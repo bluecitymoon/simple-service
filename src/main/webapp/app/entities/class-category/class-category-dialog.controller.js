@@ -1,0 +1,47 @@
+(function() {
+    'use strict';
+
+    angular
+        .module('simpleServiceApp')
+        .controller('ClassCategoryDialogController', ClassCategoryDialogController);
+
+    ClassCategoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ClassCategory', 'FreeClassRecord'];
+
+    function ClassCategoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ClassCategory, FreeClassRecord) {
+        var vm = this;
+
+        vm.classCategory = entity;
+        vm.clear = clear;
+        vm.save = save;
+        vm.freeclassrecords = FreeClassRecord.query();
+
+        $timeout(function (){
+            angular.element('.form-group:eq(1)>input').focus();
+        });
+
+        function clear () {
+            $uibModalInstance.dismiss('cancel');
+        }
+
+        function save () {
+            vm.isSaving = true;
+            if (vm.classCategory.id !== null) {
+                ClassCategory.update(vm.classCategory, onSaveSuccess, onSaveError);
+            } else {
+                ClassCategory.save(vm.classCategory, onSaveSuccess, onSaveError);
+            }
+        }
+
+        function onSaveSuccess (result) {
+            $scope.$emit('simpleServiceApp:classCategoryUpdate', result);
+            $uibModalInstance.close(result);
+            vm.isSaving = false;
+        }
+
+        function onSaveError () {
+            vm.isSaving = false;
+        }
+
+
+    }
+})();

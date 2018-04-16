@@ -1,0 +1,24 @@
+{
+    "simpleServiceApp": {
+        "freeClassRecord" : {
+            "home": {
+                "title": "Free Class Records",
+                "createLabel": "Create a new Free Class Record",
+                "createOrEditLabel": "Create or edit a Free Class Record"
+            },
+            "created": "A new Free Class Record is created with identifier {{ param }}",
+            "updated": "A Free Class Record is updated with identifier {{ param }}",
+            "deleted": "A Free Class Record is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Free Class Record {{ id }}?"
+            },
+            "detail": {
+                "title": "Free Class Record"
+            },
+            "personName": "Person Name",
+            "contactPhoneNumber": "Contact Phone Number",
+            "marketChannelCategory": "Market Channel Category",
+            "classCategory": "Class Category"
+        }
+    }
+}

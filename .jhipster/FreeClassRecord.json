@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "marketChannelCategory",
+            "otherEntityName": "marketChannelCategory",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "classCategory",
+            "otherEntityName": "classCategory",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "freeClassRecord"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "personName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contactPhoneNumber",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180414115116",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "free_class_record",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

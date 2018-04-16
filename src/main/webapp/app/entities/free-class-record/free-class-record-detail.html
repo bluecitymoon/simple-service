@@ -1,0 +1,37 @@
+
+<div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span> {{vm.freeClassRecord.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
+        <dd>
+            <span>{{vm.freeClassRecord.personName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span></dt>
+        <dd>
+            <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span></dt>
+        <dd>
+            <a ui-sref="market-channel-category-detail({id:vm.freeClassRecord.marketChannelCategory.id})">{{vm.freeClassRecord.marketChannelCategory.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.classCategory">Class Category</span></dt>
+        <dd>
+            <span ng-repeat="classCategory in vm.freeClassRecord.classCategories">
+                <a ui-sref="class-category-detail({id: classCategory.id})">{{classCategory.name}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="free-class-record-detail.edit({id:vm.freeClassRecord.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

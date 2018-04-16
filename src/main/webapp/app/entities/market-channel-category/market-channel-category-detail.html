@@ -1,0 +1,31 @@
+
+<div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.marketChannelCategory.detail.title">Market Channel Category</span> {{vm.marketChannelCategory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.marketChannelCategory.name">Name</span></dt>
+        <dd>
+            <span>{{vm.marketChannelCategory.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.marketChannelCategory.code">Code</span></dt>
+        <dd>
+            <span>{{vm.marketChannelCategory.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.marketChannelCategory.description">Description</span></dt>
+        <dd>
+            <span>{{vm.marketChannelCategory.description}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="market-channel-category-detail.edit({id:vm.marketChannelCategory.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
