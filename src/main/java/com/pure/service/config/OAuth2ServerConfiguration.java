@@ -90,6 +90,7 @@ public class OAuth2ServerConfiguration {
                 .antMatchers("/api/authenticate").permitAll()
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/profile-info").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/free-class-records").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/v2/api-docs/**").permitAll()
