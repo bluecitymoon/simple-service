@@ -2,15 +2,15 @@
     "simpleServiceApp": {
         "freeClassRecord" : {
             "home": {
-                "title": "Free Class Records",
+                "title": "免费预约",
                 "createLabel": "Create a new Free Class Record",
                 "createOrEditLabel": "Create or edit a Free Class Record"
             },
-            "created": "A new Free Class Record is created with identifier {{ param }}",
-            "updated": "A Free Class Record is updated with identifier {{ param }}",
-            "deleted": "A Free Class Record is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Free Class Record {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
                 "title": "Free Class Record"

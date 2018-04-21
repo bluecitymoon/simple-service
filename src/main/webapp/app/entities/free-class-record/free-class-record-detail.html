@@ -1,22 +1,22 @@
 
 <div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span> {{vm.freeClassRecord.id}}</h2>
+    <h2><span>免费预约记录</span> {{vm.freeClassRecord.personName}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
+        <dt><span>姓名</span></dt>
         <dd>
             <span>{{vm.freeClassRecord.personName}}</span>
         </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span></dt>
+        <dt><span>电话</span></dt>
         <dd>
             <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
         </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span></dt>
+        <dt><span>渠道</span></dt>
         <dd>
             <a ui-sref="market-channel-category-detail({id:vm.freeClassRecord.marketChannelCategory.id})">{{vm.freeClassRecord.marketChannelCategory.name}}</a>
         </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.classCategory">Class Category</span></dt>
+        <dt><span>课程类别</span></dt>
         <dd>
             <span ng-repeat="classCategory in vm.freeClassRecord.classCategories">
                 <a ui-sref="class-category-detail({id: classCategory.id})">{{classCategory.name}}</a>{{$last ? '' : ', '}}

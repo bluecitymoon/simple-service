@@ -1,6 +1,6 @@
 /*!
  * angular-translate - v2.11.1 - 2016-07-17
- * 
+ *
  * Copyright (c) 2016 The angular-translate team, Pascal Precht; Licensed MIT
  */
 (function (root, factory) {
