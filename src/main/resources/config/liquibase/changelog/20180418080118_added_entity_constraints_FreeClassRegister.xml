@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FreeClassRegister.
+    -->
+    <changeSet id="20180418080118-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="free_class_registers_id"
+                                 baseTableName="free_class_register_class_category"
+                                 constraintName="fk_free_class_register_class_category_free_class_registers_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="free_class_register"/>
+        <addForeignKeyConstraint baseColumnNames="class_categories_id"
+                                 baseTableName="free_class_register_class_category"
+                                 constraintName="fk_free_class_register_class_category_class_categories_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_category"/>
+        
+        <addForeignKeyConstraint baseColumnNames="market_channel_category_id"
+                                 baseTableName="free_class_register"
+                                 constraintName="fk_free_class_register_market_channel_category_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="market_channel_category"/>
+
+    </changeSet>
+</databaseChangeLog>

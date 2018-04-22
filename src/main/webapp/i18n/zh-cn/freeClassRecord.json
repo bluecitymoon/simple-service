@@ -2,9 +2,9 @@
     "simpleServiceApp": {
         "freeClassRecord" : {
             "home": {
-                "title": "免费预约",
-                "createLabel": "Create a new Free Class Record",
-                "createOrEditLabel": "Create or edit a Free Class Record"
+                "title": "新单",
+                "createLabel": "录入一条新单",
+                "createOrEditLabel": "管理新单"
             },
             "created": "创建成功！",
             "updated": "更新成功！",
@@ -13,12 +13,12 @@
                 "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Free Class Record"
+                "title": "预约记录"
             },
-            "personName": "����",
-            "contactPhoneNumber": "Contact Phone Number",
-            "marketChannelCategory": "Market Channel Category",
-            "classCategory": "Class Category"
+            "personName": "姓名",
+            "contactPhoneNumber": "联系电话",
+            "marketChannelCategory": "渠道",
+            "classCategory": "课程类型"
         }
     }
 }

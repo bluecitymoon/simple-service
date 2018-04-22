@@ -8,8 +8,8 @@
             "entities": {
                 "main": "数据",
                 "classCategory": "课程种类",
-                "marketChannelCategory": "市场渠道",
-                "freeClassRecord": "免费体验课",
+                "marketChannelCategory": "渠道",
+                "freeClassRecord": "新单",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

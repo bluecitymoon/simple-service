@@ -1,13 +1,13 @@
 <div class="panel-body">
-    <h2>预约记录</h2>
+    <h2 data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h2>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="free-class-record.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span>
-                        新增
+                    <span  data-translate="simpleServiceApp.freeClassRecord.home.createLabel">
+                        Create new Free Class Record
                     </span>
                 </button>
             </div>
@@ -18,10 +18,10 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="personName"><span>姓名</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contactPhoneNumber"><span>联系电话</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="marketChannelCategory.name"><span>渠道</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="personName"><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contactPhoneNumber"><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="marketChannelCategory.name"><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
