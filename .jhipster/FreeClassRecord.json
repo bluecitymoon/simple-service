@@ -24,6 +24,22 @@
         {
             "fieldName": "contactPhoneNumber",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20180414115116",

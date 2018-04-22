@@ -12,6 +12,8 @@
 
         vm.freeClassRecord = entity;
         vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         vm.save = save;
         vm.marketchannelcategories = MarketChannelCategory.query();
         vm.classcategories = ClassCategory.query();
@@ -43,6 +45,11 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.createdDate = false;
+        vm.datePickerOpenStatus.lastModifiedDate = false;
 
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

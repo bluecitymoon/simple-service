@@ -1,17 +1,11 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
-
-
+import java.io.Serializable;
 
 
 /**
@@ -31,6 +25,14 @@ public class FreeClassRecordCriteria implements Serializable {
     private StringFilter personName;
 
     private StringFilter contactPhoneNumber;
+
+    private StringFilter createdBy;
+
+    private InstantFilter createdDate;
+
+    private StringFilter lastModifiedBy;
+
+    private InstantFilter lastModifiedDate;
 
     private LongFilter marketChannelCategoryId;
 
@@ -61,6 +63,38 @@ public class FreeClassRecordCriteria implements Serializable {
         this.contactPhoneNumber = contactPhoneNumber;
     }
 
+    public StringFilter getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(StringFilter createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public InstantFilter getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(InstantFilter createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public StringFilter getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    public void setLastModifiedBy(StringFilter lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public InstantFilter getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public void setLastModifiedDate(InstantFilter lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
     public LongFilter getMarketChannelCategoryId() {
         return marketChannelCategoryId;
     }
@@ -75,6 +109,10 @@ public class FreeClassRecordCriteria implements Serializable {
                 (id != null ? "id=" + id + ", " : "") +
                 (personName != null ? "personName=" + personName + ", " : "") +
                 (contactPhoneNumber != null ? "contactPhoneNumber=" + contactPhoneNumber + ", " : "") +
+                (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
+                (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
+                (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
+                (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
                 (marketChannelCategoryId != null ? "marketChannelCategoryId=" + marketChannelCategoryId + ", " : "") +
             "}";
     }

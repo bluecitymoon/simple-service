@@ -30,12 +30,30 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="created_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="created_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_by" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="last_modified_date" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
             <column name="market_channel_category_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="free_class_record" columnName="created_date" columnDataType="datetime"/>
+        <dropDefaultValue tableName="free_class_record" columnName="last_modified_date" columnDataType="datetime"/>
         
         <createTable tableName="free_class_record_class_category">
             <column name="class_categories_id" type="bigint">

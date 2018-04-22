@@ -4,9 +4,9 @@
         .module('simpleServiceApp')
         .factory('FreeClassRecord', FreeClassRecord);
 
-    FreeClassRecord.$inject = ['$resource'];
+    FreeClassRecord.$inject = ['$resource', 'DateUtils'];
 
-    function FreeClassRecord ($resource) {
+    function FreeClassRecord ($resource, DateUtils) {
         var resourceUrl =  'api/free-class-records/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,8 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
+                        data.lastModifiedDate = DateUtils.convertDateTimeFromServer(data.lastModifiedDate);
                     }
                     return data;
                 }

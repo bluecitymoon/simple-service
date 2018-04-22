@@ -17,6 +17,10 @@
             },
             "personName": "Person Name",
             "contactPhoneNumber": "Contact Phone Number",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
             "marketChannelCategory": "Market Channel Category",
             "classCategory": "Class Category"
         }

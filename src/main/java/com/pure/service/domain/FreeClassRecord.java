@@ -1,18 +1,27 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A FreeClassRecord.
  */
 @Entity
 @Table(name = "free_class_record")
-public class FreeClassRecord implements Serializable {
+public class FreeClassRecord extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,6 +34,18 @@ public class FreeClassRecord implements Serializable {
 
     @Column(name = "contact_phone_number")
     private String contactPhoneNumber;
+
+//    @Column(name = "created_by")
+//    private String createdBy;
+//
+//    @Column(name = "created_date")
+//    private ZonedDateTime createdDate;
+//
+//    @Column(name = "last_modified_by")
+//    private String lastModifiedBy;
+//
+//    @Column(name = "last_modified_date")
+//    private ZonedDateTime lastModifiedDate;
 
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
@@ -69,6 +90,58 @@ public class FreeClassRecord implements Serializable {
     public void setContactPhoneNumber(String contactPhoneNumber) {
         this.contactPhoneNumber = contactPhoneNumber;
     }
+
+//    public String getCreatedBy() {
+//        return createdBy;
+//    }
+//
+//    public FreeClassRecord createdBy(String createdBy) {
+//        this.createdBy = createdBy;
+//        return this;
+//    }
+//
+//    public void setCreatedBy(String createdBy) {
+//        this.createdBy = createdBy;
+//    }
+//
+//    public ZonedDateTime getCreatedDate() {
+//        return createdDate;
+//    }
+//
+//    public FreeClassRecord createdDate(ZonedDateTime createdDate) {
+//        this.createdDate = createdDate;
+//        return this;
+//    }
+//
+//    public void setCreatedDate(ZonedDateTime createdDate) {
+//        this.createdDate = createdDate;
+//    }
+//
+//    public String getLastModifiedBy() {
+//        return lastModifiedBy;
+//    }
+//
+//    public FreeClassRecord lastModifiedBy(String lastModifiedBy) {
+//        this.lastModifiedBy = lastModifiedBy;
+//        return this;
+//    }
+//
+//    public void setLastModifiedBy(String lastModifiedBy) {
+//        this.lastModifiedBy = lastModifiedBy;
+//    }
+//
+//    public ZonedDateTime getLastModifiedDate() {
+//        return lastModifiedDate;
+//    }
+//
+//    public FreeClassRecord lastModifiedDate(ZonedDateTime lastModifiedDate) {
+//        this.lastModifiedDate = lastModifiedDate;
+//        return this;
+//    }
+//
+//    public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
+//        this.lastModifiedDate = lastModifiedDate;
+//    }
 
     public MarketChannelCategory getMarketChannelCategory() {
         return marketChannelCategory;
@@ -135,6 +208,10 @@ public class FreeClassRecord implements Serializable {
             "id=" + getId() +
             ", personName='" + getPersonName() + "'" +
             ", contactPhoneNumber='" + getContactPhoneNumber() + "'" +
+            ", createdBy='" + getCreatedBy() + "'" +
+            ", createdDate='" + getCreatedDate() + "'" +
+            ", lastModifiedBy='" + getLastModifiedBy() + "'" +
+            ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             "}";
     }
 }

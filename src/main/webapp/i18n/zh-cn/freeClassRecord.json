@@ -18,7 +18,11 @@
             "personName": "姓名",
             "contactPhoneNumber": "联系电话",
             "marketChannelCategory": "渠道",
-            "classCategory": "课程类型"
+            "classCategory": "课程类型",
+            "createdBy": "创建者",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "上次更改",
+            "lastModifiedDate": "上次更改时间"
         }
     }
 }

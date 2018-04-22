@@ -126,6 +126,10 @@
                             return {
                                 personName: null,
                                 contactPhoneNumber: null,
+                                createdBy: null,
+                                createdDate: null,
+                                lastModifiedBy: null,
+                                lastModifiedDate: null,
                                 id: null
                             };
                         }

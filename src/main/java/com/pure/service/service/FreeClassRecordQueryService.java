@@ -1,8 +1,12 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.FreeClassRecord_;
+import com.pure.service.domain.MarketChannelCategory_;
+import com.pure.service.repository.FreeClassRecordRepository;
+import com.pure.service.service.dto.FreeClassRecordCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +15,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.FreeClassRecord;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.FreeClassRecordRepository;
-import com.pure.service.service.dto.FreeClassRecordCriteria;
+import java.util.List;
 
 
 /**
@@ -77,6 +76,18 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             }
             if (criteria.getContactPhoneNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getContactPhoneNumber(), FreeClassRecord_.contactPhoneNumber));
+            }
+            if (criteria.getCreatedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getCreatedBy(), FreeClassRecord_.createdBy));
+            }
+            if (criteria.getCreatedDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getCreatedDate(), FreeClassRecord_.createdDate));
+            }
+            if (criteria.getLastModifiedBy() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getLastModifiedBy(), FreeClassRecord_.lastModifiedBy));
+            }
+            if (criteria.getLastModifiedDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), FreeClassRecord_.lastModifiedDate));
             }
             if (criteria.getMarketChannelCategoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMarketChannelCategoryId(), FreeClassRecord_.marketChannelCategory, MarketChannelCategory_.id));

@@ -1,6 +1,6 @@
 
 <div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span> {{vm.freeClassRecord.personName}}</h2>
+    <h2><span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span> {{vm.freeClassRecord.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
@@ -11,6 +11,22 @@
         <dt><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span></dt>
         <dd>
             <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.freeClassRecord.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.freeClassRecord.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.freeClassRecord.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.freeClassRecord.lastModifiedDate | date:'medium'}}</span>
         </dd>
         <dt><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span></dt>
         <dd>
