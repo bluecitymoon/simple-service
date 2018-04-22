@@ -70,12 +70,15 @@ liquibase:
 #        keyAlias: simpleService
 # ===================================================================
 server:
-    port: 8080
-#    ssl:
-#        key-store: classpath:config/keystore.p12
-#        key-store-password: changeit
-#        keyStoreType: PKCS12
-#        keyAlias: simpleService
+  port: 8443
+  ssl:
+    enabled: true
+    key-alias: tomcat-localhost
+    key-password: changeit
+    key-store: classpath:keystore.jks
+    key-store-provider: SUN
+    key-store-type: JKS
+    key-store-password: changeit
     compression:
         enabled: true
         mime-types: text/html,text/xml,text/plain,text/css, application/javascript, application/json

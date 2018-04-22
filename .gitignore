@@ -4,6 +4,7 @@
 /target/www/**
 /src/test/javascript/coverage/
 #/src/main/resources/config/
+/src/main/resources/keystore.jks
 ######################
 # Node
 ######################
