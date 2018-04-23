@@ -24,19 +24,16 @@
             <column name="last_modified_date" type="tinyblob"/>
         </addColumn>
     </changeSet>
-    <changeSet author="Jerry (generated)" id="1524406367676-5">
-        <dropForeignKeyConstraint baseTableName="free_class_register_class_category" constraintName="fk_free_class_register_class_category_class_categories_id"/>
-    </changeSet>
-    <changeSet author="Jerry (generated)" id="1524406367676-6">
-        <dropForeignKeyConstraint baseTableName="free_class_register_class_category" constraintName="fk_free_class_register_class_category_free_class_registers_id"/>
-    </changeSet>
-    <changeSet author="Jerry (generated)" id="1524406367676-7">
-        <dropForeignKeyConstraint baseTableName="free_class_register" constraintName="fk_free_class_register_market_channel_category_id"/>
-    </changeSet>
-    <changeSet author="Jerry (generated)" id="1524406367676-8">
-        <dropTable tableName="free_class_register"/>
-    </changeSet>
-    <changeSet author="Jerry (generated)" id="1524406367676-9">
-        <dropTable tableName="free_class_register_class_category"/>
-    </changeSet>
+    <!--<changeSet author="Jerry (generated)" id="1524406367676-5">-->
+        <!--<dropForeignKeyConstraint baseTableName="free_class_register_class_category" constraintName="fk_free_class_register_class_category_class_categories_id"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Jerry (generated)" id="1524406367676-6">-->
+        <!--<dropForeignKeyConstraint baseTableName="free_class_register_class_category" constraintName="fk_free_class_register_class_category_free_class_registers_id"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Jerry (generated)" id="1524406367676-7">-->
+        <!--<dropForeignKeyConstraint baseTableName="free_class_register" constraintName="fk_free_class_register_market_channel_category_id"/>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="Jerry (generated)" id="1524406367676-8">-->
+        <!--<dropTable tableName="free_class_register"/>-->
+    <!--</changeSet>-->
 </databaseChangeLog>

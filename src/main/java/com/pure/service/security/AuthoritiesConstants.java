@@ -6,6 +6,8 @@ package com.pure.service.security;
 public final class AuthoritiesConstants {
 
     public static final String ADMIN = "ROLE_ADMIN";
+    public static final String HEADMASTER = "ROLE_HEADMASTER";
+    public static final String SALES = "ROLE_SALES";
 
     public static final String USER = "ROLE_USER";
 

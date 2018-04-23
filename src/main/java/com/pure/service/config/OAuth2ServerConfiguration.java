@@ -135,6 +135,7 @@ public class OAuth2ServerConfiguration {
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints)
                 throws Exception {
+
             endpoints
                 .authorizationCodeServices(authorizationCodeServices())
                 .approvalStore(approvalStore())
@@ -149,7 +150,14 @@ public class OAuth2ServerConfiguration {
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+
             clients.jdbc(dataSource);
+//                .withClient("simpleServiceapp")
+//                .authorizedGrantTypes("password,refresh_token,authorization_code,implicit")
+//                .authorities("ROLE_ADMIN,ROLE_USER,ROLE_SALES,ROLE_HEADMASTER")
+//                .scopes("read,write")
+//                .resourceIds("res_simpleService")
+//                .accessTokenValiditySeconds(31536000).
         }
     }
 }
