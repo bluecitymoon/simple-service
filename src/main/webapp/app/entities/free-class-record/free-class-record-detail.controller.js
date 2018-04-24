@@ -13,6 +13,10 @@
         vm.freeClassRecord = entity;
         vm.previousState = previousState.name;
 
+        vm.assignToSales = function () {
+
+        };
+
         var unsubscribe = $rootScope.$on('simpleServiceApp:freeClassRecordUpdate', function(event, result) {
             vm.freeClassRecord = result;
         });

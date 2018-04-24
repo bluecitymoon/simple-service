@@ -1,5 +1,7 @@
+<div class="panel">
 <div class="panel-body">
     <h2 data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h2>
+    <hr>
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -13,7 +15,7 @@
     <!-- start -->
     <div class="pad-btm form-inline">
         <div class="row">
-            <div class="col-sm-6 text-xs-center">
+            <div class="text-xs-center">
                 <div class="form-group">
                     <button class="btn btn-primary" ui-sref="free-class-record.new" >
                         <span class="glyphicon glyphicon-plus"></span>
@@ -21,10 +23,6 @@
                             Create new Free Class Record
                         </span>
                     </button>
-                </div>
-            </div>
-            <div class="col-sm-6 text-xs-center text-right">
-                <div class="form-group">
                     <button class="btn btn-warning" ui-sref="market-channel-category" has-authority="ROLE_ADMIN">
                         <span class="glyphicon glyphicon-bookmark"></span>
                         <span>
@@ -38,9 +36,28 @@
                         </span>
                     </button>
                 </div>
+
             </div>
+
+            <!--<div class="col-sm-6 text-xs-center text-right">-->
+                <!--<div class="form-group">-->
+                    <!---->
+                <!--</div>-->
+            <!--</div>-->
         </div>
+
+        <!--<div class="input-group-wrap">-->
+            <!--<div class="input-group">-->
+                <!--<input type="text" placeholder="搜索员工" class="form-control">-->
+                <!--<span class="input-group-btn">-->
+					 <!--<button class="btn btn-purple" type="button">分配给该员工<i class="glyphicon glyphicon-user"></i></button>-->
+				<!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
+
+    <hr>
+
     <!-- end -->
     <div class="table-responsive">
         <table class="jh-table table table-striped">
@@ -49,11 +66,11 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="personName"><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contactPhoneNumber"><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="marketChannelCategory.name"><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="marketChannelCategory.name"><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th></th>
                 </tr>
             </thead>
@@ -62,20 +79,21 @@
                     <td><a ui-sref="free-class-record-detail({id:freeClassRecord.id})">{{freeClassRecord.id}}</a></td>
                     <td>{{freeClassRecord.personName}}</td>
                     <td>{{freeClassRecord.contactPhoneNumber}}</td>
-                    <td>{{freeClassRecord.createdBy}}</td>
-                    <td>{{freeClassRecord.createdDate | date:'medium'}}</td>
-                    <td>{{freeClassRecord.lastModifiedBy}}</td>
-                    <td>{{freeClassRecord.lastModifiedDate | date:'medium'}}</td>
                     <td>
                         <a ui-sref="market-channel-category-detail({id:freeClassRecord.marketChannelCategory.id})">{{freeClassRecord.marketChannelCategory.name}}</a>
                     </td>
+                    <td>{{freeClassRecord.createdBy}}</td>
+                    <td>{{freeClassRecord.createdDate | date:'medium'}}</td>
+                    <!--<td>{{ freeClassRecord.lastModifiedBy}}</td>-->
+                    <!--<td>{{freeClassRecord.lastModifiedDate | date:'medium'}}</td>-->
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="free-class-record-detail({id:freeClassRecord.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                                <span class="hidden-sm-down">管理</span>
                             </button>
                             <button type="submit"
                                     ui-sref="free-class-record.edit({id:freeClassRecord.id})"
@@ -99,4 +117,5 @@
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
+</div>
 </div>

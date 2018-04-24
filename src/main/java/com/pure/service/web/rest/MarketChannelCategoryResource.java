@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.MarketChannelCategory;
 
 import com.pure.service.repository.MarketChannelCategoryRepository;
+import com.pure.service.security.AuthoritiesConstants;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -49,6 +51,7 @@ public class MarketChannelCategoryResource {
      */
     @PostMapping("/market-channel-categories")
     @Timed
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEADMASTER})
     public ResponseEntity<MarketChannelCategory> createMarketChannelCategory(@RequestBody MarketChannelCategory marketChannelCategory) throws URISyntaxException {
         log.debug("REST request to save MarketChannelCategory : {}", marketChannelCategory);
         if (marketChannelCategory.getId() != null) {

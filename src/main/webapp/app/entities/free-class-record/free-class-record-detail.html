@@ -1,53 +1,95 @@
 
-<div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span> {{vm.freeClassRecord.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
-        <dd>
-            <span>{{vm.freeClassRecord.personName}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span></dt>
-        <dd>
-            <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span></dt>
-        <dd>
-            <span>{{vm.freeClassRecord.createdBy}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span></dt>
-        <dd>
-            <span>{{vm.freeClassRecord.createdDate | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vm.freeClassRecord.lastModifiedBy}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>
-            <span>{{vm.freeClassRecord.lastModifiedDate | date:'medium'}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span></dt>
-        <dd>
-            <a ui-sref="market-channel-category-detail({id:vm.freeClassRecord.marketChannelCategory.id})">{{vm.freeClassRecord.marketChannelCategory.name}}</a>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.freeClassRecord.classCategory">Class Category</span></dt>
-        <dd>
+<div class="panel">
+
+    <!--Panel heading-->
+    <div class="panel-heading" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+        <div class="panel-control">
+            <div class="input-group-wrap">
+                <div class="input-group">
+                    <input type="text" placeholder="搜索员工" class="form-control">
+                    <span class="input-group-btn">
+					     <button class="btn btn-danger" type="button">分配给该员工<i class="glyphicon glyphicon-user"></i></button>
+					</span>
+                </div>
+            </div>
+        </div>
+        <h3 class="panel-title">
+            <span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span>
+            {{vm.freeClassRecord.personName}}
+        </h3>
+    </div>
+
+    <!--Panel body-->
+    <div class="panel-body">
+        <jhi-alert-error></jhi-alert-error>
+        <hr>
+
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
+            <dd>
+                <span>{{vm.freeClassRecord.personName}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
+            </dt>
+            <dd>
+                <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span></dt>
+            <dd>
+                <span>{{vm.freeClassRecord.createdBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span></dt>
+            <dd>
+                <span>{{vm.freeClassRecord.createdDate | date:'medium'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span></dt>
+            <dd>
+                <span>{{vm.freeClassRecord.lastModifiedBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span></dt>
+            <dd>
+                <span>{{vm.freeClassRecord.lastModifiedDate | date:'medium'}}</span>
+            </dd>
+            <dt><span
+                    data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
+            </dt>
+            <dd>
+                <a ui-sref="market-channel-category-detail({id:vm.freeClassRecord.marketChannelCategory.id})">{{vm.freeClassRecord.marketChannelCategory.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.classCategory">Class Category</span></dt>
+            <dd>
             <span ng-repeat="classCategory in vm.freeClassRecord.classCategories">
                 <a ui-sref="class-category-detail({id: classCategory.id})">{{classCategory.name}}</a>{{$last ? '' : ', '}}
             </span>
-        </dd>
-    </dl>
+            </dd>
+        </dl>
+    </div>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+    <div class="panel-footer">
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
 
-    <button type="button" ui-sref="free-class-record-detail.edit({id:vm.freeClassRecord.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-    </button>
+        <button has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" type="button"
+                ui-sref="free-class-record-detail.edit({id:vm.freeClassRecord.id})" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+        </button>
+
+        <!--<button has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" type="button" ng-click="vm.assignToSales()"-->
+                <!--class="btn btn-danger">-->
+            <!--<span class="glyphicon glyphicon-user"></span>-->
+            <!--<span class="hidden-sm-down">分配给销售人员</span>-->
+        <!--</button>-->
+
+        <button has-any-authority="ROLE_ADMIN,ROLE_SALES" type="button" ng-click="vm.assignToSales()"
+                class="btn btn-success">
+            <span class="glyphicon glyphicon-bookmark"></span>
+            <span class="hidden-sm-down">开始跟单</span>
+        </button>
+
+    </div>
 </div>
