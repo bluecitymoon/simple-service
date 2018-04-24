@@ -19,6 +19,11 @@
         vm.classcategories = ClassCategory.query();
         vm.users = User.query();
 
+        vm.searchPersonWithKeyword = function (keyword) {
+
+            console.log("searching people with keyword " + keyword);
+        };
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
