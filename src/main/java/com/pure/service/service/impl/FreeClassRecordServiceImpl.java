@@ -35,6 +35,11 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     @Override
     public FreeClassRecord save(FreeClassRecord freeClassRecord) {
         log.debug("Request to save FreeClassRecord : {}", freeClassRecord);
+
+        if (freeClassRecord.getId() == null){
+            freeClassRecord.setStatus("新单");
+        }
+
         return freeClassRecordRepository.save(freeClassRecord);
     }
 

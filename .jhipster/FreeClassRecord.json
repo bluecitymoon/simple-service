@@ -14,6 +14,14 @@
             "otherEntityField": "name",
             "ownerSide": true,
             "otherEntityRelationshipName": "freeClassRecord"
+        },
+        {
+            "relationshipName": "salesFollower",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "freeClassRecord"
         }
     ],
     "fields": [
@@ -40,6 +48,10 @@
         {
             "fieldName": "lastModifiedDate",
             "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180414115116",

@@ -25,5 +25,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="class_category"/>
         
+        <addForeignKeyConstraint baseColumnNames="sales_follower_id"
+                                 baseTableName="free_class_record"
+                                 constraintName="fk_free_class_record_sales_follower_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

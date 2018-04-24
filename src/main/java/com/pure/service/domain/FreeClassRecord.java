@@ -46,6 +46,8 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 //
 //    @Column(name = "last_modified_date")
 //    private ZonedDateTime lastModifiedDate;
+    @Column(name = "status")
+    private String status;
 
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
@@ -55,6 +57,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
                joinColumns = @JoinColumn(name="free_class_records_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="class_categories_id", referencedColumnName="id"))
     private Set<ClassCategory> classCategories = new HashSet<>();
+
+    @ManyToOne
+    private User salesFollower;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -143,6 +148,19 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 //        this.lastModifiedDate = lastModifiedDate;
 //    }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public FreeClassRecord status(String status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public MarketChannelCategory getMarketChannelCategory() {
         return marketChannelCategory;
     }
@@ -180,6 +198,19 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     public void setClassCategories(Set<ClassCategory> classCategories) {
         this.classCategories = classCategories;
     }
+
+    public User getSalesFollower() {
+        return salesFollower;
+    }
+
+    public FreeClassRecord salesFollower(User user) {
+        this.salesFollower = user;
+        return this;
+    }
+
+    public void setSalesFollower(User user) {
+        this.salesFollower = user;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -212,6 +243,7 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", status='" + getStatus() + "'" +
             "}";
     }
 }

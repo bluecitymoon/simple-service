@@ -1,9 +1,11 @@
 package com.pure.service.service;
 
 
+
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.FreeClassRecord_;
 import com.pure.service.domain.MarketChannelCategory_;
+import com.pure.service.domain.User_;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.service.dto.FreeClassRecordCriteria;
 import io.github.jhipster.service.QueryService;
@@ -89,8 +91,14 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), FreeClassRecord_.lastModifiedDate));
             }
+            if (criteria.getStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getStatus(), FreeClassRecord_.status));
+            }
             if (criteria.getMarketChannelCategoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMarketChannelCategoryId(), FreeClassRecord_.marketChannelCategory, MarketChannelCategory_.id));
+            }
+            if (criteria.getSalesFollowerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getSalesFollowerId(), FreeClassRecord_.salesFollower, User_.id));
             }
         }
         return specification;

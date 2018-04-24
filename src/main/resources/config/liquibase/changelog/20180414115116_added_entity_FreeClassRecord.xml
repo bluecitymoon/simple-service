@@ -46,7 +46,15 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="status" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
             <column name="market_channel_category_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="sales_follower_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

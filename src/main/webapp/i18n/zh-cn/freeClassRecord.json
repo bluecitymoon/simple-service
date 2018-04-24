@@ -22,7 +22,9 @@
             "createdBy": "创建者",
             "createdDate": "创建时间",
             "lastModifiedBy": "上次更改",
-            "lastModifiedDate": "上次更改时间"
+            "lastModifiedDate": "上次更改时间",
+            "status": "状态",
+            "salesFollower": "跟单人"
         }
     }
 }

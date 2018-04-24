@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordDetailController', FreeClassRecordDetailController);
 
-    FreeClassRecordDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'FreeClassRecord', 'MarketChannelCategory', 'ClassCategory'];
+    FreeClassRecordDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'FreeClassRecord', 'MarketChannelCategory', 'ClassCategory', 'User'];
 
-    function FreeClassRecordDetailController($scope, $rootScope, $stateParams, previousState, entity, FreeClassRecord, MarketChannelCategory, ClassCategory) {
+    function FreeClassRecordDetailController($scope, $rootScope, $stateParams, previousState, entity, FreeClassRecord, MarketChannelCategory, ClassCategory, User) {
         var vm = this;
 
         vm.freeClassRecord = entity;

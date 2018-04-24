@@ -34,7 +34,11 @@ public class FreeClassRecordCriteria implements Serializable {
 
     private InstantFilter lastModifiedDate;
 
+    private StringFilter status;
+
     private LongFilter marketChannelCategoryId;
+
+    private LongFilter salesFollowerId;
 
     public FreeClassRecordCriteria() {
     }
@@ -95,12 +99,28 @@ public class FreeClassRecordCriteria implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public StringFilter getStatus() {
+        return status;
+    }
+
+    public void setStatus(StringFilter status) {
+        this.status = status;
+    }
+
     public LongFilter getMarketChannelCategoryId() {
         return marketChannelCategoryId;
     }
 
     public void setMarketChannelCategoryId(LongFilter marketChannelCategoryId) {
         this.marketChannelCategoryId = marketChannelCategoryId;
+    }
+
+    public LongFilter getSalesFollowerId() {
+        return salesFollowerId;
+    }
+
+    public void setSalesFollowerId(LongFilter salesFollowerId) {
+        this.salesFollowerId = salesFollowerId;
     }
 
     @Override
@@ -113,7 +133,9 @@ public class FreeClassRecordCriteria implements Serializable {
                 (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+                (status != null ? "status=" + status + ", " : "") +
                 (marketChannelCategoryId != null ? "marketChannelCategoryId=" + marketChannelCategoryId + ", " : "") +
+                (salesFollowerId != null ? "salesFollowerId=" + salesFollowerId + ", " : "") +
             "}";
     }
 

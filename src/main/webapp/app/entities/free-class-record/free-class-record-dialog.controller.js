@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordDialogController', FreeClassRecordDialogController);
 
-    FreeClassRecordDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'FreeClassRecord', 'MarketChannelCategory', 'ClassCategory'];
+    FreeClassRecordDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'FreeClassRecord', 'MarketChannelCategory', 'ClassCategory', 'User'];
 
-    function FreeClassRecordDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, FreeClassRecord, MarketChannelCategory, ClassCategory) {
+    function FreeClassRecordDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, FreeClassRecord, MarketChannelCategory, ClassCategory, User) {
         var vm = this;
 
         vm.freeClassRecord = entity;
@@ -17,6 +17,7 @@
         vm.save = save;
         vm.marketchannelcategories = MarketChannelCategory.query();
         vm.classcategories = ClassCategory.query();
+        vm.users = User.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -25,6 +25,10 @@
         <hr>
 
         <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span></dt>
+            <dd>
+                <span>{{vm.freeClassRecord.status}}</span>
+            </dd>
             <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
             <dd>
                 <span>{{vm.freeClassRecord.personName}}</span>
@@ -61,6 +65,10 @@
             <span ng-repeat="classCategory in vm.freeClassRecord.classCategories">
                 <a ui-sref="class-category-detail({id: classCategory.id})">{{classCategory.name}}</a>{{$last ? '' : ', '}}
             </span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span></dt>
+            <dd>
+                {{vm.freeClassRecord.salesFollower.login}}
             </dd>
         </dl>
     </div>
