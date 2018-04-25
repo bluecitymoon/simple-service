@@ -15,6 +15,7 @@
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422141239_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180424063707_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180425130746_changelog_add_relationship_to_new_order.xml" relativeToChangelogFile="false"/>
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

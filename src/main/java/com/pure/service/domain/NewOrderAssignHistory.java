@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
@@ -46,6 +47,8 @@ public class NewOrderAssignHistory extends AbstractAuditingEntity implements Ser
 //
 //    @Column(name = "last_modified_date")
 //    private Instant lastModifiedDate;
+    @ManyToOne
+    private FreeClassRecord newOrder;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -107,7 +110,7 @@ public class NewOrderAssignHistory extends AbstractAuditingEntity implements Ser
     public void setNewFollowerName(String newFollowerName) {
         this.newFollowerName = newFollowerName;
     }
-//
+
 //    public String getCreatedBy() {
 //        return createdBy;
 //    }
@@ -159,6 +162,19 @@ public class NewOrderAssignHistory extends AbstractAuditingEntity implements Ser
 //    public void setLastModifiedDate(Instant lastModifiedDate) {
 //        this.lastModifiedDate = lastModifiedDate;
 //    }
+
+    public FreeClassRecord getNewOrder() {
+        return newOrder;
+    }
+
+    public NewOrderAssignHistory newOrder(FreeClassRecord freeClassRecord) {
+        this.newOrder = freeClassRecord;
+        return this;
+    }
+
+    public void setNewOrder(FreeClassRecord freeClassRecord) {
+        this.newOrder = freeClassRecord;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

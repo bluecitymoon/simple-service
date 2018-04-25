@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('NewOrderAssignHistory Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockNewOrderAssignHistory;
+        var MockEntity, MockPreviousState, MockNewOrderAssignHistory, MockFreeClassRecord;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -13,6 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockNewOrderAssignHistory = jasmine.createSpy('MockNewOrderAssignHistory');
+            MockFreeClassRecord = jasmine.createSpy('MockFreeClassRecord');
             
 
             var locals = {
@@ -20,7 +21,8 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'NewOrderAssignHistory': MockNewOrderAssignHistory
+                'NewOrderAssignHistory': MockNewOrderAssignHistory,
+                'FreeClassRecord': MockFreeClassRecord
             };
             createController = function() {
                 $injector.get('$controller')("NewOrderAssignHistoryDetailController", locals);

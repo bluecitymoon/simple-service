@@ -1,15 +1,11 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-import io.github.jhipster.service.filter.InstantFilter;
+import java.io.Serializable;
 
 
 
@@ -43,6 +39,8 @@ public class NewOrderAssignHistoryCriteria implements Serializable {
     private StringFilter lastModifiedBy;
 
     private InstantFilter lastModifiedDate;
+
+    private LongFilter newOrderId;
 
     public NewOrderAssignHistoryCriteria() {
     }
@@ -119,6 +117,14 @@ public class NewOrderAssignHistoryCriteria implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public LongFilter getNewOrderId() {
+        return newOrderId;
+    }
+
+    public void setNewOrderId(LongFilter newOrderId) {
+        this.newOrderId = newOrderId;
+    }
+
     @Override
     public String toString() {
         return "NewOrderAssignHistoryCriteria{" +
@@ -131,6 +137,7 @@ public class NewOrderAssignHistoryCriteria implements Serializable {
                 (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+                (newOrderId != null ? "newOrderId=" + newOrderId + ", " : "") +
             "}";
     }
 

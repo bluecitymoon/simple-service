@@ -1,0 +1,17 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1524661674827-1">
+        <addColumn tableName="new_order_assign_history">
+            <column name="new_order_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1524661674827-2">
+        <addForeignKeyConstraint baseColumnNames="new_order_id" baseTableName="new_order_assign_history" constraintName="FKfpy9o40xj0l91n58l10p0v118" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="free_class_record"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1524661674827-3">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="new_order_assign_history"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1524661674827-4">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="new_order_assign_history"/>
+    </changeSet>
+</databaseChangeLog>

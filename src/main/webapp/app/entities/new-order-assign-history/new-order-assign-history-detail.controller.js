@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('NewOrderAssignHistoryDetailController', NewOrderAssignHistoryDetailController);
 
-    NewOrderAssignHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'NewOrderAssignHistory'];
+    NewOrderAssignHistoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'NewOrderAssignHistory', 'FreeClassRecord'];
 
-    function NewOrderAssignHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, NewOrderAssignHistory) {
+    function NewOrderAssignHistoryDetailController($scope, $rootScope, $stateParams, previousState, entity, NewOrderAssignHistory, FreeClassRecord) {
         var vm = this;
 
         vm.newOrderAssignHistory = entity;

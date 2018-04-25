@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "newOrder",
+            "otherEntityName": "freeClassRecord",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "personName"
+        }
+    ],
     "fields": [
         {
             "fieldName": "olderFollowerLogin",

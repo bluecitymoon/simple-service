@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('NewOrderAssignHistoryDialogController', NewOrderAssignHistoryDialogController);
 
-    NewOrderAssignHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'NewOrderAssignHistory'];
+    NewOrderAssignHistoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'NewOrderAssignHistory', 'FreeClassRecord'];
 
-    function NewOrderAssignHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, NewOrderAssignHistory) {
+    function NewOrderAssignHistoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, NewOrderAssignHistory, FreeClassRecord) {
         var vm = this;
 
         vm.newOrderAssignHistory = entity;
@@ -15,6 +15,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
+        vm.freeclassrecords = FreeClassRecord.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

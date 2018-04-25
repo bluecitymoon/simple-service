@@ -13,7 +13,7 @@
                 "question": "Are you sure you want to delete New Order Assign History {{ id }}?"
             },
             "detail": {
-                "title": "New Order Assign History"
+                "title": "新单分配记录"
             },
             "olderFollowerLogin": "老的跟单者",
             "olderFollowerName": "老的跟单者姓名",
@@ -22,7 +22,8 @@
             "createdBy": "操作者",
             "createdDate": "操作时间",
             "lastModifiedBy": "最近修改人",
-            "lastModifiedDate": "最近修改时间"
+            "lastModifiedDate": "最近修改时间",
+            "newOrder": "新单"
         }
     }
 }

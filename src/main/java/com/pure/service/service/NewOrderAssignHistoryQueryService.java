@@ -96,6 +96,9 @@ public class NewOrderAssignHistoryQueryService extends QueryService<NewOrderAssi
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), NewOrderAssignHistory_.lastModifiedDate));
             }
+            if (criteria.getNewOrderId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getNewOrderId(), NewOrderAssignHistory_.newOrder, FreeClassRecord_.id));
+            }
         }
         return specification;
     }

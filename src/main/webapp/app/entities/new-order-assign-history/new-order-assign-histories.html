@@ -28,6 +28,7 @@
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.newOrderAssignHistory.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newOrder.personName"><span data-translate="simpleServiceApp.newOrderAssignHistory.newOrder">New Order</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -42,6 +43,9 @@
                     <td>{{newOrderAssignHistory.createdDate | date:'medium'}}</td>
                     <td>{{newOrderAssignHistory.lastModifiedBy}}</td>
                     <td>{{newOrderAssignHistory.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="free-class-record-detail({id:newOrderAssignHistory.newOrder.id})">{{newOrderAssignHistory.newOrder.personName}}</a>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
