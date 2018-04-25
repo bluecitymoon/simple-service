@@ -1,0 +1,53 @@
+
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.newOrderAssignHistory.detail.title">New Order Assign History</span> {{vm.newOrderAssignHistory.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerLogin">Older Follower Login</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.olderFollowerLogin}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerName">Older Follower Name</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.olderFollowerName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerLogin">New Follower Login</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.newFollowerLogin}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerName">New Follower Name</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.newFollowerName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.newOrderAssignHistory.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <!--<button type="button" ui-sref="new-order-assign-history-detail.edit({id:vm.newOrderAssignHistory.id})" class="btn btn-primary">-->
+        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+        <!--<span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>-->
+    <!--</button>-->
+</div>
+</div>

@@ -10,6 +10,7 @@
                 "classCategory": "课程种类",
                 "marketChannelCategory": "渠道",
                 "freeClassRecord": "新单",
+                "newOrderAssignHistory": "新单分配记录",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

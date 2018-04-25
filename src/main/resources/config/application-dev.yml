@@ -35,7 +35,6 @@ spring:
                 prepStmtCacheSize: 250
                 prepStmtCacheSqlLimit: 2048
                 useServerPrepStmts: true
-                minimumIdle: 5
                 validationTimeout: 3000
                 connectionTimeout: 60000
                 idleTimeout: 60000

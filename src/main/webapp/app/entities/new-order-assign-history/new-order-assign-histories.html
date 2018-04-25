@@ -1,0 +1,76 @@
+<div class="panel">
+    <div class="panel-body">
+    <h2 data-translate="simpleServiceApp.newOrderAssignHistory.home.title">New Order Assign Histories</h2>
+    <jhi-alert></jhi-alert>
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="new-order-assign-history.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.newOrderAssignHistory.home.createLabel">-->
+                        <!--Create new New Order Assign History-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="olderFollowerLogin"><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerLogin">Older Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="olderFollowerName"><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerName">Older Follower Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newFollowerLogin"><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerLogin">New Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newFollowerName"><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerName">New Follower Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.newOrderAssignHistory.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.newOrderAssignHistory.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="newOrderAssignHistory in vm.newOrderAssignHistories track by newOrderAssignHistory.id">
+                    <td><a ui-sref="new-order-assign-history-detail({id:newOrderAssignHistory.id})">{{newOrderAssignHistory.id}}</a></td>
+                    <td>{{newOrderAssignHistory.olderFollowerLogin}}</td>
+                    <td>{{newOrderAssignHistory.olderFollowerName}}</td>
+                    <td>{{newOrderAssignHistory.newFollowerLogin}}</td>
+                    <td>{{newOrderAssignHistory.newFollowerName}}</td>
+                    <td>{{newOrderAssignHistory.createdBy}}</td>
+                    <td>{{newOrderAssignHistory.createdDate | date:'medium'}}</td>
+                    <td>{{newOrderAssignHistory.lastModifiedBy}}</td>
+                    <td>{{newOrderAssignHistory.lastModifiedDate | date:'medium'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="new-order-assign-history-detail({id:newOrderAssignHistory.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="new-order-assign-history.edit({id:newOrderAssignHistory.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="new-order-assign-history.delete({id:newOrderAssignHistory.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

@@ -1,0 +1,28 @@
+{
+    "simpleServiceApp": {
+        "newOrderAssignHistory" : {
+            "home": {
+                "title": "新单分配记录",
+                "createLabel": "Create a new New Order Assign History",
+                "createOrEditLabel": "Create or edit a New Order Assign History"
+            },
+            "created": "A new New Order Assign History is created with identifier {{ param }}",
+            "updated": "A New Order Assign History is updated with identifier {{ param }}",
+            "deleted": "A New Order Assign History is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete New Order Assign History {{ id }}?"
+            },
+            "detail": {
+                "title": "New Order Assign History"
+            },
+            "olderFollowerLogin": "老的跟单者",
+            "olderFollowerName": "老的跟单者姓名",
+            "newFollowerLogin": "新的跟单者",
+            "newFollowerName": "新的跟单者姓名",
+            "createdBy": "操作者",
+            "createdDate": "操作时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间"
+        }
+    }
+}

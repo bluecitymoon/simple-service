@@ -10,6 +10,7 @@
                 "classCategory": "Class Category",
                 "marketChannelCategory": "Market Channel Category",
                 "freeClassRecord": "Free Class Record",
+                "newOrderAssignHistory": "New Order Assign History",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

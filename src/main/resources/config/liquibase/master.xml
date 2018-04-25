@@ -9,6 +9,7 @@
     <include file="config/liquibase/changelog/20180414114307_added_entity_MarketChannelCategory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180414115116_added_entity_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
+    <include file="config/liquibase/changelog/20180425120139_added_entity_NewOrderAssignHistory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>

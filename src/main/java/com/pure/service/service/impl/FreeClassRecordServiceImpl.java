@@ -1,8 +1,10 @@
 package com.pure.service.service.impl;
 
-import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.repository.FreeClassRecordRepository;
+import com.pure.service.repository.NewOrderAssignHistoryRepository;
+import com.pure.service.service.FreeClassRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -21,9 +23,11 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     private final Logger log = LoggerFactory.getLogger(FreeClassRecordServiceImpl.class);
 
     private final FreeClassRecordRepository freeClassRecordRepository;
+    private final NewOrderAssignHistoryRepository newOrderAssignHistoryRepository;
 
-    public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository) {
+    public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository, NewOrderAssignHistoryRepository newOrderAssignHistoryRepository) {
         this.freeClassRecordRepository = freeClassRecordRepository;
+        this.newOrderAssignHistoryRepository = newOrderAssignHistoryRepository;
     }
 
     /**
@@ -38,6 +42,25 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         if (freeClassRecord.getId() == null){
             freeClassRecord.setStatus("新单");
+        }
+
+        if (freeClassRecord.getId() != null) {
+
+            FreeClassRecord oldFreeClassRecord = freeClassRecordRepository.findOne(freeClassRecord.getId());
+
+            String olderFollowerLogin = oldFreeClassRecord.getSalesFollower() == null? "" : oldFreeClassRecord.getSalesFollower().getLogin();
+            String olderFollowerName = oldFreeClassRecord.getSalesFollower() == null? "" : oldFreeClassRecord.getSalesFollower().getFirstName();
+            String newFollowerLogin = freeClassRecord.getSalesFollower() == null? "" : freeClassRecord.getSalesFollower().getLogin();
+            String newFollowerName = freeClassRecord.getSalesFollower() == null? "": freeClassRecord.getSalesFollower().getFirstName();
+            NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
+
+            newOrderAssignHistory = newOrderAssignHistory.newFollowerName(newFollowerName)
+                .newFollowerLogin(newFollowerLogin)
+                .newFollowerName(newFollowerName)
+                .olderFollowerLogin(olderFollowerLogin)
+                .olderFollowerName(olderFollowerName);
+
+            newOrderAssignHistoryRepository.save(newOrderAssignHistory);
         }
 
         return freeClassRecordRepository.save(freeClassRecord);

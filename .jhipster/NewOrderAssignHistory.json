@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "olderFollowerLogin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "olderFollowerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "newFollowerLogin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "newFollowerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180425120139",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "new_order_assign_history",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
