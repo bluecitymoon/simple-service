@@ -58,7 +58,8 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
                 .newFollowerLogin(newFollowerLogin)
                 .newFollowerName(newFollowerName)
                 .olderFollowerLogin(olderFollowerLogin)
-                .olderFollowerName(olderFollowerName);
+                .olderFollowerName(olderFollowerName)
+                .newOrder(freeClassRecord);
 
             newOrderAssignHistoryRepository.save(newOrderAssignHistory);
         }
