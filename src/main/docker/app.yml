@@ -4,10 +4,10 @@ services:
         image: simpleservice
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
-            - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.31.126:3306/simpleservice?useUnicode=true&characterEncoding=utf8&useSSL=false
+#            - SPRING_DATASOURCE_URL=jdbc:mysql://192.168.31.126:3306/simpleservice?useUnicode=true&characterEncoding=utf8&useSSL=false
             - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
         ports:
-            - 8080:8080
+            - 8443:8443
 #    simpleservice-mysql:
 #        extends:
 #            file: mysql.yml
