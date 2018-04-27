@@ -129,4 +129,18 @@ public class CustomerResource {
         customerService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/customers/connect/{id}")
+    @Timed
+    public ResponseEntity<Customer> connectCustomer(@PathVariable Long id) throws URISyntaxException {
+
+        log.debug("REST request to connect customer with new order id: {}", id);
+        if (id == null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "badrequest", "No new order id provided")).body(null);
+        }
+
+        Customer customer = customerService.importCustomerFromNewOrder(id);
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(customer));
+    }
 }

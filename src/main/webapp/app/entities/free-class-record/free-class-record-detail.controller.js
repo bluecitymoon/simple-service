@@ -5,17 +5,30 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordDetailController', FreeClassRecordDetailController);
 
-    FreeClassRecordDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'FreeClassRecord', 'MarketChannelCategory','AlertService', 'ClassCategory', 'User'];
+    FreeClassRecordDetailController.$inject = ['$state', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'FreeClassRecord', 'MarketChannelCategory','AlertService', 'ClassCategory', 'User'];
 
-    function FreeClassRecordDetailController($scope, $rootScope, $stateParams, previousState, entity, FreeClassRecord, MarketChannelCategory, AlertService, ClassCategory, User) {
+    function FreeClassRecordDetailController($state, $scope, $rootScope, $stateParams, previousState, entity, FreeClassRecord, MarketChannelCategory, AlertService, ClassCategory, User) {
         var vm = this;
 
         vm.freeClassRecord = entity;
         vm.previousState = previousState.name;
 
         vm.assignToSales = function () {
-            save();
+
+            FreeClassRecord.connectCustomer({id : vm.freeClassRecord.id},
+
+                function (result) {
+
+                    $state.go('customer-detail', {id: result.id});
+
+                    AlertService.success("≤Ÿ◊˜≥…π¶£°");
+
+                }, function (error) {
+
+                    AlertService.error("∏˙µ• ß∞‹");
+                });
         };
+
         vm.users = User.query();
 
         vm.searchPersonWithKeyword = function (keyword) {
@@ -40,7 +53,7 @@
 
         function onSaveError () {
             vm.isSaving = false;
-            AlertService.success("∑÷≈‰ ß∞‹£°")
+            AlertService.error("∑÷≈‰ ß∞‹£°");
         }
 
         var unsubscribe = $rootScope.$on('simpleServiceApp:freeClassRecordUpdate', function(event, result) {

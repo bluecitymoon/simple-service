@@ -39,4 +39,8 @@ public interface CustomerService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    /*
+     */
+    Customer importCustomerFromNewOrder(Long newOrderId);
 }

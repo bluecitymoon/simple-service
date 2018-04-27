@@ -22,6 +22,11 @@
                     return data;
                 }
             },
+            'connectCustomer' : {
+                method: 'GET',
+                url: 'api/customers/connect/:id',
+                params: { id : '@id'}
+            },
             'update': { method:'PUT' }
         });
     }
