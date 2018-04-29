@@ -91,6 +91,8 @@ public class OAuth2ServerConfiguration {
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/profile-info").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/free-class-records").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/market-channel-categories").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/class-categories").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/v2/api-docs/**").permitAll()

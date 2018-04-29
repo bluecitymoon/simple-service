@@ -7,7 +7,7 @@ ENV SPRING_OUTPUT_ANSI_ENABLED=ALWAYS \
 
 ADD *.war /app.war
 
-EXPOSE 8443 10000
+EXPOSE 443:8443 10000
 CMD echo "The application will start in ${JHIPSTER_SLEEP}s..." && \
     sleep ${JHIPSTER_SLEEP} && \
     java ${JAVA_OPTS} -Djava.security.egd=file:/dev/./urandom -jar /app.war
