@@ -11,12 +11,14 @@
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180425120139_added_entity_NewOrderAssignHistory.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180426025350_added_entity_Customer.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180429110202_added_entity_NewOrderWechatUserInfo.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422141239_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180424063707_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180425130746_changelog_add_relationship_to_new_order.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180429110934_changelog.xml" relativeToChangelogFile="false"/> <!-- relationship to wechat info-->
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->

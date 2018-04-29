@@ -1,0 +1,37 @@
+{
+    "simpleServiceApp": {
+        "newOrderWechatUserInfo" : {
+            "home": {
+                "title": "新单用户微信信息",
+                "createLabel": "Create a new New Order Wechat User Info",
+                "createOrEditLabel": "Create or edit a New Order Wechat User Info"
+            },
+            "created": "A new New Order Wechat User Info is created with identifier {{ param }}",
+            "updated": "A New Order Wechat User Info is updated with identifier {{ param }}",
+            "deleted": "A New Order Wechat User Info is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete New Order Wechat User Info {{ id }}?"
+            },
+            "detail": {
+                "title": "微信信息"
+            },
+            "code": "Code",
+            "encryptedData": "Encrypted Data",
+            "iv": "Iv",
+            "nickName": "昵称",
+            "gender": "Gender",
+            "language": "语言",
+            "city": "市",
+            "province": "省",
+            "country": "国",
+            "avatarUrl": "头像",
+            "createdBy": "创建者",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改",
+            "lastModifiedDate": "最近修改人",
+            "openId": "Open Id",
+            "comments": "Comments",
+            "newOrder": "新单"
+        }
+    }
+}

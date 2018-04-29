@@ -1,0 +1,83 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "newOrder",
+            "otherEntityName": "freeClassRecord",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "newOrderWechatUserInfo"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "encryptedData",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "iv",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nickName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "gender",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "language",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "city",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "province",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "country",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "avatarUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "openId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180429110202",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "new_order_wechat_user_info",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

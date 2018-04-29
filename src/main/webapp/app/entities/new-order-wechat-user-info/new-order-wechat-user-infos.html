@@ -1,0 +1,92 @@
+<div class="panel">
+<div class="panel-body">
+    <h2 data-translate="simpleServiceApp.newOrderWechatUserInfo.home.title">New Order Wechat User Infos</h2>
+    <jhi-alert></jhi-alert>
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="new-order-wechat-user-info.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.newOrderWechatUserInfo.home.createLabel">-->
+                        <!--Create new New Order Wechat User Info-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="encryptedData"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.encryptedData">Encrypted Data</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="iv"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.iv">Iv</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="nickName"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.nickName">Nick Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="gender"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.gender">Gender</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="language"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.language">Language</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="city"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.city">City</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="province"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.province">Province</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="country"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.country">Country</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="avatarUrl"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.avatarUrl">Avatar Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="openId"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.openId">Open Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="comments"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="newOrderWechatUserInfo in vm.newOrderWechatUserInfos track by newOrderWechatUserInfo.id">
+                    <td><a ui-sref="new-order-wechat-user-info-detail({id:newOrderWechatUserInfo.id})">{{newOrderWechatUserInfo.id}}</a></td>
+                    <td>{{newOrderWechatUserInfo.code}}</td>
+                    <!--<td>{{newOrderWechatUserInfo.encryptedData}}</td>-->
+                    <td>{{newOrderWechatUserInfo.iv}}</td>
+                    <td>{{newOrderWechatUserInfo.nickName}}</td>
+                    <td>{{newOrderWechatUserInfo.gender}}</td>
+                    <td>{{newOrderWechatUserInfo.language}}</td>
+                    <td>{{newOrderWechatUserInfo.city}}</td>
+                    <td>{{newOrderWechatUserInfo.province}}</td>
+                    <td>{{newOrderWechatUserInfo.country}}</td>
+                    <td>{{newOrderWechatUserInfo.avatarUrl}}</td>
+                    <td>{{newOrderWechatUserInfo.createdBy}}</td>
+                    <td>{{newOrderWechatUserInfo.createdDate | date:'medium'}}</td>
+                    <!--<td>{{newOrderWechatUserInfo.lastModifiedBy}}</td>-->
+                    <!--<td>{{newOrderWechatUserInfo.lastModifiedDate | date:'medium'}}</td>-->
+                    <td>{{newOrderWechatUserInfo.openId}}</td>
+                    <!--<td>{{newOrderWechatUserInfo.comments}}</td>-->
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="new-order-wechat-user-info-detail({id:newOrderWechatUserInfo.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="new-order-wechat-user-info.edit({id:newOrderWechatUserInfo.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="new-order-wechat-user-info.delete({id:newOrderWechatUserInfo.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

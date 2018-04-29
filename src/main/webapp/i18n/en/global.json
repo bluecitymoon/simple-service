@@ -12,6 +12,7 @@
                 "freeClassRecord": "Free Class Record",
                 "newOrderAssignHistory": "New Order Assign History",
                 "customer": "Customer",
+                "newOrderWechatUserInfo": "New Order Wechat User Info",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

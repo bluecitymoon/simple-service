@@ -1,0 +1,84 @@
+<div class="panel">
+<div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.newOrderWechatUserInfo.detail.title">New Order Wechat User Info</span> {{vm.newOrderWechatUserInfo.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.code">Code</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.encryptedData">Encrypted Data</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.encryptedData}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.iv">Iv</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.iv}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.nickName">Nick Name</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.nickName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.gender">Gender</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.gender}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.language">Language</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.language}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.city">City</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.city}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.province">Province</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.province}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.country">Country</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.country}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.avatarUrl">Avatar Url</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.avatarUrl}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.openId">Open Id</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.openId}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.comments}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <!--<button type="button" ui-sref="new-order-wechat-user-info-detail.edit({id:vm.newOrderWechatUserInfo.id})" class="btn btn-primary">-->
+        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+        <!--<span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>-->
+    <!--</button>-->
+</div>
+</div>
