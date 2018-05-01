@@ -1,14 +1,15 @@
 package com.pure.service.config;
 
+import com.google.common.collect.Lists;
 import com.pure.service.security.AuthoritiesConstants;
-
-import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 import io.github.jhipster.security.AjaxLogoutSuccessHandler;
-
+import io.github.jhipster.security.Http401UnauthorizedEntryPoint;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,6 +28,7 @@ import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeSe
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.CorsFilter;
 
 import javax.sql.DataSource;
@@ -43,6 +45,22 @@ public class OAuth2ServerConfiguration {
     @Bean
     public JdbcTokenStore tokenStore() {
         return new JdbcTokenStore(dataSource);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter());
+        return restTemplate;
+    }
+
+    private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+
+        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Lists.newArrayList(MediaType.APPLICATION_JSON, MediaType.TEXT_PLAIN));
+
+        return mappingJackson2HttpMessageConverter;
     }
 
     @Configuration
@@ -94,6 +112,7 @@ public class OAuth2ServerConfiguration {
                 .antMatchers(HttpMethod.GET, "/api/market-channel-categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/class-categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/.well-known/pki-validation/fileauth.txt").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/new-order-wechat-user-infos").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/v2/api-docs/**").permitAll()

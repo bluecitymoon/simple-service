@@ -2,13 +2,14 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.NewOrderWechatUserInfo;
+import com.pure.service.service.NewOrderWechatUserInfoQueryService;
 import com.pure.service.service.NewOrderWechatUserInfoService;
+import com.pure.service.service.OpenIdService;
+import com.pure.service.service.dto.NewOrderWechatUserInfoCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
-import com.pure.service.service.dto.NewOrderWechatUserInfoCriteria;
-import com.pure.service.service.NewOrderWechatUserInfoQueryService;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,11 +17,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +45,14 @@ public class NewOrderWechatUserInfoResource {
 
     private final NewOrderWechatUserInfoQueryService newOrderWechatUserInfoQueryService;
 
-    public NewOrderWechatUserInfoResource(NewOrderWechatUserInfoService newOrderWechatUserInfoService, NewOrderWechatUserInfoQueryService newOrderWechatUserInfoQueryService) {
+    private final OpenIdService openIdService;
+
+    public NewOrderWechatUserInfoResource(NewOrderWechatUserInfoService newOrderWechatUserInfoService,
+                                          NewOrderWechatUserInfoQueryService newOrderWechatUserInfoQueryService,
+                                          OpenIdService openIdService) {
         this.newOrderWechatUserInfoService = newOrderWechatUserInfoService;
         this.newOrderWechatUserInfoQueryService = newOrderWechatUserInfoQueryService;
+        this.openIdService = openIdService;
     }
 
     /**
@@ -58,6 +69,10 @@ public class NewOrderWechatUserInfoResource {
         if (newOrderWechatUserInfo.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new newOrderWechatUserInfo cannot already have an ID")).body(null);
         }
+
+        String openId = openIdService.getTencentOpenId(newOrderWechatUserInfo.getCode());
+        newOrderWechatUserInfo.setOpenId(openId);
+
         NewOrderWechatUserInfo result = newOrderWechatUserInfoService.save(newOrderWechatUserInfo);
         return ResponseEntity.created(new URI("/api/new-order-wechat-user-infos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -116,17 +131,17 @@ public class NewOrderWechatUserInfoResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(newOrderWechatUserInfo));
     }
 
-    /**
-     * DELETE  /new-order-wechat-user-infos/:id : delete the "id" newOrderWechatUserInfo.
-     *
-     * @param id the id of the newOrderWechatUserInfo to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @DeleteMapping("/new-order-wechat-user-infos/{id}")
-    @Timed
-    public ResponseEntity<Void> deleteNewOrderWechatUserInfo(@PathVariable Long id) {
-        log.debug("REST request to delete NewOrderWechatUserInfo : {}", id);
-        newOrderWechatUserInfoService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-    }
+//    /**
+//     * DELETE  /new-order-wechat-user-infos/:id : delete the "id" newOrderWechatUserInfo.
+//     *
+//     * @param id the id of the newOrderWechatUserInfo to delete
+//     * @return the ResponseEntity with status 200 (OK)
+//     */
+//    @DeleteMapping("/new-order-wechat-user-infos/{id}")
+//    @Timed
+//    public ResponseEntity<Void> deleteNewOrderWechatUserInfo(@PathVariable Long id) {
+//        log.debug("REST request to delete NewOrderWechatUserInfo : {}", id);
+//        newOrderWechatUserInfoService.delete(id);
+//        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+//    }
 }

@@ -29,7 +29,7 @@ public class NewOrderWechatUserInfo extends AbstractAuditingEntity {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "encrypted_data")
+    @Column(name = "encrypted_data", length = 5000)
     private String encryptedData;
 
     @Column(name = "iv")

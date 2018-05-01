@@ -1,21 +1,9 @@
 <div class="panel">
 <div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.newOrderWechatUserInfo.detail.title">New Order Wechat User Info</span> {{vm.newOrderWechatUserInfo.id}}</h2>
+    <h2><span data-translate="simpleServiceApp.newOrderWechatUserInfo.detail.title">New Order Wechat User Info</span> <img class="img-circle img-md" src="{{vm.newOrderWechatUserInfo.avatarUrl}}" alt="Profile Picture"></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.code">Code</span></dt>
-        <dd>
-            <span>{{vm.newOrderWechatUserInfo.code}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.encryptedData">Encrypted Data</span></dt>
-        <dd>
-            <span>{{vm.newOrderWechatUserInfo.encryptedData}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.iv">Iv</span></dt>
-        <dd>
-            <span>{{vm.newOrderWechatUserInfo.iv}}</span>
-        </dd>
         <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.nickName">Nick Name</span></dt>
         <dd>
             <span>{{vm.newOrderWechatUserInfo.nickName}}</span>
@@ -44,6 +32,19 @@
         <dd>
             <span>{{vm.newOrderWechatUserInfo.avatarUrl}}</span>
         </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.code">Code</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.encryptedData">Encrypted Data</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.encryptedData}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.iv">Iv</span></dt>
+        <dd>
+            <span>{{vm.newOrderWechatUserInfo.iv}}</span>
+        </dd>
+
         <dt><span data-translate="simpleServiceApp.newOrderWechatUserInfo.createdBy">Created By</span></dt>
         <dd>
             <span>{{vm.newOrderWechatUserInfo.createdBy}}</span>
