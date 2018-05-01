@@ -20,9 +20,9 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="code"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="code"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th jh-sort-by="encryptedData"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.encryptedData">Encrypted Data</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <th jh-sort-by="iv"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.iv">Iv</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="iv"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.iv">Iv</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="nickName"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.nickName">Nick Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="gender"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.gender">Gender</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="language"><span data-translate="simpleServiceApp.newOrderWechatUserInfo.language">Language</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -42,9 +42,9 @@
             <tbody>
                 <tr ng-repeat="newOrderWechatUserInfo in vm.newOrderWechatUserInfos track by newOrderWechatUserInfo.id">
                     <td><a ui-sref="new-order-wechat-user-info-detail({id:newOrderWechatUserInfo.id})">{{newOrderWechatUserInfo.id}}</a></td>
-                    <td>{{newOrderWechatUserInfo.code}}</td>
+                    <!--<td>{{newOrderWechatUserInfo.code}}</td>-->
                     <!--<td>{{newOrderWechatUserInfo.encryptedData}}</td>-->
-                    <td>{{newOrderWechatUserInfo.iv}}</td>
+                    <!--<td>{{newOrderWechatUserInfo.iv}}</td>-->
                     <td>{{newOrderWechatUserInfo.nickName}}</td>
                     <td>{{newOrderWechatUserInfo.gender}}</td>
                     <td>{{newOrderWechatUserInfo.language}}</td>
@@ -72,12 +72,12 @@
                                 <!--<span class="glyphicon glyphicon-pencil"></span>-->
                                 <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
                             <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="new-order-wechat-user-info.delete({id:newOrderWechatUserInfo.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
+                            <button type="submit"
+                                    ui-sref="new-order-wechat-user-info.delete({id:newOrderWechatUserInfo.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
                         </div>
                     </td>
                 </tr>

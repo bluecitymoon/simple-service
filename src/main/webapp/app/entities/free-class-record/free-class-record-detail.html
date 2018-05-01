@@ -1,111 +1,151 @@
+<div class="row">
+    <div ng-class="(vm.freeClassRecord.newOrderWechatUserInfo !=null) ? 'col-sm-9': 'col-sm-12' ">
 
-<div class="panel">
-    <jhi-alert></jhi-alert>
-    <!--Panel heading-->
-    <div class="panel-heading" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-        <div class="panel-control">
-            <div class="input-group-wrap">
-                <div class="input-group">
-                    <!--<input type="text" placeholder="搜索员工" class="form-control">-->
-                    <ui-select ng-model="vm.freeClassRecord.salesFollower" class="form-control">
-                        <ui-select-match>
-                            {{$select.selected.firstName}}
-                        </ui-select-match>
-                        <ui-select-choices refresh="vm.searchPersonWithKeyword($select.search)" refresh-delay="0" repeat="item in (vm.users | filter: $select.search) track by item.id">
-                            <span ng-bind="item.firstName"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                    <span class="input-group-btn">
-					     <button class="btn btn-danger" type="button" ng-click="vm.assignToSales()">分配给该员工<i class="glyphicon glyphicon-user"></i></button>
+        <div class="panel">
+            <jhi-alert></jhi-alert>
+            <!--Panel heading-->
+            <div class="panel-heading" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                <div class="panel-control">
+                    <div class="input-group-wrap">
+                        <div class="input-group">
+                            <!--<input type="text" placeholder="搜索员工" class="form-control">-->
+                            <ui-select ng-model="vm.freeClassRecord.salesFollower" class="form-control">
+                                <ui-select-match>
+                                    {{$select.selected.firstName}}
+                                </ui-select-match>
+                                <ui-select-choices refresh="vm.searchPersonWithKeyword($select.search)"
+                                                   refresh-delay="0"
+                                                   repeat="item in (vm.users | filter: $select.search) track by item.id">
+                                    <span ng-bind="item.firstName"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                            <span class="input-group-btn">
+					     <button class="btn btn-danger" type="button" ng-click="vm.assignToSales()">分配给该员工<i
+                                 class="glyphicon glyphicon-user"></i></button>
 					</span>
+                        </div>
+                    </div>
                 </div>
+                <h3 class="panel-title">
+                    <span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span>
+                    {{vm.freeClassRecord.personName}}
+                </h3>
             </div>
-        </div>
-        <h3 class="panel-title">
-            <span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span>
-            {{vm.freeClassRecord.personName}}
-        </h3>
-    </div>
 
-    <!--Panel body-->
-    <div class="panel-body">
-        <jhi-alert-error></jhi-alert-error>
-        <hr>
+            <!--Panel body-->
+            <div class="panel-body">
+                <jhi-alert-error></jhi-alert-error>
+                <hr>
 
-        <dl class="dl-horizontal jh-entity-details">
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span></dt>
-            <dd>
-                <span>{{vm.freeClassRecord.status}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
-            <dd>
-                <span>{{vm.freeClassRecord.personName}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
-            </dt>
-            <dd>
-                <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span></dt>
-            <dd>
-                <span>{{vm.freeClassRecord.createdBy}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span></dt>
-            <dd>
-                <span>{{vm.freeClassRecord.createdDate | date:'medium'}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span></dt>
-            <dd>
-                <span>{{vm.freeClassRecord.lastModifiedBy}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span></dt>
-            <dd>
-                <span>{{vm.freeClassRecord.lastModifiedDate | date:'medium'}}</span>
-            </dd>
-            <dt><span
-                    data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
-            </dt>
-            <dd>
-                <a ui-sref="market-channel-category-detail({id:vm.freeClassRecord.marketChannelCategory.id})">{{vm.freeClassRecord.marketChannelCategory.name}}</a>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.classCategory">Class Category</span></dt>
-            <dd>
+                <dl class="dl-horizontal jh-entity-details">
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span></dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.status}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span></dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.personName}}</span>
+                    </dd>
+                    <dt><span
+                            data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
+                    </dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.contactPhoneNumber}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span></dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.createdBy}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span></dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.createdDate | date:'medium'}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedBy">Last Modified By</span>
+                    </dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.lastModifiedBy}}</span>
+                    </dd>
+                    <dt><span
+                            data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span>
+                    </dt>
+                    <dd>
+                        <span>{{vm.freeClassRecord.lastModifiedDate | date:'medium'}}</span>
+                    </dd>
+                    <dt><span
+                            data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
+                    </dt>
+                    <dd>
+                        <a ui-sref="market-channel-category-detail({id:vm.freeClassRecord.marketChannelCategory.id})">{{vm.freeClassRecord.marketChannelCategory.name}}</a>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.classCategory">Class Category</span></dt>
+                    <dd>
             <span ng-repeat="classCategory in vm.freeClassRecord.classCategories">
                 <a ui-sref="class-category-detail({id: classCategory.id})">{{classCategory.name}}</a>{{$last ? '' : ', '}}
             </span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span></dt>
-            <dd>
-                {{vm.freeClassRecord.salesFollower.firstName}}
-            </dd>
-        </dl>
-    </div>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span></dt>
+                    <dd>
+                        {{vm.freeClassRecord.salesFollower.firstName}}
+                    </dd>
+                </dl>
+            </div>
 
-    <div class="panel-footer">
-        <button type="submit"
-                ui-sref="{{ vm.previousState }}"
-                class="btn btn-info">
-            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-                data-translate="entity.action.back"> Back</span>
-        </button>
+            <div class="panel-footer">
+                <button type="submit"
+                        ui-sref="{{ vm.previousState }}"
+                        class="btn btn-info">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                        data-translate="entity.action.back"> Back</span>
+                </button>
 
-        <button has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" type="button"
-                ui-sref="free-class-record-detail.edit({id:vm.freeClassRecord.id})" class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-        </button>
+                <button has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" type="button"
+                        ui-sref="free-class-record-detail.edit({id:vm.freeClassRecord.id})" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+                </button>
 
-        <!--<button has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" type="button" ng-click="vm.assignToSales()"-->
+                <!--<button has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" type="button" ng-click="vm.assignToSales()"-->
                 <!--class="btn btn-danger">-->
-            <!--<span class="glyphicon glyphicon-user"></span>-->
-            <!--<span class="hidden-sm-down">分配给销售人员</span>-->
-        <!--</button>-->
+                <!--<span class="glyphicon glyphicon-user"></span>-->
+                <!--<span class="hidden-sm-down">分配给销售人员</span>-->
+                <!--</button>-->
 
-        <button has-any-authority="ROLE_ADMIN,ROLE_SALES" type="button" ng-click="vm.assignToSales()"
-                class="btn btn-success">
-            <span class="glyphicon glyphicon-bookmark"></span>
-            <span class="hidden-sm-down">开始跟单</span>
-        </button>
+                <button has-any-authority="ROLE_ADMIN,ROLE_SALES" type="button" ng-click="vm.assignToSales()"
+                        class="btn btn-success">
+                    <span class="glyphicon glyphicon-bookmark"></span>
+                    <span class="hidden-sm-down">开始跟单</span>
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3" ng-show="vm.freeClassRecord.newOrderWechatUserInfo">
+
+        <div class="panel widget">
+            <div class="widget-header bg-info text-center">
+                <h4 class="text-light mar-no pad-top">{{vm.freeClassRecord.newOrderWechatUserInfo.nickName}}</h4>
+                <p class="mar-btm">{{vm.freeClassRecord.newOrderWechatUserInfo.gender? '男' : '女'}}</p>
+            </div>
+            <div class="widget-body">
+                <img alt="Profile Picture" class="widget-img img-circle img-border-light"
+                     src="{{vm.freeClassRecord.newOrderWechatUserInfo.avatarUrl}}">
+
+                <div class="list-group bg-trans mar-no">
+                    <b class="list-group-item list-item-sm">
+                        <span class="label label-primary pull-right">{{vm.freeClassRecord.newOrderWechatUserInfo.city}}</span>
+                        地区
+                    </b>
+                    <b class="list-group-item list-item-sm">
+                        <span class="label label-success pull-right">{{vm.freeClassRecord.newOrderWechatUserInfo.province}}</span>
+                        省份
+                    </b>
+                    <b class="list-group-item list-item-sm">
+                        <span class="label label-danger pull-right">{{vm.freeClassRecord.newOrderWechatUserInfo.openId}}</span>
+                        Open Id
+                    </b>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>

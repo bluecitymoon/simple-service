@@ -112,7 +112,7 @@ public class OAuth2ServerConfiguration {
                 .antMatchers(HttpMethod.GET, "/api/market-channel-categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/class-categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/.well-known/pki-validation/fileauth.txt").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/new-order-wechat-user-infos").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/new-order-wechat-user-infos/migrate").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/v2/api-docs/**").permitAll()

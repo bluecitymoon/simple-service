@@ -17,6 +17,8 @@ public interface NewOrderWechatUserInfoService {
      */
     NewOrderWechatUserInfo save(NewOrderWechatUserInfo newOrderWechatUserInfo);
 
+    NewOrderWechatUserInfo migrate(NewOrderWechatUserInfo newOrderWechatUserInfo);
+
     /**
      *  Get all the newOrderWechatUserInfos.
      *

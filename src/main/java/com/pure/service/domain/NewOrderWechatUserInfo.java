@@ -1,7 +1,5 @@
 package com.pure.service.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -75,7 +73,7 @@ public class NewOrderWechatUserInfo extends AbstractAuditingEntity {
     private String comments;
 
     @OneToMany(mappedBy = "newOrderWechatUserInfo")
-    @JsonIgnore
+//    @JsonIgnore
     private Set<FreeClassRecord> newOrders = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove

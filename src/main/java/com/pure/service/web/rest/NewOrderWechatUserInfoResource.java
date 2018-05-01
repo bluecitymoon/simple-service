@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,11 +70,22 @@ public class NewOrderWechatUserInfoResource {
         if (newOrderWechatUserInfo.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new newOrderWechatUserInfo cannot already have an ID")).body(null);
         }
-
-        String openId = openIdService.getTencentOpenId(newOrderWechatUserInfo.getCode());
-        newOrderWechatUserInfo.setOpenId(openId);
-
         NewOrderWechatUserInfo result = newOrderWechatUserInfoService.save(newOrderWechatUserInfo);
+        return ResponseEntity.created(new URI("/api/new-order-wechat-user-infos/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/new-order-wechat-user-infos/migrate")
+    @Timed
+    public ResponseEntity<NewOrderWechatUserInfo> createOrUpdateNewOrderWechatUserInfo(@RequestBody NewOrderWechatUserInfo newOrderWechatUserInfo) throws URISyntaxException {
+        log.debug("REST request to save NewOrderWechatUserInfo : {}", newOrderWechatUserInfo);
+        if (newOrderWechatUserInfo.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new newOrderWechatUserInfo cannot already have an ID")).body(null);
+        }
+
+        NewOrderWechatUserInfo result = newOrderWechatUserInfoService.migrate(newOrderWechatUserInfo);
+
         return ResponseEntity.created(new URI("/api/new-order-wechat-user-infos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -131,17 +143,17 @@ public class NewOrderWechatUserInfoResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(newOrderWechatUserInfo));
     }
 
-//    /**
-//     * DELETE  /new-order-wechat-user-infos/:id : delete the "id" newOrderWechatUserInfo.
-//     *
-//     * @param id the id of the newOrderWechatUserInfo to delete
-//     * @return the ResponseEntity with status 200 (OK)
-//     */
-//    @DeleteMapping("/new-order-wechat-user-infos/{id}")
-//    @Timed
-//    public ResponseEntity<Void> deleteNewOrderWechatUserInfo(@PathVariable Long id) {
-//        log.debug("REST request to delete NewOrderWechatUserInfo : {}", id);
-//        newOrderWechatUserInfoService.delete(id);
-//        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
-//    }
+    /**
+     * DELETE  /new-order-wechat-user-infos/:id : delete the "id" newOrderWechatUserInfo.
+     *
+     * @param id the id of the newOrderWechatUserInfo to delete
+     * @return the ResponseEntity with status 200 (OK)
+     */
+    @DeleteMapping("/new-order-wechat-user-infos/{id}")
+    @Timed
+    public ResponseEntity<Void> deleteNewOrderWechatUserInfo(@PathVariable Long id) {
+        log.debug("REST request to delete NewOrderWechatUserInfo : {}", id);
+        newOrderWechatUserInfoService.delete(id);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
 }
