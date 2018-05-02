@@ -14,6 +14,8 @@
                 "customer": "Customer",
                 "newOrderWechatUserInfo": "New Order Wechat User Info",
                 "customerCommunicationSchedule": "Customer Communication Schedule",
+                "customerCommunicationLogType": "Customer Communication Log Type",
+                "customerCommunicationLog": "Customer Communication Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

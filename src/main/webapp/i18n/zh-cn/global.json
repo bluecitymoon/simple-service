@@ -13,7 +13,9 @@
                 "newOrderAssignHistory": "新单分配记录",
                 "customer": "客户",
                 "newOrderWechatUserInfo": "New Order Wechat User Info",
-                "customerCommunicationSchedule": "Customer Communication Schedule",
+                "customerCommunicationSchedule": "客户预约安排",
+                "customerCommunicationLogType": "客户沟通记录类型",
+                "customerCommunicationLog": "客户沟通记录",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

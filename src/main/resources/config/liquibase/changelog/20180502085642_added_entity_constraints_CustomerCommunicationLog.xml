@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CustomerCommunicationLog.
+    -->
+    <changeSet id="20180502085642-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="log_type_id"
+                                 baseTableName="customer_communication_log"
+                                 constraintName="fk_customer_communication_log_log_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer_communication_log_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_id"
+                                 baseTableName="customer_communication_log"
+                                 constraintName="fk_customer_communication_log_customer_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer"/>
+
+        <addForeignKeyConstraint baseColumnNames="free_class_record_id"
+                                 baseTableName="customer_communication_log"
+                                 constraintName="fk_customer_communication_log_free_class_record_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="free_class_record"/>
+
+    </changeSet>
+</databaseChangeLog>

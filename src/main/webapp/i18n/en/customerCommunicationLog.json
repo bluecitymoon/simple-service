@@ -1,0 +1,28 @@
+{
+    "simpleServiceApp": {
+        "customerCommunicationLog" : {
+            "home": {
+                "title": "Customer Communication Logs",
+                "createLabel": "Create a new Customer Communication Log",
+                "createOrEditLabel": "Create or edit a Customer Communication Log"
+            },
+            "created": "A new Customer Communication Log is created with identifier {{ param }}",
+            "updated": "A Customer Communication Log is updated with identifier {{ param }}",
+            "deleted": "A Customer Communication Log is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Communication Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Communication Log"
+            },
+            "comments": "Comments",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "logType": "Log Type",
+            "customer": "Customer",
+            "freeClassRecord": "Free Class Record"
+        }
+    }
+}

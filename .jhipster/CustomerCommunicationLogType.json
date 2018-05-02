@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180502084830",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "customer_communication_log_type",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

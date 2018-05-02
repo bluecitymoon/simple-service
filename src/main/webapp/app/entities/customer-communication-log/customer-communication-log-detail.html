@@ -1,0 +1,61 @@
+<div class="panel">
+    <div class="panel-body">
+        <h2><span
+                data-translate="simpleServiceApp.customerCommunicationLog.detail.title">Customer Communication Log</span>
+            {{vm.customerCommunicationLog.id}}</h2>
+        <hr>
+        <jhi-alert-error></jhi-alert-error>
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.customerCommunicationLog.comments">Comments</span></dt>
+            <dd>
+                <span>{{vm.customerCommunicationLog.comments}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.customerCommunicationLog.createdBy">Created By</span></dt>
+            <dd>
+                <span>{{vm.customerCommunicationLog.createdBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.customerCommunicationLog.createdDate">Created Date</span></dt>
+            <dd>
+                <span>{{vm.customerCommunicationLog.createdDate | date:'medium'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.customerCommunicationLog.lastModifiedBy">Last Modified By</span>
+            </dt>
+            <dd>
+                <span>{{vm.customerCommunicationLog.lastModifiedBy}}</span>
+            </dd>
+            <dt><span
+                    data-translate="simpleServiceApp.customerCommunicationLog.lastModifiedDate">Last Modified Date</span>
+            </dt>
+            <dd>
+                <span>{{vm.customerCommunicationLog.lastModifiedDate | date:'medium'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.customerCommunicationLog.logType">Log Type</span></dt>
+            <dd>
+                <a ui-sref="customer-communication-log-type-detail({id:vm.customerCommunicationLog.logType.id})">{{vm.customerCommunicationLog.logType.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.customerCommunicationLog.customer">Customer</span></dt>
+            <dd>
+                <a ui-sref="customer-detail({id:vm.customerCommunicationLog.customer.id})">{{vm.customerCommunicationLog.customer.name}}</a>
+            </dd>
+            <dt><span
+                    data-translate="simpleServiceApp.customerCommunicationLog.freeClassRecord">Free Class Record</span>
+            </dt>
+            <dd>
+                <a ui-sref="free-class-record-detail({id:vm.customerCommunicationLog.freeClassRecord.id})">{{vm.customerCommunicationLog.freeClassRecord.personName}}</a>
+            </dd>
+        </dl>
+
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
+
+        <!--<button type="button" ui-sref="customer-communication-log-detail.edit({id:vm.customerCommunicationLog.id})"-->
+                <!--class="btn btn-primary">-->
+            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+            <!--<span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>-->
+        <!--</button>-->
+    </div>
+</div>
