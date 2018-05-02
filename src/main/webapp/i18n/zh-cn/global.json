@@ -13,6 +13,7 @@
                 "newOrderAssignHistory": "新单分配记录",
                 "customer": "客户",
                 "newOrderWechatUserInfo": "New Order Wechat User Info",
+                "customerCommunicationSchedule": "Customer Communication Schedule",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,28 @@
+{
+    "simpleServiceApp": {
+        "customerCommunicationSchedule" : {
+            "home": {
+                "title": "Customer Communication Schedules",
+                "createLabel": "Create a new Customer Communication Schedule",
+                "createOrEditLabel": "Create or edit a Customer Communication Schedule"
+            },
+            "created": "A new Customer Communication Schedule is created with identifier {{ param }}",
+            "updated": "A Customer Communication Schedule is updated with identifier {{ param }}",
+            "deleted": "A Customer Communication Schedule is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Communication Schedule {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Communication Schedule"
+            },
+            "sceduleDate": "Scedule Date",
+            "comments": "Comments",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "customer": "Customer",
+            "follower": "Follower"
+        }
+    }
+}

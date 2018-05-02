@@ -1,0 +1,100 @@
+<div class="panel">
+    <div class="panel-body">
+        <h2 data-translate="simpleServiceApp.customerCommunicationSchedule.home.title">Customer Communication
+            Schedules</h2>
+        <jhi-alert></jhi-alert>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="customer-communication-schedule.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span data-translate="simpleServiceApp.customerCommunicationSchedule.home.createLabel">
+                        Create new Customer Communication Schedule
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sceduleDate"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate">Scedule Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comments"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.comments">Comments</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy">Created By</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.createdDate">Created Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedBy">Last Modified By</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedDate">Last Modified Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.customer">Customer</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="follower.login"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.follower">Follower</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customerCommunicationSchedule in vm.customerCommunicationSchedules track by customerCommunicationSchedule.id">
+                    <td><a ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})">{{customerCommunicationSchedule.id}}</a>
+                    </td>
+                    <td>{{customerCommunicationSchedule.sceduleDate | date:'medium'}}</td>
+                    <td>{{customerCommunicationSchedule.comments}}</td>
+                    <td>{{customerCommunicationSchedule.createdBy}}</td>
+                    <td>{{customerCommunicationSchedule.createdDate | date:'medium'}}</td>
+                    <td>{{customerCommunicationSchedule.lastModifiedBy}}</td>
+                    <td>{{customerCommunicationSchedule.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        <a ui-sref="customer-detail({id:customerCommunicationSchedule.customer.id})">{{customerCommunicationSchedule.customer.name}}</a>
+                    </td>
+                    <td>
+                        {{customerCommunicationSchedule.follower.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-communication-schedule.edit({id:customerCommunicationSchedule.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-communication-schedule.delete({id:customerCommunicationSchedule.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
+    </div>
+</div>
