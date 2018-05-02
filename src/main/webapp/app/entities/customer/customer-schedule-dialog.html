@@ -4,32 +4,32 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myCustomerLabel" data-translate="simpleServiceApp.customer.home.createOrEditLabel">Create or edit a Customer</h4>
+        <h4 class="modal-title">预约客户</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.customer.id">
-            <label for="id" data-translate="global.field.id">客户编号</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.customer.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.customer.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.customer.name" readonly
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.customer.contactPhoneNumber" for="field_contactPhoneNumber">Contact Phone Number</label>
-            <input type="text" class="form-control" name="contactPhoneNumber" id="field_contactPhoneNumber"
-                    ng-model="vm.customer.contactPhoneNumber"
-                    readonly />
-        </div>
+        <!--<div class="form-group" ng-show="vm.customer.id">-->
+            <!--<label for="id" data-translate="global.field.id">客户编号</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                    <!--ng-model="vm.customer.id" readonly />-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="simpleServiceApp.customer.name" for="field_name">Name</label>-->
+            <!--<input type="text" class="form-control" name="name" id="field_name"-->
+                    <!--ng-model="vm.customer.name" readonly-->
+                    <!--/>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="simpleServiceApp.customer.contactPhoneNumber" for="field_contactPhoneNumber">Contact Phone Number</label>-->
+            <!--<input type="text" class="form-control" name="contactPhoneNumber" id="field_contactPhoneNumber"-->
+                    <!--ng-model="vm.customer.contactPhoneNumber"-->
+                    <!--readonly />-->
+        <!--</div>-->
 
         <div class="form-group">
             <label class="control-label" for="field_sceduleDate">预约时间</label>
             <div class="input-group">
-                <input id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
+                <input ng-focus="vm.openCalendar('sceduleDate')" id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
                 />
                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('sceduleDate')"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -38,18 +38,25 @@
         </div>
         <div class="form-group">
             <label class="control-label" for="field_comments">备注</label>
-            <input type="text" class="form-control" name="comments" id="field_comments"
-                   ng-model="vm.customerCommunicationSchedule.comments"
-            />
+            <textarea type="text" class="form-control" name="comments" id="field_comments"
+                   ng-model="vm.customerCommunicationSchedule.comments" rows="8"
+            ></textarea>
         </div>
 
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
-        </button>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">
+                    <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-block btn-pink">
+                    <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定预约</span>
+                </button>
+            </div>
+        </div>
+
     </div>
 </form>
