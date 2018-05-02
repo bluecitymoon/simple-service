@@ -1,9 +1,13 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.time.Instant;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -11,7 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "customer_communication_log")
-public class CustomerCommunicationLog implements Serializable {
+public class CustomerCommunicationLog extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,18 +25,6 @@ public class CustomerCommunicationLog implements Serializable {
 
     @Column(name = "comments")
     private String comments;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "created_date")
-    private Instant createdDate;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private Instant lastModifiedDate;
 
     @ManyToOne
     private CustomerCommunicationLogType logType;
@@ -63,58 +55,6 @@ public class CustomerCommunicationLog implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public CustomerCommunicationLog createdBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
-
-    public CustomerCommunicationLog createdDate(Instant createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public CustomerCommunicationLog lastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public CustomerCommunicationLog lastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-        return this;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 
     public CustomerCommunicationLogType getLogType() {

@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CustomerCommunicationLogTypeRepository extends JpaRepository<CustomerCommunicationLogType, Long> {
 
+    CustomerCommunicationLogType findByCode(String code);
+
 }

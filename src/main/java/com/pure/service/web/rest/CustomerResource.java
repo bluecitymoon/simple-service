@@ -130,6 +130,12 @@ public class CustomerResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+    /**
+     *
+     * @param id new order id
+     * @return
+     * @throws URISyntaxException
+     */
     @GetMapping("/customers/connect/{id}")
     @Timed
     public ResponseEntity<Customer> connectCustomer(@PathVariable Long id) throws URISyntaxException {

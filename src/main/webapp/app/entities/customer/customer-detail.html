@@ -1,59 +1,67 @@
-<div class="panel">
-    <div class="panel-body">
-        <h2><span data-translate="simpleServiceApp.customer.detail.title">Customer</span></h2>
-        <hr>
-        <jhi-alert-error></jhi-alert-error>
-        <jhi-alert></jhi-alert>
-        <dl class="dl-horizontal jh-entity-details">
-            <dt><span data-translate="simpleServiceApp.customer.name">Name</span></dt>
-            <dd>
-                <span>{{vm.customer.name}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.age">Age</span></dt>
-            <dd>
-                <span>{{vm.customer.age}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span></dt>
-            <dd>
-                <span>{{vm.customer.contactPhoneNumber}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.createdBy">Created By</span></dt>
-            <dd>
-                <span>{{vm.customer.createdBy}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.createdDate">Created Date</span></dt>
-            <dd>
-                <span>{{vm.customer.createdDate | date:'medium'}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.lastModifiedBy">Last Modified By</span></dt>
-            <dd>
-                <span>{{vm.customer.lastModifiedBy}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.lastModifiedDate">Last Modified Date</span></dt>
-            <dd>
-                <span>{{vm.customer.lastModifiedDate | date:'medium'}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customer.newOrder">New Order</span></dt>
-            <dd>
-                <a ui-sref="free-class-record-detail({id:vm.customer.newOrder.id})">{{vm.customer.newOrder.id}}</a>
-            </dd>
-        </dl>
+<div class="row">
+    <div class="col-md-4">
 
-        <button type="submit"
-                ui-sref="{{ vm.previousState }}"
-                class="btn btn-info">
-            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-                data-translate="entity.action.back"> Back</span>
-        </button>
+        <div class="panel">
+            <div class="panel-body">
+                <h2><span data-translate="simpleServiceApp.customer.detail.title">Customer</span></h2>
+                <hr>
+                <jhi-alert-error></jhi-alert-error>
+                <jhi-alert></jhi-alert>
+                <dl class="dl-horizontal jh-entity-details">
+                    <dt><span data-translate="simpleServiceApp.customer.name">Name</span></dt>
+                    <dd>
+                        <span>{{vm.customer.name}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.age">Age</span></dt>
+                    <dd>
+                        <span>{{vm.customer.age}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span></dt>
+                    <dd>
+                        <span>{{vm.customer.contactPhoneNumber}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.createdBy">Created By</span></dt>
+                    <dd>
+                        <span>{{vm.customer.createdBy}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.createdDate">Created Date</span></dt>
+                    <dd>
+                        <span>{{vm.customer.createdDate | date:'medium'}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.lastModifiedBy">Last Modified By</span></dt>
+                    <dd>
+                        <span>{{vm.customer.lastModifiedBy}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.lastModifiedDate">Last Modified Date</span></dt>
+                    <dd>
+                        <span>{{vm.customer.lastModifiedDate | date:'medium'}}</span>
+                    </dd>
+                    <dt><span data-translate="simpleServiceApp.customer.newOrder">New Order</span></dt>
+                    <dd>
+                        <a ui-sref="free-class-record-detail({id:vm.customer.newOrder.id})">{{vm.customer.newOrder.id}}</a>
+                    </dd>
+                </dl>
 
-        <button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-        </button>
+                <button type="submit"
+                        ui-sref="{{ vm.previousState }}"
+                        class="btn btn-info">
+                    <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                        data-translate="entity.action.back"> Back</span>
+                </button>
 
-        <button type="button" ui-sref="customer-detail.schedule({id:vm.customer.id})" class="btn btn-warning">
-            <span class="glyphicon glyphicon-phone-alt"></span>
-            <span>预约</span>
-        </button>
+                <button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+                </button>
+
+                <button type="button" ui-sref="customer-detail.schedule({id:vm.customer.id})" class="btn btn-warning">
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                    <span>预约</span>
+                </button>
+            </div>
+        </div>
+
     </div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
 </div>

@@ -21,11 +21,11 @@
 
                     $state.go('customer-detail', {id: result.id});
 
-                    AlertService.success("≤Ÿ◊˜≥…π¶£°");
+                    AlertService.success("Operation Successfully!");
 
                 }, function (error) {
 
-                    AlertService.error("∏˙µ• ß∞‹");
+                    AlertService.error("Failed.");
                 });
         };
 
@@ -48,12 +48,12 @@
         function onSaveSuccess (result) {
             vm.isSaving = false;
 
-            // AlertService.success("∑÷≈‰≥…π¶£°")
+            // AlertService.success("ÂàÜÈÖçÊàêÂäüÔºÅ")
         }
 
         function onSaveError () {
             vm.isSaving = false;
-            AlertService.error("∑÷≈‰ ß∞‹£°");
+            AlertService.error("Assign failed.");
         }
 
         var unsubscribe = $rootScope.$on('simpleServiceApp:freeClassRecordUpdate', function(event, result) {

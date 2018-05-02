@@ -1,7 +1,11 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.CustomerCommunicationLog;
+import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
+import com.pure.service.repository.CustomerCommunicationLogRepository;
+import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
 import com.pure.service.service.FreeClassRecordService;
@@ -24,10 +28,17 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
     private final FreeClassRecordRepository freeClassRecordRepository;
     private final NewOrderAssignHistoryRepository newOrderAssignHistoryRepository;
+    private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
+    private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
 
-    public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository, NewOrderAssignHistoryRepository newOrderAssignHistoryRepository) {
+    public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
+                                      NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
+                                      CustomerCommunicationLogRepository customerCommunicationLogRepository,
+                                      CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository) {
         this.freeClassRecordRepository = freeClassRecordRepository;
         this.newOrderAssignHistoryRepository = newOrderAssignHistoryRepository;
+        this.customerCommunicationLogRepository = customerCommunicationLogRepository;
+        this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
     }
 
     /**
@@ -44,6 +55,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
             freeClassRecord.setStatus("新单");
         }
 
+        boolean newOrder = false;
         if (freeClassRecord.getId() != null) {
 
             FreeClassRecord oldFreeClassRecord = freeClassRecordRepository.findOne(freeClassRecord.getId());
@@ -52,19 +64,48 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
             String olderFollowerName = oldFreeClassRecord.getSalesFollower() == null? "" : oldFreeClassRecord.getSalesFollower().getFirstName();
             String newFollowerLogin = freeClassRecord.getSalesFollower() == null? "" : freeClassRecord.getSalesFollower().getLogin();
             String newFollowerName = freeClassRecord.getSalesFollower() == null? "": freeClassRecord.getSalesFollower().getFirstName();
-            NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
 
-            newOrderAssignHistory = newOrderAssignHistory.newFollowerName(newFollowerName)
-                .newFollowerLogin(newFollowerLogin)
-                .newFollowerName(newFollowerName)
-                .olderFollowerLogin(olderFollowerLogin)
-                .olderFollowerName(olderFollowerName)
-                .newOrder(freeClassRecord);
+            if (!olderFollowerLogin.equals(newFollowerLogin)) {
 
-            newOrderAssignHistoryRepository.save(newOrderAssignHistory);
+                NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
+
+                newOrderAssignHistory = newOrderAssignHistory.newFollowerName(newFollowerName)
+                    .newFollowerLogin(newFollowerLogin)
+                    .newFollowerName(newFollowerName)
+                    .olderFollowerLogin(olderFollowerLogin)
+                    .olderFollowerName(olderFollowerName)
+                    .newOrder(freeClassRecord);
+
+                newOrderAssignHistoryRepository.save(newOrderAssignHistory);
+            }
+
+        } else {
+
+            newOrder = true;
         }
 
-        return freeClassRecordRepository.save(freeClassRecord);
+        log.debug("Operation on new order ? " + newOrder);
+
+        FreeClassRecord saved = freeClassRecordRepository.saveAndFlush(freeClassRecord);
+
+        log.debug("Saved new order {} " + saved );
+        //Save log for new order created.
+        if (newOrder) {
+
+            CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.new_order_created.name());
+            CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
+            customerCommunicationLog.comments("新单记录创建成功");
+
+            customerCommunicationLog.setLogType(newCreateOrderType);
+            customerCommunicationLog.freeClassRecord(saved);
+
+            CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
+
+            log.debug("Saved customer log for the new order created {}", savedLog);
+
+        }
+
+        return saved;
     }
 
     /**

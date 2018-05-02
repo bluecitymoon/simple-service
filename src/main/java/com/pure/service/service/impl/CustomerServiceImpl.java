@@ -1,11 +1,17 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Customer;
+import com.pure.service.domain.CustomerCommunicationLog;
+import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.repository.CustomerCommunicationLogRepository;
+import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
+import com.pure.service.repository.CustomerRepository;
+import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
-import com.pure.service.domain.Customer;
-import com.pure.service.repository.CustomerRepository;
 import com.pure.service.service.FreeClassRecordService;
+import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -31,11 +37,22 @@ public class CustomerServiceImpl implements CustomerService{
     private final CustomerRepository customerRepository;
     private final FreeClassRecordService freeClassRecordService;
     private final CustomerQueryService customerQueryService;
+    private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
+    private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
+    private final CustomerCommunicationLogQueryService customerCommunicationLogQueryService;
 
-    public CustomerServiceImpl(CustomerRepository customerRepository, FreeClassRecordService freeClassRecordService, CustomerQueryService customerQueryService) {
+    public CustomerServiceImpl(CustomerRepository customerRepository,
+                               FreeClassRecordService freeClassRecordService,
+                               CustomerQueryService customerQueryService,
+                               CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
+                               CustomerCommunicationLogRepository customerCommunicationLogRepository,
+                               CustomerCommunicationLogQueryService customerCommunicationLogQueryService){
         this.customerRepository = customerRepository;
         this.freeClassRecordService = freeClassRecordService;
         this.customerQueryService = customerQueryService;
+        this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
+        this.customerCommunicationLogRepository = customerCommunicationLogRepository;
+        this.customerCommunicationLogQueryService = customerCommunicationLogQueryService;
     }
 
     /**
@@ -96,6 +113,7 @@ public class CustomerServiceImpl implements CustomerService{
         customerCriteria.setNewOrderId(longFilter);
 
         List<Customer> existCustomer = customerQueryService.findByCriteria(customerCriteria);
+
         if (CollectionUtils.isEmpty(existCustomer)) {
 
             FreeClassRecord newOrder = freeClassRecordService.findOne(newOrderId);
@@ -104,7 +122,31 @@ public class CustomerServiceImpl implements CustomerService{
             customer.setContactPhoneNumber(newOrder.getContactPhoneNumber());
             customer.setNewOrder(newOrder);
 
-            return save(customer);
+            Customer savedCustomer = save(customer);
+
+            CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.new_order_created.name());
+            CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
+            customerCommunicationLog.comments("新单记录创建成功");
+
+            customerCommunicationLog.setLogType(newCreateOrderType);
+            customerCommunicationLog.customer(savedCustomer);
+
+            CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
+
+            log.debug("Saved customer log for the new order created {}", savedLog);
+
+            CustomerCommunicationLogCriteria customerCommunicationLogCriteria = new CustomerCommunicationLogCriteria();
+            customerCommunicationLogCriteria.setFreeClassRecordId(longFilter);
+            List<CustomerCommunicationLog> logs = customerCommunicationLogQueryService.findByCriteria(customerCommunicationLogCriteria);
+
+            if (!CollectionUtils.isEmpty(logs)) {
+
+                logs.forEach(log -> log.setCustomer(savedCustomer));
+                customerCommunicationLogRepository.save(logs);
+            }
+
+            return savedCustomer;
+
         }
 
         return existCustomer.get(0);
