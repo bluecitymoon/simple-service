@@ -1,5 +1,8 @@
 {
     "simpleServiceApp": {
+        "customerCommunicationSchedule": {
+            "created": "预约成功！"
+        },
         "customer" : {
             "home": {
                 "title": "客户",

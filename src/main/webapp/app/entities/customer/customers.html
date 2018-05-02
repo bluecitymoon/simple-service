@@ -50,7 +50,13 @@
                                     ui-sref="customer-detail({id:customer.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                                <span class="hidden-sm-down">管理</span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer.schedule({id:customer.id})"
+                                    class="btn btn-warning btn-sm">
+                                <span class="glyphicon glyphicon-phone-alt"></span>
+                                <span class="hidden-sm-down">预约</span>
                             </button>
                             <button type="submit"
                                     ui-sref="customer.edit({id:customer.id})"

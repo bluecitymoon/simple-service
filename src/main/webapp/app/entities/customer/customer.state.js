@@ -167,6 +167,56 @@
                 });
             }]
         })
+            .state('customer.schedule', {
+                parent: 'customer',
+                url: '/{id}/schedule',
+                // data: {
+                //     authorities: ['ROLE_USER']
+                // },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer/customer-schedule-dialog.html',
+                        controller: 'CustomerScheduleDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Customer', function(Customer) {
+                                return Customer.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('customer', null, { reload: 'customer' });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
+            .state('customer-detail.schedule', {
+            parent: 'customer-detail',
+            url: '/detail/schedule',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/customer/customer-schedule-dialog.html',
+                    controller: 'CustomerScheduleDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: ['Customer', function(Customer) {
+                            return Customer.get({id : $stateParams.id}).$promise;
+                        }]
+                    }
+                }).result.then(function() {
+                    $state.go('^', {}, { reload: false });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
+        })
         .state('customer.delete', {
             parent: 'customer',
             url: '/{id}/delete',
