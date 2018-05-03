@@ -3,6 +3,19 @@
         "customerCommunicationSchedule": {
             "created": "预约成功！"
         },
+        "customerCommunicationLog" : {
+            "created": "创建成功！",
+            "home": {
+                "title": "客户沟通记录",
+                "createLabel": "录入沟通记录",
+                "createOrEditLabel": "录入沟通记录"
+            },
+            "detail": {
+                "title": "客户沟通记录"
+            },
+            "comments": "备注",
+            "logType": "记录类型"
+        },
         "customer" : {
             "home": {
                 "title": "客户",

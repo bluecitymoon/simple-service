@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.customerCommunicationLog = entity;
+
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -23,10 +24,22 @@
             angular.element('.form-group:eq(1)>input').focus();
         });
 
+        loadSingleCustomer(entity.cid);
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }
 
+        function loadSingleCustomer(cid) {
+
+            if (cid) {
+
+                Customer.get({id : cid}, function (data) {
+                    vm.customerCommunicationLog.customer = data;
+                }, function (error) {
+                    console.debug(error);
+                })
+            }
+        }
         function save () {
             vm.isSaving = true;
             if (vm.customerCommunicationLog.id !== null) {

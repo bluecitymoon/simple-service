@@ -1,12 +1,15 @@
 <div class="row">
-    <div class="col-md-4">
+
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+
+    <div ng-class="vm.logs.length > 0? 'col-md-8': ''">
 
         <div class="panel">
             <div class="panel-body">
                 <h2><span data-translate="simpleServiceApp.customer.detail.title">Customer</span></h2>
                 <hr>
-                <jhi-alert-error></jhi-alert-error>
-                <jhi-alert></jhi-alert>
+
                 <dl class="dl-horizontal jh-entity-details">
                     <dt><span data-translate="simpleServiceApp.customer.name">Name</span></dt>
                     <dd>
@@ -62,6 +65,27 @@
         </div>
 
     </div>
-    <div class="col-md-4"></div>
-    <div class="col-md-4"></div>
+    <div class="col-md-4" ng-show="vm.logs.length > 0">
+
+        <div class="timeline">
+
+            <!-- Timeline header -->
+            <div class="timeline-header">
+                <div class="timeline-header-title bg-info">沟通记录</div><button ui-sref="customer-detail.new-log({cid: vm.customer.id})" style="margin-left: 1em" class="btn btn-mint"><i class="glyphicon glyphicon-plus-sign"></i></button>
+            </div>
+            <div class="timeline-entry" ng-repeat="log in vm.logs track by log.id">
+
+                <div class="timeline-stat">
+                    <div class="timeline-icon"></div>
+                    <div class="timeline-time">{{log.createdDate}}</div>
+                </div>
+                <div class="timeline-label">
+                    <p class="mar-no pad-btm"><a href="#" class="btn-link text-semibold">{{log.createdBy}}</a> <b>{{log.logType.name}}</b></p>
+                    <blockquote class="bq-open bq-sm">{{log.comments}}</blockquote>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 </div>

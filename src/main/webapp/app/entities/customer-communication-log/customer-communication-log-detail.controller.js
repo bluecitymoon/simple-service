@@ -11,6 +11,7 @@
         var vm = this;
 
         vm.customerCommunicationLog = entity;
+
         vm.previousState = previousState.name;
 
         var unsubscribe = $rootScope.$on('simpleServiceApp:customerCommunicationLogUpdate', function(event, result) {

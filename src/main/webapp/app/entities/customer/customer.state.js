@@ -217,6 +217,39 @@
                 });
             }]
         })
+            .state('customer-detail.new-log', {
+                parent: 'customer-detail',
+                url: '/detail/log/{cid}',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer-communication-log/customer-communication-log-dialog-on-customer-detail.html',
+                        controller: 'CustomerCommunicationLogDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    comments: null,
+                                    createdBy: null,
+                                    createdDate: null,
+                                    lastModifiedBy: null,
+                                    lastModifiedDate: null,
+                                    id: null,
+                                    cid: $stateParams.cid
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
         .state('customer.delete', {
             parent: 'customer',
             url: '/{id}/delete',
