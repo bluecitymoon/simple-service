@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cssStyle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180504130915",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_status",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

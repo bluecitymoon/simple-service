@@ -17,6 +17,7 @@
                 "customerCommunicationLogType": "Customer Communication Log Type",
                 "customerCommunicationLog": "Customer Communication Log",
                 "customerScheduleStatus": "Customer Schedule Status",
+                "customerStatus": "Customer Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
