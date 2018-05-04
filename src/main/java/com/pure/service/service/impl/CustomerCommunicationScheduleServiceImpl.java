@@ -1,8 +1,12 @@
 package com.pure.service.service.impl;
 
-import com.pure.service.service.CustomerCommunicationScheduleService;
+import com.pure.service.domain.CustomerCommunicationLog;
+import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.repository.CustomerCommunicationLogRepository;
+import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
+import com.pure.service.service.CustomerCommunicationScheduleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -21,9 +25,15 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     private final Logger log = LoggerFactory.getLogger(CustomerCommunicationScheduleServiceImpl.class);
 
     private final CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository;
+    private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
+    private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
 
-    public CustomerCommunicationScheduleServiceImpl(CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository) {
+    public CustomerCommunicationScheduleServiceImpl(CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository,
+                                                    CustomerCommunicationLogRepository customerCommunicationLogRepository,
+                                                    CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository) {
         this.customerCommunicationScheduleRepository = customerCommunicationScheduleRepository;
+        this.customerCommunicationLogRepository = customerCommunicationLogRepository;
+        this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
     }
 
     /**
@@ -35,7 +45,21 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     @Override
     public CustomerCommunicationSchedule save(CustomerCommunicationSchedule customerCommunicationSchedule) {
         log.debug("Request to save CustomerCommunicationSchedule : {}", customerCommunicationSchedule);
-        return customerCommunicationScheduleRepository.save(customerCommunicationSchedule);
+        CustomerCommunicationSchedule savedSchedule = customerCommunicationScheduleRepository.saveAndFlush(customerCommunicationSchedule);
+
+        CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.schedule.name());
+        CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
+        customerCommunicationLog.comments("预约了客户在 <b>" + savedSchedule.getSceduleDate().toString() + "</b> 沟通。");
+
+        customerCommunicationLog.setLogType(newCreateOrderType);
+        customerCommunicationLog.customer(savedSchedule.getCustomer());
+
+        CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
+
+        log.debug("Saved customer log for the new order created {}", savedLog);
+
+
+        return savedSchedule;
     }
 
     /**

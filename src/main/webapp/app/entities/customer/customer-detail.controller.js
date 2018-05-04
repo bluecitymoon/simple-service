@@ -20,6 +20,11 @@
         var unsubscribeLogEvent = $rootScope.$on('simpleServiceApp:customerCommunicationLogUpdate', function(event, result) {
             vm.logs.push(result);
         });
+        var unsubscribeLogGenerated = $rootScope.$on('simpleServiceApp:customerCommunicationNewLogGenerated', function(event, result) {
+            loadCustomerlogs();
+        });
+
+
         $scope.$on('$destroy', unsubscribe);
         loadCustomerlogs();
 
@@ -39,5 +44,6 @@
         }
         $scope.$on('$destroy', unsubscribe);
         $scope.$on('$destroy', unsubscribeLogEvent);
+        $scope.$on('$destroy', unsubscribeLogGenerated);
     }
 })();

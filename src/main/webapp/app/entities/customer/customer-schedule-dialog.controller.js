@@ -50,6 +50,7 @@
 
             $uibModalInstance.close(result);
 
+            $scope.$emit('simpleServiceApp:customerCommunicationNewLogGenerated', result);
             vm.isSaving = false;
         }
 

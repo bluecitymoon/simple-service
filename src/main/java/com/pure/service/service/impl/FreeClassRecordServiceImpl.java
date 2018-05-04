@@ -88,6 +88,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         FreeClassRecord saved = freeClassRecordRepository.saveAndFlush(freeClassRecord);
 
+        //TODO fixing duplicate log issue
         log.debug("Saved new order {} " + saved );
         //Save log for new order created.
         if (newOrder) {

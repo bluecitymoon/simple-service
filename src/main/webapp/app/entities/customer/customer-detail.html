@@ -81,7 +81,7 @@
                 </div>
                 <div class="timeline-label">
                     <p class="mar-no pad-btm"><a href="#" class="btn-link text-semibold">{{log.createdBy}}</a> <b>{{log.logType.name}}</b></p>
-                    <blockquote class="bq-open bq-sm">{{log.comments}}</blockquote>
+                    <blockquote class="bq-open bq-sm"><span ng-bind-html="log.comments"></span></blockquote>
                 </div>
             </div>
 
