@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCommunicationScheduleDetailController', CustomerCommunicationScheduleDetailController);
 
-    CustomerCommunicationScheduleDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'CustomerCommunicationSchedule', 'Customer', 'User'];
+    CustomerCommunicationScheduleDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'CustomerCommunicationSchedule', 'Customer', 'User', 'CustomerScheduleStatus'];
 
-    function CustomerCommunicationScheduleDetailController($scope, $rootScope, $stateParams, previousState, entity, CustomerCommunicationSchedule, Customer, User) {
+    function CustomerCommunicationScheduleDetailController($scope, $rootScope, $stateParams, previousState, entity, CustomerCommunicationSchedule, Customer, User, CustomerScheduleStatus) {
         var vm = this;
 
         vm.customerCommunicationSchedule = entity;

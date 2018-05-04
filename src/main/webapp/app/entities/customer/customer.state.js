@@ -262,6 +262,7 @@
                     controller: 'CustomerDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
+                    windowClass: 'modal zoomInDown',
                     resolve: {
                         entity: ['Customer', function(Customer) {
                             return Customer.get({id : $stateParams.id}).$promise;

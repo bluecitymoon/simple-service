@@ -30,11 +30,17 @@ public class CustomerCommunicationSchedule extends AbstractAuditingEntity {
     @Column(name = "comments")
     private String comments;
 
+    @Column(name = "actuall_meet_date")
+    private Instant actuallMeetDate;
+
     @ManyToOne
     private Customer customer;
 
     @ManyToOne
     private User follower;
+
+    @ManyToOne
+    private CustomerScheduleStatus scheduleStatus;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -71,6 +77,20 @@ public class CustomerCommunicationSchedule extends AbstractAuditingEntity {
         this.comments = comments;
     }
 
+
+    public Instant getActuallMeetDate() {
+        return actuallMeetDate;
+    }
+
+    public CustomerCommunicationSchedule actuallMeetDate(Instant actuallMeetDate) {
+        this.actuallMeetDate = actuallMeetDate;
+        return this;
+    }
+
+    public void setActuallMeetDate(Instant actuallMeetDate) {
+        this.actuallMeetDate = actuallMeetDate;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -95,6 +115,19 @@ public class CustomerCommunicationSchedule extends AbstractAuditingEntity {
 
     public void setFollower(User user) {
         this.follower = user;
+    }
+
+    public CustomerScheduleStatus getScheduleStatus() {
+        return scheduleStatus;
+    }
+
+    public CustomerCommunicationSchedule scheduleStatus(CustomerScheduleStatus customerScheduleStatus) {
+        this.scheduleStatus = customerScheduleStatus;
+        return this;
+    }
+
+    public void setScheduleStatus(CustomerScheduleStatus customerScheduleStatus) {
+        this.scheduleStatus = customerScheduleStatus;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -128,6 +161,7 @@ public class CustomerCommunicationSchedule extends AbstractAuditingEntity {
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", actuallMeetDate='" + getActuallMeetDate() + "'" +
             "}";
     }
 }

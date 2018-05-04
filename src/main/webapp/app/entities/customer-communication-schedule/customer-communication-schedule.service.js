@@ -19,6 +19,7 @@
                         data.sceduleDate = DateUtils.convertDateTimeFromServer(data.sceduleDate);
                         data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
                         data.lastModifiedDate = DateUtils.convertDateTimeFromServer(data.lastModifiedDate);
+                        data.actuallMeetDate = DateUtils.convertDateTimeFromServer(data.actuallMeetDate);
                     }
                     return data;
                 }

@@ -5,6 +5,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
+
                 <button class="btn btn-primary" ui-sref="customer.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span  data-translate="simpleServiceApp.customer.home.createLabel">
@@ -12,10 +13,16 @@
                     </span>
                 </button>
 
-                <button class="btn btn-mint" ui-sref="customer-communication-log" ng-click="vm.collapseNavbar()">
+                <button class="btn btn-pink" ui-sref="customer-communication-schedule">
+                    <span class="glyphicon glyphicon-bishop"></span>&nbsp;
+                    <span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>
+                </button>
+
+                <button class="btn btn-mint" ui-sref="customer-communication-log" >
                     <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
                     <span data-translate="global.menu.entities.customerCommunicationLog">Customer Communication Log</span>
                 </button>
+
             </div>
         </div>
     </div>

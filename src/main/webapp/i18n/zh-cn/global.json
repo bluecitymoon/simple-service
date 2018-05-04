@@ -6,16 +6,17 @@
             "home": "首页",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
-                "main": "数据",
+                "main": "MIS",
                 "classCategory": "课程种类",
                 "marketChannelCategory": "渠道",
                 "freeClassRecord": "新单",
                 "newOrderAssignHistory": "新单分配记录",
                 "customer": "客户",
                 "newOrderWechatUserInfo": "New Order Wechat User Info",
-                "customerCommunicationSchedule": "客户预约安排",
+                "customerCommunicationSchedule": "客户预约",
                 "customerCommunicationLogType": "客户沟通记录类型",
                 "customerCommunicationLog": "客户沟通记录",
+                "customerScheduleStatus": "客户预约状态管理",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

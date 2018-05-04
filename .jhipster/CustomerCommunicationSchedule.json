@@ -14,6 +14,12 @@
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "customerCommunicationSchedule"
+        },
+        {
+            "relationshipName": "scheduleStatus",
+            "otherEntityName": "customerScheduleStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -39,6 +45,10 @@
         },
         {
             "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "actuallMeetDate",
             "fieldType": "Instant"
         }
     ],

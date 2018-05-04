@@ -21,8 +21,10 @@
             "createdDate": "Created Date",
             "lastModifiedBy": "Last Modified By",
             "lastModifiedDate": "Last Modified Date",
+            "actuallMeetDate": "Actuall Meet Date",
             "customer": "Customer",
-            "follower": "Follower"
+            "follower": "Follower",
+            "scheduleStatus": "Schedule Status"
         }
     }
 }

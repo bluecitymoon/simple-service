@@ -1,61 +1,61 @@
+
 <div class="panel">
     <div class="panel-body">
-        <h2><span data-translate="simpleServiceApp.customerCommunicationSchedule.detail.title">Customer Communication Schedule</span>
-            {{vm.customerCommunicationSchedule.id}}</h2>
-        <hr>
-        <jhi-alert-error></jhi-alert-error>
-        <dl class="dl-horizontal jh-entity-details">
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate">Scedule Date</span>
-            </dt>
-            <dd>
-                <span>{{vm.customerCommunicationSchedule.sceduleDate | date:'medium'}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.comments">Comments</span></dt>
-            <dd>
-                <span>{{vm.customerCommunicationSchedule.comments}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy">Created By</span></dt>
-            <dd>
-                <span>{{vm.customerCommunicationSchedule.createdBy}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.createdDate">Created Date</span>
-            </dt>
-            <dd>
-                <span>{{vm.customerCommunicationSchedule.createdDate | date:'medium'}}</span>
-            </dd>
-            <dt><span
-                    data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedBy">Last Modified By</span>
-            </dt>
-            <dd>
-                <span>{{vm.customerCommunicationSchedule.lastModifiedBy}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedDate">Last Modified Date</span>
-            </dt>
-            <dd>
-                <span>{{vm.customerCommunicationSchedule.lastModifiedDate | date:'medium'}}</span>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.customer">Customer</span></dt>
-            <dd>
-                <a ui-sref="customer-detail({id:vm.customerCommunicationSchedule.customer.id})">{{vm.customerCommunicationSchedule.customer.name}}</a>
-            </dd>
-            <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.follower">Follower</span></dt>
-            <dd>
-                {{vm.customerCommunicationSchedule.follower.login}}
-            </dd>
-        </dl>
+    <h2><span data-translate="simpleServiceApp.customerCommunicationSchedule.detail.title">Customer Communication Schedule</span> {{vm.customerCommunicationSchedule.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate">Scedule Date</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.sceduleDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.actuallMeetDate">Actuall Meet Date</span></dt>
+        <dd>
+            <span>{{vm.customerCommunicationSchedule.actuallMeetDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.customer">Customer</span></dt>
+        <dd>
+            <a ui-sref="customer-detail({id:vm.customerCommunicationSchedule.customer.id})">{{vm.customerCommunicationSchedule.customer.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.follower">Follower</span></dt>
+        <dd>
+            {{vm.customerCommunicationSchedule.follower.login}}
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCommunicationSchedule.scheduleStatus">Schedule Status</span></dt>
+        <dd>
+            <a ui-sref="customer-schedule-status-detail({id:vm.customerCommunicationSchedule.scheduleStatus.id})">{{vm.customerCommunicationSchedule.scheduleStatus.name}}</a>
+        </dd>
+    </dl>
 
-        <button type="submit"
-                ui-sref="{{ vm.previousState }}"
-                class="btn btn-info">
-            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-                data-translate="entity.action.back"> Back</span>
-        </button>
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
 
-        <button type="button"
-                ui-sref="customer-communication-schedule-detail.edit({id:vm.customerCommunicationSchedule.id})"
-                class="btn btn-primary">
-            <span class="glyphicon glyphicon-pencil"></span>
-            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-        </button>
-    </div>
+    <button type="button" ui-sref="customer-communication-schedule-detail.edit({id:vm.customerCommunicationSchedule.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
 </div>

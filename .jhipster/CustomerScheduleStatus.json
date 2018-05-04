@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "labelStyle",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180504031405",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_schedule_status",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

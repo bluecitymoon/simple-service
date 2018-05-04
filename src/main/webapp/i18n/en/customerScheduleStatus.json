@@ -1,0 +1,23 @@
+{
+    "simpleServiceApp": {
+        "customerScheduleStatus" : {
+            "home": {
+                "title": "Customer Schedule Statuses",
+                "createLabel": "Create a new Customer Schedule Status",
+                "createOrEditLabel": "Create or edit a Customer Schedule Status"
+            },
+            "created": "A new Customer Schedule Status is created with identifier {{ param }}",
+            "updated": "A Customer Schedule Status is updated with identifier {{ param }}",
+            "deleted": "A Customer Schedule Status is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Schedule Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Schedule Status"
+            },
+            "name": "Name",
+            "code": "Code",
+            "labelStyle": "Label Style"
+        }
+    }
+}

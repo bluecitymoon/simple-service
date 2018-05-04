@@ -130,6 +130,7 @@
                                 createdDate: null,
                                 lastModifiedBy: null,
                                 lastModifiedDate: null,
+                                actuallMeetDate: null,
                                 id: null
                             };
                         }

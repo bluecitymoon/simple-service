@@ -34,18 +34,6 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "contact_phone_number")
     private String contactPhoneNumber;
 
-//    @Column(name = "created_by")
-//    private String createdBy;
-//
-//    @Column(name = "created_date")
-//    private Instant createdDate;
-//
-//    @Column(name = "last_modified_by")
-//    private String lastModifiedBy;
-//
-//    @Column(name = "last_modified_date")
-//    private Instant lastModifiedDate;
-
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -97,58 +85,6 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     public void setContactPhoneNumber(String contactPhoneNumber) {
         this.contactPhoneNumber = contactPhoneNumber;
     }
-
-//    public String getCreatedBy() {
-//        return createdBy;
-//    }
-//
-//    public Customer createdBy(String createdBy) {
-//        this.createdBy = createdBy;
-//        return this;
-//    }
-//
-//    public void setCreatedBy(String createdBy) {
-//        this.createdBy = createdBy;
-//    }
-//
-//    public Instant getCreatedDate() {
-//        return createdDate;
-//    }
-//
-//    public Customer createdDate(Instant createdDate) {
-//        this.createdDate = createdDate;
-//        return this;
-//    }
-//
-//    public void setCreatedDate(Instant createdDate) {
-//        this.createdDate = createdDate;
-//    }
-//
-//    public String getLastModifiedBy() {
-//        return lastModifiedBy;
-//    }
-//
-//    public Customer lastModifiedBy(String lastModifiedBy) {
-//        this.lastModifiedBy = lastModifiedBy;
-//        return this;
-//    }
-//
-//    public void setLastModifiedBy(String lastModifiedBy) {
-//        this.lastModifiedBy = lastModifiedBy;
-//    }
-//
-//    public Instant getLastModifiedDate() {
-//        return lastModifiedDate;
-//    }
-//
-//    public Customer lastModifiedDate(Instant lastModifiedDate) {
-//        this.lastModifiedDate = lastModifiedDate;
-//        return this;
-//    }
-//
-//    public void setLastModifiedDate(Instant lastModifiedDate) {
-//        this.lastModifiedDate = lastModifiedDate;
-//    }
 
     public FreeClassRecord getNewOrder() {
         return newOrder;

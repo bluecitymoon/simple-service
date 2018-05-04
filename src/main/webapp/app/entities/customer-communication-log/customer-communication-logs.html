@@ -5,12 +5,12 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left">
-                    <button class="btn btn-primary" ui-sref="customer-communication-log.new">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span data-translate="simpleServiceApp.customerCommunicationLog.home.createLabel">
-                        Create new Customer Communication Log
-                    </span>
-                    </button>
+                    <!--<button class="btn btn-primary" ui-sref="customer-communication-log.new">-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span data-translate="simpleServiceApp.customerCommunicationLog.home.createLabel">-->
+                        <!--Create new Customer Communication Log-->
+                    <!--</span>-->
+                    <!--</button>-->
                     <button class="btn btn-success" ui-sref="customer-communication-log-type" has-authority="ROLE_ADMIN">
                         <span class="glyphicon glyphicon-saved"></span>
                         <span>
@@ -57,7 +57,7 @@
                 <tr ng-repeat="customerCommunicationLog in vm.customerCommunicationLogs track by customerCommunicationLog.id">
                     <td><a ui-sref="customer-communication-log-detail({id:customerCommunicationLog.id})">{{customerCommunicationLog.id}}</a>
                     </td>
-                    <td>{{customerCommunicationLog.comments}}</td>
+                    <td><span ng-bind-html="customerCommunicationLog.comments"></span></td>
                     <td>{{customerCommunicationLog.createdBy}}</td>
                     <td>{{customerCommunicationLog.createdDate | date:'medium'}}</td>
                     <td>{{customerCommunicationLog.lastModifiedBy}}</td>

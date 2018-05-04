@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCommunicationScheduleDialogController', CustomerCommunicationScheduleDialogController);
 
-    CustomerCommunicationScheduleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCommunicationSchedule', 'Customer', 'User'];
+    CustomerCommunicationScheduleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCommunicationSchedule', 'Customer', 'User', 'CustomerScheduleStatus'];
 
-    function CustomerCommunicationScheduleDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCommunicationSchedule, Customer, User) {
+    function CustomerCommunicationScheduleDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCommunicationSchedule, Customer, User, CustomerScheduleStatus) {
         var vm = this;
 
         vm.customerCommunicationSchedule = entity;
@@ -17,6 +17,7 @@
         vm.save = save;
         vm.customers = Customer.query();
         vm.users = User.query();
+        vm.customerschedulestatuses = CustomerScheduleStatus.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -48,6 +49,7 @@
         vm.datePickerOpenStatus.sceduleDate = false;
         vm.datePickerOpenStatus.createdDate = false;
         vm.datePickerOpenStatus.lastModifiedDate = false;
+        vm.datePickerOpenStatus.actuallMeetDate = false;
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

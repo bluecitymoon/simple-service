@@ -40,9 +40,13 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
 
     private InstantFilter lastModifiedDate;
 
+    private InstantFilter actuallMeetDate;
+
     private LongFilter customerId;
 
     private LongFilter followerId;
+
+    private LongFilter scheduleStatusId;
 
     public CustomerCommunicationScheduleCriteria() {
     }
@@ -103,6 +107,14 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public InstantFilter getActuallMeetDate() {
+        return actuallMeetDate;
+    }
+
+    public void setActuallMeetDate(InstantFilter actuallMeetDate) {
+        this.actuallMeetDate = actuallMeetDate;
+    }
+
     public LongFilter getCustomerId() {
         return customerId;
     }
@@ -119,6 +131,14 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
         this.followerId = followerId;
     }
 
+    public LongFilter getScheduleStatusId() {
+        return scheduleStatusId;
+    }
+
+    public void setScheduleStatusId(LongFilter scheduleStatusId) {
+        this.scheduleStatusId = scheduleStatusId;
+    }
+
     @Override
     public String toString() {
         return "CustomerCommunicationScheduleCriteria{" +
@@ -129,8 +149,10 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
                 (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+                (actuallMeetDate != null ? "actuallMeetDate=" + actuallMeetDate + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
                 (followerId != null ? "followerId=" + followerId + ", " : "") +
+                (scheduleStatusId != null ? "scheduleStatusId=" + scheduleStatusId + ", " : "") +
             "}";
     }
 

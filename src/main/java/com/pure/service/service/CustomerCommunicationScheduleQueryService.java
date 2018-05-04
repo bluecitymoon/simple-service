@@ -90,11 +90,17 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), CustomerCommunicationSchedule_.lastModifiedDate));
             }
+            if (criteria.getActuallMeetDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getActuallMeetDate(), CustomerCommunicationSchedule_.actuallMeetDate));
+            }
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerId(), CustomerCommunicationSchedule_.customer, Customer_.id));
             }
             if (criteria.getFollowerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getFollowerId(), CustomerCommunicationSchedule_.follower, User_.id));
+            }
+            if (criteria.getScheduleStatusId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getScheduleStatusId(), CustomerCommunicationSchedule_.scheduleStatus, CustomerScheduleStatus_.id));
             }
         }
         return specification;
