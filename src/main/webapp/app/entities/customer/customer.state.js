@@ -131,6 +131,14 @@
                                 createdDate: null,
                                 lastModifiedBy: null,
                                 lastModifiedDate: null,
+                                sex: null,
+                                birthday: null,
+                                address: null,
+                                hoby: null,
+                                email: null,
+                                classLevel: null,
+                                parentName: null,
+                                parentContractNumber: null,
                                 id: null
                             };
                         }
@@ -262,7 +270,6 @@
                     controller: 'CustomerDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
-                    windowClass: 'modal zoomInDown',
                     resolve: {
                         entity: ['Customer', function(Customer) {
                             return Customer.get({id : $stateParams.id}).$promise;

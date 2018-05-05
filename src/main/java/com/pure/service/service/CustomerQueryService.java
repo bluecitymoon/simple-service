@@ -93,8 +93,38 @@ public class CustomerQueryService extends QueryService<Customer> {
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), Customer_.lastModifiedDate));
             }
+            if (criteria.getSex() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getSex(), Customer_.sex));
+            }
+            if (criteria.getBirthday() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getBirthday(), Customer_.birthday));
+            }
+            if (criteria.getAddress() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getAddress(), Customer_.address));
+            }
+            if (criteria.getHoby() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getHoby(), Customer_.hoby));
+            }
+            if (criteria.getEmail() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getEmail(), Customer_.email));
+            }
+            if (criteria.getClassLevel() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getClassLevel(), Customer_.classLevel));
+            }
+            if (criteria.getParentName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getParentName(), Customer_.parentName));
+            }
+            if (criteria.getParentContractNumber() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getParentContractNumber(), Customer_.parentContractNumber));
+            }
             if (criteria.getNewOrderId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getNewOrderId(), Customer_.newOrder, FreeClassRecord_.id));
+            }
+            if (criteria.getStatusId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getStatusId(), Customer_.status, CustomerStatus_.id));
+            }
+            if (criteria.getChannelId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getChannelId(), Customer_.channel, MarketChannelCategory_.id));
             }
         }
         return specification;

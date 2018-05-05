@@ -1,8 +1,80 @@
+<div class="row">
+    <div class="col-md-11">
+        <div class="panel">
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="pad-all btn-group ">
+                            <button type="button" class="btn btn-sm {{st.labelStyle}}" ng-repeat="st in vm.customerschedulestatuses track by st.id" ng-click="vm.searchCondition.statusId = st.id; vm.loadAll()">{{st.name}}</button>
+                            <button type="button" class="btn btn-sm btn-dark" ng-click="vm.searchCondition.statusId = null; vm.loadAll()">全部状态</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+                        <form class="form-inline">
+                            预约时间从
+                            <div class="form-group">
+                                <input type="text" name="startDate" placeholder="开始时间" class="form-control" ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}" ng-model="vm.searchCondition.startDate" is-open="vm.datePickerOpenStatus.startDate">
+                            </div>
+                            到
+                            <div class="form-group">
+                                <input type="text" placeholder="结束时间" class="form-control" ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}" ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
+                            </div>
+
+                            <button class="btn btn-primary" type="button" ng-click="vm.loadAll()"><i class="fa fa-search-minus"></i>查询</button>
+                            <button class="btn btn-mint" type="button" ng-click="vm.clearConditions()"><i class="fa fa-trash"></i>清除条件</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1">
+        <div class="panel panel-dark panel-colorful">
+            <div class="pad-all text-center">
+                <span class="text-3x text-thin">{{vm.queryCount}}</span>
+                <p>预约记录</p>
+                <!--<i class="fa fa-people-carry icon-lg"></i>-->
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
 <div class="panel">
+
+    <div class="panel-heading pad-all" style="height: 5em">
+
+        <div class="panel-control">
+
+            <button class="btn btn-info" ui-sref="customer-schedule-status" has-authority="ROLE_ADMIN">
+                <span class="glyphicon glyphicon-signal"></span>
+                <span data-translate="global.menu.entities.customerScheduleStatus">Customer Schedule Status</span>
+            </button>
+            <!---->
+            <!--<div class="input-group-wrap">-->
+            <!--<div class="input-group">-->
+            <!--<input type="text" placeholder="Search" class="form-control">-->
+            <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-primary" type="button">Search</button>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <h3 data-translate="simpleServiceApp.customerCommunicationSchedule.home.title">Customer Communication Schedules</h3>
+    </div>
+
+    <hr>
+
     <div class="panel-body">
-        <h2 data-translate="simpleServiceApp.customerCommunicationSchedule.home.title">Customer Communication
-            Schedules</h2>
+
         <jhi-alert></jhi-alert>
+
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left">
@@ -13,10 +85,7 @@
                     <!--</span>-->
                     <!--</button>-->
 
-                    <button class="btn btn-info" ui-sref="customer-schedule-status" has-authority="ROLE_ADMIN">
-                        <span class="glyphicon glyphicon-signal"></span>
-                        <span data-translate="global.menu.entities.customerScheduleStatus">Customer Schedule Status</span>
-                    </button>
+
 
                 </div>
             </div>

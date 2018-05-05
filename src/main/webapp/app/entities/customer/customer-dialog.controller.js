@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerDialogController', CustomerDialogController);
 
-    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Customer', 'FreeClassRecord'];
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Customer', 'FreeClassRecord', 'CustomerStatus', 'MarketChannelCategory'];
 
-    function CustomerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Customer, FreeClassRecord) {
+    function CustomerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Customer, FreeClassRecord, CustomerStatus, MarketChannelCategory) {
         var vm = this;
 
         vm.customer = entity;
@@ -24,6 +24,8 @@
         }).then(function(newOrder) {
             vm.neworders.push(newOrder);
         });
+        vm.customerstatuses = CustomerStatus.query();
+        vm.marketchannelcategories = MarketChannelCategory.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -54,6 +56,7 @@
 
         vm.datePickerOpenStatus.createdDate = false;
         vm.datePickerOpenStatus.lastModifiedDate = false;
+        vm.datePickerOpenStatus.birthday = false;
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

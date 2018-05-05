@@ -1,15 +1,9 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -34,9 +28,43 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "contact_phone_number")
     private String contactPhoneNumber;
 
+    @Column(name = "sex")
+    private String sex;
+
+    @Column(name = "birthday")
+    private Instant birthday;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "hoby")
+    private String hoby;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "class_level")
+    private String classLevel;
+
+    @Column(name = "parent_name")
+    private String parentName;
+
+    @Column(name = "parent_contract_number")
+    private String parentContractNumber;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
+
+    @ManyToOne
+    private CustomerStatus status;
+
+    @ManyToOne
+    private MarketChannelCategory channel;
+
+    @ManyToOne
+    private User salesFollower;
+
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -86,6 +114,111 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
         this.contactPhoneNumber = contactPhoneNumber;
     }
 
+
+    public String getSex() {
+        return sex;
+    }
+
+    public Customer sex(String sex) {
+        this.sex = sex;
+        return this;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Instant getBirthday() {
+        return birthday;
+    }
+
+    public Customer birthday(Instant birthday) {
+        this.birthday = birthday;
+        return this;
+    }
+
+    public void setBirthday(Instant birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Customer address(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getHoby() {
+        return hoby;
+    }
+
+    public Customer hoby(String hoby) {
+        this.hoby = hoby;
+        return this;
+    }
+
+    public void setHoby(String hoby) {
+        this.hoby = hoby;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Customer email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getClassLevel() {
+        return classLevel;
+    }
+
+    public Customer classLevel(String classLevel) {
+        this.classLevel = classLevel;
+        return this;
+    }
+
+    public void setClassLevel(String classLevel) {
+        this.classLevel = classLevel;
+    }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public Customer parentName(String parentName) {
+        this.parentName = parentName;
+        return this;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public String getParentContractNumber() {
+        return parentContractNumber;
+    }
+
+    public Customer parentContractNumber(String parentContractNumber) {
+        this.parentContractNumber = parentContractNumber;
+        return this;
+    }
+
+    public void setParentContractNumber(String parentContractNumber) {
+        this.parentContractNumber = parentContractNumber;
+    }
+
     public FreeClassRecord getNewOrder() {
         return newOrder;
     }
@@ -98,6 +231,43 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     public void setNewOrder(FreeClassRecord freeClassRecord) {
         this.newOrder = freeClassRecord;
     }
+
+    public CustomerStatus getStatus() {
+        return status;
+    }
+
+    public Customer status(CustomerStatus customerStatus) {
+        this.status = customerStatus;
+        return this;
+    }
+
+    public void setStatus(CustomerStatus customerStatus) {
+        this.status = customerStatus;
+    }
+
+    public MarketChannelCategory getChannel() {
+        return channel;
+    }
+
+    public Customer channel(MarketChannelCategory marketChannelCategory) {
+        this.channel = marketChannelCategory;
+        return this;
+    }
+
+    public void setChannel(MarketChannelCategory marketChannelCategory) {
+        this.channel = marketChannelCategory;
+    }
+
+    public User getSalesFollower() {
+        return salesFollower;
+    }
+
+    public Customer setSalesFollower(User salesFollower) {
+        this.salesFollower = salesFollower;
+
+        return this;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -131,6 +301,14 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", sex='" + getSex() + "'" +
+            ", birthday='" + getBirthday() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", hoby='" + getHoby() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", classLevel='" + getClassLevel() + "'" +
+            ", parentName='" + getParentName() + "'" +
+            ", parentContractNumber='" + getParentContractNumber() + "'" +
             "}";
     }
 }

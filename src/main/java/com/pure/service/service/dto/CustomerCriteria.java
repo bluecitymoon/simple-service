@@ -42,7 +42,27 @@ public class CustomerCriteria implements Serializable {
 
     private InstantFilter lastModifiedDate;
 
+    private StringFilter sex;
+
+    private InstantFilter birthday;
+
+    private StringFilter address;
+
+    private StringFilter hoby;
+
+    private StringFilter email;
+
+    private StringFilter classLevel;
+
+    private StringFilter parentName;
+
+    private StringFilter parentContractNumber;
+
     private LongFilter newOrderId;
+
+    private LongFilter statusId;
+
+    private LongFilter channelId;
 
     public CustomerCriteria() {
     }
@@ -111,12 +131,92 @@ public class CustomerCriteria implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public StringFilter getSex() {
+        return sex;
+    }
+
+    public void setSex(StringFilter sex) {
+        this.sex = sex;
+    }
+
+    public InstantFilter getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(InstantFilter birthday) {
+        this.birthday = birthday;
+    }
+
+    public StringFilter getAddress() {
+        return address;
+    }
+
+    public void setAddress(StringFilter address) {
+        this.address = address;
+    }
+
+    public StringFilter getHoby() {
+        return hoby;
+    }
+
+    public void setHoby(StringFilter hoby) {
+        this.hoby = hoby;
+    }
+
+    public StringFilter getEmail() {
+        return email;
+    }
+
+    public void setEmail(StringFilter email) {
+        this.email = email;
+    }
+
+    public StringFilter getClassLevel() {
+        return classLevel;
+    }
+
+    public void setClassLevel(StringFilter classLevel) {
+        this.classLevel = classLevel;
+    }
+
+    public StringFilter getParentName() {
+        return parentName;
+    }
+
+    public void setParentName(StringFilter parentName) {
+        this.parentName = parentName;
+    }
+
+    public StringFilter getParentContractNumber() {
+        return parentContractNumber;
+    }
+
+    public void setParentContractNumber(StringFilter parentContractNumber) {
+        this.parentContractNumber = parentContractNumber;
+    }
+
     public LongFilter getNewOrderId() {
         return newOrderId;
     }
 
     public void setNewOrderId(LongFilter newOrderId) {
         this.newOrderId = newOrderId;
+    }
+
+    public LongFilter getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(LongFilter statusId) {
+        this.statusId = statusId;
+    }
+
+    public LongFilter getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(LongFilter channelId) {
+        this.channelId = channelId;
     }
 
     @Override
@@ -130,7 +230,17 @@ public class CustomerCriteria implements Serializable {
                 (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+                (sex != null ? "sex=" + sex + ", " : "") +
+                (birthday != null ? "birthday=" + birthday + ", " : "") +
+                (address != null ? "address=" + address + ", " : "") +
+                (hoby != null ? "hoby=" + hoby + ", " : "") +
+                (email != null ? "email=" + email + ", " : "") +
+                (classLevel != null ? "classLevel=" + classLevel + ", " : "") +
+                (parentName != null ? "parentName=" + parentName + ", " : "") +
+                (parentContractNumber != null ? "parentContractNumber=" + parentContractNumber + ", " : "") +
                 (newOrderId != null ? "newOrderId=" + newOrderId + ", " : "") +
+                (statusId != null ? "statusId=" + statusId + ", " : "") +
+                (channelId != null ? "channelId=" + channelId + ", " : "") +
             "}";
     }
 

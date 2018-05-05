@@ -19,7 +19,7 @@
         "customer" : {
             "home": {
                 "title": "客户",
-                "createLabel": "录入一个客户",
+                "createLabel": "新增客户",
                 "createOrEditLabel": "管理客户资料"
             },
             "created": "创建成功！",
@@ -38,7 +38,18 @@
             "createdDate": "创建时间",
             "lastModifiedBy": "最近修改人",
             "lastModifiedDate": "最近修改时间",
-            "newOrder": "新单号"
+            "sex": "性别",
+            "birthday": "生日",
+            "address": "住址",
+            "hoby": "兴趣",
+            "email": "Email",
+            "classLevel": "年级",
+            "parentName": "家长姓名",
+            "parentContractNumber": "家长联系方式",
+            "newOrder": "新单",
+            "status": "状态",
+            "channel": "来源渠道",
+            "salesFollower": "客户经理"
         }
     }
 }

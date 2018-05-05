@@ -22,7 +22,17 @@
             "createdDate": "Created Date",
             "lastModifiedBy": "Last Modified By",
             "lastModifiedDate": "Last Modified Date",
-            "newOrder": "New Order"
+            "sex": "Sex",
+            "birthday": "Birthday",
+            "address": "Address",
+            "hoby": "Hoby",
+            "email": "Email",
+            "classLevel": "Class Level",
+            "parentName": "Parent Name",
+            "parentContractNumber": "Parent Contract Number",
+            "newOrder": "New Order",
+            "status": "Status",
+            "channel": "Channel"
         }
     }
 }

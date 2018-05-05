@@ -18,6 +18,7 @@
                         data = angular.fromJson(data);
                         data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
                         data.lastModifiedDate = DateUtils.convertDateTimeFromServer(data.lastModifiedDate);
+                        data.birthday = DateUtils.convertDateTimeFromServer(data.birthday);
                     }
                     return data;
                 }
