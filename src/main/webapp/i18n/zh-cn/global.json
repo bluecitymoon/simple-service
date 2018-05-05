@@ -18,7 +18,6 @@
                 "customerCommunicationLog": "客户沟通记录",
                 "customerScheduleStatus": "客户预约状态管理",
                 "customerStatus": "客户状态管理",
-                "customerStatus": "Customer Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
