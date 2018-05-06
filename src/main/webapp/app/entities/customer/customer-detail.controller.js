@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerDetailController', CustomerDetailController);
 
-    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog'];
+    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks'];
 
-    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog) {
+    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks) {
         var vm = this;
 
         vm.customer = entity;
@@ -22,11 +22,13 @@
         });
         var unsubscribeLogGenerated = $rootScope.$on('simpleServiceApp:customerCommunicationNewLogGenerated', function(event, result) {
             loadCustomerlogs();
+            loadAllSchedules();
         });
 
 
         $scope.$on('$destroy', unsubscribe);
         loadCustomerlogs();
+        loadAllSchedules();
 
         function loadCustomerlogs() {
 
@@ -42,6 +44,29 @@
             });
 
         }
+
+        function loadAllSchedules() {
+
+            var param = {
+                page: 0,
+                size: 100,
+                sort: 'id',
+                'customerId.equals': vm.customer.id
+            };
+
+            CustomerCommunicationSchedule.query(param, onSuccess, onError);
+
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalItems = headers('X-Total-Count');
+                vm.queryCount = vm.totalItems;
+                vm.customerCommunicationSchedules = data;
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+
+        };
         $scope.$on('$destroy', unsubscribe);
         $scope.$on('$destroy', unsubscribeLogEvent);
         $scope.$on('$destroy', unsubscribeLogGenerated);

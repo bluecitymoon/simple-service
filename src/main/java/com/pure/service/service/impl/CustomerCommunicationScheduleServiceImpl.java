@@ -14,6 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
+
 
 /**
  * Service Implementation for managing CustomerCommunicationSchedule.
@@ -48,6 +50,11 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         CustomerCommunicationSchedule savedSchedule = customerCommunicationScheduleRepository.saveAndFlush(customerCommunicationSchedule);
 
         CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.schedule.name());
+
+        if (newCreateOrderType == null) {
+            log.error(CustomerCommunicationLogTypeEnum.schedule.name() + " not exists in the log type configuration.");
+        }
+
         CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
         customerCommunicationLog.comments("预约了客户在 <b>" + savedSchedule.getSceduleDate().toString() + "</b> 沟通。");
 
@@ -97,5 +104,30 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     public void delete(Long id) {
         log.debug("Request to delete CustomerCommunicationSchedule : {}", id);
         customerCommunicationScheduleRepository.delete(id);
+    }
+
+    @Override
+    public CustomerCommunicationSchedule signin(Long id) {
+
+        CustomerCommunicationSchedule schedule = findOne(id);
+        schedule = schedule.actuallMeetDate(Instant.now());
+
+        CustomerCommunicationSchedule customerCommunicationSchedule = save(schedule);
+
+        CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.signin.name());
+
+        if (newCreateOrderType == null) {
+            log.error(CustomerCommunicationLogTypeEnum.signin.name() + " not exists in the log type configuration.");
+        }
+
+        CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
+        customerCommunicationLog.comments("签到成功");
+
+        customerCommunicationLog.setLogType(newCreateOrderType);
+        customerCommunicationLog.customer(schedule.getCustomer());
+
+        customerCommunicationLogRepository.save(customerCommunicationLog);
+
+        return customerCommunicationSchedule;
     }
 }

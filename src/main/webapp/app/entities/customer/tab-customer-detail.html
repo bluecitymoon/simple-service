@@ -1,0 +1,248 @@
+<div class="panel">
+
+    <div class="panel-heading pad-all">
+
+        <div class="panel-control">
+
+            <button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+            </button>
+
+
+
+            <!---->
+            <!--<div class="input-group-wrap">-->
+            <!--<div class="input-group">-->
+            <!--<input type="text" placeholder="Search" class="form-control">-->
+            <!--<span class="input-group-btn">-->
+            <!--<button class="btn btn-primary" type="button">Search</button>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <!--<h3><span data-translate="simpleServiceApp.customer.detail.title">Customer</span></h3>-->
+    </div>
+
+    <form class="form-horizontal">
+
+        <div class="panel-body">
+
+            <!--<hr>-->
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.name">Name</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.name}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group has-success">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.status">Status</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.status.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span></label>
+                        <div class="col-sm-8"><span
+                                class="form-control">{{vm.customer.contactPhoneNumber}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.sex">Sex</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.sex}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.newOrder">Address</span></label>
+                        <div class="col-sm-8">
+
+                            <div class="input-group-wrap">
+                                <div class="input-group">
+                                    <span class="form-control">{{vm.customer.newOrder.id}}</span>
+                                    <span class="input-group-btn">
+					                                <button class="btn btn-icon btn-pink" type="button"
+                                                            ui-sref="free-class-record-detail({id:vm.customer.newOrder.id})"><i
+                                                            class="fa fa-forward"></i></button>
+					                            </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.channel">Channel</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.channel.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.address">Address</span></label>
+                        <div class="col-sm-8"><textarea readonly rows="4" class="form-control">{{vm.customer.address}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <!--<label class="col-sm-4 control-label text-bold">-->
+                        <!--<span>预约免费体验课程</span>-->
+                        <!--</label>-->
+                        <!--<div class="col-sm-8">-->
+                        <!--<ul class="list-group">-->
+                        <!--<li class="list-group-item"-->
+                        <!--ng-repeat="freeClassRecord in vm.customer.newOrder.classCategories track by freeClassRecord.id">-->
+                        <!--{{freeClassRecord.name}}-->
+                        <!--</li>-->
+                        <!--</ul>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.age">Age</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.age}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.birthday">Age</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.birthday | date: 'yyyy-MM-dd' }}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.hoby">Hoby</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.hoby}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.classLevel">Class Level</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.classLevel}}</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.email">Email</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.email}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                </div>
+            </div>
+            <div class="row">
+
+                <!--<div class="col-sm-6">-->
+                <!--<div class="form-group">-->
+                <!--<label class="col-sm-4 control-label text-bold"><span data-translate="simpleServiceApp.customer.birthday">Age</span></label>-->
+                <!--<div class="col-sm-8"> <span class="form-control">{{vm.customer.birthday | date: 'yyyy-MM-dd' }}</span></div>-->
+                <!--</div>-->
+                <!--</div>-->
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.parentName">Parent Name</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.parentName}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.parentContractNumber">Parent Contract Number</span></label>
+                        <div class="col-sm-8"><span
+                                class="form-control">{{vm.customer.parentContractNumber}}</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.createdBy">Created By</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.createdBy}}</span></div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.createdDate">Created Date</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.createdDate | date:'medium'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.lastModifiedBy">Last Modified By</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.lastModifiedBy}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label text-bold"><span
+                                data-translate="simpleServiceApp.customer.lastModifiedDate">Last Modified Date</span></label>
+                        <div class="col-sm-8"><span class="form-control">{{vm.customer.lastModifiedDate | date:'medium'}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit"
+                    ui-sref="{{ vm.previousState }}"
+                    class="btn btn-info">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                    data-translate="entity.action.back"> Back</span>
+            </button>
+
+        </div>
+    </form>
+
+</div>

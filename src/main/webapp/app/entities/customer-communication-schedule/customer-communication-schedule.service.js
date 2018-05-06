@@ -24,7 +24,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'sign': { method:'POST', url: 'api/customer-communication-schedules/signin/:id', params: { id : '@id'} }
         });
     }
 })();

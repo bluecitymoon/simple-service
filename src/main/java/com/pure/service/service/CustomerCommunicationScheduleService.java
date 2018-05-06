@@ -39,4 +39,6 @@ public interface CustomerCommunicationScheduleService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    CustomerCommunicationSchedule signin(Long id);
 }

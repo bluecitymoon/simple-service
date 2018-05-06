@@ -64,6 +64,20 @@ public class CustomerCommunicationScheduleResource {
             .body(result);
     }
 
+    @PostMapping("/customer-communication-schedules/signin/{id}")
+    @Timed
+    public ResponseEntity<CustomerCommunicationSchedule> signin(@PathVariable Long id) throws URISyntaxException {
+        log.debug("REST request to save sigin in : {}", id);
+        if (id == null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idrequired", "Need an ID")).body(null);
+        }
+        CustomerCommunicationSchedule result = customerCommunicationScheduleService.signin(id);
+
+        return ResponseEntity.created(new URI("/api/customer-communication-schedules/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
     /**
      * PUT  /customer-communication-schedules : Updates an existing customerCommunicationSchedule.
      *

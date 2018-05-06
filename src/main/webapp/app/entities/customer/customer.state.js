@@ -258,6 +258,25 @@
                     });
                 }]
             })
+            .state('customer.signin', {
+                parent: 'customer-communication-schedule',
+                url: '/{id}/sign',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer/customer-signin-dialog.html',
+                        controller: 'CustomerSigninController',
+                        controllerAs: 'vm',
+                        size: 'md'
+                    }).result.then(function() {
+                        // $state.go('customer', null, { reload: 'customer' });
+                    }, function() {
+                        // $state.go('^');
+                    });
+                }]
+            })
         .state('customer.delete', {
             parent: 'customer',
             url: '/{id}/delete',
@@ -282,6 +301,7 @@
                 });
             }]
         });
+
     }
 
 })();
