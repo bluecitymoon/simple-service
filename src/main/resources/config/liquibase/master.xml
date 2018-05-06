@@ -18,6 +18,8 @@
     <include file="config/liquibase/changelog/20180504031405_added_entity_CustomerScheduleStatus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180504130915_added_entity_CustomerStatus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180506124154_added_entity_ClassRoom.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180506125709_added_entity_EducationLevel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180506130054_added_entity_Teacher.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -33,5 +35,6 @@
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180502065136_added_entity_constraints_CustomerCommunicationSchedule.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180502085642_added_entity_constraints_CustomerCommunicationLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180506130054_added_entity_constraints_Teacher.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -19,6 +19,8 @@
                 "customerScheduleStatus": "Customer Schedule Status",
                 "customerStatus": "Customer Status",
                 "classRoom": "Class Room",
+                "educationLevel": "Education Level",
+                "teacher": "Teacher",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

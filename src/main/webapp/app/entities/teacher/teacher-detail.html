@@ -1,0 +1,36 @@
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.teacher.detail.title">Teacher</span> {{vm.teacher.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.teacher.name">Name</span></dt>
+        <dd>
+            <span>{{vm.teacher.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.teacher.age">Age</span></dt>
+        <dd>
+            <span>{{vm.teacher.age}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.teacher.graduatedSchool">Graduated School</span></dt>
+        <dd>
+            <span>{{vm.teacher.graduatedSchool}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.teacher.educationLevel">Education Level</span></dt>
+        <dd>
+            <a ui-sref="education-level-detail({id:vm.teacher.educationLevel.id})">{{vm.teacher.educationLevel.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="teacher-detail.edit({id:vm.teacher.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

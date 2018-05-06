@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "educationLevel",
+            "otherEntityName": "educationLevel",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "age",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "graduatedSchool",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180506130054",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "teacher",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
