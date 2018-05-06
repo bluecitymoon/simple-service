@@ -24,6 +24,7 @@
                 "course": "课程管理",
                 "classAgeLevel": "班级类型管理",
                 "classStatus": "班级状态管理",
+                "product": "班级管理",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
