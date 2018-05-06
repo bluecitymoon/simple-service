@@ -1,0 +1,48 @@
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.classRoom.detail.title">Class Room</span> {{vm.classRoom.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.classRoom.name">Name</span></dt>
+        <dd>
+            <span>{{vm.classRoom.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classRoom.code">Code</span></dt>
+        <dd>
+            <span>{{vm.classRoom.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classRoom.roomNumber">Room Number</span></dt>
+        <dd>
+            <span>{{vm.classRoom.roomNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classRoom.acreage">Acreage</span></dt>
+        <dd>
+            <span>{{vm.classRoom.acreage}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classRoom.maxStudentCapacity">Max Student Capacity</span></dt>
+        <dd>
+            <span>{{vm.classRoom.maxStudentCapacity}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classRoom.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.classRoom.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classRoom.avaliable">Avaliable</span></dt>
+        <dd>
+            <span>{{vm.classRoom.avaliable}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="class-room-detail.edit({id:vm.classRoom.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "roomNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "acreage",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "maxStudentCapacity",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "avaliable",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180506124154",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "class_room",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

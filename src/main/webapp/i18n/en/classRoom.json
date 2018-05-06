@@ -1,0 +1,27 @@
+{
+    "simpleServiceApp": {
+        "classRoom" : {
+            "home": {
+                "title": "Class Rooms",
+                "createLabel": "Create a new Class Room",
+                "createOrEditLabel": "Create or edit a Class Room"
+            },
+            "created": "A new Class Room is created with identifier {{ param }}",
+            "updated": "A Class Room is updated with identifier {{ param }}",
+            "deleted": "A Class Room is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Class Room {{ id }}?"
+            },
+            "detail": {
+                "title": "Class Room"
+            },
+            "name": "Name",
+            "code": "Code",
+            "roomNumber": "Room Number",
+            "acreage": "Acreage",
+            "maxStudentCapacity": "Max Student Capacity",
+            "comments": "Comments",
+            "avaliable": "Avaliable"
+        }
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "simpleServiceApp": {
+        "classRoom" : {
+            "home": {
+                "title": "教室",
+                "createLabel": "新建教室",
+                "createOrEditLabel": "新建/编辑教室信息"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条记录？"
+            },
+            "detail": {
+                "title": "教室详情"
+            },
+            "name": "名称",
+            "code": "编号",
+            "roomNumber": "房间号",
+            "acreage": "面积",
+            "maxStudentCapacity": "最大学生容量数",
+            "comments": "备注",
+            "avaliable": "是否可用"
+        }
+    }
+}

@@ -18,6 +18,7 @@
                 "customerCommunicationLog": "Customer Communication Log",
                 "customerScheduleStatus": "Customer Schedule Status",
                 "customerStatus": "Customer Status",
+                "classRoom": "Class Room",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
