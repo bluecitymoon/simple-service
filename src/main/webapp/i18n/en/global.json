@@ -21,6 +21,8 @@
                 "classRoom": "Class Room",
                 "educationLevel": "Education Level",
                 "teacher": "Teacher",
+                "course": "Course",
+                "classAgeLevel": "Class Age Level",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

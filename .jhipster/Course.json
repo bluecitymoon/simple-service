@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180506131940",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "course",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

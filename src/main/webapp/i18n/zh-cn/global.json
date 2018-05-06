@@ -21,6 +21,8 @@
                 "classRoom": "教室管理",
                 "educationLevel": "教育程度",
                 "teacher": "教师",
+                "course": "课程",
+                "classAgeLevel": "班级类型",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

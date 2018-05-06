@@ -20,6 +20,8 @@
     <include file="config/liquibase/changelog/20180506124154_added_entity_ClassRoom.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180506125709_added_entity_EducationLevel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180506130054_added_entity_Teacher.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180506131940_added_entity_Course.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180506132347_added_entity_ClassAgeLevel.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>

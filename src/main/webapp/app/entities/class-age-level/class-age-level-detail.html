@@ -1,0 +1,28 @@
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.classAgeLevel.detail.title">Class Age Level</span> {{vm.classAgeLevel.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.classAgeLevel.name">Name</span></dt>
+        <dd>
+            <span>{{vm.classAgeLevel.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classAgeLevel.code">Code</span></dt>
+        <dd>
+            <span>{{vm.classAgeLevel.code}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="class-age-level-detail.edit({id:vm.classAgeLevel.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>
