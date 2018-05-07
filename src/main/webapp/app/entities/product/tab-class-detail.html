@@ -1,0 +1,69 @@
+<div class="panel">
+    <div class="panel-body">
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.product.name">Name</span></dt>
+            <dd>
+                <span>{{vm.product.name}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.code">Code</span></dt>
+            <dd>
+                <span>{{vm.product.code}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.minutesPerClass">Minutes Per Class</span></dt>
+            <dd>
+                <span>{{vm.product.minutesPerClass}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.planedStartDate">Planed Start Date</span></dt>
+            <dd>
+                <span>{{vm.product.planedStartDate | date:'medium'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.comments">Comments</span></dt>
+            <dd>
+                <span>{{vm.product.comments}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.createdBy">Created By</span></dt>
+            <dd>
+                <span>{{vm.product.createdBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.createdDate">Created Date</span></dt>
+            <dd>
+                <span>{{vm.product.createdDate | date:'medium'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.lastModifiedBy">Last Modified By</span></dt>
+            <dd>
+                <span>{{vm.product.lastModifiedBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.lastModifiedDate">Last Modified Date</span></dt>
+            <dd>
+                <span>{{vm.product.lastModifiedDate | date:'medium'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.classAgeLevel">Class Age Level</span></dt>
+            <dd>
+                <a ui-sref="class-age-level-detail({id:vm.product.classAgeLevel.id})">{{vm.product.classAgeLevel.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.teacher">Teacher</span></dt>
+            <dd>
+                <a ui-sref="teacher-detail({id:vm.product.teacher.id})">{{vm.product.teacher.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.classRoom">Class Room</span></dt>
+            <dd>
+                <a ui-sref="class-room-detail({id:vm.product.classRoom.id})">{{vm.product.classRoom.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.product.course">Course</span></dt>
+            <dd>
+                <a ui-sref="course-detail({id:vm.product.course.id})">{{vm.product.course.name}}</a>
+            </dd>
+        </dl>
+
+        <!--<button type="submit"-->
+                <!--ui-sref="{{ vm.previousState }}"-->
+                <!--class="btn btn-info">-->
+            <!--<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>-->
+        <!--</button>-->
+
+        <!--<button type="button" ui-sref="product-detail.edit({id:vm.product.id})" class="btn btn-primary">-->
+            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+            <!--<span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>-->
+        <!--</button>-->
+    </div>
+</div>
