@@ -1,0 +1,45 @@
+
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.classArrangementRule.detail.title">Class Arrangement Rule</span> {{vm.classArrangementRule.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.classArrangementRule.estimateStartDate">Estimate Start Date</span></dt>
+        <dd>
+            <span>{{vm.classArrangementRule.estimateStartDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangementRule.estimateStartTime">Estimate Start Time</span></dt>
+        <dd>
+            <span>{{vm.classArrangementRule.estimateStartTime}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangementRule.estimateEndTime">Estimate End Time</span></dt>
+        <dd>
+            <span>{{vm.classArrangementRule.estimateEndTime}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangementRule.maxLoopCount">Max Loop Count</span></dt>
+        <dd>
+            <span>{{vm.classArrangementRule.maxLoopCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangementRule.targetClass">Target Class</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.classArrangementRule.targetClass.id})">{{vm.classArrangementRule.targetClass.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangementRule.loopWay">Loop Way</span></dt>
+        <dd>
+            <a ui-sref="class-arrangement-rule-loop-way-detail({id:vm.classArrangementRule.loopWay.id})">{{vm.classArrangementRule.loopWay.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="class-arrangement-rule-detail.edit({id:vm.classArrangementRule.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

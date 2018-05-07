@@ -25,6 +25,8 @@
                 "classAgeLevel": "Class Age Level",
                 "classStatus": "Class Status",
                 "product": "Product",
+                "classArrangementRuleLoopWay": "Class Arrangement Rule Loop Way",
+                "classArrangementRule": "Class Arrangement Rule",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

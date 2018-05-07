@@ -1,0 +1,26 @@
+{
+    "simpleServiceApp": {
+        "classArrangementRule" : {
+            "home": {
+                "title": "排课规则",
+                "createLabel": "录入规则",
+                "createOrEditLabel": "新建/编辑排课规则"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条记录？"
+            },
+            "detail": {
+                "title": "排课规则"
+            },
+            "estimateStartDate": "预计开课日期",
+            "estimateStartTime": "预计开始时间",
+            "estimateEndTime": "预计结束时间",
+            "maxLoopCount": "最大循环次数",
+            "targetClass": "班级",
+            "loopWay": "循环方式"
+        }
+    }
+}

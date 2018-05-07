@@ -1,0 +1,44 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "targetClass",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "classArrangementRule"
+        },
+        {
+            "relationshipName": "loopWay",
+            "otherEntityName": "classArrangementRuleLoopWay",
+            "relationshipType": "many-to-one",
+            "ownerSide": true,
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "estimateStartDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "estimateStartTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "estimateEndTime",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "maxLoopCount",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180507083233",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "class_arrangement_rule",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
