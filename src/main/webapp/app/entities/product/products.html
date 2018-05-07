@@ -1,23 +1,113 @@
 <div class="panel">
+
+    <!--<div class="panel-heading pad-all" style="height: 5em">-->
+
+        <!--<div class="panel-control">-->
+
+            <!--&lt;!&ndash;<button class="btn btn-success" ui-sref="course" has-authority="ROLE_ADMIN">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="fa fa-book"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span data-translate="global.menu.entities.course">Course</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<button class="btn btn-primary" ui-sref="class-room" has-authority="ROLE_ADMIN">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="fa fa-home"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span data-translate="global.menu.entities.classRoom">Class Room</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<button class="btn btn-mint" ui-sref="class-age-level" has-authority="ROLE_ADMIN">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="glyphicon glyphicon-signal"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button class="btn btn-warning" ui-sref="class-status" has-authority="ROLE_ADMIN">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="fa fa-book"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span data-translate="global.menu.entities.classStatus">Class Status</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<button class="btn btn-pink" ui-sref="education-level" has-authority="ROLE_ADMIN">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="glyphicon glyphicon-education"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span data-translate="global.menu.entities.educationLevel">Education Level</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<button class="btn btn-info" ui-sref="teacher" has-authority="ROLE_ADMIN">&ndash;&gt;-->
+                <!--&lt;!&ndash;<span class="fa fa-certificate"></span>&ndash;&gt;-->
+                <!--&lt;!&ndash;<span data-translate="global.menu.entities.teacher">Teacher</span>&ndash;&gt;-->
+            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+
+            <!---->
+        <!--</div>-->
+
+        <!--<h3 data-translate="simpleServiceApp.product.home.title">Products</h3>-->
+
+    <!--</div>-->
+
     <div class="panel-body">
-    <h2 data-translate="simpleServiceApp.product.home.title">Products</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="product.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.product.home.createLabel">
+        <jhi-alert></jhi-alert>
+
+        <h2 data-translate="simpleServiceApp.product.home.title">Products</h2>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="product.new" >
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span  data-translate="simpleServiceApp.product.home.createLabel">
                         Create new Product
                     </span>
-                </button>
+                    </button>
+
+                    <div class="btn-group btn-group-sm">
+                        <div class="dropdown" uib-dropdown>
+                            <button class="btn btn-sm btn-mint btn-active-purple dropdown-toggle" uib-dropdown-toggle type="button" aria-expanded="false">
+                                教务管理操作 <i class="dropdown-caret"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" style="" uib-dropdown-menu has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <li class="dropdown-header">学校资源</li>
+                                <li><a ui-sref="class-room"><span class="fa fa-home"></span>教室管理</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown-header">课程</li>
+                                <li>
+                                    <a ui-sref="course">
+                                        <span class="fa fa-book"></span>
+                                        <span data-translate="global.menu.entities.course">Course</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="class-status">
+                                        <span class="fa fa-book"></span>
+                                        <span data-translate="global.menu.entities.classStatus">Class Status</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="class-age-level">
+                                        <span class="glyphicon glyphicon-signal"></span>
+                                        <span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+                                <li class="dropdown-header">老师</li>
+                                <li>
+                                    <a ui-sref="teacher">
+                                        <span class="fa fa-certificate"></span>
+                                        <span data-translate="global.menu.entities.teacher">Teacher</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="education-level">
+                                        <span class="glyphicon glyphicon-education"></span>
+                                        <span data-translate="global.menu.entities.educationLevel">Education Level</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+        <br/>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -27,16 +117,16 @@
                     <th jh-sort-by="comments"><span data-translate="simpleServiceApp.product.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.product.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.product.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.product.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.product.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.product.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.product.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="classAgeLevel.name"><span data-translate="simpleServiceApp.product.classAgeLevel">Class Age Level</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="teacher.name"><span data-translate="simpleServiceApp.product.teacher">Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="classRoom.name"><span data-translate="simpleServiceApp.product.classRoom">Class Room</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="course.name"><span data-translate="simpleServiceApp.product.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="product in vm.products track by product.id">
                     <td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
                     <td>{{product.name}}</td>
@@ -46,8 +136,8 @@
                     <td>{{product.comments}}</td>
                     <td>{{product.createdBy}}</td>
                     <td>{{product.createdDate | date:'medium'}}</td>
-                    <td>{{product.lastModifiedBy}}</td>
-                    <td>{{product.lastModifiedDate | date:'medium'}}</td>
+                    <!--<td>{{product.lastModifiedBy}}</td>-->
+                    <!--<td>{{product.lastModifiedDate | date:'medium'}}</td>-->
                     <td>
                         <a ui-sref="class-age-level-detail({id:product.classAgeLevel.id})">{{product.classAgeLevel.name}}</a>
                     </td>
@@ -64,9 +154,9 @@
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="product-detail({id:product.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                                    class="btn btn-info btn-mint">
+                                <span class="fa fa-server"></span>
+                                <span>管理</span>
                             </button>
                             <button type="submit"
                                     ui-sref="product.edit({id:product.id})"
@@ -83,12 +173,12 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-    </div>
-</div>
 </div>
