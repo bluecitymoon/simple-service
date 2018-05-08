@@ -102,9 +102,9 @@
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
+                     $state.go('^', {}, { reload: false });
                 }, function() {
-                    $state.go('^');
+                     $state.go('^');
                 });
             }]
         })

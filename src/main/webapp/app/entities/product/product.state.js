@@ -108,6 +108,32 @@
                 });
             }]
         })
+            .state('product-detail.editarrangment', {
+                parent: 'product-detail',
+                url: '/update-rule/{id}',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/class-arrangement-rule/class-arrangement-rule-dialog.html',
+                        controller: 'ClassArrangementRuleDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['ClassArrangementRule', function(ClassArrangementRule) {
+                                return ClassArrangementRule.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function(error) {
+                        console.log(error);
+                        $state.go('^');
+                    });
+                }]
+            })
         .state('product.new', {
             parent: 'product',
             url: '/new',
