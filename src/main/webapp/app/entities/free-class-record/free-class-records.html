@@ -12,8 +12,7 @@
                                     type="button" aria-expanded="false">
                                 新单管理 <i class="dropdown-caret"></i>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-left" style="" uib-dropdown-menu
-                                has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                            <ul class="dropdown-menu dropdown-menu-left" style="" uib-dropdown-menu>
                                 <li>
                                     <a ui-sref="free-class-record.new">
                                         <span class="glyphicon glyphicon-plus"></span>
@@ -23,27 +22,19 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="market-channel-category" has-authority="ROLE_ADMIN">
+                                    <a ui-sref="market-channel-category" has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER">
                                         <span class="glyphicon glyphicon-bookmark"></span>
                                         <span>
                                         渠道管理
                                     </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a ui-sref="class-category" has-authority="ROLE_ADMIN">
-                                        <span class="glyphicon glyphicon-phone-alt"></span>
-                                        <span>
-                                        课程种类管理
-                                    </span>
-                                    </a>
-                                </li>
 
                                 <li class="divider"></li>
-                                <li class="dropdown-header">数据</li>
+                                <li class="dropdown-header" has-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>
                                 <li>
                                     <a ui-sref="new-order-assign-history"
-                                       has-authority="ROLE_ADMIN">
+                                       has-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                                         <span class="glyphicon glyphicon-record"></span>
                                         <span>
                                         新单分配记录
@@ -52,7 +43,7 @@
                                 </li>
                                 <li>
                                     <a ui-sref="new-order-wechat-user-info"
-                                       has-authority="ROLE_ADMIN">
+                                       has-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                                         <span class="glyphicon glyphicon-star-empty"></span>
                                         <span>
                                         新单用户微信列表

@@ -130,7 +130,7 @@
                                 createdDate: null,
                                 lastModifiedBy: null,
                                 lastModifiedDate: null,
-                                status: null,
+                                status: '新单',
                                 id: null
                             };
                         }
