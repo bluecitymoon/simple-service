@@ -65,4 +65,9 @@ public final class SecurityUtils {
         }
         return false;
     }
+
+    public static boolean isCurrentUserHeadmasterOrAdmin() {
+
+        return isCurrentUserInRole(AuthoritiesConstants.ADMIN) || isCurrentUserInRole(AuthoritiesConstants.HEADMASTER);
+    }
 }

@@ -16,8 +16,9 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-
-        loadAll();
+        // vm.pageOptions = [];
+        vm.loadAll = loadAll;
+        vm.loadAll();
 
         function loadAll () {
             FreeClassRecord.query({

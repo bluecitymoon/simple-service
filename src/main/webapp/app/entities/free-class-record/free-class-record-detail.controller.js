@@ -21,11 +21,11 @@
 
                     $state.go('customer-detail', {id: result.id});
 
-                    AlertService.success("Operation Successfully!");
+                    AlertService.success("操作成功！");
 
                 }, function (error) {
 
-                    AlertService.error("Failed.");
+                    AlertService.error("出错了。");
                 });
         };
 

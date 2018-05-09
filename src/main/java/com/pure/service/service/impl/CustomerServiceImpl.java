@@ -64,6 +64,22 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public Customer save(Customer customer) {
         log.debug("Request to save Customer : {}", customer);
+
+        FreeClassRecord freeClassRecord = customer.getNewOrder();
+        if (freeClassRecord != null && customer.getStatus() != null) {
+
+            String newOrderStatus = freeClassRecord.getStatus();
+
+            if (!newOrderStatus.equals(customer.getStatus().getName())) {
+                freeClassRecord.setStatus(customer.getStatus().getName());
+
+                freeClassRecordService.save(freeClassRecord);
+
+                log.debug("Update new order status while the customer status is changing");
+            }
+
+        }
+
         return customerRepository.save(customer);
     }
 

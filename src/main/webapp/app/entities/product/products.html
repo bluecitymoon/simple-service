@@ -48,23 +48,29 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left">
-                    <button class="btn btn-primary" ui-sref="product.new" >
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span  data-translate="simpleServiceApp.product.home.createLabel">
-                        Create new Product
-                    </span>
-                    </button>
+                    <!--<button class="btn btn-primary" ui-sref="product.new" >-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span  data-translate="simpleServiceApp.product.home.createLabel">-->
+                        <!--Create new Product-->
+                    <!--</span>-->
+                    <!--</button>-->
 
                     <div class="btn-group btn-group-sm">
                         <div class="dropdown" uib-dropdown>
                             <button class="btn btn-sm btn-mint btn-active-purple dropdown-toggle" uib-dropdown-toggle type="button" aria-expanded="false">
-                                教务管理操作 <i class="dropdown-caret"></i>
+                                教务管理 <i class="dropdown-caret"></i>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-right" style="" uib-dropdown-menu has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                            <ul class="dropdown-menu dropdown-menu-left" style="" uib-dropdown-menu has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                                 <li class="dropdown-header">学校资源</li>
                                 <li><a ui-sref="class-room"><span class="fa fa-home"></span>教室管理</a></li>
                                 <li class="divider"></li>
                                 <li class="dropdown-header">课程</li>
+                                <li>
+                                    <a ui-sref="product.new">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                        <span data-translate="simpleServiceApp.product.home.createLabel">Course</span>
+                                    </a>
+                                </li>
                                 <li>
                                     <a ui-sref="course">
                                         <span class="fa fa-book"></span>

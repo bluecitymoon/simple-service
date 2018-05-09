@@ -2,11 +2,15 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.User;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.FreeClassRecordQueryService;
 import com.pure.service.service.FreeClassRecordService;
+import com.pure.service.service.UserService;
 import com.pure.service.service.dto.FreeClassRecordCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -44,10 +48,12 @@ public class FreeClassRecordResource {
     private final FreeClassRecordService freeClassRecordService;
 
     private final FreeClassRecordQueryService freeClassRecordQueryService;
+    private final UserService userService;
 
-    public FreeClassRecordResource(FreeClassRecordService freeClassRecordService, FreeClassRecordQueryService freeClassRecordQueryService) {
+    public FreeClassRecordResource(FreeClassRecordService freeClassRecordService, FreeClassRecordQueryService freeClassRecordQueryService, UserService userService) {
         this.freeClassRecordService = freeClassRecordService;
         this.freeClassRecordQueryService = freeClassRecordQueryService;
+        this.userService = userService;
     }
 
     /**
@@ -103,6 +109,16 @@ public class FreeClassRecordResource {
     @Timed
     public ResponseEntity<List<FreeClassRecord>> getAllFreeClassRecords(FreeClassRecordCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get FreeClassRecords by criteria: {}", criteria);
+        User currentUser = userService.getUserWithAuthorities();
+
+        //Only Admin and Headmaster can have all the new orders
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+
+            LongFilter userIdFilter = new LongFilter();
+            userIdFilter.setEquals(currentUser.getId());
+
+            criteria.setSalesFollowerId(userIdFilter);
+        }
         Page<FreeClassRecord> page = freeClassRecordQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/free-class-records");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

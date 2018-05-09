@@ -49,6 +49,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "status")
     private String status;
 
+//    @ManyToOne
+//    private CustomerStatus customerStatus;
+
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
@@ -72,6 +75,19 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     public void setId(Long id) {
         this.id = id;
     }
+
+//    public CustomerStatus getCustomerStatus() {
+//        return customerStatus;
+//    }
+//
+//    public void setCustomerStatus(CustomerStatus customerStatus) {
+//        this.customerStatus = customerStatus;
+//    }
+//
+//    public FreeClassRecord customerStatus(CustomerStatus customerStatus) {
+//        this.customerStatus = customerStatus;
+//        return this;
+//    }
 
     public String getPersonName() {
         return personName;
