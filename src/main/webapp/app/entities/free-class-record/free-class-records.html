@@ -22,19 +22,24 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="market-channel-category" has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER">
+                                    <a has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER" ui-sref="market-channel-category">
                                         <span class="glyphicon glyphicon-bookmark"></span>
-                                        <span>
-                                        渠道管理
-                                    </span>
+                                        <span>渠道管理</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER" ui-sref="class-category">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <span>课程种类</span>
                                     </a>
                                 </li>
 
                                 <li class="divider"></li>
-                                <li class="dropdown-header" has-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>
+                                <li class="dropdown-header">数据</li>
                                 <li>
                                     <a ui-sref="new-order-assign-history"
-                                       has-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                       has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER">
                                         <span class="glyphicon glyphicon-record"></span>
                                         <span>
                                         新单分配记录
@@ -43,7 +48,7 @@
                                 </li>
                                 <li>
                                     <a ui-sref="new-order-wechat-user-info"
-                                       has-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                       has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                                         <span class="glyphicon glyphicon-star-empty"></span>
                                         <span>
                                         新单用户微信列表
@@ -57,52 +62,6 @@
             </div>
         </div>
         <br/>
-
-        <!--&lt;!&ndash; start &ndash;&gt;-->
-        <!--<div class="pad-btm form-inline">-->
-            <!--<div class="row">-->
-                <!--<div class="text-xs-center">-->
-                    <!--<div class="form-group">-->
-                        <!--<button class="btn btn-primary" ui-sref="free-class-record.new">-->
-                            <!--<span class="glyphicon glyphicon-plus"></span>-->
-                            <!--<span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">-->
-                            <!--Create new Free Class Record-->
-                        <!--</span>-->
-                        <!--</button>-->
-                        <!--<button class="btn btn-warning" ui-sref="market-channel-category" has-authority="ROLE_ADMIN">-->
-                            <!--<span class="glyphicon glyphicon-bookmark"></span>-->
-                            <!--<span>-->
-                            <!--渠道管理-->
-                        <!--</span>-->
-                        <!--</button>-->
-                        <!--<button class="btn btn-success" ui-sref="class-category" has-authority="ROLE_ADMIN">-->
-                            <!--<span class="glyphicon glyphicon-phone-alt"></span>-->
-                            <!--<span>-->
-                            <!--课程种类管理-->
-                        <!--</span>-->
-                        <!--</button>-->
-                        <!--<button class="btn btn-purple" ui-sref="new-order-assign-history" has-authority="ROLE_ADMIN">-->
-                            <!--<span class="glyphicon glyphicon-record"></span>-->
-                            <!--<span>-->
-                            <!--新单分配记录-->
-                        <!--</span>-->
-                        <!--</button>-->
-                        <!--<button class="btn btn-info" ui-sref="new-order-wechat-user-info" has-authority="ROLE_ADMIN">-->
-                            <!--<span class="glyphicon glyphicon-star-empty"></span>-->
-                            <!--<span>-->
-                            <!--新单用户微信列表-->
-                        <!--</span>-->
-                        <!--</button>-->
-                    <!--</div>-->
-
-                <!--</div>-->
-            <!--</div>-->
-
-        <!--</div>-->
-
-        <!--<hr>-->
-
-        <!-- end -->
         <div class="table-responsive">
             <div class="fixed-table-toolbar">
                 <div class=" btn-group pull-left">
@@ -125,11 +84,11 @@
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
+                        class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="personName"><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contactPhoneNumber"><span
-                            data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
+                        data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -140,11 +99,11 @@
                     <th jh-sort-by="status"><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="marketChannelCategory.name"><span
-                            data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
+                        data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="salesFollower.login"><span
-                            data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
+                        data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -172,18 +131,7 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down">查看</span>
                             </button>
-                            <!--<button type="submit"-->
-                            <!--ui-sref="free-class-record.edit({id:freeClassRecord.id})"-->
-                            <!--class="btn btn-primary btn-sm">-->
-                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                            <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                            <!--ui-sref="free-class-record.delete({id:freeClassRecord.id})"-->
-                            <!--class="btn btn-danger btn-sm">-->
-                            <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                            <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
+
                         </div>
                     </td>
                 </tr>
