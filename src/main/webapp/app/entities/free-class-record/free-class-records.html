@@ -12,34 +12,33 @@
                                     type="button" aria-expanded="false">
                                 新单管理 <i class="dropdown-caret"></i>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-left" style="" uib-dropdown-menu>
+                            <ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu>
                                 <li>
                                     <a ui-sref="free-class-record.new">
                                         <span class="glyphicon glyphicon-plus"></span>
                                         <span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">
                                             Create new Free Class Record
-                                    </span>
+                                        </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER" ui-sref="market-channel-category">
+                                <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                    <a ui-sref="market-channel-category">
                                         <span class="glyphicon glyphicon-bookmark"></span>
                                         <span>渠道管理</span>
                                     </a>
                                 </li>
 
-                                <li>
-                                    <a has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER" ui-sref="class-category">
+                                <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                    <a  ui-sref="class-category">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                         <span>课程种类</span>
                                     </a>
                                 </li>
 
                                 <li class="divider"></li>
-                                <li class="dropdown-header">数据</li>
+                                <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>
                                 <li>
-                                    <a ui-sref="new-order-assign-history"
-                                       has-any-authority=ROLE_ADMIN,ROLE_HEADMASTER">
+                                    <a ui-sref="new-order-assign-history">
                                         <span class="glyphicon glyphicon-record"></span>
                                         <span>
                                         新单分配记录
@@ -47,8 +46,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="new-order-wechat-user-info"
-                                       has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                    <a ui-sref="new-order-wechat-user-info">
                                         <span class="glyphicon glyphicon-star-empty"></span>
                                         <span>
                                         新单用户微信列表
@@ -84,11 +82,11 @@
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="personName"><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contactPhoneNumber"><span
-                        data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
+                            data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -99,11 +97,11 @@
                     <th jh-sort-by="status"><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="marketChannelCategory.name"><span
-                        data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
+                            data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="salesFollower.login"><span
-                        data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
                 </thead>
