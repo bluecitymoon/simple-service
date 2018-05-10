@@ -1,267 +1,314 @@
-<nav class="navbar navbar-default sidebar navbar-" role="navigation">
+<div class="header py-4">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <!--<a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">-->
-                <!--<img class="logo-img" src="content/images/logo-jhipster.png" alt="logo"/>-->
-                <!--&lt;!&ndash;<span data-translate="global.title">SimpleService</span> <span class="navbar-version">v{{VERSION}}</span>&ndash;&gt;-->
-            <!--</a>-->
-        </div>
-        <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
-            <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active">
-                    <a ui-sref="home" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon glyphicon-home"></span>
-                        <span class="hidden-sm" data-translate="global.menu.home">Home</span>
+        <div class="d-flex">
+            <a class="header-brand">
+                <img src="./content/images/pzlogo.png" class="header-brand-img">
+            </a>
+            <div class="d-flex order-lg-2 ml-auto">
+                <div class="dropdown d-none d-md-flex">
+                    <a class="nav-link icon" data-toggle="dropdown">
+                        <i class="fa fa-bell"></i>
+                        <span class="nav-unread"></span>
                     </a>
-                </li>
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" data-translate="global.menu.entities.main">
-                                Entities
+
+                </div>
+                <div class="dropdown" ng-switch="vm.isAuthenticated()">
+                    <li uib-dropdown>
+                        <a class="nav-link pr-0 leading-none" uib-dropdown-toggle href="" >
+                            <span class="avatar" style="background-image: url(./../content/images/logo-jhipster.png)"></span>
+                            <span class="ml-2 d-none d-lg-block">
+                                <span class="text-default" ng-switch-when="true">{{vm.account.firstName}}</span>
+                                <small class="text-muted d-block mt-1">{{vm.account.login}}</small>
                             </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="class-category" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-book"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.classCategory">Class Category</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="market-channel-category" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-picture"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.marketChannelCategory">Market Channel Category</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <li ui-sref-active="active">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li ui-sref-active="active">
+                                <a ui-sref="settings" ng-click="vm.collapseNavbar()" ng-switch-when="true">
+                                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                    <span data-translate="global.menu.account.settings">Settings</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="password" ng-click="vm.collapseNavbar()" ng-switch-when="true">
+                                    <span class="glyphicon glyphicon-lock"></span>&nbsp;
+                                    <span data-translate="global.menu.account.password">Password</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a href="" ng-click="vm.logout()" ng-switch-when="true">
+                                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                                    <span data-translate="global.menu.account.logout">Sign out</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" ng-switch-when="false">
+                                <a href="" ng-click="vm.login()">
+                                    <span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                                    <span data-translate="global.menu.account.login">Sign in</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" ng-switch-when="false">
+                                <a ui-sref="register" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+                                    <span data-translate="global.menu.account.register">Register</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="header collapse d-lg-flex p-0">
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                    <li ui-sref-active="active" class="nav-item">
+                        <a ui-sref="home" class="nav-link"> <i class="fa fa-home"></i>主页
+                        </a>
+                    </li>
+                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-user"></span>
+                                <span class="hidden-sm">
+                                    前台
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li ui-sref-active="active">
+                                <a ui-sref="customer-communication-schedule" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-tree-deciduous"></span>&nbsp;
+                                    <span>前台到访</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-registration-mark"></span>
+                                <span class="hidden-sm">
+                                    市场部
+                                </span>
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li>
                                 <a ui-sref="free-class-record" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-bishop"></span>&nbsp;
                                     <span data-translate="global.menu.entities.freeClassRecord">Free Class Record</span>
                                 </a>
                             </li>
 
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="new-order-assign-history" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.newOrderAssignHistory">New Order Assign History</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <li ui-sref-active="active">
-                                <a ui-sref="customer" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-user"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.customer">Customer</span>
+                            <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">客户</li>
+
+                            <li>
+                                <a ui-sref="customer">
+                                    <span class="glyphicon glyphicon-tags"></span>
+                                    <span>客户列表</span>
                                 </a>
                             </li>
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="new-order-wechat-user-info" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.newOrderWechatUserInfo">New Order Wechat User Info</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="customer-communication-schedule" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-bishop"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="customer-communication-log-type" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerCommunicationLogType">Customer Communication Log Type</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="customer-communication-log" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-list-alt"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerCommunicationLog">Customer Communication Log</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="customer-schedule-status" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerScheduleStatus">Customer Schedule Status</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="customer-communication-schedule" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="customer-status" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerStatus">Customer Status</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="class-room" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="fa fa-home"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.classRoom">Class Room</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="education-level" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="fa fa-certificate"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.educationLevel">Education Level</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="teacher" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="fa fa-pencil-alt"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.teacher">Teacher</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="course" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="fa fa-book"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.course">Course</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="class-age-level" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="fa fa-calendar-times"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--<li ui-sref-active="active">-->
-                                <!--<a ui-sref="class-status" ng-click="vm.collapseNavbar()">-->
-                                    <!--<span class="glyphicon glyphicon-asterisk"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.classStatus">Class Status</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <li ui-sref-active="active">
-                                <a ui-sref="product" ng-click="vm.collapseNavbar()">
-                                    <span class="fa fa-home"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.educationBusiness">Product</span>
+                            <li>
+                                <a ui-sref="customer-communication-schedule">
+                                    <span class="glyphicon glyphicon-bishop"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>
                                 </a>
                             </li>
-                        <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
-                    </ul>
-                </li>
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-user"></span>
-                            <span class="hidden-sm" data-translate="global.menu.account.main">
-                                Account
+                            <li>
+                                <a ui-sref="customer-communication-log" >
+                                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.customerCommunicationLog">Customer Communication Log</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="customer-status" >
+                                    <span class="glyphicon glyphicon-stats"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.customerStatus">Customer Communication Log</span>
+                                </a>
+                            </li>
+
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="market-channel-category">
+                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                    <span>渠道管理</span>
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>
+                            <li>
+                                <a ui-sref="new-order-assign-history">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                    <span>
+                                        新单分配记录
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="new-order-wechat-user-info">
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                    <span>
+                                        新单用户微信列表
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-education"></span>
+                                <span class="hidden-sm">
+                                    教务处
+                                </span>
                             </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="settings" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                                <span data-translate="global.menu.account.settings">Settings</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="password" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                                <span data-translate="global.menu.account.password">Password</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a href="" ng-click="vm.logout()" id="logout">
-                                <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                                <span data-translate="global.menu.account.logout">Sign out</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a href="" ng-click="vm.login()" id="login">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                                <span data-translate="global.menu.account.login">Sign in</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
-                                <span data-translate="global.menu.account.register">Register</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-tower"></span>
-                            <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
-                            <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp;
-                                <span data-translate="global.menu.admin.userManagement">User management</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
-                                <span data-translate="global.menu.admin.metrics">Metrics</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-heart"></span>&nbsp;
-                                <span data-translate="global.menu.admin.health">Health</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
-                                <span data-translate="global.menu.admin.configuration">Configuration</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="audits" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-bell"></span>&nbsp;
-                                <span data-translate="global.menu.admin.audits">Audits</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                            <a ui-sref="logs" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;
-                                <span data-translate="global.menu.admin.logs">Logs</span>
-                            </a>
-                        </li>
-                        <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
-                            <a ui-sref="docs" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-book"></span>&nbsp;
-                                <span data-translate="global.menu.admin.apidocs">API</span>
-                            </a>
-                        </li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                    </ul>
-                </li>
-                <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li class="dropdown-header">学校资源</li>
+                            <li><a ui-sref="class-room"><span class="fa fa-home"></span>教室管理</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">课程</li>
+
+                            <li>
+                                <a ui-sref="product">
+                                    <span class="fa fa-book"></span>
+                                    <span data-translate="global.menu.entities.product">Product</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a ui-sref="course">
+                                    <span class="fa fa-book"></span>
+                                    <span data-translate="global.menu.entities.course">Course</span>
+                                </a>
+                            </li>
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a  ui-sref="class-category">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    <span>课程种类</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="class-status">
+                                    <span class="fa fa-book"></span>
+                                    <span data-translate="global.menu.entities.classStatus">Class Status</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="class-age-level">
+                                    <span class="glyphicon glyphicon-signal"></span>
+                                    <span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a ui-sref="class-arrangement-rule-loop-way" ng-click="vm.collapseNavbar()">
+                                    <span class="fa fa-ruble-sign"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.classArrangementRuleLoopWay">Class Arrangement Rule Loop Way</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="class-arrangement-rule" ng-click="vm.collapseNavbar()">
+                                    <span class="fa fa-archive"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.classArrangementRule">Class Arrangement Rule</span>
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+                            <li class="dropdown-header">老师</li>
+                            <li>
+                                <a ui-sref="teacher">
+                                    <span class="fa fa-certificate"></span>
+                                    <span data-translate="global.menu.entities.teacher">Teacher</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="education-level">
+                                    <span class="glyphicon glyphicon-education"></span>
+                                    <span data-translate="global.menu.entities.educationLevel">Education Level</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-dashboard"></span>
+                                <span class="hidden-sm">
+                                    系统管理
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li ui-sref-active="active">
+                                <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-user"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.userManagement">User management</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.metrics">Metrics</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-heart"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.health">Health</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.configuration">Configuration</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="audits" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-bell"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.audits">Audits</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="logs" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-tasks"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.logs">Logs</span>
+                                </a>
+                            </li>
+                            <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
+                                <a ui-sref="docs" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-book"></span>&nbsp;
+                                    <span data-translate="global.menu.admin.apidocs">API</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li uib-dropdown class="nav-item pull-right" ng-controller="JhiLanguageController as languageVm">
+                        <a class="nav-link" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
                         <span>
                             <span class="glyphicon glyphicon-flag"></span>
                             <span class="hidden-sm" data-translate="global.menu.language">Language</span>
-                            <b class="caret"></b>
                         </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
-                        <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
-                            <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        </a>
+                        <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
+                            <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
+                                <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
         </div>
     </div>
-</nav>
+</div>

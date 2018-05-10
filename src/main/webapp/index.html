@@ -18,6 +18,7 @@
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/main.css">
+    <link rel="stylesheet" href="content/css/dashboard.css">
     <link rel="stylesheet" href="content/css/simple.css">
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
     <link rel="stylesheet" href="content/css/fontawesome-all.min.css">
@@ -31,16 +32,15 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <!--<page-ribbon></page-ribbon>-->
+
     <div ui-view="navbar" ng-cloak></div>
 
-    <div class="container" style="width: 100%">
+    <div class="container my-3 my-md-5" style="width: 100%">
         <div ui-view="content">
             <!-- Angular views -->
         </div>
 
-        <div class="footer" ng-cloak>
-            <!--<p data-translate="footer">This is your footer</p>-->
-        </div>
+
     </div>
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
@@ -300,4 +300,14 @@
     <!-- endbuild -->
 
 </body>
+
+<footer>
+    <div class="container">
+        <div class="row align-items-center flex-row-reverse">
+            <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center">
+                Copyright © 2018 朴真书院. All rights reserved.
+            </div>
+        </div>
+    </div>
+</footer>
 </html>

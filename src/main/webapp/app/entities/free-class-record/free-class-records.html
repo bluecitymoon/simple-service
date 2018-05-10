@@ -1,61 +1,69 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h1>
+</div>
+
 <div class="panel">
     <div class="panel-body">
-        <h2 data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h2>
-        <hr>
         <jhi-alert></jhi-alert>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left">
-                    <div class="btn-group btn-group-sm">
-                        <div class="dropdown" uib-dropdown>
-                            <button class="btn btn-sm btn-mint btn-active-purple dropdown-toggle" uib-dropdown-toggle
-                                    type="button" aria-expanded="false">
-                                新单管理 <i class="dropdown-caret"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu>
-                                <li>
-                                    <a ui-sref="free-class-record.new">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                        <span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">
+                    <button class="btn btn-primary" ui-sref="free-class-record.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">
                                             Create new Free Class Record
                                         </span>
-                                    </a>
-                                </li>
-                                <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                                    <a ui-sref="market-channel-category">
-                                        <span class="glyphicon glyphicon-bookmark"></span>
-                                        <span>渠道管理</span>
-                                    </a>
-                                </li>
+                    </button>
+                    <!--<div class="btn-group btn-group-sm">-->
+                        <!--<div class="dropdown" uib-dropdown>-->
+                            <!--<button class="btn btn-sm btn-mint btn-active-purple dropdown-toggle" uib-dropdown-toggle-->
+                                    <!--type="button" aria-expanded="false">-->
+                                <!--新单管理 <i class="dropdown-caret"></i>-->
+                            <!--</button>-->
+                            <!--<ul class="dropdown-menu dropdown-menu-left" uib-dropdown-menu>-->
+                                <!--<li>-->
+                                    <!--<a ui-sref="free-class-record.new">-->
+                                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                        <!--<span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">-->
+                                            <!--Create new Free Class Record-->
+                                        <!--</span>-->
+                                    <!--</a>-->
+                                <!--</li>-->
+                                <!--&lt;!&ndash;<li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a ui-sref="market-channel-category">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="glyphicon glyphicon-bookmark"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span>渠道管理</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
 
-                                <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                                    <a  ui-sref="class-category">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                        <span>课程种类</span>
-                                    </a>
-                                </li>
+                                <!--&lt;!&ndash;<li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a  ui-sref="class-category">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="glyphicon glyphicon-calendar"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span>课程种类</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
 
-                                <li class="divider"></li>
-                                <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>
-                                <li>
-                                    <a ui-sref="new-order-assign-history">
-                                        <span class="glyphicon glyphicon-record"></span>
-                                        <span>
-                                        新单分配记录
-                                    </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ui-sref="new-order-wechat-user-info">
-                                        <span class="glyphicon glyphicon-star-empty"></span>
-                                        <span>
-                                        新单用户微信列表
-                                    </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                                <!--&lt;!&ndash;<li class="divider"></li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a ui-sref="new-order-assign-history">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="glyphicon glyphicon-record"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;新单分配记录&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a ui-sref="new-order-wechat-user-info">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span class="glyphicon glyphicon-star-empty"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;<span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;新单用户微信列表&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</span>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                                <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
         </div>

@@ -1,126 +1,22 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.product.home.title">Products</h1>
+
+</div>
 <div class="panel">
-
-    <!--<div class="panel-heading pad-all" style="height: 5em">-->
-
-        <!--<div class="panel-control">-->
-
-            <!--&lt;!&ndash;<button class="btn btn-success" ui-sref="course" has-authority="ROLE_ADMIN">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="fa fa-book"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;<span data-translate="global.menu.entities.course">Course</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<button class="btn btn-primary" ui-sref="class-room" has-authority="ROLE_ADMIN">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="fa fa-home"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;<span data-translate="global.menu.entities.classRoom">Class Room</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<button class="btn btn-mint" ui-sref="class-age-level" has-authority="ROLE_ADMIN">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="glyphicon glyphicon-signal"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;<span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-            <!--&lt;!&ndash;<button class="btn btn-warning" ui-sref="class-status" has-authority="ROLE_ADMIN">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="fa fa-book"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;<span data-translate="global.menu.entities.classStatus">Class Status</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<button class="btn btn-pink" ui-sref="education-level" has-authority="ROLE_ADMIN">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="glyphicon glyphicon-education"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;<span data-translate="global.menu.entities.educationLevel">Education Level</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<button class="btn btn-info" ui-sref="teacher" has-authority="ROLE_ADMIN">&ndash;&gt;-->
-                <!--&lt;!&ndash;<span class="fa fa-certificate"></span>&ndash;&gt;-->
-                <!--&lt;!&ndash;<span data-translate="global.menu.entities.teacher">Teacher</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;</button>&ndash;&gt;-->
-
-            <!---->
-        <!--</div>-->
-
-        <!--<h3 data-translate="simpleServiceApp.product.home.title">Products</h3>-->
-
-    <!--</div>-->
 
     <div class="panel-body">
         <jhi-alert></jhi-alert>
 
-        <h2 data-translate="simpleServiceApp.product.home.title">Products</h2>
 
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left">
-                    <!--<button class="btn btn-primary" ui-sref="product.new" >-->
-                        <!--<span class="glyphicon glyphicon-plus"></span>-->
-                        <!--<span  data-translate="simpleServiceApp.product.home.createLabel">-->
-                        <!--Create new Product-->
-                    <!--</span>-->
-                    <!--</button>-->
-
-                    <div class="btn-group btn-group-sm">
-                        <div class="dropdown" uib-dropdown>
-                            <button class="btn btn-sm btn-mint btn-active-purple dropdown-toggle" uib-dropdown-toggle type="button" aria-expanded="false">
-                                教务管理 <i class="dropdown-caret"></i>
-                            </button>
-                            <ul class="dropdown-menu dropdown-menu-left" style="" uib-dropdown-menu has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                                <li class="dropdown-header">学校资源</li>
-                                <li><a ui-sref="class-room"><span class="fa fa-home"></span>教室管理</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">课程</li>
-                                <li>
-                                    <a ui-sref="product.new">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                        <span data-translate="simpleServiceApp.product.home.createLabel">Course</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ui-sref="course">
-                                        <span class="fa fa-book"></span>
-                                        <span data-translate="global.menu.entities.course">Course</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ui-sref="class-status">
-                                        <span class="fa fa-book"></span>
-                                        <span data-translate="global.menu.entities.classStatus">Class Status</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ui-sref="class-age-level">
-                                        <span class="glyphicon glyphicon-signal"></span>
-                                        <span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a ui-sref="class-arrangement-rule-loop-way" ng-click="vm.collapseNavbar()">
-                                        <span class="fa fa-ruble-sign"></span>&nbsp;
-                                        <span data-translate="global.menu.entities.classArrangementRuleLoopWay">Class Arrangement Rule Loop Way</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ui-sref="class-arrangement-rule" ng-click="vm.collapseNavbar()">
-                                        <span class="fa fa-archive"></span>&nbsp;
-                                        <span data-translate="global.menu.entities.classArrangementRule">Class Arrangement Rule</span>
-                                    </a>
-                                </li>
-
-
-                                <li class="divider"></li>
-                                <li class="dropdown-header">老师</li>
-                                <li>
-                                    <a ui-sref="teacher">
-                                        <span class="fa fa-certificate"></span>
-                                        <span data-translate="global.menu.entities.teacher">Teacher</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a ui-sref="education-level">
-                                        <span class="glyphicon glyphicon-education"></span>
-                                        <span data-translate="global.menu.entities.educationLevel">Education Level</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <button class="btn btn-primary" ui-sref="product.new" >
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span  data-translate="simpleServiceApp.product.home.createLabel">
+                        Create new Product
+                    </span>
+                    </button>
                 </div>
             </div>
         </div>
