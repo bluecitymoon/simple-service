@@ -3,7 +3,6 @@ package com.pure.service.service.impl;
 import com.pure.service.service.OpenIdService;
 import com.pure.service.service.dto.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,11 +13,11 @@ public class OpenIdServiceImpl implements OpenIdService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("${application.wechatmp.appid}")
-    private String appid;
+//    @Value("${simple.wechatmp.appid}")
+    private String appid = "wx705a848318546f57";
 
-    @Value("${application.wechatmp.secret}")
-    private String secret;
+//    @Value("#{simple.wechatmp.secret}")
+    private String secret = "0bf25b973cafd1f277b81e8f5e812620";
 
     @Override
     public String getTencentOpenId(String code) {
