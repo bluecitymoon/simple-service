@@ -31,25 +31,25 @@
                         </p>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="lastName" data-translate="settings.form.lastname">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"
-                           ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50">
-                    <div ng-show="form.lastName.$dirty && form.lastName.$invalid">
-                        <p class="help-block"
-                               ng-show="form.lastName.$error.required" data-translate="settings.messages.validate.lastname.required">
-                            Your last name is required.
-                        </p>
-                        <p class="help-block"
-                               ng-show="form.lastName.$error.minlength" data-translate="settings.messages.validate.lastname.minlength">
-                            Your last name is required to be at least 1 character.
-                        </p>
-                        <p class="help-block"
-                               ng-show="form.lastName.$error.maxlength" data-translate="settings.messages.validate.lastname.maxlength">
-                            Your last name cannot be longer than 50 characters.
-                        </p>
-                    </div>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" for="lastName" data-translate="settings.form.lastname">Last Name</label>-->
+                    <!--<input type="text" class="form-control" id="lastName" name="lastName" placeholder="{{'settings.form.lastname.placeholder' | translate}}"-->
+                           <!--ng-model="vm.settingsAccount.lastName" ng-minlength=1 ng-maxlength=50 required maxlength="50">-->
+                    <!--<div ng-show="form.lastName.$dirty && form.lastName.$invalid">-->
+                        <!--<p class="help-block"-->
+                               <!--ng-show="form.lastName.$error.required" data-translate="settings.messages.validate.lastname.required">-->
+                            <!--Your last name is required.-->
+                        <!--</p>-->
+                        <!--<p class="help-block"-->
+                               <!--ng-show="form.lastName.$error.minlength" data-translate="settings.messages.validate.lastname.minlength">-->
+                            <!--Your last name is required to be at least 1 character.-->
+                        <!--</p>-->
+                        <!--<p class="help-block"-->
+                               <!--ng-show="form.lastName.$error.maxlength" data-translate="settings.messages.validate.lastname.maxlength">-->
+                            <!--Your last name cannot be longer than 50 characters.-->
+                        <!--</p>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="form-group">
                     <label class="control-label" for="email" data-translate="global.form.email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" placeholder="{{'global.form.email.placeholder' | translate}}"

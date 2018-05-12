@@ -49,6 +49,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "status")
     private String status;
 
+    @Column(name = "agent_id")
+    private Long agentId;
+
 //    @ManyToOne
 //    private CustomerStatus customerStatus;
 
@@ -65,6 +68,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     private User salesFollower;
 
     @ManyToOne
+    private User referer;
+
+    @ManyToOne
     private NewOrderWechatUserInfo newOrderWechatUserInfo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
@@ -76,7 +82,25 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
         this.id = id;
     }
 
-//    public CustomerStatus getCustomerStatus() {
+    public Long getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(Long agentId) {
+        this.agentId = agentId;
+    }
+
+    public User getReferer() {
+        return referer;
+    }
+
+    public FreeClassRecord setReferer(User referer) {
+        this.referer = referer;
+
+        return this;
+    }
+
+    //    public CustomerStatus getCustomerStatus() {
 //        return customerStatus;
 //    }
 //
