@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -66,23 +67,34 @@ public class NewOrderWechatUserInfoServiceImpl implements NewOrderWechatUserInfo
         Set<FreeClassRecord> newOrdersAssigning = newOrderWechatUserInfo.getNewOrders();
 
         String openId = openIdService.getTencentOpenId(newOrderWechatUserInfo.getCode());
-        newOrderWechatUserInfo.setOpenId(openId);
 
-        NewOrderWechatUserInfoCriteria newOrderWechatUserInfoCriteria = new NewOrderWechatUserInfoCriteria();
-        StringFilter stringFilter = new StringFilter();
-        stringFilter.setEquals(openId);
-        newOrderWechatUserInfoCriteria.setOpenId(stringFilter);
-        List<NewOrderWechatUserInfo> userInfos = newOrderWechatUserInfoQueryService.findByCriteria(newOrderWechatUserInfoCriteria);
+        log.debug("Getting user open id and find " + openId);
+        NewOrderWechatUserInfo userInfoObject = null;
 
-        NewOrderWechatUserInfo userInfoObject;
-        if (CollectionUtils.isEmpty(userInfos)) {
+        if (!StringUtils.isEmpty(openId)) {
 
-            userInfoObject = newOrderWechatUserInfoRepository.saveAndFlush(newOrderWechatUserInfo);
+            newOrderWechatUserInfo.setOpenId(openId);
+
+            NewOrderWechatUserInfoCriteria newOrderWechatUserInfoCriteria = new NewOrderWechatUserInfoCriteria();
+            StringFilter stringFilter = new StringFilter();
+            stringFilter.setEquals(openId);
+            newOrderWechatUserInfoCriteria.setOpenId(stringFilter);
+            List<NewOrderWechatUserInfo> userInfos = newOrderWechatUserInfoQueryService.findByCriteria(newOrderWechatUserInfoCriteria);
+
+
+            if (CollectionUtils.isEmpty(userInfos)) {
+
+                userInfoObject = newOrderWechatUserInfoRepository.saveAndFlush(newOrderWechatUserInfo);
+            } else {
+
+                userInfoObject = userInfos.get(0);
+
+            }
         } else {
-
-            userInfoObject = userInfos.get(0);
+            log.error("Open id is empty for user {} ", newOrderWechatUserInfo );
 
         }
+
 
         FreeClassRecord newOrderCreated = freeClassRecordService.findOne(newOrdersAssigning.iterator().next().getId());
         newOrderCreated.setNewOrderWechatUserInfo(userInfoObject);

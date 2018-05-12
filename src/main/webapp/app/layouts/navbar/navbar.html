@@ -1,67 +1,67 @@
-<div class="header py-4">
-    <div class="container">
-        <div class="d-flex">
-            <a class="header-brand">
-                <img src="./content/images/pz_logo_long.png" class="header-brand-img">
-            </a>
-            <div class="d-flex order-lg-2 ml-auto">
-                <div class="dropdown d-none d-md-flex">
-                    <a class="nav-link icon" data-toggle="dropdown">
-                        <i class="fa fa-bell"></i>
-                        <span class="nav-unread"></span>
-                    </a>
+<!--<div class="header py-4">-->
+    <!--<div class="container">-->
+        <!--<div class="d-flex">-->
+            <!--<a class="header-brand">-->
+                <!--<img src="./content/images/pz_logo_long.png" class="header-brand-img">-->
+            <!--</a>-->
+            <!--<div class="d-flex order-lg-2 ml-auto">-->
+                <!--<div class="dropdown d-none d-md-flex">-->
+                    <!--<a class="nav-link icon" data-toggle="dropdown">-->
+                        <!--<i class="fa fa-bell"></i>-->
+                        <!--<span class="nav-unread"></span>-->
+                    <!--</a>-->
 
-                </div>
-                <div class="dropdown" ng-switch="vm.isAuthenticated()">
-                    <li uib-dropdown>
-                        <a class="nav-link pr-0 leading-none" uib-dropdown-toggle href="" >
-                            <span class="avatar" style="background-image: url(./../content/images/logo-jhipster.png)"></span>
-                            <span class="ml-2 d-none d-lg-block">
-                                <span class="text-default" ng-switch-when="true">{{vm.account.firstName}}</span>
-                                <small class="text-muted d-block mt-1">{{vm.account.login}}</small>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
-                            <li ui-sref-active="active">
-                                <a ui-sref="settings" ng-click="vm.collapseNavbar()" ng-switch-when="true">
-                                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                                    <span data-translate="global.menu.account.settings">Settings</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="password" ng-click="vm.collapseNavbar()" ng-switch-when="true">
-                                    <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                                    <span data-translate="global.menu.account.password">Password</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a href="" ng-click="vm.logout()" ng-switch-when="true">
-                                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                                    <span data-translate="global.menu.account.logout">Sign out</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active" ng-switch-when="false">
-                                <a href="" ng-click="vm.login()">
-                                    <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                                    <span data-translate="global.menu.account.login">Sign in</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active" ng-switch-when="false">
-                                <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
-                                    <span data-translate="global.menu.account.register">Register</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                <!--</div>-->
+                <!--<div class="dropdown" ng-switch="vm.isAuthenticated()">-->
+                    <!--<li uib-dropdown>-->
+                        <!--<a class="nav-link pr-0 leading-none" uib-dropdown-toggle href="" >-->
+                            <!--<span class="avatar" style="background-image: url(./../content/images/logo-jhipster.png)"></span>-->
+                            <!--<span class="ml-2 d-none d-lg-block">-->
+                                <!--<span class="text-default" ng-switch-when="true">{{vm.account.firstName}}</span>-->
+                                <!--<small class="text-muted d-block mt-1">{{vm.account.login}}</small>-->
+                            <!--</span>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>-->
+                            <!--<li ui-sref-active="active">-->
+                                <!--<a ui-sref="settings" ng-click="vm.collapseNavbar()" ng-switch-when="true">-->
+                                    <!--<span class="glyphicon glyphicon-wrench"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.account.settings">Settings</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li ui-sref-active="active">-->
+                                <!--<a ui-sref="password" ng-click="vm.collapseNavbar()" ng-switch-when="true">-->
+                                    <!--<span class="glyphicon glyphicon-lock"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.account.password">Password</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li ui-sref-active="active">-->
+                                <!--<a href="" ng-click="vm.logout()" ng-switch-when="true">-->
+                                    <!--<span class="glyphicon glyphicon-log-out"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.account.logout">Sign out</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li ui-sref-active="active" ng-switch-when="false">-->
+                                <!--<a href="" ng-click="vm.login()">-->
+                                    <!--<span class="glyphicon glyphicon-log-in"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.account.login">Sign in</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li ui-sref-active="active" ng-switch-when="false">-->
+                                <!--<a ui-sref="register" ng-click="vm.collapseNavbar()">-->
+                                    <!--<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.account.register">Register</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
 
 
-                </div>
-            </div>
+                <!--</div>-->
+            <!--</div>-->
 
-        </div>
-    </div>
-</div>
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 <div class="header collapse d-lg-flex p-0">
     <div class="container">
         <div class="row align-items-center">
@@ -293,6 +293,47 @@
                         </ul>
                     </li>
 
+                    <li uib-dropdown class="nav-item pull-right">
+                        <a class="nav-link" uib-dropdown-toggle href="" >
+                            <!--<span class="avatar" style="background-image: url(./../content/images/logo-jhipster.png)"></span>-->
+                            <!--<span class="ml-2 d-none d-lg-block">-->
+                            <span ng-switch-when="true">{{vm.account.firstName}}</span>
+                            <!--<small class="text-muted d-block mt-1">{{vm.account.login}}</small>-->
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li ui-sref-active="active">
+                                <a ui-sref="settings" ng-click="vm.collapseNavbar()" ng-switch-when="true">
+                                    <span class="glyphicon glyphicon-wrench"></span>&nbsp;
+                                    <span data-translate="global.menu.account.settings">Settings</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="password" ng-click="vm.collapseNavbar()" ng-switch-when="true">
+                                    <span class="glyphicon glyphicon-lock"></span>&nbsp;
+                                    <span data-translate="global.menu.account.password">Password</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active">
+                                <a href="" ng-click="vm.logout()" ng-switch-when="true">
+                                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                                    <span data-translate="global.menu.account.logout">Sign out</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" ng-switch-when="false">
+                                <a href="" ng-click="vm.login()">
+                                    <span class="glyphicon glyphicon-log-in"></span>&nbsp;
+                                    <span data-translate="global.menu.account.login">Sign in</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" ng-switch-when="false">
+                                <a ui-sref="register" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
+                                    <span data-translate="global.menu.account.register">Register</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li uib-dropdown class="nav-item pull-right" ng-controller="JhiLanguageController as languageVm">
                         <a class="nav-link" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
                         <span>
@@ -300,13 +341,12 @@
                             <span class="hidden-sm" data-translate="global.menu.language">Language</span>
                         </span>
                         </a>
-                        <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
                             <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
                                 <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
                             </li>
                         </ul>
                     </li>
-
                 </ul>
             </div>
         </div>
