@@ -29,12 +29,12 @@
                 });
         };
 
-        vm.users = User.query();
-
-        vm.searchPersonWithKeyword = function (keyword) {
-
-            console.log("searching people with keyword " + keyword);
-        };
+        // vm.users = User.query();
+        //
+        // vm.searchPersonWithKeyword = function (keyword) {
+        //
+        //     console.log("searching people with keyword " + keyword);
+        // };
 
         function save () {
             vm.isSaving = true;

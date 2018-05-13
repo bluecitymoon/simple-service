@@ -5,12 +5,13 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User'];
 
-    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User) {
 
         var vm = this;
 
+        vm.selectedUser = null;
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
@@ -30,7 +31,42 @@
                 return;
             }
 
+            if (!vm.selectedUser) {
+                AlertService.error("请选择目标用户！");
+                return;
+            }
+
+            selectedRecords.forEach(function (newOrder) {
+                newOrder.salesFollower = vm.selectedUser;
+            });
+
+            FreeClassRecord.batchUpdate(selectedRecords, function (response) {
+
+                AlertService.success("操作成功！批量分配了" + response.length + "条新单到用户" + vm.selectedUser.firstName+ "！");
+
+            }, function (error) {
+
+                AlertService.error(error);
+            });
+
         };
+        loadAllUsers();
+
+        function loadAllUsers () {
+            User.query({
+                page: 0,
+                size: 1000
+            }, onSuccess, onError);
+
+            function onSuccess(data) {
+                vm.users = data;
+            }
+
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
+
         vm.toggleAll = function () {
             // vm.allSelected = !vm.allSelected;
             vm.freeClassRecords.forEach(function (record) {

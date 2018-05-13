@@ -16,6 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Service Implementation for managing FreeClassRecord.
@@ -144,5 +147,15 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     public void delete(Long id) {
         log.debug("Request to delete FreeClassRecord : {}", id);
         freeClassRecordRepository.delete(id);
+    }
+
+    @Override
+    public List<FreeClassRecord> batchSave(List<FreeClassRecord> freeClassRecords) {
+
+        List<FreeClassRecord> records = new ArrayList<>();
+
+        freeClassRecords.forEach(newOrder -> records.add(save(newOrder)));
+
+        return freeClassRecordRepository.save(freeClassRecords);
     }
 }

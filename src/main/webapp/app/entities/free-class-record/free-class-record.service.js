@@ -27,6 +27,11 @@
                 url: 'api/customers/connect/:id',
                 params: { id : '@id'}
             },
+            'batchUpdate' : {
+                method: 'PUT',
+                url: 'api/free-class-records/batchupdate',
+                isArray: true
+            },
             'update': { method:'PUT' }
         });
     }

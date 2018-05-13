@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,6 +97,21 @@ public class FreeClassRecordResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, freeClassRecord.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * PUT  /free-class-records : Updates an existing array of freeClassRecord.
+     */
+    @PutMapping("/free-class-records/batchupdate")
+    @Timed
+    public ResponseEntity<List<FreeClassRecord>> batchUpdateFreeClassRecord(@RequestBody List<FreeClassRecord> freeClassRecords) throws URISyntaxException {
+        log.debug("REST request to update FreeClassRecord : {}", freeClassRecords);
+        if (CollectionUtils.isEmpty(freeClassRecords)) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<FreeClassRecord> result = freeClassRecordService.batchSave(freeClassRecords);
+
+        return ResponseEntity.ok().body(result);
     }
 
     /**

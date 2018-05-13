@@ -4,6 +4,8 @@ import com.pure.service.domain.FreeClassRecord;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing FreeClassRecord.
  */
@@ -16,6 +18,8 @@ public interface FreeClassRecordService {
      * @return the persisted entity
      */
     FreeClassRecord save(FreeClassRecord freeClassRecord);
+
+    List<FreeClassRecord> batchSave(List<FreeClassRecord> freeClassRecords);
 
     /**
      *  Get all the freeClassRecords.
