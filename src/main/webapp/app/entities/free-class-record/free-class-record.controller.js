@@ -19,6 +19,24 @@
         // vm.pageOptions = [];
         vm.loadAll = loadAll;
         vm.loadAll();
+        vm.allSelected = false;
+        vm.batchAssignNewOrder = function () {
+            var selectedRecords = vm.freeClassRecords.filter(function (r) {
+                return r.selected;
+            });
+
+            if (!selectedRecords || selectedRecords.length == 0) {
+                AlertService.error("没有选中任何新单，无法分配！");
+                return;
+            }
+
+        };
+        vm.toggleAll = function () {
+            // vm.allSelected = !vm.allSelected;
+            vm.freeClassRecords.forEach(function (record) {
+                record.selected = vm.allSelected;
+            })
+        };
 
         function loadAll () {
             FreeClassRecord.query({

@@ -304,7 +304,7 @@ entity tables helpers
 entity detail page css
 ========================================================================== */
 .dl-horizontal.jh-entity-details > dd {
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
 @media screen and (min-width: 768px) {
@@ -337,6 +337,47 @@ ui bootstrap tweaks
 }
 
 
+
+.dropdown-menu-arrow:before {
+    position: absolute;
+    top: -6px;
+    left: 12px;
+    display: inline-block;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid rgba(0, 40, 100, 0.12);
+    border-left: 5px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
+}
+
+.dropdown-menu-arrow:after {
+    position: absolute;
+    top: -5px;
+    left: 12px;
+    display: inline-block;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #fff;
+    border-left: 5px solid transparent;
+    content: '';
+}
+
+.dropdown-menu-arrow.dropdown-menu-right:before, .dropdown-menu-arrow.dropdown-menu-right:after {
+    left: auto;
+    right: 12px;
+}
+
+
+.footer {
+    background: #fff;
+    border-top: 1px solid rgba(0, 40, 100, 0.12);
+    font-size: 0.875rem;
+    padding: 1.25rem 0;
+    color: #9aa0ac;
+}
+
+.footer a:not(.btn) {
+    color: #6e7687;
+}
 
 
 /* jhipster-needle-css-add-main JHipster will add new css style */

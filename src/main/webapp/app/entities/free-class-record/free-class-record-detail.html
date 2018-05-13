@@ -1,3 +1,6 @@
+<div class="page-header">
+    <h1 class="page-title">新单资源详情</h1>
+</div>
 <div class="row">
     <div ng-class="(vm.freeClassRecord.newOrderWechatUserInfo !=null) ? 'col-sm-9': 'col-sm-12' ">
 
@@ -26,16 +29,13 @@
                         </div>
                     </div>
                 </div>
-                <h3 class="panel-title">
-                    <span data-translate="simpleServiceApp.freeClassRecord.detail.title">Free Class Record</span>
-                    {{vm.freeClassRecord.personName}}
-                </h3>
+
             </div>
 
             <!--Panel body-->
             <div class="panel-body">
                 <jhi-alert-error></jhi-alert-error>
-                <hr>
+                <!--<hr>-->
 
                 <dl class="dl-horizontal jh-entity-details">
                     <dt><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span></dt>

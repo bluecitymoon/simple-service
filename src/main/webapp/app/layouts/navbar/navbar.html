@@ -301,7 +301,7 @@
                             <!--<small class="text-muted d-block mt-1">{{vm.account.login}}</small>-->
                             </span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                        <ul class="dropdown-menu dropdown-menu-arrow" style="left: 0" uib-dropdown-menu>
                             <li ui-sref-active="active">
                                 <a ui-sref="settings" ng-click="vm.collapseNavbar()" ng-switch-when="true">
                                     <span class="glyphicon glyphicon-wrench"></span>&nbsp;
@@ -341,7 +341,7 @@
                             <span class="hidden-sm" data-translate="global.menu.language">Language</span>
                         </span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
+                        <ul class="dropdown-menu dropdown-menu-arrow" style="left: 0" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
                             <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
                                 <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
                             </li>
