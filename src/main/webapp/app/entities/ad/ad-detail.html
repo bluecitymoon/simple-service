@@ -1,8 +1,10 @@
+<div class="page-header">
+    <h1 class="page-title"data-translate="simpleServiceApp.ad.home.title">AD</h1>
 
-<div>
-    <h2><span data-translate="simpleServiceApp.ad.detail.title">Ad</span> {{vm.ad.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
+</div>
+<div class="panel">
+ <div class="panel-body">
+     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="simpleServiceApp.ad.type">Type</span></dt>
         <dd>
@@ -36,6 +38,10 @@
         <dd>
             <span>{{vm.ad.createdBy}}</span>
         </dd>
+        <dt>预览</dt>
+        <dd>
+            <img src="{{vm.ad.content}}" />
+        </dd>
     </dl>
 
     <button type="submit"
@@ -48,4 +54,5 @@
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
     </button>
+</div>
 </div>

@@ -1,5 +1,9 @@
-<div>
-    <h2 data-translate="simpleServiceApp.ad.home.title">Ads</h2>
+<div class="page-header">
+    <h1 class="page-title"data-translate="simpleServiceApp.ad.home.title">AD</h1>
+
+</div>
+<div class="panel">
+    <div class="panel-body">
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
@@ -71,4 +75,5 @@
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
+</div>
 </div>
