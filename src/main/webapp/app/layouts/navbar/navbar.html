@@ -165,6 +165,24 @@
                     <li uib-dropdown class="nav-item" ng-switch-when="true">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
+                                <span class="glyphicon glyphicon-option-horizontal"></span>
+                                <span class="hidden-sm">
+                                    运营部
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li ui-sref-active="active">
+                                <a ui-sref="ad" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-tree-deciduous"></span>&nbsp;
+                                    <span>小程序广告</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
                                 <span class="glyphicon glyphicon-education"></span>
                                 <span class="hidden-sm">
                                     教务处

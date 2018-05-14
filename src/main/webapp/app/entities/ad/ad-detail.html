@@ -1,0 +1,51 @@
+
+<div>
+    <h2><span data-translate="simpleServiceApp.ad.detail.title">Ad</span> {{vm.ad.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.ad.type">Type</span></dt>
+        <dd>
+            <span>{{vm.ad.type}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.content">Content</span></dt>
+        <dd>
+            <span>{{vm.ad.content}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.rpxWidth">Rpx Width</span></dt>
+        <dd>
+            <span>{{vm.ad.rpxWidth}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.rpxHeight">Rpx Height</span></dt>
+        <dd>
+            <span>{{vm.ad.rpxHeight}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.status">Status</span></dt>
+        <dd>
+            <span>{{vm.ad.status}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.sequence">Sequence</span></dt>
+        <dd>
+            <span>{{vm.ad.sequence}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.ad.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.ad.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.ad.createdBy}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ad-detail.edit({id:vm.ad.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

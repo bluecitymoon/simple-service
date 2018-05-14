@@ -29,6 +29,7 @@
                 "classArrangementRule": "Class Arrangement Rule",
                 "systemVariable": "System Variable",
                 "asset": "Asset",
+                "ad": "Ad",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

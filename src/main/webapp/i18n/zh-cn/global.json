@@ -30,6 +30,7 @@
                 "classArrangementRule": "排课规则",
                 "systemVariable": "System Variable",
                 "asset": "Asset",
+                "ad": "Ad",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
