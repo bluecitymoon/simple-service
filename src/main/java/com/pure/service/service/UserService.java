@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -114,6 +115,10 @@ public class UserService {
         User user = new User();
         user.setLogin(userDTO.getLogin());
         user.setFirstName(userDTO.getFirstName());
+
+        if (StringUtils.isEmpty(userDTO.getFirstName())) {
+            user.setFirstName(user.getLogin());
+        }
         user.setLastName(userDTO.getLastName());
         user.setEmail(userDTO.getEmail());
         user.setImageUrl(userDTO.getImageUrl());

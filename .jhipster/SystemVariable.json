@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "attrValue",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180514031810",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "system_variable",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

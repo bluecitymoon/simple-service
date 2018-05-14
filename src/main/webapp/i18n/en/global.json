@@ -27,6 +27,8 @@
                 "product": "Product",
                 "classArrangementRuleLoopWay": "Class Arrangement Rule Loop Way",
                 "classArrangementRule": "Class Arrangement Rule",
+                "systemVariable": "System Variable",
+                "asset": "Asset",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

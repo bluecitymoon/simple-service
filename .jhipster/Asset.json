@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullPath",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "resourceId",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180514032213",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "asset",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

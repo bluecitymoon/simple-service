@@ -28,6 +28,8 @@
                 "educationBusiness": "教务管理",
                 "classArrangementRuleLoopWay": "排课循环方式",
                 "classArrangementRule": "排课规则",
+                "systemVariable": "System Variable",
+                "asset": "Asset",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
