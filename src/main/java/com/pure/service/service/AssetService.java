@@ -3,6 +3,9 @@ package com.pure.service.service;
 import com.pure.service.domain.Asset;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 /**
  * Service Interface for managing Asset.
@@ -16,6 +19,8 @@ public interface AssetService {
      * @return the persisted entity
      */
     Asset save(Asset asset);
+
+    Asset saveAsset(MultipartFile file) throws IOException;
 
     /**
      *  Get all the assets.

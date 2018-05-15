@@ -9,6 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 
 /**
@@ -36,6 +43,26 @@ public class AssetServiceImpl implements AssetService{
     public Asset save(Asset asset) {
         log.debug("Request to save Asset : {}", asset);
         return assetRepository.save(asset);
+    }
+
+    @Override
+    public Asset saveAsset(MultipartFile file) throws IOException {
+
+        String resourceId =  UUID.randomUUID().toString();
+        String serverFileName = "/images/" + resourceId + "-" + file.getOriginalFilename();
+        Path path = Paths.get(serverFileName);
+
+        Files.write(path, file.getBytes());
+
+        Asset asset = new Asset();
+
+        asset.setResourceId(resourceId);
+        asset.setName(file.getOriginalFilename());
+        asset.setType(file.getContentType());
+        asset.setComments("File size is " + file.getSize());
+        asset.setFullPath("http://www.puzhenchina.com/images/" + resourceId + "-" + file.getOriginalFilename());
+
+        return save(asset);
     }
 
     /**

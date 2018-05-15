@@ -6,10 +6,8 @@ services:
               dockerfile: Dockerfile
         image: simple-service
         environment:
-            - SPRING_PROFILES_ACTIVE=prod,swagger
-            - JHIPSTER_SLEEP=0
+            - SPRING_PROFILES_ACTIVE=dev,swagger
         volumes:
-            - /var/www/html/images:/images
+            - /Users/Jerry/Documents/files/images:/images
         ports:
-            - 443:8443
-            - 10000:10000
+            - 8443:8443

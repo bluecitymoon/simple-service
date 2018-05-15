@@ -30,12 +30,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * REST controller for managing Asset.
@@ -90,24 +86,9 @@ public class AssetResource {
         if (file.isEmpty()) {
             return ResponseEntity.badRequest().build();
         }
-        String resourceId =  UUID.randomUUID().toString();
-        String serverFileName = "/images/" + resourceId + "-" + file.getOriginalFilename();
-        Path path = Paths.get(serverFileName);
-//
-//        Files.createFile(path);
 
-        byte[] bytes = file.getBytes();
-        Files.write(path, bytes);
+        Asset result = assetService.saveAsset(file);
 
-        Asset asset = new Asset();
-
-        asset.setResourceId(resourceId);
-        asset.setName(file.getOriginalFilename());
-        asset.setType(file.getContentType());
-        asset.setComments("File size is " + file.getSize());
-        asset.setFullPath("http://www.puzhenchina.com/images/" + resourceId + "-" + file.getOriginalFilename());
-
-        Asset result = assetService.save(asset);
         return ResponseEntity.created(new URI("/api/assets/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
