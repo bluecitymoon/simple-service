@@ -105,6 +105,7 @@ public class AssetResource {
         asset.setName(file.getOriginalFilename());
         asset.setType(file.getContentType());
         asset.setComments("File size is " + file.getSize());
+        asset.setFullPath("http://www.puzhenchina.com/images/" + resourceId + "-" + file.getOriginalFilename());
 
         Asset result = assetService.save(asset);
         return ResponseEntity.created(new URI("/api/assets/" + result.getId()))
