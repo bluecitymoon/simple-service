@@ -7,7 +7,9 @@ services:
         image: simple-service
         environment:
             - SPRING_PROFILES_ACTIVE=prod,swagger
-            - JHIPSTER_SLEEP=3
+            - JHIPSTER_SLEEP=0
+        volumes:
+            - /Users/Jerry/Documents/files/images:/images
         ports:
             - 443:8443
             - 10000:10000

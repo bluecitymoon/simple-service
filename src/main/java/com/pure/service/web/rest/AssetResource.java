@@ -91,7 +91,7 @@ public class AssetResource {
             return ResponseEntity.badRequest().build();
         }
         String resourceId =  UUID.randomUUID().toString();
-        String serverFileName = "" + resourceId + "-" + file.getOriginalFilename();
+        String serverFileName = "/images/" + resourceId + "-" + file.getOriginalFilename();
         Path path = Paths.get(serverFileName);
 //
 //        Files.createFile(path);
