@@ -1,0 +1,120 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.marketingQrcode.home.title">Market Channel Categories</h1>
+</div>
+<jhi-alert></jhi-alert>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="input-group mar-btm">
+                    <ui-select ng-model="vm.selectedCreatingUser" placeholder="输入目标用户姓名生成二维码">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button" ng-click="vm.createNewQrcode()"><span class="glyphicon glyphicon-qrcode"></span>生成二维码</button>
+					    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="input-group mar-btm">
+                    <ui-select ng-model="vm.selectedSearchingUser" placeholder="输入目标用户姓名搜索">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button" ng-click="vm.searchQrcodeBySelectedUser()">搜索</button>
+					    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<div class="panel">
+    <div class="panel-body">
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+
+
+
+                <!--<button class="btn btn-primary" ui-sref="marketing-qrcode.new" >-->
+                    <!--<span class="glyphicon glyphicon-qrcode"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.marketingQrcode.home.createLabel">-->
+                        <!--Create new Marketing Qrcode-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br/>-->
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fileUrl"><span data-translate="simpleServiceApp.marketingQrcode.fileUrl">File Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.marketingQrcode.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.marketingQrcode.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.marketingQrcode.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.marketingQrcode.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="agent.login"><span data-translate="simpleServiceApp.marketingQrcode.agent">Agent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="marketingQrcode in vm.marketingQrcodes track by marketingQrcode.id">
+                    <td><a ui-sref="marketing-qrcode-detail({id:marketingQrcode.id})">{{marketingQrcode.id}}</a></td>
+                    <td>{{marketingQrcode.fileUrl}}</td>
+                    <td>{{marketingQrcode.createdBy}}</td>
+                    <td>{{marketingQrcode.createdDate | date:'medium'}}</td>
+                    <td>{{marketingQrcode.lastModifiedBy}}</td>
+                    <td>{{marketingQrcode.lastModifiedDate | date:'medium'}}</td>
+                    <td>
+                        {{marketingQrcode.agent.login}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="marketing-qrcode-detail({id:marketingQrcode.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="marketing-qrcode.edit({id:marketingQrcode.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="marketing-qrcode.delete({id:marketingQrcode.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

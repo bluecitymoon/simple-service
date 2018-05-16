@@ -65,6 +65,13 @@ public class AssetServiceImpl implements AssetService{
         return save(asset);
     }
 
+    @Override
+    public Asset saveBinary(byte[] bytes, String subfolderName) {
+
+
+        return null;
+    }
+
     /**
      *  Get all the assets.
      *

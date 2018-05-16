@@ -22,6 +22,8 @@ public interface AssetService {
 
     Asset saveAsset(MultipartFile file) throws IOException;
 
+    Asset saveBinary(byte[] bytes, String subfolderName) throws IOException;
+
     /**
      *  Get all the assets.
      *
