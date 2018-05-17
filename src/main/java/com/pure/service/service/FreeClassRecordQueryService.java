@@ -1,14 +1,9 @@
 package com.pure.service.service;
 
 
+import java.time.ZonedDateTime;
+import java.util.List;
 
-import com.pure.service.domain.FreeClassRecord;
-import com.pure.service.domain.FreeClassRecord_;
-import com.pure.service.domain.MarketChannelCategory_;
-import com.pure.service.domain.User_;
-import com.pure.service.repository.FreeClassRecordRepository;
-import com.pure.service.service.dto.FreeClassRecordCriteria;
-import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,7 +12,12 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import io.github.jhipster.service.QueryService;
+
+import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.*; // for static metamodels
+import com.pure.service.repository.FreeClassRecordRepository;
+import com.pure.service.service.dto.FreeClassRecordCriteria;
 
 
 /**
@@ -93,6 +93,9 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             }
             if (criteria.getStatus() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getStatus(), FreeClassRecord_.status));
+            }
+            if (criteria.getBirthday() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getBirthday(), FreeClassRecord_.birthday));
             }
             if (criteria.getMarketChannelCategoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMarketChannelCategoryId(), FreeClassRecord_.marketChannelCategory, MarketChannelCategory_.id));

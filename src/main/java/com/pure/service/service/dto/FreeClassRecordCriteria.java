@@ -36,6 +36,8 @@ public class FreeClassRecordCriteria implements Serializable {
 
     private StringFilter status;
 
+    private InstantFilter birthday;
+
     private LongFilter marketChannelCategoryId;
 
     private LongFilter salesFollowerId;
@@ -107,6 +109,14 @@ public class FreeClassRecordCriteria implements Serializable {
         this.status = status;
     }
 
+    public InstantFilter getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(InstantFilter birthday) {
+        this.birthday = birthday;
+    }
+
     public LongFilter getMarketChannelCategoryId() {
         return marketChannelCategoryId;
     }
@@ -134,6 +144,7 @@ public class FreeClassRecordCriteria implements Serializable {
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
                 (status != null ? "status=" + status + ", " : "") +
+                (birthday != null ? "birthday=" + birthday + ", " : "") +
                 (marketChannelCategoryId != null ? "marketChannelCategoryId=" + marketChannelCategoryId + ", " : "") +
                 (salesFollowerId != null ? "salesFollowerId=" + salesFollowerId + ", " : "") +
             "}";

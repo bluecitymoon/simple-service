@@ -12,6 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -52,8 +53,8 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "agent_id")
     private Long agentId;
 
-//    @ManyToOne
-//    private CustomerStatus customerStatus;
+    @Column(name = "birthday")
+    private Instant birthday;
 
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
@@ -213,6 +214,19 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
         this.status = status;
     }
 
+    public Instant getBirthday() {
+        return birthday;
+    }
+
+    public FreeClassRecord birthday(Instant birthday) {
+        this.birthday = birthday;
+        return this;
+    }
+
+    public void setBirthday(Instant birthday) {
+        this.birthday = birthday;
+    }
+
     public MarketChannelCategory getMarketChannelCategory() {
         return marketChannelCategory;
     }
@@ -296,6 +310,7 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
             ", status='" + getStatus() + "'" +
+            ", birthday='" + getBirthday() + "'" +
             "}";
     }
 }
