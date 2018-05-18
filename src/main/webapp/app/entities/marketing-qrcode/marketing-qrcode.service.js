@@ -23,7 +23,7 @@
                 }
             },
             'update': { method:'PUT' },
-            'generate': { url: 'api/marketing-qrcodes/generate/:id', method: 'POST'}
+            'generate': { url: 'api/marketing-qrcodes/generate/:id', method: 'GET'}
         });
     }
 })();

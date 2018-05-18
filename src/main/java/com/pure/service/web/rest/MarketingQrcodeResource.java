@@ -7,6 +7,7 @@ import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.MarketingQrcodeCriteria;
 import com.pure.service.service.MarketingQrcodeQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -65,13 +67,25 @@ public class MarketingQrcodeResource {
             .body(result);
     }
 
-    @PostMapping("/marketing-qrcodes/generate/{id}")
+    @GetMapping("/marketing-qrcodes/generate/{id}")
     @Timed
     public ResponseEntity<MarketingQrcode> generate(@PathVariable Long id) throws URISyntaxException, IOException {
         log.debug("REST request to generate MarketingQrcode : {}", id);
-        if (id != null) {
+        if (id == null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "用户Id未指定")).body(null);
         }
+
+        MarketingQrcodeCriteria marketingQrcodeCriteria = new MarketingQrcodeCriteria();
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(id);
+        marketingQrcodeCriteria.setAgentId(longFilter);
+
+        List<MarketingQrcode> createdQrcodes = marketingQrcodeQueryService.findByCriteria(marketingQrcodeCriteria);
+
+        if (!CollectionUtils.isEmpty(createdQrcodes)) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "qrcodeexists", "该用户的二维码已存在！")).body(null);
+        }
+
         MarketingQrcode result = marketingQrcodeService.generate(id);
 
         return ResponseEntity.created(new URI("/api/marketing-qrcodes/" + result.getId()))

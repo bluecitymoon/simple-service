@@ -1,6 +1,5 @@
 package com.pure.service.service.impl;
 
-import com.google.common.collect.Lists;
 import com.pure.service.domain.Asset;
 import com.pure.service.domain.MarketingQrcode;
 import com.pure.service.domain.QrCodeRequestBody;
@@ -12,14 +11,19 @@ import com.pure.service.service.AssetService;
 import com.pure.service.service.MarketingQrcodeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -39,17 +43,17 @@ public class MarketingQrcodeServiceImpl implements MarketingQrcodeService{
 
     private final MarketingQrcodeRepository marketingQrcodeRepository;
 
-    private final RestTemplate restTemplate;
+    @Qualifier("noopSslRestTemplate")
+    @Autowired
+    private RestTemplate noopSslRestTemplate;
 
     private final AssetService assetService;
     private final UserRepository userRepository;
 
     public MarketingQrcodeServiceImpl(MarketingQrcodeRepository marketingQrcodeRepository,
-                                      RestTemplate restTemplate,
                                       AssetService assetService,
                                       UserRepository userRepository) {
         this.marketingQrcodeRepository = marketingQrcodeRepository;
-        this.restTemplate = restTemplate;
         this.assetService = assetService;
         this.userRepository = userRepository;
     }
@@ -107,21 +111,34 @@ public class MarketingQrcodeServiceImpl implements MarketingQrcodeService{
     public MarketingQrcode generate(Long id) throws IOException {
 
         //TODO dynamic configuration
-        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx705a848318546f57&secret=0bf25b973cafd1f277b81e8f5e812620";
+        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
 
-        WechatToken token = restTemplate.getForObject(tokenUrl, WechatToken.class);
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(tokenUrl)
+            .queryParam("grant_type", "client_credential")
+            .queryParam("appid", "wx705a848318546f57")
+            .queryParam("secret", "0bf25b973cafd1f277b81e8f5e812620");
+
+        String tokenPath = uriComponentsBuilder.toUriString();
+        log.debug("Requesting " + tokenPath);
+
+        WechatToken token = noopSslRestTemplate.getForObject(tokenPath, WechatToken.class);
         log.debug("Got wechat token {} ", token);
 
         String qrCodeUrl = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=" + token.getAccessToken();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Lists.newArrayList(MediaType.IMAGE_JPEG));
+        headers.setContentType(MediaType.APPLICATION_JSON);
 
         QrCodeRequestBody qrCodeRequestBody = new QrCodeRequestBody();
         qrCodeRequestBody.setPath("pages/introduction/index?agentId=" + id);
         qrCodeRequestBody.setWidth(430);
 
-        ResponseEntity<byte[]> responseEntity = restTemplate.postForEntity(qrCodeUrl, qrCodeRequestBody, byte[].class);
+
+        HttpEntity requestEntity = new HttpEntity(qrCodeRequestBody, headers);
+
+        ResponseEntity<byte[]> responseEntity = noopSslRestTemplate.exchange(qrCodeUrl, HttpMethod.POST, requestEntity, byte[].class);
+
+        log.debug("Got qrcode image response {} ", requestEntity);
 
         String resourceId = UUID.randomUUID().toString();
         String serverFileName = "/images/qrcode/" + resourceId + ".jpg";

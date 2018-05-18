@@ -5,9 +5,7 @@
             <column name="birthday" type="tinyblob"/>
         </addColumn>
     </changeSet>
-    <changeSet author="Jerry (generated)" id="1526560397446-2">
-        <dropUniqueConstraint constraintName="target_class_id" tableName="class_arrangement_rule"/>
-    </changeSet>
+
     <changeSet author="Jerry (generated)" id="1526560397446-3">
         <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="marketing_qrcode"/>
     </changeSet>
