@@ -130,7 +130,7 @@ public class MarketingQrcodeServiceImpl implements MarketingQrcodeService{
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         QrCodeRequestBody qrCodeRequestBody = new QrCodeRequestBody();
-        qrCodeRequestBody.setPath("pages/introduction/index?agentId=" + id);
+        qrCodeRequestBody.setPath("pages/start/start?agentId=" + id);
         qrCodeRequestBody.setWidth(430);
 
 
