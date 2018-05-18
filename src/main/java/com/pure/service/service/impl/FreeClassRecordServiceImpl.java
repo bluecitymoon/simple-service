@@ -4,10 +4,12 @@ import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
+import com.pure.service.domain.User;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
+import com.pure.service.repository.UserRepository;
 import com.pure.service.service.FreeClassRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,15 +35,18 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     private final NewOrderAssignHistoryRepository newOrderAssignHistoryRepository;
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
+    private final UserRepository userRepository;
 
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
                                       CustomerCommunicationLogRepository customerCommunicationLogRepository,
-                                      CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository) {
+                                      CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
+                                      UserRepository userRepository) {
         this.freeClassRecordRepository = freeClassRecordRepository;
         this.newOrderAssignHistoryRepository = newOrderAssignHistoryRepository;
         this.customerCommunicationLogRepository = customerCommunicationLogRepository;
         this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -56,6 +61,12 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         if (freeClassRecord.getId() == null){
             freeClassRecord.setStatus("新单");
+        }
+
+        Long agentId = freeClassRecord.getAgentId();
+        if (agentId != null) {
+            User referer = userRepository.findOne(agentId);
+            freeClassRecord.setReferer(referer);
         }
 
         boolean newOrder = false;

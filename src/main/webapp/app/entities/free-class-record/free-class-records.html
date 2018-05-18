@@ -65,7 +65,7 @@
                     <th jh-sort-by="contactPhoneNumber"><span
                             data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.freeClassRecord.createdBy">Created By</span>
+                    <th jh-sort-by="createdBy"><span>引入人</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -88,7 +88,7 @@
                     <!--<td><a ui-sref="free-class-record-detail({id:freeClassRecord.id})">{{freeClassRecord.id}}</a></td>-->
                     <td>{{freeClassRecord.personName}}</td>
                     <td>{{freeClassRecord.contactPhoneNumber}}</td>
-                    <td>{{freeClassRecord.createdBy}}</td>
+                    <td>{{freeClassRecord.referer.firstName}}</td>
                     <td>{{freeClassRecord.createdDate | date:'medium'}}</td>
                     <!--<td>{{freeClassRecord.lastModifiedBy}}</td>-->
                     <!--<td>{{freeClassRecord.lastModifiedDate | date:'medium'}}</td>-->
