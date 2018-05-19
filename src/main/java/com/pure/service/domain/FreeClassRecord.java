@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -33,7 +34,8 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "person_name")
     private String personName;
 
-    @Column(name = "contact_phone_number")
+    @Column(name = "contact_phone_number", unique = true)
+    @Size(max = 11, min = 11)
     private String contactPhoneNumber;
 
 //    @Column(name = "created_by")

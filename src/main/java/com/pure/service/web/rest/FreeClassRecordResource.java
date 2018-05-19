@@ -11,6 +11,7 @@ import com.pure.service.service.dto.FreeClassRecordCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -71,10 +73,28 @@ public class FreeClassRecordResource {
         if (freeClassRecord.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new freeClassRecord cannot already have an ID")).body(null);
         }
+
+        if (freeClassRecord.getContactPhoneNumber().length() != 11) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "badphonenumber", "手机号码错误")).body(null);
+        }
+
+        FreeClassRecordCriteria freeClassRecordCriteria = new FreeClassRecordCriteria();
+        StringFilter stringFilter = new StringFilter();
+        stringFilter.setEquals(freeClassRecord.getContactPhoneNumber());
+        freeClassRecordCriteria.setContactPhoneNumber(stringFilter);
+
+        List<FreeClassRecord> existed = freeClassRecordQueryService.findByCriteria(freeClassRecordCriteria);
+
+        if (!CollectionUtils.isEmpty(existed)) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "phonenumberexists", "手机号码已存在！")).body(null);
+        }
+
         FreeClassRecord result = freeClassRecordService.save(freeClassRecord);
+
         return ResponseEntity.created(new URI("/api/free-class-records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+
     }
 
     /**
@@ -93,6 +113,23 @@ public class FreeClassRecordResource {
         if (freeClassRecord.getId() == null) {
             return createFreeClassRecord(freeClassRecord);
         }
+
+        if (StringUtils.isEmpty(freeClassRecord.getContactPhoneNumber()) || freeClassRecord.getContactPhoneNumber().length() != 11) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "badphonenumber", "手机号码错误")).body(null);
+        }
+
+        FreeClassRecordCriteria freeClassRecordCriteria = new FreeClassRecordCriteria();
+        StringFilter stringFilter = new StringFilter();
+        stringFilter.setEquals(freeClassRecord.getContactPhoneNumber());
+        freeClassRecordCriteria.setContactPhoneNumber(stringFilter);
+
+        List<FreeClassRecord> existed = freeClassRecordQueryService.findByCriteria(freeClassRecordCriteria);
+
+        if (!CollectionUtils.isEmpty(existed) && !existed.get(0).equals(freeClassRecord)) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "phonenumberexists", "手机号码已存在！")).body(null);
+        }
+
+
         FreeClassRecord result = freeClassRecordService.save(freeClassRecord);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, freeClassRecord.getId().toString()))
@@ -104,7 +141,7 @@ public class FreeClassRecordResource {
      */
     @PutMapping("/free-class-records/batchupdate")
     @Timed
-    public ResponseEntity<List<FreeClassRecord>> batchUpdateFreeClassRecord(@RequestBody List<FreeClassRecord> freeClassRecords) throws URISyntaxException {
+    public ResponseEntity<List<FreeClassRecord>> batchUpdateFreeClassRecord(@RequestBody List<FreeClassRecord> freeClassRecords) {
         log.debug("REST request to update FreeClassRecord : {}", freeClassRecords);
         if (CollectionUtils.isEmpty(freeClassRecords)) {
             return ResponseEntity.badRequest().build();
