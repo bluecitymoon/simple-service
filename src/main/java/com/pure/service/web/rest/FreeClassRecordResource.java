@@ -172,6 +172,7 @@ public class FreeClassRecordResource {
 
             criteria.setSalesFollowerId(userIdFilter);
         }
+
         Page<FreeClassRecord> page = freeClassRecordQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/free-class-records");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

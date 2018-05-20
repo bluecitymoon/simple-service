@@ -141,7 +141,20 @@
                                     <span>渠道管理</span>
                                 </a>
                             </li>
-
+                            <li class="divider"></li>
+                            <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">微信小程序</li>
+                            <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="ad" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-tree-deciduous"></span>&nbsp;
+                                    <span>小程序广告</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="marketing-qrcode" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-qrcode"></span>&nbsp;
+                                    <span>推广专属二维码</span>
+                                </a>
+                            </li>
                             <li class="divider"></li>
                             <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">数据</li>
                             <li>
@@ -162,31 +175,20 @@
                             </li>
                         </ul>
                     </li>
-                    <li uib-dropdown class="nav-item" ng-switch-when="true">
-                        <a class="nav-link" uib-dropdown-toggle href="">
-                            <span>
-                                <span class="glyphicon glyphicon-share-alt"></span>
-                                <span class="hidden-sm">
-                                    运营部
-                                </span>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
-                            <li ui-sref-active="active">
-                                <a ui-sref="ad" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-tree-deciduous"></span>&nbsp;
-                                    <span>小程序广告</span>
-                                </a>
-                            </li>
-                            <li ui-sref-active="active">
-                                <a ui-sref="marketing-qrcode" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-qrcode"></span>&nbsp;
-                                    <span>推广专属二维码</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <!--<li uib-dropdown class="nav-item" ng-switch-when="true">-->
+                        <!--<a class="nav-link" uib-dropdown-toggle href="">-->
+                            <!--<span>-->
+                                <!--<span class="glyphicon glyphicon-share-alt"></span>-->
+                                <!--<span class="hidden-sm">-->
+                                    <!--运营部-->
+                                <!--</span>-->
+                            <!--</span>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>-->
+                            <!---->
+                        <!--</ul>-->
 
-                    </li>
+                    <!--</li>-->
                     <li uib-dropdown class="nav-item" ng-switch-when="true">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>

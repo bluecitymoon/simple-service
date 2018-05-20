@@ -2,11 +2,15 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Customer;
+import com.pure.service.domain.User;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerService;
+import com.pure.service.service.UserService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.CustomerQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -39,9 +43,12 @@ public class CustomerResource {
 
     private final CustomerQueryService customerQueryService;
 
-    public CustomerResource(CustomerService customerService, CustomerQueryService customerQueryService) {
+    private final UserService userService;
+
+    public CustomerResource(CustomerService customerService, CustomerQueryService customerQueryService, UserService userService) {
         this.customerService = customerService;
         this.customerQueryService = customerQueryService;
+        this.userService = userService;
     }
 
     /**
@@ -97,6 +104,17 @@ public class CustomerResource {
     @Timed
     public ResponseEntity<List<Customer>> getAllCustomers(CustomerCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Customers by criteria: {}", criteria);
+
+        User currentUser = userService.getUserWithAuthorities();
+        //Only Admin and Headmaster can have all the new orders
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+
+            LongFilter userIdFilter = new LongFilter();
+            userIdFilter.setEquals(currentUser.getId());
+
+            criteria.setSalesFollowerId(userIdFilter);
+        }
+
         Page<Customer> page = customerQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -134,11 +152,10 @@ public class CustomerResource {
      *
      * @param id new order id
      * @return
-     * @throws URISyntaxException
      */
     @GetMapping("/customers/connect/{id}")
     @Timed
-    public ResponseEntity<Customer> connectCustomer(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<Customer> connectCustomer(@PathVariable Long id) {
 
         log.debug("REST request to connect customer with new order id: {}", id);
         if (id == null) {

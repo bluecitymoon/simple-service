@@ -135,14 +135,18 @@ public class CustomerServiceImpl implements CustomerService{
             FreeClassRecord newOrder = freeClassRecordService.findOne(newOrderId);
 
             Customer customer = new Customer();
+            customer.setName(newOrder.getPersonName());
             customer.setContactPhoneNumber(newOrder.getContactPhoneNumber());
+            customer.setSalesFollower(newOrder.getSalesFollower());
+            customer.setChannel(newOrder.getMarketChannelCategory());
             customer.setNewOrder(newOrder);
+            customer.setBirthday(newOrder.getBirthday());
 
             Customer savedCustomer = save(customer);
 
-            CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.new_order_created.name());
+            CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.new_customer_created.name());
             CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
-            customerCommunicationLog.comments("新单记录创建成功");
+            customerCommunicationLog.comments("开始跟单");
 
             customerCommunicationLog.setLogType(newCreateOrderType);
             customerCommunicationLog.customer(savedCustomer);
