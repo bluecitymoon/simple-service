@@ -2,22 +2,22 @@
     "simpleServiceApp": {
         "marketChannelCategory" : {
             "home": {
-                "title": "Market Channel Categories",
-                "createLabel": "Create a new Market Channel Category",
-                "createOrEditLabel": "Create or edit a Market Channel Category"
+                "title": "渠道",
+                "createLabel": "录入渠道",
+                "createOrEditLabel": "管理"
             },
-            "created": "A new Market Channel Category is created with identifier {{ param }}",
-            "updated": "A Market Channel Category is updated with identifier {{ param }}",
-            "deleted": "A Market Channel Category is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Market Channel Category {{ id }}?"
+                "question": "你确定要删除这条记录？"
             },
             "detail": {
-                "title": "Market Channel Category"
+                "title": "类别"
             },
-            "name": "Name",
-            "code": "Code",
-            "description": "Description"
+            "name": "名称",
+            "code": "代码",
+            "description": "描述"
         }
     }
 }

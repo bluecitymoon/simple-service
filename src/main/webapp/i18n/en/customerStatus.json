@@ -2,24 +2,24 @@
     "simpleServiceApp": {
         "customerStatus" : {
             "home": {
-                "title": "Customer Statuses",
-                "createLabel": "Create a new Customer Status",
-                "createOrEditLabel": "Create or edit a Customer Status"
+                "title": "客户状态",
+                "createLabel": "录入客户状态",
+                "createOrEditLabel": "管理状态"
             },
-            "created": "A new Customer Status is created with identifier {{ param }}",
-            "updated": "A Customer Status is updated with identifier {{ param }}",
-            "deleted": "A Customer Status is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Customer Status {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Customer Status"
+                "title": "状态明细"
             },
-            "name": "Name",
-            "code": "Code",
-            "comments": "Comments",
-            "cssStyle": "Css Style",
-            "icon": "Icon"
+            "name": "名称",
+            "code": "代码",
+            "comments": "备注",
+            "cssStyle": "样式",
+            "icon": "图标"
         }
     }
 }

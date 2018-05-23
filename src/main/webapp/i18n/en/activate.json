@@ -1,9 +1,9 @@
 {
     "activate": {
-        "title": "Activation",
+        "title": "启用",
         "messages": {
-            "success": "<strong>Your user account has been activated.</strong> Please <a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">sign in</a>.",
-            "error": "<strong>Your user could not be activated.</strong> Please use the registration form to sign up."
+            "success": "<strong>您的账号已启用.</strong> 请 <a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">登录</a>.",
+            "error": "<strong>您的账号无法启用.</strong> 请重新注册."
         }
     }
 }

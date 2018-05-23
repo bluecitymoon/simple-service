@@ -1,26 +1,26 @@
 {
     "reset": {
         "request": {
-            "title": "Reset your password",
+            "title": "重置您的密码",
             "form": {
-                "button": "Reset password"
+                "button": "重置密码"
             },
             "messages": {
-                "info": "Enter the email address you used to register",
-                "success": "Check your emails for details on how to reset your password.",
-                "notfound": "<strong>Email address isn't registered!</strong> Please check and try again"
+                "info": "请输入您注册时使用的邮件地址",
+                "success": "已将重置密码的操作说明发送到您的邮箱，请检查邮件.",
+                "notfound": "<strong>没有与该邮件地址关联的账号.</strong> 请使用其他邮件地址"
             }
         },
         "finish" : {
-            "title": "Reset password",
+            "title": "重置密码",
             "form": {
-                "button": "Validate new password"
+                "button": "确定"
             },
             "messages": {
-                "info": "Choose a new password",
-                "success": "<strong>Your password has been reset.</strong> Please <a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">sign in</a>.",
-                "keymissing": "The reset key is missing.",
-                "error": "Your password couldn't be reset. Remember a password request is only valid for 24 hours."
+                "info": "请设置新密码",
+                "success": "<strong>您的密码已被重置.</strong> 请 <a class=\"alert-link\" href=\"\" ng-click=\"vm.login()\">登录</a>.",
+                "keymissing": "无效的重置密码请求.",
+                "error": "无法重置密码. 您必须在请求重置密码后24小时内完成重置."
             }
         }
     }

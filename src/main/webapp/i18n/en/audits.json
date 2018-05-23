@@ -1,26 +1,26 @@
 {
     "audits": {
-        "title": "Audits",
+        "title": "审核",
         "filter": {
-            "title": "Filter per date",
-            "from": "from",
-            "to": "to",
+            "title": "根据日期筛选",
+            "from": "从",
+            "to": "至",
             "button": {
-                "weeks": "Weeks",
-                "today": "today",
-                "clear": "clear",
-                "close": "close"
+                "weeks": "周",
+                "today": "今天",
+                "clear": "清除",
+                "close": "关闭"
             }
         },
         "table": {
             "header": {
-                "principal": "User",
-                "date": "Date",
-                "status": "State",
-                "data": "Extra data"
+                "principal": "用户",
+                "date": "日期",
+                "status": "状态",
+                "data": "其它"
             },
             "data": {
-                "remoteAddress": "Remote Address:"
+                "remoteAddress": "远程地址:"
             }
         }
     }

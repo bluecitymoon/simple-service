@@ -2,29 +2,29 @@
     "simpleServiceApp": {
         "customerCommunicationSchedule" : {
             "home": {
-                "title": "Customer Communication Schedules",
-                "createLabel": "Create a new Customer Communication Schedule",
-                "createOrEditLabel": "Create or edit a Customer Communication Schedule"
+                "title": "客户预约记录",
+                "createLabel": "开始新的预约计划",
+                "createOrEditLabel": "管理"
             },
-            "created": "A new Customer Communication Schedule is created with identifier {{ param }}",
-            "updated": "A Customer Communication Schedule is updated with identifier {{ param }}",
-            "deleted": "A Customer Communication Schedule is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Customer Communication Schedule {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Customer Communication Schedule"
+                "title": "客户预约计划详情"
             },
-            "sceduleDate": "Scedule Date",
-            "comments": "Comments",
-            "createdBy": "Created By",
-            "createdDate": "Created Date",
-            "lastModifiedBy": "Last Modified By",
-            "lastModifiedDate": "Last Modified Date",
-            "actuallMeetDate": "Actuall Meet Date",
-            "customer": "Customer",
-            "follower": "Follower",
-            "scheduleStatus": "Schedule Status"
+            "sceduleDate": "预约到访时间",
+            "comments": "备注",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "customer": "客户",
+            "follower": "TMK",
+            "actuallMeetDate": "实际到访时间",
+            "scheduleStatus": "状态"
         }
     }
 }

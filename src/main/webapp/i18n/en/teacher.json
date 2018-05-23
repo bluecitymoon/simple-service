@@ -2,9 +2,9 @@
     "simpleServiceApp": {
         "teacher" : {
             "home": {
-                "title": "Teachers",
-                "createLabel": "Create a new Teacher",
-                "createOrEditLabel": "Create or edit a Teacher"
+                "title": "教师",
+                "createLabel": "录入一个教师",
+                "createOrEditLabel": "录入/编辑教师信息"
             },
             "created": "A new Teacher is created with identifier {{ param }}",
             "updated": "A Teacher is updated with identifier {{ param }}",
@@ -13,12 +13,12 @@
                 "question": "Are you sure you want to delete Teacher {{ id }}?"
             },
             "detail": {
-                "title": "Teacher"
+                "title": "教室详情"
             },
-            "name": "Name",
-            "age": "Age",
-            "graduatedSchool": "Graduated School",
-            "educationLevel": "Education Level"
+            "name": "姓名",
+            "age": "年龄",
+            "graduatedSchool": "毕业学校",
+            "educationLevel": "教育程度"
         }
     }
 }

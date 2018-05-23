@@ -1,38 +1,78 @@
 {
     "simpleServiceApp": {
-        "customer" : {
+        "customerCommunicationSchedule": {
             "home": {
-                "title": "Customers",
-                "createLabel": "Create a new Customer",
-                "createOrEditLabel": "Create or edit a Customer"
+                "title": "客户预约记录",
+                "createLabel": "开始新的预约计划",
+                "createOrEditLabel": "管理"
             },
-            "created": "A new Customer is created with identifier {{ param }}",
-            "updated": "A Customer is updated with identifier {{ param }}",
-            "deleted": "A Customer is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Customer {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Customer"
+                "title": "客户预约计划详情"
             },
-            "name": "Name",
-            "age": "Age",
-            "contactPhoneNumber": "Contact Phone Number",
-            "createdBy": "Created By",
-            "createdDate": "Created Date",
-            "lastModifiedBy": "Last Modified By",
-            "lastModifiedDate": "Last Modified Date",
-            "sex": "Sex",
-            "birthday": "Birthday",
-            "address": "Address",
-            "hoby": "Hoby",
+            "sceduleDate": "预约到访时间",
+            "comments": "备注",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "customer": "客户",
+            "follower": "TMK",
+            "actuallMeetDate": "实际到访时间",
+            "scheduleStatus": "状态"
+        },
+        "customerCommunicationLog" : {
+            "created": "创建成功！",
+            "home": {
+                "title": "客户沟通记录",
+                "createLabel": "录入沟通记录",
+                "createOrEditLabel": "录入沟通记录"
+            },
+            "detail": {
+                "title": "客户沟通记录"
+            },
+            "comments": "备注",
+            "logType": "记录类型"
+        },
+        "customer" : {
+            "home": {
+                "title": "客户",
+                "createLabel": "新增客户",
+                "createOrEditLabel": "管理客户资料"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "客户详情"
+            },
+            "name": "姓名",
+            "age": "年龄",
+            "contactPhoneNumber": "联系电话",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "sex": "性别",
+            "birthday": "生日",
+            "address": "住址",
+            "hoby": "兴趣",
             "email": "Email",
-            "classLevel": "Class Level",
-            "parentName": "Parent Name",
-            "parentContractNumber": "Parent Contract Number",
-            "newOrder": "New Order",
-            "status": "Status",
-            "channel": "Channel"
+            "classLevel": "年级",
+            "parentName": "家长姓名",
+            "parentContractNumber": "家长联系方式",
+            "newOrder": "新单",
+            "status": "状态",
+            "channel": "来源渠道",
+            "salesFollower": "客户经理"
         }
     }
 }

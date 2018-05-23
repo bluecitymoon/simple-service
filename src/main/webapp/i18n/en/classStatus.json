@@ -2,21 +2,21 @@
     "simpleServiceApp": {
         "classStatus" : {
             "home": {
-                "title": "Class Statuses",
-                "createLabel": "Create a new Class Status",
-                "createOrEditLabel": "Create or edit a Class Status"
+                "title": "班级状态",
+                "createLabel": "录入一个状态",
+                "createOrEditLabel": "新建/编辑状态"
             },
-            "created": "A new Class Status is created with identifier {{ param }}",
-            "updated": "A Class Status is updated with identifier {{ param }}",
-            "deleted": "A Class Status is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Class Status {{ id }}?"
+                "question": "你确定要删除这条记录？"
             },
             "detail": {
-                "title": "Class Status"
+                "title": "状态详情"
             },
-            "name": "Name",
-            "code": "Code"
+            "name": "名称",
+            "code": "编码"
         }
     }
 }

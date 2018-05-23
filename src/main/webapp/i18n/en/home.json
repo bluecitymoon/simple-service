@@ -1,19 +1,19 @@
 {
     "home": {
-        "title": "Welcome, Java Hipster!",
-        "subtitle": "This is your homepage",
+        "title": "欢迎使用MIS系统！",
+        "subtitle": "这里是首页",
         "logged": {
-            "message": "You are logged in as user \"{{username}}\"."
+            "message": "您目前是以 \"{{username}}\" 账号登录."
         },
-        "question": "If you have any question on JHipster:",
+        "question": "如果您有任何有关 JHipster 的问题, 可以查阅下列资源:",
         "link": {
-            "homepage": "JHipster homepage",
-            "stackoverflow": "JHipster on Stack Overflow",
-            "bugtracker": "JHipster bug tracker",
+            "homepage": "JHipster 首頁",
+            "stackoverflow": "Stack Overflow 上关于 JHipster 的讨论",
+            "bugtracker": "JHipster 的缺陷追踪",
             "chat": "JHipster public chat room",
-            "follow": "follow @java_hipster on Twitter"
+            "follow": "在 Twitter 上联络 @java_hipster"
         },
-        "like": "If you like JHipster, don't forget to give us a star on",
+        "like": "如果您喜欢 JHipster, 请记得给我们加星在",
         "github": "GitHub"
     }
 }

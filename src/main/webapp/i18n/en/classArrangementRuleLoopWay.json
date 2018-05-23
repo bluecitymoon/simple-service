@@ -2,21 +2,21 @@
     "simpleServiceApp": {
         "classArrangementRuleLoopWay" : {
             "home": {
-                "title": "Class Arrangement Rule Loop Ways",
-                "createLabel": "Create a new Class Arrangement Rule Loop Way",
-                "createOrEditLabel": "Create or edit a Class Arrangement Rule Loop Way"
+                "title": "排班循环方式",
+                "createLabel": "录入",
+                "createOrEditLabel": "录入/编辑循环方式"
             },
-            "created": "A new Class Arrangement Rule Loop Way is created with identifier {{ param }}",
-            "updated": "A Class Arrangement Rule Loop Way is updated with identifier {{ param }}",
-            "deleted": "A Class Arrangement Rule Loop Way is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Class Arrangement Rule Loop Way {{ id }}?"
+                "question": "你确定要删除这条记录？"
             },
             "detail": {
-                "title": "Class Arrangement Rule Loop Way"
+                "title": "循环详情"
             },
-            "name": "Name",
-            "code": "Code"
+            "name": "名称",
+            "code": "编码"
         }
     }
 }

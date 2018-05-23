@@ -2,32 +2,54 @@
     "simpleServiceApp": {
         "product" : {
             "home": {
-                "title": "Products",
-                "createLabel": "Create a new Product",
-                "createOrEditLabel": "Create or edit a Product"
+                "title": "班级",
+                "createLabel": "开班",
+                "createOrEditLabel": "新建/编辑班级"
             },
-            "created": "A new Product is created with identifier {{ param }}",
-            "updated": "A Product is updated with identifier {{ param }}",
-            "deleted": "A Product is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Product {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Product"
+                "title": "班级"
             },
-            "name": "Name",
-            "code": "Code",
-            "minutesPerClass": "Minutes Per Class",
-            "planedStartDate": "Planed Start Date",
-            "comments": "Comments",
-            "createdBy": "Created By",
-            "createdDate": "Created Date",
-            "lastModifiedBy": "Last Modified By",
-            "lastModifiedDate": "Last Modified Date",
-            "classAgeLevel": "Class Age Level",
-            "teacher": "Teacher",
-            "classRoom": "Class Room",
-            "course": "Course"
+            "name": "名称",
+            "code": "编码",
+            "minutesPerClass": "每节课分钟数",
+            "planedStartDate": "计划开班时间",
+            "comments": "备注",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "上次修改人",
+            "lastModifiedDate": "上次修改时间",
+            "classAgeLevel": "班级类型",
+            "teacher": "教师",
+            "classRoom": "教室",
+            "course": "课程"
+        },
+        "classArrangementRule" : {
+            "home": {
+                "title": "排课规则",
+                "createLabel": "录入规则",
+                "createOrEditLabel": "新建/编辑排课规则"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条记录？"
+            },
+            "detail": {
+                "title": "排课规则"
+            },
+            "estimateStartDate": "预计开课日期",
+            "estimateStartTime": "预计开始时间",
+            "estimateEndTime": "预计结束时间",
+            "maxLoopCount": "最大循环次数",
+            "targetClass": "班级",
+            "loopWay": "循环方式"
         }
     }
 }

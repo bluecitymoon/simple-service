@@ -1,0 +1,22 @@
+{
+    "simpleServiceApp": {
+        "classArrangementRuleLoopWay" : {
+            "home": {
+                "title": "Class Arrangement Rule Loop Ways",
+                "createLabel": "Create a new Class Arrangement Rule Loop Way",
+                "createOrEditLabel": "Create or edit a Class Arrangement Rule Loop Way"
+            },
+            "created": "A new Class Arrangement Rule Loop Way is created with identifier {{ param }}",
+            "updated": "A Class Arrangement Rule Loop Way is updated with identifier {{ param }}",
+            "deleted": "A Class Arrangement Rule Loop Way is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Class Arrangement Rule Loop Way {{ id }}?"
+            },
+            "detail": {
+                "title": "Class Arrangement Rule Loop Way"
+            },
+            "name": "Name",
+            "code": "Code"
+        }
+    }
+}

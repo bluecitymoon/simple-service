@@ -1,0 +1,23 @@
+{
+    "simpleServiceApp": {
+        "marketChannelCategory" : {
+            "home": {
+                "title": "Market Channel Categories",
+                "createLabel": "Create a new Market Channel Category",
+                "createOrEditLabel": "Create or edit a Market Channel Category"
+            },
+            "created": "A new Market Channel Category is created with identifier {{ param }}",
+            "updated": "A Market Channel Category is updated with identifier {{ param }}",
+            "deleted": "A Market Channel Category is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Market Channel Category {{ id }}?"
+            },
+            "detail": {
+                "title": "Market Channel Category"
+            },
+            "name": "Name",
+            "code": "Code",
+            "description": "Description"
+        }
+    }
+}

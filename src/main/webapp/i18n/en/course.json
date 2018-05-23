@@ -2,21 +2,21 @@
     "simpleServiceApp": {
         "course" : {
             "home": {
-                "title": "Courses",
-                "createLabel": "Create a new Course",
-                "createOrEditLabel": "Create or edit a Course"
+                "title": "课程",
+                "createLabel": "录入一个课程",
+                "createOrEditLabel": "新建/编辑课程"
             },
-            "created": "A new Course is created with identifier {{ param }}",
-            "updated": "A Course is updated with identifier {{ param }}",
-            "deleted": "A Course is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Course {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Course"
+                "title": "课程详情"
             },
-            "name": "Name",
-            "code": "Code"
+            "name": "名称",
+            "code": "编码"
         }
     }
 }

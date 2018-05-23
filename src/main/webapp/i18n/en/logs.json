@@ -1,11 +1,11 @@
 {
     "logs": {
-        "title": "Logs",
-        "nbloggers": "There are {{ total }} loggers.",
-        "filter": "Filter",
+        "title": "日志",
+        "nbloggers": "共有 {{ total }} 条日志.",
+        "filter": "筛选",
         "table": {
-            "name": "Name",
-            "level": "Level"
+            "name": "名称",
+            "level": "等级"
         }
     }
 }

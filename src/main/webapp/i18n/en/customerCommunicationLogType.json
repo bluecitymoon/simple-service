@@ -2,21 +2,21 @@
     "simpleServiceApp": {
         "customerCommunicationLogType" : {
             "home": {
-                "title": "Customer Communication Log Types",
-                "createLabel": "Create a new Customer Communication Log Type",
-                "createOrEditLabel": "Create or edit a Customer Communication Log Type"
+                "title": "客户沟通记录类型",
+                "createLabel": "录入",
+                "createOrEditLabel": "管理"
             },
-            "created": "A new Customer Communication Log Type is created with identifier {{ param }}",
-            "updated": "A Customer Communication Log Type is updated with identifier {{ param }}",
-            "deleted": "A Customer Communication Log Type is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Customer Communication Log Type {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Customer Communication Log Type"
+                "title": "客户沟通记录类型"
             },
-            "name": "Name",
-            "code": "Code"
+            "name": "名称",
+            "code": "编码"
         }
     }
 }

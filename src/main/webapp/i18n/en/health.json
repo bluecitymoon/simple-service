@@ -1,27 +1,27 @@
 {
     "health": {
-        "title": "Health Checks",
-        "refresh.button": "Refresh",
-        "stacktrace": "Stacktrace",
+        "title": "服务状态",
+        "refresh.button": "刷新",
+        "stacktrace": "堆栈调用",
         "details": {
-            "details": "Details",
-            "properties": "Properties",
-            "name": "Name",
-            "value": "Value",
-            "error": "Error"
+            "details": "详细情况",
+            "properties": "属性",
+            "name": "名称",
+            "value": "值",
+            "error": "错误"
         },
         "indicator": {
-            "diskSpace": "Disk space",
-            "mail": "Email",
-            "db": "Database"
+            "diskSpace": "硬盘空间",
+            "mail": "电子邮件",
+            "db": "数据库"
         },
         "table": {
-            "service": "Service name",
-            "status": "Status"
+            "service": "服务名称",
+            "status": "状态"
         },
         "status": {
-            "UP": "UP",
-            "DOWN": "DOWN"
+            "UP": "正常",
+            "DOWN": "异常"
         }
     }
 }
