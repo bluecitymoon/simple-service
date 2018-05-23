@@ -1,0 +1,88 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.marketingNewOrderPlan.home.title"></h1>
+
+</div>
+<div class="panel">
+    <div class="panel-body">
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="marketing-new-order-plan.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.marketingNewOrderPlan.home.createLabel">
+                        Create new Marketing New Order Plan
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="year"><span data-translate="simpleServiceApp.marketingNewOrderPlan.year">Year</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="month"><span data-translate="simpleServiceApp.marketingNewOrderPlan.month">Month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span data-translate="simpleServiceApp.marketingNewOrderPlan.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="targetNumber"><span data-translate="simpleServiceApp.marketingNewOrderPlan.targetNumber">Target Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="currentNumber"><span data-translate="simpleServiceApp.marketingNewOrderPlan.currentNumber">Current Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="percentage"><span data-translate="simpleServiceApp.marketingNewOrderPlan.percentage">Percentage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="finished"><span data-translate="simpleServiceApp.marketingNewOrderPlan.finished">Finished</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.marketingNewOrderPlan.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.marketingNewOrderPlan.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.marketingNewOrderPlan.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.marketingNewOrderPlan.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="marketingNewOrderPlan in vm.marketingNewOrderPlans track by marketingNewOrderPlan.id">
+                    <td><a ui-sref="marketing-new-order-plan-detail({id:marketingNewOrderPlan.id})">{{marketingNewOrderPlan.id}}</a></td>
+                    <td>{{marketingNewOrderPlan.year}}</td>
+                    <td>{{marketingNewOrderPlan.month}}</td>
+                    <td>
+                        {{marketingNewOrderPlan.user.firstName}}
+                    </td>
+                    <td>{{marketingNewOrderPlan.targetNumber}}</td>
+                    <td>{{marketingNewOrderPlan.currentNumber}}</td>
+                    <td>{{marketingNewOrderPlan.percentage}}%</td>
+                    <td>{{marketingNewOrderPlan.finished}}</td>
+                    <td>{{marketingNewOrderPlan.createdBy}}</td>
+                    <td>{{marketingNewOrderPlan.createdDate | date:'medium'}}</td>
+                    <!--<td>{{marketingNewOrderPlan.lastModifiedBy}}</td>-->
+                    <!--<td>{{marketingNewOrderPlan.lastModifiedDate | date:'medium'}}</td>-->
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="marketing-new-order-plan-detail({id:marketingNewOrderPlan.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                            <!--</button>-->
+                            <button type="submit"
+                                    ui-sref="marketing-new-order-plan.edit({id:marketingNewOrderPlan.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="marketing-new-order-plan.delete({id:marketingNewOrderPlan.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

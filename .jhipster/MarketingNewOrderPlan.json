@@ -1,0 +1,61 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "marketingNewOrderPlan"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "year",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "month",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "targetNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "currentNumber",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "finished",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "percentage",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20180523115501",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "marketing_new_order_plan",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

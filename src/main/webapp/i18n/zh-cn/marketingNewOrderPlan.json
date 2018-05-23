@@ -1,0 +1,31 @@
+{
+    "simpleServiceApp": {
+        "marketingNewOrderPlan" : {
+            "home": {
+                "title": "新单业绩目标",
+                "createLabel": "制定目标",
+                "createOrEditLabel": "制定/修改业绩目标"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条记录？"
+            },
+            "detail": {
+                "title": "新单业绩目标"
+            },
+            "year": "年",
+            "month": "月",
+            "targetNumber": "目标新单数",
+            "currentNumber": "当前数量",
+            "finished": "是否已完成",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改日期",
+            "percentage": "比例",
+            "user": "计划执行人"
+        }
+    }
+}

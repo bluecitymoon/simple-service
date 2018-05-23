@@ -32,6 +32,7 @@
                 "asset": "Asset",
                 "ad": "Ad",
                 "marketingQrcode": "Marketing Qrcode",
+                "marketingNewOrderPlan": "Marketing New Order Plan",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
