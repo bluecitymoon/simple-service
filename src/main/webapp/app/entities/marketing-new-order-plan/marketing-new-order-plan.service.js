@@ -11,6 +11,11 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'generate': {
+                url: 'api/marketing-new-order-plans/refresh/:year/:month',
+                method: 'GET',
+                isArray: true
+            },
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

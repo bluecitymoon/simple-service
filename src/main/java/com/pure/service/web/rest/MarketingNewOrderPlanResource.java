@@ -2,13 +2,15 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.MarketingNewOrderPlan;
+import com.pure.service.service.MarketingNewOrderPlanQueryService;
 import com.pure.service.service.MarketingNewOrderPlanService;
+import com.pure.service.service.dto.MarketingNewOrderPlanCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
-import com.pure.service.service.dto.MarketingNewOrderPlanCriteria;
-import com.pure.service.service.MarketingNewOrderPlanQueryService;
-import io.swagger.annotations.ApiParam;
+import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -16,11 +18,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -59,10 +68,27 @@ public class MarketingNewOrderPlanResource {
 
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new marketingNewOrderPlan cannot already have an ID")).body(null);
         } else {
-            marketingNewOrderPlan = marketingNewOrderPlan
-                                    .finished(false)
-                                    .currentNumber(0)
-                                    .percentage(0f);
+            marketingNewOrderPlan = marketingNewOrderPlan.finished(false).currentNumber(0).percentage(0f);
+        }
+
+        MarketingNewOrderPlanCriteria criteria = new MarketingNewOrderPlanCriteria();
+
+        StringFilter yearFilter = new StringFilter();
+        yearFilter.setEquals(marketingNewOrderPlan.getYear());
+
+        StringFilter monthFilter = new StringFilter();
+        monthFilter.setEquals(marketingNewOrderPlan.getMonth());
+
+        LongFilter agentIdFilter = new LongFilter();
+        agentIdFilter.setEquals(marketingNewOrderPlan.getUser().getId());
+        criteria.setYear(yearFilter);
+        criteria.setMonth(monthFilter);
+        criteria.setUserId(agentIdFilter);
+
+        List<MarketingNewOrderPlan> existedPlan = marketingNewOrderPlanQueryService.findByCriteria(criteria);
+
+        if (!CollectionUtils.isEmpty(existedPlan)) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "planexists", "")).body(null);
         }
 
         MarketingNewOrderPlan result = marketingNewOrderPlanService.save(marketingNewOrderPlan);
@@ -107,6 +133,15 @@ public class MarketingNewOrderPlanResource {
         Page<MarketingNewOrderPlan> page = marketingNewOrderPlanQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/marketing-new-order-plans");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/marketing-new-order-plans/refresh")
+    @Timed
+    public ResponseEntity<List<MarketingNewOrderPlan>> refresh(MarketingNewOrderPlanCriteria criteria) {
+        log.debug("REST request to get refresh report by criteria: {}", criteria);
+        List<MarketingNewOrderPlan> marketingNewOrderPlans = marketingNewOrderPlanQueryService.findByCriteria(criteria);
+
+        return new ResponseEntity<>(marketingNewOrderPlanService.generateReport(marketingNewOrderPlans), HttpStatus.OK);
     }
 
     /**

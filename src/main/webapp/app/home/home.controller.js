@@ -5,34 +5,19 @@
         .module('simpleServiceApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', '$interval', '$timeout'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', '$interval', '$timeout', 'MarketingNewOrderPlan'];
 
-    function HomeController ($scope, Principal, LoginService, $state, $interval, $timeout) {
+    function HomeController ($scope, Principal, LoginService, $state, $interval, $timeout, MarketingNewOrderPlan) {
         var vm = this;
 
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
         vm.register = register;
+
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
-
-        getAccount();
-
-        function getAccount() {
-            Principal.identity().then(function(account) {
-                vm.account = account;
-                vm.isAuthenticated = Principal.isAuthenticated;
-            });
-        }
-        function register () {
-            $state.go('register');
-        }
-
-        function onClick(params){
-            console.log(params);
-        };
 
         $scope.lineConfig = {
             theme:'shine',
@@ -66,35 +51,86 @@
             },
             xAxis: {
                 type: 'category',
-                data: ['Jerry','Ada','Shelly','Mini','Tina','James']
+                data: []
             },
             series: [
                 {
                     name: '实际数量',
                     type: 'bar',
-                    data: [18203, 23489, 29034, 104970, 131744, 30230]
+                    data: []
                 },
                 {
                     name: '目标数量',
                     type: 'bar',
-                    data: [19325, 23438, 31000, 121594, 134141, 81807]
+                    data: []
                 }
             ]
         };
+        
+        function reloadChart(plans) {
+
+            $scope.lineOption.xAxis.data = [];
+            $scope.lineOption.series[0].data = [];
+            $scope.lineOption.series[1].data = [];
+
+            angular.forEach(plans, function (i) {
+                $scope.lineOption.xAxis.data.push(i.user.firstName);
+                $scope.lineOption.series[0].data.push(i.currentNumber);
+                $scope.lineOption.series[1].data.push(i.targetNumber);
+                console.log(i);
+            });
+        }
+        function loadPwiReport() {
+
+            var currentTime = new Date();
+            var parameters = {
+                page: 0,
+                size: 100,
+                'year.equals': currentTime.getFullYear(),
+                'month.equals': currentTime.getMonth() + 1
+            };
+            MarketingNewOrderPlan.query(parameters, function (response) {
+
+                reloadChart(response);
+
+            }, function (error) {
+                console.log(error);
+
+            });
+        }
+
+        loadPwiReport();
+
+        getAccount();
+
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.account = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+            });
+        }
+        function register () {
+            $state.go('register');
+        }
+
+        function onClick(params){
+            console.log(params);
+        };
 
         vm.regenerateReport = function () {
-            $scope.lineOption.series = [
-                {
-                    name: '实际数量',
-                    type: 'bar',
-                    data: [28203, 23489, 29034, 104970, 131744, 10230]
-                },
-                {
-                    name: '目标数量',
-                    type: 'bar',
-                    data: [19325, 23438, 31000, 121594, 134141, 81807]
-                }
-            ];
+
+            var currentTime = new Date();
+            var parameters = {
+                'year.equals': currentTime.getFullYear(),
+                'month.equals': currentTime.getMonth() + 1
+            };
+
+            MarketingNewOrderPlan.generate(parameters, function (response) {
+                reloadChart(response);
+            }, function (error) {
+                console.log(error);
+
+            });
         };
 
     }

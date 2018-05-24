@@ -1,9 +1,13 @@
 package com.pure.service.service;
 
 
-import java.time.ZonedDateTime;
-import java.util.List;
-
+import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.FreeClassRecord_;
+import com.pure.service.domain.MarketChannelCategory_;
+import com.pure.service.domain.User_;
+import com.pure.service.repository.FreeClassRecordRepository;
+import com.pure.service.service.dto.FreeClassRecordCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,12 +16,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.FreeClassRecord;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.FreeClassRecordRepository;
-import com.pure.service.service.dto.FreeClassRecordCriteria;
+import java.util.List;
 
 
 /**
@@ -102,6 +101,9 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             }
             if (criteria.getSalesFollowerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSalesFollowerId(), FreeClassRecord_.salesFollower, User_.id));
+            }
+            if (criteria.getAgentId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getAgentId(), FreeClassRecord_.referer, User_.id));
             }
         }
         return specification;

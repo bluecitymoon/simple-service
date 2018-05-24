@@ -42,6 +42,8 @@ public class FreeClassRecordCriteria implements Serializable {
 
     private LongFilter salesFollowerId;
 
+    private LongFilter agentId;
+
     public FreeClassRecordCriteria() {
     }
 
@@ -131,6 +133,14 @@ public class FreeClassRecordCriteria implements Serializable {
 
     public void setSalesFollowerId(LongFilter salesFollowerId) {
         this.salesFollowerId = salesFollowerId;
+    }
+
+    public LongFilter getAgentId() {
+        return agentId;
+    }
+
+    public void setAgentId(LongFilter agentId) {
+        this.agentId = agentId;
     }
 
     @Override

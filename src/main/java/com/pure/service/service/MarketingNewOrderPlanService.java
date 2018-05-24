@@ -4,6 +4,8 @@ import com.pure.service.domain.MarketingNewOrderPlan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing MarketingNewOrderPlan.
  */
@@ -16,6 +18,8 @@ public interface MarketingNewOrderPlanService {
      * @return the persisted entity
      */
     MarketingNewOrderPlan save(MarketingNewOrderPlan marketingNewOrderPlan);
+
+    List<MarketingNewOrderPlan> generateReport(List<MarketingNewOrderPlan> marketingNewOrderPlans);
 
     /**
      *  Get all the marketingNewOrderPlans.
