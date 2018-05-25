@@ -5129,6 +5129,10 @@ ng-dependencies@~0.2.0:
     estraverse "^1.5.1"
     lodash "^3.0.1"
 
+ng-echarts@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ng-echarts/-/ng-echarts-3.0.1.tgz#721a6d8c4f0f59dc65ab3637800f14d16600b20b"
+
 no-case@^2.2.0, no-case@^2.3.2:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"

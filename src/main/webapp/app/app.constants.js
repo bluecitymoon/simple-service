@@ -5,6 +5,6 @@
         .module('simpleServiceApp')
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', false)
-        .constant('BUILD_TIMESTAMP', 1526609351678)
+        .constant('BUILD_TIMESTAMP', 1527228106783)
 ;
 })();
