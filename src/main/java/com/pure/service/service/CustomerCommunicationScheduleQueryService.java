@@ -1,8 +1,14 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.domain.CustomerCommunicationSchedule_;
+import com.pure.service.domain.CustomerScheduleStatus_;
+import com.pure.service.domain.Customer_;
+import com.pure.service.domain.User_;
+import com.pure.service.repository.CustomerCommunicationScheduleRepository;
+import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +17,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.CustomerCommunicationSchedule;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.CustomerCommunicationScheduleRepository;
-import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
+import java.util.List;
 
 
 /**
@@ -40,6 +41,7 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
 
     /**
      * Return a {@link List} of {%link CustomerCommunicationSchedule} which matches the criteria from the database
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
      * @return the matching entities.
      */
@@ -52,8 +54,9 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
 
     /**
      * Return a {@link Page} of {%link CustomerCommunicationSchedule} which matches the criteria from the database
+     *
      * @param criteria The object which holds all the filters, which the entities should match.
-     * @param page The page, which should be returned.
+     * @param page     The page, which should be returned.
      * @return the matching entities.
      */
     @Transactional(readOnly = true)
@@ -95,6 +98,12 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             }
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerId(), CustomerCommunicationSchedule_.customer, Customer_.id));
+            }
+            if (criteria.getCustomerName() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerName(), CustomerCommunicationSchedule_.customer, Customer_.name));
+            }
+            if (criteria.getContactPhoneNumber() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getContactPhoneNumber(), CustomerCommunicationSchedule_.customer, Customer_.contactPhoneNumber));
             }
             if (criteria.getFollowerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getFollowerId(), CustomerCommunicationSchedule_.follower, User_.id));

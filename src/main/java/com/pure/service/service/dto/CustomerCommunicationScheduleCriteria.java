@@ -1,15 +1,11 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-import io.github.jhipster.service.filter.InstantFilter;
+import java.io.Serializable;
 
 
 
@@ -47,6 +43,9 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private LongFilter followerId;
 
     private LongFilter scheduleStatusId;
+
+    private StringFilter customerName;
+    private StringFilter contactPhoneNumber;
 
     public CustomerCommunicationScheduleCriteria() {
     }
@@ -137,6 +136,22 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
 
     public void setScheduleStatusId(LongFilter scheduleStatusId) {
         this.scheduleStatusId = scheduleStatusId;
+    }
+
+    public StringFilter getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(StringFilter customerName) {
+        this.customerName = customerName;
+    }
+
+    public StringFilter getContactPhoneNumber() {
+        return contactPhoneNumber;
+    }
+
+    public void setContactPhoneNumber(StringFilter contactPhoneNumber) {
+        this.contactPhoneNumber = contactPhoneNumber;
     }
 
     @Override

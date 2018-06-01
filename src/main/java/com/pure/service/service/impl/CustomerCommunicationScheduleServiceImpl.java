@@ -56,7 +56,10 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         }
 
         CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
-        customerCommunicationLog.comments("预约了客户在 <b>" + savedSchedule.getSceduleDate().toString() + "</b> 沟通。");
+        if (savedSchedule.getSceduleDate() != null) {
+            customerCommunicationLog.comments("预约了客户在 <b>" + savedSchedule.getSceduleDate().toString() + "</b> 沟通。");
+
+        }
 
         customerCommunicationLog.setLogType(newCreateOrderType);
         customerCommunicationLog.customer(savedSchedule.getCustomer());

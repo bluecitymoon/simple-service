@@ -45,6 +45,14 @@
                 param["sceduleDate.lessOrEqualThan"] = vm.searchCondition.endDate;
 
             }
+            if (vm.searchCondition.customerName) {
+                param["customerName.equals"] = vm.searchCondition.customerName;
+
+            }
+            if (vm.searchCondition.contactPhoneNumber) {
+                param["contactPhoneNumber.equals"] = vm.searchCondition.contactPhoneNumber;
+
+            }
             CustomerCommunicationSchedule.query(param, onSuccess, onError);
 
             function onSuccess(data, headers) {
