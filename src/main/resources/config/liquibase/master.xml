@@ -45,6 +45,7 @@
     <include file="config/liquibase/changelog/20180512064231_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180517123307_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180519070137_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180531061634_changelog.xml" relativeToChangelogFile="false"/>
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180502065136_added_entity_constraints_CustomerCommunicationSchedule.xml" relativeToChangelogFile="false"/>
