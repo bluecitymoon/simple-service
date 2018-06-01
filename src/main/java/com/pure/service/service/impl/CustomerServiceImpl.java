@@ -16,6 +16,7 @@ import com.pure.service.service.dto.CustomerCriteria;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,20 +36,21 @@ public class CustomerServiceImpl implements CustomerService{
     private final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
     private final CustomerRepository customerRepository;
-    private final FreeClassRecordService freeClassRecordService;
+
+    @Autowired
+    private FreeClassRecordService freeClassRecordService;
+
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
     private final CustomerCommunicationLogQueryService customerCommunicationLogQueryService;
 
     public CustomerServiceImpl(CustomerRepository customerRepository,
-                               FreeClassRecordService freeClassRecordService,
                                CustomerQueryService customerQueryService,
                                CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
                                CustomerCommunicationLogRepository customerCommunicationLogRepository,
                                CustomerCommunicationLogQueryService customerCommunicationLogQueryService){
         this.customerRepository = customerRepository;
-        this.freeClassRecordService = freeClassRecordService;
         this.customerQueryService = customerQueryService;
         this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
         this.customerCommunicationLogRepository = customerCommunicationLogRepository;

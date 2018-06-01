@@ -1,7 +1,9 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.User;
@@ -10,9 +12,12 @@ import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
 import com.pure.service.repository.UserRepository;
+import com.pure.service.service.CustomerCommunicationScheduleService;
+import com.pure.service.service.CustomerService;
 import com.pure.service.service.FreeClassRecordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -36,17 +41,23 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
     private final UserRepository userRepository;
+    private final CustomerCommunicationScheduleService scheduleService;
+
+    @Autowired
+    private CustomerService customerService;
 
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
                                       CustomerCommunicationLogRepository customerCommunicationLogRepository,
                                       CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
-                                      UserRepository userRepository) {
+                                      UserRepository userRepository,
+                                      CustomerCommunicationScheduleService scheduleService) {
         this.freeClassRecordRepository = freeClassRecordRepository;
         this.newOrderAssignHistoryRepository = newOrderAssignHistoryRepository;
         this.customerCommunicationLogRepository = customerCommunicationLogRepository;
         this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
         this.userRepository = userRepository;
+        this.scheduleService = scheduleService;
     }
 
     /**
@@ -102,14 +113,13 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         FreeClassRecord saved = freeClassRecordRepository.saveAndFlush(freeClassRecord);
 
-        //TODO fixing duplicate log issue
         log.debug("Saved new order {} " + saved );
         //Save log for new order created.
         if (newOrder) {
 
             CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.new_order_created.name());
             CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
-            customerCommunicationLog.comments("新单记录创建成功");
+            customerCommunicationLog.comments("回单记录创建成功");
 
             customerCommunicationLog.setLogType(newCreateOrderType);
             customerCommunicationLog.freeClassRecord(saved);
@@ -117,6 +127,20 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
             CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
 
             log.debug("Saved customer log for the new order created {}", savedLog);
+
+            //save the default customer for new order.
+            Customer newCustomer = customerService.importCustomerFromNewOrder(saved.getId());
+
+            log.debug("Default customer saved for the new order, customer is {} ", newCustomer);
+            //create default schedule for the new customer so that the recipient could check.
+            CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
+
+            schedule.setCustomer(newCustomer);
+            schedule.setFollower(newCustomer.getSalesFollower());
+
+            log.debug("Default schedule saved for the new order, schedule is {} ", schedule);
+
+            scheduleService.save(schedule);
 
         }
 
