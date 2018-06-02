@@ -2,24 +2,18 @@
 
     <div class="panel-heading pad-all">
 
+
+        <button type="submit"
+                ui-sref="customer"
+                class="btn btn-default bord-all">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>返回客户列表</span>
+        </button>
         <div class="panel-control">
 
             <button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
                 <span class="glyphicon glyphicon-pencil"></span>
                 <span class="hidden-sm-down">修改客户资料</span>
             </button>
-
-
-
-            <!---->
-            <!--<div class="input-group-wrap">-->
-            <!--<div class="input-group">-->
-            <!--<input type="text" placeholder="Search" class="form-control">-->
-            <!--<span class="input-group-btn">-->
-            <!--<button class="btn btn-primary" type="button">Search</button>-->
-            <!--</span>-->
-            <!--</div>-->
-            <!--</div>-->
         </div>
         <!--<h3><span data-translate="simpleServiceApp.customer.detail.title">Customer</span></h3>-->
     </div>
@@ -235,12 +229,6 @@
                 </div>
             </div>
 
-            <button type="submit"
-                    ui-sref="customer"
-                    class="btn btn-info">
-                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
-                    data-translate="entity.action.back"> Back</span>
-            </button>
 
         </div>
     </form>
