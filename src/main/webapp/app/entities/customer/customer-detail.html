@@ -30,13 +30,13 @@
             <div class="timeline-header">
                 <div class="timeline-header-title bg-info">沟通记录</div>
                 <button ui-sref="customer-detail.new-log({cid: vm.customer.id})" style="margin-left: 1em"
-                        class="btn btn-mint"><i class="glyphicon glyphicon-plus-sign"></i></button>
+                        class="btn btn-mint"><i class="glyphicon glyphicon-plus-sign"></i>录入沟通记录</button>
             </div>
             <div class="timeline-entry" ng-repeat="log in vm.logs track by log.id">
 
                 <div class="timeline-stat">
                     <div class="timeline-icon"></div>
-                    <div class="timeline-time"><b>{{log.createdDate | date: 'medium'}}</b></div>
+                    <div class="timeline-time"><b>{{log.createdDate | date: 'yyyy-MM-dd hh:mm'}}</b></div>
                 </div>
                 <div class="timeline-label">
                     <p class="mar-no pad-btm"><a href="#" class="btn-link text-semibold">{{log.createdBy}}</a> <b>{{log.logType.name}}</b>

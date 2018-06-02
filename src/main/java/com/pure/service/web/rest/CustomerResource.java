@@ -2,10 +2,14 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Customer;
+import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.User;
 import com.pure.service.security.SecurityUtils;
+import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.UserService;
+import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
+import com.pure.service.service.dto.CustomerFollowLog;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CustomerCriteria;
@@ -15,16 +19,20 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,13 +50,15 @@ public class CustomerResource {
     private final CustomerService customerService;
 
     private final CustomerQueryService customerQueryService;
+    private final CustomerCommunicationLogQueryService logQueryService;
 
     private final UserService userService;
 
-    public CustomerResource(CustomerService customerService, CustomerQueryService customerQueryService, UserService userService) {
+    public CustomerResource(CustomerService customerService, CustomerQueryService customerQueryService, UserService userService,CustomerCommunicationLogQueryService logQueryService) {
         this.customerService = customerService;
         this.customerQueryService = customerQueryService;
         this.userService = userService;
+        this.logQueryService = logQueryService;
     }
 
     /**
@@ -118,6 +128,64 @@ public class CustomerResource {
         Page<Customer> page = customerQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * GET  /customers : get all the customers.
+     *
+     * @param pageable the pagination information
+     * @param criteria the criterias which the requested entities should match
+     * @return the ResponseEntity with status 200 (OK) and the list of customers in body
+     */
+    @GetMapping("/customers/withlog")
+    @Timed
+    public ResponseEntity<List<CustomerFollowLog>> getAllCustomersWithFollowLog(CustomerCriteria criteria, @ApiParam Pageable pageable) {
+        log.debug("REST request to get Customers with log by criteria: {}", criteria);
+
+        User currentUser = userService.getUserWithAuthorities();
+        //Only Admin and Headmaster can have all the new orders
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+
+            LongFilter userIdFilter = new LongFilter();
+            userIdFilter.setEquals(currentUser.getId());
+
+            criteria.setSalesFollowerId(userIdFilter);
+        }
+
+        List<CustomerFollowLog> customerFollowLogs = new ArrayList<>();
+
+        Page<Customer> customers = customerQueryService.findByCriteria(criteria, pageable);
+        for (Customer customer : customers) {
+
+            CustomerFollowLog customerFollowLog = new CustomerFollowLog();
+
+            BeanUtils.copyProperties(customer, customerFollowLog);
+
+            CustomerCommunicationLogCriteria logCriteria = new CustomerCommunicationLogCriteria();
+
+            LongFilter customerIdFilter = new LongFilter();
+            customerIdFilter.setEquals(customer.getId());
+
+            logCriteria.setCustomerId(customerIdFilter);
+            List<CustomerCommunicationLog> logs = logQueryService.findByCriteria(logCriteria);
+
+            if (CollectionUtils.isEmpty(logs)) {
+                customerFollowLog.setFollowCount(0);
+            } else {
+
+                CustomerCommunicationLog lastLog = logs.get(logs.size() - 1);
+                customerFollowLog.setLastFollowComments(lastLog.getComments());
+                customerFollowLog.setFollowCount(logs.size());
+                customerFollowLog.setLastFollowTime(lastLog.getCreatedDate());
+                customerFollowLog.setLogType(lastLog.getLogType());
+            }
+            customerFollowLogs.add(customerFollowLog);
+        }
+
+        Page<CustomerFollowLog> logPage = new PageImpl<>(customerFollowLogs, pageable, customers.getTotalElements());
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(logPage, "/api/customers");
+        return new ResponseEntity<>(customerFollowLogs, headers, HttpStatus.OK);
     }
 
     /**

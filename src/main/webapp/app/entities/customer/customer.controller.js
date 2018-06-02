@@ -16,15 +16,28 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.searchCondition = {};
+        vm.clearConditions = function () {
+            vm.searchCondition = {};
+        };
 
-        loadAll();
-
-        function loadAll () {
-            Customer.query({
+        vm.loadAll = function() {
+            var parameters = {
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
-            }, onSuccess, onError);
+            };
+
+            if (vm.searchCondition.name) {
+                parameters["name.contains"] = vm.searchCondition.name;
+            }
+
+            if (vm.searchCondition.contactPhoneNumber) {
+                parameters["contactPhoneNumber.contains"] = vm.searchCondition.contactPhoneNumber;
+            }
+
+            Customer.queryWithLog(parameters, onSuccess, onError);
+
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -42,7 +55,8 @@
             function onError(error) {
                 AlertService.error(error.data.message);
             }
-        }
+        };
+        vm.loadAll();
 
         function loadPage(page) {
             vm.page = page;

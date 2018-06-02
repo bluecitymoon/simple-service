@@ -1,24 +1,52 @@
 <div class="page-header">
-    <h1 class="page-title" data-translate="simpleServiceApp.customer.home.title">Customers</h1>
+    <h1 class="page-title">客户列表</h1>
 </div>
 
 <div class="panel">
+        <form class="form-horizontal">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">客户姓名</label>
+                            <div class="col-sm-7">
+                                <input type="text" ng-model="vm.searchCondition.name" placeholder="客户姓名" class="form-control input-sm">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="col-sm-5 control-label">联系电话</label>
+                            <div class="col-sm-7">
+                                <input type="text" ng-model="vm.searchCondition.contactPhoneNumber" placeholder="联系电话" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3"></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary" type="button" ng-click="vm.loadAll()"><i class="fa fa-search-minus"></i>查询</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+<div class="panel">
     <div class="panel-body">
     <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="no-padding-left">
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="no-padding-left">-->
 
-                <button class="btn btn-primary" ui-sref="customer.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.customer.home.createLabel">
-                        Create new Customer
-                    </span>
-                </button>
+                <!--<button class="btn btn-primary" ui-sref="customer.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.customer.home.createLabel">-->
+                        <!--Create new Customer-->
+                    <!--</span>-->
+                <!--</button>-->
 
-            </div>
-        </div>
-    </div>
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
@@ -32,7 +60,12 @@
                     <th jh-sort-by="age"><span data-translate="simpleServiceApp.customer.age">Age</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contactPhoneNumber"><span data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="salesFollower.id"><span data-translate="simpleServiceApp.customer.salesFollower">Sales</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th>来访性质</th>
+                    <th>年级</th>
+                    <th>录入时间</th>
+                    <th>跟踪记录次数</th>
+                    <th>最后一次跟踪时间</th>
+                    <th>最后一次跟踪备注</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +79,12 @@
                     <td>{{customer.age}}</td>
                     <td>{{customer.contactPhoneNumber}}</td>
                     <td>{{customer.salesFollower.firstName}}</td>
+                    <td>{{customer.logType.name}}</td>
+                    <td>{{customer.classLevel}}</td>
+                    <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customer.followCount}}</td>
+                    <td>{{customer.lastFollowTime | date :'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customer.lastFollowComments}}</td>
                     <!--<td>-->
                         <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
                     <!--</td>-->
@@ -59,22 +98,22 @@
                             </button>
                             <button type="submit"
                                     ui-sref="customer.schedule({id:customer.id})"
-                                    class="btn btn-warning btn-sm">
-                                <span class="glyphicon glyphicon-phone-alt"></span>
-                                <span class="hidden-sm-down">预约</span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="customer.edit({id:customer.id})"
                                     class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                                <span class="glyphicon glyphicon-phone-alt"></span>
+                                <span class="hidden-sm-down">邀约</span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="customer.delete({id:customer.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                            </button>
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="customer.edit({id:customer.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="customer.delete({id:customer.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
                         </div>
                     </td>
                 </tr>
