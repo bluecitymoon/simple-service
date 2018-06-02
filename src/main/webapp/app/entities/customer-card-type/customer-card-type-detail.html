@@ -1,0 +1,32 @@
+
+<div class="page-header">
+    <h1 class="page-title">卡类型详情</h1>
+</div>
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.customerCardType.detail.title">Customer Card Type</span> {{vm.customerCardType.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerCardType.name">Name</span></dt>
+        <dd>
+            <span>{{vm.customerCardType.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardType.code">Code</span></dt>
+        <dd>
+            <span>{{vm.customerCardType.code}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-card-type-detail.edit({id:vm.customerCardType.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

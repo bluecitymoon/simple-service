@@ -1,0 +1,75 @@
+<div class="page-header">
+    <h1 class="page-title">卡详情</h1>
+</div>
+<div class="panel">
+    <div class="panel-body">
+    <h2><span data-translate="simpleServiceApp.customerCard.detail.title">Customer Card</span> {{vm.customerCard.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerCard.number">Number</span></dt>
+        <dd>
+            <span>{{vm.customerCard.number}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.serialNumber">Serial Number</span></dt>
+        <dd>
+            <span>{{vm.customerCard.serialNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.signDate">Sign Date</span></dt>
+        <dd>
+            <span>{{vm.customerCard.signDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.customerCard.startDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.customerCard.endDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.moneyCollected">Money Collected</span></dt>
+        <dd>
+            <span>{{vm.customerCard.moneyCollected}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.balance">Balance</span></dt>
+        <dd>
+            <span>{{vm.customerCard.balance}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.customerCard.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.customerCard.createdDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.customerCard.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.customerCard.lastModifiedDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.customer">Customer</span></dt>
+        <dd>
+            <a ui-sref="customer-detail({id:vm.customerCard.customer.id})">{{vm.customerCard.customer.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.customerCardType">Customer Card Type</span></dt>
+        <dd>
+            <a ui-sref="customer-card-type-detail({id:vm.customerCard.customerCardType.id})">{{vm.customerCard.customerCardType.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-card-detail.edit({id:vm.customerCard.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

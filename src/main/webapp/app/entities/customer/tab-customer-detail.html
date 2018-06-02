@@ -3,16 +3,17 @@
     <div class="panel-heading pad-all">
 
 
-        <button type="submit"
-                ui-sref="customer"
-                class="btn btn-default bord-all">
-            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>返回客户列表</span>
-        </button>
+
         <div class="panel-control">
 
             <button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
                 <span class="glyphicon glyphicon-pencil"></span>
-                <span class="hidden-sm-down">修改客户资料</span>
+                <span class="hidden-sm-down">修改履历</span>
+            </button>
+            <button type="submit"
+                    ui-sref="customer"
+                    class="btn btn-default bord-all">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span>返回</span>
             </button>
         </div>
         <!--<h3><span data-translate="simpleServiceApp.customer.detail.title">Customer</span></h3>-->

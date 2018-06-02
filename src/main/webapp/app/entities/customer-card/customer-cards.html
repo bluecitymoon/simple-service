@@ -1,0 +1,95 @@
+
+<div class="page-header">
+    <h1 class="page-title">卡列表</h1>
+</div>
+<div class="panel">
+    <div class="panel-body">
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <!--<button class="btn btn-primary" ui-sref="customer-card.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.customerCard.home.createLabel">-->
+                        <!--Create new Customer Card-->
+                    <!--</span>-->
+                <!--</button>-->
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="number"><span data-translate="simpleServiceApp.customerCard.number">Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.customerCard.serialNumber">Serial Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span data-translate="simpleServiceApp.customerCard.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerCardType.name"><span data-translate="simpleServiceApp.customerCard.customerCardType">Customer Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="signDate"><span data-translate="simpleServiceApp.customerCard.signDate">Sign Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span data-translate="simpleServiceApp.customerCard.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.customerCard.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.customerCard.moneyCollected">Money Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="balance"><span data-translate="simpleServiceApp.customerCard.balance">Balance</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerCard.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerCard.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerCard.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerCard.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                   <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerCard in vm.customerCards track by customerCard.id">
+                    <td><a ui-sref="customer-card-detail({id:customerCard.id})">{{customerCard.id}}</a></td>
+                    <td>{{customerCard.number}}</td>
+                    <td>{{customerCard.serialNumber}}</td>
+                    <td>
+                        <a ui-sref="customer-detail({id:customerCard.customer.id})">{{customerCard.customer.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="customer-card-type-detail({id:customerCard.customerCardType.id})">{{customerCard.customerCardType.name}}</a>
+                    </td>
+                    <td>{{customerCard.signDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{customerCard.startDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{customerCard.endDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{customerCard.moneyCollected}}</td>
+                    <td>{{customerCard.balance}}</td>
+                    <td>{{customerCard.createdBy}}</td>
+                    <td>{{customerCard.createdDate | date:'yyyy-MM-dd'}}</td>
+                    <!--<td>{{customerCard.lastModifiedBy}}</td>-->
+                    <!--<td>{{customerCard.lastModifiedDate | date:'yyyy-MM-dd'}}</td>-->
+
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer-card-detail({id:customerCard.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-card.edit({id:customerCard.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="customer-card.delete({id:customerCard.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

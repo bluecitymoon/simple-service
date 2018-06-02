@@ -1,0 +1,124 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCustomerCardLabel" data-translate="simpleServiceApp.customerCard.home.createOrEditLabel">Create or edit a Customer Card</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.customerCard.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.customerCard.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.number" for="field_number">Number</label>
+            <input type="text" class="form-control" name="number" id="field_number"
+                    ng-model="vm.customerCard.number"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.serialNumber" for="field_serialNumber">Serial Number</label>
+            <input type="text" class="form-control" name="serialNumber" id="field_serialNumber"
+                    ng-model="vm.customerCard.serialNumber"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.signDate" for="field_signDate">Sign Date</label>
+                <div class="input-group">
+                    <input id="field_signDate" type="text" class="form-control" name="signDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCard.signDate" is-open="vm.datePickerOpenStatus.signDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('signDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.startDate" for="field_startDate">Start Date</label>
+                <div class="input-group">
+                    <input id="field_startDate" type="text" class="form-control" name="startDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCard.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.endDate" for="field_endDate">End Date</label>
+                <div class="input-group">
+                    <input id="field_endDate" type="text" class="form-control" name="endDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCard.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.moneyCollected" for="field_moneyCollected">Money Collected</label>
+            <input type="number" class="form-control" name="moneyCollected" id="field_moneyCollected"
+                    ng-model="vm.customerCard.moneyCollected"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.balance" for="field_balance">Balance</label>
+            <input type="number" class="form-control" name="balance" id="field_balance"
+                    ng-model="vm.customerCard.balance"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.createdBy" for="field_createdBy">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                    ng-model="vm.customerCard.createdBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.createdDate" for="field_createdDate">Created Date</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCard.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                    ng-model="vm.customerCard.lastModifiedBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerCard.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                <div class="input-group">
+                    <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCard.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.customerCard.customer" for="field_customer">Customer</label>
+            <select class="form-control" id="field_customer" name="customer" ng-model="vm.customerCard.customer" ng-options="customer as customer.name for customer in vm.customers track by customer.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.customerCard.customerCardType" for="field_customerCardType">Customer Card Type</label>
+            <select class="form-control" id="field_customerCardType" name="customerCardType" ng-model="vm.customerCard.customerCardType" ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

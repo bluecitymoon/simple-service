@@ -33,6 +33,8 @@
                 "ad": "Ad",
                 "marketingQrcode": "Marketing Qrcode",
                 "marketingNewOrderPlan": "Marketing New Order Plan",
+                "customerCardType": "Customer Card Type",
+                "customerCard": "Customer Card",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

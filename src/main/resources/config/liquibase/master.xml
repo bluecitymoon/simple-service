@@ -31,6 +31,8 @@
     <include file="config/liquibase/changelog/20180514100026_added_entity_Ad.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180516110712_added_entity_MarketingQrcode.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180523115501_added_entity_MarketingNewOrderPlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180602125303_added_entity_CustomerCardType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180602132515_added_entity_CustomerCard.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -55,5 +57,6 @@
     <include file="config/liquibase/changelog/20180507083233_added_entity_constraints_ClassArrangementRule.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180516110712_added_entity_constraints_MarketingQrcode.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180523115501_added_entity_constraints_MarketingNewOrderPlan.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180602132515_added_entity_constraints_CustomerCard.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
