@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerDetailController', CustomerDetailController);
 
-    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks'];
+    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks', 'CustomerCard'];
 
-    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks) {
+    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks, CustomerCard) {
         var vm = this;
 
         vm.customer = entity;
@@ -29,6 +29,7 @@
         $scope.$on('$destroy', unsubscribe);
         loadCustomerlogs();
         loadAllSchedules();
+        loadAllCards();
 
         function loadCustomerlogs() {
 
@@ -62,6 +63,30 @@
                 vm.queryCount = vm.totalItems;
                 vm.customerCommunicationSchedules = data;
             }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+
+        };
+
+        function loadAllCards() {
+
+            var param = {
+                page: 0,
+                size: 100,
+                sort: 'id',
+                'customerId.equals': vm.customer.id
+            };
+
+            CustomerCard.query(param, onSuccess, onError);
+
+            function onSuccess(data, headers) {
+                vm.links = ParseLinks.parse(headers('link'));
+                vm.totalCardItems = headers('X-Total-Count');
+                vm.queryCardCount = vm.totalCardItems;
+                vm.cards = data;
+            }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }

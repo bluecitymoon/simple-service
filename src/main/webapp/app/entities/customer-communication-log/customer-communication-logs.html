@@ -60,9 +60,9 @@
                     </td>
                     <td><span ng-bind-html="customerCommunicationLog.comments"></span></td>
                     <td>{{customerCommunicationLog.createdBy}}</td>
-                    <td>{{customerCommunicationLog.createdDate | date:'medium'}}</td>
+                    <td>{{customerCommunicationLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{customerCommunicationLog.lastModifiedBy}}</td>
-                    <td>{{customerCommunicationLog.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{customerCommunicationLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>
                         <a ui-sref="customer-communication-log-type-detail({id:customerCommunicationLog.logType.id})">{{customerCommunicationLog.logType.name}}</a>
                     </td>

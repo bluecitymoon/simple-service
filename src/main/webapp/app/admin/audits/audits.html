@@ -26,7 +26,7 @@
         </thead>
 
         <tr ng-repeat="audit in vm.audits | filter:filter | orderBy:predicate:reverse" ng-hide="audit.filtered">
-            <td><span>{{audit.timestamp| date:'medium'}}</span></td>
+            <td><span>{{audit.timestamp| date:'yyyy-MM-dd hh:mm'}}</span></td>
             <td><small>{{audit.principal}}</small></td>
             <td>{{audit.type}}</td>
             <td>

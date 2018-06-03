@@ -3,7 +3,7 @@
     <div class="panel-title">
         <div class="panel-control">
             <button type="button" ui-sref="customer-detail.schedule({id:vm.customer.id})"
-                    class="btn btn-mint">
+                    class="btn btn-primary">
                 <span class="glyphicon glyphicon-phone-alt"></span>
                 <span>录入预约记录</span>
             </button>
@@ -40,6 +40,7 @@
                     <th jh-sort-by="createdBy"><span
                             data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy">Created By</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,9 +48,9 @@
                     <td><a ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})">{{customerCommunicationSchedule.id}}</a>
                     </td>
                     <td><span class="{{customerCommunicationSchedule.scheduleStatus.labelStyle}}">{{customerCommunicationSchedule.scheduleStatus.name}}</span></td>
-                    <td>{{customerCommunicationSchedule.sceduleDate | date:'medium'}}</td>
-                    <td>{{customerCommunicationSchedule.actuallMeetDate | date:'medium'}}</td>
-                    <td>{{customerCommunicationSchedule.createdDate | date:'medium'}}</td>
+                    <td>{{customerCommunicationSchedule.sceduleDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCommunicationSchedule.actuallMeetDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCommunicationSchedule.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
 
                     <td>{{customerCommunicationSchedule.comments}}</td>
                     <td>{{customerCommunicationSchedule.createdBy}}</td>
@@ -57,8 +58,8 @@
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})"
-                                    class="btn btn-warning btn-sm">
+                                    ui-sref="customer-detail.signin_on_detail({cid:customerCommunicationSchedule.id})"
+                                    class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down">签到</span>
                             </button>

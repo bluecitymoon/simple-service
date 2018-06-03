@@ -5,11 +5,15 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$state', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function CustomerController($state, Customer, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
+
+        vm.department = $stateParams.dept;
+
+        console.log(vm.department);
 
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
@@ -28,6 +32,8 @@
                 sort: sort()
             };
 
+            parameters["department"] = vm.department;
+            
             if (vm.searchCondition.name) {
                 parameters["name.contains"] = vm.searchCondition.name;
             }

@@ -111,7 +111,7 @@
                             <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">客户</li>
 
                             <li>
-                                <a ui-sref="customer">
+                                <a ui-sref="customer({dept: 'market'})">
                                     <span class="glyphicon glyphicon-tags"></span>
                                     <span>客户列表</span>
                                 </a>
@@ -194,7 +194,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
                             <li>
-                                <a ui-sref="customer">
+                                <a ui-sref="customer({dept: 'operation'})">
                                     <span class="glyphicon glyphicon-tags"></span>
                                     <span>客户列表</span>
                                 </a>

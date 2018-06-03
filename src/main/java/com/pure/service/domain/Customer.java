@@ -52,6 +52,9 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "parent_contract_number")
     private String parentContractNumber;
 
+    @Column(name = "visit_date")
+    private Instant visitDate;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -217,6 +220,14 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     public void setParentContractNumber(String parentContractNumber) {
         this.parentContractNumber = parentContractNumber;
+    }
+
+    public Instant getVisitDate() {
+        return visitDate;
+    }
+
+    public void setVisitDate(Instant visitDate) {
+        this.visitDate = visitDate;
     }
 
     public FreeClassRecord getNewOrder() {

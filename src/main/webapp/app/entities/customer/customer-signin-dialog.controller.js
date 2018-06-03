@@ -19,11 +19,9 @@
 
         function confirmSignin () {
 
-            CustomerCommunicationSchedule.sign({id: $stateParams.id},
+            CustomerCommunicationSchedule.sign({id: $stateParams.cid},
                 function () {
                     $uibModalInstance.close(true);
-
-
                 });
         }
     }

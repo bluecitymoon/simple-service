@@ -39,7 +39,7 @@
             <tbody>
                 <tr ng-repeat="classArrangementRule in vm.classArrangementRules track by classArrangementRule.id">
                     <td><a ui-sref="class-arrangement-rule-detail({id:classArrangementRule.id})">{{classArrangementRule.id}}</a></td>
-                    <td>{{classArrangementRule.estimateStartDate | date:'medium'}}</td>
+                    <td>{{classArrangementRule.estimateStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{classArrangementRule.estimateStartTime}}</td>
                     <td>{{classArrangementRule.estimateEndTime}}</td>
                     <td>{{classArrangementRule.maxLoopCount}}</td>

@@ -89,9 +89,9 @@
                     <td>{{freeClassRecord.personName}}</td>
                     <td>{{freeClassRecord.contactPhoneNumber}}</td>
                     <td>{{freeClassRecord.referer.firstName}}</td>
-                    <td>{{freeClassRecord.createdDate | date:'medium'}}</td>
+                    <td>{{freeClassRecord.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <!--<td>{{freeClassRecord.lastModifiedBy}}</td>-->
-                    <!--<td>{{freeClassRecord.lastModifiedDate | date:'medium'}}</td>-->
+                    <!--<td>{{freeClassRecord.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
                     <td>{{freeClassRecord.status}}</td>
                     <td>
                         <a ui-sref="market-channel-category-detail({id:freeClassRecord.marketChannelCategory.id})">{{freeClassRecord.marketChannelCategory.name}}</a>

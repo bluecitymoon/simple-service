@@ -11,7 +11,7 @@
         $stateProvider
         .state('customer', {
             parent: 'entity',
-            url: '/customer?page&sort&search',
+            url: '/customer?page&sort&search&dept',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'simpleServiceApp.customer.home.title'
@@ -32,7 +32,8 @@
                     value: 'id,desc',
                     squash: true
                 },
-                search: null
+                search: null,
+                dept: null
             },
             resolve: {
                 pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
@@ -68,6 +69,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('customer');
+                    $translatePartialLoader.addPart('customerCard');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Customer', function($stateParams, Customer) {
@@ -200,6 +202,25 @@
                     });
                 }]
             })
+            .state('customer-detail.signin_on_detail', {
+                parent: 'customer-detail',
+                url: '/detail/sign/{cid}',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer/customer-signin-dialog.html',
+                        controller: 'CustomerSigninController',
+                        controllerAs: 'vm',
+                        size: 'md'
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
             .state('customer-detail.schedule', {
             parent: 'customer-detail',
             url: '/detail/schedule',
@@ -260,7 +281,7 @@
             })
             .state('customer.signin', {
                 parent: 'customer-communication-schedule',
-                url: '/{id}/sign',
+                url: '/{cid}/sign',
                 data: {
                     authorities: ['ROLE_USER']
                 },
@@ -271,12 +292,13 @@
                         controllerAs: 'vm',
                         size: 'md'
                     }).result.then(function() {
-                        // $state.go('customer', null, { reload: 'customer' });
+                         $state.go('customer-communication-schedule', null, { reload: 'customer-communication-schedule' });
                     }, function() {
-                        // $state.go('^');
+                         // $state.go('^');
                     });
                 }]
             })
+
         .state('customer.delete', {
             parent: 'customer',
             url: '/{id}/delete',

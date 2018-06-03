@@ -65,7 +65,8 @@
                     <th>录入时间</th>
                     <th>跟踪记录次数</th>
                     <th>最后一次跟踪时间</th>
-                    <th>最后一次跟踪备注</th>
+                    <th ng-if="vm.department == 'market'">最后一次跟踪备注</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -84,7 +85,7 @@
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{customer.followCount}}</td>
                     <td>{{customer.lastFollowTime | date :'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{customer.lastFollowComments}}</td>
+                    <td ng-if="vm.department == 'market'">{{customer.lastFollowComments}}</td>
                     <!--<td>-->
                         <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
                     <!--</td>-->

@@ -1,11 +1,13 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
+import com.pure.service.repository.CustomerRepository;
 import com.pure.service.service.CustomerCommunicationScheduleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,13 +31,16 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     private final CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository;
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
+    private final CustomerRepository customerRepository;
 
     public CustomerCommunicationScheduleServiceImpl(CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository,
                                                     CustomerCommunicationLogRepository customerCommunicationLogRepository,
-                                                    CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository) {
+                                                    CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
+                                                    CustomerRepository customerRepository) {
         this.customerCommunicationScheduleRepository = customerCommunicationScheduleRepository;
         this.customerCommunicationLogRepository = customerCommunicationLogRepository;
         this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
+        this.customerRepository = customerRepository;
     }
 
     /**
@@ -117,6 +122,11 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
 
         CustomerCommunicationSchedule customerCommunicationSchedule = save(schedule);
 
+        Customer customer = customerCommunicationSchedule.getCustomer();
+        customer.setVisitDate(Instant.now());
+
+        customerRepository.save(customer);
+
         CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.signin.name());
 
         if (newCreateOrderType == null) {
@@ -124,7 +134,7 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         }
 
         CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
-        customerCommunicationLog.comments("签到成功");
+        customerCommunicationLog.comments("到店访签到成功");
 
         customerCommunicationLog.setLogType(newCreateOrderType);
         customerCommunicationLog.customer(schedule.getCustomer());

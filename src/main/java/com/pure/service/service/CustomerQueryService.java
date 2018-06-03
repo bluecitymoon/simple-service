@@ -10,6 +10,7 @@ import com.pure.service.domain.User_;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.service.dto.CustomerCriteria;
 import io.github.jhipster.service.QueryService;
+import io.github.jhipster.service.filter.InstantFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -17,7 +18,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import java.time.Instant;
 import java.util.List;
 
 
@@ -118,6 +121,14 @@ public class CustomerQueryService extends QueryService<Customer> {
             }
             if (criteria.getParentContractNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getParentContractNumber(), Customer_.parentContractNumber));
+            }
+            String department = criteria.getDepartment();
+            if (!StringUtils.isEmpty(department) && department.equals("operation")) {
+
+                InstantFilter visitDate = new InstantFilter();
+                visitDate.setGreaterThan(Instant.EPOCH);
+
+                specification = specification.and(buildRangeSpecification(visitDate, Customer_.visitDate));
             }
             if (criteria.getNewOrderId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getNewOrderId(), Customer_.newOrder, FreeClassRecord_.id));

@@ -43,9 +43,9 @@
                     <td>{{newOrderAssignHistory.newFollowerLogin}}</td>
                     <td>{{newOrderAssignHistory.newFollowerName}}</td>
                     <td>{{newOrderAssignHistory.createdBy}}</td>
-                    <td>{{newOrderAssignHistory.createdDate | date:'medium'}}</td>
+                    <td>{{newOrderAssignHistory.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{newOrderAssignHistory.lastModifiedBy}}</td>
-                    <td>{{newOrderAssignHistory.lastModifiedDate | date:'medium'}}</td>
+                    <td>{{newOrderAssignHistory.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>
                         <a ui-sref="free-class-record-detail({id:newOrderAssignHistory.newOrder.id})">{{newOrderAssignHistory.newOrder.personName}}</a>
                     </td>

@@ -47,12 +47,12 @@
                     <td>{{product.name}}</td>
                     <td>{{product.code}}</td>
                     <td>{{product.minutesPerClass}}</td>
-                    <td>{{product.planedStartDate | date:'medium'}}</td>
+                    <td>{{product.planedStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{product.comments}}</td>
                     <td>{{product.createdBy}}</td>
-                    <td>{{product.createdDate | date:'medium'}}</td>
+                    <td>{{product.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <!--<td>{{product.lastModifiedBy}}</td>-->
-                    <!--<td>{{product.lastModifiedDate | date:'medium'}}</td>-->
+                    <!--<td>{{product.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
                     <td>
                         <a ui-sref="class-age-level-detail({id:product.classAgeLevel.id})">{{product.classAgeLevel.name}}</a>
                     </td>
