@@ -222,30 +222,68 @@
                 }]
             })
             .state('customer-detail.schedule', {
-            parent: 'customer-detail',
-            url: '/detail/schedule',
-            data: {
-                authorities: ['ROLE_USER']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/customer/customer-schedule-dialog.html',
-                    controller: 'CustomerScheduleDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Customer', function(Customer) {
-                            return Customer.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
-        })
+                parent: 'customer-detail',
+                url: '/detail/schedule',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer/customer-schedule-dialog.html',
+                        controller: 'CustomerScheduleDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Customer', function (Customer) {
+                                return Customer.get({id: $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function () {
+                        $state.go('^', {}, {reload: false});
+                    }, function () {
+                        $state.go('^');
+                    });
+                }]
+            })
+            .state('customer-detail.new-card', {
+                parent: 'customer-detail',
+                url: '/customer-detail/card/{cid}',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer-card/customer-card-dialog.html',
+                        controller: 'CustomerCardDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    number: null,
+                                    serialNumber: null,
+                                    signDate: null,
+                                    startDate: null,
+                                    endDate: null,
+                                    moneyCollected: null,
+                                    balance: null,
+                                    createdBy: null,
+                                    createdDate: null,
+                                    lastModifiedBy: null,
+                                    lastModifiedDate: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
             .state('customer-detail.new-log', {
                 parent: 'customer-detail',
                 url: '/detail/log/{cid}',

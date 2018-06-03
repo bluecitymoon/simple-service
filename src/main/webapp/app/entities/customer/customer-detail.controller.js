@@ -25,6 +25,9 @@
             loadAllSchedules();
         });
 
+        var unsubscribeCardCreated = $rootScope.$on('simpleServiceApp:customerCardUpdate', function(event, result) {
+            loadAllCards();
+        });
 
         $scope.$on('$destroy', unsubscribe);
         loadCustomerlogs();
@@ -95,5 +98,6 @@
         $scope.$on('$destroy', unsubscribe);
         $scope.$on('$destroy', unsubscribeLogEvent);
         $scope.$on('$destroy', unsubscribeLogGenerated);
+        $scope.$on('$destroy', unsubscribeCardCreated);
     }
 })();

@@ -15,9 +15,23 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.customers = Customer.query();
+        vm.customerId = $stateParams.cid;
+
+        if (!vm.customerId) {
+
+            var parameters = {
+                page: 0,
+                size: 5000,
+                sort: 'id,desc',
+                department: 'operation'
+            };
+
+            vm.customers = Customer.query(parameters);
+        }
+
         vm.customercardtypes = CustomerCardType.query();
 
+        loadSingleCustomer(vm.customerId);
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -45,6 +59,17 @@
             vm.isSaving = false;
         }
 
+        function loadSingleCustomer(cid) {
+
+            if (cid) {
+
+                Customer.get({id : cid}, function (data) {
+                    vm.customerCard.customer = data;
+                }, function (error) {
+                    console.debug(error);
+                })
+            }
+        }
         vm.datePickerOpenStatus.signDate = false;
         vm.datePickerOpenStatus.startDate = false;
         vm.datePickerOpenStatus.endDate = false;
