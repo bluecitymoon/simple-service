@@ -1,85 +1,123 @@
 <div class="page-header">
-        <h1 class="page-title">客户列表</h1>
+    <h1 class="page-title">客户列表</h1>
 </div>
-<div class="row">
-    <div class="col-md-12">
-        <div class="panel">
-            <div class="panel-body">
 
-                <div class="row">
-                    <!--<div class="col-md-6">-->
+<div class="panel panel-primary panel-bordered-dark">
 
-                        <!--&lt;!&ndash;<div class="pad-all btn-group ">&ndash;&gt;-->
-                            <!--&lt;!&ndash;<button type="button" class="btn btn-sm {{st.labelStyle}}" ng-repeat="st in vm.customerschedulestatuses track by st.id" ng-click="vm.searchCondition.statusId = st.id; vm.loadAll()">{{st.name}}</button>&ndash;&gt;-->
-                            <!--&lt;!&ndash;<button type="button" class="btn btn-sm btn-dark" ng-click="vm.searchCondition.statusId = null; vm.loadAll()">全部状态</button>&ndash;&gt;-->
-                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                    <!--</div>-->
-                    <div class="col-md-11">
+    <div class="panel-heading">
+        <h3 class="panel-title">查询客户到访记录</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
 
-                        <form class="form-inline">
-
-                            <div class="form-group pad-rgt">
-                                <input type="text" name="customerName" placeholder="客户姓名" class="form-control" ng-model="vm.searchCondition.customerName">
-                            </div>
-
-                            <div class="form-group pad-rgt">
-                                <input type="text" name="contactPhoneNumber" placeholder="联系电话" class="form-control" ng-model="vm.searchCondition.contactPhoneNumber">
-                            </div>
-
-                            <div class="form-group">
-                                <input type="text" name="startDate" placeholder="预约开始时间" class="form-control" ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}" ng-model="vm.searchCondition.startDate" is-open="vm.datePickerOpenStatus.startDate">
-                            </div>
-                            到
-                            <div class="form-group">
-                                <input type="text" placeholder="预约结束时间" class="form-control" ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}" ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
-                            </div>
-
-                            <div class="form-group pad-rgt pad-lft">
-                                <button class="btn btn-primary" type="button" ng-click="vm.loadAll()"><i class="fa fa-search-minus"></i>查询</button>
-                            </div>
-                            <div class="form-group pad-rgt">
-                                <button class="btn btn-mint" type="button" ng-click="vm.clearConditions()"><i class="fa fa-trash"></i>清除</button>
-
-                            </div>
-
-
-
-                        </form>
+                    <label class="col-sm-3 control-label">姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="customerName" placeholder="客户姓名" class="form-control"
+                               ng-model="vm.searchCondition.customerName">
                     </div>
-                    <div class="col-md-1">
-                        <div class="form-group pad-rgt">
-                            <button class="btn btn-info"  type="button" ui-sref="customer-communication-schedule.new-order"><i class="fa fa-plus"></i>新增</button>
-                        </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="contactPhoneNumber" placeholder="联系电话" class="form-control"
+                               ng-model="vm.searchCondition.contactPhoneNumber">
                     </div>
+
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" name="startDate" placeholder="预约开始时间" class="form-control"
+                           ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.searchCondition.startDate"
+                           is-open="vm.datePickerOpenStatus.startDate">
+
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" placeholder="预约结束时间" class="form-control"
+                           ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll()"><i
+                            class="fa fa-search-minus"></i>查询
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                            class="fa fa-trash"></i>清除
+                    </button>
                 </div>
 
             </div>
-        </div>
-    </div>
-    <!--<div class="col-md-1">-->
-        <!--<div class="panel panel-dark panel-colorful">-->
-            <!--<div class="pad-all text-center">-->
-                <!--<span class="text-3x text-thin">{{vm.queryCount}}</span>-->
-                <!--<p>预约</p>-->
-                <!--&lt;!&ndash;<i class="fa fa-people-carry icon-lg"></i>&ndash;&gt;-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
 
+            <!-- Second line -->
+            <div class="row">
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">来源渠道</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.channel" placeholder="来源渠道">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.channels | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">PWI</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.pwi" placeholder="PWI">
+                            <ui-select-match>
+                                {{$select.selected.firstName}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.pwis | filter: $select.search) track by item.id">
+                                <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" name="startDate" placeholder="实际到访开始时间" class="form-control"
+                           ng-focus="vm.openCalendar('actualStartDate')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.searchCondition.actualStartDate"
+                           is-open="vm.datePickerOpenStatus.actualStartDate">
+
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" placeholder="实际到访结束时间" class="form-control"
+                           ng-focus="vm.openCalendar('actualEndDate')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.searchCondition.actualEndDate" is-open="vm.datePickerOpenStatus.actualEndDate">
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-info btn-block" type="button"
+                            ui-sref="customer-communication-schedule.new-order"><i class="fa fa-plus"></i>新增
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+
 
 
 <div class="panel">
 
     <!--<div class="panel-heading pad-all" style="height: 5em">-->
 
-        <!--<div class="panel-control">-->
+    <!--<div class="panel-control">-->
 
-            <!--<button class="btn btn-info" ui-sref="customer-schedule-status" has-authority="ROLE_ADMIN">-->
-                <!--<span class="glyphicon glyphicon-signal"></span>-->
-                <!--<span data-translate="global.menu.entities.customerScheduleStatus">Customer Schedule Status</span>-->
-            <!--</button>-->
-        <!--</div>-->
+    <!--<button class="btn btn-info" ui-sref="customer-schedule-status" has-authority="ROLE_ADMIN">-->
+    <!--<span class="glyphicon glyphicon-signal"></span>-->
+    <!--<span data-translate="global.menu.entities.customerScheduleStatus">Customer Schedule Status</span>-->
+    <!--</button>-->
+    <!--</div>-->
     <!--</div>-->
 
     <div class="panel-body">
@@ -102,11 +140,11 @@
                         联系方式
                     </th>
                     <th>
-                        信息来源
+                        来源渠道
                     </th>
                     <!--<th jh-sort-by="scheduleStatus.name">-->
-                        <!--<span data-translate="simpleServiceApp.customerCommunicationSchedule.scheduleStatus">Schedule Status</span>-->
-                        <!--<span class="glyphicon glyphicon-sort"></span>-->
+                    <!--<span data-translate="simpleServiceApp.customerCommunicationSchedule.scheduleStatus">Schedule Status</span>-->
+                    <!--<span class="glyphicon glyphicon-sort"></span>-->
                     <!--</th>-->
                     <th jh-sort-by="sceduleDate"><span
                             data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate">Scedule Date</span>
@@ -120,18 +158,18 @@
                     <th jh-sort-by="createdDate"><span>户外推广人员</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <!--<th jh-sort-by="comments"><span-->
-                            <!--data-translate="simpleServiceApp.customerCommunicationSchedule.comments">Comments</span>-->
-                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--data-translate="simpleServiceApp.customerCommunicationSchedule.comments">Comments</span>-->
+                    <!--<span class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th jh-sort-by="createdBy"><span-->
-                            <!--data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy">Created By</span>-->
-                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy">Created By</span>-->
+                    <!--<span class="glyphicon glyphicon-sort"></span></th>-->
 
                     <!--<th jh-sort-by="lastModifiedBy"><span-->
-                            <!--data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedBy">Last Modified By</span>-->
-                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedBy">Last Modified By</span>-->
+                    <!--<span class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th jh-sort-by="lastModifiedDate"><span-->
-                            <!--data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedDate">Last Modified Date</span>-->
-                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedDate">Last Modified Date</span>-->
+                    <!--<span class="glyphicon glyphicon-sort"></span></th>-->
 
                     <th jh-sort-by="follower.login"><span
                             data-translate="simpleServiceApp.customerCommunicationSchedule.follower">Follower</span>
@@ -178,22 +216,22 @@
                                 <span class="hidden-sm-down">签到</span>
                             </button>
                             <!--<button type="submit"-->
-                                    <!--ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})"-->
-                                    <!--class="btn btn-info btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                            <!--ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})"-->
+                            <!--class="btn btn-info btn-sm">-->
+                            <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                            <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
                             <!--</button>-->
                             <!--<button type="submit"-->
-                                    <!--ui-sref="customer-communication-schedule.edit({id:customerCommunicationSchedule.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--ui-sref="customer-communication-schedule.edit({id:customerCommunicationSchedule.id})"-->
+                            <!--class="btn btn-primary btn-sm">-->
+                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                            <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
                             <!--</button>-->
                             <!--<button type="submit"-->
-                                    <!--ui-sref="customer-communication-schedule.delete({id:customerCommunicationSchedule.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--ui-sref="customer-communication-schedule.delete({id:customerCommunicationSchedule.id})"-->
+                            <!--class="btn btn-danger btn-sm">-->
+                            <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                            <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
                             <!--</button>-->
                         </div>
                     </td>

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCommunicationScheduleController', CustomerCommunicationScheduleController);
 
-    CustomerCommunicationScheduleController.$inject = ['$state', 'CustomerCommunicationSchedule', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerScheduleStatus'];
+    CustomerCommunicationScheduleController.$inject = ['$state', 'CustomerCommunicationSchedule', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerScheduleStatus', 'MarketChannelCategory', 'User'];
 
-    function CustomerCommunicationScheduleController($state, CustomerCommunicationSchedule, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerScheduleStatus) {
+    function CustomerCommunicationScheduleController($state, CustomerCommunicationSchedule, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerScheduleStatus, MarketChannelCategory, User) {
 
         var vm = this;
 
@@ -20,6 +20,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.searchCondition = {};
+        vm.channels = MarketChannelCategory.query();
+        vm.pwis = User.query();
+
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -32,7 +35,7 @@
                 sort: sort()
             };
 
-            console.debug(vm.searchCondition);
+            console.log(vm.searchCondition);
 
             if (vm.searchCondition.statusId) {
                 param["scheduleStatusId.equals"] = vm.searchCondition.statusId;
@@ -51,7 +54,20 @@
             }
             if (vm.searchCondition.contactPhoneNumber) {
                 param["contactPhoneNumber.equals"] = vm.searchCondition.contactPhoneNumber;
+            }
+            if (vm.searchCondition.actualStartDate) {
+                param["actuallMeetDate.greaterOrEqualThan"] = vm.searchCondition.actualStartDate;
+            }
+            if (vm.searchCondition.actualEndDate) {
+                param["actuallMeetDate.lessOrEqualThan"] = vm.searchCondition.actualEndDate;
+            }
 
+            if (vm.searchCondition.channel) {
+                param["channelId"] = vm.searchCondition.channel.id;
+            }
+
+            if (vm.searchCondition.pwi) {
+                param["pwiId"] = vm.searchCondition.pwi.id;
             }
             CustomerCommunicationSchedule.query(param, onSuccess, onError);
 
@@ -74,12 +90,13 @@
             }
         };
 
-        vm.loadAll();
+        // vm.loadAll();
 
         function loadPage(page) {
             vm.page = page;
             vm.transition();
         }
+
 
         function transition() {
             $state.transitionTo($state.$current, {

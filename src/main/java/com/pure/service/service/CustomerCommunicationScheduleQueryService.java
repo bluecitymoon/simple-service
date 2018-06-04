@@ -5,6 +5,7 @@ import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.CustomerCommunicationSchedule_;
 import com.pure.service.domain.CustomerScheduleStatus_;
 import com.pure.service.domain.Customer_;
+import com.pure.service.domain.FreeClassRecord_;
 import com.pure.service.domain.User_;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -99,6 +101,12 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerId(), CustomerCommunicationSchedule_.customer, Customer_.id));
             }
+            if (criteria.getChannelId() != null) {
+                specification = specification.and(channelIdEquals(criteria.getChannelId()));
+            }
+            if (criteria.getPwiId() != null) {
+                specification = specification.and(pwidIdEquals(criteria.getPwiId()));
+            }
             if (criteria.getCustomerName() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerName(), CustomerCommunicationSchedule_.customer, Customer_.name));
             }
@@ -115,4 +123,13 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
         return specification;
     }
 
+    private Specification channelIdEquals(Long channelId) {
+
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.channel).get("id"), channelId);
+
+    }
+
+    private Specification pwidIdEquals(Long pwiId) {
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.newOrder).get(FreeClassRecord_.referer).get("id"), pwiId);
+    }
 }

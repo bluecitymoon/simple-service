@@ -47,6 +47,9 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private StringFilter customerName;
     private StringFilter contactPhoneNumber;
 
+    private Long channelId;
+    private Long pwiId;
+
     public CustomerCommunicationScheduleCriteria() {
     }
 
@@ -152,6 +155,22 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
 
     public void setContactPhoneNumber(StringFilter contactPhoneNumber) {
         this.contactPhoneNumber = contactPhoneNumber;
+    }
+
+    public Long getChannelId() {
+        return channelId;
+    }
+
+    public void setChannelId(Long channelId) {
+        this.channelId = channelId;
+    }
+
+    public Long getPwiId() {
+        return pwiId;
+    }
+
+    public void setPwiId(Long pwiId) {
+        this.pwiId = pwiId;
     }
 
     @Override
