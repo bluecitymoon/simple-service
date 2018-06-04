@@ -69,6 +69,9 @@
             if (vm.searchCondition.pwi) {
                 param["pwiId"] = vm.searchCondition.pwi.id;
             }
+            if (vm.searchCondition.tmk) {
+                param["tmkId"] = vm.searchCondition.tmk.id;
+            }
             CustomerCommunicationSchedule.query(param, onSuccess, onError);
 
             function onSuccess(data, headers) {

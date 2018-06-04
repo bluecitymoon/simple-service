@@ -76,7 +76,8 @@
                                 {{$select.selected.firstName}}
                             </ui-select-match>
                             <ui-select-choices repeat="item in (vm.pwis | filter: $select.search) track by item.id">
-                                <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                                <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                            ng-bind="item.login"></span>
                             </ui-select-choices>
                         </ui-select>
                     </div>
@@ -101,10 +102,28 @@
                     </button>
                 </div>
             </div>
+
+            <!-- 3rd-->
+            <div class="row">
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">TMK/课程顾问</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.tmk">
+                            <ui-select-match>
+                                {{$select.selected.firstName}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.pwis | filter: $select.search) track by item.id">
+                                <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                            ng-bind="item.login"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
-
 
 
 <div class="panel">

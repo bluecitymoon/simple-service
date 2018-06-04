@@ -6,6 +6,7 @@ import com.pure.service.domain.CustomerCommunicationSchedule_;
 import com.pure.service.domain.CustomerScheduleStatus_;
 import com.pure.service.domain.Customer_;
 import com.pure.service.domain.FreeClassRecord_;
+import com.pure.service.domain.MarketChannelCategory_;
 import com.pure.service.domain.User_;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
@@ -107,6 +108,9 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             if (criteria.getPwiId() != null) {
                 specification = specification.and(pwidIdEquals(criteria.getPwiId()));
             }
+            if (criteria.getTmkId() != null) {
+                specification = specification.and(tmkdIdEquals(criteria.getTmkId()));
+            }
             if (criteria.getCustomerName() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerName(), CustomerCommunicationSchedule_.customer, Customer_.name));
             }
@@ -125,11 +129,15 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
 
     private Specification channelIdEquals(Long channelId) {
 
-        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.channel).get("id"), channelId);
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.channel).get(MarketChannelCategory_.id), channelId);
 
     }
 
     private Specification pwidIdEquals(Long pwiId) {
-        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.newOrder).get(FreeClassRecord_.referer).get("id"), pwiId);
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.newOrder).get(FreeClassRecord_.referer).get(User_.id), pwiId);
+    }
+
+    private Specification tmkdIdEquals(Long tmkId) {
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.salesFollower).get(User_.id), tmkId);
     }
 }
