@@ -13,8 +13,11 @@ import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.service.CustomerCommunicationScheduleService;
+import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.FreeClassRecordService;
+import com.pure.service.service.dto.CustomerCriteria;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +49,9 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private CustomerQueryService customerQueryService;
 
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
@@ -189,8 +196,27 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         List<FreeClassRecord> records = new ArrayList<>();
 
-        freeClassRecords.forEach(newOrder -> records.add(save(newOrder)));
+        freeClassRecords.forEach(newOrder -> {
+            FreeClassRecord freeClassRecord = save(newOrder);
 
-        return freeClassRecordRepository.save(freeClassRecords);
+            records.add(freeClassRecord);
+
+            CustomerCriteria customerCriteria = new CustomerCriteria();
+            LongFilter longFilter = new LongFilter();
+            longFilter.setEquals(freeClassRecord.getId());
+            customerCriteria.setNewOrderId(longFilter);
+
+            List<Customer> existCustomers = customerQueryService.findByCriteria(customerCriteria);
+
+            if (!CollectionUtils.isEmpty(existCustomers)) {
+
+                for (Customer existCustomer : existCustomers) {
+                    existCustomer.setSalesFollower(freeClassRecord.getSalesFollower());
+                    customerService.save(existCustomer);
+                }
+            }
+        });
+
+        return freeClassRecords;
     }
 }
