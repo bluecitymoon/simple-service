@@ -105,11 +105,29 @@ public class CustomerCardQueryService extends QueryService<CustomerCard> {
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), CustomerCard_.lastModifiedDate));
             }
+            if (criteria.getTotalMoneyAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTotalMoneyAmount(), CustomerCard_.totalMoneyAmount));
+            }
+            if (criteria.getPromotionAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getPromotionAmount(), CustomerCard_.promotionAmount));
+            }
+            if (criteria.getClassCount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getClassCount(), CustomerCard_.classCount));
+            }
+            if (criteria.getTotalMinutes() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTotalMinutes(), CustomerCard_.totalMinutes));
+            }
+            if (criteria.getSpecialPromotionAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getSpecialPromotionAmount(), CustomerCard_.specialPromotionAmount));
+            }
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerId(), CustomerCard_.customer, Customer_.id));
             }
             if (criteria.getCustomerCardTypeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerCardTypeId(), CustomerCard_.customerCardType, CustomerCardType_.id));
+            }
+            if (criteria.getCourseId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCourseId(), CustomerCard_.course, Course_.id));
             }
         }
         return specification;

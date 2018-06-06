@@ -12,6 +12,12 @@
             "otherEntityName": "customerCardType",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "course",
+            "otherEntityName": "course",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [
@@ -58,6 +64,26 @@
         {
             "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "totalMoneyAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "promotionAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "classCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalMinutes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "specialPromotionAmount",
+            "fieldType": "Float"
         }
     ],
     "changelogDate": "20180602132515",

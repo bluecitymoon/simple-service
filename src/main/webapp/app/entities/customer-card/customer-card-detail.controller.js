@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCardDetailController', CustomerCardDetailController);
 
-    CustomerCardDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType'];
+    CustomerCardDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType', 'Course'];
 
-    function CustomerCardDetailController($scope, $rootScope, $stateParams, previousState, entity, CustomerCard, Customer, CustomerCardType) {
+    function CustomerCardDetailController($scope, $rootScope, $stateParams, previousState, entity, CustomerCard, Customer, CustomerCardType, Course) {
         var vm = this;
 
         vm.customerCard = entity;

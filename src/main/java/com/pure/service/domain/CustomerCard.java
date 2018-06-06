@@ -45,11 +45,28 @@ public class CustomerCard extends AbstractAuditingEntity {
     @Column(name = "balance")
     private Float balance;
 
+    @Column(name = "total_money_amount")
+    private Float totalMoneyAmount;
+
+    @Column(name = "promotion_amount")
+    private Float promotionAmount;
+
+    @Column(name = "class_count")
+    private Integer classCount;
+
+    @Column(name = "total_minutes")
+    private Integer totalMinutes;
+
+    @Column(name = "special_promotion_amount")
+    private Float specialPromotionAmount;
     @ManyToOne
     private Customer customer;
 
     @ManyToOne
     private CustomerCardType customerCardType;
+
+    @ManyToOne
+    private Course course;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -152,6 +169,72 @@ public class CustomerCard extends AbstractAuditingEntity {
     }
 
 
+
+    public Float getTotalMoneyAmount() {
+        return totalMoneyAmount;
+    }
+
+    public CustomerCard totalMoneyAmount(Float totalMoneyAmount) {
+        this.totalMoneyAmount = totalMoneyAmount;
+        return this;
+    }
+
+    public void setTotalMoneyAmount(Float totalMoneyAmount) {
+        this.totalMoneyAmount = totalMoneyAmount;
+    }
+
+    public Float getPromotionAmount() {
+        return promotionAmount;
+    }
+
+    public CustomerCard promotionAmount(Float promotionAmount) {
+        this.promotionAmount = promotionAmount;
+        return this;
+    }
+
+    public void setPromotionAmount(Float promotionAmount) {
+        this.promotionAmount = promotionAmount;
+    }
+
+    public Integer getClassCount() {
+        return classCount;
+    }
+
+    public CustomerCard classCount(Integer classCount) {
+        this.classCount = classCount;
+        return this;
+    }
+
+    public void setClassCount(Integer classCount) {
+        this.classCount = classCount;
+    }
+
+    public Integer getTotalMinutes() {
+        return totalMinutes;
+    }
+
+    public CustomerCard totalMinutes(Integer totalMinutes) {
+        this.totalMinutes = totalMinutes;
+        return this;
+    }
+
+    public void setTotalMinutes(Integer totalMinutes) {
+        this.totalMinutes = totalMinutes;
+    }
+
+    public Float getSpecialPromotionAmount() {
+        return specialPromotionAmount;
+    }
+
+    public CustomerCard specialPromotionAmount(Float specialPromotionAmount) {
+        this.specialPromotionAmount = specialPromotionAmount;
+        return this;
+    }
+
+    public void setSpecialPromotionAmount(Float specialPromotionAmount) {
+        this.specialPromotionAmount = specialPromotionAmount;
+    }
+
     public Customer getCustomer() {
         return customer;
     }
@@ -176,6 +259,19 @@ public class CustomerCard extends AbstractAuditingEntity {
 
     public void setCustomerCardType(CustomerCardType customerCardType) {
         this.customerCardType = customerCardType;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public CustomerCard course(Course course) {
+        this.course = course;
+        return this;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -214,6 +310,11 @@ public class CustomerCard extends AbstractAuditingEntity {
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", totalMoneyAmount='" + getTotalMoneyAmount() + "'" +
+            ", promotionAmount='" + getPromotionAmount() + "'" +
+            ", classCount='" + getClassCount() + "'" +
+            ", totalMinutes='" + getTotalMinutes() + "'" +
+            ", specialPromotionAmount='" + getSpecialPromotionAmount() + "'" +
             "}";
     }
 }

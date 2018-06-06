@@ -50,9 +50,21 @@ public class CustomerCardCriteria implements Serializable {
 
     private InstantFilter lastModifiedDate;
 
+    private FloatFilter totalMoneyAmount;
+
+    private FloatFilter promotionAmount;
+
+    private IntegerFilter classCount;
+
+    private IntegerFilter totalMinutes;
+
+    private FloatFilter specialPromotionAmount;
+
     private LongFilter customerId;
 
     private LongFilter customerCardTypeId;
+
+    private LongFilter courseId;
 
     public CustomerCardCriteria() {
     }
@@ -153,6 +165,46 @@ public class CustomerCardCriteria implements Serializable {
         this.lastModifiedDate = lastModifiedDate;
     }
 
+    public FloatFilter getTotalMoneyAmount() {
+        return totalMoneyAmount;
+    }
+
+    public void setTotalMoneyAmount(FloatFilter totalMoneyAmount) {
+        this.totalMoneyAmount = totalMoneyAmount;
+    }
+
+    public FloatFilter getPromotionAmount() {
+        return promotionAmount;
+    }
+
+    public void setPromotionAmount(FloatFilter promotionAmount) {
+        this.promotionAmount = promotionAmount;
+    }
+
+    public IntegerFilter getClassCount() {
+        return classCount;
+    }
+
+    public void setClassCount(IntegerFilter classCount) {
+        this.classCount = classCount;
+    }
+
+    public IntegerFilter getTotalMinutes() {
+        return totalMinutes;
+    }
+
+    public void setTotalMinutes(IntegerFilter totalMinutes) {
+        this.totalMinutes = totalMinutes;
+    }
+
+    public FloatFilter getSpecialPromotionAmount() {
+        return specialPromotionAmount;
+    }
+
+    public void setSpecialPromotionAmount(FloatFilter specialPromotionAmount) {
+        this.specialPromotionAmount = specialPromotionAmount;
+    }
+
     public LongFilter getCustomerId() {
         return customerId;
     }
@@ -167,6 +219,14 @@ public class CustomerCardCriteria implements Serializable {
 
     public void setCustomerCardTypeId(LongFilter customerCardTypeId) {
         this.customerCardTypeId = customerCardTypeId;
+    }
+
+    public LongFilter getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(LongFilter courseId) {
+        this.courseId = courseId;
     }
 
     @Override
@@ -184,8 +244,14 @@ public class CustomerCardCriteria implements Serializable {
                 (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+                (totalMoneyAmount != null ? "totalMoneyAmount=" + totalMoneyAmount + ", " : "") +
+                (promotionAmount != null ? "promotionAmount=" + promotionAmount + ", " : "") +
+                (classCount != null ? "classCount=" + classCount + ", " : "") +
+                (totalMinutes != null ? "totalMinutes=" + totalMinutes + ", " : "") +
+                (specialPromotionAmount != null ? "specialPromotionAmount=" + specialPromotionAmount + ", " : "") +
                 (customerId != null ? "customerId=" + customerId + ", " : "") +
                 (customerCardTypeId != null ? "customerCardTypeId=" + customerCardTypeId + ", " : "") +
+                (courseId != null ? "courseId=" + courseId + ", " : "") +
             "}";
     }
 

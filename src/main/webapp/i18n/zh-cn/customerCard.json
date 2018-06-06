@@ -27,7 +27,13 @@
             "lastModifiedBy": "最近修改人",
             "lastModifiedDate": "最近修改时间",
             "customer": "客户",
-            "customerCardType": "卡类型"
+            "customerCardType": "卡类型",
+            "totalMoneyAmount": "金额",
+            "promotionAmount": "优惠金额",
+            "classCount": "课时",
+            "totalMinutes": "总时长",
+            "specialPromotionAmount": "特殊优惠金额",
+            "course": "科目"
         }
     }
 }

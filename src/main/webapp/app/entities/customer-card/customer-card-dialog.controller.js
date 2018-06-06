@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCardDialogController', CustomerCardDialogController);
 
-    CustomerCardDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType'];
+    CustomerCardDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType', 'Course'];
 
-    function CustomerCardDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCard, Customer, CustomerCardType) {
+    function CustomerCardDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCard, Customer, CustomerCardType, Course) {
         var vm = this;
 
         vm.customerCard = entity;
@@ -30,6 +30,7 @@
         }
 
         vm.customercardtypes = CustomerCardType.query();
+        vm.courses = Course.query();
 
         loadSingleCustomer(vm.customerId);
         $timeout(function (){

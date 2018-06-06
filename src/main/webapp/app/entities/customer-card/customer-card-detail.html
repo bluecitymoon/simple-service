@@ -3,8 +3,6 @@
 </div>
 <div class="panel">
     <div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.customerCard.detail.title">Customer Card</span> {{vm.customerCard.id}}</h2>
-    <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="simpleServiceApp.customerCard.number">Number</span></dt>
@@ -51,6 +49,26 @@
         <dd>
             <span>{{vm.customerCard.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
         </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.totalMoneyAmount">Total Money Amount</span></dt>
+        <dd>
+            <span>{{vm.customerCard.totalMoneyAmount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.promotionAmount">Promotion Amount</span></dt>
+        <dd>
+            <span>{{vm.customerCard.promotionAmount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.classCount">Class Count</span></dt>
+        <dd>
+            <span>{{vm.customerCard.classCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.totalMinutes">Total Minutes</span></dt>
+        <dd>
+            <span>{{vm.customerCard.totalMinutes}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.specialPromotionAmount">Special Promotion Amount</span></dt>
+        <dd>
+            <span>{{vm.customerCard.specialPromotionAmount}}</span>
+        </dd>
         <dt><span data-translate="simpleServiceApp.customerCard.customer">Customer</span></dt>
         <dd>
             <a ui-sref="customer-detail({id:vm.customerCard.customer.id})">{{vm.customerCard.customer.name}}</a>
@@ -58,6 +76,10 @@
         <dt><span data-translate="simpleServiceApp.customerCard.customerCardType">Customer Card Type</span></dt>
         <dd>
             <a ui-sref="customer-card-type-detail({id:vm.customerCard.customerCardType.id})">{{vm.customerCard.customerCardType.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCard.course">Course</span></dt>
+        <dd>
+            <a ui-sref="course-detail({id:vm.customerCard.course.id})">{{vm.customerCard.course.name}}</a>
         </dd>
     </dl>
 
