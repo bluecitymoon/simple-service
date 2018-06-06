@@ -111,9 +111,17 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.customer.classLevel"
                            for="field_classLevel">Class Level</label>
-                    <input type="text" class="form-control" name="classLevel" id="field_classLevel"
-                           ng-model="vm.customer.classLevel"
-                    />
+                    <!--<input type="text" class="form-control" name="classLevel" id="field_classLevel"-->
+                           <!--ng-model="vm.customer.classLevel"-->
+                    <!--/>-->
+                    <ui-select ng-model="vm.customer.classLevel">
+                        <ui-select-match>
+                            {{$select.selected.value}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.classLevels | filter: $select.search) track by item.id">
+                            <span ng-bind="item.value"></span>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
             </div>
         </div>

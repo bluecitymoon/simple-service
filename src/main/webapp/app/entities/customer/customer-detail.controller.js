@@ -13,7 +13,12 @@
         vm.customer = entity;
         vm.previousState = previousState.name;
         vm.logs = [];
-
+        vm.classLevels = [
+            {id: 1, value: "幼儿园"},
+            {id: 2, value: "小学"},
+            {id: 3, value: "初中"},
+            {id: 4, value: "高中"}
+        ];
         var unsubscribe = $rootScope.$on('simpleServiceApp:customerUpdate', function(event, result) {
             vm.customer = result;
         });

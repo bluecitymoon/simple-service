@@ -26,7 +26,11 @@
         });
         vm.customerstatuses = CustomerStatus.query();
         vm.marketchannelcategories = MarketChannelCategory.query();
-
+        vm.classLevels = [
+            {id: 1, value: "成年"},
+            {id: 2, value: "学生"},
+            {id: 3, value: "幼儿"}
+        ];
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
@@ -37,6 +41,9 @@
 
         function save () {
             vm.isSaving = true;
+            if (vm.customer.classLevel) {
+                vm.customer.classLevel = vm.customer.classLevel.value;
+            }
             if (vm.customer.id !== null) {
                 Customer.update(vm.customer, onSaveSuccess, onSaveError);
             } else {

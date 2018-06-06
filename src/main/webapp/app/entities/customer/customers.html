@@ -1,65 +1,143 @@
 <div class="page-header">
-    <h1 class="page-title">客户列表</h1>
+    <h1 class="page-title"></h1>
 </div>
+<div class="panel panel-primary panel-bordered-dark">
 
-<div class="panel">
-        <form class="form-horizontal">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="col-sm-5 control-label">客户姓名</label>
-                            <div class="col-sm-7">
-                                <input type="text" ng-model="vm.searchCondition.name" placeholder="客户姓名" class="form-control input-sm">
-                            </div>
-                        </div>
+    <div class="panel-heading">
+        <h3 class="panel-title">查询客户列表</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">客户姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.name" placeholder="客户姓名"
+                               class="form-control input-sm">
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="col-sm-5 control-label">联系电话</label>
-                            <div class="col-sm-7">
-                                <input type="text" ng-model="vm.searchCondition.contactPhoneNumber" placeholder="联系电话" class="form-control">
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">联系电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.contactPhoneNumber" placeholder="联系电话"
+                               class="form-control">
                     </div>
-                    <div class="col-md-3"></div>
-                    <div class="col-md-3">
-                        <button class="btn btn-primary" type="button" ng-click="vm.loadAll()"><i class="fa fa-search-minus"></i>查询</button>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">来源渠道</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.channel" placeholder="来源渠道">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.channels | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <div class="col-sm-9">
+                        <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="row">
+                <div class="col-md-3 form-group" ng-if="vm.department != 'operation'">
+                    <label class="col-sm-3 control-label">是否到访</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.visited">
+                            <ui-select-match>
+                                {{$select.selected.value}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.yesOrNo | filter: $select.search) track by item.id">
+                                <span ng-bind="item.value"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">年级</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.classLevel">
+                            <ui-select-match>
+                                {{$select.selected.value}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.classLevels | filter: $select.search) track by item.id">
+                                <span ng-bind="item.value"></span>
+                            </ui-select-choices>
+                        </ui-select>
+
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">录入时间</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="开始时间" class="form-control"
+                               ng-focus="vm.openCalendar('createStartDate')" datetime-picker="{{dateformat}}"
+                               ng-model="vm.searchCondition.createStartDate" is-open="vm.datePickerOpenStatus.createStartDate">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="结束时间" class="form-control"
+                               ng-focus="vm.openCalendar('createEndDate')" datetime-picker="{{dateformat}}"
+                               ng-model="vm.searchCondition.createEndDate" is-open="vm.datePickerOpenStatus.createEndDate">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+
 <div class="panel">
     <div class="panel-body">
-    <jhi-alert></jhi-alert>
-    <!--<div class="container-fluid">-->
+        <jhi-alert></jhi-alert>
+        <!--<div class="container-fluid">-->
         <!--<div class="row">-->
-            <!--<div class="no-padding-left">-->
+        <!--<div class="no-padding-left">-->
 
-                <!--<button class="btn btn-primary" ui-sref="customer.new" >-->
-                    <!--<span class="glyphicon glyphicon-plus"></span>-->
-                    <!--<span  data-translate="simpleServiceApp.customer.home.createLabel">-->
-                        <!--Create new Customer-->
-                    <!--</span>-->
-                <!--</button>-->
+        <!--<button class="btn btn-primary" ui-sref="customer.new" >-->
+        <!--<span class="glyphicon glyphicon-plus"></span>-->
+        <!--<span  data-translate="simpleServiceApp.customer.home.createLabel">-->
+        <!--Create new Customer-->
+        <!--</span>-->
+        <!--</button>-->
 
-            <!--</div>-->
         <!--</div>-->
-    <!--</div>-->
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+        <!--</div>-->
+        <!--</div>-->
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.sex">Sex</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.name">Name</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.sex">Sex</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
-                    <th jh-sort-by="status.name"><span data-translate="simpleServiceApp.customer.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="status.channel"><span data-translate="simpleServiceApp.customer.channel">Channel</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="age"><span data-translate="simpleServiceApp.customer.age">Age</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contactPhoneNumber"><span data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="salesFollower.id"><span data-translate="simpleServiceApp.customer.salesFollower">Sales</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status.name"><span data-translate="simpleServiceApp.customer.status">Status</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status.channel"><span
+                            data-translate="simpleServiceApp.customer.channel">Channel</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="age"><span data-translate="simpleServiceApp.customer.age">Age</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contactPhoneNumber"><span
+                            data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="salesFollower.id"><span data-translate="simpleServiceApp.customer.salesFollower">Sales</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
                     <th>来访性质</th>
                     <th>年级</th>
                     <th>录入时间</th>
@@ -68,11 +146,11 @@
                     <th ng-if="vm.department == 'market'">最后一次跟踪备注</th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="customer in vm.customers track by customer.id">
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.id}}</a></td>
-                    <td>{{customer.name}}</td>
+                    <td><a ui-sref="customer-detail({id:customer.id})">{{customer.name}}</a></td>
                     <td>{{customer.sex}}</td>
                     <td><i class="{{customer.status.icon}}"></i></td>
                     <td><label class="{{customer.status.cssStyle}}">{{customer.status.name}}</label></td>
@@ -87,7 +165,7 @@
                     <td>{{customer.lastFollowTime | date :'yyyy-MM-dd hh:mm'}}</td>
                     <td ng-if="vm.department == 'market'">{{customer.lastFollowComments}}</td>
                     <!--<td>-->
-                        <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
+                    <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
                     <!--</td>-->
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
@@ -98,32 +176,33 @@
                                 <span class="hidden-sm-down">管理</span>
                             </button>
                             <!--<button type="submit"-->
-                                    <!--ui-sref="customer.schedule({id:customer.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-phone-alt"></span>-->
-                                <!--<span class="hidden-sm-down">邀约</span>-->
+                            <!--ui-sref="customer.schedule({id:customer.id})"-->
+                            <!--class="btn btn-primary btn-sm">-->
+                            <!--<span class="glyphicon glyphicon-phone-alt"></span>-->
+                            <!--<span class="hidden-sm-down">邀约</span>-->
                             <!--</button>-->
                             <!--<button type="submit"-->
-                                    <!--ui-sref="customer.edit({id:customer.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--ui-sref="customer.edit({id:customer.id})"-->
+                            <!--class="btn btn-primary btn-sm">-->
+                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                            <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
                             <!--</button>-->
                             <!--<button type="submit"-->
-                                    <!--ui-sref="customer.delete({id:customer.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--ui-sref="customer.delete({id:customer.id})"-->
+                            <!--class="btn btn-danger btn-sm">-->
+                            <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                            <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
                             <!--</button>-->
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-    </div>
-</div>
 </div>

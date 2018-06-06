@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory'];
 
-    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory) {
 
         var vm = this;
 
@@ -21,6 +21,19 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.searchCondition = {};
+        vm.channels = MarketChannelCategory.query();
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
+
+        vm.yesOrNo = [
+            {id : 1, value: "已到访", visited: true},
+            {id : 2, value: "未到访", visited: false}
+        ];
+        vm.classLevels = [
+            {id: 1, value: "成年"},
+            {id: 2, value: "学生"},
+            {id: 3, value: "幼儿"}
+        ];
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -40,6 +53,25 @@
 
             if (vm.searchCondition.contactPhoneNumber) {
                 parameters["contactPhoneNumber.contains"] = vm.searchCondition.contactPhoneNumber;
+            }
+
+            if (vm.searchCondition.channel) {
+                parameters["channelId.equals"] = vm.searchCondition.channel.id;
+            }
+
+            if (vm.searchCondition.classLevel) {
+                parameters["classLevel.equals"] = vm.searchCondition.classLevel.value;
+            }
+
+            if (vm.searchCondition.visited) { //equal logic for department operation
+                parameters["department"] = "operation";
+            }
+
+            if (vm.searchCondition.createStartDate) {
+                parameters["createdDate.greaterOrEqualThan"] = vm.searchCondition.createStartDate;
+            }
+            if (vm.searchCondition.createEndDate) {
+                parameters["createdDate.lessOrEqualThan"] = vm.searchCondition.createEndDate;
             }
 
             Customer.queryWithLog(parameters, onSuccess, onError);
@@ -62,7 +94,7 @@
                 AlertService.error(error.data.message);
             }
         };
-        vm.loadAll();
+        // vm.loadAll();
 
         function loadPage(page) {
             vm.page = page;
@@ -75,6 +107,10 @@
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
             });
+        }
+
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
         }
     }
 })();
