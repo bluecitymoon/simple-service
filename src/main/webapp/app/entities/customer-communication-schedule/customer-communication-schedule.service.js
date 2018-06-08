@@ -25,6 +25,11 @@
                 }
             },
             'update': { method:'PUT' },
+            'batchUpdate' : {
+                method: 'PUT',
+                url: 'api/customer-communication-schedules/batchUpdate',
+                isArray: true
+            },
             'sign': { method:'POST', url: 'api/customer-communication-schedules/signin/:id', params: { id : '@id'} }
         });
     }

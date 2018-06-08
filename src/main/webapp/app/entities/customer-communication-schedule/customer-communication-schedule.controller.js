@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCommunicationScheduleController', CustomerCommunicationScheduleController);
 
-    CustomerCommunicationScheduleController.$inject = ['$state', 'CustomerCommunicationSchedule', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerScheduleStatus', 'MarketChannelCategory', 'User'];
+    CustomerCommunicationScheduleController.$inject = ['$rootScope','$state', 'CustomerCommunicationSchedule', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerScheduleStatus', 'MarketChannelCategory', 'User'];
 
-    function CustomerCommunicationScheduleController($state, CustomerCommunicationSchedule, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerScheduleStatus, MarketChannelCategory, User) {
+    function CustomerCommunicationScheduleController($rootScope, $state, CustomerCommunicationSchedule, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerScheduleStatus, MarketChannelCategory, User) {
 
         var vm = this;
 
@@ -22,7 +22,40 @@
         vm.searchCondition = {};
         vm.channels = MarketChannelCategory.query();
         vm.pwis = User.query();
+        vm.batchAssignNewOrder = function () {
+            var selectedRecords = vm.customerCommunicationSchedules.filter(function (r) {
+                return r.selected;
+            });
 
+            if (!selectedRecords || selectedRecords.length == 0) {
+                AlertService.error("没有选中任何客户记录，无法分配！");
+                return;
+            }
+
+            if (!vm.selectedUser) {
+                AlertService.error("请选择目标用户！");
+                return;
+            }
+
+            selectedRecords.forEach(function (c) {
+                c.customer.courseConsultant = vm.selectedUser;
+            });
+
+            CustomerCommunicationSchedule.batchUpdate(selectedRecords, function (response) {
+
+                AlertService.success("操作成功！批量分配了" + response.length + "条客户数据到用户" + vm.selectedUser.firstName+ "！");
+
+            }, function (error) {
+
+                AlertService.error(error);
+            });
+
+        };
+        vm.toggleAll = function () {
+            vm.customerCommunicationSchedules.forEach(function (record) {
+                record.selected = vm.allSelected;
+            })
+        };
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -72,6 +105,9 @@
             if (vm.searchCondition.tmk) {
                 param["tmkId"] = vm.searchCondition.tmk.id;
             }
+            if (vm.searchCondition.courseConsultant) {
+                param["courseConsultantId"] = vm.searchCondition.courseConsultant.id;
+            }
             CustomerCommunicationSchedule.query(param, onSuccess, onError);
 
             function onSuccess(data, headers) {
@@ -100,6 +136,9 @@
             vm.transition();
         }
 
+        $rootScope.$on("reload_schedule", function (event) {
+            vm.loadAll();
+        });
 
         function transition() {
             $state.transitionTo($state.$current, {

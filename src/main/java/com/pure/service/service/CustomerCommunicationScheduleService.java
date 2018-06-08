@@ -4,6 +4,8 @@ import com.pure.service.domain.CustomerCommunicationSchedule;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing CustomerCommunicationSchedule.
  */
@@ -16,6 +18,8 @@ public interface CustomerCommunicationScheduleService {
      * @return the persisted entity
      */
     CustomerCommunicationSchedule save(CustomerCommunicationSchedule customerCommunicationSchedule);
+
+    List<CustomerCommunicationSchedule> batchUpdate(List<CustomerCommunicationSchedule> customerCommunicationSchedules);
 
     /**
      *  Get all the customerCommunicationSchedules.

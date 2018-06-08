@@ -7,7 +7,7 @@
 
     CustomerSigninController.$inject = ['$uibModalInstance', 'CustomerCommunicationSchedule', '$stateParams'];
 
-    function CustomerSigninController($uibModalInstance, CustomerCommunicationSchedule, $stateParams) {
+    function CustomerSigninController( $uibModalInstance, CustomerCommunicationSchedule, $stateParams) {
         var vm = this;
 
         vm.clear = clear;

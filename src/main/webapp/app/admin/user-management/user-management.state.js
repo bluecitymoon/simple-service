@@ -90,7 +90,10 @@
                     size: 'lg',
                     resolve: {
                         entity: ['User', function(User) {
-                            return User.get({login : $stateParams.login}).$promise;
+                            var user =  User.get({login : $stateParams.login}).$promise;
+
+                            angular.forEach()
+                            return user;
                         }]
                     }
                 }).result.then(function() {

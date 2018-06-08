@@ -321,16 +321,17 @@
                 parent: 'customer-communication-schedule',
                 url: '/{cid}/sign',
                 data: {
-                    authorities: ['ROLE_USER']
+                    authorities: ['ROLE_USER', "ROLE_RECEPTION"]
                 },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function( $stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'app/entities/customer/customer-signin-dialog.html',
                         controller: 'CustomerSigninController',
                         controllerAs: 'vm',
                         size: 'md'
                     }).result.then(function() {
-                         $state.go('customer-communication-schedule', null, { reload: 'customer-communication-schedule' });
+                        // $state.go('customer-communication-schedule', null, { reload: 'customer-communication-schedule' });
+                        $state.go('^', {}, { reload: false });
                     }, function() {
                          // $state.go('^');
                     });

@@ -107,9 +107,24 @@
             <div class="row">
                 <div class="col-md-3 form-group">
 
-                    <label class="col-sm-3 control-label">TMK/课程顾问</label>
+                    <label class="col-sm-3 control-label">TMK</label>
                     <div class="col-sm-9">
                         <ui-select ng-model="vm.searchCondition.tmk">
+                            <ui-select-match>
+                                {{$select.selected.firstName}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.pwis | filter: $select.search) track by item.id">
+                                <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                            ng-bind="item.login"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">课程顾问</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.courseConsultant">
                             <ui-select-match>
                                 {{$select.selected.firstName}}
                             </ui-select-match>
@@ -130,8 +145,31 @@
 
         无数据
     </div>
+<jhi-alert></jhi-alert>
 
 <div class="panel" ng-if="vm.customerCommunicationSchedules.length > 0">
+
+    <div class="pad-all">
+        <div class="row">
+
+            <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
+                <div class="input-group mar-btm">
+                    <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.pwis | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">-->
+                    <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button" ng-click="vm.batchAssignNewOrder()">分配给该课程顾问</button>
+					    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--<div class="panel-heading pad-all" style="height: 5em">-->
 
@@ -146,12 +184,12 @@
 
     <div class="panel-body">
 
-        <jhi-alert></jhi-alert>
 
         <div class="table-responsive">
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th class="text-center"><input type="checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()">全选</th>
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="customer.name"><span
@@ -179,6 +217,7 @@
                         <span class="glyphicon glyphicon-sort"></span>
                     </th>
                     <th jh-sort-by="createdDate"><span>录入时间</span>
+                    <th jh-sort-by="createdDate"><span>课程顾问</span>
                     <th jh-sort-by="createdDate"><span>户外推广人员</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <!--<th jh-sort-by="comments"><span-->
@@ -202,7 +241,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customerCommunicationSchedule in vm.customerCommunicationSchedules track by customerCommunicationSchedule.id">
+                <tr ng-repeat="customerCommunicationSchedule in vm.customerCommunicationSchedules track by customerCommunicationSchedule.id" ng-class="customerCommunicationSchedule.selected? 'bg-info': ''">
+                    <td class="text-center"><input type="checkbox" ng-model="customerCommunicationSchedule.selected"></td></td>
                     <td><a ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})">{{customerCommunicationSchedule.id}}</a>
                     </td>
                     <td>
@@ -224,17 +264,20 @@
                     <!--<td>{{customerCommunicationSchedule.createdBy}}</td>-->
                     <!--<td>{{customerCommunicationSchedule.lastModifiedBy}}</td>-->
                     <!--<td>{{customerCommunicationSchedule.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
-
+                    <td>
+                        {{customerCommunicationSchedule.customer.courseConsultant.firstName}}
+                    </td>
                     <td>
                         {{customerCommunicationSchedule.customer.newOrder.referer.firstName}}
                     </td>
+
                     <td>
-                        {{customerCommunicationSchedule.follower.login}}
+                        {{customerCommunicationSchedule.customer.salesFollower.login}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="customer.signin({id:customerCommunicationSchedule.id})"
+                                    ui-sref="customer.signin({cid:customerCommunicationSchedule.id})"
                                     class="btn btn-mint btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down">签到</span>

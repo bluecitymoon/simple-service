@@ -68,11 +68,11 @@
 
             <div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                    <li ui-sref-active="active" class="nav-item">
-                        <a ui-sref="home" class="nav-link"> <i class="fa fa-home"></i>主页
-                        </a>
-                    </li>
-                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                    <!--<li ui-sref-active="active" class="nav-item">-->
+                        <!--<a ui-sref="home" class="nav-link"> <i class="fa fa-home"></i>主页-->
+                        <!--</a>-->
+                    <!--</li>-->
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
                                 <span class="glyphicon glyphicon-user"></span>
@@ -90,7 +90,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_SALES,ROLE_PWI">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
                                 <span class="glyphicon glyphicon-registration-mark"></span>
@@ -231,7 +231,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_COURSE_CONSULTANT">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
                                 <span class="glyphicon glyphicon-share-alt"></span>
@@ -262,7 +262,7 @@
                         </ul>
 
                     </li>
-                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_COURSE_CONSULTANT">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
                                 <span class="glyphicon glyphicon-education"></span>
@@ -338,7 +338,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li uib-dropdown class="nav-item" ng-switch-when="true">
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
                                 <span class="glyphicon glyphicon-dashboard"></span>

@@ -51,6 +51,8 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private Long pwiId;
     private Long tmkId;
 
+    private Long courseConsultantId;
+
     public CustomerCommunicationScheduleCriteria() {
     }
 
@@ -180,6 +182,14 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
 
     public void setTmkId(Long tmkId) {
         this.tmkId = tmkId;
+    }
+
+    public Long getCourseConsultantId() {
+        return courseConsultantId;
+    }
+
+    public void setCourseConsultantId(Long courseConsultantId) {
+        this.courseConsultantId = courseConsultantId;
     }
 
     @Override

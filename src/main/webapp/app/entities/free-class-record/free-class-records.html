@@ -19,7 +19,7 @@
                     </button>
 
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <div class="input-group mar-btm">
                         <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">
                             <ui-select-match>

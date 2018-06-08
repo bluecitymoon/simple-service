@@ -100,6 +100,15 @@ public class CustomerCommunicationScheduleResource {
             .body(result);
     }
 
+    @PutMapping("/customer-communication-schedules/batchUpdate")
+    @Timed
+    public ResponseEntity<List<CustomerCommunicationSchedule>> batchUpdateCustomerCommunicationSchedule(@RequestBody List<CustomerCommunicationSchedule> customerCommunicationSchedules) {
+
+        List<CustomerCommunicationSchedule> result = customerCommunicationScheduleService.batchUpdate(customerCommunicationSchedules);
+        return ResponseEntity.ok()
+            .body(result);
+    }
+
     /**
      * GET  /customer-communication-schedules : get all the customerCommunicationSchedules.
      *

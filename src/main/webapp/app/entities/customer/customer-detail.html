@@ -18,7 +18,7 @@
                 </uib-tab-heading>
                 <div ng-include="'app/entities/customer/tab-customer-schedule.html'"></div>
             </uib-tab>
-            <uib-tab>
+            <uib-tab has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_COURSE_CONSULTANT">
                 <uib-tab-heading>
                     卡列表 <span class="badge badge-purple">{{vm.totalCardItems}}</span>
                 </uib-tab-heading>

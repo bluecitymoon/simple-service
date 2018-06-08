@@ -98,9 +98,18 @@
 
         <div class="form-group">
             <label data-translate="userManagement.profiles">Profiles</label>
-            <select class="form-control" multiple name="authority" ng-model="vm.user.authorities"
+            <select style="height: 150px" class="form-control" multiple name="authority" ng-model="vm.user.authorities"
                     ng-options="authority for authority in vm.authorities">
             </select>
+            <!--<ui-select ng-model="vm.user.authorities" multiple>-->
+                <!--<ui-select-match>-->
+                    <!--{{$select.selected}}-->
+                <!--</ui-select-match>-->
+                <!--<ui-select-choices repeat="item in (vm.authorities | filter: $select.search)">-->
+                    <!--<span ng-bind="item"></span>-->
+                    <!--&lt;!&ndash;<span ng-bind="item.code" class="pull-right"></span>&ndash;&gt;-->
+                <!--</ui-select-choices>-->
+            <!--</ui-select>-->
         </div>
     </div>
     <div class="modal-footer">

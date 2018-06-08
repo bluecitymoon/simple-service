@@ -111,6 +111,10 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             if (criteria.getTmkId() != null) {
                 specification = specification.and(tmkdIdEquals(criteria.getTmkId()));
             }
+            if (criteria.getCourseConsultantId() != null) {
+                specification = specification.and(courseConsultantIdEquals(criteria.getCourseConsultantId()));
+            }
+
             if (criteria.getCustomerName() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerName(), CustomerCommunicationSchedule_.customer, Customer_.name));
             }
@@ -140,4 +144,9 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
     private Specification tmkdIdEquals(Long tmkId) {
         return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.salesFollower).get(User_.id), tmkId);
     }
+
+    private Specification courseConsultantIdEquals(Long courseConsultantId) {
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.courseConsultant).get(User_.id), courseConsultantId);
+    }
+
 }
