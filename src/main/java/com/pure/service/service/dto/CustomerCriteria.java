@@ -63,6 +63,8 @@ public class CustomerCriteria implements Serializable {
 
     private LongFilter salesFollowerId;
 
+    private LongFilter courseConsultantId;
+
     private String department;
 
     public CustomerCriteria() {
@@ -232,6 +234,14 @@ public class CustomerCriteria implements Serializable {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public LongFilter getCourseConsultantId() {
+        return courseConsultantId;
+    }
+
+    public void setCourseConsultantId(LongFilter courseConsultantId) {
+        this.courseConsultantId = courseConsultantId;
     }
 
     @Override

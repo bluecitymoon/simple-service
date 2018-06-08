@@ -27,6 +27,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -149,7 +150,22 @@ public class CustomerResource {
             LongFilter userIdFilter = new LongFilter();
             userIdFilter.setEquals(currentUser.getId());
 
-            criteria.setSalesFollowerId(userIdFilter);
+            String department = criteria.getDepartment();
+            if (!StringUtils.isEmpty(department)) {
+
+                if (department.equals("market")) {
+
+                    log.debug("REST request to get Customers for sales ", currentUser.getFirstName());
+
+                    criteria.setSalesFollowerId(userIdFilter);
+
+                } else if (department.equals("operation")){
+
+                    log.debug("REST request to get Customers for course consultant ", currentUser.getFirstName());
+
+                    criteria.setCourseConsultantId(userIdFilter);
+                }
+            }
         }
 
         List<CustomerFollowLog> customerFollowLogs = new ArrayList<>();

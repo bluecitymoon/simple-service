@@ -143,6 +143,11 @@ public class CustomerQueryService extends QueryService<Customer> {
             if (criteria.getSalesFollowerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSalesFollowerId(), Customer_.salesFollower, User_.id));
             }
+
+            if (criteria.getCourseConsultantId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCourseConsultantId(), Customer_.courseConsultant, User_.id));
+            }
+
         }
         return specification;
     }
