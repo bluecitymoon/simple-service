@@ -7,18 +7,125 @@
     <h1 class="page-title" data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h1>
 </div>
 
+<div class="panel panel-primary panel-bordered-dark">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">查询新单记录</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" placeholder="客户姓名" class="form-control"
+                               ng-model="vm.searchCondition.name">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="contactPhoneNumber" placeholder="联系电话" class="form-control"
+                               ng-model="vm.searchCondition.contactPhoneNumber">
+                    </div>
+
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" name="startDate" placeholder="录入开始日期" class="form-control"
+                           ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.searchCondition.startDate"
+                           is-open="vm.datePickerOpenStatus.startDate">
+
+                </div>
+                <div class="col-md-2 form-group">
+                    <input type="text" placeholder="录入结束日期" class="form-control"
+                           ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll()"><i
+                            class="fa fa-search-minus"></i>查询
+                    </button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                            class="fa fa-trash"></i>清除
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Second line -->
+            <div class="row">
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">来源渠道</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.channel" placeholder="来源渠道">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.channels | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">PWI</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.pwi" placeholder="PWI">
+                            <ui-select-match>
+                                {{$select.selected.firstName}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
+                                <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                            ng-bind="item.login"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">销售主管</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.sales">
+                            <ui-select-match>
+                                {{$select.selected.firstName}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
+                                <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                            ng-bind="item.login"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+                <div class="col-md-2 form-group">
+
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-info btn-block" type="button"
+                            ui-sref="free-class-record.new"><i class="fa fa-plus"></i>新增
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
 <div class="panel">
     <div class="panel-body">
         <jhi-alert></jhi-alert>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-2 no-padding-left">
-                    <button class="btn btn-primary" ui-sref="free-class-record.new">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">Create new Free Class Record</span>
-                    </button>
+                <!--<div class="col-xs-2 no-padding-left">-->
+                    <!--<button class="btn btn-primary" ui-sref="free-class-record.new">-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">Create new Free Class Record</span>-->
+                    <!--</button>-->
 
-                </div>
+                <!--</div>-->
                 <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <div class="input-group mar-btm">
                         <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">

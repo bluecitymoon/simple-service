@@ -105,7 +105,7 @@
 
             <div class="panel-footer">
                 <button type="submit"
-                        ui-sref="{{ vm.previousState }}"
+                        ui-sref="free-class-record"
                         class="btn btn-info">
                     <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
                         data-translate="entity.action.back"> Back</span>
@@ -123,12 +123,12 @@
                 <!--<span class="hidden-sm-down">分配给销售人员</span>-->
                 <!--</button>-->
 
-                <button has-any-authority="ROLE_ADMIN,ROLE_SALES" type="button" ng-click="vm.assignToSales()"
+                <button has-any-authority="ROLE_ADMIN,ROLE_SALES,ROLE_HEADMASTER" type="button" ng-click="vm.assignToSales()"
                         class="btn btn-success">
                     <span class="glyphicon glyphicon-bookmark"></span>
                     <span class="hidden-sm-down">开始跟单</span>
                 </button>
-                <u><b>开始跟单后会生成一条新的客户记录，如果已有关联客户会直接显示该客户信息</b></u>
+                <!--<u><b>开始跟单后会生成一条新的客户记录，如果已有关联客户会直接显示该客户信息</b></u>-->
             </div>
         </div>
     </div>

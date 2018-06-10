@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User'];
+    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory'];
 
-    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User) {
+    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory) {
 
         var vm = this;
 
@@ -18,9 +18,16 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         // vm.pageOptions = [];
+        vm.searchCondition = {};
         vm.loadAll = loadAll;
         vm.loadAll();
         vm.allSelected = false;
+        vm.datePickerOpenStatus = {};
+        vm.channels = MarketChannelCategory.query();
+        vm.openCalendar = openCalendar;
+        vm.clearConditions = function () {
+            vm.searchCondition = {};
+        };
         vm.batchAssignNewOrder = function () {
             var selectedRecords = vm.freeClassRecords.filter(function (r) {
                 return r.selected;
@@ -75,11 +82,41 @@
         };
 
         function loadAll () {
-            FreeClassRecord.query({
+
+            var parameters = {
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
-            }, onSuccess, onError);
+            };
+
+            if (vm.searchCondition.name) {
+                parameters["personName.contains"] = vm.searchCondition.name;
+            }
+
+            if (vm.searchCondition.contactPhoneNumber) {
+                parameters["contactPhoneNumber.contains"] = vm.searchCondition.contactPhoneNumber;
+            }
+
+            if (vm.searchCondition.channel) {
+                parameters["marketChannelCategoryId.equals"] = vm.searchCondition.channel.id;
+            }
+
+            if (vm.searchCondition.startDate) {
+                parameters["createdDate.greaterOrEqualThan"] = vm.searchCondition.startDate;
+            }
+            if (vm.searchCondition.endDate) {
+                parameters["createdDate.lessOrEqualThan"] = vm.searchCondition.endDate;
+            }
+
+            if (vm.searchCondition.sales) {
+                parameters["salesFollowerId.equals"] = vm.searchCondition.sales.id;
+            }
+
+            if (vm.searchCondition.pwi) {
+                parameters["agentId.equals"] = vm.searchCondition.pwi.id;
+            }
+            FreeClassRecord.query(parameters, onSuccess, onError);
+
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -110,6 +147,9 @@
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
             });
+        }
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
         }
     }
 })();
