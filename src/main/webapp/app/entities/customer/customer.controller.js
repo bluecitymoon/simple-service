@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory'];
+    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User'];
 
-    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory) {
+    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User) {
 
         var vm = this;
 
@@ -25,6 +25,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
 
+        vm.users = User.query();
         vm.yesOrNo = [
             {id : 1, value: "已到访", visited: true},
             {id : 2, value: "未到访", visited: false}
@@ -74,6 +75,12 @@
                 parameters["createdDate.lessOrEqualThan"] = vm.searchCondition.createEndDate;
             }
 
+            if (vm.searchCondition.sales) {
+                parameters["salesFollowerId.equals"] = vm.searchCondition.sales.id;
+            }
+            if (vm.searchCondition.courseConsultant) {
+                parameters["courseConsultantId.equals"] = vm.searchCondition.courseConsultant.id;
+            }
             Customer.queryWithLog(parameters, onSuccess, onError);
 
             function sort() {

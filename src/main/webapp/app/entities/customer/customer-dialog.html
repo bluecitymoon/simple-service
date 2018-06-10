@@ -9,11 +9,11 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" ng-show="vm.customer.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   ng-model="vm.customer.id" readonly/>
-        </div>
+        <!--<div class="form-group" ng-show="vm.customer.id">-->
+            <!--<label for="id" data-translate="global.field.id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                   <!--ng-model="vm.customer.id" readonly/>-->
+        <!--</div>-->
 
         <div class="row">
             <div class="col-md-6">
@@ -148,14 +148,20 @@
 
         <div class="row">
             <div class="col-md-6">
-
                 <div class="form-group">
-                    <label data-translate="simpleServiceApp.customer.newOrder" for="field_newOrder">New Order</label>
-                    <select class="form-control" id="field_newOrder" name="newOrder" ng-model="vm.customer.newOrder"
-                            ng-options="freeClassRecord as freeClassRecord.id for freeClassRecord in vm.neworders | orderBy:'id' track by freeClassRecord.id">
+                    <label data-translate="simpleServiceApp.customer.channel" for="field_channel">Channel</label>
+                    <select class="form-control" id="field_channel" name="channel" ng-model="vm.customer.channel"
+                            ng-options="marketChannelCategory as marketChannelCategory.name for marketChannelCategory in vm.marketchannelcategories track by marketChannelCategory.id">
                         <option value=""></option>
                     </select>
                 </div>
+                <!--<div class="form-group">-->
+                    <!--<label data-translate="simpleServiceApp.customer.newOrder" for="field_newOrder">New Order</label>-->
+                    <!--<select class="form-control" id="field_newOrder" name="newOrder" ng-model="vm.customer.newOrder"-->
+                            <!--ng-options="freeClassRecord as freeClassRecord.id for freeClassRecord in vm.neworders | orderBy:'id' track by freeClassRecord.id">-->
+                        <!--<option value=""></option>-->
+                    <!--</select>-->
+                <!--</div>-->
             </div>
             <div class="col-md-6">
 
@@ -171,13 +177,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="form-group">
-                    <label data-translate="simpleServiceApp.customer.channel" for="field_channel">Channel</label>
-                    <select class="form-control" id="field_channel" name="channel" ng-model="vm.customer.channel"
-                            ng-options="marketChannelCategory as marketChannelCategory.name for marketChannelCategory in vm.marketchannelcategories track by marketChannelCategory.id">
-                        <option value=""></option>
-                    </select>
-                </div>
+
             </div>
             <div class="col-md-6"></div>
         </div>
