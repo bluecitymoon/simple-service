@@ -45,9 +45,11 @@
                     <div class="timeline-time"><b>{{log.createdDate | date: 'yyyy-MM-dd hh:mm'}}</b></div>
                 </div>
                 <div class="timeline-label">
-                    <p class="mar-no pad-btm"><a href="#" class="btn-link text-semibold">{{log.createdBy}}</a> <b>{{log.logType.name}}</b>
+                    <p class="mar-no pad-btm"><a href="" class="btn-link text-semibold">{{log.createdBy}}</a> <b>{{log.logType.name}}</b>
                     </p>
-                    <blockquote class="bq-open bq-sm"><span ng-bind-html="log.comments"></span></blockquote>
+                    <!--<blockquote class="bq-open bq-sm" ng-if="log.comments">-->
+                        <span ng-if="log.comments" ng-bind-html="log.comments"></span>
+                    <!--</blockquote>-->
                 </div>
             </div>
 
