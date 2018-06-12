@@ -4,7 +4,7 @@
 <!--}-->
 <!--</style>-->
 <div class="page-header">
-    <h1 class="page-title" data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h1>
+    <h1 class="page-title"></h1>
 </div>
 
 <div class="panel panel-primary panel-bordered-dark">
@@ -74,32 +74,38 @@
                 </div>
                 <div class="col-md-3 form-group">
 
-                    <label class="col-sm-3 control-label">引入人</label>
-                    <div class="col-sm-9">
-                        <ui-select ng-model="vm.searchCondition.pwi" placeholder="PWI">
-                            <ui-select-match>
-                                {{$select.selected.firstName}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
-                                <span ng-bind="item.firstName"></span><span class="pull-right"
-                                                                            ng-bind="item.login"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                    <div has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                        <label class="col-sm-3 control-label">引入人</label>
+                        <div class="col-sm-9">
+                            <ui-select ng-model="vm.searchCondition.pwi">
+                                <ui-select-match>
+                                    {{$select.selected.firstName}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in (vm.pwis | filter: $select.search) track by item.id">
+                                    <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                                ng-bind="item.login"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
                     </div>
+
                 </div>
                 <div class="col-md-3 form-group">
-                    <label class="col-sm-3 control-label">销售主管</label>
-                    <div class="col-sm-9">
-                        <ui-select ng-model="vm.searchCondition.sales">
-                            <ui-select-match>
-                                {{$select.selected.firstName}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
-                                <span ng-bind="item.firstName"></span><span class="pull-right"
-                                                                            ng-bind="item.login"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                    <div has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                        <label class="col-sm-3 control-label">销售主管</label>
+                        <div class="col-sm-9">
+                            <ui-select ng-model="vm.searchCondition.sales">
+                                <ui-select-match>
+                                    {{$select.selected.firstName}}
+                                </ui-select-match>
+                                <ui-select-choices repeat="item in (vm.sales | filter: $select.search) track by item.id">
+                                    <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                                ng-bind="item.login"></span>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
                     </div>
+
                 </div>
                 <div class="col-md-2 form-group">
 

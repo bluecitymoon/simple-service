@@ -21,7 +21,10 @@
         vm.openCalendar = openCalendar;
         vm.searchCondition = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
-        vm.pwis = User.query({ page: 0,  size: 1000 });
+        vm.pwis = User.getAllPwis();
+        vm.sales = User.getAllSales();
+        vm.consultants = User.getAllCourseConsultant();
+
         vm.batchAssignNewOrder = function () {
             var selectedRecords = vm.customerCommunicationSchedules.filter(function (r) {
                 return r.selected;

@@ -143,6 +143,7 @@ public class CustomerServiceImpl implements CustomerService{
             customer.setChannel(newOrder.getMarketChannelCategory());
             customer.setNewOrder(newOrder);
             customer.setBirthday(newOrder.getBirthday());
+            customer.setNewOrderResourceLocation(newOrder.getNewOrderResourceLocation());
 
             Customer savedCustomer = save(customer);
 

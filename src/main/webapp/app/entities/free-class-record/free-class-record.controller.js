@@ -25,6 +25,8 @@
         vm.datePickerOpenStatus = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
+        vm.pwis = User.getAllPwis();
+        vm.sales = User.getAllSales();
         vm.openCalendar = openCalendar;
         vm.clearConditions = function () {
             vm.searchCondition = {};
@@ -58,22 +60,22 @@
             });
 
         };
-        loadAllUsers();
-
-        function loadAllUsers () {
-            User.query({
-                page: 0,
-                size: 1000
-            }, onSuccess, onError);
-
-            function onSuccess(data) {
-                vm.users = data;
-            }
-
-            function onError(error) {
-                AlertService.error(error.data.message);
-            }
-        }
+        // loadAllUsers();
+        //
+        // function loadAllUsers () {
+        //     User.query({
+        //         page: 0,
+        //         size: 1000
+        //     }, onSuccess, onError);
+        //
+        //     function onSuccess(data) {
+        //         vm.users = data;
+        //     }
+        //
+        //     function onError(error) {
+        //         AlertService.error(error.data.message);
+        //     }
+        // }
 
         vm.toggleAll = function () {
             // vm.allSelected = !vm.allSelected;

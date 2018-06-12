@@ -155,6 +155,14 @@ public class UserResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/users/role/{role}")
+    @Timed
+    public List<User> getAllUsers(@PathVariable String role) {
+
+        List<User> users = userRepository.findAllUsersByAuthorityName(role);
+        return users;
+    }
+
     /**
      * @return a string list of the all of the roles
      */

@@ -19,7 +19,22 @@
             },
             'save': { method:'POST' },
             'update': { method:'PUT' },
-            'delete':{ method:'DELETE'}
+            'delete':{ method:'DELETE'},
+            'getAllPwis': {
+                url: "api/users/role/ROLE_PWI",
+                method: 'GET',
+                isArray: true
+            },
+            'getAllSales': {
+                url: "api/users/role/ROLE_SALES",
+                method: 'GET',
+                isArray: true
+            },
+            'getAllCourseConsultant': {
+                url: "api/users/role/ROLE_COURSE_CONSULTANT",
+                method: 'GET',
+                isArray: true
+            }
         });
 
         return service;
