@@ -15,10 +15,10 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.classagelevels = ClassAgeLevel.query();
-        vm.teachers = Teacher.query();
-        vm.classrooms = ClassRoom.query();
-        vm.courses = Course.query();
+        vm.classagelevels = ClassAgeLevel.query({ page: 0,  size: 1000 });
+        vm.teachers = Teacher.query({ page: 0,  size: 1000 });
+        vm.classrooms = ClassRoom.query({ page: 0,  size: 1000 });
+        vm.courses = Course.query({ page: 0,  size: 1000 });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

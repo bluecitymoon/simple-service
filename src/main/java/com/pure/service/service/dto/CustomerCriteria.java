@@ -67,7 +67,17 @@ public class CustomerCriteria implements Serializable {
 
     private String department;
 
+    private LongFilter locationId;
+
     public CustomerCriteria() {
+    }
+
+    public LongFilter getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(LongFilter locationId) {
+        this.locationId = locationId;
     }
 
     public LongFilter getId() {

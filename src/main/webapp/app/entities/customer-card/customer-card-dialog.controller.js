@@ -29,8 +29,8 @@
             vm.customers = Customer.query(parameters);
         }
 
-        vm.customercardtypes = CustomerCardType.query();
-        vm.courses = Course.query();
+        vm.customercardtypes = CustomerCardType.query({ page: 0,  size: 1000 });
+        vm.courses = Course.query({ page: 0,  size: 1000 });
 
         loadSingleCustomer(vm.customerId);
         $timeout(function (){

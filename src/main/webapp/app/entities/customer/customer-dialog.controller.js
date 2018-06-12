@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerDialogController', CustomerDialogController);
 
-    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Customer', 'FreeClassRecord', 'CustomerStatus', 'MarketChannelCategory'];
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Customer', 'FreeClassRecord', 'CustomerStatus', 'MarketChannelCategory', "NewOrderResourceLocation"];
 
-    function CustomerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Customer, FreeClassRecord, CustomerStatus, MarketChannelCategory) {
+    function CustomerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Customer, FreeClassRecord, CustomerStatus, MarketChannelCategory, NewOrderResourceLocation) {
         var vm = this;
 
         vm.customer = entity;
@@ -15,6 +15,8 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
+
+        vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
         vm.neworders = FreeClassRecord.query({filter: 'customer-is-null'});
         $q.all([vm.customer.$promise, vm.neworders.$promise]).then(function() {
             if (!vm.customer.newOrder || !vm.customer.newOrder.id) {
@@ -24,8 +26,8 @@
         }).then(function(newOrder) {
             vm.neworders.push(newOrder);
         });
-        vm.customerstatuses = CustomerStatus.query();
-        vm.marketchannelcategories = MarketChannelCategory.query();
+        vm.customerstatuses = CustomerStatus.query({ page: 0,  size: 1000 });
+        vm.marketchannelcategories = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.classLevels = [
             {id: 1, value: "成年"},
             {id: 2, value: "学生"},

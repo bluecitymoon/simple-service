@@ -15,8 +15,8 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.products = Product.query();
-        vm.classarrangementruleloopways = ClassArrangementRuleLoopWay.query();
+        vm.products = Product.query({ page: 0,  size: 1000 });
+        vm.classarrangementruleloopways = ClassArrangementRuleLoopWay.query({ page: 0,  size: 1000 });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

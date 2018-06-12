@@ -29,7 +29,7 @@
                 });
         };
 
-        // vm.users = User.query();
+        // vm.users = User.query({ page: 0,  size: 1000 });
         //
         // vm.searchPersonWithKeyword = function (keyword) {
         //

@@ -45,7 +45,7 @@
                     />
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-1">
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.customer.sex"
                            for="field_sex">Sex</label>
@@ -57,6 +57,23 @@
                         <option value="男">男</option>
                         <option value="女">女</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="control-label">区域来源</label>
+                    <!--<input type="text" class="form-control" name="sex" id="field_sex"-->
+                    <!--ng-model="vm.customer.sex"-->
+                    <!--/>-->
+                    <ui-select ng-model="vm.customer.newOrderResourceLocation">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.locations | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
                 </div>
             </div>
         </div>

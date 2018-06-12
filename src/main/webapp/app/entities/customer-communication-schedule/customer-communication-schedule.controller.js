@@ -16,12 +16,12 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-        vm.customerschedulestatuses = CustomerScheduleStatus.query();
+        vm.customerschedulestatuses = CustomerScheduleStatus.query({ page: 0,  size: 1000 });
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.searchCondition = {};
-        vm.channels = MarketChannelCategory.query();
-        vm.pwis = User.query();
+        vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
+        vm.pwis = User.query({ page: 0,  size: 1000 });
         vm.batchAssignNewOrder = function () {
             var selectedRecords = vm.customerCommunicationSchedules.filter(function (r) {
                 return r.selected;

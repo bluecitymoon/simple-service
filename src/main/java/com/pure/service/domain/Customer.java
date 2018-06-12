@@ -71,6 +71,8 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @ManyToOne
     private User courseConsultant;
 
+    @ManyToOne
+    private NewOrderResourceLocation newOrderResourceLocation;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -289,7 +291,16 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     public void setCourseConsultant(User courseConsultant) {
         this.courseConsultant = courseConsultant;
     }
-// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public NewOrderResourceLocation getNewOrderResourceLocation() {
+        return newOrderResourceLocation;
+    }
+
+    public void setNewOrderResourceLocation(NewOrderResourceLocation newOrderResourceLocation) {
+        this.newOrderResourceLocation = newOrderResourceLocation;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

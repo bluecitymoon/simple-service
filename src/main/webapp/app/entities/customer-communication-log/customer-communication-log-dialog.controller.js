@@ -16,9 +16,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.customercommunicationlogtypes = CustomerCommunicationLogType.query();
-        vm.customers = Customer.query();
-        vm.freeclassrecords = FreeClassRecord.query();
+        vm.customercommunicationlogtypes = CustomerCommunicationLogType.query({ page: 0,  size: 1000 });
+        vm.customers = Customer.query({ page: 0,  size: 1000 });
+        vm.freeclassrecords = FreeClassRecord.query({ page: 0,  size: 1000 });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

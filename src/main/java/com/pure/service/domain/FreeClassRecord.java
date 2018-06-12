@@ -61,6 +61,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
+    @ManyToOne
+    private NewOrderResourceLocation newOrderResourceLocation;
+
     @ManyToMany
     @JoinTable(name = "free_class_record_class_category",
                joinColumns = @JoinColumn(name="free_class_records_id", referencedColumnName="id"),
@@ -278,6 +281,14 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     public void setSalesFollower(User user) {
         this.salesFollower = user;
+    }
+
+    public NewOrderResourceLocation getNewOrderResourceLocation() {
+        return newOrderResourceLocation;
+    }
+
+    public void setNewOrderResourceLocation(NewOrderResourceLocation newOrderResourceLocation) {
+        this.newOrderResourceLocation = newOrderResourceLocation;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

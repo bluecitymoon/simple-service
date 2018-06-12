@@ -1,7 +1,7 @@
 <!--<style>-->
-    <!--.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {-->
-        <!--padding: 0px!important;-->
-    <!--}-->
+<!--.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {-->
+<!--padding: 0px!important;-->
+<!--}-->
 <!--</style>-->
 <div class="page-header">
     <h1 class="page-title" data-translate="simpleServiceApp.freeClassRecord.home.title">Free Class Records</h1>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-md-3 form-group">
 
-                    <label class="col-sm-3 control-label">PWI</label>
+                    <label class="col-sm-3 control-label">引入人</label>
                     <div class="col-sm-9">
                         <ui-select ng-model="vm.searchCondition.pwi" placeholder="PWI">
                             <ui-select-match>
@@ -110,7 +110,22 @@
                     </button>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
 
+                    <label class="col-sm-3 control-label">区域</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.location">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.locations | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
         </div>
     </form>
 </div>
@@ -120,10 +135,10 @@
         <div class="container-fluid">
             <div class="row">
                 <!--<div class="col-xs-2 no-padding-left">-->
-                    <!--<button class="btn btn-primary" ui-sref="free-class-record.new">-->
-                        <!--<span class="glyphicon glyphicon-plus"></span>-->
-                        <!--<span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">Create new Free Class Record</span>-->
-                    <!--</button>-->
+                <!--<button class="btn btn-primary" ui-sref="free-class-record.new">-->
+                <!--<span class="glyphicon glyphicon-plus"></span>-->
+                <!--<span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">Create new Free Class Record</span>-->
+                <!--</button>-->
 
                 <!--</div>-->
                 <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
@@ -133,12 +148,14 @@
                                 {{$select.selected.firstName}}
                             </ui-select-match>
                             <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
-                                <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                                <span ng-bind="item.firstName"></span><span class="pull-right"
+                                                                            ng-bind="item.login"></span>
                             </ui-select-choices>
                         </ui-select>
                         <!--<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">-->
                         <span class="input-group-btn">
-					          <button class="btn btn-primary" type="button" ng-click="vm.batchAssignNewOrder()">批量分配</button>
+					          <button class="btn btn-primary" type="button"
+                                      ng-click="vm.batchAssignNewOrder()">批量分配</button>
 					    </span>
                     </div>
                 </div>
@@ -165,7 +182,8 @@
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th class="text-center"><input type="checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()">全选</th>
+                    <th class="text-center"><input type="checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()">全选
+                    </th>
                     <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="personName"><span data-translate="simpleServiceApp.freeClassRecord.personName">Person Name</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -183,6 +201,8 @@
                     <th jh-sort-by="marketChannelCategory.name"><span
                             data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="marketChannelCategory.name"><span>区域</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="salesFollower.login"><span
                             data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
@@ -190,8 +210,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="freeClassRecord in vm.freeClassRecords track by freeClassRecord.id" ng-class="freeClassRecord.selected? 'bg-info': ''">
-                    <td class="text-center"><input type="checkbox" ng-model="freeClassRecord.selected"></td></td>
+                <tr ng-repeat="freeClassRecord in vm.freeClassRecords track by freeClassRecord.id"
+                    ng-class="freeClassRecord.selected? 'bg-info': ''">
+                    <td class="text-center"><input type="checkbox" ng-model="freeClassRecord.selected"></td>
+                    </td>
                     <!--<td><a ui-sref="free-class-record-detail({id:freeClassRecord.id})">{{freeClassRecord.id}}</a></td>-->
                     <td>{{freeClassRecord.personName}}</td>
                     <td>{{freeClassRecord.contactPhoneNumber}}</td>
@@ -201,7 +223,10 @@
                     <!--<td>{{freeClassRecord.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
                     <td>{{freeClassRecord.status}}</td>
                     <td>
-                        <a ui-sref="market-channel-category-detail({id:freeClassRecord.marketChannelCategory.id})">{{freeClassRecord.marketChannelCategory.name}}</a>
+                        {{freeClassRecord.marketChannelCategory.name}}
+                    </td>
+                    <td>
+                        {{freeClassRecord.newOrderResourceLocation.name}}
                     </td>
                     <td>
                         {{freeClassRecord.salesFollower.firstName}}

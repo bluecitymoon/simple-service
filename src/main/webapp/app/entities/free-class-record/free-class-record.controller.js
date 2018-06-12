@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory'];
+    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation'];
 
-    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory) {
+    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation) {
 
         var vm = this;
 
@@ -23,7 +23,8 @@
         vm.loadAll();
         vm.allSelected = false;
         vm.datePickerOpenStatus = {};
-        vm.channels = MarketChannelCategory.query();
+        vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
+        vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
         vm.openCalendar = openCalendar;
         vm.clearConditions = function () {
             vm.searchCondition = {};
@@ -115,6 +116,11 @@
             if (vm.searchCondition.pwi) {
                 parameters["agentId.equals"] = vm.searchCondition.pwi.id;
             }
+
+            if (vm.searchCondition.location) {
+                parameters["locationId.equals"] = vm.searchCondition.location.id;
+            }
+
             FreeClassRecord.query(parameters, onSuccess, onError);
 
             function sort() {

@@ -1,0 +1,19 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1528787564345-1">
+        <addColumn tableName="customer">
+            <column name="new_order_resource_location_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1528787564345-2">
+        <addColumn tableName="free_class_record">
+            <column name="new_order_resource_location_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1528787564345-3">
+        <addForeignKeyConstraint baseColumnNames="new_order_resource_location_id" baseTableName="customer" constraintName="FK200ciyxnikt0bxm1g0wy4mwb4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="new_order_resource_location"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1528787564345-4">
+        <addForeignKeyConstraint baseColumnNames="new_order_resource_location_id" baseTableName="free_class_record" constraintName="FKc5asuntai3ti90gq4wthy82e0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="new_order_resource_location"/>
+    </changeSet>
+</databaseChangeLog>

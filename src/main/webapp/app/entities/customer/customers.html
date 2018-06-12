@@ -124,6 +124,20 @@
                         </ui-select>
                     </div>
                 </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">区域</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.location">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.locations | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -156,8 +170,10 @@
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.sex">Sex</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                    <th jh-sort-by="status.name"><span data-translate="simpleServiceApp.customer.status">Status</span>
+                    <!--<th></th>-->
+                    <!--<th jh-sort-by="status.name"><span data-translate="simpleServiceApp.customer.status">Status</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="newOrderResourceLocation.name"><span>来源区域</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status.channel"><span
                             data-translate="simpleServiceApp.customer.channel">Channel</span> <span
@@ -184,8 +200,9 @@
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.id}}</a></td>
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.name}}</a></td>
                     <td>{{customer.sex}}</td>
-                    <td><i class="{{customer.status.icon}}"></i></td>
-                    <td><label class="{{customer.status.cssStyle}}">{{customer.status.name}}</label></td>
+                    <!--<td><i class="{{customer.status.icon}}"></i></td>-->
+                    <!--<td><label class="{{customer.status.cssStyle}}">{{customer.status.name}}</label></td>-->
+                    <td>{{customer.newOrderResourceLocation.name}}</td>
                     <td>{{customer.channel.name}}</td>
                     <td>{{customer.age}}</td>
                     <td>{{customer.contactPhoneNumber}}</td>

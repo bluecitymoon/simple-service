@@ -15,9 +15,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.customers = Customer.query();
-        vm.users = User.query();
-        vm.customerschedulestatuses = CustomerScheduleStatus.query();
+        vm.customers = Customer.query({ page: 0,  size: 1000 });
+        vm.users = User.query({ page: 0,  size: 1000 });
+        vm.customerschedulestatuses = CustomerScheduleStatus.query({ page: 0,  size: 1000 });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

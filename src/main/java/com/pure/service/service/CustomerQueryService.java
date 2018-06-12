@@ -6,6 +6,7 @@ import com.pure.service.domain.CustomerStatus_;
 import com.pure.service.domain.Customer_;
 import com.pure.service.domain.FreeClassRecord_;
 import com.pure.service.domain.MarketChannelCategory_;
+import com.pure.service.domain.NewOrderResourceLocation_;
 import com.pure.service.domain.User_;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.service.dto.CustomerCriteria;
@@ -147,7 +148,9 @@ public class CustomerQueryService extends QueryService<Customer> {
             if (criteria.getCourseConsultantId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCourseConsultantId(), Customer_.courseConsultant, User_.id));
             }
-
+            if (criteria.getLocationId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getLocationId(), Customer_.newOrderResourceLocation, NewOrderResourceLocation_.id));
+            }
         }
         return specification;
     }

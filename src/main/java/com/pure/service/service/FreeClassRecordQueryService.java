@@ -4,6 +4,7 @@ package com.pure.service.service;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.FreeClassRecord_;
 import com.pure.service.domain.MarketChannelCategory_;
+import com.pure.service.domain.NewOrderResourceLocation_;
 import com.pure.service.domain.User_;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.service.dto.FreeClassRecordCriteria;
@@ -101,6 +102,9 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             }
             if (criteria.getSalesFollowerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getSalesFollowerId(), FreeClassRecord_.salesFollower, User_.id));
+            }
+            if (criteria.getLocationId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getLocationId(), FreeClassRecord_.newOrderResourceLocation, NewOrderResourceLocation_.id));
             }
             if (criteria.getAgentId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getAgentId(), FreeClassRecord_.referer, User_.id));

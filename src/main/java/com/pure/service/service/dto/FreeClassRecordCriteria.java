@@ -44,7 +44,17 @@ public class FreeClassRecordCriteria implements Serializable {
 
     private LongFilter agentId;
 
+    private LongFilter locationId;
+
     public FreeClassRecordCriteria() {
+    }
+
+    public LongFilter getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(LongFilter locationId) {
+        this.locationId = locationId;
     }
 
     public LongFilter getId() {

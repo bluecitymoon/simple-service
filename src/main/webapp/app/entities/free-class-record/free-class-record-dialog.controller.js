@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordDialogController', FreeClassRecordDialogController);
 
-    FreeClassRecordDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'FreeClassRecord', 'MarketChannelCategory', 'ClassCategory', 'User'];
+    FreeClassRecordDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'FreeClassRecord', 'MarketChannelCategory', 'ClassCategory', 'User', 'NewOrderResourceLocation'];
 
-    function FreeClassRecordDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, FreeClassRecord, MarketChannelCategory, ClassCategory, User) {
+    function FreeClassRecordDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, FreeClassRecord, MarketChannelCategory, ClassCategory, User, NewOrderResourceLocation) {
         var vm = this;
 
         vm.freeClassRecord = entity;
@@ -15,9 +15,10 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.marketchannelcategories = MarketChannelCategory.query();
-        vm.classcategories = ClassCategory.query();
-        vm.users = User.query();
+        vm.marketchannelcategories = MarketChannelCategory.query({ page: 0,  size: 1000 });
+        vm.classcategories = ClassCategory.query({ page: 0,  size: 1000 });
+        vm.users = User.query({ page: 0,  size: 1000 });
+        vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
 
         vm.searchPersonWithKeyword = function (keyword) {
 

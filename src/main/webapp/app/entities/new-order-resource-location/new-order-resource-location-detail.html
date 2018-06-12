@@ -1,0 +1,36 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.newOrderResourceLocation.detail.title">New Order Resource
+        Locations</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.newOrderResourceLocation.name">Name</span></dt>
+            <dd>
+                <span>{{vm.newOrderResourceLocation.name}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.newOrderResourceLocation.code">Code</span></dt>
+            <dd>
+                <span>{{vm.newOrderResourceLocation.code}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.newOrderResourceLocation.description">Description</span></dt>
+            <dd>
+                <span>{{vm.newOrderResourceLocation.description}}</span>
+            </dd>
+        </dl>
+
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button" ui-sref="new-order-resource-location-detail.edit({id:vm.newOrderResourceLocation.id})"
+                class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+        </button>
+    </div>
+</div>

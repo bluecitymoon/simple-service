@@ -9,11 +9,11 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.freeClassRecord.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                   ng-model="vm.freeClassRecord.id" readonly/>
-        </div>
+        <!--<div class="form-group" ng-show="vm.freeClassRecord.id">-->
+            <!--<label for="id" data-translate="global.field.id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                   <!--ng-model="vm.freeClassRecord.id" readonly/>-->
+        <!--</div>-->
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -49,6 +49,37 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    <label>区域</label>
+                    <ui-select ng-model="vm.freeClassRecord.newOrderResourceLocation">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.locations | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>引入人</label>
+                    <ui-select ng-model="vm.freeClassRecord.referer">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
                     <label data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</label>
                     <!--<select class="form-control" id="field_salesFollower" name="salesFollower" ng-model="vm.freeClassRecord.salesFollower" ng-options="user as user.login for user in vm.users track by user.id">-->
                     <!--<option value=""></option>-->
@@ -67,8 +98,6 @@
                 </div>
             </div>
         </div>
-
-
         <!--<div class="form-group">-->
         <!--<label class="control-label" data-translate="simpleServiceApp.freeClassRecord.createdBy" for="field_createdBy">Created By</label>-->
         <!--<input type="text" class="form-control" name="createdBy" id="field_createdBy"-->

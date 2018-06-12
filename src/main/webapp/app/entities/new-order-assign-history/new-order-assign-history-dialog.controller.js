@@ -15,7 +15,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.freeclassrecords = FreeClassRecord.query();
+        vm.freeclassrecords = FreeClassRecord.query({ page: 0,  size: 1000 });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

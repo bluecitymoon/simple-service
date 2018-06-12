@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User'];
+    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation'];
 
-    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User) {
+    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation) {
 
         var vm = this;
 
@@ -21,11 +21,12 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.searchCondition = {};
-        vm.channels = MarketChannelCategory.query();
+        vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
 
-        vm.users = User.query();
+        vm.users = User.query({ page: 0,  size: 1000 });
+        vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
         vm.yesOrNo = [
             {id : 1, value: "已到访", visited: true},
             {id : 2, value: "未到访", visited: false}
@@ -80,6 +81,9 @@
             }
             if (vm.searchCondition.courseConsultant) {
                 parameters["courseConsultantId.equals"] = vm.searchCondition.courseConsultant.id;
+            }
+            if (vm.searchCondition.location) {
+                parameters["locationId.equals"] = vm.searchCondition.location.id;
             }
             Customer.queryWithLog(parameters, onSuccess, onError);
 
