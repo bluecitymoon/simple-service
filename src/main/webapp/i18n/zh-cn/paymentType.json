@@ -1,0 +1,22 @@
+{
+    "simpleServiceApp": {
+        "paymentType" : {
+            "home": {
+                "title": "支付方式",
+                "createLabel": "录入",
+                "createOrEditLabel": "管理"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "支付方式"
+            },
+            "name": "名称",
+            "code": "代码"
+        }
+    }
+}

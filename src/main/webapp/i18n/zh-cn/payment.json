@@ -1,0 +1,33 @@
+{
+    "simpleServiceApp": {
+        "payment" : {
+            "home": {
+                "title": "支出",
+                "createLabel": "录入支出",
+                "createOrEditLabel": "管理支出"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "支出"
+            },
+            "projectName": "项目名称",
+            "estimateAmount": "预算费用",
+            "actualAmount": "实际费用",
+            "paied": "已支付",
+            "unpaid": "未支付",
+            "paidDate": "付款日期",
+            "comments": "备注",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改日期",
+            "paidUser": "支付人",
+            "paymentType": "支付方式"
+        }
+    }
+}

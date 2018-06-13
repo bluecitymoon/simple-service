@@ -1,0 +1,76 @@
+<div class="page-header">
+    <h1 class="page-title">支付详情</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+
+<div class="panel">
+    <div class="panel-body">
+
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.payment.projectName">Project Name</span></dt>
+            <dd>
+                <span>{{vm.payment.projectName}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.estimateAmount">Estimate Amount</span></dt>
+            <dd>
+                <span>{{vm.payment.estimateAmount}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.actualAmount">Actual Amount</span></dt>
+            <dd>
+                <span>{{vm.payment.actualAmount}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.paied">Paied</span></dt>
+            <dd>
+                <span>{{vm.payment.paied}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.unpaid">Unpaid</span></dt>
+            <dd>
+                <span>{{vm.payment.unpaid}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.paidDate">Paid Date</span></dt>
+            <dd>
+                <span>{{vm.payment.paidDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.comments">Comments</span></dt>
+            <dd>
+                <span>{{vm.payment.comments}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.createdBy">Created By</span></dt>
+            <dd>
+                <span>{{vm.payment.createdBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.createdDate">Created Date</span></dt>
+            <dd>
+                <span>{{vm.payment.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.lastModifiedBy">Last Modified By</span></dt>
+            <dd>
+                <span>{{vm.payment.lastModifiedBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.lastModifiedDate">Last Modified Date</span></dt>
+            <dd>
+                <span>{{vm.payment.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.paidUser">Paid User</span></dt>
+            <dd>
+                {{vm.payment.paidUser.login}}
+            </dd>
+            <dt><span data-translate="simpleServiceApp.payment.paymentType">Payment Type</span></dt>
+            <dd>
+                <a ui-sref="payment-type-detail({id:vm.payment.paymentType.id})">{{vm.payment.paymentType.name}}</a>
+            </dd>
+        </dl>
+
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button" ui-sref="payment-detail.edit({id:vm.payment.id})" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+        </button>
+    </div>
+</div>

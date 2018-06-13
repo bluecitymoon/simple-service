@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180613084441",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "payment_type",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

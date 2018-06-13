@@ -1,0 +1,111 @@
+<div class="page-header">
+    <h1 class="page-title">支出列表</h1>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="payment.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span data-translate="simpleServiceApp.payment.home.createLabel">
+                        Create new Payment
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="projectName"><span data-translate="simpleServiceApp.payment.projectName">Project Name</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estimateAmount"><span data-translate="simpleServiceApp.payment.estimateAmount">Estimate Amount</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actualAmount"><span data-translate="simpleServiceApp.payment.actualAmount">Actual Amount</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paied"><span data-translate="simpleServiceApp.payment.paied">Paied</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="unpaid"><span data-translate="simpleServiceApp.payment.unpaid">Unpaid</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paidDate"><span data-translate="simpleServiceApp.payment.paidDate">Paid Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.payment.comments">Comments</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span
+                            data-translate="simpleServiceApp.payment.createdBy">Created By</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.payment.createdDate">Created Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.payment.lastModifiedBy">Last Modified By</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.payment.lastModifiedDate">Last Modified Date</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="paidUser.login"><span
+                            data-translate="simpleServiceApp.payment.paidUser">Paid User</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="paymentType.name"><span data-translate="simpleServiceApp.payment.paymentType">Payment Type</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="payment in vm.payments track by payment.id">
+                    <td><a ui-sref="payment-detail({id:payment.id})">{{payment.id}}</a></td>
+                    <td>{{payment.projectName}}</td>
+                    <td>{{payment.estimateAmount}}</td>
+                    <td>{{payment.actualAmount}}</td>
+                    <td>{{payment.paied}}</td>
+                    <td>{{payment.unpaid}}</td>
+                    <td>{{payment.paidDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{payment.comments}}</td>
+                    <td>{{payment.createdBy}}</td>
+                    <td>{{payment.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <!--<td>{{payment.lastModifiedBy}}</td>-->
+                    <!--<td>{{payment.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
+                    <td>
+                        {{payment.paidUser.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="payment-type-detail({id:payment.paymentType.id})">{{payment.paymentType.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="payment-detail({id:payment.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="payment.edit({id:payment.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="payment.delete({id:payment.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
+    </div>
+</div>

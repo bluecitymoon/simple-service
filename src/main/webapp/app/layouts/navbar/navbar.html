@@ -268,6 +268,7 @@
                         </ul>
 
                     </li>
+
                     <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_EDUCATION_ADMIN">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
@@ -344,6 +345,39 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-jpy"></span>
+                                <span class="hidden-sm">
+                                    财务部
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li>
+                                <a ui-sref="payment">
+                                    <span class="glyphicon glyphicon-credit-card"></span>
+                                    <span>支出列表</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    <span class="glyphicon glyphicon-file"></span>
+                                    <span>收入列表</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="payment-type">
+                                    <span class="glyphicon glyphicon-signal"></span>
+                                    <span>支付方式管理</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
                     <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>

@@ -1,0 +1,71 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "paidUser",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "payment"
+        },
+        {
+            "relationshipName": "paymentType",
+            "otherEntityName": "paymentType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "projectName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "estimateAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "actualAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "paied",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "unpaid",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "paidDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180613084942",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "payment",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}
