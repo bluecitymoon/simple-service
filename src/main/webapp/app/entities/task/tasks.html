@@ -1,0 +1,82 @@
+<div>
+    <h2 data-translate="simpleServiceApp.task.home.title">Tasks</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="task.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.task.home.createLabel">
+                        Create new Task
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span data-translate="simpleServiceApp.task.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estimateExecuteDate"><span data-translate="simpleServiceApp.task.estimateExecuteDate">Estimate Execute Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.task.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.task.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.task.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.task.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="assignee.login"><span data-translate="simpleServiceApp.task.assignee">Assignee</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="taskStatus.name"><span data-translate="simpleServiceApp.task.taskStatus">Task Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reporter.firstName"><span data-translate="simpleServiceApp.task.reporter">Reporter</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in vm.tasks track by task.id">
+                    <td><a ui-sref="task-detail({id:task.id})">{{task.id}}</a></td>
+                    <td>{{task.description}}</td>
+                    <td>{{task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{task.createdBy}}</td>
+                    <td>{{task.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{task.lastModifiedBy}}</td>
+                    <td>{{task.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        {{task.assignee.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="task-status-detail({id:task.taskStatus.id})">{{task.taskStatus.name}}</a>
+                    </td>
+                    <td>
+                        {{task.reporter.firstName}}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="task-detail({id:task.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="task.edit({id:task.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="task.delete({id:task.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

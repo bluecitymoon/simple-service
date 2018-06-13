@@ -1,0 +1,27 @@
+
+<div>
+    <h2><span data-translate="simpleServiceApp.customerTrackTask.detail.title">Customer Track Task</span> {{vm.customerTrackTask.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerTrackTask.customer">Customer</span></dt>
+        <dd>
+            <a ui-sref="customer-detail({id:vm.customerTrackTask.customer.id})">{{vm.customerTrackTask.customer.id}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerTrackTask.task">Task</span></dt>
+        <dd>
+            <a ui-sref="task-detail({id:vm.customerTrackTask.task.id})">{{vm.customerTrackTask.task.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-track-task-detail.edit({id:vm.customerTrackTask.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

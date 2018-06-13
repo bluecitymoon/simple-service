@@ -1,0 +1,22 @@
+{
+    "simpleServiceApp": {
+        "customerTrackTask" : {
+            "home": {
+                "title": "Customer Track Tasks",
+                "createLabel": "Create a new Customer Track Task",
+                "createOrEditLabel": "Create or edit a Customer Track Task"
+            },
+            "created": "A new Customer Track Task is created with identifier {{ param }}",
+            "updated": "A Customer Track Task is updated with identifier {{ param }}",
+            "deleted": "A Customer Track Task is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Track Task {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Track Task"
+            },
+            "customer": "Customer",
+            "task": "Task"
+        }
+    }
+}

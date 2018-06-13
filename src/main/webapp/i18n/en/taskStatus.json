@@ -1,0 +1,23 @@
+{
+    "simpleServiceApp": {
+        "taskStatus" : {
+            "home": {
+                "title": "Task Statuses",
+                "createLabel": "Create a new Task Status",
+                "createOrEditLabel": "Create or edit a Task Status"
+            },
+            "created": "A new Task Status is created with identifier {{ param }}",
+            "updated": "A Task Status is updated with identifier {{ param }}",
+            "deleted": "A Task Status is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Task Status {{ id }}?"
+            },
+            "detail": {
+                "title": "Task Status"
+            },
+            "name": "Name",
+            "code": "Code",
+            "labelCss": "Label Css"
+        }
+    }
+}

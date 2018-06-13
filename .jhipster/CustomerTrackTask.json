@@ -1,0 +1,26 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityRelationshipName": "customerTrackTask"
+        },
+        {
+            "relationshipName": "task",
+            "otherEntityName": "task",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "customerTrackTask"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20180613130336",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_track_task",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

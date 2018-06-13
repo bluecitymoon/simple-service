@@ -38,6 +38,9 @@
                 "newOrderResourceLocation": "New Order Resource Location",
                 "paymentType": "Payment Type",
                 "payment": "Payment",
+                "task": "Task",
+                "taskStatus": "Task Status",
+                "customerTrackTask": "Customer Track Task",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
