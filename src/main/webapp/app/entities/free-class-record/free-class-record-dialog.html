@@ -78,7 +78,7 @@
                     </ui-select>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                 <div class="form-group">
                     <label data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</label>
                     <!--<select class="form-control" id="field_salesFollower" name="salesFollower" ng-model="vm.freeClassRecord.salesFollower" ng-options="user as user.login for user in vm.users track by user.id">-->

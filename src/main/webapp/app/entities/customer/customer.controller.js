@@ -25,7 +25,10 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
 
-        vm.users = User.query({ page: 0,  size: 1000 });
+        // vm.users = User.query({ page: 0,  size: 1000 });
+        // vm.pwis = User.getAllPwis();
+        vm.sales = User.getAllSales();
+        vm.consultants = User.getAllCourseConsultant();
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
         vm.yesOrNo = [
             {id : 1, value: "已到访", visited: true},
