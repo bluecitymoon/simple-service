@@ -21,7 +21,7 @@ public class CustomerTrackTask implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Task task;
 

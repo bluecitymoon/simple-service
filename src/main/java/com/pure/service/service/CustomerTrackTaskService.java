@@ -39,4 +39,6 @@ public interface CustomerTrackTaskService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    CustomerTrackTask closeTask(CustomerTrackTask customerTrackTask);
 }

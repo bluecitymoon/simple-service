@@ -2,21 +2,21 @@
     "simpleServiceApp": {
         "customerTrackTask" : {
             "home": {
-                "title": "Customer Track Tasks",
-                "createLabel": "Create a new Customer Track Task",
-                "createOrEditLabel": "Create or edit a Customer Track Task"
+                "title": "客户追踪任务",
+                "createLabel": "录入客户追踪任务",
+                "createOrEditLabel": "录入/修改追踪任务"
             },
-            "created": "A new Customer Track Task is created with identifier {{ param }}",
+            "created": "任务已创建！",
             "updated": "A Customer Track Task is updated with identifier {{ param }}",
             "deleted": "A Customer Track Task is deleted with identifier {{ param }}",
             "delete": {
                 "question": "Are you sure you want to delete Customer Track Task {{ id }}?"
             },
             "detail": {
-                "title": "Customer Track Task"
+                "title": "客户追踪任务"
             },
-            "customer": "Customer",
-            "task": "Task"
+            "customer": "客户",
+            "task": "任务"
         }
     }
 }

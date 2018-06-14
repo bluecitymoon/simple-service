@@ -1,0 +1,50 @@
+<div class="panel">
+
+    <div class="panel-title">
+        <div class="panel-control">
+            <button type="button" ui-sref="customer-detail.new-task({id:vm.customer.id})"
+                    class="btn btn-primary">
+                <span class="fa fa-tasks"></span>
+                <span>创建下一次跟踪任务</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">序号</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="estimateExecuteDate"><span data-translate="simpleServiceApp.task.estimateExecuteDate">Estimate Execute Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>状态</th>
+                    <th jh-sort-by="description"><span data-translate="simpleServiceApp.task.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span>执行人</span> </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customerTrackTask in vm.customerTrackTasks track by customerTrackTask.id">
+                    <td><a ui-sref="task-detail({id:task.id})">{{customerTrackTask.task.id}}</a></td>
+                    <td>{{customerTrackTask.task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td><label class="{{customerTrackTask.task.taskStatus.labelCss}}">{{customerTrackTask.task.taskStatus.name}}</label></td>
+                    <td>{{customerTrackTask.task.description}}</td>
+                    <td>{{customerTrackTask.task.assignee.firstName}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ng-click="vm.closeTask(customerTrackTask)"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-window-close"></span>
+                                <span>关闭任务</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

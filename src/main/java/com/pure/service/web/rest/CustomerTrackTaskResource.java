@@ -7,6 +7,7 @@ import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CustomerTrackTaskCriteria;
 import com.pure.service.service.CustomerTrackTaskQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -103,6 +104,24 @@ public class CustomerTrackTaskResource {
     }
 
     /**
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of customerTrackTasks in body
+     */
+    @GetMapping("/customer-track-tasks/customer/{cid}")
+    @Timed
+    public List<CustomerTrackTask> getAllCustomerTrackTasks(@PathVariable Long cid) {
+        CustomerTrackTaskCriteria criteria = new CustomerTrackTaskCriteria();
+
+        LongFilter customerIdFilter = new LongFilter();
+        customerIdFilter.setEquals(cid);
+        criteria.setCustomerId(customerIdFilter);
+
+        return customerTrackTaskQueryService.findByCriteria(criteria);
+    }
+
+
+
+    /**
      * GET  /customer-track-tasks/:id : get the "id" customerTrackTask.
      *
      * @param id the id of the customerTrackTask to retrieve
@@ -114,6 +133,16 @@ public class CustomerTrackTaskResource {
         log.debug("REST request to get CustomerTrackTask : {}", id);
         CustomerTrackTask customerTrackTask = customerTrackTaskService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(customerTrackTask));
+    }
+
+    @GetMapping("/customer-track-tasks/close/{id}")
+    @Timed
+    public ResponseEntity<CustomerTrackTask> closeCustomerTrackTask(@PathVariable Long id) {
+        log.debug("REST request to get CustomerTrackTask : {}", id);
+        CustomerTrackTask customerTrackTask = customerTrackTaskService.findOne(id);
+
+
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(customerTrackTaskService.closeTask(customerTrackTask)));
     }
 
     /**

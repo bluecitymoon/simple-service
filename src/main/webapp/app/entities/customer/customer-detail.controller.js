@@ -1,43 +1,66 @@
-(function() {
+(function () {
     'use strict';
 
     angular
         .module('simpleServiceApp')
         .controller('CustomerDetailController', CustomerDetailController);
 
-    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks', 'CustomerCard'];
+    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks', 'CustomerCard', 'CustomerTrackTask', 'AlertService'];
 
-    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks, CustomerCard) {
+    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks, CustomerCard, CustomerTrackTask, AlertService) {
         var vm = this;
 
         vm.customer = entity;
         vm.previousState = previousState.name;
         vm.logs = [];
         vm.classLevels = [
-            {id: 1, value: "”◊∂˘‘∞"},
-            {id: 2, value: "–°—ß"},
-            {id: 3, value: "≥ı÷–"},
-            {id: 4, value: "∏ﬂ÷–"}
+            {id: 1, value: "ÂπºÂÑøÂõ≠"},
+            {id: 2, value: "Â∞èÂ≠¶"},
+            {id: 3, value: "Âàù‰∏≠"},
+            {id: 4, value: "È´ò‰∏≠"}
         ];
-        var unsubscribe = $rootScope.$on('simpleServiceApp:customerUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('simpleServiceApp:customerUpdate', function (event, result) {
             vm.customer = result;
         });
-        var unsubscribeLogEvent = $rootScope.$on('simpleServiceApp:customerCommunicationLogUpdate', function(event, result) {
+        var unsubscribeLogEvent = $rootScope.$on('simpleServiceApp:customerCommunicationLogUpdate', function (event, result) {
             vm.logs.push(result);
         });
-        var unsubscribeLogGenerated = $rootScope.$on('simpleServiceApp:customerCommunicationNewLogGenerated', function(event, result) {
+        var unsubscribeLogGenerated = $rootScope.$on('simpleServiceApp:customerCommunicationNewLogGenerated', function (event, result) {
             loadCustomerlogs();
             loadAllSchedules();
         });
 
-        var unsubscribeCardCreated = $rootScope.$on('simpleServiceApp:customerCardUpdate', function(event, result) {
+        var unsubscribeCardCreated = $rootScope.$on('simpleServiceApp:customerCardUpdate', function (event, result) {
             loadAllCards();
         });
 
+        var unsubscribeTaskUpdate = $rootScope.$on('simpleServiceApp:taskUpdate', function (event, result) {
+            loadAllCustomerTrackTasks();
+        });
+
         $scope.$on('$destroy', unsubscribe);
+
+        vm.closeTask = function (customerTrackTask) {
+            CustomerTrackTask.closeTask({id: customerTrackTask.id}, function (response) {
+                AlertService.success("Êìç‰ΩúÊàêÂäüÔºÅ");
+
+                loadAllCustomerTrackTasks();
+            });
+        };
         loadCustomerlogs();
         loadAllSchedules();
         loadAllCards();
+        loadAllCustomerTrackTasks();
+
+        function loadAllCustomerTrackTasks() {
+            CustomerTrackTask.getCustomerTrackTasks({cid: vm.customer.id},
+                function (response) {
+                    vm.customerTrackTasks = response;
+                },
+                function (error) {
+
+                });
+        }
 
         function loadCustomerlogs() {
 
@@ -71,6 +94,7 @@
                 vm.queryCount = vm.totalItems;
                 vm.customerCommunicationSchedules = data;
             }
+
             function onError(error) {
                 AlertService.error(error.data.message);
             }
@@ -98,11 +122,12 @@
             function onError(error) {
                 AlertService.error(error.data.message);
             }
-
         };
+
         $scope.$on('$destroy', unsubscribe);
         $scope.$on('$destroy', unsubscribeLogEvent);
         $scope.$on('$destroy', unsubscribeLogGenerated);
         $scope.$on('$destroy', unsubscribeCardCreated);
+        $scope.$on('$destroy', unsubscribeTaskUpdate);
     }
 })();

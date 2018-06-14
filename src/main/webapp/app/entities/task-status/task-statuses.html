@@ -1,31 +1,41 @@
-<div>
-    <h2 data-translate="simpleServiceApp.taskStatus.home.title">Task Statuses</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="task-status.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.taskStatus.home.createLabel">
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.taskStatus.home.title"></h1>
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="task-status.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span data-translate="simpleServiceApp.taskStatus.home.createLabel">
                         Create new Task Status
                     </span>
-                </button>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+        <br/>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.taskStatus.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="code"><span data-translate="simpleServiceApp.taskStatus.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="labelCss"><span data-translate="simpleServiceApp.taskStatus.labelCss">Label Css</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.taskStatus.name">Name</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span data-translate="simpleServiceApp.taskStatus.code">Code</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="labelCss"><span
+                            data-translate="simpleServiceApp.taskStatus.labelCss">Label Css</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="taskStatus in vm.taskStatuses track by taskStatus.id">
                     <td><a ui-sref="task-status-detail({id:taskStatus.id})">{{taskStatus.id}}</a></td>
                     <td>{{taskStatus.name}}</td>
@@ -54,11 +64,13 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
 </div>

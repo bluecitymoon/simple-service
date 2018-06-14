@@ -20,7 +20,16 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            "getCustomerTrackTasks": {
+                url: "api/customer-track-tasks/customer/:cid",
+                method: 'GET',
+                isArray: true
+            },
+            "closeTask": {
+                url: "api/customer-track-tasks/close/:id",
+                method: 'GET'
+            }
         });
     }
 })();

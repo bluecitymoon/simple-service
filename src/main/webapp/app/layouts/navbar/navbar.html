@@ -128,18 +128,7 @@
                                     <!--<span>TMK确认到访任务</span>-->
                                 <!--</a>-->
                             <!--</li>-->
-                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                                <a ui-sref="market-channel-category">
-                                    <span class="glyphicon glyphicon-bookmark"></span>
-                                    <span>渠道管理</span>
-                                </a>
-                            </li>
-                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                                <a ui-sref="new-order-resource-location">
-                                    <span class="glyphicon glyphicon-baby-formula"></span>
-                                    <span>来源区域管理</span>
-                                </a>
-                            </li>
+
                             <li>
                                 <a ui-sref="home">
                                     <span class="glyphicon glyphicon-tags"></span>
@@ -368,6 +357,47 @@
                                     <span>收入列表</span>
                                 </a>
                             </li>
+                            <li>
+                                <a ui-sref="payment-type">
+                                    <span class="glyphicon glyphicon-signal"></span>
+                                    <span>支付方式管理</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-king"></span>
+                                <span class="hidden-sm">
+                                    数据配置
+                                </span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+
+                            <li class="dropdown-header">市场部</li>
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="market-channel-category">
+                                    <span class="glyphicon glyphicon-bookmark"></span>
+                                    <span>渠道管理</span>
+                                </a>
+                            </li>
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="new-order-resource-location">
+                                    <span class="glyphicon glyphicon-baby-formula"></span>
+                                    <span>来源区域管理</span>
+                                </a>
+                            </li>
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="task-status">
+                                    <span class="fa fa-book"></span>
+                                    <span>任务状态</span>
+                                </a>
+                            </li>
+                            <li class="dropdown-header">财务部</li>
                             <li>
                                 <a ui-sref="payment-type">
                                     <span class="glyphicon glyphicon-signal"></span>

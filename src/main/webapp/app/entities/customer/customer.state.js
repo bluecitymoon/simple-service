@@ -47,6 +47,8 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('customer');
+                    $translatePartialLoader.addPart('task');
+                    $translatePartialLoader.addPart('customerTrackTask');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -180,9 +182,9 @@
             .state('customer.schedule', {
                 parent: 'customer',
                 url: '/{id}/schedule',
-                // data: {
-                //     authorities: ['ROLE_USER']
-                // },
+                data: {
+                    authorities: ['ROLE_USER']
+                },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
                         templateUrl: 'app/entities/customer/customer-schedule-dialog.html',
@@ -202,6 +204,7 @@
                     });
                 }]
             })
+
             .state('customer-detail.signin_on_detail', {
                 parent: 'customer-detail',
                 url: '/detail/sign/{cid}',
@@ -214,6 +217,31 @@
                         controller: 'CustomerSigninController',
                         controllerAs: 'vm',
                         size: 'md'
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
+            .state('customer-detail.new-task', {
+                parent: 'customer-detail',
+                url: '/detail/newtask',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer/customer-track-dialog.html',
+                        controller: 'CustomerTaskDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Customer', function (Customer) {
+                                return Customer.get({id: $stateParams.id}).$promise;
+                            }]
+                        }
                     }).result.then(function() {
                         $state.go('^', {}, { reload: false });
                     }, function() {
