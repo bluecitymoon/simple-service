@@ -126,6 +126,9 @@
                             return {
                                 name: null,
                                 code: null,
+                                totalMoneyAmount: null,
+                                classCount: null,
+                                totalMinutes: null,
                                 id: null
                             };
                         }

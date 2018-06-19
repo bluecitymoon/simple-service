@@ -32,6 +32,15 @@
         vm.customercardtypes = CustomerCardType.query({ page: 0,  size: 1000 });
         vm.courses = Course.query({ page: 0,  size: 1000 });
 
+        $scope.$watch("vm.customerCard.customerCardType", function (newVal, oldVal) {
+
+            if (newVal) {
+                vm.customerCard.totalMoneyAmount = newVal.totalMoneyAmount;
+                vm.customerCard.classCount = newVal.classCount;
+                vm.customerCard.totalMinutes = newVal.totalMinutes;
+            }
+        });
+
         loadSingleCustomer(vm.customerId);
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

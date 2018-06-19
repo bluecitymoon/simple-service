@@ -9,7 +9,7 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
 
-        <div class="form-group" ng-if="">
+        <div class="form-group" ng-if="!vm.customerId">
             <label data-translate="simpleServiceApp.customerCard.customer">Customer</label>
             <ui-select ng-model="vm.customerCard.customer">
                 <ui-select-match>
@@ -33,13 +33,21 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label data-translate="simpleServiceApp.customerCard.customerCardType" for="field_customerCardType">Customer
+                    <label data-translate="simpleServiceApp.customerCard.customerCardType">Customer
                         Card Type</label>
-                    <select class="form-control" id="field_customerCardType" name="customerCardType"
-                            ng-model="vm.customerCard.customerCardType"
-                            ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">
-                        <option value=""></option>
-                    </select>
+                    <ui-select ng-model="vm.customerCard.customerCardType">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.customercardtypes | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--<select class="form-control" id="field_customerCardType" name="customerCardType"-->
+                            <!--ng-model="vm.customerCard.customerCardType"-->
+                            <!--ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">-->
+                        <!--<option value=""></option>-->
+                    <!--</select>-->
                 </div>
             </div>
         </div>

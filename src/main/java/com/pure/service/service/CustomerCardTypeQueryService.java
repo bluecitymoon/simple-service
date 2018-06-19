@@ -78,6 +78,15 @@ public class CustomerCardTypeQueryService extends QueryService<CustomerCardType>
             if (criteria.getCode() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCode(), CustomerCardType_.code));
             }
+            if (criteria.getTotalMoneyAmount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTotalMoneyAmount(), CustomerCardType_.totalMoneyAmount));
+            }
+            if (criteria.getClassCount() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getClassCount(), CustomerCardType_.classCount));
+            }
+            if (criteria.getTotalMinutes() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getTotalMinutes(), CustomerCardType_.totalMinutes));
+            }
         }
         return specification;
     }

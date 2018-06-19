@@ -32,6 +32,12 @@ public class CustomerCardTypeCriteria implements Serializable {
 
     private StringFilter code;
 
+    private FloatFilter totalMoneyAmount;
+
+    private IntegerFilter classCount;
+
+    private IntegerFilter totalMinutes;
+
     public CustomerCardTypeCriteria() {
     }
 
@@ -59,12 +65,39 @@ public class CustomerCardTypeCriteria implements Serializable {
         this.code = code;
     }
 
+    public FloatFilter getTotalMoneyAmount() {
+        return totalMoneyAmount;
+    }
+
+    public void setTotalMoneyAmount(FloatFilter totalMoneyAmount) {
+        this.totalMoneyAmount = totalMoneyAmount;
+    }
+
+    public IntegerFilter getClassCount() {
+        return classCount;
+    }
+
+    public void setClassCount(IntegerFilter classCount) {
+        this.classCount = classCount;
+    }
+
+    public IntegerFilter getTotalMinutes() {
+        return totalMinutes;
+    }
+
+    public void setTotalMinutes(IntegerFilter totalMinutes) {
+        this.totalMinutes = totalMinutes;
+    }
+
     @Override
     public String toString() {
         return "CustomerCardTypeCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (code != null ? "code=" + code + ", " : "") +
+                (totalMoneyAmount != null ? "totalMoneyAmount=" + totalMoneyAmount + ", " : "") +
+                (classCount != null ? "classCount=" + classCount + ", " : "") +
+                (totalMinutes != null ? "totalMinutes=" + totalMinutes + ", " : "") +
             "}";
     }
 

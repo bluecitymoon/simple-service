@@ -1,0 +1,36 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1529392275548-1">
+        <addColumn tableName="customer_card_type">
+            <column name="class_count" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-2">
+        <addColumn tableName="customer_card_type">
+            <column name="total_minutes" type="integer"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-3">
+        <addColumn tableName="customer_card_type">
+            <column name="total_money_amount" type="float"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-5">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="marketing_new_order_plan"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-6">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="payment"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-7">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="task"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-8">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="marketing_new_order_plan"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-9">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="payment"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1529392275548-10">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="task"/>
+    </changeSet>
+</databaseChangeLog>

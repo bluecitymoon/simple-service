@@ -16,7 +16,10 @@
                 "title": "卡类型"
             },
             "name": "名称",
-            "code": "代码"
+            "code": "代码",
+            "totalMoneyAmount": "总金额",
+            "classCount": "课时",
+            "totalMinutes": "总时长"
         }
     }
 }
