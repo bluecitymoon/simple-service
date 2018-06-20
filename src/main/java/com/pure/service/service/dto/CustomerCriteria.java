@@ -69,6 +69,10 @@ public class CustomerCriteria implements Serializable {
 
     private LongFilter locationId;
 
+    private StringFilter trackStatus;
+
+    private InstantFilter nextTrackDate;
+
     public CustomerCriteria() {
     }
 
@@ -252,6 +256,22 @@ public class CustomerCriteria implements Serializable {
 
     public void setCourseConsultantId(LongFilter courseConsultantId) {
         this.courseConsultantId = courseConsultantId;
+    }
+
+    public StringFilter getTrackStatus() {
+        return trackStatus;
+    }
+
+    public void setTrackStatus(StringFilter trackStatus) {
+        this.trackStatus = trackStatus;
+    }
+
+    public InstantFilter getNextTrackDate() {
+        return nextTrackDate;
+    }
+
+    public void setNextTrackDate(InstantFilter nextTrackDate) {
+        this.nextTrackDate = nextTrackDate;
     }
 
     @Override

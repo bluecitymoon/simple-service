@@ -123,6 +123,13 @@ public class CustomerQueryService extends QueryService<Customer> {
             if (criteria.getParentContractNumber() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getParentContractNumber(), Customer_.parentContractNumber));
             }
+            if (criteria.getTrackStatus() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getTrackStatus(), Customer_.trackStatus));
+            }
+            if (criteria.getNextTrackDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getNextTrackDate(), Customer_.nextTrackDate));
+            }
+
             String department = criteria.getDepartment();
             if (!StringUtils.isEmpty(department) && department.equals("operation")) {
 

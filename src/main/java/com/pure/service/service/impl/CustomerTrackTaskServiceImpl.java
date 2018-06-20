@@ -1,8 +1,10 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.TaskStatus;
 import com.pure.service.domain.User;
+import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
 import com.pure.service.repository.TaskRepository;
 import com.pure.service.repository.TaskStatusRepository;
@@ -35,6 +37,9 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     public CustomerTrackTaskServiceImpl(CustomerTrackTaskRepository customerTrackTaskRepository, TaskRepository taskRepository) {
         this.customerTrackTaskRepository = customerTrackTaskRepository;
         this.taskRepository = taskRepository;
@@ -59,6 +64,12 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
 
             User currentUser = userService.getUserWithAuthorities();
             customerTrackTask.getTask().setAssignee(currentUser);
+
+            Customer customer = customerTrackTask.getCustomer();
+            customer.setTrackStatus(ongoing.getName());
+            customer.setNextTrackDate(customerTrackTask.getTask().getEstimateExecuteDate());
+
+            customerRepository.save(customer);
         }
 
         return customerTrackTaskRepository.save(customerTrackTask);
@@ -107,6 +118,10 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
         TaskStatus finished = taskStatusRepository.findByCode("finished");
         customerTrackTask.getTask().setTaskStatus(finished);
 
+        Customer customer = customerTrackTask.getCustomer();
+        customer.setTrackStatus(finished.getName());
+
+        customerRepository.save(customer);
         return customerTrackTaskRepository.save(customerTrackTask);
     }
 }

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation'];
+    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus'];
 
-    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation) {
+    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus) {
 
         var vm = this;
 
@@ -24,6 +24,7 @@
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
+        vm.taskstatuses = TaskStatus.query();
 
         // vm.users = User.query({ page: 0,  size: 1000 });
         // vm.pwis = User.getAllPwis();
@@ -55,6 +56,9 @@
             if (vm.searchCondition.name) {
                 parameters["name.contains"] = vm.searchCondition.name;
             }
+            if (vm.searchCondition.trackResult) {
+                parameters["trackStatus.equals"] = vm.searchCondition.trackResult.name;
+            }
 
             if (vm.searchCondition.contactPhoneNumber) {
                 parameters["contactPhoneNumber.contains"] = vm.searchCondition.contactPhoneNumber;
@@ -77,6 +81,12 @@
             }
             if (vm.searchCondition.createEndDate) {
                 parameters["createdDate.lessOrEqualThan"] = vm.searchCondition.createEndDate;
+            }
+            if (vm.searchCondition.nextTrackStartDate) {
+                parameters["nextTrackDate.greaterOrEqualThan"] = vm.searchCondition.nextTrackStartDate;
+            }
+            if (vm.searchCondition.nextTrackEndDate) {
+                parameters["nextTrackDate.lessOrEqualThan"] = vm.searchCondition.nextTrackEndDate;
             }
 
             if (vm.searchCondition.sales) {

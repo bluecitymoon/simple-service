@@ -55,6 +55,12 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "visit_date")
     private Instant visitDate;
 
+    @Column(name = "track_status")
+    private String trackStatus;
+
+    @Column(name = "next_track_date")
+    private Instant nextTrackDate;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -298,6 +304,22 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     public void setNewOrderResourceLocation(NewOrderResourceLocation newOrderResourceLocation) {
         this.newOrderResourceLocation = newOrderResourceLocation;
+    }
+
+    public String getTrackStatus() {
+        return trackStatus;
+    }
+
+    public void setTrackStatus(String trackStatus) {
+        this.trackStatus = trackStatus;
+    }
+
+    public Instant getNextTrackDate() {
+        return nextTrackDate;
+    }
+
+    public void setNextTrackDate(Instant nextTrackDate) {
+        this.nextTrackDate = nextTrackDate;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

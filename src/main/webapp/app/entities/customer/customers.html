@@ -98,6 +98,43 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-3 form-group">
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">追踪结果</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.trackResult">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    repeat="item in (vm.taskstatuses | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">下次追踪时间</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="开始时间" class="form-control"
+                               ng-focus="vm.openCalendar('nextTrackStartDate')" datetime-picker="{{dateformat}}"
+                               ng-model="vm.searchCondition.nextTrackStartDate"
+                               is-open="vm.datePickerOpenStatus.nextTrackStartDate">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="结束时间" class="form-control"
+                               ng-focus="vm.openCalendar('nextTrackEndDate')" datetime-picker="{{dateformat}}"
+                               ng-model="vm.searchCondition.nextTrackEndDate"
+                               is-open="vm.datePickerOpenStatus.nextTrackEndDate">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <label class="col-sm-3 control-label">客户经理</label>
                     <div class="col-sm-9">
@@ -213,7 +250,7 @@
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{customer.followCount}}</td>
                     <td>{{customer.lastFollowTime | date :'yyyy-MM-dd hh:mm'}}</td>
-                    <td ng-if="vm.department == 'market'">{{customer.lastFollowComments}}</td>
+                    <td ng-if="vm.department == 'market'"><span ng-bind-html="customer.lastFollowComments"></span></td>
                     <!--<td>-->
                     <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
                     <!--</td>-->
