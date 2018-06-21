@@ -140,14 +140,8 @@
         <jhi-alert></jhi-alert>
         <div class="container-fluid">
             <div class="row">
-                <!--<div class="col-xs-2 no-padding-left">-->
-                <!--<button class="btn btn-primary" ui-sref="free-class-record.new">-->
-                <!--<span class="glyphicon glyphicon-plus"></span>-->
-                <!--<span data-translate="simpleServiceApp.freeClassRecord.home.createLabel">Create new Free Class Record</span>-->
-                <!--</button>-->
-
-                <!--</div>-->
                 <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+
                     <div class="input-group mar-btm">
                         <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">
                             <ui-select-match>
@@ -164,7 +158,22 @@
                                       ng-click="vm.batchAssignNewOrder()">批量分配</button>
 					    </span>
                     </div>
+
                 </div>
+
+                <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                    <div class="input-group mar-btm">
+                        <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button"
+                                      ng-click="vm.batchAnalysis()">显示批量解析</button>
+					    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="vm.showUploadTextArea">
+            <div class="form-group">
+                <textarea class="form-control" rows="20" placeholder="粘贴数据CSV内容"></textarea>
             </div>
         </div>
         <div class="table-responsive">

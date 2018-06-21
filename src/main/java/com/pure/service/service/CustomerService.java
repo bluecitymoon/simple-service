@@ -43,4 +43,6 @@ public interface CustomerService {
     /*
      */
     Customer importCustomerFromNewOrder(Long newOrderId);
+
+    void updateTrackTaskStatus(Customer customer);
 }

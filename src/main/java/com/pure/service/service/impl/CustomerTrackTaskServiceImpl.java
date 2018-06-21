@@ -115,13 +115,12 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
     @Override
     public CustomerTrackTask closeTask(CustomerTrackTask customerTrackTask) {
 
+        Customer customer = customerTrackTask.getCustomer();
+
         TaskStatus finished = taskStatusRepository.findByCode("finished");
         customerTrackTask.getTask().setTaskStatus(finished);
-
-        Customer customer = customerTrackTask.getCustomer();
         customer.setTrackStatus(finished.getName());
 
-        customerRepository.save(customer);
         return customerTrackTaskRepository.save(customerTrackTask);
     }
 }

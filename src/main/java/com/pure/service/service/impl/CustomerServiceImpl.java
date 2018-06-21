@@ -3,16 +3,22 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.Task;
+import com.pure.service.domain.TaskStatus;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerRepository;
+import com.pure.service.repository.CustomerTrackTaskRepository;
+import com.pure.service.repository.TaskStatusRepository;
 import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
+import com.pure.service.service.dto.TaskStatusEnum;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +37,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     private final Logger log = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
@@ -39,6 +45,12 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     private FreeClassRecordService freeClassRecordService;
+
+    @Autowired
+    private CustomerTrackTaskRepository customerTrackTaskRepository;
+
+    @Autowired
+    private TaskStatusRepository taskStatusRepository;
 
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
@@ -49,7 +61,7 @@ public class CustomerServiceImpl implements CustomerService{
                                CustomerQueryService customerQueryService,
                                CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
                                CustomerCommunicationLogRepository customerCommunicationLogRepository,
-                               CustomerCommunicationLogQueryService customerCommunicationLogQueryService){
+                               CustomerCommunicationLogQueryService customerCommunicationLogQueryService) {
         this.customerRepository = customerRepository;
         this.customerQueryService = customerQueryService;
         this.customerCommunicationLogTypeRepository = customerCommunicationLogTypeRepository;
@@ -86,10 +98,10 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     /**
-     *  Get all the customers.
+     * Get all the customers.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -99,10 +111,10 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     /**
-     *  Get one customer by id.
+     * Get one customer by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -112,9 +124,9 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
     /**
-     *  Delete the  customer by id.
+     * Delete the  customer by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -173,5 +185,36 @@ public class CustomerServiceImpl implements CustomerService{
         }
 
         return existCustomer.get(0);
+    }
+
+    @Override
+    public void updateTrackTaskStatus(Customer customer) {
+
+        List<CustomerTrackTask> trackTasks = customerTrackTaskRepository.findByCustomer_Id(customer.getId());
+
+        boolean stillHaveUnfinishedTask = false;
+        for (CustomerTrackTask trackTask : trackTasks) {
+            Task task = trackTask.getTask();
+
+            if (task.getTaskStatus().getCode().equals(TaskStatusEnum.ongoing.name())) {
+
+                TaskStatus ongoing = taskStatusRepository.findByCode(TaskStatusEnum.ongoing.name());
+                customer.setTrackStatus(ongoing.getName());
+
+                customerRepository.save(customer);
+
+                stillHaveUnfinishedTask = true;
+                break;
+
+            }
+        }
+
+        if (!stillHaveUnfinishedTask) {
+
+            TaskStatus ongoing = taskStatusRepository.findByCode(TaskStatusEnum.finished.name());
+            customer.setTrackStatus(ongoing.getName());
+
+            customerRepository.save(customer);
+        }
     }
 }
