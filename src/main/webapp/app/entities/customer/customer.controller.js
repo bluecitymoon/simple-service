@@ -98,7 +98,7 @@
             if (vm.searchCondition.location) {
                 parameters["locationId.equals"] = vm.searchCondition.location.id;
             }
-            Customer.queryWithLog(parameters, onSuccess, onError);
+            Customer.query(parameters, onSuccess, onError);
 
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];

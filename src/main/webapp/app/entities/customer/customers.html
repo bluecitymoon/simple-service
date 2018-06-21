@@ -249,9 +249,9 @@
                     <td>{{customer.logType.name}}</td>
                     <td>{{customer.classLevel}}</td>
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{customer.followCount}}</td>
-                    <td>{{customer.lastFollowTime | date :'yyyy-MM-dd hh:mm'}}</td>
-                    <td ng-if="vm.department == 'market'"><span ng-bind-html="customer.lastFollowComments"></span></td>
+                    <td>{{customer.trackCount}}</td>
+                    <td>{{customer.lastTrackDate | date :'yyyy-MM-dd hh:mm'}}</td>
+                    <td ng-if="vm.department == 'market'"><span ng-bind-html="customer.lastTrackComments"></span></td>
                     <!--<td>-->
                     <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
                     <!--</td>-->

@@ -17,4 +17,7 @@ public interface CustomerTrackTaskRepository extends JpaRepository<CustomerTrack
 
     List<CustomerTrackTask> findByCustomer_Id(Long customerId);
 
+    @Query(value = "select count(0) as unfinished_task_count from customer_track_task tt left join task t on tt.task_id = t.id where task_status_id = 2 and tt.customer_id = ?", nativeQuery = true)
+    Integer getCustomerFinishedTrackCount(Long customerId);
+
 }

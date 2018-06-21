@@ -61,6 +61,15 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "next_track_date")
     private Instant nextTrackDate;
 
+    @Column(name = "last_track_date")
+    private Instant lastTrackDate;
+
+    @Column(name = "track_count")
+    private Integer trackCount;
+
+    @Column(name = "last_track_comments")
+    private String lastTrackComments;
+
     @Column(name = "school")
     private String school;
 
@@ -82,6 +91,30 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
+
+    public Instant getLastTrackDate() {
+        return lastTrackDate;
+    }
+
+    public void setLastTrackDate(Instant lastTrackDate) {
+        this.lastTrackDate = lastTrackDate;
+    }
+
+    public Integer getTrackCount() {
+        return trackCount;
+    }
+
+    public void setTrackCount(Integer trackCount) {
+        this.trackCount = trackCount;
+    }
+
+    public String getLastTrackComments() {
+        return lastTrackComments;
+    }
+
+    public void setLastTrackComments(String lastTrackComments) {
+        this.lastTrackComments = lastTrackComments;
+    }
 
     public String getSchool() {
         return school;
