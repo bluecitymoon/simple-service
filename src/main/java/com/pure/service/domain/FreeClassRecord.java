@@ -38,17 +38,6 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Size(max = 11, min = 11)
     private String contactPhoneNumber;
 
-//    @Column(name = "created_by")
-//    private String createdBy;
-//
-//    @Column(name = "created_date")
-//    private ZonedDateTime createdDate;
-//
-//    @Column(name = "last_modified_by")
-//    private String lastModifiedBy;
-//
-//    @Column(name = "last_modified_date")
-//    private ZonedDateTime lastModifiedDate;
     @Column(name = "status")
     private String status;
 
@@ -57,6 +46,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     @Column(name = "birthday")
     private Instant birthday;
+
+    @Column(name = "school")
+    private String school;
 
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
@@ -78,6 +70,14 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     @ManyToOne
     private NewOrderWechatUserInfo newOrderWechatUserInfo;
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -105,19 +105,6 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
         return this;
     }
-
-    //    public CustomerStatus getCustomerStatus() {
-//        return customerStatus;
-//    }
-//
-//    public void setCustomerStatus(CustomerStatus customerStatus) {
-//        this.customerStatus = customerStatus;
-//    }
-//
-//    public FreeClassRecord customerStatus(CustomerStatus customerStatus) {
-//        this.customerStatus = customerStatus;
-//        return this;
-//    }
 
     public String getPersonName() {
         return personName;
@@ -153,58 +140,6 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
         this.newOrderWechatUserInfo = newOrderWechatUserInfo;
         return this;
     }
-
-    //    public String getCreatedBy() {
-//        return createdBy;
-//    }
-//
-//    public FreeClassRecord createdBy(String createdBy) {
-//        this.createdBy = createdBy;
-//        return this;
-//    }
-//
-//    public void setCreatedBy(String createdBy) {
-//        this.createdBy = createdBy;
-//    }
-//
-//    public ZonedDateTime getCreatedDate() {
-//        return createdDate;
-//    }
-//
-//    public FreeClassRecord createdDate(ZonedDateTime createdDate) {
-//        this.createdDate = createdDate;
-//        return this;
-//    }
-//
-//    public void setCreatedDate(ZonedDateTime createdDate) {
-//        this.createdDate = createdDate;
-//    }
-//
-//    public String getLastModifiedBy() {
-//        return lastModifiedBy;
-//    }
-//
-//    public FreeClassRecord lastModifiedBy(String lastModifiedBy) {
-//        this.lastModifiedBy = lastModifiedBy;
-//        return this;
-//    }
-//
-//    public void setLastModifiedBy(String lastModifiedBy) {
-//        this.lastModifiedBy = lastModifiedBy;
-//    }
-//
-//    public ZonedDateTime getLastModifiedDate() {
-//        return lastModifiedDate;
-//    }
-//
-//    public FreeClassRecord lastModifiedDate(ZonedDateTime lastModifiedDate) {
-//        this.lastModifiedDate = lastModifiedDate;
-//        return this;
-//    }
-//
-//    public void setLastModifiedDate(ZonedDateTime lastModifiedDate) {
-//        this.lastModifiedDate = lastModifiedDate;
-//    }
 
     public String getStatus() {
         return status;

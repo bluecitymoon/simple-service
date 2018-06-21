@@ -98,7 +98,8 @@
                                 <ui-select-match>
                                     {{$select.selected.firstName}}
                                 </ui-select-match>
-                                <ui-select-choices repeat="item in (vm.sales | filter: $select.search) track by item.id">
+                                <ui-select-choices
+                                        repeat="item in (vm.sales | filter: $select.search) track by item.id">
                                     <span ng-bind="item.firstName"></span><span class="pull-right"
                                                                                 ng-bind="item.login"></span>
                                 </ui-select-choices>
@@ -125,7 +126,8 @@
                             <ui-select-match>
                                 {{$select.selected.name}}
                             </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.locations | filter: $select.search) track by item.id">
+                            <ui-select-choices
+                                    repeat="item in (vm.locations | filter: $select.search) track by item.id">
                                 <span ng-bind="item.name"></span>
                             </ui-select-choices>
                         </ui-select>
@@ -164,16 +166,21 @@
                 <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <div class="input-group mar-btm">
                         <span class="input-group-btn">
-					          <button class="btn btn-primary" type="button"
+                            <button class="btn btn-info" type="button"
                                       ng-click="vm.batchAnalysis()">显示批量解析</button>
+
+                            <button class="btn btn-primary"
+                                    type="button"
+                                    ng-click="vm.batchUpload()">上传</button>
 					    </span>
                     </div>
+
                 </div>
             </div>
         </div>
         <div class="row" ng-if="vm.showUploadTextArea">
             <div class="form-group">
-                <textarea class="form-control" rows="20" placeholder="粘贴数据CSV内容"></textarea>
+                <textarea ng-model="vm.textUpload" class="form-control" rows="20" placeholder="粘贴数据CSV内容"></textarea>
             </div>
         </div>
         <div class="table-responsive">

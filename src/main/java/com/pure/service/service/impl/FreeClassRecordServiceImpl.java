@@ -16,6 +16,8 @@ import com.pure.service.service.CustomerCommunicationScheduleService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.FreeClassRecordService;
+import com.pure.service.service.dto.BatchCustomers;
+import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.CustomerCriteria;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -189,6 +191,13 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     public void delete(Long id) {
         log.debug("Request to delete FreeClassRecord : {}", id);
         freeClassRecordRepository.delete(id);
+    }
+
+    @Override
+    public BatchCustomersResponse upload(BatchCustomers customers) {
+        String content = customers.getContent();
+
+        return null;
     }
 
     @Override

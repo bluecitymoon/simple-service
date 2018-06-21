@@ -7,6 +7,8 @@ import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.FreeClassRecordQueryService;
 import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.UserService;
+import com.pure.service.service.dto.BatchCustomers;
+import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.FreeClassRecordCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -94,6 +96,16 @@ public class FreeClassRecordResource {
         return ResponseEntity.created(new URI("/api/free-class-records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+
+    }
+
+    @PostMapping("/free-class-records/upload")
+    @Timed
+    public ResponseEntity<BatchCustomersResponse> batchUploadCustomers(@RequestBody BatchCustomers customers) {
+
+        BatchCustomersResponse response = freeClassRecordService.upload(customers);
+
+        return ResponseEntity.ok(response);
 
     }
 

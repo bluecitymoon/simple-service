@@ -61,6 +61,9 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "next_track_date")
     private Instant nextTrackDate;
 
+    @Column(name = "school")
+    private String school;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -79,6 +82,14 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {

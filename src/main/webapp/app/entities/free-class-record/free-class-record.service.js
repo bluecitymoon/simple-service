@@ -32,6 +32,10 @@
                 url: 'api/free-class-records/batchupdate',
                 isArray: true
             },
+            'batchUploadCustomers' : {
+                method: 'POST',
+                url: 'api/free-class-records/upload'
+            },
             'update': { method:'PUT' }
         });
     }

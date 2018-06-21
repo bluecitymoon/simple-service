@@ -1,6 +1,8 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.service.dto.BatchCustomers;
+import com.pure.service.service.dto.BatchCustomersResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -43,4 +45,6 @@ public interface FreeClassRecordService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    BatchCustomersResponse upload(BatchCustomers customers);
 }

@@ -66,6 +66,11 @@
 
             vm.showUploadTextArea = !vm.showUploadTextArea;
         };
+        vm.batchUpload = function () {
+
+            console.log(vm.textUpload);
+        };
+
         loadAllUsers();
 
         function loadAllUsers () {
