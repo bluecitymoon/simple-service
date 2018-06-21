@@ -68,7 +68,11 @@
         };
         vm.batchUpload = function () {
 
-            console.log(vm.textUpload);
+            FreeClassRecord.batchUploadCustomers({content: vm.textUpload}, function (response) {
+                console.log(response);
+            }, function (error) {
+                console.log(error);
+            })
         };
 
         loadAllUsers();

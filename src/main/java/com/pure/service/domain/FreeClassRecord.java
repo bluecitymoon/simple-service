@@ -11,7 +11,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -35,7 +34,7 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     private String personName;
 
     @Column(name = "contact_phone_number", unique = true)
-    @Size(max = 11, min = 11)
+//    @Size(max = 11, min = 11)
     private String contactPhoneNumber;
 
     @Column(name = "status")
@@ -49,6 +48,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     @Column(name = "school")
     private String school;
+
+    @Column(name = "comments")
+    private String comments;
 
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
@@ -70,6 +72,14 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     @ManyToOne
     private NewOrderWechatUserInfo newOrderWechatUserInfo;
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
 
     public String getSchool() {
         return school;

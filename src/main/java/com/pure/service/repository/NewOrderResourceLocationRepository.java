@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface NewOrderResourceLocationRepository extends JpaRepository<NewOrderResourceLocation, Long>, JpaSpecificationExecutor<NewOrderResourceLocation> {
 
+    NewOrderResourceLocation findByName(String name);
 }

@@ -19,4 +19,6 @@ public interface FreeClassRecordRepository extends JpaRepository<FreeClassRecord
     @Query("select free_class_record from FreeClassRecord free_class_record left join fetch free_class_record.classCategories where free_class_record.id =:id")
     FreeClassRecord findOneWithEagerRelationships(@Param("id") Long id);
 
+    FreeClassRecord findByPersonNameAndContactPhoneNumber(String personName, String contactPhoneNumber);
+
 }

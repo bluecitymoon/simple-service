@@ -212,6 +212,7 @@
                     <th jh-sort-by="contactPhoneNumber"><span
                             data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>学校</th>
                     <th jh-sort-by="createdBy"><span>引入人</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.freeClassRecord.createdDate">Created Date</span>
@@ -228,6 +229,7 @@
                     <th jh-sort-by="salesFollower.login"><span
                             data-translate="simpleServiceApp.freeClassRecord.salesFollower">Sales Follower</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
+                    <th>备注</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -239,6 +241,7 @@
                     <!--<td><a ui-sref="free-class-record-detail({id:freeClassRecord.id})">{{freeClassRecord.id}}</a></td>-->
                     <td>{{freeClassRecord.personName}}</td>
                     <td>{{freeClassRecord.contactPhoneNumber}}</td>
+                    <td>{{freeClassRecord.school}}</td>
                     <td>{{freeClassRecord.referer.firstName}}</td>
                     <td>{{freeClassRecord.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <!--<td>{{freeClassRecord.lastModifiedBy}}</td>-->
@@ -252,6 +255,9 @@
                     </td>
                     <td>
                         {{freeClassRecord.salesFollower.firstName}}
+                    </td>
+                    <td>
+                        {{freeClassRecord.comments}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

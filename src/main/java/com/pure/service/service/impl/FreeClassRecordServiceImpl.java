@@ -19,6 +19,7 @@ import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.BatchCustomers;
 import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.CustomerCriteria;
+import com.pure.service.service.util.BatchCustomerUtil;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +55,9 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
     @Autowired
     private CustomerQueryService customerQueryService;
+
+    @Autowired
+    private BatchCustomerUtil batchCustomerUtil;
 
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
@@ -197,7 +201,29 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     public BatchCustomersResponse upload(BatchCustomers customers) {
         String content = customers.getContent();
 
-        return null;
+        List<FreeClassRecord> freeClassRecords = batchCustomerUtil.batchAnalysisCustomer(content);
+
+        StringBuilder logBuilder = new StringBuilder();
+        int importCount = 0, existedCount = 0;
+        for (FreeClassRecord freeClassRecord : freeClassRecords) {
+
+            FreeClassRecord existedNewOrder = freeClassRecordRepository.findByPersonNameAndContactPhoneNumber(freeClassRecord.getPersonName(), freeClassRecord.getContactPhoneNumber());
+            if (existedNewOrder == null) {
+                save(freeClassRecord);
+
+                importCount ++;
+            } else {
+                existedCount ++;
+            }
+        }
+
+        logBuilder.append("成功导入数据" + importCount + "条，" + " 因为已存在而跳过数据" + existedCount + "条");
+
+        BatchCustomersResponse response = new BatchCustomersResponse();
+        response.setSuccess(true);
+        response.setMessage(logBuilder.toString());
+
+        return response;
     }
 
     @Override
