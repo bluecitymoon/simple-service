@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCommunicationScheduleController', CustomerCommunicationScheduleController);
 
-    CustomerCommunicationScheduleController.$inject = ['$rootScope','$state', 'CustomerCommunicationSchedule', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerScheduleStatus', 'MarketChannelCategory', 'User'];
+    CustomerCommunicationScheduleController.$inject = ['$scope', '$rootScope','$state', 'CustomerCommunicationSchedule', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerScheduleStatus', 'MarketChannelCategory', 'User'];
 
-    function CustomerCommunicationScheduleController($rootScope, $state, CustomerCommunicationSchedule, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerScheduleStatus, MarketChannelCategory, User) {
+    function CustomerCommunicationScheduleController($scope, $rootScope, $state, CustomerCommunicationSchedule, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerScheduleStatus, MarketChannelCategory, User) {
 
         var vm = this;
 
@@ -63,15 +63,17 @@
             vm.searchCondition = {};
         };
 
+        $scope.pagination = {
+            currentPageNumber: 1,
+            totalItems: 0
+        };
         vm.loadAll = function () {
 
             var param = {
-                page: pagingParams.page - 1,
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
             };
-
-            console.log(vm.searchCondition);
 
             if (vm.searchCondition.statusId) {
                 param["scheduleStatusId.equals"] = vm.searchCondition.statusId;
@@ -115,8 +117,8 @@
 
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
+                $scope.pagination.totalItems = headers('X-Total-Count');
+                // vm.queryCount = vm.totalItems;
                 vm.customerCommunicationSchedules = data;
                 vm.page = pagingParams.page;
             }
