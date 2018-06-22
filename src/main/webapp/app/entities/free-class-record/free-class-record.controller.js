@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation'];
+    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation'];
 
-    function FreeClassRecordController($state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation) {
+    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation) {
 
         var vm = this;
 
@@ -20,7 +20,7 @@
         // vm.pageOptions = [];
         vm.searchCondition = {};
         vm.loadAll = loadAll;
-        vm.loadAll();
+        // vm.loadAll();
         vm.allSelected = false;
         vm.datePickerOpenStatus = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
@@ -99,58 +99,57 @@
             })
         };
 
+        $scope.pagination = {
+            currentPageNumber: 1,
+            totalItems: 0
+        };
+
         function loadAll () {
 
-            var parameters = {
-                page: pagingParams.page - 1,
+            vm.parameters = {
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
             };
 
             if (vm.searchCondition.name) {
-                parameters["personName.contains"] = vm.searchCondition.name;
+                vm.parameters["personName.contains"] = vm.searchCondition.name;
             }
 
             if (vm.searchCondition.contactPhoneNumber) {
-                parameters["contactPhoneNumber.contains"] = vm.searchCondition.contactPhoneNumber;
+                vm.parameters["contactPhoneNumber.contains"] = vm.searchCondition.contactPhoneNumber;
             }
 
             if (vm.searchCondition.channel) {
-                parameters["marketChannelCategoryId.equals"] = vm.searchCondition.channel.id;
+                vm.parameters["marketChannelCategoryId.equals"] = vm.searchCondition.channel.id;
             }
 
             if (vm.searchCondition.startDate) {
-                parameters["createdDate.greaterOrEqualThan"] = vm.searchCondition.startDate;
+                vm.parameters["createdDate.greaterOrEqualThan"] = vm.searchCondition.startDate;
             }
             if (vm.searchCondition.endDate) {
-                parameters["createdDate.lessOrEqualThan"] = vm.searchCondition.endDate;
+                vm.parameters["createdDate.lessOrEqualThan"] = vm.searchCondition.endDate;
             }
 
             if (vm.searchCondition.sales) {
-                parameters["salesFollowerId.equals"] = vm.searchCondition.sales.id;
+                vm.parameters["salesFollowerId.equals"] = vm.searchCondition.sales.id;
             }
 
             if (vm.searchCondition.pwi) {
-                parameters["agentId.equals"] = vm.searchCondition.pwi.id;
+                vm.parameters["agentId.equals"] = vm.searchCondition.pwi.id;
             }
 
             if (vm.searchCondition.location) {
-                parameters["locationId.equals"] = vm.searchCondition.location.id;
+                vm.parameters["locationId.equals"] = vm.searchCondition.location.id;
             }
 
-            FreeClassRecord.query(parameters, onSuccess, onError);
+            FreeClassRecord.query(vm.parameters, onSuccess, onError);
 
-            function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
-                if (vm.predicate !== 'id') {
-                    result.push('id');
-                }
-                return result;
-            }
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
+                $scope.pagination.totalItems = headers('X-Total-Count');
+                // vm.queryCount = vm.totalItems;
                 vm.freeClassRecords = data;
                 vm.page = pagingParams.page;
             }
@@ -159,17 +158,20 @@
             }
         }
 
+        function sort() {
+            var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+            if (vm.predicate !== 'id') {
+                result.push('id');
+            }
+            return result;
+        }
         function loadPage(page) {
             vm.page = page;
             vm.transition();
         }
 
         function transition() {
-            $state.transitionTo($state.$current, {
-                page: vm.page,
-                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                search: vm.currentSearch
-            });
+            $state.transitionTo($state.$current, vm.parameters);
         }
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

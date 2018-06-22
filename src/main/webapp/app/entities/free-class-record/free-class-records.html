@@ -44,7 +44,7 @@
                            ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll()"><i
+                    <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
                             class="fa fa-search-minus"></i>查询
                     </button>
                 </div>
@@ -221,9 +221,9 @@
                     <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.freeClassRecord.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="status"><span data-translate="simpleServiceApp.freeClassRecord.status">Status</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="marketChannelCategory.name"><span
-                            data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="marketChannelCategory.name"><span-->
+                            <!--data-translate="simpleServiceApp.freeClassRecord.marketChannelCategory">Market Channel Category</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="marketChannelCategory.name"><span>区域</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="salesFollower.login"><span
@@ -247,9 +247,9 @@
                     <!--<td>{{freeClassRecord.lastModifiedBy}}</td>-->
                     <!--<td>{{freeClassRecord.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
                     <td>{{freeClassRecord.status}}</td>
-                    <td>
-                        {{freeClassRecord.marketChannelCategory.name}}
-                    </td>
+                    <!--<td>-->
+                        <!--{{freeClassRecord.marketChannelCategory.name}}-->
+                    <!--</td>-->
                     <td>
                         {{freeClassRecord.newOrderResourceLocation.name}}
                     </td>
@@ -276,9 +276,9 @@
         </div>
 
         <div class="text-center">
-            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
-                            ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+            <jhi-item-count page="vm.page" total="pagination.totalItems" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="pagination.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="pagination.currentPageNumber" ng-click="vm.loadAll()"></uib-pagination>
         </div>
     </div>
 </div>

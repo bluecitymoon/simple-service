@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus'];
+    CustomerController.$inject = ['$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus'];
 
-    function CustomerController($state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus) {
+    function CustomerController($scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus) {
 
         var vm = this;
 
@@ -44,9 +44,14 @@
             vm.searchCondition = {};
         };
 
+        $scope.pagination = {
+            currentPageNumber: 1,
+            totalItems: 0
+        };
+
         vm.loadAll = function() {
             var parameters = {
-                page: pagingParams.page - 1,
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
             };
@@ -109,8 +114,8 @@
             }
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
-                vm.queryCount = vm.totalItems;
+                $scope.pagination.totalItems = headers('X-Total-Count');
+                // vm.queryCount = vm.totalItems;
                 vm.customers = data;
                 vm.page = pagingParams.page;
             }
