@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.time.Instant;
 import java.util.List;
 
 
@@ -188,7 +189,18 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void updateTrackTaskStatus(Customer customer) {
+    public void updateTrackTaskStatus(Customer customer, String lastComments) {
+
+        customer.setLastTrackDate(Instant.now());
+        customer.setLastTrackComments(lastComments);
+
+        Integer trackedCount = customer.getTrackCount();
+        if (trackedCount == null) {
+            trackedCount = 1;
+        } else {
+            trackedCount += 1;
+        }
+        customer.setTrackCount(trackedCount);
 
         List<CustomerTrackTask> trackTasks = customerTrackTaskRepository.findByCustomer_Id(customer.getId());
 

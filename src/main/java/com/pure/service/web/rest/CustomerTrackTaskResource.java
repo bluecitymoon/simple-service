@@ -148,7 +148,7 @@ public class CustomerTrackTaskResource {
 
         CustomerTrackTask closedTask = customerTrackTaskService.closeTask(customerTrackTask);
 
-        customerService.updateTrackTaskStatus(closedTask.getCustomer());
+        customerService.updateTrackTaskStatus(closedTask.getCustomer(), closedTask.getTask().getDescription());
 
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(closedTask));
     }

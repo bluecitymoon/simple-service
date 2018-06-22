@@ -18,8 +18,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-
 
 /**
  * Service Implementation for managing CustomerTrackTask.
@@ -117,21 +115,8 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
     @Override
     public CustomerTrackTask closeTask(CustomerTrackTask customerTrackTask) {
 
-        Customer customer = customerTrackTask.getCustomer();
-
         TaskStatus finished = taskStatusRepository.findByCode("finished");
         customerTrackTask.getTask().setTaskStatus(finished);
-        customer.setTrackStatus(finished.getName());
-        customer.setLastTrackDate(Instant.now());
-        customer.setLastTrackComments(customerTrackTask.getTask().getDescription());
-
-        Integer trackedCount = customer.getTrackCount();
-        if (trackedCount == null) {
-            trackedCount = 1;
-        } else {
-            trackedCount += 1;
-        }
-        customer.setTrackCount(trackedCount);
 
         return customerTrackTaskRepository.save(customerTrackTask);
     }
