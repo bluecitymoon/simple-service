@@ -47,4 +47,6 @@ public interface FreeClassRecordService {
     void delete(Long id);
 
     BatchCustomersResponse upload(BatchCustomers customers);
+
+    BatchCustomersResponse upload(byte[] bytes);
 }

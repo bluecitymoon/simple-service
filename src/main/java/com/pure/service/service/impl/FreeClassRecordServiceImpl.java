@@ -227,6 +227,12 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     }
 
     @Override
+    public BatchCustomersResponse upload(byte[] bytes) {
+
+        return null;
+    }
+
+    @Override
     public List<FreeClassRecord> batchSave(List<FreeClassRecord> freeClassRecords) {
 
         List<FreeClassRecord> records = new ArrayList<>();

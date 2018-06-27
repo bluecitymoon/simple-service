@@ -2,32 +2,32 @@
     "simpleServiceApp": {
         "payment" : {
             "home": {
-                "title": "Ö§³ö",
-                "createLabel": "Â¼ÈëÖ§³ö",
-                "createOrEditLabel": "¹ÜÀíÖ§³ö"
+                "title": "æ”¯å‡º",
+                "createLabel": "å½•å…¥æ”¯å‡º",
+                "createOrEditLabel": "ç®¡ç†æ”¯å‡º"
             },
-            "created": "´´½¨³É¹¦£¡",
-            "updated": "¸üĞÂ³É¹¦£¡",
-            "deleted": "É¾³ı³É¹¦£¡",
+            "created": "åˆ›å»ºæˆåŠŸï¼",
+            "updated": "æ›´æ–°æˆåŠŸï¼",
+            "deleted": "åˆ é™¤æˆåŠŸï¼",
             "delete": {
-                "question": "ÄãÈ·¶¨ÒªÉ¾³ıÕâÌõÊı¾İ?"
+                "question": "ä½ ç¡®å®šè¦åˆ é™¤è¿™æ¡æ•°æ®?"
             },
             "detail": {
-                "title": "Ö§³ö"
+                "title": "æ”¯å‡º"
             },
-            "projectName": "ÏîÄ¿Ãû³Æ",
-            "estimateAmount": "Ô¤Ëã·ÑÓÃ",
-            "actualAmount": "Êµ¼Ê·ÑÓÃ",
-            "paied": "ÒÑÖ§¸¶",
-            "unpaid": "Î´Ö§¸¶",
-            "paidDate": "¸¶¿îÈÕÆÚ",
-            "comments": "±¸×¢",
-            "createdBy": "´´½¨ÈË",
-            "createdDate": "´´½¨Ê±¼ä",
-            "lastModifiedBy": "×î½üĞŞ¸ÄÈË",
-            "lastModifiedDate": "×î½üĞŞ¸ÄÈÕÆÚ",
-            "paidUser": "Ö§¸¶ÈË",
-            "paymentType": "Ö§¸¶·½Ê½"
+            "projectName": "é¡¹ç›®åç§°",
+            "estimateAmount": "é¢„ç®—è´¹ç”¨",
+            "actualAmount": "å®é™…è´¹ç”¨",
+            "paied": "å·²æ”¯ä»˜",
+            "unpaid": "æœªæ”¯ä»˜",
+            "paidDate": "ä»˜æ¬¾æ—¥æœŸ",
+            "comments": "å¤‡æ³¨",
+            "createdBy": "åˆ›å»ºäºº",
+            "createdDate": "åˆ›å»ºæ—¶é—´",
+            "lastModifiedBy": "æœ€è¿‘ä¿®æ”¹äºº",
+            "lastModifiedDate": "æœ€è¿‘ä¿®æ”¹æ—¥æœŸ",
+            "paidUser": "æ”¯ä»˜äºº",
+            "paymentType": "æ”¯ä»˜æ–¹å¼"
         }
     }
 }

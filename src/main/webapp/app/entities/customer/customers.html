@@ -136,6 +136,7 @@
                 </div>
             </div>
             <div class="row">
+                <!-- TODO 目前不要客户经理，由课程顾问代替
                 <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <label class="col-sm-3 control-label">客户经理</label>
                     <div class="col-sm-9">
@@ -148,11 +149,12 @@
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <label class="col-sm-3 control-label">课程顾问</label>
                     <div class="col-sm-9">
-                        <ui-select ng-model="vm.searchCondition.courseConsultant">
+                        <!-- <ui-select ng-model="vm.searchCondition.courseConsultant"> -->
+                        <ui-select ng-model="vm.searchCondition.sales">
                             <ui-select-match>
                                 {{$select.selected.firstName}}
                             </ui-select-match>
@@ -221,8 +223,8 @@
                     <th jh-sort-by="contactPhoneNumber"><span
                             data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="salesFollower.id"><span data-translate="simpleServiceApp.customer.salesFollower">Sales</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="salesFollower.id"><span data-translate="simpleServiceApp.customer.salesFollower">Sales</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
                     <th>课程顾问</th>
                     <th>来访性质</th>
                     <th>年级</th>
@@ -245,7 +247,7 @@
                     <td>{{customer.age}}</td>
                     <td>{{customer.contactPhoneNumber}}</td>
                     <td>{{customer.salesFollower.firstName}}</td>
-                    <td>{{customer.courseConsultant.firstName}}</td>
+                    <!--<td>{{customer.courseConsultant.firstName}}</td>-->
                     <td>{{customer.logType.name}}</td>
                     <td>{{customer.classLevel}}</td>
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>

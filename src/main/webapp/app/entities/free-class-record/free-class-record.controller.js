@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation'];
+    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation', 'FileUploader'];
 
-    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation) {
+    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation, FileUploader) {
 
         var vm = this;
 
@@ -31,6 +31,15 @@
         vm.openCalendar = openCalendar;
         vm.clearConditions = function () {
             vm.searchCondition = {};
+        };
+
+
+        var uploader = $scope.uploader = new FileUploader({
+            url: 'api/assets/upload'
+        });
+
+        vm.batchUploadNewOrders = function () {
+
         };
         vm.batchAssignNewOrder = function () {
             var selectedRecords = vm.freeClassRecords.filter(function (r) {

@@ -1,6 +1,7 @@
 package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.pure.service.domain.Asset;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.User;
 import com.pure.service.security.SecurityUtils;
@@ -32,8 +33,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -107,6 +111,19 @@ public class FreeClassRecordResource {
 
         return ResponseEntity.ok(response);
 
+    }
+
+    @PostMapping("/free-class-records/upload/byfile")
+    @Timed
+    public ResponseEntity<BatchCustomersResponse> uploadAssert(@RequestParam("file") MultipartFile file) throws IOException {
+
+        if (file.isEmpty()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        BatchCustomersResponse response = freeClassRecordService.upload(file.getBytes());
+
+        return ResponseEntity.ok(response);
     }
 
     /**
