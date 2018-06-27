@@ -55,7 +55,7 @@ public class CustomerResource {
 
     private final UserService userService;
 
-    public CustomerResource(CustomerService customerService, CustomerQueryService customerQueryService, UserService userService,CustomerCommunicationLogQueryService logQueryService) {
+    public CustomerResource(CustomerService customerService, CustomerQueryService customerQueryService, UserService userService, CustomerCommunicationLogQueryService logQueryService) {
         this.customerService = customerService;
         this.customerQueryService = customerQueryService;
         this.userService = userService;
@@ -113,8 +113,14 @@ public class CustomerResource {
      */
     @GetMapping("/customers")
     @Timed
-    public ResponseEntity<List<Customer>> getAllCustomers(CustomerCriteria criteria,@ApiParam Pageable pageable) {
+    public ResponseEntity<List<Customer>> getAllCustomers(CustomerCriteria criteria, @ApiParam Pageable pageable) {
         log.debug("REST request to get Customers by criteria: {}", criteria);
+
+        String department = criteria.getDepartment();
+
+        if (StringUtils.isEmpty(department)) {
+            return ResponseEntity.badRequest().build();
+        }
 
         User currentUser = userService.getUserWithAuthorities();
         //Only Admin and Headmaster can have all the new orders
@@ -123,7 +129,16 @@ public class CustomerResource {
             LongFilter userIdFilter = new LongFilter();
             userIdFilter.setEquals(currentUser.getId());
 
-            criteria.setSalesFollowerId(userIdFilter);
+            switch (department) {
+                case "operation":
+                    criteria.setCourseConsultantId(userIdFilter);
+                    break;
+                case "market":
+                    criteria.setSalesFollowerId(userIdFilter);
+                    break;
+                default:
+                    break;
+            }
         }
 
         Page<Customer> page = customerQueryService.findByCriteria(criteria, pageable);
@@ -159,7 +174,7 @@ public class CustomerResource {
 
                     criteria.setSalesFollowerId(userIdFilter);
 
-                } else if (department.equals("operation")){
+                } else if (department.equals("operation")) {
 
                     log.debug("REST request to get Customers for course consultant ", currentUser.getFirstName());
 
@@ -233,7 +248,6 @@ public class CustomerResource {
     }
 
     /**
-     *
      * @param id new order id
      * @return
      */
