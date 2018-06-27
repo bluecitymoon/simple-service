@@ -223,9 +223,9 @@
                     <th jh-sort-by="contactPhoneNumber"><span
                             data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <!--<th jh-sort-by="salesFollower.id"><span data-translate="simpleServiceApp.customer.salesFollower">Sales</span>-->
-                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
-                    <th>课程顾问</th>
+                    <th ng-if="vm.department == 'market'" jh-sort-by="salesFollower.id"><span>跟单人</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th ng-if="vm.department == 'operation'" >课程顾问</th>
                     <th>来访性质</th>
                     <th>年级</th>
                     <th>录入时间</th>
@@ -246,8 +246,8 @@
                     <td>{{customer.channel.name}}</td>
                     <td>{{customer.age}}</td>
                     <td>{{customer.contactPhoneNumber}}</td>
-                    <td>{{customer.salesFollower.firstName}}</td>
-                    <!--<td>{{customer.courseConsultant.firstName}}</td>-->
+                    <td ng-if="vm.department == 'market'">{{customer.salesFollower.firstName}}</td>
+                    <td ng-if="vm.department == 'operation'">{{customer.courseConsultant.firstName}}</td>
                     <td>{{customer.logType.name}}</td>
                     <td>{{customer.classLevel}}</td>
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>
