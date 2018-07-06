@@ -42,6 +42,9 @@ public class CustomerCard extends AbstractAuditingEntity {
     @Column(name = "money_collected")
     private Float moneyCollected;
 
+    @Column(name = "money_should_collected")
+    private Float moneyShouldCollected;
+
     @Column(name = "balance")
     private Float balance;
 
@@ -75,6 +78,14 @@ public class CustomerCard extends AbstractAuditingEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Float getMoneyShouldCollected() {
+        return moneyShouldCollected;
+    }
+
+    public void setMoneyShouldCollected(Float moneyShouldCollected) {
+        this.moneyShouldCollected = moneyShouldCollected;
     }
 
     public String getNumber() {

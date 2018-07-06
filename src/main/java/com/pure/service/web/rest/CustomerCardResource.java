@@ -3,6 +3,7 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.service.CustomerCardService;
+import com.pure.service.service.dto.CardNumberRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CustomerCardCriteria;
@@ -62,6 +63,12 @@ public class CustomerCardResource {
         return ResponseEntity.created(new URI("/api/customer-cards/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/customer-cards/generate-card-number")
+    @Timed
+    public String generateCardNumber(@RequestBody CardNumberRequest cardNumberRequest) {
+        return customerCardService.generateCardNumber(cardNumberRequest);
     }
 
     /**

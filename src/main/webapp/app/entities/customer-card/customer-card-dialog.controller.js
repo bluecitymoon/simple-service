@@ -32,14 +32,40 @@
         vm.customercardtypes = CustomerCardType.query({ page: 0,  size: 1000 });
         vm.courses = Course.query({ page: 0,  size: 1000 });
 
+        function calculateMoney() {
+            vm.customerCard.moneyShouldCollected = vm.customerCard.totalMoneyAmount - vm.customerCard.promotionAmount - vm.customerCard.specialPromotionAmount;
+        }
+
         $scope.$watch("vm.customerCard.customerCardType", function (newVal, oldVal) {
 
             if (newVal) {
                 vm.customerCard.totalMoneyAmount = newVal.totalMoneyAmount;
                 vm.customerCard.classCount = newVal.classCount;
                 vm.customerCard.totalMinutes = newVal.totalMinutes;
+
+               calculateMoney();
             }
         });
+
+        $scope.$watch("vm.customerCard.totalMoneyAmount", function (newVal, oldVal) {
+
+            if (newVal) {
+                calculateMoney();
+            }
+        });
+        $scope.$watch("vm.customerCard.promotionAmount", function (newVal, oldVal) {
+
+            if (newVal) {
+                calculateMoney();
+            }
+        });
+        $scope.$watch("vm.customerCard.specialPromotionAmount", function (newVal, oldVal) {
+
+            if (newVal) {
+                calculateMoney();
+            }
+        });
+
 
         loadSingleCustomer(vm.customerId);
         $timeout(function (){

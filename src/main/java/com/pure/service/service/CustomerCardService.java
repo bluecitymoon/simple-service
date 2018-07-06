@@ -1,6 +1,7 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.CustomerCard;
+import com.pure.service.service.dto.CardNumberRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,4 +40,6 @@ public interface CustomerCardService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    String generateCardNumber(CardNumberRequest cardNumberRequest);
 }
