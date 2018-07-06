@@ -21,6 +21,8 @@ import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.util.BatchCustomerUtil;
 import io.github.jhipster.service.filter.LongFilter;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,8 +231,20 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     }
 
     @Override
-    public BatchCustomersResponse upload(byte[] bytes) {
+    public BatchCustomersResponse upload(InputStream inputStream, String fileName) {
+        Workbook workbook = null;
 
+        try {
+            if (fileName.endsWith(".xls")) {
+                workbook = new XSSFWorkbook(inputStream);
+            } else if (fileName.endsWith(".xlsx")) {
+//                workbook = new SXSSFWorkbook(inputStream);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

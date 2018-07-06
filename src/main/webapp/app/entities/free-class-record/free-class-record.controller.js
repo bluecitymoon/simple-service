@@ -35,7 +35,7 @@
 
 
         var uploader = $scope.uploader = new FileUploader({
-            url: 'api/assets/upload'
+            url: 'api/free-class-records/upload/byfile'
         });
 
         vm.batchUploadNewOrders = function () {

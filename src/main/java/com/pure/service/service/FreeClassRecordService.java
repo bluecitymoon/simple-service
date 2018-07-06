@@ -6,6 +6,7 @@ import com.pure.service.service.dto.BatchCustomersResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -48,5 +49,5 @@ public interface FreeClassRecordService {
 
     BatchCustomersResponse upload(BatchCustomers customers);
 
-    BatchCustomersResponse upload(byte[] bytes);
+    BatchCustomersResponse upload(InputStream inputStream, String name);
 }

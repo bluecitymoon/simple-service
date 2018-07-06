@@ -41,9 +41,9 @@ html, body {
 body {
     background-color: #ecf0f5;
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 10px;
+    font-size: 13px;
     font-weight: normal;
-    color: #7a878e;
+    color: #000000;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased !important
 }
@@ -63,21 +63,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     color: #fff
 }
 
-::placeholder {
-    color: #b1b9bd !important
-}
+/*::placeholder {*/
+    /*color: #b1b9bd !important*/
+/*}*/
 
-::-webkit-input-placeholder {
-    color: #b1b9bd !important
-}
+/*::-webkit-input-placeholder {*/
+    /*color: #b1b9bd !important*/
+/*}*/
 
-::-ms-input-placeholder {
-    color: #b1b9bd !important
-}
+/*::-ms-input-placeholder {*/
+    /*color: #b1b9bd !important*/
+/*}*/
 
-:-ms-input-placeholder {
-    color: #b1b9bd !important
-}
+/*:-ms-input-placeholder {*/
+    /*color: #b1b9bd !important*/
+/*}*/
 
 #container {
     min-height: 100vh;
@@ -7332,7 +7332,7 @@ blockquote {
 }
 
 .nav-tabs li a {
-    color: #7a878e;
+    color: #000000;
     border-radius: 3px 3px 0 0
 }
 

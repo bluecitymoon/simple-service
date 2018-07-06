@@ -1,7 +1,6 @@
 package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.pure.service.domain.Asset;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.User;
 import com.pure.service.security.SecurityUtils;
@@ -121,7 +120,8 @@ public class FreeClassRecordResource {
             return ResponseEntity.badRequest().build();
         }
 
-        BatchCustomersResponse response = freeClassRecordService.upload(file.getBytes());
+
+        BatchCustomersResponse response = freeClassRecordService.upload(file.getInputStream(), file.getName());
 
         return ResponseEntity.ok(response);
     }
