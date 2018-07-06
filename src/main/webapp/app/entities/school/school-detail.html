@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="simpleServiceApp.school.detail.title">School</span> {{vm.school.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.school.name">Name</span></dt>
+        <dd>
+            <span>{{vm.school.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.code">Code</span></dt>
+        <dd>
+            <span>{{vm.school.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.school.startDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.school.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.school.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.school.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.school.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.address">Address</span></dt>
+        <dd>
+            <span>{{vm.school.address}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.school.phone">Phone</span></dt>
+        <dd>
+            <span>{{vm.school.phone}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="school-detail.edit({id:vm.school.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

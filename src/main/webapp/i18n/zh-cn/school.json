@@ -1,0 +1,29 @@
+{
+    "simpleServiceApp": {
+        "school" : {
+            "home": {
+                "title": "Schools",
+                "createLabel": "Create a new School",
+                "createOrEditLabel": "Create or edit a School"
+            },
+            "created": "A new School is created with identifier {{ param }}",
+            "updated": "A School is updated with identifier {{ param }}",
+            "deleted": "A School is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete School {{ id }}?"
+            },
+            "detail": {
+                "title": "School"
+            },
+            "name": "Name",
+            "code": "Code",
+            "startDate": "Start Date",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "address": "Address",
+            "phone": "Phone"
+        }
+    }
+}

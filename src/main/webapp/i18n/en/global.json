@@ -41,6 +41,7 @@
                 "task": "Task",
                 "taskStatus": "Task Status",
                 "customerTrackTask": "Customer Track Task",
+                "school": "School",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
