@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.dto.CardNumberRequest;
+import com.pure.service.service.dto.CustomerCardDTO;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CustomerCardCriteria;
@@ -67,8 +68,13 @@ public class CustomerCardResource {
 
     @PostMapping("/customer-cards/generate-card-number")
     @Timed
-    public String generateCardNumber(@RequestBody CardNumberRequest cardNumberRequest) {
-        return customerCardService.generateCardNumber(cardNumberRequest);
+    public ResponseEntity<CustomerCardDTO> generateCardNumber(@RequestBody CardNumberRequest cardNumberRequest) {
+        String cardNumber = customerCardService.generateCardNumber(cardNumberRequest);
+
+        CustomerCardDTO dto = new CustomerCardDTO();
+        dto.setCardNumber(cardNumber);
+
+        return ResponseEntity.ok(dto);
     }
 
     /**

@@ -301,6 +301,11 @@
                                     createdDate: null,
                                     lastModifiedBy: null,
                                     lastModifiedDate: null,
+                                    totalMoneyAmount: null,
+                                    promotionAmount: null,
+                                    classCount: null,
+                                    totalMinutes: null,
+                                    specialPromotionAmount: null,
                                     id: null
                                 };
                             }

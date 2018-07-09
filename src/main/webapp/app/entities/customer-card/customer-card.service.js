@@ -25,7 +25,9 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getSequenceNumber': {method: 'POST', url: 'api/sequence/get'},
+            'generateCustomerCardNumber': {method: 'POST', url: 'api/customer-cards/generate-card-number'}
         });
     }
 })();

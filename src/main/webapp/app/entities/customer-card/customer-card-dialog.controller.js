@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCardDialogController', CustomerCardDialogController);
 
-    CustomerCardDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType', 'Course'];
+    CustomerCardDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType', 'Course', 'SequenceNumber', 'AlertService'];
 
-    function CustomerCardDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCard, Customer, CustomerCardType, Course) {
+    function CustomerCardDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCard, Customer, CustomerCardType, Course, SequenceNumber, AlertService) {
         var vm = this;
 
         vm.customerCard = entity;
@@ -21,7 +21,7 @@
 
             var parameters = {
                 page: 0,
-                size: 5000,
+                size: 100000,
                 sort: 'id,desc',
                 department: 'operation'
             };
@@ -36,6 +36,21 @@
             vm.customerCard.moneyShouldCollected = vm.customerCard.totalMoneyAmount - vm.customerCard.promotionAmount - vm.customerCard.specialPromotionAmount;
         }
 
+        function generateCustomerCardNumber() {
+
+            CustomerCard.generateCustomerCardNumber({
+                customerId: vm.customerCard.customer.id,
+                cardCode: vm.customerCard.customerCardType.code
+            }, function (data) {
+
+                console.log(data);
+                vm.customerCard.number = data.cardNumber;
+
+            }, function (error) {
+
+            });
+        }
+
         $scope.$watch("vm.customerCard.customerCardType", function (newVal, oldVal) {
 
             if (newVal) {
@@ -44,6 +59,20 @@
                 vm.customerCard.totalMinutes = newVal.totalMinutes;
 
                calculateMoney();
+
+                if (vm.customerCard.customer) {
+                    generateCustomerCardNumber();
+                }
+            }
+        });
+
+        $scope.$watch("vm.customerCard.customer", function (newVal, oldVal) {
+
+            if (newVal) {
+
+                if (vm.customerCard.customerCardType) {
+                    generateCustomerCardNumber();
+                }
             }
         });
 
@@ -66,8 +95,22 @@
             }
         });
 
+        function generateSequenceNumber() {
+
+            if (vm.customerCard.id == null) {
+
+                 CustomerCard.getSequenceNumber({}, function (data) {
+                     vm.customerCard.serialNumber  = data.number;
+                }, function (error) {
+                    AlertService.error('生成流水号失败 ' + error);
+                });
+
+            }
+        }
 
         loadSingleCustomer(vm.customerId);
+        generateSequenceNumber();
+
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

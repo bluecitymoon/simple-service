@@ -22,16 +22,8 @@
         </div>
 
         <div class="row">
-            <div class="col-md-9">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.customerCard.number"
-                           for="field_number">Number</label>
-                    <input type="text" class="form-control" name="number" id="field_number"
-                           ng-model="vm.customerCard.number"
-                    />
-                </div>
-            </div>
-            <div class="col-md-3">
+
+            <div class="col-md-4">
                 <div class="form-group">
                     <label data-translate="simpleServiceApp.customerCard.customerCardType">Customer
                         Card Type</label>
@@ -44,12 +36,23 @@
                         </ui-select-choices>
                     </ui-select>
                     <!--<select class="form-control" id="field_customerCardType" name="customerCardType"-->
-                            <!--ng-model="vm.customerCard.customerCardType"-->
-                            <!--ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">-->
-                        <!--<option value=""></option>-->
+                    <!--ng-model="vm.customerCard.customerCardType"-->
+                    <!--ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">-->
+                    <!--<option value=""></option>-->
                     <!--</select>-->
                 </div>
             </div>
+
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.number"
+                           for="field_number">Number</label>
+                    <input type="text" class="form-control" name="number" id="field_number"
+                           ng-model="vm.customerCard.number" readonly
+                    />
+                </div>
+            </div>
+
         </div>
 
         <div class="row">
@@ -58,7 +61,7 @@
                     <label class="control-label" data-translate="simpleServiceApp.customerCard.serialNumber"
                            for="field_serialNumber">Serial Number</label>
                     <input type="text" class="form-control" name="serialNumber" id="field_serialNumber"
-                           ng-model="vm.customerCard.serialNumber"
+                           ng-model="vm.customerCard.serialNumber" readonly
                     />
                 </div>
             </div>
@@ -90,7 +93,7 @@
                     />
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.customerCard.promotionAmount"
                            for="field_promotionAmount">Promotion Amount</label>
@@ -99,7 +102,7 @@
                     />
                 </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" for="field_moneyShouldCollected">应收金额</label>
                     <input type="number" class="form-control" name="moneyShouldCollected" id="field_moneyShouldCollected"
@@ -107,15 +110,15 @@
                     />
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.customerCard.moneyCollected"
-                           for="field_moneyCollected">Money Collected</label>
-                    <input type="number" class="form-control" name="moneyCollected" id="field_moneyCollected"
-                           ng-model="vm.customerCard.moneyCollected"
-                    />
-                </div>
-            </div>
+            <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" data-translate="simpleServiceApp.customerCard.moneyCollected"-->
+                           <!--for="field_moneyCollected">Money Collected</label>-->
+                    <!--<input type="number" class="form-control" name="moneyCollected" id="field_moneyCollected"-->
+                           <!--ng-model="vm.customerCard.moneyCollected"-->
+                    <!--/>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <div class="col-md-2">
                 <div class="form-group">

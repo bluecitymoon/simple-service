@@ -1,5 +1,6 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.repository.CustomerCardRepository;
 import com.pure.service.service.CustomerCardService;
@@ -85,6 +86,19 @@ public class CustomerCardServiceImpl implements CustomerCardService{
     @Override
     public String generateCardNumber(CardNumberRequest cardNumberRequest) {
 
-        return "hfbl" + cardNumberRequest.getCardCode() + DateUtil.getSimpleToday() + "";
+        Customer customer = customerService.findOne(cardNumberRequest.getCustomerId());
+
+        String freshNumber = "hfbl" + cardNumberRequest.getCardCode() + DateUtil.getSimpleToday() + customer.getId();
+
+        Integer lastSequenceNumber = 1;
+        Integer cardCount = customerCardRepository.getCustomerCardCount(cardNumberRequest.getCustomerId().intValue());
+
+        if (cardCount != null) {
+
+            lastSequenceNumber = cardCount + 1;
+        }
+
+        return freshNumber + lastSequenceNumber;
+
     }
 }
