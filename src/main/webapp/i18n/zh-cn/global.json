@@ -42,6 +42,7 @@
                 "taskStatus": "Task Status",
                 "customerTrackTask": "Customer Track Task",
                 "school": "School",
+                "financeCategory": "Finance Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,23 @@
+{
+    "simpleServiceApp": {
+        "financeCategory" : {
+            "home": {
+                "title": "财务项目类别",
+                "createLabel": "录入",
+                "createOrEditLabel": "管理"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "财务项目类别"
+            },
+            "name": "名称",
+            "code": "代码",
+            "comments": "备注"
+        }
+    }
+}
