@@ -2,21 +2,21 @@
     "simpleServiceApp": {
         "paymentType" : {
             "home": {
-                "title": "Ö§¸¶·½Ê½",
-                "createLabel": "Â¼Èë",
-                "createOrEditLabel": "¹ÜÀí"
+                "title": "æ”¯ä»˜æ–¹å¼",
+                "createLabel": "å½•å…¥",
+                "createOrEditLabel": "ç®¡ç†"
             },
-            "created": "´´½¨³É¹¦£¡",
-            "updated": "¸üĞÂ³É¹¦£¡",
-            "deleted": "É¾³ı³É¹¦£¡",
+            "created": "åˆ›å»ºæˆåŠŸï¼",
+            "updated": "æ›´æ–°æˆåŠŸï¼",
+            "deleted": "åˆ é™¤æˆåŠŸï¼",
             "delete": {
-                "question": "ÄãÈ·¶¨ÒªÉ¾³ıÕâÌõÊı¾İ?"
+                "question": "ä½ ç¡®å®šè¦åˆ é™¤è¿™æ¡æ•°æ®?"
             },
             "detail": {
-                "title": "Ö§¸¶·½Ê½"
+                "title": "æ”¯ä»˜æ–¹å¼"
             },
-            "name": "Ãû³Æ",
-            "code": "´úÂë"
+            "name": "åç§°",
+            "code": "ä»£ç "
         }
     }
 }
