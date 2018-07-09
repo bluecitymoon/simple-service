@@ -14,4 +14,6 @@ import org.springframework.data.jpa.repository.*;
 public interface FinanceCategoryRepository extends JpaRepository<FinanceCategory, Long>, JpaSpecificationExecutor<FinanceCategory> {
 
     FinanceCategory findByName(String deal);
+
+    FinanceCategory findByCode(String deal);
 }

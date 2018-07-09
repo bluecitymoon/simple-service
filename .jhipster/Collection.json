@@ -1,0 +1,61 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "financeCategory",
+            "otherEntityName": "financeCategory",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "paymentType",
+            "otherEntityName": "paymentType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "moneyShouldCollected",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "moneyCollected",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "balance",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "sequenceNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "payerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180709085328",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "collection",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

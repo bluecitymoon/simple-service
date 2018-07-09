@@ -1,0 +1,67 @@
+<div class="page-header">
+    <h1 class="page-title">应收详情</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.collection.moneyShouldCollected">Money Should Collected</span>
+            </dt>
+            <dd>
+                <span>{{vm.collection.moneyShouldCollected}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.moneyCollected">Money Collected</span></dt>
+            <dd>
+                <span>{{vm.collection.moneyCollected}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.balance">Balance</span></dt>
+            <dd>
+                <span>{{vm.collection.balance}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.sequenceNumber">Sequence Number</span></dt>
+            <dd>
+                <span>{{vm.collection.sequenceNumber}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.payerName">Payer Name</span></dt>
+            <dd>
+                <span>{{vm.collection.payerName}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.createdBy">Created By</span></dt>
+            <dd>
+                <span>{{vm.collection.createdBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.createdDate">Created Date</span></dt>
+            <dd>
+                <span>{{vm.collection.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.lastModifiedBy">Last Modified By</span></dt>
+            <dd>
+                <span>{{vm.collection.lastModifiedBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.lastModifiedDate">Last Modified Date</span></dt>
+            <dd>
+                <span>{{vm.collection.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.financeCategory">Finance Category</span></dt>
+            <dd>
+                <a ui-sref="finance-category-detail({id:vm.collection.financeCategory.id})">{{vm.collection.financeCategory.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.collection.paymentType">Payment Type</span></dt>
+            <dd>
+                <a ui-sref="payment-type-detail({id:vm.collection.paymentType.id})">{{vm.collection.paymentType.name}}</a>
+            </dd>
+        </dl>
+
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button" ui-sref="collection-detail.edit({id:vm.collection.id})" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+        </button>
+    </div>
+</div>

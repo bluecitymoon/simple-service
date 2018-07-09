@@ -41,6 +41,7 @@
     <include file="config/liquibase/changelog/20180613130336_added_entity_CustomerTrackTask.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180706082222_added_entity_School.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180709063734_added_entity_FinanceCategory.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180709085328_added_entity_Collection.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -80,5 +81,6 @@
     <include file="config/liquibase/changelog/20180613084942_added_entity_constraints_Payment.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180613125305_added_entity_constraints_Task.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180613130336_added_entity_constraints_CustomerTrackTask.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180709085328_added_entity_constraints_Collection.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

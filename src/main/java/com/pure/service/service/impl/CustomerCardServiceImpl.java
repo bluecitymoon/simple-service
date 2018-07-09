@@ -1,13 +1,14 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Collection;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.FinanceCategory;
 import com.pure.service.repository.CustomerCardRepository;
 import com.pure.service.repository.FinanceCategoryRepository;
+import com.pure.service.service.CollectionService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.CustomerService;
-import com.pure.service.service.PaymentService;
 import com.pure.service.service.dto.CardNumberRequest;
 import com.pure.service.service.util.DateUtil;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class CustomerCardServiceImpl implements CustomerCardService{
     private final CustomerCardRepository customerCardRepository;
 
     @Autowired
-    private PaymentService paymentService;
+    private CollectionService collectionService;
 
     @Autowired
     private FinanceCategoryRepository financeCategoryRepository;
@@ -56,8 +57,20 @@ public class CustomerCardServiceImpl implements CustomerCardService{
         //generate finance payment for new card
         if (customerCard.getId() == null) {
 
-            FinanceCategory dealCategory = financeCategoryRepository.findByName("deal");
-            
+            FinanceCategory dealCategory = financeCategoryRepository.findByCode("deal");
+            Collection collection = new Collection();
+            collection.setFinanceCategory(dealCategory);
+            collection.setSequenceNumber(customerCard.getSerialNumber());
+            collection.setMoneyShouldCollected(customerCard.getMoneyShouldCollected());
+            collection.setMoneyCollected(customerCard.getMoneyCollected());
+
+            if (customerCard.getMoneyShouldCollected() != null && customerCard.getMoneyCollected() != null) {
+                Float balance = customerCard.getMoneyShouldCollected() - customerCard.getMoneyCollected();
+                collection.setBalance(balance);
+            }
+            collection.setPayerName(customerCard.getCustomer().getName());
+
+            collectionService.save(collection);
         }
 
         return customerCardRepository.save(customerCard);

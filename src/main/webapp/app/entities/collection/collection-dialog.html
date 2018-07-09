@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCollectionLabel" data-translate="simpleServiceApp.collection.home.createOrEditLabel">Create or edit a Collection</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.collection.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.collection.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.collection.moneyShouldCollected" for="field_moneyShouldCollected">Money Should Collected</label>
+            <input type="number" class="form-control" name="moneyShouldCollected" id="field_moneyShouldCollected"
+                    ng-model="vm.collection.moneyShouldCollected"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.collection.moneyCollected" for="field_moneyCollected">Money Collected</label>
+            <input type="number" class="form-control" name="moneyCollected" id="field_moneyCollected"
+                    ng-model="vm.collection.moneyCollected"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.collection.balance" for="field_balance">Balance</label>
+            <input type="number" class="form-control" name="balance" id="field_balance"
+                    ng-model="vm.collection.balance"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.collection.sequenceNumber" for="field_sequenceNumber">Sequence Number</label>
+            <input type="text" class="form-control" name="sequenceNumber" id="field_sequenceNumber"
+                    ng-model="vm.collection.sequenceNumber"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.collection.payerName" for="field_payerName">Payer Name</label>
+            <input type="text" class="form-control" name="payerName" id="field_payerName"
+                    ng-model="vm.collection.payerName"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.collection.financeCategory" for="field_financeCategory">Finance Category</label>
+            <select class="form-control" id="field_financeCategory" name="financeCategory" ng-model="vm.collection.financeCategory" ng-options="financeCategory as financeCategory.name for financeCategory in vm.financecategories track by financeCategory.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.collection.paymentType" for="field_paymentType">Payment Type</label>
+            <select class="form-control" id="field_paymentType" name="paymentType" ng-model="vm.collection.paymentType" ng-options="paymentType as paymentType.name for paymentType in vm.paymenttypes track by paymentType.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
