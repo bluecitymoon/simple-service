@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('PaymentDetailController', PaymentDetailController);
 
-    PaymentDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Payment', 'User', 'PaymentType'];
+    PaymentDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Payment', 'User', 'PaymentType', 'FinanceCategory'];
 
-    function PaymentDetailController($scope, $rootScope, $stateParams, previousState, entity, Payment, User, PaymentType) {
+    function PaymentDetailController($scope, $rootScope, $stateParams, previousState, entity, Payment, User, PaymentType, FinanceCategory) {
         var vm = this;
 
         vm.payment = entity;

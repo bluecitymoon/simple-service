@@ -27,6 +27,9 @@
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="projectName"><span data-translate="simpleServiceApp.payment.projectName">Project Name</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>
+                        <span>项目类别</span>
+                    </th>
                     <th jh-sort-by="estimateAmount"><span data-translate="simpleServiceApp.payment.estimateAmount">Estimate Amount</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="actualAmount"><span data-translate="simpleServiceApp.payment.actualAmount">Actual Amount</span>
@@ -60,6 +63,7 @@
                 <tr ng-repeat="payment in vm.payments track by payment.id">
                     <td><a ui-sref="payment-detail({id:payment.id})">{{payment.id}}</a></td>
                     <td>{{payment.projectName}}</td>
+                    <td>{{payment.financeCategory.name}}</td>
                     <td>{{payment.estimateAmount}}</td>
                     <td>{{payment.actualAmount}}</td>
                     <td>{{payment.paied}}</td>

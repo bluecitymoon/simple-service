@@ -1,15 +1,12 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
 import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-import io.github.jhipster.service.filter.InstantFilter;
+import java.io.Serializable;
 
 
 
@@ -53,6 +50,8 @@ public class PaymentCriteria implements Serializable {
     private LongFilter paidUserId;
 
     private LongFilter paymentTypeId;
+
+    private LongFilter financeCategoryId;
 
     public PaymentCriteria() {
     }
@@ -169,6 +168,14 @@ public class PaymentCriteria implements Serializable {
         this.paymentTypeId = paymentTypeId;
     }
 
+    public LongFilter getFinanceCategoryId() {
+        return financeCategoryId;
+    }
+
+    public void setFinanceCategoryId(LongFilter financeCategoryId) {
+        this.financeCategoryId = financeCategoryId;
+    }
+
     @Override
     public String toString() {
         return "PaymentCriteria{" +
@@ -186,6 +193,7 @@ public class PaymentCriteria implements Serializable {
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
                 (paidUserId != null ? "paidUserId=" + paidUserId + ", " : "") +
                 (paymentTypeId != null ? "paymentTypeId=" + paymentTypeId + ", " : "") +
+                (financeCategoryId != null ? "financeCategoryId=" + financeCategoryId + ", " : "") +
             "}";
     }
 

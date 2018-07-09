@@ -111,6 +111,9 @@ public class PaymentQueryService extends QueryService<Payment> {
             if (criteria.getPaymentTypeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getPaymentTypeId(), Payment_.paymentType, PaymentType_.id));
             }
+            if (criteria.getFinanceCategoryId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getFinanceCategoryId(), Payment_.financeCategory, FinanceCategory_.id));
+            }
         }
         return specification;
     }

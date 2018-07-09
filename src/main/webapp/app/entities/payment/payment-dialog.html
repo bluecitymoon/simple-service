@@ -15,7 +15,20 @@
                     ng-model="vm.payment.id" readonly />
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" >项目类别</label>
+                    <ui-select ng-model="vm.payment.financeCategory">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.financecategories | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.payment.projectName" for="field_projectName">Project Name</label>
                     <input type="text" class="form-control" name="projectName" id="field_projectName"
@@ -23,7 +36,7 @@
                     />
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label data-translate="simpleServiceApp.payment.paymentType" for="field_paymentType">Payment Type</label>
                     <select class="form-control" id="field_paymentType" name="paymentType" ng-model="vm.payment.paymentType" ng-options="paymentType as paymentType.name for paymentType in vm.paymenttypes track by paymentType.id">
@@ -86,10 +99,18 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label data-translate="simpleServiceApp.payment.paidUser" for="field_paidUser">Paid User</label>
-                    <select class="form-control" id="field_paidUser" name="paidUser" ng-model="vm.payment.paidUser" ng-options="user as user.login for user in vm.users track by user.id">
-                        <option value=""></option>
-                    </select>
+                    <label data-translate="simpleServiceApp.payment.paidUser">Paid User</label>
+                    <ui-select ng-model="vm.payment.paidUser">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.users | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--<select class="form-control" id="field_paidUser" name="paidUser" ng-model="vm.payment.paidUser" ng-options="user as user.login for user in vm.users track by user.id">-->
+                        <!--<option value=""></option>-->
+                    <!--</select>-->
                 </div>
             </div>
         </div>

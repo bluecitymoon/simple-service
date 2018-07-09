@@ -52,6 +52,9 @@ public class Payment extends AbstractAuditingEntity {
     @ManyToOne
     private PaymentType paymentType;
 
+    @ManyToOne
+    private FinanceCategory financeCategory;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -176,6 +179,19 @@ public class Payment extends AbstractAuditingEntity {
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public FinanceCategory getFinanceCategory() {
+        return financeCategory;
+    }
+
+    public Payment financeCategory(FinanceCategory financeCategory) {
+        this.financeCategory = financeCategory;
+        return this;
+    }
+
+    public void setFinanceCategory(FinanceCategory financeCategory) {
+        this.financeCategory = financeCategory;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

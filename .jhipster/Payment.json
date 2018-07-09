@@ -14,6 +14,12 @@
             "otherEntityName": "paymentType",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "financeCategory",
+            "otherEntityName": "financeCategory",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [

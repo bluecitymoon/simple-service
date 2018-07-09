@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('PaymentDialogController', PaymentDialogController);
 
-    PaymentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Payment', 'User', 'PaymentType'];
+    PaymentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Payment', 'User', 'PaymentType', 'FinanceCategory'];
 
-    function PaymentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Payment, User, PaymentType) {
+    function PaymentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Payment, User, PaymentType, FinanceCategory) {
         var vm = this;
 
         vm.payment = entity;
@@ -15,8 +15,9 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.users = User.query();
+        vm.users = User.query({ page: 0,  size: 1000 });
         vm.paymenttypes = PaymentType.query();
+        vm.financecategories = FinanceCategory.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
