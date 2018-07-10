@@ -30,6 +30,13 @@
                 </uib-tab-heading>
                 <div ng-include="'app/entities/customer/tab-customer-cards.html'"></div>
             </uib-tab>
+
+            <uib-tab has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_COURSE_CONSULTANT">
+                <uib-tab-heading>
+                    关联学员
+                </uib-tab-heading>
+                <div ng-include="'app/entities/customer/tab-students.html'"></div>
+            </uib-tab>
         </uib-tabset>
 
     </div>

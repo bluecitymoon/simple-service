@@ -49,6 +49,7 @@
                     $translatePartialLoader.addPart('customer');
                     $translatePartialLoader.addPart('task');
                     $translatePartialLoader.addPart('customerTrackTask');
+                    $translatePartialLoader.addPart('student');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]

@@ -1,0 +1,39 @@
+<div class="panel panel-bordered-primary" ng-repeat="student in vm.students track by student.id">
+    <div class="panel-body">
+
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.student.name">Name</span></dt>
+            <dd>
+                <span>{{student.name}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.phone">Phone</span></dt>
+            <dd>
+                <span>{{student.phone}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.gender">Gender</span></dt>
+            <dd>
+                <span>{{student.gender}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.birthday">Birthday</span></dt>
+            <dd>
+                <span>{{student.birthday | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.address">Address</span></dt>
+            <dd>
+                <span>{{student.address}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.school">School</span></dt>
+            <dd>
+                <span>{{student.school}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.qq">Qq</span></dt>
+            <dd>
+                <span>{{student.qq}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.comments">Comments</span></dt>
+            <dd>
+                <span>{{student.comments}}</span>
+            </dd>
+        </dl>
+    </div>
+</div>

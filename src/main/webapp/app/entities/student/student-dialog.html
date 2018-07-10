@@ -1,81 +1,126 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myStudentLabel" data-translate="simpleServiceApp.student.home.createOrEditLabel">Create or edit a Student</h4>
+        <h4 class="modal-title" id="myStudentLabel" data-translate="simpleServiceApp.student.home.createOrEditLabel">
+            Create or edit a Student</h4>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.student.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.student.id" readonly />
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label data-translate="simpleServiceApp.student.customer">Customer</label>
+                <ui-select ng-model="vm.student.customer">
+                    <ui-select-match>
+                        {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in (vm.customers | filter: $select.search) track by item.id">
+                        <span ng-bind="item.name"></span><span class="pull-right"
+                                                               ng-bind="item.contactPhoneNumber"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.student.name"
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.name"
+                           for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           ng-model="vm.student.name"
                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.phone" for="field_phone">Phone</label>
-            <input type="text" class="form-control" name="phone" id="field_phone"
-                    ng-model="vm.student.phone"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.gender" for="field_gender">Gender</label>
-            <input type="text" class="form-control" name="gender" id="field_gender"
-                    ng-model="vm.student.gender"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.birthday" for="field_birthday">Birthday</label>
-                <div class="input-group">
-                    <input id="field_birthday" type="text" class="form-control" name="birthday" datetime-picker="{{dateformat}}" ng-model="vm.student.birthday" is-open="vm.datePickerOpenStatus.birthday"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('birthday')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
                 </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.address" for="field_address">Address</label>
-            <input type="text" class="form-control" name="address" id="field_address"
-                    ng-model="vm.student.address"
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.phone"
+                           for="field_phone">Phone</label>
+                    <input type="text" class="form-control" name="phone" id="field_phone"
+                           ng-model="vm.student.phone"
                     />
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.school" for="field_school">School</label>
-            <input type="text" class="form-control" name="school" id="field_school"
-                    ng-model="vm.student.school"
-                    />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.gender"
+                           for="field_sex">Gender</label>
+                    <select class="form-control" id="field_sex" name="sex" ng-model="vm.student.gender">
+                        <option value=""></option>
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.birthday"
+                           for="field_birthday">Birthday</label>
+                    <div class="input-group">
+                        <input id="field_birthday" type="text" class="form-control" name="birthday"
+                               datetime-picker="{{dateformat}}" ng-model="vm.student.birthday"
+                               is-open="vm.datePickerOpenStatus.birthday"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('birthday')"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.qq" for="field_qq">Qq</label>
-            <input type="text" class="form-control" name="qq" id="field_qq"
-                    ng-model="vm.student.qq"
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.address"
+                           for="field_address">Address</label>
+                    <input type="text" class="form-control" name="address" id="field_address"
+                           ng-model="vm.student.address"
                     />
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.student.comments" for="field_comments">Comments</label>
-            <input type="text" class="form-control" name="comments" id="field_comments"
-                    ng-model="vm.student.comments"
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.school"
+                           for="field_school">School</label>
+                    <input type="text" class="form-control" name="school" id="field_school"
+                           ng-model="vm.student.school"
                     />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.qq" for="field_qq">Qq</label>
+                    <input type="text" class="form-control" name="qq" id="field_qq"
+                           ng-model="vm.student.qq"
+                    />
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.student.customer" for="field_customer">Customer</label>
-            <select class="form-control" id="field_customer" name="customer" ng-model="vm.student.customer" ng-options="customer as customer.name for customer in vm.customers track by customer.id">
-                <option value=""></option>
-            </select>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.student.comments"
+                           for="field_comments">Comments</label>
+                    <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"
+                              ng-model="vm.student.comments"
+                    ></textarea>
+                </div>
+            </div>
         </div>
+
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>

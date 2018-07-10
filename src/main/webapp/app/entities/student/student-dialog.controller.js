@@ -15,7 +15,32 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.customers = Customer.query();
+        vm.customerId = $stateParams.cid;
+
+        if (!vm.customerId) {
+
+            //TODO
+            var parameters = {
+                page: 0,
+                size: 100000,
+                sort: 'id,desc',
+                department: 'operation'
+            };
+
+            vm.customers = Customer.query(parameters);
+        }
+
+        $scope.$watch("vm.student.customer", function (newVal, oldVal) {
+
+            if (newVal) {
+                vm.student.name = vm.student.customer.name;
+                vm.student.gender = vm.student.customer.sex;
+                vm.student.school = vm.student.customer.school;
+                vm.student.address = vm.student.customer.address;
+                vm.student.birthday = vm.student.customer.birthday;
+                vm.student.phone = vm.student.customer.contactPhoneNumber;
+            }
+        });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerDetailController', CustomerDetailController);
 
-    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks', 'CustomerCard', 'CustomerTrackTask', 'AlertService'];
+    CustomerDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Customer', 'FreeClassRecord', 'CustomerCommunicationLog', 'CustomerCommunicationSchedule', 'ParseLinks', 'CustomerCard', 'CustomerTrackTask', 'AlertService', 'Student'];
 
-    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks, CustomerCard, CustomerTrackTask, AlertService) {
+    function CustomerDetailController($scope, $rootScope, $stateParams, previousState, entity, Customer, FreeClassRecord, CustomerCommunicationLog, CustomerCommunicationSchedule, ParseLinks, CustomerCard, CustomerTrackTask, AlertService, Student) {
         var vm = this;
 
         vm.customer = entity;
@@ -51,6 +51,21 @@
         loadAllSchedules();
         loadAllCards();
         loadAllCustomerTrackTasks();
+        loadStudents();
+
+        function loadStudents() {
+
+            Student.query({
+                page: 0,
+                size: 100,
+                sort: 'id',
+                'customerId.equals': vm.customer.id
+            }, function (data) {
+                vm.students = data;
+            }, function (error) {
+                //
+            });
+        }
 
         function loadAllCustomerTrackTasks() {
             CustomerTrackTask.getCustomerTrackTasks({cid: vm.customer.id},
@@ -72,7 +87,7 @@
             }, function (data) {
                 vm.logs = data;
             }, function (error) {
-
+                //
             });
 
         }
