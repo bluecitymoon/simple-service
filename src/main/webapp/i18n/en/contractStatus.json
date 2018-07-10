@@ -1,0 +1,22 @@
+{
+    "simpleServiceApp": {
+        "contractStatus" : {
+            "home": {
+                "title": "合同状态管理",
+                "createLabel": "录入状态",
+                "createOrEditLabel": "管理状态"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "合同状态管理"
+            },
+            "name": "状态",
+            "code": "代码"
+        }
+    }
+}

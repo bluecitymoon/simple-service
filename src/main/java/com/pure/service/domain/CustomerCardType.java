@@ -33,6 +33,9 @@ public class CustomerCardType implements Serializable {
     @Column(name = "total_minutes")
     private Integer totalMinutes;
 
+    @Column(name = "years")
+    private Integer years;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -40,6 +43,14 @@ public class CustomerCardType implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getYears() {
+        return years;
+    }
+
+    public void setYears(Integer years) {
+        this.years = years;
     }
 
     public String getName() {

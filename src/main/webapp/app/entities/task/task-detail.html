@@ -1,55 +1,59 @@
+<div class="page-header">
+    <h1 class="page-title">任务详情</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
 
-<div>
-    <h2><span data-translate="simpleServiceApp.task.detail.title">Task</span> {{vm.task.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="simpleServiceApp.task.description">Description</span></dt>
-        <dd>
-            <span>{{vm.task.description}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.estimateExecuteDate">Estimate Execute Date</span></dt>
-        <dd>
-            <span>{{vm.task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.createdBy">Created By</span></dt>
-        <dd>
-            <span>{{vm.task.createdBy}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.createdDate">Created Date</span></dt>
-        <dd>
-            <span>{{vm.task.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.lastModifiedBy">Last Modified By</span></dt>
-        <dd>
-            <span>{{vm.task.lastModifiedBy}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.lastModifiedDate">Last Modified Date</span></dt>
-        <dd>
-            <span>{{vm.task.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.assignee">Assignee</span></dt>
-        <dd>
-            {{vm.task.assignee.login}}
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.taskStatus">Task Status</span></dt>
-        <dd>
-            <a ui-sref="task-status-detail({id:vm.task.taskStatus.id})">{{vm.task.taskStatus.name}}</a>
-        </dd>
-        <dt><span data-translate="simpleServiceApp.task.reporter">Reporter</span></dt>
-        <dd>
-            {{vm.task.reporter.firstName}}
-        </dd>
-    </dl>
+<div class="panel">
+    <div class="panel-body">
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.task.description">Description</span></dt>
+            <dd>
+                <span>{{vm.task.description}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.estimateExecuteDate">Estimate Execute Date</span></dt>
+            <dd>
+                <span>{{vm.task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.createdBy">Created By</span></dt>
+            <dd>
+                <span>{{vm.task.createdBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.createdDate">Created Date</span></dt>
+            <dd>
+                <span>{{vm.task.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.lastModifiedBy">Last Modified By</span></dt>
+            <dd>
+                <span>{{vm.task.lastModifiedBy}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.lastModifiedDate">Last Modified Date</span></dt>
+            <dd>
+                <span>{{vm.task.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.assignee">Assignee</span></dt>
+            <dd>
+                {{vm.task.assignee.login}}
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.taskStatus">Task Status</span></dt>
+            <dd>
+                <a ui-sref="task-status-detail({id:vm.task.taskStatus.id})">{{vm.task.taskStatus.name}}</a>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.task.reporter">Reporter</span></dt>
+            <dd>
+                {{vm.task.reporter.firstName}}
+            </dd>
+        </dl>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
 
-    <button type="button" ui-sref="task-detail.edit({id:vm.task.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-    </button>
+        <button type="button" ui-sref="task-detail.edit({id:vm.task.id})" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+        </button>
+    </div>
 </div>
