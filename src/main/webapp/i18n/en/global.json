@@ -45,6 +45,7 @@
                 "financeCategory": "Finance Category",
                 "collection": "Collection",
                 "contractStatus": "Contract Status",
+                "student": "Student",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

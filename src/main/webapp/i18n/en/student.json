@@ -1,0 +1,29 @@
+{
+    "simpleServiceApp": {
+        "student" : {
+            "home": {
+                "title": "学员",
+                "createLabel": "录入一个学员",
+                "createOrEditLabel": "管理学员"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "学员详情"
+            },
+            "name": "姓名",
+            "phone": "联系电话",
+            "gender": "性别",
+            "birthday": "生日",
+            "address": "住址",
+            "school": "学校",
+            "qq": "QQ",
+            "comments": "备注",
+            "customer": "客户"
+        }
+    }
+}

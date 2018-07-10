@@ -1,0 +1,60 @@
+<div class="page-header">
+    <h1 class="page-title">学员详情</h1>
+</div>
+
+<jhi-alert-error></jhi-alert-error>
+
+<div class="panel">
+    <div class="panel-body">
+        <dl class="dl-horizontal jh-entity-details">
+            <dt><span data-translate="simpleServiceApp.student.name">Name</span></dt>
+            <dd>
+                <span>{{vm.student.name}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.phone">Phone</span></dt>
+            <dd>
+                <span>{{vm.student.phone}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.gender">Gender</span></dt>
+            <dd>
+                <span>{{vm.student.gender}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.birthday">Birthday</span></dt>
+            <dd>
+                <span>{{vm.student.birthday | date:'yyyy-MM-dd hh:mm'}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.address">Address</span></dt>
+            <dd>
+                <span>{{vm.student.address}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.school">School</span></dt>
+            <dd>
+                <span>{{vm.student.school}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.qq">Qq</span></dt>
+            <dd>
+                <span>{{vm.student.qq}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.comments">Comments</span></dt>
+            <dd>
+                <span>{{vm.student.comments}}</span>
+            </dd>
+            <dt><span data-translate="simpleServiceApp.student.customer">Customer</span></dt>
+            <dd>
+                <a ui-sref="customer-detail({id:vm.student.customer.id})">{{vm.student.customer.name}}</a>
+            </dd>
+        </dl>
+
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+                data-translate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button" ui-sref="student-detail.edit({id:vm.student.id})" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+        </button>
+    </div>
+</div>
