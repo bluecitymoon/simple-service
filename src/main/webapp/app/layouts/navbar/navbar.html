@@ -116,12 +116,12 @@
                                     <span>客户列表</span>
                                 </a>
                             </li>
-                            <li>
-                                <a ui-sref="task">
-                                    <span class="glyphicon glyphicon-tasks"></span>
-                                    <span>TMK任务</span>
-                                </a>
-                            </li>
+                            <!--<li>-->
+                                <!--<a ui-sref="task">-->
+                                    <!--<span class="glyphicon glyphicon-tasks"></span>-->
+                                    <!--<span>TMK任务</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
                             <!--<li>-->
                                 <!--<a ui-sref="home">-->
                                     <!--<span class="glyphicon glyphicon-tags"></span>-->
@@ -165,12 +165,12 @@
                                     <span>客户回单统计表</span>
                                 </a>
                             </li>
-                            <li>
-                                <a ui-sref="customer-communication-schedule">
-                                    <span class="glyphicon glyphicon-bishop"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>
-                                </a>
-                            </li>
+                            <!--<li>-->
+                                <!--<a ui-sref="customer-communication-schedule">-->
+                                    <!--<span class="glyphicon glyphicon-bishop"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
                             <!--<li>-->
                                 <!--<a ui-sref="customer-communication-log" >-->
                                     <!--<span class="glyphicon glyphicon-list-alt"></span>&nbsp;-->
@@ -248,12 +248,7 @@
                                     <span>卡列表</span>
                                 </a>
                             </li>
-                            <li>
-                                <a ui-sref="student">
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span>学员管理</span>
-                                </a>
-                            </li>
+
                             <li>
                                 <a ui-sref="customer-card-type">
                                     <span class="glyphicon glyphicon-blackboard"></span>
@@ -298,29 +293,21 @@
                                     <span>课程种类</span>
                                 </a>
                             </li>
-                            <li>
-                                <a ui-sref="class-status">
-                                    <span class="fa fa-book"></span>
-                                    <span data-translate="global.menu.entities.classStatus">Class Status</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a ui-sref="class-age-level">
-                                    <span class="glyphicon glyphicon-signal"></span>
-                                    <span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>
-                                </a>
-                            </li>
 
-                            <li>
-                                <a ui-sref="class-arrangement-rule-loop-way" ng-click="vm.collapseNavbar()">
-                                    <span class="fa fa-ruble-sign"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.classArrangementRuleLoopWay">Class Arrangement Rule Loop Way</span>
-                                </a>
-                            </li>
                             <li>
                                 <a ui-sref="class-arrangement-rule" ng-click="vm.collapseNavbar()">
                                     <span class="fa fa-archive"></span>&nbsp;
                                     <span data-translate="global.menu.entities.classArrangementRule">Class Arrangement Rule</span>
+                                </a>
+                            </li>
+
+                            <li class="divider"></li>
+
+                            <li class="dropdown-header">学员</li>
+                            <li>
+                                <a ui-sref="student">
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span>学员管理</span>
                                 </a>
                             </li>
 
@@ -411,6 +398,28 @@
                                     <span>财务项目类别</span>
                                 </a>
                             </li>
+
+                            <li class="dropdown-header">教务处</li>
+                            <li>
+                                <a ui-sref="class-status">
+                                    <span class="fa fa-book"></span>
+                                    <span data-translate="global.menu.entities.classStatus">Class Status</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="class-age-level">
+                                    <span class="glyphicon glyphicon-signal"></span>
+                                    <span data-translate="global.menu.entities.classAgeLevel">Class Age Level</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a ui-sref="class-arrangement-rule-loop-way" ng-click="vm.collapseNavbar()">
+                                    <span class="fa fa-ruble-sign"></span>&nbsp;
+                                    <span data-translate="global.menu.entities.classArrangementRuleLoopWay">Class Arrangement Rule Loop Way</span>
+                                </a>
+                            </li>
+
                             <li class="dropdown-header">运营部</li>
                             <li>
                                 <a ui-sref="contract-status">
