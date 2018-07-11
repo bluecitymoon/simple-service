@@ -1,18 +1,18 @@
 <div class="page-header">
-    <h1 class="page-title" data-translate="simpleServiceApp.contractStatus.home.title">Contract Statuses</h1>
+    <h1 class="page-title" data-translate="simpleServiceApp.contractType.home.title">Contract Types</h1>
 </div>
 <jhi-alert></jhi-alert>
 <div class="panel">
     <div class="panel-body">
 
-    <!--<h2 data-translate="simpleServiceApp.contractStatus.home.title">Contract Statuses</h2>-->
+    <!--<h2 data-translate="simpleServiceApp.contractType.home.title">Contract Types</h2>-->
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="contract-status.new" >
+                <button class="btn btn-primary" ui-sref="contract-type.new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.contractStatus.home.createLabel">
-                        Create new Contract Status
+                    <span  data-translate="simpleServiceApp.contractType.home.createLabel">
+                        Create new Contract Type
                     </span>
                 </button>
             </div>
@@ -24,32 +24,32 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.contractStatus.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="code"><span data-translate="simpleServiceApp.contractStatus.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.contractType.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="code"><span data-translate="simpleServiceApp.contractType.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="contractStatus in vm.contractStatuses track by contractStatus.id">
-                    <td><a ui-sref="contract-status-detail({id:contractStatus.id})">{{contractStatus.id}}</a></td>
-                    <td>{{contractStatus.name}}</td>
-                    <td>{{contractStatus.code}}</td>
+                <tr ng-repeat="contractType in vm.contractTypes track by contractType.id">
+                    <td><a ui-sref="contract-type-detail({id:contractType.id})">{{contractType.id}}</a></td>
+                    <td>{{contractType.name}}</td>
+                    <td>{{contractType.code}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
-                                    ui-sref="contract-status-detail({id:contractStatus.id})"
+                                    ui-sref="contract-type-detail({id:contractType.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="contract-status.edit({id:contractStatus.id})"
+                                    ui-sref="contract-type.edit({id:contractType.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="contract-status.delete({id:contractStatus.id})"
+                                    ui-sref="contract-type.delete({id:contractType.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
