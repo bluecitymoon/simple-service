@@ -47,6 +47,7 @@
                 "contractStatus": "Contract Status",
                 "student": "Student",
                 "contractType": "合同类型",
+                "contractNature": "Contract Nature",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
