@@ -3,7 +3,6 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
-import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.User;
@@ -150,14 +149,14 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
             log.debug("Default customer saved for the new order, customer is {} ", newCustomer);
             //create default schedule for the new customer so that the recipient could check.
-            CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
-
-            schedule.setCustomer(newCustomer);
-            schedule.setFollower(newCustomer.getSalesFollower());
-
-            log.debug("Default schedule saved for the new order, schedule is {} ", schedule);
-
-            scheduleService.save(schedule);
+//            CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
+//
+//            schedule.setCustomer(newCustomer);
+//            schedule.setFollower(newCustomer.getSalesFollower());
+//
+//            log.debug("Default schedule saved for the new order, schedule is {} ", schedule);
+//
+//            scheduleService.save(schedule);
 
         }
 
