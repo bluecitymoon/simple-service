@@ -19,6 +19,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -118,6 +119,11 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             if (criteria.getCustomerName() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerName(), CustomerCommunicationSchedule_.customer, Customer_.name));
             }
+
+            if(!StringUtils.isEmpty(criteria.getCustomerCreatedBy())) {
+                specification = specification.and(customerCreateByEuals(criteria.getCustomerCreatedBy()));
+            }
+
             if (criteria.getContactPhoneNumber() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getContactPhoneNumber(), CustomerCommunicationSchedule_.customer, Customer_.contactPhoneNumber));
             }
@@ -149,4 +155,7 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
         return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.courseConsultant).get(User_.id), courseConsultantId);
     }
 
+    private Specification customerCreateByEuals(String createdBy) {
+        return (root, query, cb) -> cb.equal(root.get(CustomerCommunicationSchedule_.customer).get(Customer_.createdBy), createdBy);
+    }
 }

@@ -27,6 +27,7 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private StringFilter comments;
 
     private StringFilter createdBy;
+    private String customerCreatedBy;
 
     private InstantFilter createdDate;
 
@@ -52,6 +53,14 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private Long courseConsultantId;
 
     public CustomerCommunicationScheduleCriteria() {
+    }
+
+    public String getCustomerCreatedBy() {
+        return customerCreatedBy;
+    }
+
+    public void setCustomerCreatedBy(String customerCreatedBy) {
+        this.customerCreatedBy = customerCreatedBy;
     }
 
     public LongFilter getId() {
