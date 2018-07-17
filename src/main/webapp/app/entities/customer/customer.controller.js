@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus'];
+    CustomerController.$inject = ['$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus'];
 
-    function CustomerController($scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus) {
+    function CustomerController($scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus) {
 
         var vm = this;
 
@@ -25,6 +25,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.taskstatuses = TaskStatus.query();
+        vm.customerStatus = CustomerStatus.query();
 
         // vm.users = User.query({ page: 0,  size: 1000 });
         // vm.pwis = User.getAllPwis();
@@ -103,6 +104,10 @@
             if (vm.searchCondition.location) {
                 parameters["locationId.equals"] = vm.searchCondition.location.id;
             }
+            if (vm.searchCondition.customerStatus) {
+                parameters["statusId.equals"] = vm.searchCondition.customerStatus.id;
+            }
+
             Customer.query(parameters, onSuccess, onError);
 
             function sort() {

@@ -37,15 +37,17 @@
                     </div>
                 </div>
                 <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">客户状态</label>
                     <div class="col-sm-9">
-                        <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
-                                class="fa fa-search-minus"></i>查询
-                        </button>
-                    </div>
-                    <div class="col-sm-3">
-                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
-                                class="fa fa-trash"></i>清除
-                        </button>
+                        <ui-select ng-model="vm.searchCondition.customerStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.customerStatus | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                                <span class="pull-right {{item.cssStyle}}"></span>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
             </div>
@@ -178,6 +180,21 @@
                         </ui-select>
                     </div>
                 </div>
+
+                <div class="col-md-3 form-group">
+                    </div>
+                <div class="col-md-3 form-group">
+                    <div class="col-sm-9">
+                        <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -238,7 +255,7 @@
                 <tbody>
                 <tr ng-repeat="customer in vm.customers track by customer.id">
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.id}}</a></td>
-                    <td><a ui-sref="customer-detail({id:customer.id})">{{customer.name}}</a></td>
+                    <td><a class="{{customer.status.cssStyle}}" ui-sref="customer-detail({id:customer.id})">{{customer.name}}</a></td>
                     <td>{{customer.sex}}</td>
                     <!--<td><i class="{{customer.status.icon}}"></i></td>-->
                     <!--<td><label class="{{customer.status.cssStyle}}">{{customer.status.name}}</label></td>-->

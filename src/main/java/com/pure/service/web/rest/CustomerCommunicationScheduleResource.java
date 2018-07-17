@@ -2,6 +2,7 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationScheduleService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,6 +122,11 @@ public class CustomerCommunicationScheduleResource {
     @Timed
     public ResponseEntity<List<CustomerCommunicationSchedule>> getAllCustomerCommunicationSchedules(CustomerCommunicationScheduleCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerCommunicationSchedules by criteria: {}", criteria);
+
+        if (criteria.isNull() && !SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+            return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.OK);
+        }
+
         Page<CustomerCommunicationSchedule> page = customerCommunicationScheduleQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customer-communication-schedules");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);

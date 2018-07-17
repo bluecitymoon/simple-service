@@ -8,8 +8,6 @@ import io.github.jhipster.service.filter.StringFilter;
 import java.io.Serializable;
 
 
-
-
 /**
  * Criteria class for the CustomerCommunicationSchedule entity. This class is used in CustomerCommunicationScheduleResource to
  * receive all the possible filtering options from the Http GET request parameters.
@@ -192,20 +190,28 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
         this.courseConsultantId = courseConsultantId;
     }
 
+    public boolean isNull() {
+
+        return id == null && sceduleDate == null && comments == null && createdBy == null
+            && createdDate == null && lastModifiedBy == null && lastModifiedDate == null && actuallMeetDate == null
+            && customerId == null && followerId == null && scheduleStatusId == null && customerName == null && contactPhoneNumber == null && channelId == null
+            && pwiId == null && tmkId == null;
+    }
+
     @Override
     public String toString() {
         return "CustomerCommunicationScheduleCriteria{" +
-                (id != null ? "id=" + id + ", " : "") +
-                (sceduleDate != null ? "sceduleDate=" + sceduleDate + ", " : "") +
-                (comments != null ? "comments=" + comments + ", " : "") +
-                (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
-                (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
-                (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
-                (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
-                (actuallMeetDate != null ? "actuallMeetDate=" + actuallMeetDate + ", " : "") +
-                (customerId != null ? "customerId=" + customerId + ", " : "") +
-                (followerId != null ? "followerId=" + followerId + ", " : "") +
-                (scheduleStatusId != null ? "scheduleStatusId=" + scheduleStatusId + ", " : "") +
+            (id != null ? "id=" + id + ", " : "") +
+            (sceduleDate != null ? "sceduleDate=" + sceduleDate + ", " : "") +
+            (comments != null ? "comments=" + comments + ", " : "") +
+            (createdBy != null ? "createdBy=" + createdBy + ", " : "") +
+            (createdDate != null ? "createdDate=" + createdDate + ", " : "") +
+            (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
+            (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
+            (actuallMeetDate != null ? "actuallMeetDate=" + actuallMeetDate + ", " : "") +
+            (customerId != null ? "customerId=" + customerId + ", " : "") +
+            (followerId != null ? "followerId=" + followerId + ", " : "") +
+            (scheduleStatusId != null ? "scheduleStatusId=" + scheduleStatusId + ", " : "") +
             "}";
     }
 
