@@ -4,6 +4,8 @@ import com.pure.service.domain.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing Customer.
  */
@@ -45,4 +47,6 @@ public interface CustomerService {
     Customer importCustomerFromNewOrder(Long newOrderId);
 
     void updateTrackTaskStatus(Customer customer, String lastComments);
+
+    List<Customer> batchSave(List<Customer> customers);
 }

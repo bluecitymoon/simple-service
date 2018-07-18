@@ -50,6 +50,7 @@
                     $translatePartialLoader.addPart('task');
                     $translatePartialLoader.addPart('customerTrackTask');
                     $translatePartialLoader.addPart('student');
+                    $translatePartialLoader.addPart('freeClassRecord');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -73,6 +74,7 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('customer');
                     $translatePartialLoader.addPart('customerCard');
+                    // $translatePartialLoader.addPart('free');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Customer', function($stateParams, Customer) {
@@ -155,6 +157,62 @@
                 });
             }]
         })
+
+            // .state('customer.new-order', {
+            //     parent: 'customer',
+            //     url: '/new-order',
+            //     data: {
+            //         authorities: ['ROLE_USER']
+            //     },
+            //     onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            //         $uibModal.open({
+            //             templateUrl: 'app/entities/customer/new-order.html',
+            //             controller: 'NewOrderDialogController',
+            //             controllerAs: 'vm',
+            //             backdrop: 'static',
+            //             size: 'lg'
+            //
+            //         }).result.then(function() {
+            //             $state.go('^', {}, { reload: false });
+            //         }, function() {
+            //             $state.go('^');
+            //         });
+            //     }]
+            // })
+            .state('customer.new-order', {
+                parent: 'customer',
+                url: '/new-order',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/free-class-record/free-class-record-dialog.html',
+                        controller: 'FreeClassRecordDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    personName: null,
+                                    contactPhoneNumber: null,
+                                    createdBy: null,
+                                    createdDate: null,
+                                    lastModifiedBy: null,
+                                    lastModifiedDate: null,
+                                    status: '新单',
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('^');
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
         .state('customer.edit', {
             parent: 'customer',
             url: '/{id}/edit',

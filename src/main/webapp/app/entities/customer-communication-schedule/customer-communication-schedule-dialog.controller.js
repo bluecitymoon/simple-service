@@ -11,14 +11,35 @@
         var vm = this;
 
         vm.customerCommunicationSchedule = entity;
+
+        // if (angular.isEmpty(entity)) {
+        //
+        // }
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.customers = Customer.query({ page: 0,  size: 1000 });
+        // vm.customers = Customer.query({ page: 0,  size: 1000 });
         vm.users = User.query({ page: 0,  size: 1000 });
         vm.customerschedulestatuses = CustomerScheduleStatus.query({ page: 0,  size: 1000 });
+        // var parameters = {
+        //     page: 0,
+        //     size: 100000,
+        //     sort: 'id,desc',
+        //     department: 'recipient'
+        // };
+        //
 
+        vm.customers = [];
+
+        vm.searchPersonWithKeyword = function (keyword) {
+
+            if (!keyword) return;
+
+            Customer.queryByKeyword({keyword: keyword, sort: 'id,desc', department: 'recipient', size: 50}, function (response) {
+                vm.customers = response;
+            })
+        };
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

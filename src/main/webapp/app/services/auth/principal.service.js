@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .factory('Principal', Principal);
 
-    Principal.$inject = ['$q', 'Account'];
+    Principal.$inject = ['$q', 'Account', '$localStorage'];
 
-    function Principal ($q, Account) {
+    function Principal ($q, Account, $localStorage) {
         var _identity,
             _authenticated = false;
 
@@ -78,6 +78,8 @@
             function getAccountThen (account) {
                 _identity = account.data;
                 _authenticated = true;
+
+                $localStorage.user = account.data;
                 deferred.resolve(_identity);
             }
 

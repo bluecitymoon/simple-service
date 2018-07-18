@@ -184,14 +184,19 @@
                 <div class="col-md-3 form-group">
                     </div>
                 <div class="col-md-3 form-group">
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                         <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
                                 class="fa fa-search-minus"></i>查询
                         </button>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
                                 class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+                    <div class="col-sm-4" has-any-authority="ROLE_ADMIN,ROLE_RECEPTION,ROLE_HEADMASTER">
+                        <button class="btn btn-block btn-info" type="button" ui-sref="customer.new-order"><i
+                                class="fa fa-plus" ></i>新增客户
                         </button>
                     </div>
                 </div>
@@ -200,27 +205,40 @@
     </form>
 </div>
 
+<jhi-alert></jhi-alert>
+
 <div class="panel">
+
+    <div class="pad-all">
+        <div class="row" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
+            <div class="col-xs-4" >
+                <div class="input-group mar-btm">
+                    <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">-->
+                    <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button"
+                                      ng-click="vm.batchAssignNewOrder()">分配给该课程顾问</button>
+					    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="panel-body">
-        <jhi-alert></jhi-alert>
-        <!--<div class="container-fluid">-->
-        <!--<div class="row">-->
-        <!--<div class="no-padding-left">-->
 
-        <!--<button class="btn btn-primary" ui-sref="customer.new" >-->
-        <!--<span class="glyphicon glyphicon-plus"></span>-->
-        <!--<span  data-translate="simpleServiceApp.customer.home.createLabel">-->
-        <!--Create new Customer-->
-        <!--</span>-->
-        <!--</button>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
         <div class="table-responsive">
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th class="text-center"><input type="checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()">全选
+                    </th>
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.name">Name</span> <span
@@ -240,9 +258,9 @@
                     <th jh-sort-by="contactPhoneNumber"><span
                             data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th ng-if="vm.department == 'market'" jh-sort-by="salesFollower.id"><span>跟单人</span>
+                    <th jh-sort-by="salesFollower.id"><span>跟单人</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th ng-if="vm.department == 'operation'" >课程顾问</th>
+                    <th>课程顾问</th>
                     <th>来访性质</th>
                     <th>年级</th>
                     <th>录入时间</th>
@@ -253,7 +271,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customer in vm.customers track by customer.id">
+                <tr ng-repeat="customer in vm.customers track by customer.id"
+                    ng-class="customer.selected? 'bg-info': ''">
+                    <td class="text-center"><input type="checkbox" ng-model="customer.selected">
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.id}}</a></td>
                     <td><a class="{{customer.status.cssStyle}}" ui-sref="customer-detail({id:customer.id})">{{customer.name}}</a></td>
                     <td>{{customer.sex}}</td>
@@ -263,8 +283,8 @@
                     <td>{{customer.channel.name}}</td>
                     <td>{{customer.age}}</td>
                     <td>{{customer.contactPhoneNumber}}</td>
-                    <td ng-if="vm.department == 'market'">{{customer.salesFollower.firstName}}</td>
-                    <td ng-if="vm.department == 'operation'">{{customer.courseConsultant.firstName}}</td>
+                    <td>{{customer.salesFollower.firstName}}</td>
+                    <td>{{customer.courseConsultant.firstName}}</td>
                     <td>{{customer.logType.name}}</td>
                     <td>{{customer.classLevel}}</td>
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>

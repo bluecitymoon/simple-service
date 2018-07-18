@@ -6,17 +6,19 @@ import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.User;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationLogQueryService;
+import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.UserService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
+import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.CustomerFollowLog;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
-import com.pure.service.service.dto.CustomerCriteria;
-import com.pure.service.service.CustomerQueryService;
 import io.github.jhipster.service.filter.LongFilter;
-import io.swagger.annotations.ApiParam;
+import io.github.jhipster.service.filter.StringFilter;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -28,11 +30,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -146,6 +154,62 @@ public class CustomerResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/customers/search/{keyword}")
+    @Timed
+    public ResponseEntity<List<Customer>> searchAllCustomers(CustomerCriteria criteria, @ApiParam Pageable pageable, @PathVariable("keyword") String keyword) {
+        log.debug("REST request to get Customers by criteria: {} and keyword {}", criteria, keyword);
+
+        if (StringUtils.isEmpty(keyword)) {
+            return new ResponseEntity<>(new ArrayList<>(), null, HttpStatus.OK);
+        }
+
+        String department = criteria.getDepartment();
+
+        if (StringUtils.isEmpty(department)) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        User currentUser = userService.getUserWithAuthorities();
+        //Only Admin and Headmaster can have all the new orders
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+
+            LongFilter userIdFilter = new LongFilter();
+            userIdFilter.setEquals(currentUser.getId());
+
+            switch (department) {
+                case "operation":
+                    criteria.setCourseConsultantId(userIdFilter);
+                    break;
+                case "market":
+                    criteria.setSalesFollowerId(userIdFilter);
+                    break;
+//                case "recipient":
+//                    criteria.set
+                default:
+                    break;
+            }
+        }
+
+        if (NumberUtils.isCreatable(keyword)) {
+
+            StringFilter phoneNumberFilter = new StringFilter();
+            phoneNumberFilter.setContains(keyword);
+
+            criteria.setContactPhoneNumber(phoneNumberFilter);
+
+        } else {
+
+            StringFilter customerNameFilter = new StringFilter();
+            customerNameFilter.setContains(keyword);
+
+            criteria.setName(customerNameFilter);
+        }
+
+        Page<Customer> page = customerQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
     /**
      * GET  /customers : get all the customers.
      *
@@ -219,6 +283,17 @@ public class CustomerResource {
         return new ResponseEntity<>(customerFollowLogs, headers, HttpStatus.OK);
     }
 
+    @PutMapping("/customers/batchupdate")
+    @Timed
+    public ResponseEntity<List<Customer>> batchUpdateCustomers(@RequestBody List<Customer> customers) {
+        log.debug("REST request to update customers : {}", customers);
+        if (CollectionUtils.isEmpty(customers)) {
+            return ResponseEntity.badRequest().build();
+        }
+        List<Customer> result = customerService.batchSave(customers);
+
+        return ResponseEntity.ok().body(result);
+    }
     /**
      * GET  /customers/:id : get the "id" customer.
      *

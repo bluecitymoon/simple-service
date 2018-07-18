@@ -12,6 +12,7 @@
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'queryWithLog': { url: 'api/customers/withlog', method: 'GET', isArray: true},
+            'queryByKeyword': { url: 'api/customers/search/:keyword', method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
@@ -24,7 +25,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'batchUpdate' : {
+                method: 'PUT',
+                url: 'api/customers/batchupdate',
+                isArray: true
+            }
         });
     }
 })();

@@ -88,6 +88,18 @@
                                     <span>前台到访</span>
                                 </a>
                             </li>
+                            <!--<li>-->
+                                <!--<a ui-sref="free-class-record" ng-click="vm.collapseNavbar()">-->
+                                    <!--<span class="glyphicon glyphicon-bishop"></span>&nbsp;-->
+                                    <!--<span data-translate="global.menu.entities.freeClassRecord">Free Class Record</span>-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <li ui-sref-active="active">
+                                <a ui-sref="customer({dept: 'recipient'})" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;
+                                    <span>客户列表</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_SALES,ROLE_PWI">
@@ -165,24 +177,6 @@
                                     <span>客户回单统计表</span>
                                 </a>
                             </li>
-                            <!--<li>-->
-                                <!--<a ui-sref="customer-communication-schedule">-->
-                                    <!--<span class="glyphicon glyphicon-bishop"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerCommunicationSchedule">Customer Communication Schedule</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="customer-communication-log" >-->
-                                    <!--<span class="glyphicon glyphicon-list-alt"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerCommunicationLog">Customer Communication Log</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="customer-status" >-->
-                                    <!--<span class="glyphicon glyphicon-stats"></span>&nbsp;-->
-                                    <!--<span data-translate="global.menu.entities.customerStatus">Customer Communication Log</span>-->
-                                <!--</a>-->
-                            <!--</li>-->
 
                             <li class="divider"></li>
                             <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">微信小程序</li>

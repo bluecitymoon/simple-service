@@ -8,82 +8,77 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.customerCommunicationSchedule.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.customerCommunicationSchedule.id" readonly />
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.customerCommunicationSchedule.customer">Customer</label>
+                    <!--<select class="form-control" id="field_customer" name="customer" ng-model="vm.customerCommunicationSchedule.customer" ng-options="customer as customer.name for customer in vm.customers track by customer.id">-->
+                        <!--<option value=""></option>-->
+                    <!--</select>-->
+
+                    <ui-select ng-model="vm.customerCommunicationSchedule.customer">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices refresh="vm.searchPersonWithKeyword($select.search)" repeat="item in (vm.customers | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span><span class="pull-right" ng-bind="item.contactPhoneNumber"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate" for="field_sceduleDate">Scedule Date</label>
-                <div class="input-group">
-                    <input id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
-                    />
-                    <span class="input-group-btn">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate" for="field_sceduleDate">Scedule Date</label>
+                    <div class="input-group">
+                        <input id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" ng-focus="vm.openCalendar('sceduleDate')" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
+                        />
+                        <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('sceduleDate')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
+                    </div>
                 </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.comments" for="field_comments">Comments</label>
-            <input type="text" class="form-control" name="comments" id="field_comments"
-                    ng-model="vm.customerCommunicationSchedule.comments"
-                    />
-        </div>
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.createdBy" for="field_createdBy">Created By</label>-->
-            <!--<input type="text" class="form-control" name="createdBy" id="field_createdBy"-->
-                    <!--ng-model="vm.customerCommunicationSchedule.createdBy"-->
-                    <!--/>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.createdDate" for="field_createdDate">Created Date</label>-->
-                <!--<div class="input-group">-->
-                    <!--<input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.createdDate" is-open="vm.datePickerOpenStatus.createdDate"-->
-                    <!--/>-->
-                    <!--<span class="input-group-btn">-->
-                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-                <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>-->
-            <!--<input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"-->
-                    <!--ng-model="vm.customerCommunicationSchedule.lastModifiedBy"-->
-                    <!--/>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>-->
-                <!--<div class="input-group">-->
-                    <!--<input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate"-->
-                    <!--/>-->
-                    <!--<span class="input-group-btn">-->
-                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-                <!--</div>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.actuallMeetDate" for="field_actuallMeetDate">Actuall Meet Date</label>-->
-                <!--<div class="input-group">-->
-                    <!--<input id="field_actuallMeetDate" type="text" class="form-control" name="actuallMeetDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.actuallMeetDate" is-open="vm.datePickerOpenStatus.actuallMeetDate"-->
-                    <!--/>-->
-                    <!--<span class="input-group-btn">-->
-                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('actuallMeetDate')"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                    <!--</span>-->
-                <!--</div>-->
-        <!--</div>-->
+            </div>
+            <div class="col-md-6">
 
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.customerCommunicationSchedule.customer" for="field_customer">Customer</label>
-            <select class="form-control" id="field_customer" name="customer" ng-model="vm.customerCommunicationSchedule.customer" ng-options="customer as customer.name for customer in vm.customers track by customer.id">
-                <option value=""></option>
-            </select>
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.actuallMeetDate" for="field_actuallMeetDate">Actuall Meet Date</label>
+                    <div class="input-group">
+                        <input id="field_actuallMeetDate" type="text" class="form-control" ng-focus="vm.openCalendar('actuallMeetDate')" name="actuallMeetDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.actuallMeetDate" is-open="vm.datePickerOpenStatus.actuallMeetDate"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('actuallMeetDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.customerCommunicationSchedule.follower" for="field_follower">Follower</label>
-            <select class="form-control" id="field_follower" name="follower" ng-model="vm.customerCommunicationSchedule.follower" ng-options="user as user.login for user in vm.users track by user.id">
-                <option value=""></option>
-            </select>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.comments" for="field_comments">Comments</label>
+                    <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"
+                           ng-model="vm.customerCommunicationSchedule.comments"
+                    ></textarea>
+                </div>
+            </div>
         </div>
+
+
+        <!--<div class="form-group">-->
+            <!--<label data-translate="simpleServiceApp.customerCommunicationSchedule.follower" for="field_follower">Follower</label>-->
+            <!--<select class="form-control" id="field_follower" name="follower" ng-model="vm.customerCommunicationSchedule.follower" ng-options="user as user.login for user in vm.users track by user.id">-->
+                <!--<option value=""></option>-->
+            <!--</select>-->
+        <!--</div>-->
         <div class="form-group">
             <label data-translate="simpleServiceApp.customerCommunicationSchedule.scheduleStatus" for="field_scheduleStatus">Schedule Status</label>
             <select class="form-control" id="field_scheduleStatus" name="scheduleStatus" ng-model="vm.customerCommunicationSchedule.scheduleStatus" ng-options="customerScheduleStatus as customerScheduleStatus.name for customerScheduleStatus in vm.customerschedulestatuses track by customerScheduleStatus.id">

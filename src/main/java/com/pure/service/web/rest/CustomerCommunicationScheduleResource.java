@@ -131,8 +131,6 @@ public class CustomerCommunicationScheduleResource {
         CustomerCommunicationScheduleCriteria customerCommunicationScheduleCriteria = new CustomerCommunicationScheduleCriteria();
         if (criteria.isNull() && !SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
 
-//            StringFilter stringFilter = new StringFilter();
-//            stringFilter.setEquals(SecurityUtils.getCurrentUserLogin());
             customerCommunicationScheduleCriteria.setCustomerCreatedBy(SecurityUtils.getCurrentUserLogin());
 
         } else {

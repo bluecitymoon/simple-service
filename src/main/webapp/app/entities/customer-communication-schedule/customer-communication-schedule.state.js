@@ -124,13 +124,13 @@
                         resolve: {
                             entity: function () {
                                 return {
-                                    sceduleDate: null,
+                                    sceduleDate: new Date(),
                                     comments: null,
                                     createdBy: null,
                                     createdDate: null,
                                     lastModifiedBy: null,
                                     lastModifiedDate: null,
-                                    actuallMeetDate: null,
+                                    actuallMeetDate: new Date(),
                                     id: null
                                 };
                             }

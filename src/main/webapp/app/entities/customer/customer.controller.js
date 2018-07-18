@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus'];
+    CustomerController.$inject = ['$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage'];
 
-    function CustomerController($scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus) {
+    function CustomerController($scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage) {
 
         var vm = this;
 
@@ -50,7 +50,23 @@
             totalItems: 0
         };
 
+        vm.allSelected = false;
         vm.loadAll = function() {
+            var user = $localStorage.user;
+            var isAdmin = false;
+            angular.forEach(user.authorities, function (authority) {
+                if (authority == 'ROLE_ADMIN') {
+                    isAdmin = true;
+                    return;
+                }
+            });
+
+            //
+            if (vm.department && vm.department == 'recipient' && angular.equals(vm.searchCondition, {}) && !isAdmin) {
+                AlertService.warning("请输入搜索条件");
+                return;
+            }
+
             var parameters = {
                 page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
@@ -130,6 +146,41 @@
         };
         // vm.loadAll();
 
+        vm.batchAssignNewOrder = function () {
+
+            var selectedRecords = vm.customers.filter(function (r) {
+                return r.selected;
+            });
+
+            if (!selectedRecords || selectedRecords.length == 0) {
+                AlertService.error("没有选中任何客户记录，无法分配！");
+                return;
+            }
+
+            if (!vm.selectedUser) {
+                AlertService.error("请选择目标用户！");
+                return;
+            }
+
+            selectedRecords.forEach(function (c) {
+                c.courseConsultant = vm.selectedUser;
+            });
+
+            Customer.batchUpdate(selectedRecords, function (response) {
+
+                AlertService.success("操作成功！批量分配了" + response.length + "条客户数据到用户" + vm.selectedUser.firstName+ "！");
+
+            }, function (error) {
+
+                AlertService.error(error);
+            });
+
+        };
+        vm.toggleAll = function () {
+            vm.customers.forEach(function (record) {
+                record.selected = vm.allSelected;
+            })
+        };
         function loadPage(page) {
             vm.page = page;
             vm.transition();

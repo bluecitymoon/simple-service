@@ -229,4 +229,9 @@ public class CustomerServiceImpl implements CustomerService {
             customerRepository.save(customer);
         }
     }
+
+    @Override
+    public List<Customer> batchSave(List<Customer> customers) {
+        return customerRepository.save(customers);
+    }
 }
