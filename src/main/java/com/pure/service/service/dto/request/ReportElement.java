@@ -7,31 +7,103 @@ import java.io.Serializable;
  */
 public class ReportElement implements Serializable {
 
-    private String key;
-    private String value;
-    private String label;
+    private Long userId;
+    private String userName;
+    private Integer ageTooSmallCount = 0;
+    private Integer errorInformation = 0;
+    private Integer noWillingCount = 0;
+    private Integer consideringCount = 0;
+    private Integer scheduledCount = 0;
+    private Integer dealedCount = 0; //已成交数量
+    private Integer newCreatedCount = 0;
+    private Integer totalCount = 0;
+    private Double finishRate = 0.0;
 
-    public String getKey() {
-        return key;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getValue() {
-        return value;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getLabel() {
-        return label;
+    public Integer getAgeTooSmallCount() {
+        return ageTooSmallCount;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public void setAgeTooSmallCount(Integer ageTooSmallCount) {
+        this.ageTooSmallCount = ageTooSmallCount;
+    }
+
+    public Integer getErrorInformation() {
+        return errorInformation;
+    }
+
+    public void setErrorInformation(Integer errorInformation) {
+        this.errorInformation = errorInformation;
+    }
+
+    public Integer getNoWillingCount() {
+        return noWillingCount;
+    }
+
+    public void setNoWillingCount(Integer noWillingCount) {
+        this.noWillingCount = noWillingCount;
+    }
+
+    public Integer getConsideringCount() {
+        return consideringCount;
+    }
+
+    public void setConsideringCount(Integer consideringCount) {
+        this.consideringCount = consideringCount;
+    }
+
+    public Integer getScheduledCount() {
+        return scheduledCount;
+    }
+
+    public void setScheduledCount(Integer scheduledCount) {
+        this.scheduledCount = scheduledCount;
+    }
+
+    public Integer getDealedCount() {
+        return dealedCount;
+    }
+
+    public void setDealedCount(Integer dealedCount) {
+        this.dealedCount = dealedCount;
+    }
+
+    public Integer getNewCreatedCount() {
+        return newCreatedCount;
+    }
+
+    public void setNewCreatedCount(Integer newCreatedCount) {
+        this.newCreatedCount = newCreatedCount;
+    }
+
+    public Integer getTotalCount() {
+        return totalCount;
+    }
+
+    public void setTotalCount(Integer totalCount) {
+        this.totalCount = totalCount;
+    }
+
+    public Double getFinishRate() {
+        return finishRate;
+    }
+
+    public void setFinishRate(Double finishRate) {
+        this.finishRate = finishRate;
     }
 }

@@ -13,7 +13,7 @@ import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.CustomerFollowLog;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
-import com.pure.service.service.dto.request.CustomerStatusResponse;
+import com.pure.service.service.dto.request.ReportElement;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.service.filter.LongFilter;
@@ -156,13 +156,11 @@ public class CustomerResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-    @GetMapping("/customers/status/report")
+    @PostMapping("/customers/status/report")
     @Timed
-    public ResponseEntity<List<CustomerStatusResponse>> getCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
+    public ResponseEntity<List<ReportElement>> getCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
 
-
-
-        List<CustomerStatusResponse> report = customerService.getStatusReport(customerStatusRequest);
+        List<ReportElement> report = customerService.getStatusReport(customerStatusRequest);
 
         return new ResponseEntity<>(report, HttpStatus.OK);
     }

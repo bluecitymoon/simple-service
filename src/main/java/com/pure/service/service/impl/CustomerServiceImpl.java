@@ -21,9 +21,9 @@ import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.TaskStatusEnum;
+import com.pure.service.service.dto.dto.ReportEntity;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
-import com.pure.service.service.dto.request.CustomerStatusResponse;
-import io.github.jhipster.service.filter.InstantFilter;
+import com.pure.service.service.dto.request.ReportElement;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -251,21 +254,64 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<CustomerStatusResponse> getStatusReport(CustomerStatusRequest customerStatusRequest) {
+    public List<ReportElement> getStatusReport(CustomerStatusRequest customerStatusRequest) {
 
-        CustomerCriteria customerCriteria = new CustomerCriteria();
+        List<ReportEntity> reportEntities = customerRepository.searchCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
 
-        InstantFilter assignDateFilter = new InstantFilter();
-        if (customerStatusRequest.getStartDate() != null) {
-            assignDateFilter.setGreaterOrEqualThan(customerStatusRequest.getStartDate());
+        Map<Long, ReportElement> userBasedStatusCountMap = new HashMap<>();
+
+        for (ReportEntity reportEntity : reportEntities) {
+            ReportElement reportElement = userBasedStatusCountMap.get(reportEntity.getUserId());
+            if (reportElement == null) {
+                reportElement = new ReportElement();
+
+                reportElement.setUserId(reportEntity.getUserId());
+                reportElement.setUserName(reportEntity.getUserName());
+
+                userBasedStatusCountMap.put(reportEntity.getUserId(), reportElement);
+            }
+
+            switch (reportEntity.getStatusCode()) {
+
+                case "new_created":
+                    reportElement.setNewCreatedCount(reportEntity.getCount());
+                    break;
+                case "Too_Young":
+                    reportElement.setAgeTooSmallCount(reportEntity.getCount());
+                    break;
+                case "Bad_Information":
+                    reportElement.setErrorInformation(reportEntity.getCount());
+                    break;
+                case "No_Willing":
+                    reportElement.setNoWillingCount(reportEntity.getCount());
+                    break;
+                case "Considering":
+                    reportElement.setConsideringCount(reportEntity.getCount());
+                    break;
+                case "meeting_schedule_made":
+                    reportElement.setScheduledCount(reportEntity.getCount());
+                    break;
+                case "deal":
+                    reportElement.setDealedCount(reportEntity.getCount());
+                    break;
+
+                default:
+                    break;
+
+            }
         }
 
-        if (customerStatusRequest.getEndDate() != null) {
-            assignDateFilter.setLessOrEqualThan(customerStatusRequest.getEndDate());
-        }
+        List<ReportElement> elements = new ArrayList<>(userBasedStatusCountMap.values());
+        elements.forEach(element -> {
 
-        List<Customer> customers = customerQueryService.findByCriteria(customerCriteria);
+            Integer totalCount =  element.getConsideringCount() + element.getDealedCount() + element.getErrorInformation() + element.getAgeTooSmallCount() + element.getNewCreatedCount()
+                + element.getNoWillingCount() + element.getScheduledCount();
+            element.setTotalCount(totalCount);
 
-        return null;
+            Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) / totalCount;
+            element.setFinishRate(finishRate);
+        });
+
+        return elements;
     }
 }

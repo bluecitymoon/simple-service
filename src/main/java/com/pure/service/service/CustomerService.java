@@ -2,7 +2,7 @@ package com.pure.service.service;
 
 import com.pure.service.domain.Customer;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
-import com.pure.service.service.dto.request.CustomerStatusResponse;
+import com.pure.service.service.dto.request.ReportElement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -52,5 +52,5 @@ public interface CustomerService {
 
     List<Customer> batchSave(List<Customer> customers);
 
-    List<CustomerStatusResponse> getStatusReport(CustomerStatusRequest customerStatusRequest);
+    List<ReportElement> getStatusReport(CustomerStatusRequest customerStatusRequest);
 }
