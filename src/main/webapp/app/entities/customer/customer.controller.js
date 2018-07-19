@@ -164,6 +164,7 @@
 
             selectedRecords.forEach(function (c) {
                 c.courseConsultant = vm.selectedUser;
+                c.assignDate = new Date();
             });
 
             Customer.batchUpdate(selectedRecords, function (response) {

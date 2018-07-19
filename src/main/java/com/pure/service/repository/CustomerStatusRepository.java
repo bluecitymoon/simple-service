@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CustomerStatusRepository extends JpaRepository<CustomerStatus, Long>, JpaSpecificationExecutor<CustomerStatus> {
 
+    CustomerStatus findByCode(String code);
 }

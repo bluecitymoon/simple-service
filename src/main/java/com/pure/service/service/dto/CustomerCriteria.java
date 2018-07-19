@@ -72,8 +72,17 @@ public class CustomerCriteria implements Serializable {
     private StringFilter trackStatus;
 
     private InstantFilter nextTrackDate;
+    private InstantFilter assignDate;
 
     public CustomerCriteria() {
+    }
+
+    public InstantFilter getAssignDate() {
+        return assignDate;
+    }
+
+    public void setAssignDate(InstantFilter assignDate) {
+        this.assignDate = assignDate;
     }
 
     public LongFilter getLocationId() {

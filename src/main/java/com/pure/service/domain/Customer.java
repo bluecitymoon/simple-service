@@ -73,6 +73,9 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "school")
     private String school;
 
+    @Column(name = "assign_date")
+    private Instant assignDate;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -91,6 +94,14 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
+
+    public Instant getAssignDate() {
+        return assignDate;
+    }
+
+    public void setAssignDate(Instant assignDate) {
+        this.assignDate = assignDate;
+    }
 
     public Instant getLastTrackDate() {
         return lastTrackDate;

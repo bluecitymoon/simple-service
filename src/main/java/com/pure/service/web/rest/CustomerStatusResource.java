@@ -64,27 +64,27 @@ public class CustomerStatusResource {
             .body(result);
     }
 
-    /**
-     * PUT  /customer-statuses : Updates an existing customerStatus.
-     *
-     * @param customerStatus the customerStatus to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated customerStatus,
-     * or with status 400 (Bad Request) if the customerStatus is not valid,
-     * or with status 500 (Internal Server Error) if the customerStatus couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @PutMapping("/customer-statuses")
-    @Timed
-    public ResponseEntity<CustomerStatus> updateCustomerStatus(@RequestBody CustomerStatus customerStatus) throws URISyntaxException {
-        log.debug("REST request to update CustomerStatus : {}", customerStatus);
-        if (customerStatus.getId() == null) {
-            return createCustomerStatus(customerStatus);
-        }
-        CustomerStatus result = customerStatusService.save(customerStatus);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, customerStatus.getId().toString()))
-            .body(result);
-    }
+//    /**
+//     * PUT  /customer-statuses : Updates an existing customerStatus.
+//     *
+//     * @param customerStatus the customerStatus to update
+//     * @return the ResponseEntity with status 200 (OK) and with body the updated customerStatus,
+//     * or with status 400 (Bad Request) if the customerStatus is not valid,
+//     * or with status 500 (Internal Server Error) if the customerStatus couldn't be updated
+//     * @throws URISyntaxException if the Location URI syntax is incorrect
+//     */
+//    @PutMapping("/customer-statuses")
+//    @Timed
+//    public ResponseEntity<CustomerStatus> updateCustomerStatus(@RequestBody CustomerStatus customerStatus) throws URISyntaxException {
+//        log.debug("REST request to update CustomerStatus : {}", customerStatus);
+//        if (customerStatus.getId() == null) {
+//            return createCustomerStatus(customerStatus);
+//        }
+//        CustomerStatus result = customerStatusService.save(customerStatus);
+//        return ResponseEntity.ok()
+//            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, customerStatus.getId().toString()))
+//            .body(result);
+//    }
 
     /**
      * GET  /customer-statuses : get all the customerStatuses.

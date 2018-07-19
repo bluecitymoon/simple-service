@@ -1,6 +1,8 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.Customer;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.CustomerStatusResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -49,4 +51,6 @@ public interface CustomerService {
     void updateTrackTaskStatus(Customer customer, String lastComments);
 
     List<Customer> batchSave(List<Customer> customers);
+
+    List<CustomerStatusResponse> getStatusReport(CustomerStatusRequest customerStatusRequest);
 }

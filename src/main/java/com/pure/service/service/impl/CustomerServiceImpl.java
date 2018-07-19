@@ -3,6 +3,7 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.Task;
@@ -10,6 +11,7 @@ import com.pure.service.domain.TaskStatus;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerRepository;
+import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
 import com.pure.service.repository.TaskStatusRepository;
 import com.pure.service.service.CustomerCommunicationLogQueryService;
@@ -19,6 +21,9 @@ import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.TaskStatusEnum;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.CustomerStatusResponse;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +58,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private TaskStatusRepository taskStatusRepository;
 
+    @Autowired
+    private CustomerStatusRepository customerStatusRepository;
+
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
@@ -80,6 +88,13 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer save(Customer customer) {
         log.debug("Request to save Customer : {}", customer);
 
+        if (customer.getStatus() == null && customer.getId() == null) {
+
+            CustomerStatus newOrderStatus = customerStatusRepository.findByCode("new_created");
+            customer.setStatus(newOrderStatus);
+        }
+
+        //TODO Synchronize more attribute
         FreeClassRecord freeClassRecord = customer.getNewOrder();
         if (freeClassRecord != null && customer.getStatus() != null) {
 
@@ -233,5 +248,24 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> batchSave(List<Customer> customers) {
         return customerRepository.save(customers);
+    }
+
+    @Override
+    public List<CustomerStatusResponse> getStatusReport(CustomerStatusRequest customerStatusRequest) {
+
+        CustomerCriteria customerCriteria = new CustomerCriteria();
+
+        InstantFilter assignDateFilter = new InstantFilter();
+        if (customerStatusRequest.getStartDate() != null) {
+            assignDateFilter.setGreaterOrEqualThan(customerStatusRequest.getStartDate());
+        }
+
+        if (customerStatusRequest.getEndDate() != null) {
+            assignDateFilter.setLessOrEqualThan(customerStatusRequest.getEndDate());
+        }
+
+        List<Customer> customers = customerQueryService.findByCriteria(customerCriteria);
+
+        return null;
     }
 }

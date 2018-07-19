@@ -130,6 +130,9 @@ public class CustomerQueryService extends QueryService<Customer> {
                 specification = specification.and(buildRangeSpecification(criteria.getNextTrackDate(), Customer_.nextTrackDate));
             }
 
+            if (criteria.getAssignDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getAssignDate(), Customer_.assignDate));
+            }
             String department = criteria.getDepartment();
             if (!StringUtils.isEmpty(department) && department.equals("operation")) {
 
