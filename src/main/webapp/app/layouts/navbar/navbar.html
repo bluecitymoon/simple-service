@@ -120,7 +120,7 @@
                                 </a>
                             </li>
 
-                            <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">客户</li>
+                            <li class="dropdown-header">客户</li>
 
                             <li>
                                 <a ui-sref="customer({dept: 'market'})">
@@ -141,9 +141,9 @@
                                 <!--</a>-->
                             <!--</li>-->
 
-                            <li>
-                                <a ui-sref="home">
-                                    <span class="glyphicon glyphicon-tags"></span>
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER" >
+                                <a ui-sref="customer-status-report-dtl">
+                                    <span class="glyphicon glyphicon-record"></span>
                                     <span>TMK报表</span>
                                 </a>
                             </li>

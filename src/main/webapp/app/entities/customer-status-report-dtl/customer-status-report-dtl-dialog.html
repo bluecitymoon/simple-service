@@ -1,0 +1,92 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCustomerStatusReportDtlLabel" data-translate="simpleServiceApp.customerStatusReportDtl.home.createOrEditLabel">Create or edit a Customer Status Report Dtl</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.customerStatusReportDtl.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.customerStatusReportDtl.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.userId" for="field_userId">User Id</label>
+            <input type="number" class="form-control" name="userId" id="field_userId"
+                    ng-model="vm.customerStatusReportDtl.userId"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.userName" for="field_userName">User Name</label>
+            <input type="text" class="form-control" name="userName" id="field_userName"
+                    ng-model="vm.customerStatusReportDtl.userName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.ageTooSmallCount" for="field_ageTooSmallCount">Age Too Small Count</label>
+            <input type="number" class="form-control" name="ageTooSmallCount" id="field_ageTooSmallCount"
+                    ng-model="vm.customerStatusReportDtl.ageTooSmallCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.errorInformation" for="field_errorInformation">Error Information</label>
+            <input type="number" class="form-control" name="errorInformation" id="field_errorInformation"
+                    ng-model="vm.customerStatusReportDtl.errorInformation"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.noWillingCount" for="field_noWillingCount">No Willing Count</label>
+            <input type="number" class="form-control" name="noWillingCount" id="field_noWillingCount"
+                    ng-model="vm.customerStatusReportDtl.noWillingCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.consideringCount" for="field_consideringCount">Considering Count</label>
+            <input type="number" class="form-control" name="consideringCount" id="field_consideringCount"
+                    ng-model="vm.customerStatusReportDtl.consideringCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.scheduledCount" for="field_scheduledCount">Scheduled Count</label>
+            <input type="number" class="form-control" name="scheduledCount" id="field_scheduledCount"
+                    ng-model="vm.customerStatusReportDtl.scheduledCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.dealedCount" for="field_dealedCount">Dealed Count</label>
+            <input type="number" class="form-control" name="dealedCount" id="field_dealedCount"
+                    ng-model="vm.customerStatusReportDtl.dealedCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.newCreatedCount" for="field_newCreatedCount">New Created Count</label>
+            <input type="number" class="form-control" name="newCreatedCount" id="field_newCreatedCount"
+                    ng-model="vm.customerStatusReportDtl.newCreatedCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.totalCount" for="field_totalCount">Total Count</label>
+            <input type="number" class="form-control" name="totalCount" id="field_totalCount"
+                    ng-model="vm.customerStatusReportDtl.totalCount"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.customerStatusReportDtl.finishRate" for="field_finishRate">Finish Rate</label>
+            <input type="number" class="form-control" name="finishRate" id="field_finishRate"
+                    ng-model="vm.customerStatusReportDtl.finishRate"
+                    />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -7,6 +7,9 @@ public class CustomerStatusRequest implements Serializable {
 
     private Instant startDate;
     private Instant endDate;
+    private Integer year;
+    private Integer month;
+    private String queryType;
 
     public Instant getStartDate() {
         return startDate;
@@ -22,5 +25,29 @@ public class CustomerStatusRequest implements Serializable {
 
     public void setEndDate(Instant endDate) {
         this.endDate = endDate;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    public String getQueryType() {
+        return queryType;
+    }
+
+    public void setQueryType(String queryType) {
+        this.queryType = queryType;
     }
 }

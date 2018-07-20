@@ -1,0 +1,66 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerStatusReportDtlhome.title">Customer Status Report Dtls</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.userId">User Id</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.userId}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.userName">User Name</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.userName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.ageTooSmallCount">Age Too Small Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.ageTooSmallCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.errorInformation">Error Information</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.errorInformation}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.noWillingCount">No Willing Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.noWillingCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.consideringCount">Considering Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.consideringCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.scheduledCount">Scheduled Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.scheduledCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.dealedCount">Dealed Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.dealedCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.newCreatedCount">New Created Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.newCreatedCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.totalCount">Total Count</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.totalCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerStatusReportDtl.finishRate">Finish Rate</span></dt>
+        <dd>
+            <span>{{vm.customerStatusReportDtl.finishRate}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-status-report-dtl-detail.edit({id:vm.customerStatusReportDtl.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

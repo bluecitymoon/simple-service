@@ -1,0 +1,31 @@
+{
+    "simpleServiceApp": {
+        "customerStatusReportDtl" : {
+            "home": {
+                "title": "TMK统计报表",
+                "createLabel": "录入",
+                "createOrEditLabel": "管理报表"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "报表详情"
+            },
+            "userId": "用户ID",
+            "userName": "TMK",
+            "ageTooSmallCount": "年龄小",
+            "errorInformation": "信息错误",
+            "noWillingCount": "无意愿",
+            "consideringCount": "考虑中",
+            "scheduledCount": "已预约",
+            "dealedCount": "已成交",
+            "newCreatedCount": "新单",
+            "totalCount": "总计",
+            "finishRate": "完成率"
+        }
+    }
+}

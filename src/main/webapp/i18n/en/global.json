@@ -48,6 +48,7 @@
                 "student": "Student",
                 "contractType": "合同类型",
                 "contractNature": "Contract Nature",
+                "customerStatusReportDtl": "Customer Status Report Dtl",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
@@ -163,7 +164,8 @@
         "idexists": "新建的 {{entityName}} 不能包含ID",
         "badphonenumber": "手机号码错误",
         "phonenumberexists": "手机号码已存在！",
-        "planexists": "该员工该时间段的业绩目标已存在！"
+        "planexists": "该员工该时间段的业绩目标已存在！",
+        "conditionneeded": "请输入搜索条件"
     },
     "footer": "这里是页脚"
 }

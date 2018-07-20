@@ -17,7 +17,7 @@ public class ReportElement implements Serializable {
     private Integer dealedCount = 0; //已成交数量
     private Integer newCreatedCount = 0;
     private Integer totalCount = 0;
-    private Double finishRate = 0.0;
+    private String finishRate = "0";
 
     public Long getUserId() {
         return userId;
@@ -99,11 +99,11 @@ public class ReportElement implements Serializable {
         this.totalCount = totalCount;
     }
 
-    public Double getFinishRate() {
+    public String getFinishRate() {
         return finishRate;
     }
 
-    public void setFinishRate(Double finishRate) {
+    public void setFinishRate(String finishRate) {
         this.finishRate = finishRate;
     }
 }

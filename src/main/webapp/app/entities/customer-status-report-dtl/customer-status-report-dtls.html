@@ -1,0 +1,231 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerStatusReportDtl.home.title">Customer Status Report
+        Dtls</h1>
+</div>
+<!--<jhi-alert></jhi-alert>-->
+<jhi-alert-error></jhi-alert-error>
+
+<uib-tabset>
+    <uib-tab heading="查询报告-按年月">
+        <div class="panel">
+            <form class="form-horizontal">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">年份</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.searchCondition.yearObject"
+                                        ng-options="year as year.id for year in vm.years">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">月份</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.searchCondition.monthObject"
+                                        ng-options="month as month.id for month in vm.months">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 form-group">
+
+                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll('monthly')"><i
+                                    class="fa fa-search-minus"></i>查询
+                            </button>
+
+                        </div>
+                        <div class="col-md-2 form-group">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </uib-tab>
+    <uib-tab heading="查询报告-按日期范围">
+        <div class="panel">
+            <form class="form-horizontal">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">开始日期</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="开始时间" class="form-control"
+                                       ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                                       ng-model="vm.searchCondition.startDate"
+                                       is-open="vm.datePickerOpenStatus.startDate">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">结束日期</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="结束时间" class="form-control"
+                                       ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                                       ng-model="vm.searchCondition.endDate"
+                                       is-open="vm.datePickerOpenStatus.endDate">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 form-group">
+
+                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll('dateRange')">
+                                <i
+                                        class="fa fa-search-minus"></i>查询
+                            </button>
+
+                        </div>
+                        <div class="col-md-2 form-group">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </uib-tab>
+
+</uib-tabset>
+
+
+
+
+<!--<div class="panel-body">-->
+
+    <!--<div class="row">-->
+        <!--<div class="col-lg-8">-->
+            <!--<p class="text-semibold text-uppercase text-main">总完成度</p>-->
+            <!--<div class="row">-->
+                <!--<div class="col-xs-5">-->
+                    <!--<div class="media">-->
+                        <!--<div class="media-left">-->
+                            <!--<span class="text-3x text-thin text-main">43.7</span>-->
+                        <!--</div>-->
+                        <!--<div class="media-body">-->
+                            <!--<p class="mar-no">%</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-xs-7 text-sm">-->
+                    <!--<p>-->
+                        <!--<span>最低</span>-->
+                        <!--<span class="pad-lft text-semibold">-->
+<!--<span class="text-lg">27%</span>-->
+<!--<span class="labellabel-success mar-lft">-->
+<!--<i class="pci-caret-down text-success"></i>-->
+<!--<smal>- 20</smal>-->
+<!--</span>-->
+<!--</span>-->
+                    <!--</p>-->
+                    <!--<p>-->
+                        <!--<span>最高</span>-->
+                        <!--<span class="pad-lft text-semibold">-->
+<!--<span class="text-lg">100%</span>-->
+<!--<span class="labellabel-danger mar-lft">-->
+<!--<i class="pci-caret-up text-danger"></i>-->
+<!--<smal>+ 57</smal>-->
+<!--</span>-->
+<!--</span>-->
+                    <!--</p>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<hr>-->
+
+        <!--</div>-->
+
+
+    <!--</div>-->
+<!--</div>-->
+<div class="panel">
+    <div class="panel-body">
+
+        <div class="pad-all" style="">
+            <ng-echarts class="echarts" ec-config="lineConfig" ec-option="lineOption"
+                        style="height: 455px; width: 1380px"></ng-echarts>
+        </div>
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> </th>-->
+                    <th jh-sort-by="userId"><span data-translate="simpleServiceApp.customerStatusReportDtl.userId">User Id</span>
+                    </th>
+                    <th jh-sort-by="userName"><span data-translate="simpleServiceApp.customerStatusReportDtl.userName">User Name</span>
+                    </th>
+                    <th jh-sort-by="ageTooSmallCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.ageTooSmallCount">Age Too Small Count</span>
+                    </th>
+                    <th jh-sort-by="errorInformation"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.errorInformation">Error Information</span>
+                    </th>
+                    <th jh-sort-by="noWillingCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.noWillingCount">No Willing Count</span>
+                    </th>
+                    <th jh-sort-by="consideringCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.consideringCount">Considering Count</span>
+                    </th>
+                    <th jh-sort-by="scheduledCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.scheduledCount">Scheduled Count</span>
+                    </th>
+                    <th jh-sort-by="dealedCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.dealedCount">Dealed Count</span>
+                    </th>
+                    <th jh-sort-by="newCreatedCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.newCreatedCount">New Created Count</span>
+                    </th>
+                    <th jh-sort-by="totalCount"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.totalCount">Total Count</span>
+                    </th>
+                    <th jh-sort-by="finishRate"><span
+                            data-translate="simpleServiceApp.customerStatusReportDtl.finishRate">Finish Rate</span>
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customerStatusReportDtl in vm.customerStatusReportDtls track by customerStatusReportDtl.userId">
+                    <!--<td><a ui-sref="customer-status-report-dtl-detail({id:customerStatusReportDtl.id})">{{customerStatusReportDtl.id}}</a></td>-->
+                    <td>{{customerStatusReportDtl.userId}}</td>
+                    <td>{{customerStatusReportDtl.userName}}</td>
+                    <td>{{customerStatusReportDtl.ageTooSmallCount}}</td>
+                    <td>{{customerStatusReportDtl.errorInformation}}</td>
+                    <td>{{customerStatusReportDtl.noWillingCount}}</td>
+                    <td>{{customerStatusReportDtl.consideringCount}}</td>
+                    <td>{{customerStatusReportDtl.scheduledCount}}</td>
+                    <td>{{customerStatusReportDtl.dealedCount}}</td>
+                    <td>{{customerStatusReportDtl.newCreatedCount}}</td>
+                    <td>{{customerStatusReportDtl.totalCount}}</td>
+                    <td>{{customerStatusReportDtl.finishRate}}</td>
+                    <!--<td class="text-right">-->
+                    <!--<div class="btn-group flex-btn-group-container">-->
+                    <!--<button type="submit"-->
+                    <!--ui-sref="customer-status-report-dtl-detail({id:customerStatusReportDtl.id})"-->
+                    <!--class="btn btn-info btn-sm">-->
+                    <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                    <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                    <!--</button>-->
+                    <!--<button type="submit"-->
+                    <!--ui-sref="customer-status-report-dtl.edit({id:customerStatusReportDtl.id})"-->
+                    <!--class="btn btn-primary btn-sm">-->
+                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                    <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                    <!--</button>-->
+                    <!--<button type="submit"-->
+                    <!--ui-sref="customer-status-report-dtl.delete({id:customerStatusReportDtl.id})"-->
+                    <!--class="btn btn-danger btn-sm">-->
+                    <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                    <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<div class="text-center">-->
+        <!--<jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>-->
+        <!--<uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>-->
+        <!--</div>-->
+    </div>
+</div>

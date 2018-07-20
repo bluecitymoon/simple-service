@@ -1,0 +1,56 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ageTooSmallCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "errorInformation",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "noWillingCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "consideringCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "scheduledCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dealedCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "newCreatedCount",
+            "fieldType": "Integer"
+        },
+         {
+            "fieldName": "totalCount",
+            "fieldType": "Integer"
+        },
+         {
+            "fieldName": "finishRate",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20180719092532",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_status_report_dtl",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

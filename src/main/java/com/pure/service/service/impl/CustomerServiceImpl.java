@@ -34,6 +34,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -308,8 +309,12 @@ public class CustomerServiceImpl implements CustomerService {
                 + element.getNoWillingCount() + element.getScheduledCount();
             element.setTotalCount(totalCount);
 
-            Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) / totalCount;
-            element.setFinishRate(finishRate);
+            Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) * 100 / totalCount;
+
+            BigDecimal finishRateDecimal = new BigDecimal(finishRate);
+            BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+            element.setFinishRate(roundedDecimal.toString() + "%");
+
         });
 
         return elements;
