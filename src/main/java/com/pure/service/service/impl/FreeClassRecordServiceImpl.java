@@ -33,6 +33,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -268,6 +269,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
                 for (Customer existCustomer : existCustomers) {
                     existCustomer.setSalesFollower(freeClassRecord.getSalesFollower());
+                    existCustomer.setAssignDate(Instant.now());
                     customerService.save(existCustomer);
                 }
             }
