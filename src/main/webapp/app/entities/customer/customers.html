@@ -135,32 +135,45 @@
                     </div>
                 </div>
                 <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">课程顾问分配状态</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.ccAssignStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    repeat="item in (vm.ccAssignStatusList | filter: $select.search) track by item.code">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
                 </div>
             </div>
             <div class="row">
-                <!-- TODO 目前不要客户经理，由课程顾问代替
+                <!-- TODO 目前不要客户经理，由课程顾问代替 , 7月21再次改回去-->
                 <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                    <label class="col-sm-3 control-label">客户经理</label>
+                    <label class="col-sm-3 control-label">课程顾问</label>
                     <div class="col-sm-9">
-                        <ui-select ng-model="vm.searchCondition.sales">
+                        <ui-select ng-model="vm.searchCondition.courseConsultant">
                             <ui-select-match>
                                 {{$select.selected.firstName}}
                             </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.sales | filter: $select.search) track by item.id">
+                            <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
                                 <span ng-bind="item.firstName"></span>
                             </ui-select-choices>
                         </ui-select>
                     </div>
-                </div> -->
+                </div>
                 <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
-                    <label class="col-sm-3 control-label">课程顾问</label>
+                    <label class="col-sm-3 control-label">跟单人</label>
                     <div class="col-sm-9">
                         <!-- <ui-select ng-model="vm.searchCondition.courseConsultant"> -->
                         <ui-select ng-model="vm.searchCondition.sales">
                             <ui-select-match>
                                 {{$select.selected.firstName}}
                             </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
+                            <ui-select-choices repeat="item in (vm.sales | filter: $select.search) track by item.id">
                                 <span ng-bind="item.firstName"></span>
                             </ui-select-choices>
                         </ui-select>
@@ -181,8 +194,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 form-group">
-                    </div>
+                <!--<div class="col-md-3 form-group">-->
+                    <!--</div>-->
                 <div class="col-md-3 form-group">
                     <div class="col-sm-4">
                         <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
@@ -209,27 +222,27 @@
 
 <div class="panel">
 
-    <!--<div class="pad-all">-->
-        <!--<div class="row" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">-->
-            <!--<div class="col-xs-4" >-->
-                <!--<div class="input-group mar-btm">-->
-                    <!--<ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">-->
-                        <!--<ui-select-match>-->
-                            <!--{{$select.selected.firstName}}-->
-                        <!--</ui-select-match>-->
-                        <!--<ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">-->
-                            <!--<span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>-->
-                        <!--</ui-select-choices>-->
-                    <!--</ui-select>-->
-                    <!--&lt;!&ndash;<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">&ndash;&gt;-->
-                    <!--<span class="input-group-btn">-->
-					          <!--<button class="btn btn-primary" type="button"-->
-                                      <!--ng-click="vm.batchAssignNewOrder()">分配给该课程顾问</button>-->
-					    <!--</span>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="pad-all" ng-if="vm.department == 'recipient'">
+        <div class="row" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
+            <div class="col-xs-4" >
+                <div class="input-group mar-btm">
+                    <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">
+                        <ui-select-match>
+                            {{$select.selected.firstName}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
+                            <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <!--<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">-->
+                    <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button"
+                                      ng-click="vm.batchAssignNewOrder()">分配给该课程顾问</button>
+					    </span>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="panel-body">
 

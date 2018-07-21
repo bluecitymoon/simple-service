@@ -46,6 +46,9 @@ public class FreeClassRecordCriteria implements Serializable {
 
     private LongFilter locationId;
 
+    private String salesFollowerAssignStatus;
+    private String ccAssignStatus;
+
     public FreeClassRecordCriteria() {
     }
 
@@ -151,6 +154,22 @@ public class FreeClassRecordCriteria implements Serializable {
 
     public void setAgentId(LongFilter agentId) {
         this.agentId = agentId;
+    }
+
+    public String getSalesFollowerAssignStatus() {
+        return salesFollowerAssignStatus;
+    }
+
+    public void setSalesFollowerAssignStatus(String salesFollowerAssignStatus) {
+        this.salesFollowerAssignStatus = salesFollowerAssignStatus;
+    }
+
+    public String getCcAssignStatus() {
+        return ccAssignStatus;
+    }
+
+    public void setCcAssignStatus(String ccAssignStatus) {
+        this.ccAssignStatus = ccAssignStatus;
     }
 
     @Override

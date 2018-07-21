@@ -13,9 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -97,6 +99,10 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             if (criteria.getBirthday() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getBirthday(), FreeClassRecord_.birthday));
             }
+
+            if (!StringUtils.isEmpty(criteria.getSalesFollowerAssignStatus())) {
+                specification = specification.and(assignSalesFollowerStatus(criteria.getSalesFollowerAssignStatus()));
+            }
             if (criteria.getMarketChannelCategoryId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getMarketChannelCategoryId(), FreeClassRecord_.marketChannelCategory, MarketChannelCategory_.id));
             }
@@ -113,4 +119,23 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
         return specification;
     }
 
+    private Specification assignSalesFollowerStatus(String status) {
+
+        if (status.equals("assigned")) {
+            return (root, query, cb) -> cb.isNotNull(root.get(FreeClassRecord_.salesFollower));
+        } else if (status.equals("not_assigned")){
+            return (root, query, cb) -> cb.isNull(root.get(FreeClassRecord_.salesFollower));
+        }
+        return null;
+    }
+
+//    private Specification assignCcStatus(String status) {
+//
+//        if (status.equals("assigned")) {
+//            return (root, query, cb) -> cb.isNotNull(root.get(FreeClassRecord_.));
+//        } else if (status.equals("not_assigned")){
+//            return (root, query, cb) -> cb.isNull(root.get(FreeClassRecord_.salesFollower));
+//        }
+//        return null;
+//    }
 }

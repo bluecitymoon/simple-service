@@ -28,6 +28,10 @@
         vm.pwis = User.getAllPwis();
         vm.sales = User.getAllSales();
         vm.showUploadTextArea = false;
+        vm.salesAssignStatusList = [
+            {name: "已分配", code: "assigned"},
+            {name: "未分配", code: "not_assigned"}
+        ];
         vm.openCalendar = openCalendar;
         vm.clearConditions = function () {
             vm.searchCondition = {};
@@ -152,6 +156,9 @@
                 vm.parameters["locationId.equals"] = vm.searchCondition.location.id;
             }
 
+            if (vm.searchCondition.salesAssignStatus) {
+                vm.parameters["salesFollowerAssignStatus"] = vm.searchCondition.salesAssignStatus.code;
+            }
             FreeClassRecord.query(vm.parameters, onSuccess, onError);
 
 

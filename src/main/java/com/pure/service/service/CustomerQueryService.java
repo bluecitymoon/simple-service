@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -141,6 +142,10 @@ public class CustomerQueryService extends QueryService<Customer> {
 
                 specification = specification.and(buildRangeSpecification(visitDate, Customer_.visitDate));
             }
+
+            if (!StringUtils.isEmpty(criteria.getCcAssignStatus())) {
+                specification = specification.and(assignCcStatus(criteria.getCcAssignStatus()));
+            }
             if (criteria.getNewOrderId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getNewOrderId(), Customer_.newOrder, FreeClassRecord_.id));
             }
@@ -165,4 +170,13 @@ public class CustomerQueryService extends QueryService<Customer> {
         return specification;
     }
 
+    private Specification assignCcStatus(String status) {
+
+        if (status.equals("assigned")) {
+            return (root, query, cb) -> cb.isNotNull(root.get(Customer_.courseConsultant));
+        } else if (status.equals("not_assigned")){
+            return (root, query, cb) -> cb.isNull(root.get(Customer_.courseConsultant));
+        }
+        return null;
+    }
 }

@@ -41,6 +41,15 @@
             {id: 2, value: "学生"},
             {id: 3, value: "幼儿"}
         ];
+        vm.ccAssignStatusList = [
+            {name: "已分配", code: "assigned"},
+            {name: "未分配", code: "not_assigned"}
+        ];
+
+        vm.salesAssignStatusList = [
+            {name: "已分配", code: "assigned"},
+            {name: "未分配", code: "not_assigned"}
+        ];
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -122,6 +131,10 @@
             }
             if (vm.searchCondition.customerStatus) {
                 parameters["statusId.equals"] = vm.searchCondition.customerStatus.id;
+            }
+
+            if (vm.searchCondition.ccAssignStatus) {
+                parameters["ccAssignStatus"] = vm.searchCondition.ccAssignStatus.code;
             }
 
             Customer.query(parameters, onSuccess, onError);

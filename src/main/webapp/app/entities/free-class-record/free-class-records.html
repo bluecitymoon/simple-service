@@ -133,6 +133,26 @@
                         </ui-select>
                     </div>
                 </div>
+
+                <div class="col-md-3 form-group">
+
+                </div>
+
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">跟单人分配状态</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.salesAssignStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    repeat="item in (vm.salesAssignStatusList | filter: $select.search) track by item.code">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

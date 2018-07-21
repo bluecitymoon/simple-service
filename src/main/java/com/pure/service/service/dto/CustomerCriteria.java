@@ -74,6 +74,8 @@ public class CustomerCriteria implements Serializable {
     private InstantFilter nextTrackDate;
     private InstantFilter assignDate;
 
+    private String ccAssignStatus;
+
     public CustomerCriteria() {
     }
 
@@ -281,6 +283,14 @@ public class CustomerCriteria implements Serializable {
 
     public void setNextTrackDate(InstantFilter nextTrackDate) {
         this.nextTrackDate = nextTrackDate;
+    }
+
+    public String getCcAssignStatus() {
+        return ccAssignStatus;
+    }
+
+    public void setCcAssignStatus(String ccAssignStatus) {
+        this.ccAssignStatus = ccAssignStatus;
     }
 
     @Override
