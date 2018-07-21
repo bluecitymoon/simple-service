@@ -14,9 +14,10 @@ import java.util.Objects;
 @NamedNativeQueries({
     @NamedNativeQuery(name = "Customer.searchCustomerStatusReport", query = "select u.id as userId, u.first_name as userName, count(0) as count, cs.name as statusName, cs.code as statusCode\n" +
         "\t from customer t \n" +
-        "\t     left join customer_status cs on t.status_id = cs.id\n" +
-        "\t     left join jhi_user u on t.sales_follower_id  = u.id\n" +
+        "\t     cross join customer_status cs on t.status_id = cs.id\n" +
+        "\t     cross join jhi_user u on t.sales_follower_id  = u.id\n" +
         "\t where t.assign_date < :2 and t.assign_date > :1\n" +
+        "\t and exists (select 1 from `jhi_user_authority` a where a.`user_id` = u.id and a.`authority_name` = 'ROLE_COURSE_CONSULTANT') \n" +
         "\t     group by t.status_id, u.id;",
     resultSetMapping = "reportMapping")
 })

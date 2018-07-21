@@ -209,27 +209,27 @@
 
 <div class="panel">
 
-    <div class="pad-all">
-        <div class="row" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
-            <div class="col-xs-4" >
-                <div class="input-group mar-btm">
-                    <ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">
-                        <ui-select-match>
-                            {{$select.selected.firstName}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
-                            <span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                    <!--<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">-->
-                    <span class="input-group-btn">
-					          <button class="btn btn-primary" type="button"
-                                      ng-click="vm.batchAssignNewOrder()">分配给该课程顾问</button>
-					    </span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!--<div class="pad-all">-->
+        <!--<div class="row" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">-->
+            <!--<div class="col-xs-4" >-->
+                <!--<div class="input-group mar-btm">-->
+                    <!--<ui-select ng-model="vm.selectedUser" placeholder="输入目标用户姓名搜索">-->
+                        <!--<ui-select-match>-->
+                            <!--{{$select.selected.firstName}}-->
+                        <!--</ui-select-match>-->
+                        <!--<ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">-->
+                            <!--<span ng-bind="item.firstName"></span><span class="pull-right" ng-bind="item.login"></span>-->
+                        <!--</ui-select-choices>-->
+                    <!--</ui-select>-->
+                    <!--&lt;!&ndash;<input type="text" placeholder="输入目标用户姓名搜索" class="form-control">&ndash;&gt;-->
+                    <!--<span class="input-group-btn">-->
+					          <!--<button class="btn btn-primary" type="button"-->
+                                      <!--ng-click="vm.batchAssignNewOrder()">分配给该课程顾问</button>-->
+					    <!--</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="panel-body">
 

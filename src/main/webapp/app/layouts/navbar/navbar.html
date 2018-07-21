@@ -68,10 +68,10 @@
 
             <div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
-                    <!--<li ui-sref-active="active" class="nav-item">-->
-                        <!--<a ui-sref="home" class="nav-link"> <i class="fa fa-home"></i>主页-->
-                        <!--</a>-->
-                    <!--</li>-->
+                    <li ui-sref-active="active" class="nav-item">
+                        <a ui-sref="home" class="nav-link"> <i class="fa fa-home"></i>主页
+                        </a>
+                    </li>
                     <li uib-dropdown class="nav-item" ng-switch-when="true" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <span>
@@ -113,6 +113,9 @@
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+
+                            <li class="dropdown-header">回单</li>
+
                             <li>
                                 <a ui-sref="free-class-record" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-bishop"></span>&nbsp;
@@ -120,6 +123,12 @@
                                 </a>
                             </li>
 
+                            <li>
+                                <a ui-sref="new-order-assign-history" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-hourglass"></span>&nbsp;
+                                    <span>新单分配历史</span>
+                                </a>
+                            </li>
                             <li class="dropdown-header">客户</li>
 
                             <li>

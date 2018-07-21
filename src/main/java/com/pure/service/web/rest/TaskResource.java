@@ -2,6 +2,7 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Task;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.TaskService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -100,6 +101,18 @@ public class TaskResource {
         Page<Task> page = taskQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/tasks");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/tasks/today")
+    @Timed
+    public ResponseEntity<List<Task>> getTodaysTask(TaskCriteria criteria) {
+
+        log.debug("REST request to get Tasks by criteria: {}", criteria);
+
+        //2007-12-03T10:15:30.00Z
+        String currentLogin = SecurityUtils.getCurrentUserLogin();
+        List<Task> tasks = taskQueryService.findByCriteria(criteria);
+        return new ResponseEntity<>(tasks, null, HttpStatus.OK);
     }
 
     /**
