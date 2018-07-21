@@ -321,18 +321,18 @@
                             <!--<span class="glyphicon glyphicon-phone-alt"></span>-->
                             <!--<span class="hidden-sm-down">邀约</span>-->
                             <!--</button>-->
-                            <!--<button type="submit"-->
-                            <!--ui-sref="customer.edit({id:customer.id})"-->
-                            <!--class="btn btn-primary btn-sm">-->
-                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                            <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                            <!--ui-sref="customer.delete({id:customer.id})"-->
-                            <!--class="btn btn-danger btn-sm">-->
-                            <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                            <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
+                            <button type="submit"
+                                    ng-click="vm.openCustomerEditDialog(customer.id)"
+                                    class="btn btn-primary btn-info">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button ng-if="vm.department == 'recipient'" type="submit"
+                                    ng-click="vm.customerCheckin(customer.id)"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-tree-deciduous"></span>
+                                <span>签到</span>
+                            </button>
                         </div>
                     </td>
                 </tr>

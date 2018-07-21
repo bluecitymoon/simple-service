@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CustomerScheduleStatusRepository extends JpaRepository<CustomerScheduleStatus, Long>, JpaSpecificationExecutor<CustomerScheduleStatus> {
 
+    CustomerScheduleStatus findByCode(String code);
 }

@@ -4,13 +4,21 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.domain.CustomerScheduleStatus;
+import com.pure.service.domain.CustomerStatus;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.repository.CustomerRepository;
+import com.pure.service.repository.CustomerScheduleStatusRepository;
+import com.pure.service.repository.CustomerStatusRepository;
+import com.pure.service.service.CustomerCommunicationScheduleQueryService;
 import com.pure.service.service.CustomerCommunicationScheduleService;
+import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -33,6 +41,15 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
     private final CustomerRepository customerRepository;
+
+    @Autowired
+    private CustomerCommunicationScheduleQueryService customerCommunicationScheduleQueryService;
+
+    @Autowired
+    private CustomerScheduleStatusRepository customerScheduleStatusRepository;
+
+    @Autowired
+    private CustomerStatusRepository customerStatusRepository;
 
     public CustomerCommunicationScheduleServiceImpl(CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository,
                                                     CustomerCommunicationLogRepository customerCommunicationLogRepository,
@@ -151,5 +168,52 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         customerCommunicationLogRepository.save(customerCommunicationLog);
 
         return customerCommunicationSchedule;
+    }
+
+    @Override
+    public CustomerCommunicationSchedule customerSignin(Long id) {
+
+        CustomerCommunicationScheduleCriteria customerCommunicationScheduleCriteria = new CustomerCommunicationScheduleCriteria();
+
+        LongFilter customerFilter = new LongFilter();
+        customerFilter.setEquals(id);
+
+        customerCommunicationScheduleCriteria.setCustomerId(customerFilter);
+
+        boolean hasUnCheckedSchedule = false;
+        List<CustomerCommunicationSchedule> customerCommunicationSchedules = customerCommunicationScheduleQueryService.findByCriteria(customerCommunicationScheduleCriteria);
+        for (CustomerCommunicationSchedule customerCommunicationSchedule : customerCommunicationSchedules) {
+            if (customerCommunicationSchedule.getActuallMeetDate() == null) {
+                customerCommunicationSchedule.setActuallMeetDate(Instant.now());
+
+                customerCommunicationScheduleRepository.save(customerCommunicationSchedule);
+
+                hasUnCheckedSchedule = true;
+            }
+        }
+
+        //没有预约数据的，新增预约记录并签到
+        if (!hasUnCheckedSchedule) {
+
+            CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
+
+            Customer customer = customerRepository.findOne(id);
+            schedule.setCustomer(customer);
+
+            schedule.setSceduleDate(Instant.now());
+            schedule.setActuallMeetDate(Instant.now());
+            schedule.setComments("客户未预约，系统自动生成的预约记录");
+
+            CustomerScheduleStatus signedSuccessStatus = customerScheduleStatusRepository.findByCode("signin_success");
+            schedule.setScheduleStatus(signedSuccessStatus);
+
+            customerCommunicationScheduleRepository.save(schedule);
+
+            CustomerStatus successCheckedStatus = customerStatusRepository.findByCode("visited");
+            customer.setStatus(successCheckedStatus);
+
+            customerRepository.save(customer);
+        }
+        return null;
     }
 }

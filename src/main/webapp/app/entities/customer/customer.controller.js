@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage'];
+    CustomerController.$inject = ['$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule'];
 
-    function CustomerController($scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage) {
+    function CustomerController($uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule) {
 
         var vm = this;
 
@@ -58,6 +58,8 @@
             currentPageNumber: 1,
             totalItems: 0
         };
+
+
 
         vm.allSelected = false;
         vm.loadAll = function() {
@@ -158,6 +160,37 @@
             }
         };
         // vm.loadAll();
+
+        vm.openCustomerEditDialog = function (customerId) {
+
+            $uibModal.open({
+                templateUrl: 'app/entities/customer/customer-dialog.html',
+                controller: 'CustomerDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: ['Customer', function(Customer) {
+                        return Customer.get({id : customerId}).$promise;
+                    }]
+                }
+            }).result.then(function() {
+                vm.loadAll();
+            }, function() {
+                // $state.go('^');
+            });
+        };
+
+        vm.customerCheckin = function (customerId) {
+
+            CustomerCommunicationSchedule.customersignin({id: customerId},
+            function () {
+                AlertService.success("签到成功!");
+            },
+            function () {
+                AlertService.error("签到失败");
+            })
+        };
 
         vm.batchAssignNewOrder = function () {
 

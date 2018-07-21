@@ -30,7 +30,8 @@
                 url: 'api/customer-communication-schedules/batchUpdate',
                 isArray: true
             },
-            'sign': { method:'POST', url: 'api/customer-communication-schedules/signin/:id', params: { id : '@id'} }
+            'sign': { method:'POST', url: 'api/customer-communication-schedules/signin/:id', params: { id : '@id'} },
+            'customersignin': { method:'POST', url: 'api/customer-communication-schedules/customersignin/:id', params: { id : '@id'} }
         });
     }
 })();

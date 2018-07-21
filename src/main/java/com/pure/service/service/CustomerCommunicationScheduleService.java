@@ -45,4 +45,6 @@ public interface CustomerCommunicationScheduleService {
     void delete(Long id);
 
     CustomerCommunicationSchedule signin(Long id);
+
+    CustomerCommunicationSchedule customerSignin(Long id);
 }

@@ -82,7 +82,7 @@
             CustomerCommunicationLog.query({
                 page: 0,
                 size: 100,
-                sort: 'id',
+                sort: 'id,desc',
                 'customerId.equals': vm.customer.id
             }, function (data) {
                 vm.logs = data;
