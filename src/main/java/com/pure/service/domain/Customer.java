@@ -1,6 +1,7 @@
 package com.pure.service.domain;
 
 
+import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
 
 import javax.persistence.*;
@@ -19,17 +20,36 @@ import java.util.Objects;
         "\t where t.assign_date < :2 and t.assign_date > :1\n" +
         "\t and exists (select 1 from `jhi_user_authority` a where a.`user_id` = u.id and a.`authority_name` = 'ROLE_COURSE_CONSULTANT') \n" +
         "\t     group by t.status_id, u.id;",
-    resultSetMapping = "reportMapping")
+    resultSetMapping = "reportMapping"),
+    @NamedNativeQuery(name = "Customer.searchCurrentUserOverview", query = "select count(0) as untrackedCustomerCount from customer t \n" +
+        "\tleft join `customer_status` cs on t.`status_id` = cs.id\n" +
+        "\t where `sales_follower_id` = :1\n" +
+        "\t \tand cs.`code` = 'new_created' \t\n" +
+        "\t \tand  t.assign_date < :2 \n" +
+        "\t \tand t.assign_date > :3",
+    resultSetMapping = "overviewMapping")
+
 })
-@SqlResultSetMapping(name = "reportMapping",
-    classes = @ConstructorResult(targetClass = ReportEntity.class,
-        columns = {
-            @ColumnResult(name = "userId", type = Long.class),
-            @ColumnResult(name = "userName", type = String.class),
-            @ColumnResult(name = "count", type = Integer.class),
-            @ColumnResult(name = "statusName", type = String.class),
-            @ColumnResult(name = "statusCode", type = String.class)
-    }))
+
+@SqlResultSetMappings({
+    @SqlResultSetMapping(name = "overviewMapping",
+        classes = @ConstructorResult(targetClass = Overview.class,
+            columns = {
+                @ColumnResult(name = "untrackedCustomerCount", type = Integer.class),
+            })
+    ),
+    @SqlResultSetMapping(name = "reportMapping",
+        classes = @ConstructorResult(targetClass = ReportEntity.class,
+            columns = {
+                @ColumnResult(name = "userId", type = Long.class),
+                @ColumnResult(name = "userName", type = String.class),
+                @ColumnResult(name = "count", type = Integer.class),
+                @ColumnResult(name = "statusName", type = String.class),
+                @ColumnResult(name = "statusCode", type = String.class)
+            }))
+})
+
+
 @Entity
 @Table(name = "customer")
 public class Customer extends AbstractAuditingEntity implements Serializable {

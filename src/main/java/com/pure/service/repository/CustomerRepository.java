@@ -20,4 +20,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
 
     @Query(nativeQuery = true)
     List<ReportEntity> searchCustomerStatusReport(Instant startDate, Instant endDate);
+
+    @Query(nativeQuery = true)
+    List<ReportEntity> searchCurrentUserOverview(Instant startDate, Instant endDate, Long userId);
 }

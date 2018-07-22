@@ -212,6 +212,8 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
             CustomerStatus successCheckedStatus = customerStatusRepository.findByCode("visited");
             customer.setStatus(successCheckedStatus);
 
+            customer.setVisitDate(Instant.now());
+
             customerRepository.save(customer);
         }
         return null;

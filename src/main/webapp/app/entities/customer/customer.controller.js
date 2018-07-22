@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule'];
+    CustomerController.$inject = ['$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule', 'Cache'];
 
-    function CustomerController($uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule) {
+    function CustomerController($uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule, Cache) {
 
         var vm = this;
 
@@ -139,6 +139,8 @@
                 parameters["ccAssignStatus"] = vm.searchCondition.ccAssignStatus.code;
             }
 
+            Cache.setCustomerSearchCondition(vm.searchCondition);
+
             Customer.query(parameters, onSuccess, onError);
 
             function sort() {
@@ -159,8 +161,17 @@
                 AlertService.error(error.data.message);
             }
         };
-        // vm.loadAll();
+        reloadLastSearchPage();
 
+        function reloadLastSearchPage() {
+            var condition = Cache.getCustomerSearchCondition();
+
+            if (condition) {
+                vm.searchCondition = condition;
+
+                vm.loadAll();
+            }
+        }
         vm.openCustomerEditDialog = function (customerId) {
 
             $uibModal.open({

@@ -12,6 +12,7 @@ import com.pure.service.service.UserService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.CustomerFollowLog;
+import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.dto.request.ReportElement;
 import com.pure.service.web.rest.util.HeaderUtil;
@@ -155,6 +156,13 @@ public class CustomerResource {
         Page<Customer> page = customerQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customers");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/customers/overview")
+    @Timed
+    public Overview getUntrackedCustomerInCurrentMonth() {
+
+        return customerService.getCurrentUserOverview();
     }
 
     @PostMapping("/customers/status/report")

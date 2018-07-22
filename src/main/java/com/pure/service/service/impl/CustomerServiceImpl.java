@@ -14,6 +14,7 @@ import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
 import com.pure.service.repository.TaskStatusRepository;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
@@ -21,9 +22,11 @@ import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.TaskStatusEnum;
+import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.dto.request.ReportElement;
+import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -318,5 +321,16 @@ public class CustomerServiceImpl implements CustomerService {
         });
 
         return elements;
+    }
+
+    @Override
+    public Overview getCurrentUserOverview() {
+
+
+        Instant monthBeginning = DateUtil.getFirstSecondOfMonth();
+        Instant monthEnding = DateUtil.getLastSecondOfMonth();
+
+        String currentLogin = SecurityUtils.getCurrentUserLogin();
+        return null;
     }
 }

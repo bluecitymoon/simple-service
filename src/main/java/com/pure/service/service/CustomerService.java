@@ -1,6 +1,7 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.Customer;
+import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.dto.request.ReportElement;
 import org.springframework.data.domain.Page;
@@ -53,4 +54,6 @@ public interface CustomerService {
     List<Customer> batchSave(List<Customer> customers);
 
     List<ReportElement> getStatusReport(CustomerStatusRequest customerStatusRequest);
+    
+    Overview getCurrentUserOverview();
 }
