@@ -115,7 +115,7 @@ public class CustomerTrackTaskResource {
 
     @GetMapping("/customer-track-tasks/today")
     @Timed
-    public ResponseEntity<List<CustomerTrackTask>> getAllCustomerTrackTasksFollowedByCurrentUserToday() {
+    public List<CustomerTrackTask> getAllCustomerTrackTasksFollowedByCurrentUserToday() {
 
         User currentUser = userService.getUserWithAuthorities();
 
@@ -125,9 +125,8 @@ public class CustomerTrackTaskResource {
 
         log.debug("REST request to get CustomerTrackTasks by criteria: {}", criteria);
 
-        List<CustomerTrackTask> page = customerTrackTaskQueryService.findByCriteria(criteria);
+        return customerTrackTaskQueryService.findByCriteria(criteria);
 
-        return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
     /**
