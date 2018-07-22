@@ -8,12 +8,14 @@ import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.Task;
 import com.pure.service.domain.TaskStatus;
+import com.pure.service.domain.User;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
 import com.pure.service.repository.TaskStatusRepository;
+import com.pure.service.repository.UserRepository;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerQueryService;
@@ -67,6 +69,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private CustomerStatusRepository customerStatusRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
@@ -326,11 +331,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Overview getCurrentUserOverview() {
 
-
         Instant monthBeginning = DateUtil.getFirstSecondOfMonth();
         Instant monthEnding = DateUtil.getLastSecondOfMonth();
 
         String currentLogin = SecurityUtils.getCurrentUserLogin();
-        return null;
+        User currentUser = userRepository.findOneByLogin(currentLogin).get();
+
+        Overview overview = customerRepository.searchCurrentUserOverview(currentUser.getId(), monthEnding, monthBeginning);
+
+        return overview;
     }
 }

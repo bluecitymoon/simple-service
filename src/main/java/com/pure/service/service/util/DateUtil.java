@@ -23,7 +23,7 @@ public class DateUtil {
 
         //2007-12-03T10:15:30.00Z
         String shortToday = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        String fullToday = shortToday + "T00:00:01.00Z";
+        String fullToday = shortToday + "T00:00:00.00Z";
 
         return Instant.parse(fullToday);
     }
@@ -76,10 +76,11 @@ public class DateUtil {
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
     }
-
+//
 //    public static void main(String[] args) {
 //        int year = 2018, month = 4;
-//        System.out.println(getLastDayOfMonth(year, month));
-//        System.out.println(getLastSecondOfMonth());
+////        System.out.println(getLastDayOfMonth(year, month));
+//        System.out.println(getSimpleTodayInstantBegin());
+//        System.out.println(getSimpleTodayInstantEnd());
 //    }
 }

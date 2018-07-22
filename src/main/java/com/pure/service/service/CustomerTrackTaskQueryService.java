@@ -1,22 +1,25 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.CustomerTrackTask;
+import com.pure.service.domain.CustomerTrackTask_;
+import com.pure.service.domain.Customer_;
+import com.pure.service.domain.Task_;
+import com.pure.service.repository.CustomerTrackTaskRepository;
+import com.pure.service.service.dto.CustomerTrackTaskCriteria;
+import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.CustomerTrackTask;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.CustomerTrackTaskRepository;
-import com.pure.service.service.dto.CustomerTrackTaskCriteria;
+import java.time.Instant;
+import java.util.List;
 
 
 /**
@@ -78,8 +81,28 @@ public class CustomerTrackTaskQueryService extends QueryService<CustomerTrackTas
             if (criteria.getTaskId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getTaskId(), CustomerTrackTask_.task, Task_.id));
             }
+
+            if (criteria.getSalesFollowerId() != null) {
+                specification = specification.and(assignSalesFollower(criteria.getSalesFollowerId()));
+            }
+
+            if (criteria.isToday()) {
+                specification = specification.and(taskEstimateExecutionDateToday());
+            }
         }
         return specification;
     }
 
+    private Specification assignSalesFollower(Long userId) {
+
+        return (root, query, cb) -> cb.equal(root.get(CustomerTrackTask_.customer).get(Customer_.salesFollower), userId);
+    }
+
+    private Specification taskEstimateExecutionDateToday() {
+
+        Instant start = DateUtil.getSimpleTodayInstantBegin();
+        Instant end = DateUtil.getSimpleTodayInstantEnd();
+
+        return (root, query, cb) -> cb.between(root.get(CustomerTrackTask_.task).get(Task_.estimateExecuteDate), start, end);
+    }
 }

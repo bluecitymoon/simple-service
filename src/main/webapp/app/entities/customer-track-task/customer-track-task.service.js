@@ -26,6 +26,11 @@
                 method: 'GET',
                 isArray: true
             },
+            "getCurrentUserCustomerTrackTasksToday": {
+                url: "api/customer-track-tasks/today",
+                method: 'GET',
+                isArray: true
+            },
             "closeTask": {
                 url: "api/customer-track-tasks/close/:id",
                 method: 'GET'

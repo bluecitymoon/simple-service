@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation', 'FileUploader'];
+    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation', 'FileUploader', 'Cache'];
 
-    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation, FileUploader) {
+    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation, FileUploader, Cache) {
 
         var vm = this;
 
@@ -162,6 +162,8 @@
             FreeClassRecord.query(vm.parameters, onSuccess, onError);
 
 
+            Cache.setNewOrderCondition(vm.searchCondition);
+
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
                 $scope.pagination.totalItems = headers('X-Total-Count');
@@ -173,6 +175,16 @@
                 AlertService.error(error.data.message);
             }
         }
+
+        function loadLastSearchResult() {
+            if (Cache.getNewOrderCondition()) {
+                vm.searchCondition = Cache.getNewOrderCondition();
+
+                vm.loadAll();
+            }
+        }
+
+        loadLastSearchResult();
 
         function sort() {
             var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];

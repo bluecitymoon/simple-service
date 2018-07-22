@@ -2,16 +2,22 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.domain.User;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationScheduleQueryService;
 import com.pure.service.service.CustomerCommunicationScheduleService;
+import com.pure.service.service.UserService;
 import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
+import com.pure.service.service.util.DateUtil;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.InstantFilter;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -45,6 +51,9 @@ public class CustomerCommunicationScheduleResource {
     private final CustomerCommunicationScheduleService customerCommunicationScheduleService;
 
     private final CustomerCommunicationScheduleQueryService customerCommunicationScheduleQueryService;
+
+    @Autowired
+    private UserService userService;
 
     public CustomerCommunicationScheduleResource(CustomerCommunicationScheduleService customerCommunicationScheduleService, CustomerCommunicationScheduleQueryService customerCommunicationScheduleQueryService) {
         this.customerCommunicationScheduleService = customerCommunicationScheduleService;
@@ -87,7 +96,7 @@ public class CustomerCommunicationScheduleResource {
 
     @PostMapping("/customer-communication-schedules/customersignin/{id}")
     @Timed
-    public ResponseEntity<CustomerCommunicationSchedule> customerSignin(@PathVariable Long id) throws URISyntaxException {
+    public ResponseEntity<CustomerCommunicationSchedule> customerSignin(@PathVariable Long id) {
         log.debug("REST request to save sigin in : {}", id);
         if (id == null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idrequired", "Need an ID")).body(null);
@@ -152,6 +161,31 @@ public class CustomerCommunicationScheduleResource {
         Page<CustomerCommunicationSchedule> page = customerCommunicationScheduleQueryService.findByCriteria(customerCommunicationScheduleCriteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customer-communication-schedules");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/customer-communication-schedules/today")
+    @Timed
+    public ResponseEntity<List<CustomerCommunicationSchedule>> getAllTodayCustomerCommunicationSchedules() {
+        log.debug("REST request to get CustomerCommunicationSchedules in today");
+
+        CustomerCommunicationScheduleCriteria customerCommunicationScheduleCriteria = new CustomerCommunicationScheduleCriteria();
+
+        User currentUser = userService.getUserWithAuthorities();
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(currentUser.getId());
+
+        customerCommunicationScheduleCriteria.setFollowerId(longFilter);
+
+        InstantFilter instantFilter = new InstantFilter();
+        instantFilter.setGreaterOrEqualThan(DateUtil.getSimpleTodayInstantBegin());
+        instantFilter.setLessOrEqualThan(DateUtil.getSimpleTodayInstantEnd());
+
+        customerCommunicationScheduleCriteria.setSceduleDate(instantFilter);
+
+        List<CustomerCommunicationSchedule> page = customerCommunicationScheduleQueryService.findByCriteria(customerCommunicationScheduleCriteria);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
     /**

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('simpleServiceApp')
@@ -6,9 +6,10 @@
 
     Cache.$inject = [];
 
-    function Cache () {
+    function Cache() {
 
-         this.customerCondition = null;
+        this.customerCondition = null;
+        this.newOrderCondition = null;
 
         function getCustomerSearchCondition() {
             return this.customerCondition;
@@ -17,9 +18,19 @@
         function setCustomerSearchCondition(condition) {
             this.customerCondition = condition;
         }
+
+        function getNewOrderCondition() {
+            return this.newOrderCondition;
+        }
+
+        function setNewOrderCondition(condition) {
+            this.newOrderCondition = condition;
+        }
         return {
             getCustomerSearchCondition: getCustomerSearchCondition,
-            setCustomerSearchCondition: setCustomerSearchCondition
+            setCustomerSearchCondition: setCustomerSearchCondition,
+            getNewOrderCondition: getNewOrderCondition,
+            setNewOrderCondition: setNewOrderCondition
         }
     }
 })();

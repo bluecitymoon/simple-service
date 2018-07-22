@@ -6,6 +6,10 @@ public class Overview implements Serializable {
 
     private Integer untrackedCustomerCount;
 
+    public Overview(Integer untrackedCustomerCount) {
+        this.untrackedCustomerCount = untrackedCustomerCount;
+    }
+
     public Integer getUntrackedCustomerCount() {
         return untrackedCustomerCount;
     }

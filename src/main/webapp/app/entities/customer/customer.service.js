@@ -30,6 +30,10 @@
                 method: 'PUT',
                 url: 'api/customers/batchupdate',
                 isArray: true
+            },
+            'getOverview' : {
+                method: 'GET',
+                url: 'api/customers/overview'
             }
         });
     }

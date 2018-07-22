@@ -1,13 +1,9 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
-import io.github.jhipster.service.filter.StringFilter;
+
+import java.io.Serializable;
 
 
 
@@ -31,6 +27,10 @@ public class CustomerTrackTaskCriteria implements Serializable {
     private LongFilter customerId;
 
     private LongFilter taskId;
+
+    private Long salesFollowerId;
+
+    private boolean isToday;
 
     public CustomerTrackTaskCriteria() {
     }
@@ -57,6 +57,22 @@ public class CustomerTrackTaskCriteria implements Serializable {
 
     public void setTaskId(LongFilter taskId) {
         this.taskId = taskId;
+    }
+
+    public Long getSalesFollowerId() {
+        return salesFollowerId;
+    }
+
+    public void setSalesFollowerId(Long salesFollowerId) {
+        this.salesFollowerId = salesFollowerId;
+    }
+
+    public boolean isToday() {
+        return isToday;
+    }
+
+    public void setToday(boolean today) {
+        isToday = today;
     }
 
     @Override

@@ -5,18 +5,31 @@
         .module('simpleServiceApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', '$interval', '$timeout', 'MarketingNewOrderPlan'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', '$interval', '$timeout', 'MarketingNewOrderPlan', 'Customer', 'CustomerCommunicationSchedule', 'CustomerTrackTask'];
 
-    function HomeController ($scope, Principal, LoginService, $state, $interval, $timeout, MarketingNewOrderPlan) {
+    function HomeController ($scope, Principal, LoginService, $state, $interval, $timeout, MarketingNewOrderPlan, Customer, CustomerCommunicationSchedule, CustomerTrackTask) {
         var vm = this;
 
         vm.account = null;
         vm.isAuthenticated = null;
         vm.login = LoginService.open;
+        vm.overview = {};
         vm.register = register;
 
         $scope.$on('authenticationSuccess', function() {
             getAccount();
+        });
+
+        Customer.getOverview({}, function (data) {
+            vm.overview = data;
+        });
+
+        CustomerCommunicationSchedule.getSchedulesToday({}, function (data) {
+            vm.customerCommunicationSchedules = data;
+        });
+
+        CustomerTrackTask.getCurrentUserCustomerTrackTasksToday({}, function (data) {
+            vm.customerTrackTasks = data;
         });
 
         $scope.lineConfig = {

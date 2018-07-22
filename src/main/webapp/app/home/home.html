@@ -2,92 +2,255 @@
     <h1 class="page-title"></h1>
 </div>
 
-<div id="demo-panel-network" class="panel">
-    <div class="panel-heading">
-        <!--<div class="panel-control">-->
-            <!--<button class="btn btn-default btn-active-primary" ng-click="vm.regenerateReport()">生成最新报告<i class="glyphicon glyphicon-refresh"></i></button>-->
-        <!--</div>-->
-        <!--<h3 class="panel-title">PWI地推目标完成度</h3>-->
+<div class="row">
+    <div class="col-md-3">
+        <div class="panel panel-info panel-colorful media middle pad-all">
+            <div class="media-left">
+                <div class="pad-hor">
+                    <i class=" glyphicon glyphicon-phone-alt icon-3x"></i>
+                </div>
+            </div>
+            <div class="media-body">
+                <p class="text-2x mar-no text-semibold">{{vm.overview.untrackedCustomerCount}}</p>
+                <p class="mar-no">本月未跟踪新单</p>
+            </div>
+        </div>
     </div>
+    <div class="col-md-3">
 
-
-    <!--<div class="pad-all" style="">-->
-            <!--<ng-echarts class="echarts" ec-config="lineConfig" ec-option="lineOption" style="height: 455px; width: 1380px"></ng-echarts>-->
-    <!--</div>-->
-
-
-    <!--Chart information-->
-    <!--<div class="panel-body">-->
-
-        <!--<div class="row">-->
-            <!--<div class="col-lg-8">-->
-                <!--<p class="text-semibold text-uppercase text-main">总完成度</p>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-5">-->
-                        <!--<div class="media">-->
-                            <!--<div class="media-left">-->
-                                <!--<span class="text-3x text-thin text-main">43.7</span>-->
-                            <!--</div>-->
-                            <!--<div class="media-body">-->
-                                <!--<p class="mar-no">%</p>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="col-xs-7 text-sm">-->
-                        <!--<p>-->
-                            <!--<span>最低</span>-->
-                            <!--<span class="pad-lft text-semibold">-->
-					                                        <!--<span class="text-lg">27%</span>-->
-					                                        <!--<span class="labellabel-success mar-lft">-->
-					                                            <!--<i class="pci-caret-down text-success"></i>-->
-					                                            <!--<smal>- 20</smal>-->
-					                                        <!--</span>-->
-					                                        <!--</span>-->
-                        <!--</p>-->
-                        <!--<p>-->
-                            <!--<span>最高</span>-->
-                            <!--<span class="pad-lft text-semibold">-->
-					                                        <!--<span class="text-lg">100%</span>-->
-					                                        <!--<span class="labellabel-danger mar-lft">-->
-					                                            <!--<i class="pci-caret-up text-danger"></i>-->
-					                                            <!--<smal>+ 57</smal>-->
-					                                        <!--</span>-->
-					                                        <!--</span>-->
-                        <!--</p>-->
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<hr>-->
-
-            <!--</div>-->
-
-
-        <!--</div>-->
-    <!--</div>-->
-
-    <div class="panel-body">
-
-        <div class="blog-content">
-
-            <div class="blog-body">
-                <!--<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops</p>-->
-                <!--<p><i>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</i></p>-->
-                <blockquote>
-                    <p>2018-07-20 更新内容</p>
-                    <small>增加了TMK报表页面：
-                            从菜单 市场部 -> TMK报表进入TMK报表页面，输入想要查询的年份及月份，点击搜索会显示当月下TMK的报表内容。
-                    </small>
-                    <small>
-                            一些小的页面修复
-                    </small>
-
-                </blockquote>
-
-
+        <div class="panel panel-primary panel-colorful media middle pad-all">
+            <div class="media-left">
+                <div class="pad-hor">
+                    <i class=" glyphicon glyphicon-hand-right icon-3x"></i>
+                </div>
+            </div>
+            <div class="media-body">
+                <p class="text-2x mar-no text-semibold">{{vm.customerCommunicationSchedules.length}}</p>
+                <p class="mar-no">今日客户预约</p>
             </div>
         </div>
     </div>
 
+    <div class="col-md-3">
+
+        <div class="panel panel-mint panel-colorful media middle pad-all">
+            <div class="media-left">
+                <div class="pad-hor">
+                    <i class=" glyphicon glyphicon-tasks icon-3x"></i>
+                </div>
+            </div>
+            <div class="media-body">
+                <p class="text-2x mar-no text-semibold">{{vm.customerTrackTasks.length}}</p>
+                <p class="mar-no">今日客户追踪任务</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="demo-panel-network" class="panel panel-primary panel-bordered-dark">
+    <div class="panel-heading">
+        <!--<div class="panel-control">-->
+        <!--<button class="btn btn-default btn-active-primary" ng-click="vm.regenerateReport()">生成最新报告<i class="glyphicon glyphicon-refresh"></i></button>-->
+        <!--</div>-->
+        <h3 class="panel-title">当日预约记录</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> </th>
+                    <th jh-sort-by="customer.name"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.customer">Customer</span>
+                        </th>
+                    <th>
+                        性别
+                    </th>
+                    <th>
+                        联系方式
+                    </th>
+                    <th>
+                        来源渠道
+                    </th>
+                    <th jh-sort-by="sceduleDate"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate">Scedule Date</span>
+                        
+                    </th>
+                    <th jh-sort-by="actuallMeetDate"><span
+                            data-translate="simpleServiceApp.customerCommunicationSchedule.actuallMeetDate">Actual Meet Date</span>
+                        
+                    </th>
+                    <th><span>录入时间</span>
+                    <th><span>课程顾问</span>
+                    <th><span>户外推广人员</span>
+                        </th>
+                    <th jh-sort-by="follower.login"><span>跟单人</span>
+                        </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customerCommunicationSchedule in vm.customerCommunicationSchedules track by customerCommunicationSchedule.id"
+                    ng-class="customerCommunicationSchedule.selected? 'bg-info': ''">
+
+                    </td>
+                    <td><a ui-sref="customer-communication-schedule-detail({id:customerCommunicationSchedule.id})">{{customerCommunicationSchedule.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="customer-detail({id:customerCommunicationSchedule.customer.id})">{{customerCommunicationSchedule.customer.name}}</a>
+                    </td>
+                    <td>
+                        {{customerCommunicationSchedule.customer.sex}}
+                    </td>
+                    <td>
+                        {{customerCommunicationSchedule.customer.contactPhoneNumber}}
+                    </td>
+                    <td>{{customerCommunicationSchedule.customer.channel.name}}</td>
+                    <td>{{customerCommunicationSchedule.sceduleDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCommunicationSchedule.actuallMeetDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCommunicationSchedule.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
+                    <td>
+                        {{customerCommunicationSchedule.customer.courseConsultant.firstName}}
+                    </td>
+                    <td>
+                        {{customerCommunicationSchedule.customer.newOrder.referer.firstName}}
+                    </td>
+
+                    <td>
+                        {{customerCommunicationSchedule.customer.salesFollower.login}}
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--<div class="row">-->
+        <!--<div class="col-lg-8">-->
+        <!--<p class="text-semibold text-uppercase text-main">总完成度</p>-->
+        <!--<div class="row">-->
+        <!--<div class="col-xs-5">-->
+        <!--<div class="media">-->
+        <!--<div class="media-left">-->
+        <!--<span class="text-3x text-thin text-main">43.7</span>-->
+        <!--</div>-->
+        <!--<div class="media-body">-->
+        <!--<p class="mar-no">%</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-7 text-sm">-->
+        <!--<p>-->
+        <!--<span>最低</span>-->
+        <!--<span class="pad-lft text-semibold">-->
+        <!--<span class="text-lg">27%</span>-->
+        <!--<span class="labellabel-success mar-lft">-->
+        <!--<i class="pci-caret-down text-success"></i>-->
+        <!--<smal>- 20</smal>-->
+        <!--</span>-->
+        <!--</span>-->
+        <!--</p>-->
+        <!--<p>-->
+        <!--<span>最高</span>-->
+        <!--<span class="pad-lft text-semibold">-->
+        <!--<span class="text-lg">100%</span>-->
+        <!--<span class="labellabel-danger mar-lft">-->
+        <!--<i class="pci-caret-up text-danger"></i>-->
+        <!--<smal>+ 57</smal>-->
+        <!--</span>-->
+        <!--</span>-->
+        <!--</p>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<hr>-->
+
+        <!--</div>-->
+
+
+        <!--</div>-->
+        <!--</div>-->
+
+
+        <div class="panel-body">
+
+            <!--<div class="blog-content">-->
+
+            <!--<div class="blog-body">-->
+            <!--&lt;!&ndash;<p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin. He lay on his armour-like back, and if he lifted his head a little he could see his brown belly, slightly domed and divided by arches into stiff sections. The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pitifully thin compared with the size of the rest of him, waved about helplessly as he looked. "What's happened to me?" he thought. It wasn't a dream. His room, a proper human room although a little too small, lay peacefully between its four familiar walls. A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture that he had recently cut out of an illustrated magazine and housed in a nice, gilded frame. It showed a lady fitted out with a fur hat and fur boa who sat upright, raising a heavy fur muff that covered the whole of her lower arm towards the viewer. Gregor then turned to look out the window at the dull weather. Drops</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;<p><i>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</i></p>&ndash;&gt;-->
+            <!--<blockquote>-->
+            <!--<p>2018-07-20 更新内容</p>-->
+            <!--<small>增加了TMK报表页面：-->
+            <!--从菜单 市场部 -> TMK报表进入TMK报表页面，输入想要查询的年份及月份，点击搜索会显示当月下TMK的报表内容。-->
+            <!--</small>-->
+            <!--<small>-->
+            <!--一些小的页面修复-->
+            <!--</small>-->
+
+            <!--</blockquote>-->
+
+
+            <!--</div>-->
+            <!--</div>-->
+
+
+        </div>
+
+
+    </div>
 
 </div>
 
+<div class="panel panel-mint panel-bordered-mint">
+
+    <div class="panel-heading">
+        <!--<div class="panel-control">-->
+        <!--<button class="btn btn-default btn-active-primary" ng-click="vm.regenerateReport()">生成最新报告<i class="glyphicon glyphicon-refresh"></i></button>-->
+        <!--</div>-->
+        <h3 class="panel-title">今日追踪任务</h3>
+    </div>
+
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">序号</span> </th>
+                    <th jh-sort-by="id"><span>客户</span> </th>
+                    <th jh-sort-by="estimateExecuteDate"><span data-translate="simpleServiceApp.task.estimateExecuteDate">Estimate Execute Date</span> </th>
+                    <th>状态</th>
+                    <th jh-sort-by="description"><span data-translate="simpleServiceApp.task.description">Description</span> </th>
+                    <th><span>执行人</span> </th>
+                    <!--<th></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="customerTrackTask in vm.customerTrackTasks track by customerTrackTask.id">
+                    <td><a ui-sref="task-detail({id:task.id})">{{customerTrackTask.task.id}}</a></td>
+                    <td><a ui-sref="task-detail({id:task.id})">{{customerTrackTask.customer.name}}</a></td>
+                    <td>{{customerTrackTask.task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td><label class="{{customerTrackTask.task.taskStatus.labelCss}}">{{customerTrackTask.task.taskStatus.name}}</label></td>
+                    <td>{{customerTrackTask.task.description}}</td>
+                    <td>{{customerTrackTask.task.assignee.firstName}}</td>
+
+                    <!--<td class="text-right">-->
+                        <!--<div class="btn-group flex-btn-group-container">-->
+                            <!--<button type="submit"-->
+                                    <!--ng-click="vm.closeTask(customerTrackTask)"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="fa fa-window-close"></span>-->
+                                <!--<span>关闭任务</span>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -2,8 +2,10 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerTrackTask;
+import com.pure.service.domain.User;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.CustomerTrackTaskService;
+import com.pure.service.service.UserService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CustomerTrackTaskCriteria;
@@ -44,6 +46,9 @@ public class CustomerTrackTaskResource {
 
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private UserService userService;
 
     public CustomerTrackTaskResource(CustomerTrackTaskService customerTrackTaskService, CustomerTrackTaskQueryService customerTrackTaskQueryService) {
         this.customerTrackTaskService = customerTrackTaskService;
@@ -106,6 +111,23 @@ public class CustomerTrackTaskResource {
         Page<CustomerTrackTask> page = customerTrackTaskQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/customer-track-tasks");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/customer-track-tasks/today")
+    @Timed
+    public ResponseEntity<List<CustomerTrackTask>> getAllCustomerTrackTasksFollowedByCurrentUserToday() {
+
+        User currentUser = userService.getUserWithAuthorities();
+
+        CustomerTrackTaskCriteria criteria = new CustomerTrackTaskCriteria();
+        criteria.setSalesFollowerId(currentUser.getId());
+        criteria.setToday(true);
+
+        log.debug("REST request to get CustomerTrackTasks by criteria: {}", criteria);
+
+        List<CustomerTrackTask> page = customerTrackTaskQueryService.findByCriteria(criteria);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
     /**

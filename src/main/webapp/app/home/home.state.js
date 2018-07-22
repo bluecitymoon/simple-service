@@ -24,6 +24,8 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('home');
+                    $translatePartialLoader.addPart('customerCommunicationSchedule');
+                    $translatePartialLoader.addPart('task');
 
                     return $translate.refresh();
                 }]

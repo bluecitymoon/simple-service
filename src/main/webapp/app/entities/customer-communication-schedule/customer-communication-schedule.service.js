@@ -31,7 +31,8 @@
                 isArray: true
             },
             'sign': { method:'POST', url: 'api/customer-communication-schedules/signin/:id', params: { id : '@id'} },
-            'customersignin': { method:'POST', url: 'api/customer-communication-schedules/customersignin/:id', params: { id : '@id'} }
+            'customersignin': { method:'POST', url: 'api/customer-communication-schedules/customersignin/:id', params: { id : '@id'} },
+            'getSchedulesToday': { url: 'api/customer-communication-schedules/today', method: 'GET', isArray: true}
         });
     }
 })();
