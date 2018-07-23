@@ -111,6 +111,15 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     @Column(name = "last_track_comments")
     private String lastTrackComments;
 
+    @Column(name = "next_track_comments")
+    private String nextTrackComments;
+
+    @Column(name = "next_schedule_date")
+    private Instant nextScheduleDate;
+
+    @Column(name = "next_schedule_comments")
+    private String nextScheduleComments;
+
     @Column(name = "school")
     private String school;
 
@@ -135,6 +144,14 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
+
+    public String getNextTrackComments() {
+        return nextTrackComments;
+    }
+
+    public void setNextTrackComments(String nextTrackComments) {
+        this.nextTrackComments = nextTrackComments;
+    }
 
     public Instant getAssignDate() {
         return assignDate;
@@ -418,7 +435,23 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
         this.nextTrackDate = nextTrackDate;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    public String getNextScheduleComments() {
+        return nextScheduleComments;
+    }
+
+    public void setNextScheduleComments(String nextScheduleComments) {
+        this.nextScheduleComments = nextScheduleComments;
+    }
+
+    public Instant getNextScheduleDate() {
+        return nextScheduleDate;
+    }
+
+    public void setNextScheduleDate(Instant nextScheduleDate) {
+        this.nextScheduleDate = nextScheduleDate;
+    }
+
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

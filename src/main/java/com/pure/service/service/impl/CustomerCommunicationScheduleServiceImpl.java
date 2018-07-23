@@ -14,6 +14,7 @@ import com.pure.service.repository.CustomerScheduleStatusRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.service.CustomerCommunicationScheduleQueryService;
 import com.pure.service.service.CustomerCommunicationScheduleService;
+import com.pure.service.service.CustomerService;
 import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -25,7 +26,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -51,6 +56,9 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     @Autowired
     private CustomerStatusRepository customerStatusRepository;
 
+    @Autowired
+    private CustomerService customerService;
+
     public CustomerCommunicationScheduleServiceImpl(CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository,
                                                     CustomerCommunicationLogRepository customerCommunicationLogRepository,
                                                     CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository,
@@ -70,6 +78,10 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     @Override
     public CustomerCommunicationSchedule save(CustomerCommunicationSchedule customerCommunicationSchedule) {
         log.debug("Request to save CustomerCommunicationSchedule : {}", customerCommunicationSchedule);
+
+        if (customerCommunicationSchedule.getId() == null) {
+            customerService.updateCustomerStatusForNewSchedule(customerCommunicationSchedule);
+        }
         CustomerCommunicationSchedule savedSchedule = customerCommunicationScheduleRepository.saveAndFlush(customerCommunicationSchedule);
 
         CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.schedule.name());
@@ -78,10 +90,18 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
             log.error(CustomerCommunicationLogTypeEnum.schedule.name() + " not exists in the log type configuration.");
         }
 
+
         CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
         if (savedSchedule.getSceduleDate() != null) {
-            customerCommunicationLog.comments("预约了客户在 <b>" + savedSchedule.getSceduleDate().toString() + "</b> 沟通。");
 
+            String scheduleFormateString = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG)
+                .withLocale( Locale.CHINA )
+                .withZone( ZoneId.systemDefault())
+                .format(savedSchedule.getSceduleDate());
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//            String scheduleFormateString = simpleDateFormat.format(savedSchedule.getSceduleDate());
+
+            customerCommunicationLog.comments("预约了客户沟通，时间: " + scheduleFormateString);
         }
 
         customerCommunicationLog.setLogType(newCreateOrderType);
@@ -144,14 +164,16 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
     public CustomerCommunicationSchedule signin(Long id) {
 
         CustomerCommunicationSchedule schedule = findOne(id);
+
+        return signSingleSchedule(schedule);
+    }
+
+    public CustomerCommunicationSchedule signSingleSchedule(CustomerCommunicationSchedule schedule) {
+
         schedule = schedule.actuallMeetDate(Instant.now());
 
-        CustomerCommunicationSchedule customerCommunicationSchedule = save(schedule);
-
-        Customer customer = customerCommunicationSchedule.getCustomer();
-        customer.setVisitDate(Instant.now());
-
-        customerRepository.save(customer);
+        CustomerScheduleStatus signedSuccessStatus = customerScheduleStatusRepository.findByCode("signin_success");
+        schedule.setScheduleStatus(signedSuccessStatus);
 
         CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.signin.name());
 
@@ -160,14 +182,24 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         }
 
         CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
-        customerCommunicationLog.comments("到店访签到成功");
+        customerCommunicationLog.comments("客户到店签到");
 
         customerCommunicationLog.setLogType(newCreateOrderType);
         customerCommunicationLog.customer(schedule.getCustomer());
 
         customerCommunicationLogRepository.save(customerCommunicationLog);
 
-        return customerCommunicationSchedule;
+        CustomerCommunicationSchedule saveSchedule = save(schedule);
+
+        Customer customer = saveSchedule.getCustomer();
+        CustomerStatus successCheckedStatus = customerStatusRepository.findByCode("visited");
+        customer.setStatus(successCheckedStatus);
+
+        customer.setVisitDate(Instant.now());
+
+        customerService.save(customer);
+
+        return saveSchedule;
     }
 
     @Override
@@ -184,9 +216,8 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         List<CustomerCommunicationSchedule> customerCommunicationSchedules = customerCommunicationScheduleQueryService.findByCriteria(customerCommunicationScheduleCriteria);
         for (CustomerCommunicationSchedule customerCommunicationSchedule : customerCommunicationSchedules) {
             if (customerCommunicationSchedule.getActuallMeetDate() == null) {
-                customerCommunicationSchedule.setActuallMeetDate(Instant.now());
 
-                customerCommunicationScheduleRepository.save(customerCommunicationSchedule);
+                signSingleSchedule(customerCommunicationSchedule);
 
                 hasUnCheckedSchedule = true;
             }
@@ -200,21 +231,10 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
             Customer customer = customerRepository.findOne(id);
             schedule.setCustomer(customer);
 
-            schedule.setSceduleDate(Instant.now());
-            schedule.setActuallMeetDate(Instant.now());
             schedule.setComments("客户未预约，系统自动生成的预约记录");
 
-            CustomerScheduleStatus signedSuccessStatus = customerScheduleStatusRepository.findByCode("signin_success");
-            schedule.setScheduleStatus(signedSuccessStatus);
+            signSingleSchedule(schedule);
 
-            customerCommunicationScheduleRepository.save(schedule);
-
-            CustomerStatus successCheckedStatus = customerStatusRepository.findByCode("visited");
-            customer.setStatus(successCheckedStatus);
-
-            customer.setVisitDate(Instant.now());
-
-            customerRepository.save(customer);
         }
         return null;
     }

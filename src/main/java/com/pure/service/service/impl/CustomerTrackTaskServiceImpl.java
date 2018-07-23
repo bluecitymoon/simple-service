@@ -68,6 +68,7 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
             Customer customer = customerTrackTask.getCustomer();
             customer.setTrackStatus(ongoing.getName());
             customer.setNextTrackDate(customerTrackTask.getTask().getEstimateExecuteDate());
+            customer.setNextTrackComments(customerTrackTask.getTask().getDescription());
 
             customerRepository.save(customer);
         }

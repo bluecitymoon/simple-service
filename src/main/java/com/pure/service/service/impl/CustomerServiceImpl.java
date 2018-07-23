@@ -3,6 +3,7 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
@@ -340,5 +341,18 @@ public class CustomerServiceImpl implements CustomerService {
         Overview overview = customerRepository.searchCurrentUserOverview(currentUser.getId(), monthEnding, monthBeginning);
 
         return overview;
+    }
+
+    @Override
+    public void updateCustomerStatusForNewSchedule( CustomerCommunicationSchedule schedule) {
+
+        Customer customer = schedule.getCustomer();
+
+        CustomerStatus scheduled = customerStatusRepository.findByCode("meeting_schedule_made");
+        customer.setStatus(scheduled);
+        customer.setNextScheduleComments(schedule.getComments());
+        customer.setNextScheduleDate(schedule.getSceduleDate());
+
+        save(customer);
     }
 }

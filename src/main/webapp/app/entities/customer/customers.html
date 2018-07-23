@@ -256,8 +256,19 @@
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.name">Name</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.sex">Sex</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contactPhoneNumber"><span
+                            data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>
+                        <span>下次预约备注</span>
+                    </th>
+                    <th>跟踪次数</th>
+                    <th>下次跟踪备注</th>
+                    <th>最近一次跟踪时间</th>
+                    <th ng-if="vm.department == 'market'">最近一次跟踪备注</th>
+                    
+                    <!--<th jh-sort-by="name"><span data-translate="simpleServiceApp.customer.sex">Sex</span> <span-->
+                            <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th></th>-->
                     <!--<th jh-sort-by="status.name"><span data-translate="simpleServiceApp.customer.status">Status</span>-->
                         <!--<span class="glyphicon glyphicon-sort"></span></th>-->
@@ -266,20 +277,16 @@
                     <th jh-sort-by="status.channel"><span
                             data-translate="simpleServiceApp.customer.channel">Channel</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="age"><span data-translate="simpleServiceApp.customer.age">Age</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contactPhoneNumber"><span
-                            data-translate="simpleServiceApp.customer.contactPhoneNumber">Contact Phone Number</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="age"><span data-translate="simpleServiceApp.customer.age">Age</span> <span-->
+                            <!--class="glyphicon glyphicon-sort"></span></th>-->
+
+
                     <th jh-sort-by="salesFollower.id"><span>跟单人</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th>课程顾问</th>
                     <th>来访性质</th>
                     <th>年级</th>
                     <th>录入时间</th>
-                    <th>跟踪次数</th>
-                    <th>最近一次跟踪时间</th>
-                    <th ng-if="vm.department == 'market'">最近一次跟踪备注</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -289,21 +296,25 @@
                     <td class="text-center"><input type="checkbox" ng-model="customer.selected">
                     <td><a ui-sref="customer-detail({id:customer.id})">{{customer.id}}</a></td>
                     <td><a class="{{customer.status.cssStyle}}" ui-sref="customer-detail({id:customer.id})">{{customer.name}}</a></td>
-                    <td>{{customer.sex}}</td>
+                    <td>{{customer.contactPhoneNumber}}</td>
+                    <td>{{customer.nextScheduleComments}}</td>
+                    <td>{{customer.trackCount}}</td>
+                    <td>{{customer.nextTrackComments}}</td>
+
+                    <td>{{customer.lastTrackDate | date :'yyyy-MM-dd hh:mm'}}</td>
+                    <td ng-if="vm.department == 'market'"><span ng-bind-html="customer.lastTrackComments"></span></td>
+                    <!--<td>{{customer.sex}}</td>-->
                     <!--<td><i class="{{customer.status.icon}}"></i></td>-->
                     <!--<td><label class="{{customer.status.cssStyle}}">{{customer.status.name}}</label></td>-->
                     <td>{{customer.newOrderResourceLocation.name}}</td>
                     <td>{{customer.channel.name}}</td>
-                    <td>{{customer.age}}</td>
-                    <td>{{customer.contactPhoneNumber}}</td>
+                    <!--<td>{{customer.age}}</td>-->
                     <td>{{customer.salesFollower.firstName}}</td>
                     <td>{{customer.courseConsultant.firstName}}</td>
                     <td>{{customer.logType.name}}</td>
                     <td>{{customer.classLevel}}</td>
                     <td>{{customer.createdDate | date :'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{customer.trackCount}}</td>
-                    <td>{{customer.lastTrackDate | date :'yyyy-MM-dd hh:mm'}}</td>
-                    <td ng-if="vm.department == 'market'"><span ng-bind-html="customer.lastTrackComments"></span></td>
+
                     <!--<td>-->
                     <!--<a ui-sref="free-class-record-detail({id:customer.newOrder.id})">{{customer.newOrder.id}}</a>-->
                     <!--</td>-->
