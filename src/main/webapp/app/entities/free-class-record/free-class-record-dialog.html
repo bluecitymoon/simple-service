@@ -10,9 +10,9 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <!--<div class="form-group" ng-show="vm.freeClassRecord.id">-->
-            <!--<label for="id" data-translate="global.field.id">ID</label>-->
-            <!--<input type="text" class="form-control" id="id" name="id"-->
-                   <!--ng-model="vm.freeClassRecord.id" readonly/>-->
+        <!--<label for="id" data-translate="global.field.id">ID</label>-->
+        <!--<input type="text" class="form-control" id="id" name="id"-->
+        <!--ng-model="vm.freeClassRecord.id" readonly/>-->
         <!--</div>-->
         <div class="row">
             <div class="col-md-6">
@@ -33,6 +33,26 @@
                     />
                 </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">年龄</label>
+                    <input type="number" class="form-control"
+                           ng-model="vm.freeClassRecord.age"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">生日</label>
+                    <input type="text" placeholder="生日" class="form-control"
+                           ng-focus="vm.openCalendar('birthday')" datetime-picker="{{dateformat}}"
+                           ng-model="vm.freeClassRecord.birthday"
+                           is-open="vm.datePickerOpenStatus.birthday">
+                </div>
+            </div>
+
         </div>
 
         <div class="row">

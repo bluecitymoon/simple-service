@@ -52,6 +52,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "comments")
     private String comments;
 
+    @Column(name = "age")
+    private Integer age;
+
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
@@ -235,7 +238,16 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     public void setNewOrderResourceLocation(NewOrderResourceLocation newOrderResourceLocation) {
         this.newOrderResourceLocation = newOrderResourceLocation;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {

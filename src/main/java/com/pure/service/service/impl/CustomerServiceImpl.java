@@ -185,6 +185,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setNewOrder(newOrder);
             customer.setBirthday(newOrder.getBirthday());
             customer.setNewOrderResourceLocation(newOrder.getNewOrderResourceLocation());
+            customer.setAge(newOrder.getAge());
 
             Customer savedCustomer = save(customer);
 
