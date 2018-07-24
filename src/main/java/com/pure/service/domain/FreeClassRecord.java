@@ -55,6 +55,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "age")
     private Integer age;
 
+    @Column(name = "class_level")
+    private String classLevel;
+
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
@@ -247,6 +250,13 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
         this.age = age;
     }
 
+    public String getClassLevel() {
+        return classLevel;
+    }
+
+    public void setClassLevel(String classLevel) {
+        this.classLevel = classLevel;
+    }
 // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

@@ -12,9 +12,10 @@ import com.pure.service.service.UserService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.CustomerFollowLog;
+import com.pure.service.service.dto.dto.CombinedReport;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
-import com.pure.service.service.dto.request.ReportElement;
+import com.pure.service.service.dto.request.StatusReportElement;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.service.filter.LongFilter;
@@ -165,9 +166,39 @@ public class CustomerResource {
         return customerService.getCurrentUserOverview();
     }
 
+    public void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
+
+        Integer month = customerStatusRequest.getMonth();
+        Integer year = customerStatusRequest.getYear();
+
+        Integer nextMonth = month + 1;
+        Integer nextYear = year;
+        if (nextMonth == 13) {
+            nextMonth = 1;
+
+            nextYear = year + 1;
+        }
+
+        String monthString = "" + month;
+        String nextMonthString = "" + nextMonth;
+        if (month < 10) {
+            monthString = "0" + monthString;
+        }
+
+        if (nextMonth < 10) {
+            nextMonthString = "0" + nextMonthString;
+        }
+
+        String fullDateStart = "" + year+ "-" + monthString + "-01T00:00:01.00Z";
+        String fullDateEnd = "" + nextYear + "-" + nextMonthString + "-01T00:00:01.00Z";
+
+        customerStatusRequest.setStartDate(Instant.parse(fullDateStart));
+        customerStatusRequest.setEndDate(Instant.parse(fullDateEnd));
+    }
+
     @PostMapping("/customers/status/report")
     @Timed
-    public ResponseEntity<List<ReportElement>> getCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
+    public ResponseEntity<CombinedReport> getCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
 //2014-12-03T10:15:30.00Z
         switch (customerStatusRequest.getQueryType()) {
             case "monthly":
@@ -176,32 +207,7 @@ public class CustomerResource {
                     return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
                 }
 
-                Integer month = customerStatusRequest.getMonth();
-                Integer year = customerStatusRequest.getYear();
-
-                Integer nextMonth = month + 1;
-                Integer nextYear = year;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-
-                    nextYear = year + 1;
-                }
-
-                String monthString = "" + month;
-                String nextMonthString = "" + nextMonth;
-                if (month < 10) {
-                    monthString = "0" + monthString;
-                }
-
-                if (nextMonth < 10) {
-                    nextMonthString = "0" + nextMonthString;
-                }
-
-                String fullDateStart = "" + year+ "-" + monthString + "-01T00:00:01.00Z";
-                String fullDateEnd = "" + nextYear + "-" + nextMonthString + "-01T00:00:01.00Z";
-
-                customerStatusRequest.setStartDate(Instant.parse(fullDateStart));
-                customerStatusRequest.setEndDate(Instant.parse(fullDateEnd));
+                preProccessStatusRequest(customerStatusRequest);
 
                 break;
             case "dateRange":
@@ -213,10 +219,39 @@ public class CustomerResource {
             default:
                 break;
         }
-        List<ReportElement> report = customerService.getStatusReport(customerStatusRequest);
+        CombinedReport report = customerService.getStatusReport(customerStatusRequest);
 
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
+
+    @PostMapping("/customers/status/report/location")
+    @Timed
+    public ResponseEntity<List<StatusReportElement>> getLocationCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
+//2014-12-03T10:15:30.00Z
+        switch (customerStatusRequest.getQueryType()) {
+            case "monthly":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getYear()) || StringUtils.isEmpty(customerStatusRequest.getMonth())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+
+                preProccessStatusRequest(customerStatusRequest);
+
+                break;
+            case "dateRange":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getStartDate()) || StringUtils.isEmpty(customerStatusRequest.getEndDate())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+                break;
+            default:
+                break;
+        }
+        List<StatusReportElement> report = customerService.getLocationStatusReport(customerStatusRequest);
+
+        return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
 
     @GetMapping("/customers/search/{keyword}")
     @Timed

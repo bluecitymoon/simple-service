@@ -15,7 +15,7 @@
         <!--ng-model="vm.freeClassRecord.id" readonly/>-->
         <!--</div>-->
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.freeClassRecord.personName"
                            for="field_personName">Person Name</label>
@@ -24,7 +24,7 @@
                     />
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber"
                            for="field_contactPhoneNumber">Contact Phone Number</label>
@@ -33,9 +33,7 @@
                     />
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">年龄</label>
                     <input type="number" class="form-control"
@@ -43,7 +41,10 @@
                     />
                 </div>
             </div>
-            <div class="col-md-6">
+        </div>
+        <div class="row">
+
+            <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">生日</label>
                     <input type="text" placeholder="生日" class="form-control"
@@ -52,7 +53,28 @@
                            is-open="vm.datePickerOpenStatus.birthday">
                 </div>
             </div>
-
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">学校</label>
+                    <input type="text" class="form-control"
+                           ng-model="vm.freeClassRecord.school"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">年级</label>
+                    <ui-select ng-model="vm.freeClassRecord.classLevelObject">
+                        <ui-select-match>
+                            {{$select.selected.value}}
+                        </ui-select-match>
+                        <ui-select-choices
+                                repeat="item in (vm.classLevels | filter: $select.search) track by item.id">
+                            <span ng-bind="item.value"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
         </div>
 
         <div class="row">

@@ -1,6 +1,7 @@
 package com.pure.service.domain;
 
 
+import com.pure.service.service.dto.dto.LocationStatusReportEntity;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
 
@@ -13,7 +14,8 @@ import java.util.Objects;
  * A Customer.
  */
 @NamedNativeQueries({
-    @NamedNativeQuery(name = "Customer.searchCustomerStatusReport", query = "select u.id as userId, u.first_name as userName, count(0) as count, cs.name as statusName, cs.code as statusCode\n" +
+    @NamedNativeQuery(name = "Customer.searchCustomerStatusReport",
+query = "select u.id as userId, u.first_name as userName, count(0) as count, cs.name as statusName, cs.code as statusCode\n" +
         "\t from customer t \n" +
         "\t     cross join customer_status cs on t.status_id = cs.id\n" +
         "\t     cross join jhi_user u on t.sales_follower_id  = u.id\n" +
@@ -21,13 +23,23 @@ import java.util.Objects;
         "\t and exists (select 1 from `jhi_user_authority` a where a.`user_id` = u.id and a.`authority_name` = 'ROLE_COURSE_CONSULTANT') \n" +
         "\t     group by t.status_id, u.id;",
     resultSetMapping = "reportMapping"),
-    @NamedNativeQuery(name = "Customer.searchCurrentUserOverview", query = "select count(0) as untrackedCustomerCount from customer t \n" +
+    @NamedNativeQuery(name = "Customer.searchCurrentUserOverview",
+query = "select count(0) as untrackedCustomerCount from customer t \n" +
         "\tleft join `customer_status` cs on t.`status_id` = cs.id\n" +
         "\t where `sales_follower_id` = :1\n" +
         "\t \tand cs.`code` = 'new_created' \t\n" +
-        "\t \tand  t.assign_date < :2 \n" +
+        "\t \tand t.assign_date < :2 \n" +
         "\t \tand t.assign_date > :3",
-    resultSetMapping = "overviewMapping")
+    resultSetMapping = "overviewMapping"),
+
+    @NamedNativeQuery(name="Customer.searchLocationCustomerStatusReport",
+
+query = "select count(0) as count, l.name as location, l.id as locationId, cs.code as statusCode, cs.name statusName from customer t \n" +
+        "\tcross join new_order_resource_location l on t.new_order_resource_location_id = l.`id`\n" +
+        "\tcross join `customer_status` cs on t.`status_id` = cs.id\n" +
+        "\twhere t.assign_date < :2 and t.assign_date > :1\n" +
+        " group by l.`id`, cs.id ",
+    resultSetMapping = "locationStatusMapping")
 
 })
 
@@ -46,6 +58,15 @@ import java.util.Objects;
                 @ColumnResult(name = "count", type = Integer.class),
                 @ColumnResult(name = "statusName", type = String.class),
                 @ColumnResult(name = "statusCode", type = String.class)
+            })),
+    @SqlResultSetMapping(name = "locationStatusMapping",
+        classes = @ConstructorResult(targetClass = LocationStatusReportEntity.class,
+            columns = {
+                @ColumnResult(name = "count", type = Integer.class),
+                @ColumnResult(name = "location", type = String.class),
+                @ColumnResult(name = "locationId", type = Long.class),
+                @ColumnResult(name = "statusCode", type = String.class),
+                @ColumnResult(name = "statusName", type = String.class)
             }))
 })
 

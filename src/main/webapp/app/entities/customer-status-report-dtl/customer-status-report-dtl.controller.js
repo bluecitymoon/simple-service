@@ -68,11 +68,71 @@
             }
 
             CustomerStatusReportDtl.getStatusReport(vm.searchCondition, onSuccess, onError);
+            CustomerStatusReportDtl.getLocationStatusReport(vm.searchCondition,
+                function (data) {
+                    vm.locationCustomerStatusReportDtls = data;
+                }, onError);
 
             function onSuccess(data, headers) {
-                vm.customerStatusReportDtls = data;
+                vm.customerStatusReportDtls = data.data;
+                $scope.chartdtls = data.chart;
 
-                reloadChart();
+                angular.forEach($scope.chartdtls, function (chart) {
+
+                    chart.lineOption = {
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            },
+                            position:function(p){
+                                return [p[0] + 10, p[1] - 250];
+                            }
+                        },
+                        legend: {
+                            data: []
+                        },
+                        toolbox: {
+                            show: true,
+                            orient: 'vertical',
+                            left: 'right',
+                            top: 'center',
+                            feature: {
+                                // mark: {show: true},
+                                // dataView: {show: true, readOnly: false},
+                                // magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                                // restore: {show: true},
+                                // saveAsImage: {show: true}
+                            }
+                        },
+                        calculable: true,
+                        xAxis: [
+                            {
+                                type: 'category',
+                                axisTick: {show: false},
+                                data: chart.xValues
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value'
+                            }
+                        ],
+                        series: [
+                            {
+                                name: "",
+                                type: 'bar',
+                                barGap: 0,
+                                label: labelOption,
+                                data: chart.yValues
+                            }
+                        ]
+                    };
+                });
+
+                console.log(vm.chartdtls);
+
+               // reloadChart();
             }
             function onError(error) {
                 AlertService.error(error.data.message);

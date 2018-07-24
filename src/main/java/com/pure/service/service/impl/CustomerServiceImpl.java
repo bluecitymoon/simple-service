@@ -25,10 +25,14 @@ import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.TaskStatusEnum;
+import com.pure.service.service.dto.dto.ChartElement;
+import com.pure.service.service.dto.dto.CombinedReport;
+import com.pure.service.service.dto.dto.LocationStatusReportEntity;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.dto.request.ReportElement;
+import com.pure.service.service.dto.request.StatusReportElement;
 import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
@@ -186,12 +190,14 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setBirthday(newOrder.getBirthday());
             customer.setNewOrderResourceLocation(newOrder.getNewOrderResourceLocation());
             customer.setAge(newOrder.getAge());
+            customer.setClassLevel(newOrder.getClassLevel());
+            customer.setSchool(newOrder.getSchool());
 
             Customer savedCustomer = save(customer);
 
             CustomerCommunicationLogType newCreateOrderType = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.new_customer_created.name());
             CustomerCommunicationLog customerCommunicationLog = new CustomerCommunicationLog();
-            customerCommunicationLog.comments("开始跟单");
+            customerCommunicationLog.comments("客户数据录入");
 
             customerCommunicationLog.setLogType(newCreateOrderType);
             customerCommunicationLog.customer(savedCustomer);
@@ -265,11 +271,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<ReportElement> getStatusReport(CustomerStatusRequest customerStatusRequest) {
+    public CombinedReport getStatusReport(CustomerStatusRequest customerStatusRequest) {
 
+        CombinedReport report = new CombinedReport();
         List<ReportEntity> reportEntities = customerRepository.searchCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
 
         Map<Long, ReportElement> userBasedStatusCountMap = new HashMap<>();
+        Map<String, ChartElement> codeBasedStatusCountMap = new HashMap<>();
 
         for (ReportEntity reportEntity : reportEntities) {
             ReportElement reportElement = userBasedStatusCountMap.get(reportEntity.getUserId());
@@ -282,28 +290,66 @@ public class CustomerServiceImpl implements CustomerService {
                 userBasedStatusCountMap.put(reportEntity.getUserId(), reportElement);
             }
 
+            ChartElement chartElement = codeBasedStatusCountMap.get(reportEntity.getStatusCode());
+            if (chartElement == null) {
+
+                chartElement = new ChartElement();
+
+                chartElement.setChartName(reportEntity.getStatusName());
+                chartElement.setChartCode(reportEntity.getStatusCode());
+
+                codeBasedStatusCountMap.put(reportEntity.getStatusCode(), chartElement);
+            }
+
             switch (reportEntity.getStatusCode()) {
 
                 case "new_created":
                     reportElement.setNewCreatedCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
                 case "Too_Young":
                     reportElement.setAgeTooSmallCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
                 case "Bad_Information":
                     reportElement.setErrorInformation(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
                 case "No_Willing":
                     reportElement.setNoWillingCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
                 case "Considering":
                     reportElement.setConsideringCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
                 case "meeting_schedule_made":
                     reportElement.setScheduledCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
                 case "deal":
                     reportElement.setDealedCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
+                    break;
+                case "visited":
+                    reportElement.setVisitedCount(reportEntity.getCount());
+
+                    chartElement.getxValues().add(reportEntity.getUserName());
+                    chartElement.getyValues().add(reportEntity.getCount());
                     break;
 
                 default:
@@ -327,9 +373,71 @@ public class CustomerServiceImpl implements CustomerService {
 
         });
 
-        return elements;
+        report.setData(elements);
+
+        List<ChartElement> charts = new ArrayList<>(codeBasedStatusCountMap.values());
+        report.setChart(charts);
+
+        return report;
     }
 
+
+    @Override
+    public List<StatusReportElement> getLocationStatusReport(CustomerStatusRequest customerStatusRequest) {
+
+        List<LocationStatusReportEntity> entities =
+            customerRepository.searchLocationCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
+
+        Map<Long, StatusReportElement> locationBasedReportMap = new HashMap<>();
+        for (LocationStatusReportEntity entity : entities) {
+
+            StatusReportElement reportElement = locationBasedReportMap.get(entity.getLocationId());
+            if (reportElement == null) {
+                reportElement = new StatusReportElement();
+
+                reportElement.setLocation(entity.getLocation());
+                reportElement.setLocationId(entity.getLocationId());
+
+                locationBasedReportMap.put(entity.getLocationId(), reportElement);
+            }
+
+            switch (entity.getStatusCode()) {
+
+                case "new_created":
+                    reportElement.setNewCreatedCount(entity.getCount());
+                    break;
+                case "Too_Young":
+                    reportElement.setAgeTooSmallCount(entity.getCount());
+                    break;
+                case "Bad_Information":
+                    reportElement.setErrorInformation(entity.getCount());
+                    break;
+                case "No_Willing":
+                    reportElement.setNoWillingCount(entity.getCount());
+                    break;
+                case "Considering":
+                    reportElement.setConsideringCount(entity.getCount());
+                    break;
+                case "meeting_schedule_made":
+                    reportElement.setScheduledCount(entity.getCount());
+                    break;
+                case "deal":
+                    reportElement.setDealedCount(entity.getCount());
+                    break;
+                case "visited":
+                    reportElement.setVisitedCount(entity.getCount());
+                    break;
+
+                default:
+                    break;
+
+            }
+        }
+
+        List<StatusReportElement> elements = new ArrayList<>(locationBasedReportMap.values());
+
+        return elements;
+    }
     @Override
     public Overview getCurrentUserOverview() {
 
@@ -356,4 +464,5 @@ public class CustomerServiceImpl implements CustomerService {
 
         save(customer);
     }
+
 }

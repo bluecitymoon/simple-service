@@ -19,7 +19,11 @@
         vm.classcategories = ClassCategory.query({ page: 0,  size: 1000 });
         vm.users = User.query({ page: 0,  size: 1000 });
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
-
+        vm.classLevels = [
+            {id: 1, value: "成年"},
+            {id: 2, value: "学生"},
+            {id: 3, value: "幼儿"}
+        ];
         vm.searchPersonWithKeyword = function (keyword) {
 
             console.log("searching people with keyword " + keyword);
@@ -35,6 +39,9 @@
 
         function save () {
             vm.isSaving = true;
+
+            vm.freeClassRecord.classLevel = vm.freeClassRecord.classLevelObject.value;
+
             if (vm.freeClassRecord.id !== null) {
                 FreeClassRecord.update(vm.freeClassRecord, onSaveSuccess, onSaveError);
             } else {

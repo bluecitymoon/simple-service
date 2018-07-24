@@ -1,6 +1,7 @@
 package com.pure.service.repository;
 
 import com.pure.service.domain.Customer;
+import com.pure.service.service.dto.dto.LocationStatusReportEntity;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
 import org.springframework.stereotype.Repository;
@@ -21,6 +22,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
 
     @Query(nativeQuery = true)
     List<ReportEntity> searchCustomerStatusReport(Instant startDate, Instant endDate);
+
+    @Query(nativeQuery = true)
+    List<LocationStatusReportEntity> searchLocationCustomerStatusReport(Instant startDate, Instant endDate);
 
     @Query(nativeQuery = true)
     Overview searchCurrentUserOverview(Long userId, Instant endDate, Instant startDate);

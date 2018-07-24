@@ -5,10 +5,10 @@ import java.io.Serializable;
 /**
  *
  */
-public class ReportElement implements Serializable {
+public class StatusReportElement implements Serializable {
 
-    private Long userId;
-    private String userName;
+    private String location;
+    private Long locationId;
     private Integer ageTooSmallCount = 0;
     private Integer errorInformation = 0;
     private Integer noWillingCount = 0;
@@ -18,22 +18,14 @@ public class ReportElement implements Serializable {
     private Integer visitedCount = 0; //已成交数量
     private Integer newCreatedCount = 0;
     private Integer totalCount = 0;
-    private String finishRate = "0";
+    private String valuableRate = "0";
 
-    public Long getUserId() {
-        return userId;
+    public String getLocation() {
+        return location;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Integer getAgeTooSmallCount() {
@@ -100,12 +92,12 @@ public class ReportElement implements Serializable {
         this.totalCount = totalCount;
     }
 
-    public String getFinishRate() {
-        return finishRate;
+    public String getValuableRate() {
+        return valuableRate;
     }
 
-    public void setFinishRate(String finishRate) {
-        this.finishRate = finishRate;
+    public void setValuableRate(String valuableRate) {
+        this.valuableRate = valuableRate;
     }
 
     public Integer getVisitedCount() {
@@ -114,5 +106,13 @@ public class ReportElement implements Serializable {
 
     public void setVisitedCount(Integer visitedCount) {
         this.visitedCount = visitedCount;
+    }
+
+    public Long getLocationId() {
+        return locationId;
+    }
+
+    public void setLocationId(Long locationId) {
+        this.locationId = locationId;
     }
 }

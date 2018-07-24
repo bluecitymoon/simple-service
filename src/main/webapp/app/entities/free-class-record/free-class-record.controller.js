@@ -32,6 +32,8 @@
             {name: "已分配", code: "assigned"},
             {name: "未分配", code: "not_assigned"}
         ];
+
+
         vm.openCalendar = openCalendar;
         vm.clearConditions = function () {
             vm.searchCondition = {};

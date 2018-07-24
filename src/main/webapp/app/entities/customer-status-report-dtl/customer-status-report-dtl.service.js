@@ -11,7 +11,8 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
-            'getStatusReport': { url: 'api/customers/status/report', method: 'POST', isArray: true},
+            'getStatusReport': { url: 'api/customers/status/report', method: 'POST'},
+            'getLocationStatusReport': { url: 'api/customers/status/report/location', method: 'POST', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
