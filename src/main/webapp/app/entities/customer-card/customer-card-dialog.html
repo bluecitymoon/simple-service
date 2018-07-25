@@ -98,12 +98,12 @@
                     <label class="control-label" data-translate="simpleServiceApp.customerCard.promotionAmount"
                            for="field_promotionAmount">Promotion Amount</label>
                     <input type="number" class="form-control" name="promotionAmount" id="field_promotionAmount"
-                           ng-model="vm.customerCard.promotionAmount"
+                           ng-model="vm.customerCard.promotionAmount" readonly
                     />
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="form-group">
+                <div class="form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                     <label class="control-label" data-translate="simpleServiceApp.customerCard.specialPromotionAmount"
                            for="field_specialPromotionAmount">Special Promotion Amount</label>
                     <input type="number" class="form-control" name="specialPromotionAmount" id="field_specialPromotionAmount"

@@ -57,6 +57,7 @@
                 vm.customerCard.totalMoneyAmount = newVal.totalMoneyAmount;
                 vm.customerCard.classCount = newVal.classCount;
                 vm.customerCard.totalMinutes = newVal.totalMinutes;
+                vm.customerCard.promotionAmount = newVal.promotionAmount;
 
                calculateMoney();
 

@@ -36,6 +36,9 @@ public class CustomerCardType implements Serializable {
     @Column(name = "years")
     private Integer years;
 
+    @Column(name = "promotion_amount")
+    private Integer promotionAmount;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -117,6 +120,15 @@ public class CustomerCardType implements Serializable {
     public void setTotalMinutes(Integer totalMinutes) {
         this.totalMinutes = totalMinutes;
     }
+
+    public Integer getPromotionAmount() {
+        return promotionAmount;
+    }
+
+    public void setPromotionAmount(Integer promotionAmount) {
+        this.promotionAmount = promotionAmount;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

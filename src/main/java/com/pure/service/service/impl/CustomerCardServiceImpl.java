@@ -3,8 +3,10 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.Collection;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
+import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.FinanceCategory;
 import com.pure.service.repository.CustomerCardRepository;
+import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.FinanceCategoryRepository;
 import com.pure.service.service.CollectionService;
 import com.pure.service.service.CustomerCardService;
@@ -40,6 +42,9 @@ public class CustomerCardServiceImpl implements CustomerCardService{
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private CustomerStatusRepository customerStatusRepository;
+
     public CustomerCardServiceImpl(CustomerCardRepository customerCardRepository) {
         this.customerCardRepository = customerCardRepository;
     }
@@ -71,6 +76,14 @@ public class CustomerCardServiceImpl implements CustomerCardService{
             collection.setPayerName(customerCard.getCustomer().getName());
 
             collectionService.save(collection);
+
+            CustomerStatus dealed = customerStatusRepository.findByCode("deal");
+
+            Customer customer = customerCard.getCustomer();
+            customer.setStatus(dealed);
+
+            customerService.save(customer);
+
         }
 
         return customerCardRepository.save(customerCard);
