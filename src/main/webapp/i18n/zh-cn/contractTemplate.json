@@ -1,0 +1,32 @@
+{
+    "simpleServiceApp": {
+        "contractTemplate" : {
+            "home": {
+                "title": "合同模板",
+                "createLabel": "录入合同模板",
+                "createOrEditLabel": "录入/修改合同模板"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "合同模板详情"
+            },
+            "totalMoneyAmount": "总金额",
+            "classCount": "总课时",
+            "totalMinutes": "总分钟数",
+            "totalHours": "总小时数",
+            "years": "年数",
+            "promotionAmount": "优惠金额",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改日期",
+            "customerCardType": "卡类型",
+            "contractNature": "合同性质"
+        }
+    }
+}

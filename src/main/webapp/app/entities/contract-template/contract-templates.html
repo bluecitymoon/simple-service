@@ -1,0 +1,92 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.contractTemplate.home.title">Contract Templates</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.contractTemplate.home.title">Contract Templates</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="contract-template.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.contractTemplate.home.createLabel">
+                        Create new Contract Template
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalMoneyAmount"><span data-translate="simpleServiceApp.contractTemplate.totalMoneyAmount">Total Money Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classCount"><span data-translate="simpleServiceApp.contractTemplate.classCount">Class Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalMinutes"><span data-translate="simpleServiceApp.contractTemplate.totalMinutes">Total Minutes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalHours"><span data-translate="simpleServiceApp.contractTemplate.totalHours">Total Hours</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="years"><span data-translate="simpleServiceApp.contractTemplate.years">Years</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="promotionAmount"><span data-translate="simpleServiceApp.contractTemplate.promotionAmount">Promotion Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.contractTemplate.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.contractTemplate.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.contractTemplate.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.contractTemplate.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerCardType.name"><span data-translate="simpleServiceApp.contractTemplate.customerCardType">Customer Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractNature.name"><span data-translate="simpleServiceApp.contractTemplate.contractNature">Contract Nature</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="contractTemplate in vm.contractTemplates track by contractTemplate.id">
+                    <td><a ui-sref="contract-template-detail({id:contractTemplate.id})">{{contractTemplate.id}}</a></td>
+                    <td>{{contractTemplate.totalMoneyAmount}}</td>
+                    <td>{{contractTemplate.classCount}}</td>
+                    <td>{{contractTemplate.totalMinutes}}</td>
+                    <td>{{contractTemplate.totalHours}}</td>
+                    <td>{{contractTemplate.years}}</td>
+                    <td>{{contractTemplate.promotionAmount}}</td>
+                    <td>{{contractTemplate.createdBy}}</td>
+                    <td>{{contractTemplate.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{contractTemplate.lastModifiedBy}}</td>
+                    <td>{{contractTemplate.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        <a ui-sref="customer-card-type-detail({id:contractTemplate.customerCardType.id})">{{contractTemplate.customerCardType.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contract-nature-detail({id:contractTemplate.contractNature.id})">{{contractTemplate.contractNature.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="contract-template-detail({id:contractTemplate.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="contract-template.edit({id:contractTemplate.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="contract-template.delete({id:contractTemplate.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A ContractNature.
+ * A ContractNature. 合同性质
  */
 @Entity
 @Table(name = "contract_nature")

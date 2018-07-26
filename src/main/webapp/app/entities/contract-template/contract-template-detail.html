@@ -1,0 +1,70 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.contractTemplatehome.title">Contract Templates</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.contractTemplate.totalMoneyAmount">Total Money Amount</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.totalMoneyAmount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.classCount">Class Count</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.classCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.totalMinutes">Total Minutes</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.totalMinutes}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.totalHours">Total Hours</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.totalHours}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.years">Years</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.years}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.promotionAmount">Promotion Amount</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.promotionAmount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.contractTemplate.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.customerCardType">Customer Card Type</span></dt>
+        <dd>
+            <a ui-sref="customer-card-type-detail({id:vm.contractTemplate.customerCardType.id})">{{vm.contractTemplate.customerCardType.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contractTemplate.contractNature">Contract Nature</span></dt>
+        <dd>
+            <a ui-sref="contract-nature-detail({id:vm.contractTemplate.contractNature.id})">{{vm.contractTemplate.contractNature.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="contract-template-detail.edit({id:vm.contractTemplate.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

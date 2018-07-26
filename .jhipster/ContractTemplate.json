@@ -1,0 +1,65 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customerCardType",
+            "otherEntityName": "customerCardType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "contractNature",
+            "otherEntityName": "contractNature",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "totalMoneyAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "classCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalMinutes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "totalHours",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "years",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "promotionAmount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180726124304",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "contract_template",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

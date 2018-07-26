@@ -1,0 +1,110 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myContractTemplateLabel"
+            data-translate="simpleServiceApp.contractTemplate.home.createOrEditLabel">Create or edit a Contract
+            Template</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.contractTemplate.customerCardType" for="field_customerCardType">Customer
+                        Card Type</label>
+                    <select class="form-control" id="field_customerCardType" name="customerCardType"
+                            ng-model="vm.contractTemplate.customerCardType"
+                            ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.contractTemplate.contractNature" for="field_contractNature">Contract
+                        Nature</label>
+                    <select class="form-control" id="field_contractNature" name="contractNature"
+                            ng-model="vm.contractTemplate.contractNature"
+                            ng-options="contractNature as contractNature.name for contractNature in vm.contractnatures track by contractNature.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.totalMoneyAmount"
+                           for="field_totalMoneyAmount">Total Money Amount</label>
+                    <input type="number" class="form-control" name="totalMoneyAmount" id="field_totalMoneyAmount"
+                           ng-model="vm.contractTemplate.totalMoneyAmount"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.promotionAmount"
+                           for="field_promotionAmount">Promotion Amount</label>
+                    <input type="number" class="form-control" name="promotionAmount" id="field_promotionAmount"
+                           ng-model="vm.contractTemplate.promotionAmount"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.classCount"
+                           for="field_classCount">Class Count</label>
+                    <input type="number" class="form-control" name="classCount" id="field_classCount"
+                           ng-model="vm.contractTemplate.classCount"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.totalHours"
+                           for="field_totalHours">Total Hours</label>
+                    <input type="number" class="form-control" name="totalHours" id="field_totalHours"
+                           ng-model="vm.contractTemplate.totalHours"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.years" for="field_years">Years</label>
+                    <input type="number" class="form-control" name="years" id="field_years"
+                           ng-model="vm.contractTemplate.years"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6"></div>
+        </div>
+        <!--<div class="row">-->
+            <!--<div class="col-md-6"></div>-->
+            <!--<div class="col-md-6"></div>-->
+        <!--</div>-->
+
+
+       <!---->
+       <!---->
+        <!---->
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
