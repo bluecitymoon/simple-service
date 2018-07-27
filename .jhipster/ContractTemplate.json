@@ -54,6 +54,10 @@
         {
             "fieldName": "lastModifiedDate",
             "fieldType": "Instant"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180726124304",

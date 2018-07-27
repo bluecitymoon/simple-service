@@ -18,15 +18,16 @@
             "totalMoneyAmount": "总金额",
             "classCount": "总课时",
             "totalMinutes": "总分钟数",
-            "totalHours": "总小时数",
-            "years": "年数",
+            "totalHours": "总时长（小时）",
+            "years": "有效期(年)",
             "promotionAmount": "优惠金额",
             "createdBy": "创建人",
             "createdDate": "创建时间",
             "lastModifiedBy": "最近修改人",
             "lastModifiedDate": "最近修改日期",
             "customerCardType": "卡类型",
-            "contractNature": "合同性质"
+            "contractNature": "合同性质",
+            "name": "名称"
         }
     }
 }

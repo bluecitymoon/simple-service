@@ -40,7 +40,9 @@
         function save () {
             vm.isSaving = true;
 
-            vm.freeClassRecord.classLevel = vm.freeClassRecord.classLevelObject.value;
+            if (vm.freeClassRecord.classLevelObject) {
+                vm.freeClassRecord.classLevel = vm.freeClassRecord.classLevelObject.value;
+            }
 
             if (vm.freeClassRecord.id !== null) {
                 FreeClassRecord.update(vm.freeClassRecord, onSaveSuccess, onSaveError);

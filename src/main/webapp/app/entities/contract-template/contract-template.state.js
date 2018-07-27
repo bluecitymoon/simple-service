@@ -134,6 +134,7 @@
                                 createdDate: null,
                                 lastModifiedBy: null,
                                 lastModifiedDate: null,
+                                name: null,
                                 id: null
                             };
                         }

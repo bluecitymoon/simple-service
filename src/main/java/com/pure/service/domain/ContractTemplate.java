@@ -41,6 +41,9 @@ public class ContractTemplate extends AbstractAuditingEntity {
     @Column(name = "promotion_amount")
     private Integer promotionAmount;
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne
     private CustomerCardType customerCardType;
 
@@ -160,6 +163,19 @@ public class ContractTemplate extends AbstractAuditingEntity {
     public void setContractNature(ContractNature contractNature) {
         this.contractNature = contractNature;
     }
+    public String getName() {
+        return name;
+    }
+
+    public ContractTemplate name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -196,6 +212,7 @@ public class ContractTemplate extends AbstractAuditingEntity {
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
+            ", name='" + getName() + "'" +
             "}";
     }
 }

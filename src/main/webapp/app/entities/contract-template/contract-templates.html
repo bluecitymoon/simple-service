@@ -24,9 +24,12 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span data-translate="simpleServiceApp.contractTemplate.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerCardType.name"><span data-translate="simpleServiceApp.contractTemplate.customerCardType">Customer Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractNature.name"><span data-translate="simpleServiceApp.contractTemplate.contractNature">Contract Nature</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="totalMoneyAmount"><span data-translate="simpleServiceApp.contractTemplate.totalMoneyAmount">Total Money Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="classCount"><span data-translate="simpleServiceApp.contractTemplate.classCount">Class Count</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalMinutes"><span data-translate="simpleServiceApp.contractTemplate.totalMinutes">Total Minutes</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="totalMinutes"><span data-translate="simpleServiceApp.contractTemplate.totalMinutes">Total Minutes</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="totalHours"><span data-translate="simpleServiceApp.contractTemplate.totalHours">Total Hours</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="years"><span data-translate="simpleServiceApp.contractTemplate.years">Years</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="promotionAmount"><span data-translate="simpleServiceApp.contractTemplate.promotionAmount">Promotion Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -34,17 +37,22 @@
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.contractTemplate.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.contractTemplate.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.contractTemplate.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="customerCardType.name"><span data-translate="simpleServiceApp.contractTemplate.customerCardType">Customer Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contractNature.name"><span data-translate="simpleServiceApp.contractTemplate.contractNature">Contract Nature</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="contractTemplate in vm.contractTemplates track by contractTemplate.id">
                     <td><a ui-sref="contract-template-detail({id:contractTemplate.id})">{{contractTemplate.id}}</a></td>
+                    <td>{{contractTemplate.name}}</td>
+                    <td>
+                        <a ui-sref="customer-card-type-detail({id:contractTemplate.customerCardType.id})">{{contractTemplate.customerCardType.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="contract-nature-detail({id:contractTemplate.contractNature.id})">{{contractTemplate.contractNature.name}}</a>
+                    </td>
                     <td>{{contractTemplate.totalMoneyAmount}}</td>
                     <td>{{contractTemplate.classCount}}</td>
-                    <td>{{contractTemplate.totalMinutes}}</td>
+                    <!--<td>{{contractTemplate.totalMinutes}}</td>-->
                     <td>{{contractTemplate.totalHours}}</td>
                     <td>{{contractTemplate.years}}</td>
                     <td>{{contractTemplate.promotionAmount}}</td>
@@ -52,12 +60,7 @@
                     <td>{{contractTemplate.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{contractTemplate.lastModifiedBy}}</td>
                     <td>{{contractTemplate.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>
-                        <a ui-sref="customer-card-type-detail({id:contractTemplate.customerCardType.id})">{{contractTemplate.customerCardType.name}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="contract-nature-detail({id:contractTemplate.contractNature.id})">{{contractTemplate.contractNature.name}}</a>
-                    </td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

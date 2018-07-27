@@ -64,6 +64,8 @@ public class CollectionResource {
             .body(result);
     }
 
+
+
     /**
      * PUT  /collections : Updates an existing collection.
      *

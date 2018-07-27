@@ -102,6 +102,9 @@ public class ContractTemplateQueryService extends QueryService<ContractTemplate>
             if (criteria.getLastModifiedDate() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getLastModifiedDate(), ContractTemplate_.lastModifiedDate));
             }
+            if (criteria.getName() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getName(), ContractTemplate_.name));
+            }
             if (criteria.getCustomerCardTypeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerCardTypeId(), ContractTemplate_.customerCardType, CustomerCardType_.id));
             }
