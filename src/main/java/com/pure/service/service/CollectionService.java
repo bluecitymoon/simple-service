@@ -39,4 +39,6 @@ public interface CollectionService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    void confirmCustomerCollection(Collection collection);
 }

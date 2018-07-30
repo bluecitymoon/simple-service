@@ -33,7 +33,8 @@ public class BatchCustomerUtil {
             String line = customerLines[i];
             List<String> elements = Splitter.on(",").splitToList(line);
 
-            if (!CollectionUtils.isEmpty(elements) && elements.size() > 7) {
+            //&& elements.size() > 7
+            if (!CollectionUtils.isEmpty(elements) ) {
 
                 String location = elements.get(1);
                 if (StringUtils.isEmpty(location)) {

@@ -211,7 +211,8 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
         int importCount = 0, existedCount = 0;
         for (FreeClassRecord freeClassRecord : freeClassRecords) {
 
-            FreeClassRecord existedNewOrder = freeClassRecordRepository.findByPersonNameAndContactPhoneNumber(freeClassRecord.getPersonName(), freeClassRecord.getContactPhoneNumber());
+            FreeClassRecord existedNewOrder = freeClassRecordRepository.findByContactPhoneNumber(freeClassRecord.getContactPhoneNumber());
+//            FreeClassRecord existedNewOrder = freeClassRecordRepository.findByPersonNameAndContactPhoneNumber(freeClassRecord.getPersonName(), freeClassRecord.getContactPhoneNumber());
             if (existedNewOrder == null) {
                 save(freeClassRecord);
 

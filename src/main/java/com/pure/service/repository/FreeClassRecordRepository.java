@@ -21,4 +21,6 @@ public interface FreeClassRecordRepository extends JpaRepository<FreeClassRecord
 
     FreeClassRecord findByPersonNameAndContactPhoneNumber(String personName, String contactPhoneNumber);
 
+    FreeClassRecord findByContactPhoneNumber(String contactPhoneNumber);
+
 }

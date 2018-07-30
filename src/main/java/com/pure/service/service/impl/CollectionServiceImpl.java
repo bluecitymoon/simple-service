@@ -74,4 +74,9 @@ public class CollectionServiceImpl implements CollectionService{
         log.debug("Request to delete Collection : {}", id);
         collectionRepository.delete(id);
     }
+
+    @Override
+    public void confirmCustomerCollection(Collection collection) {
+
+    }
 }
