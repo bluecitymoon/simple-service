@@ -1,0 +1,108 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "contract"
+        },
+        {
+            "relationshipName": "course",
+            "otherEntityName": "course",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "contractStatus",
+            "otherEntityName": "contractStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "product",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "customerCard",
+            "otherEntityName": "customerCard",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "number"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "contractNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "serialNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "signDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "startDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "totalMoneyAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "moneyShouldCollected",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "moneyCollected",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "promotionAmount",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "totalHours",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "hoursTaken",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180730122821",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "contract",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

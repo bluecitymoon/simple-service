@@ -1,0 +1,102 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.contracthome.title">Contracts</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.contract.contractNumber">Contract Number</span></dt>
+        <dd>
+            <span>{{vm.contract.contractNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.serialNumber">Serial Number</span></dt>
+        <dd>
+            <span>{{vm.contract.serialNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.signDate">Sign Date</span></dt>
+        <dd>
+            <span>{{vm.contract.signDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.contract.startDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.contract.endDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.totalMoneyAmount">Total Money Amount</span></dt>
+        <dd>
+            <span>{{vm.contract.totalMoneyAmount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.moneyShouldCollected">Money Should Collected</span></dt>
+        <dd>
+            <span>{{vm.contract.moneyShouldCollected}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.moneyCollected">Money Collected</span></dt>
+        <dd>
+            <span>{{vm.contract.moneyCollected}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.promotionAmount">Promotion Amount</span></dt>
+        <dd>
+            <span>{{vm.contract.promotionAmount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.totalHours">Total Hours</span></dt>
+        <dd>
+            <span>{{vm.contract.totalHours}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.hoursTaken">Hours Taken</span></dt>
+        <dd>
+            <span>{{vm.contract.hoursTaken}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.contract.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.contract.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.contract.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.contract.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.contract.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.course">Course</span></dt>
+        <dd>
+            <a ui-sref="course-detail({id:vm.contract.course.id})">{{vm.contract.course.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.contractStatus">Contract Status</span></dt>
+        <dd>
+            <a ui-sref="contract-status-detail({id:vm.contract.contractStatus.id})">{{vm.contract.contractStatus.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.product">Product</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.contract.product.id})">{{vm.contract.product.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.contract.customerCard">Customer Card</span></dt>
+        <dd>
+            <a ui-sref="customer-card-detail({id:vm.contract.customerCard.id})">{{vm.contract.customerCard.number}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="contract-detail.edit({id:vm.contract.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

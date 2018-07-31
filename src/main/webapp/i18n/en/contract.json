@@ -1,0 +1,41 @@
+{
+    "simpleServiceApp": {
+        "contract" : {
+            "home": {
+                "title": "合同列表",
+                "createLabel": "新建合同",
+                "createOrEditLabel": "管理合同"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "合同详情"
+            },
+            "contractNumber": "合同号",
+            "serialNumber": "流水号",
+            "signDate": "签约日期",
+            "startDate": "开始日期",
+            "endDate": "结束日期",
+            "totalMoneyAmount": "课程费用",
+            "moneyShouldCollected": "应收金额",
+            "moneyCollected": "已收金额",
+            "promotionAmount": "优惠金额",
+            "totalHours": "总课小时数",
+            "hoursTaken": "已上小时数",
+            "comments": "备注",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "student": "学员",
+            "course": "课程",
+            "contractStatus": "合同状态",
+            "product": "班级",
+            "customerCard": "卡号"
+        }
+    }
+}

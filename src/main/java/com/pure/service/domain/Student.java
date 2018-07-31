@@ -46,6 +46,9 @@ public class Student implements Serializable {
     @ManyToOne
     private Customer customer;
 
+    @OneToOne
+    private Contract contract;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -171,6 +174,15 @@ public class Student implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

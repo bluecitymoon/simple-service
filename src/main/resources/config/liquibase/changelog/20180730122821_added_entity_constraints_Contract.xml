@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Contract.
+    -->
+    <changeSet id="20180730122821-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="contract"
+                                 constraintName="fk_contract_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="contract_status_id"
+                                 baseTableName="contract"
+                                 constraintName="fk_contract_contract_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="contract"
+                                 constraintName="fk_contract_product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="customer_card_id"
+                                 baseTableName="contract"
+                                 constraintName="fk_contract_customer_card_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="customer_card"/>
+
+    </changeSet>
+</databaseChangeLog>
