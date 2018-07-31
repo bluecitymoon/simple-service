@@ -51,6 +51,7 @@
                 "customerStatusReportDtl": "Customer Status Report Dtl",
                 "contractTemplate": "Contract Template",
                 "contract": "Contract",
+                "collectionStatus": "Collection Status",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

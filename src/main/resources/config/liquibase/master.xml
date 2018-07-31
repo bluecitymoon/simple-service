@@ -49,6 +49,7 @@
     <include file="config/liquibase/changelog/20180719092532_added_entity_CustomerStatusReportDtl.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180726124304_added_entity_ContractTemplate.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180730122821_added_entity_Contract.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180731024855_added_entity_CollectionStatus.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
