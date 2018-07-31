@@ -44,6 +44,9 @@ public class Collection extends AbstractAuditingEntity {
     @ManyToOne
     private PaymentType paymentType;
 
+    @ManyToOne
+    private CollectionStatus status;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -143,6 +146,19 @@ public class Collection extends AbstractAuditingEntity {
 
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public CollectionStatus getStatus() {
+        return status;
+    }
+
+    public Collection status(CollectionStatus collectionStatus) {
+        this.status = collectionStatus;
+        return this;
+    }
+
+    public void setStatus(CollectionStatus collectionStatus) {
+        this.status = collectionStatus;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

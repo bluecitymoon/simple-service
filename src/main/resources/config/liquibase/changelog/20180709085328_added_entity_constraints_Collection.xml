@@ -20,5 +20,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="payment_type"/>
 
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="collection"
+                                 constraintName="fk_collection_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="collection_status"/>
+
     </changeSet>
 </databaseChangeLog>

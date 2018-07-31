@@ -12,6 +12,12 @@
             "otherEntityName": "paymentType",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "status",
+            "otherEntityName": "collectionStatus",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [

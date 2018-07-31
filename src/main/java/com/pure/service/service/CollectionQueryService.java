@@ -105,6 +105,9 @@ public class CollectionQueryService extends QueryService<Collection> {
             if (criteria.getPaymentTypeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getPaymentTypeId(), Collection_.paymentType, PaymentType_.id));
             }
+            if (criteria.getStatusId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getStatusId(), Collection_.status, CollectionStatus_.id));
+            }
         }
         return specification;
     }

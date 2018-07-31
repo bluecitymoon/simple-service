@@ -25,7 +25,8 @@
             "lastModifiedBy": "最近修改人",
             "lastModifiedDate": "最近修改时间",
             "financeCategory": "项目类别",
-            "paymentType": "付款方式"
+            "paymentType": "付款方式",
+            "status": "状态"
         }
     }
 }

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CollectionDialogController', CollectionDialogController);
 
-    CollectionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Collection', 'FinanceCategory', 'PaymentType'];
+    CollectionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Collection', 'FinanceCategory', 'PaymentType', 'CollectionStatus'];
 
-    function CollectionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Collection, FinanceCategory, PaymentType) {
+    function CollectionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Collection, FinanceCategory, PaymentType, CollectionStatus) {
         var vm = this;
 
         vm.collection = entity;
@@ -17,6 +17,7 @@
         vm.save = save;
         vm.financecategories = FinanceCategory.query();
         vm.paymenttypes = PaymentType.query();
+        vm.collectionstatuses = CollectionStatus.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

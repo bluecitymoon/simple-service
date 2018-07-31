@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CollectionDetailController', CollectionDetailController);
 
-    CollectionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Collection', 'FinanceCategory', 'PaymentType'];
+    CollectionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Collection', 'FinanceCategory', 'PaymentType', 'CollectionStatus'];
 
-    function CollectionDetailController($scope, $rootScope, $stateParams, previousState, entity, Collection, FinanceCategory, PaymentType) {
+    function CollectionDetailController($scope, $rootScope, $stateParams, previousState, entity, Collection, FinanceCategory, PaymentType, CollectionStatus) {
         var vm = this;
 
         vm.collection = entity;

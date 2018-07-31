@@ -50,6 +50,8 @@ public class CollectionCriteria implements Serializable {
 
     private LongFilter paymentTypeId;
 
+    private LongFilter statusId;
+
     public CollectionCriteria() {
     }
 
@@ -149,6 +151,14 @@ public class CollectionCriteria implements Serializable {
         this.paymentTypeId = paymentTypeId;
     }
 
+    public LongFilter getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(LongFilter statusId) {
+        this.statusId = statusId;
+    }
+
     @Override
     public String toString() {
         return "CollectionCriteria{" +
@@ -164,6 +174,7 @@ public class CollectionCriteria implements Serializable {
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
                 (financeCategoryId != null ? "financeCategoryId=" + financeCategoryId + ", " : "") +
                 (paymentTypeId != null ? "paymentTypeId=" + paymentTypeId + ", " : "") +
+                (statusId != null ? "statusId=" + statusId + ", " : "") +
             "}";
     }
 

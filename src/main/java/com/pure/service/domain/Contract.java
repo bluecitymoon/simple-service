@@ -62,6 +62,8 @@ public class Contract extends AbstractAuditingEntity {
     @Column(name = "comments")
     private String comments;
 
+    private Boolean active;
+
     @OneToOne(mappedBy = "contract")
     @JsonIgnore
     private Student student;
@@ -307,6 +309,15 @@ public class Contract extends AbstractAuditingEntity {
     public void setCustomerCard(CustomerCard customerCard) {
         this.customerCard = customerCard;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
