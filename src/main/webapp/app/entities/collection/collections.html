@@ -26,6 +26,9 @@
                     <th jh-sort-by="financeCategory.name"><span
                         data-translate="simpleServiceApp.collection.financeCategory">Finance Category</span> <span
                         class="glyphicon glyphicon-sort"></span></th>
+
+                    <th jh-sort-by="status.name"><span>状态</span> <span
+                        class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="moneyShouldCollected"><span
                         data-translate="simpleServiceApp.collection.moneyShouldCollected">Money Should Collected</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -60,6 +63,7 @@
                     <td>
                         <a ui-sref="finance-category-detail({id:collection.financeCategory.id})">{{collection.financeCategory.name}}</a>
                     </td>
+                    <td>{{collection.status.name}}</td>
                     <td>{{collection.moneyShouldCollected}}</td>
                     <td>{{collection.moneyCollected}}</td>
                     <td>{{collection.balance}}</td>

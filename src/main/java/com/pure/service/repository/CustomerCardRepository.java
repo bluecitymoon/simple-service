@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the CustomerCard entity.
@@ -16,4 +18,6 @@ public interface CustomerCardRepository extends JpaRepository<CustomerCard, Long
 
     @Query(value = "select count(0) as customercardcount from customer_card where customer_id = ?1", nativeQuery = true)
     Integer getCustomerCardCount(Integer customerId);
+
+    List<CustomerCard> findBySerialNumber(String serialNumber);
 }

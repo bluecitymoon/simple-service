@@ -3,6 +3,7 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Collection;
 import com.pure.service.service.CollectionService;
+import com.pure.service.service.ContractService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.CollectionCriteria;
@@ -11,6 +12,7 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -38,6 +40,9 @@ public class CollectionResource {
     private final CollectionService collectionService;
 
     private final CollectionQueryService collectionQueryService;
+
+    @Autowired
+    private ContractService contractService;
 
     public CollectionResource(CollectionService collectionService, CollectionQueryService collectionQueryService) {
         this.collectionService = collectionService;
@@ -71,8 +76,15 @@ public class CollectionResource {
         if (collection.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new collection cannot already have an ID")).body(null);
         }
+//
+//        if (contractService.contractAlreadyGenerated(collection.getSequenceNumber())) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "contractalreadygenerate", "合同已生成")).body(null);
+//        }
 
         Collection result = collectionService.save(collection);
+
+        collectionService.confirmCustomerCollection(collection);
+
         return ResponseEntity.created(new URI("/api/collections/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

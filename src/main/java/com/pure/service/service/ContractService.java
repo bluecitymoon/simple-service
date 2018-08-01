@@ -46,4 +46,6 @@ public interface ContractService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    boolean contractAlreadyGenerated(String serialNumber);
 }

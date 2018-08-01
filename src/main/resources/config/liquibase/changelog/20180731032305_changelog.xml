@@ -1,0 +1,32 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+   
+    <changeSet author="Jerry (generated)" id="1533007399676-2">
+        <addColumn tableName="contract">
+            <column name="active" type="bit"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533007399676-3">
+        <addColumn tableName="student">
+            <column name="contract_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533007399676-4">
+        <addColumn tableName="collection">
+            <column name="status_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533007399676-5">
+        <addForeignKeyConstraint baseColumnNames="contract_id" baseTableName="student" constraintName="FKnaw5m7u59lec1rbls7xqcflh4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contract"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533007399676-6">
+        <addForeignKeyConstraint baseColumnNames="status_id" baseTableName="collection" constraintName="FKqt5p1rfptm8cfv7wjuu8krhle" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="collection_status"/>
+    </changeSet>
+    
+    <changeSet author="Jerry (generated)" id="1533007399676-8">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="contract"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533007399676-9">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="contract"/>
+    </changeSet>
+</databaseChangeLog>

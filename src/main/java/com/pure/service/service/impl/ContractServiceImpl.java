@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,7 +60,7 @@ public class ContractServiceImpl implements ContractService{
      *  get all the contracts where Student is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Contract> findAllWhereStudentIsNull() {
         log.debug("Request to get all contracts where Student is null");
         return StreamSupport
@@ -90,5 +91,13 @@ public class ContractServiceImpl implements ContractService{
     public void delete(Long id) {
         log.debug("Request to delete Contract : {}", id);
         contractRepository.delete(id);
+    }
+
+    @Override
+    public boolean contractAlreadyGenerated(String serialNumber) {
+
+        List<Contract> existedContracts = contractRepository.findBySerialNumber(serialNumber);
+
+        return !CollectionUtils.isEmpty(existedContracts);
     }
 }

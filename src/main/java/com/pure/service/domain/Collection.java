@@ -24,13 +24,13 @@ public class Collection extends AbstractAuditingEntity {
     private Long id;
 
     @Column(name = "money_should_collected")
-    private Float moneyShouldCollected;
+    private Float moneyShouldCollected = 0.0f;
 
     @Column(name = "money_collected")
-    private Float moneyCollected;
+    private Float moneyCollected = 0.0f;
 
     @Column(name = "balance")
-    private Float balance;
+    private Float balance = 0.0f;
 
     @Column(name = "sequence_number")
     private String sequenceNumber;

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractDialogController', ContractDialogController);
 
-    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard'];
+    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer'];
 
-    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard) {
+    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer) {
         var vm = this;
 
         vm.contract = entity;
@@ -20,6 +20,16 @@
         vm.contractstatuses = ContractStatus.query();
         vm.products = Product.query();
         vm.customercards = CustomerCard.query();
+
+        vm.customers = [];
+        vm.searchPersonWithKeyword = function (keyword) {
+
+            if (!keyword) return;
+
+            Customer.queryByKeyword({keyword: keyword, sort: 'id,desc', department: 'operation', size: 50}, function (response) {
+                vm.customers = response;
+            })
+        };
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CollectionStatusRepository extends JpaRepository<CollectionStatus, Long>, JpaSpecificationExecutor<CollectionStatus> {
 
+    CollectionStatus findByCode(String name);
 }

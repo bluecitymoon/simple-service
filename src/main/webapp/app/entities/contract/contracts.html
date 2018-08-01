@@ -38,8 +38,8 @@
                     <th jh-sort-by="comments"><span data-translate="simpleServiceApp.contract.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.contract.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.contract.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.contract.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.contract.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.contract.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.contract.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="course.name"><span data-translate="simpleServiceApp.contract.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contractStatus.name"><span data-translate="simpleServiceApp.contract.contractStatus">Contract Status</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="product.name"><span data-translate="simpleServiceApp.contract.product">Product</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -64,19 +64,19 @@
                     <td>{{contract.comments}}</td>
                     <td>{{contract.createdBy}}</td>
                     <td>{{contract.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{contract.lastModifiedBy}}</td>
-                    <td>{{contract.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <!--<td>{{contract.lastModifiedBy}}</td>-->
+                    <!--<td>{{contract.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
                     <td>
-                        <a ui-sref="course-detail({id:contract.course.id})">{{contract.course.name}}</a>
+                        {{contract.course.name}}
                     </td>
                     <td>
-                        <a ui-sref="contract-status-detail({id:contract.contractStatus.id})">{{contract.contractStatus.name}}</a>
+                        {{contract.contractStatus.name}}
                     </td>
                     <td>
-                        <a ui-sref="product-detail({id:contract.product.id})">{{contract.product.name}}</a>
+                        {{contract.product.name}}
                     </td>
                     <td>
-                        <a ui-sref="customer-card-detail({id:contract.customerCard.id})">{{contract.customerCard.number}}</a>
+                        {{contract.customerCard.number}}
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
