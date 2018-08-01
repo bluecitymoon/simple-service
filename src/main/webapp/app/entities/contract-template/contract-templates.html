@@ -45,10 +45,10 @@
                     <td><a ui-sref="contract-template-detail({id:contractTemplate.id})">{{contractTemplate.id}}</a></td>
                     <td>{{contractTemplate.name}}</td>
                     <td>
-                        <a ui-sref="customer-card-type-detail({id:contractTemplate.customerCardType.id})">{{contractTemplate.customerCardType.name}}</a>
+                        {{contractTemplate.contractPackage.name}}
                     </td>
                     <td>
-                        <a ui-sref="contract-nature-detail({id:contractTemplate.contractNature.id})">{{contractTemplate.contractNature.name}}</a>
+                        {{contractTemplate.contractNature.name}}
                     </td>
                     <td>{{contractTemplate.totalMoneyAmount}}</td>
                     <td>{{contractTemplate.classCount}}</td>

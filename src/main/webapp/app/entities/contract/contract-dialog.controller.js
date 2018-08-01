@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractDialogController', ContractDialogController);
 
-    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService'];
+    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService', 'DateUtils'];
 
-    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService) {
+    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService, DateUtils) {
         var vm = this;
 
         vm.contract = entity;
@@ -54,6 +54,18 @@
             if (newVal) {
                 //angular.copy(newVal, vm.contract);
                 console.log(newVal);
+                vm.contract.classCount = newVal.classCount;
+                vm.contract.course = newVal.course;
+                vm.contract.endDate = DateUtils.convertDateTimeFromServer(newVal.endDate);
+                vm.contract.moneyCollected = newVal.moneyCollected;
+                vm.contract.moneyShouldCollected = newVal.moneyShouldCollected;
+                vm.contract.promotionAmount = newVal.promotionAmount;
+                vm.contract.serialNumber = newVal.serialNumber;
+                vm.contract.signDate = DateUtils.convertDateTimeFromServer(newVal.signDate);
+                vm.contract.specialPromotionAmount = newVal.specialPromotionAmount;
+                vm.contract.startDate = DateUtils.convertDateTimeFromServer(newVal.startDate);
+                vm.contract.totalHours = newVal.totalMinutes;
+                vm.contract.totalMoneyAmount = newVal.totalMoneyAmount;
             }
         });
 
@@ -84,6 +96,16 @@
             vm.isSaving = false;
         }
 
+        generateContractNumber();
+
+        function generateContractNumber() {
+
+            CustomerCard.getSequenceNumber({}, function (data) {
+                vm.contract.contractNumber  = data.number;
+            }, function (error) {
+                AlertService.error('生成流水号失败 ' + error);
+            });
+        }
         vm.datePickerOpenStatus.signDate = false;
         vm.datePickerOpenStatus.startDate = false;
         vm.datePickerOpenStatus.endDate = false;

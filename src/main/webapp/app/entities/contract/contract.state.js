@@ -151,6 +151,49 @@
                 });
             }]
         })
+            .state('contract.new-packaged-contracts', {
+                parent: 'contract',
+                url: '/new-packaged-contracts',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/contract/contract-dialog.html',
+                        controller: 'ContractDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    contractNumber: null,
+                                    serialNumber: null,
+                                    signDate: null,
+                                    startDate: null,
+                                    endDate: null,
+                                    totalMoneyAmount: null,
+                                    moneyShouldCollected: null,
+                                    moneyCollected: null,
+                                    promotionAmount: null,
+                                    totalHours: null,
+                                    hoursTaken: null,
+                                    comments: null,
+                                    createdBy: null,
+                                    createdDate: null,
+                                    lastModifiedBy: null,
+                                    lastModifiedDate: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('contract', null, { reload: 'contract' });
+                    }, function() {
+                        $state.go('contract');
+                    });
+                }]
+            })
         .state('contract.edit', {
             parent: 'contract',
             url: '/{id}/edit',

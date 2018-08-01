@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractTemplateDialogController', ContractTemplateDialogController);
 
-    ContractTemplateDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ContractTemplate', 'CustomerCardType', 'ContractNature'];
+    ContractTemplateDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ContractTemplate', 'CustomerCardType', 'ContractNature', 'ContractPackage'];
 
-    function ContractTemplateDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ContractTemplate, CustomerCardType, ContractNature) {
+    function ContractTemplateDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ContractTemplate, CustomerCardType, ContractNature, ContractPackage) {
         var vm = this;
 
         vm.contractTemplate = entity;
@@ -15,7 +15,8 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
-        vm.customercardtypes = CustomerCardType.query();
+        // vm.customercardtypes = CustomerCardType.query();
+        vm.contractpackages = ContractPackage.query(); //TODO
         vm.contractnatures = ContractNature.query();
 
         $timeout(function (){

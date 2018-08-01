@@ -21,11 +21,10 @@
             <div class="col-md-4">
 
                 <div class="form-group">
-                    <label data-translate="simpleServiceApp.contractTemplate.customerCardType" for="field_customerCardType">Customer
-                        Card Type</label>
+                    <label>套餐包</label>
                     <select class="form-control" id="field_customerCardType" name="customerCardType"
-                            ng-model="vm.contractTemplate.customerCardType"
-                            ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">
+                            ng-model="vm.contractTemplate.contractPackage"
+                            ng-options="contractPackage as contractPackage.name for contractPackage in vm.contractpackages track by contractPackage.id">
                         <option value=""></option>
                     </select>
                 </div>

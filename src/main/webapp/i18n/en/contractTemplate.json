@@ -25,7 +25,7 @@
             "createdDate": "创建时间",
             "lastModifiedBy": "最近修改人",
             "lastModifiedDate": "最近修改日期",
-            "customerCardType": "卡类型",
+            "customerCardType": "套餐",
             "contractNature": "合同性质",
             "name": "名称"
         }

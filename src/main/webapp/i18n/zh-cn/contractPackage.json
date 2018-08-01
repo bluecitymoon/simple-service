@@ -1,25 +1,25 @@
 {
     "simpleServiceApp": {
-        "contractPackage" : {
+        "contractPackage": {
             "home": {
-                "title": "Contract Packages",
-                "createLabel": "Create a new Contract Package",
-                "createOrEditLabel": "Create or edit a Contract Package"
+                "title": "套餐列表",
+                "createLabel": "新建套餐",
+                "createOrEditLabel": "管理套餐"
             },
-            "created": "A new Contract Package is created with identifier {{ param }}",
-            "updated": "A Contract Package is updated with identifier {{ param }}",
-            "deleted": "A Contract Package is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete Contract Package {{ id }}?"
+                "question": "你确定要删除这条数据?"
             },
             "detail": {
-                "title": "Contract Package"
+                "title": "套餐详情"
             },
-            "name": "Name",
-            "code": "Code",
-            "comments": "Comments",
-            "contractTemplate": "Contract Template",
-            "customerCardType": "Customer Card Type"
+            "name": "名称",
+            "code": "代码",
+            "comments": "备注",
+            "contractTemplate": "合同模板",
+            "customerCardType": "卡类型"
         }
     }
 }
