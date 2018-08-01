@@ -135,6 +135,9 @@ public class ContractQueryService extends QueryService<Contract> {
             if (criteria.getCustomerCardId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerCardId(), Contract_.customerCard, CustomerCard_.id));
             }
+            if (criteria.getCustomerId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerId(), Contract_.customer, Customer_.id));
+            }
         }
         return specification;
     }

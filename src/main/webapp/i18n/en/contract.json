@@ -35,7 +35,8 @@
             "course": "课程",
             "contractStatus": "合同状态",
             "product": "班级",
-            "customerCard": "卡号"
+            "customerCard": "卡号",
+            "customer": "客户"
         }
     }
 }

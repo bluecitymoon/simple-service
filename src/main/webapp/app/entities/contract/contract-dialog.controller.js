@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractDialogController', ContractDialogController);
 
-    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer'];
+    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService'];
 
-    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer) {
+    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService) {
         var vm = this;
 
         vm.contract = entity;
@@ -19,7 +19,7 @@
         vm.courses = Course.query();
         vm.contractstatuses = ContractStatus.query();
         vm.products = Product.query();
-        vm.customercards = CustomerCard.query();
+        vm.customercards = [];
 
         vm.customers = [];
         vm.searchPersonWithKeyword = function (keyword) {
@@ -30,6 +30,32 @@
                 vm.customers = response;
             })
         };
+
+        $scope.$watch("vm.contract.customer", function (newVal, oldVal) {
+
+            if (newVal) {
+                CustomerCard.getCardsByCustomerId({id: newVal.id}, function (cards) {
+
+                    if (!cards || cards.length == 0) {
+                        AlertService.error("该客户没有成卡，无法签约合同！")
+                    }
+
+                    vm.customercards = cards;
+
+                    if (vm.customercards.length == 1) {
+                        vm.contract.customerCard = cards[0];
+                    }
+                });
+            }
+        });
+
+        $scope.$watch("vm.contract.customerCard", function (newVal, oldVal) {
+
+            if (newVal) {
+                //angular.copy(newVal, vm.contract);
+                console.log(newVal);
+            }
+        });
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

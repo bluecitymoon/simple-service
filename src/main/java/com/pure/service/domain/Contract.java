@@ -80,6 +80,9 @@ public class Contract extends AbstractAuditingEntity {
     @ManyToOne
     private CustomerCard customerCard;
 
+    @ManyToOne
+    private Customer customer;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -308,6 +311,19 @@ public class Contract extends AbstractAuditingEntity {
 
     public void setCustomerCard(CustomerCard customerCard) {
         this.customerCard = customerCard;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public Contract customer(Customer customer) {
+        this.customer = customer;
+        return this;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public Boolean getActive() {

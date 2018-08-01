@@ -9,10 +9,13 @@ import com.pure.service.repository.CustomerCardRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.FinanceCategoryRepository;
 import com.pure.service.service.CollectionService;
+import com.pure.service.service.CustomerCardQueryService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.dto.CardNumberRequest;
+import com.pure.service.service.dto.CustomerCardCriteria;
 import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +24,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * Service Implementation for managing CustomerCard.
  */
 @Service
 @Transactional
-public class CustomerCardServiceImpl implements CustomerCardService{
+public class CustomerCardServiceImpl implements CustomerCardService {
 
     private final Logger log = LoggerFactory.getLogger(CustomerCardServiceImpl.class);
 
@@ -44,6 +49,9 @@ public class CustomerCardServiceImpl implements CustomerCardService{
 
     @Autowired
     private CustomerStatusRepository customerStatusRepository;
+
+    @Autowired
+    private CustomerCardQueryService customerCardQueryService;
 
     public CustomerCardServiceImpl(CustomerCardRepository customerCardRepository) {
         this.customerCardRepository = customerCardRepository;
@@ -90,10 +98,10 @@ public class CustomerCardServiceImpl implements CustomerCardService{
     }
 
     /**
-     *  Get all the customerCards.
+     * Get all the customerCards.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -103,10 +111,10 @@ public class CustomerCardServiceImpl implements CustomerCardService{
     }
 
     /**
-     *  Get one customerCard by id.
+     * Get one customerCard by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -116,9 +124,9 @@ public class CustomerCardServiceImpl implements CustomerCardService{
     }
 
     /**
-     *  Delete the  customerCard by id.
+     * Delete the  customerCard by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -143,5 +151,17 @@ public class CustomerCardServiceImpl implements CustomerCardService{
 
         return freshNumber + lastSequenceNumber;
 
+    }
+
+    @Override
+    public List<CustomerCard> getCardsByCustomerId(Long id) {
+
+        CustomerCardCriteria customerCardCriteria = new CustomerCardCriteria();
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(id);
+        customerCardCriteria.setCustomerId(longFilter);
+
+        return customerCardQueryService.findByCriteria(customerCardCriteria);
     }
 }

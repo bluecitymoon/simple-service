@@ -11,6 +11,7 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'getCardsByCustomerId': { method: 'GET', isArray: true, url: 'api/customer-cards/customer/:id'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

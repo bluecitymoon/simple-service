@@ -47,8 +47,8 @@ public class ContractTemplateCriteria implements Serializable {
     private InstantFilter lastModifiedDate;
 
     private StringFilter name;
-
-    private LongFilter customerCardTypeId;
+//
+//    private LongFilter customerCardTypeId;
 
     private LongFilter contractNatureId;
 
@@ -150,14 +150,14 @@ public class ContractTemplateCriteria implements Serializable {
     public void setName(StringFilter name) {
         this.name = name;
     }
-
-    public LongFilter getCustomerCardTypeId() {
-        return customerCardTypeId;
-    }
-
-    public void setCustomerCardTypeId(LongFilter customerCardTypeId) {
-        this.customerCardTypeId = customerCardTypeId;
-    }
+//
+//    public LongFilter getCustomerCardTypeId() {
+//        return customerCardTypeId;
+//    }
+//
+//    public void setCustomerCardTypeId(LongFilter customerCardTypeId) {
+//        this.customerCardTypeId = customerCardTypeId;
+//    }
 
     public LongFilter getContractNatureId() {
         return contractNatureId;
@@ -182,7 +182,7 @@ public class ContractTemplateCriteria implements Serializable {
                 (lastModifiedBy != null ? "lastModifiedBy=" + lastModifiedBy + ", " : "") +
                 (lastModifiedDate != null ? "lastModifiedDate=" + lastModifiedDate + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
-                (customerCardTypeId != null ? "customerCardTypeId=" + customerCardTypeId + ", " : "") +
+//                (customerCardTypeId != null ? "customerCardTypeId=" + customerCardTypeId + ", " : "") +
                 (contractNatureId != null ? "contractNatureId=" + contractNatureId + ", " : "") +
             "}";
     }

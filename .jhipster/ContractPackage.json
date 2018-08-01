@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "contractTemplate",
+            "otherEntityName": "contractTemplate",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "contractPackage"
+        },
+        {
+            "relationshipName": "customerCardType",
+            "otherEntityName": "customerCardType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180801062216",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "contract_package",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

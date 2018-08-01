@@ -52,6 +52,7 @@
                 "contractTemplate": "Contract Template",
                 "contract": "Contract",
                 "collectionStatus": "Collection Status",
+                "contractPackage": "Contract Package",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

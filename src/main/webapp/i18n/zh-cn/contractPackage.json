@@ -1,0 +1,25 @@
+{
+    "simpleServiceApp": {
+        "contractPackage" : {
+            "home": {
+                "title": "Contract Packages",
+                "createLabel": "Create a new Contract Package",
+                "createOrEditLabel": "Create or edit a Contract Package"
+            },
+            "created": "A new Contract Package is created with identifier {{ param }}",
+            "updated": "A Contract Package is updated with identifier {{ param }}",
+            "deleted": "A Contract Package is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Contract Package {{ id }}?"
+            },
+            "detail": {
+                "title": "Contract Package"
+            },
+            "name": "Name",
+            "code": "Code",
+            "comments": "Comments",
+            "contractTemplate": "Contract Template",
+            "customerCardType": "Customer Card Type"
+        }
+    }
+}

@@ -1,8 +1,12 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.ContractNature_;
+import com.pure.service.domain.ContractTemplate;
+import com.pure.service.domain.ContractTemplate_;
+import com.pure.service.repository.ContractTemplateRepository;
+import com.pure.service.service.dto.ContractTemplateCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +15,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.ContractTemplate;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.ContractTemplateRepository;
-import com.pure.service.service.dto.ContractTemplateCriteria;
+import java.util.List;
 
 
 /**
@@ -105,9 +104,7 @@ public class ContractTemplateQueryService extends QueryService<ContractTemplate>
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), ContractTemplate_.name));
             }
-            if (criteria.getCustomerCardTypeId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerCardTypeId(), ContractTemplate_.customerCardType, CustomerCardType_.id));
-            }
+
             if (criteria.getContractNatureId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getContractNatureId(), ContractTemplate_.contractNature, ContractNature_.id));
             }

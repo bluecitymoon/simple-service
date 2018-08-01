@@ -70,6 +70,8 @@ public class ContractCriteria implements Serializable {
 
     private LongFilter customerCardId;
 
+    private LongFilter customerId;
+
     public ContractCriteria() {
     }
 
@@ -249,6 +251,14 @@ public class ContractCriteria implements Serializable {
         this.customerCardId = customerCardId;
     }
 
+    public LongFilter getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(LongFilter customerId) {
+        this.customerId = customerId;
+    }
+
     @Override
     public String toString() {
         return "ContractCriteria{" +
@@ -274,6 +284,7 @@ public class ContractCriteria implements Serializable {
                 (contractStatusId != null ? "contractStatusId=" + contractStatusId + ", " : "") +
                 (productId != null ? "productId=" + productId + ", " : "") +
                 (customerCardId != null ? "customerCardId=" + customerCardId + ", " : "") +
+                (customerId != null ? "customerId=" + customerId + ", " : "") +
             "}";
     }
 

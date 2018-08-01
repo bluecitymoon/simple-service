@@ -115,6 +115,17 @@ public class CustomerCardResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/customer-cards/customer/{id}")
+    @Timed
+    public ResponseEntity<List<CustomerCard>> getCardsByCustomerId(@PathVariable Long id) {
+        log.debug("REST request to get CustomerCards by customer id: {}", id);
+
+
+        List<CustomerCard> page = customerCardService.getCardsByCustomerId(id);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
     /**
      * GET  /customer-cards/:id : get the "id" customerCard.
      *

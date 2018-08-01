@@ -45,7 +45,7 @@ public class ContractTemplate extends AbstractAuditingEntity {
     private String name;
 
     @ManyToOne
-    private CustomerCardType customerCardType;
+    private ContractPackage contractPackage;
 
     @ManyToOne
     private ContractNature contractNature;
@@ -138,17 +138,12 @@ public class ContractTemplate extends AbstractAuditingEntity {
     }
 
 
-    public CustomerCardType getCustomerCardType() {
-        return customerCardType;
+    public ContractPackage getContractPackage() {
+        return contractPackage;
     }
 
-    public ContractTemplate customerCardType(CustomerCardType customerCardType) {
-        this.customerCardType = customerCardType;
-        return this;
-    }
-
-    public void setCustomerCardType(CustomerCardType customerCardType) {
-        this.customerCardType = customerCardType;
+    public void setContractPackage(ContractPackage contractPackage) {
+        this.contractPackage = contractPackage;
     }
 
     public ContractNature getContractNature() {

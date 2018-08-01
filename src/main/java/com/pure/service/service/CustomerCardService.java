@@ -5,6 +5,8 @@ import com.pure.service.service.dto.CardNumberRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Service Interface for managing CustomerCard.
  */
@@ -42,4 +44,6 @@ public interface CustomerCardService {
     void delete(Long id);
 
     String generateCardNumber(CardNumberRequest cardNumberRequest);
+
+    List<CustomerCard> getCardsByCustomerId(Long id);
 }

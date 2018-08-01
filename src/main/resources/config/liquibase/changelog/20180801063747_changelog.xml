@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1533105479827-2">
+        <addColumn tableName="contract_template">
+            <column name="contract_package_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533105479827-3">
+        <addForeignKeyConstraint baseColumnNames="contract_package_id" baseTableName="contract_template" constraintName="FKc5q6aofexyq3agawr6gbd5h05" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="contract_package"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533105479827-4">
+        <addForeignKeyConstraint baseColumnNames="customer_card_type_id" baseTableName="contract_package" constraintName="FKhk7jybfoi4b5qjnh3g5h0av3n" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="customer_card_type"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1533105479827-5">
+        <dropForeignKeyConstraint baseTableName="contract_template" constraintName="fk_contract_template_customer_card_type_id"/>
+    </changeSet>
+
+    <changeSet author="Jerry (generated)" id="1533105479827-7">
+        <dropColumn columnName="customer_card_type_id" tableName="contract_template"/>
+    </changeSet>
+</databaseChangeLog>

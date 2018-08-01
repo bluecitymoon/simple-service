@@ -2,9 +2,6 @@ package com.pure.service.service.impl;
 
 import com.pure.service.domain.Collection;
 import com.pure.service.domain.CollectionStatus;
-import com.pure.service.domain.Contract;
-import com.pure.service.domain.ContractTemplate;
-import com.pure.service.domain.CustomerCard;
 import com.pure.service.repository.CollectionRepository;
 import com.pure.service.repository.CollectionStatusRepository;
 import com.pure.service.repository.ContractRepository;
@@ -15,16 +12,11 @@ import com.pure.service.service.ContractService;
 import com.pure.service.service.dto.enumurations.CollectionStatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -70,8 +62,8 @@ public class CollectionServiceImpl implements CollectionService {
 
         CollectionStatus status = null;
 
-        Float moneyAmount = collection.getMoneyShouldCollected();
-        Float moneyCollection = collection.getMoneyCollected();
+        Float moneyAmount = collection.getMoneyShouldCollected() == null? 0.0f: collection.getMoneyShouldCollected();
+        Float moneyCollection = collection.getMoneyCollected() == null? 0.0f: collection.getMoneyCollected();
         Float balance = moneyAmount - moneyCollection;
 
         if (moneyAmount == balance) {
@@ -126,33 +118,33 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public void confirmCustomerCollection(Collection collection) {
-
-        //确实收款后生成合同
-        String sequenceNumber = collection.getSequenceNumber();
-
-        if (contractService.contractAlreadyGenerated(sequenceNumber)) {
-
-            log.info("合同已生成，不会再次在确认收款的的时候生成新的合同，流水号 {}", sequenceNumber );
-            return;
-        }
-
-        List<CustomerCard> cards = customerCardRepository.findBySerialNumber(sequenceNumber);
-        if (CollectionUtils.isEmpty(cards)) {
-
-            log.info("该客户没有生成卡，确认收款时不自动生成合同，流水号 {}", sequenceNumber);
-            return;
-        }
-
-        CustomerCard latestCard = cards.get(cards.size() - 1) ;
-        List<ContractTemplate> contractTemplates = contractTemplateRepository.findByCustomerCardType_Id(latestCard.getId());
-
-        List<Contract> newContracts = new ArrayList<>();
-        for (ContractTemplate contractTemplate : contractTemplates) {
-            Contract contract = new Contract();
-
-            BeanUtils.copyProperties(contractTemplate, contract);
-
-            contract.setActive(true);
-        }
+//
+//        //确实收款后生成合同
+//        String sequenceNumber = collection.getSequenceNumber();
+//
+//        if (contractService.contractAlreadyGenerated(sequenceNumber)) {
+//
+//            log.info("合同已生成，不会再次在确认收款的的时候生成新的合同，流水号 {}", sequenceNumber );
+//            return;
+//        }
+//
+//        List<CustomerCard> cards = customerCardRepository.findBySerialNumber(sequenceNumber);
+//        if (CollectionUtils.isEmpty(cards)) {
+//
+//            log.info("该客户没有生成卡，确认收款时不自动生成合同，流水号 {}", sequenceNumber);
+//            return;
+//        }
+//
+//        CustomerCard latestCard = cards.get(cards.size() - 1) ;
+//        List<ContractTemplate> contractTemplates = contractTemplateRepository.findByCustomerCardType_Id(latestCard.getId());
+//
+//        List<Contract> newContracts = new ArrayList<>();
+//        for (ContractTemplate contractTemplate : contractTemplates) {
+//            Contract contract = new Contract();
+//
+//            BeanUtils.copyProperties(contractTemplate, contract);
+//
+//            contract.setActive(true);
+//        }
     }
 }
