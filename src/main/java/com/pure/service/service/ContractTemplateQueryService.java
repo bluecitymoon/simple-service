@@ -2,6 +2,7 @@ package com.pure.service.service;
 
 
 import com.pure.service.domain.ContractNature_;
+import com.pure.service.domain.ContractPackage_;
 import com.pure.service.domain.ContractTemplate;
 import com.pure.service.domain.ContractTemplate_;
 import com.pure.service.repository.ContractTemplateRepository;
@@ -107,6 +108,9 @@ public class ContractTemplateQueryService extends QueryService<ContractTemplate>
 
             if (criteria.getContractNatureId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getContractNatureId(), ContractTemplate_.contractNature, ContractNature_.id));
+            }
+            if (criteria.getContractPackageId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getContractPackageId(), ContractTemplate_.contractPackage, ContractPackage_.id));
             }
         }
         return specification;

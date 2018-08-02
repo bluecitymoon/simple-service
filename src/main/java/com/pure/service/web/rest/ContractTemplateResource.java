@@ -7,6 +7,7 @@ import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.ContractTemplateCriteria;
 import com.pure.service.service.ContractTemplateQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -101,6 +102,24 @@ public class ContractTemplateResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contract-templates");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    @GetMapping("/contract-templates/contract-package/{id}")
+    @Timed
+    public ResponseEntity<List<ContractTemplate>> getContractTemplatesByPackageId(@PathVariable Long id) {
+
+        log.debug("REST request to get ContractTemplates by package id: {}", id);
+        ContractTemplateCriteria contractTemplateCriteria = new ContractTemplateCriteria();
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(id);
+
+        contractTemplateCriteria.setContractPackageId(longFilter);
+
+        List<ContractTemplate> page = contractTemplateQueryService.findByCriteria(contractTemplateCriteria);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
 
     /**
      * GET  /contract-templates/:id : get the "id" contractTemplate.

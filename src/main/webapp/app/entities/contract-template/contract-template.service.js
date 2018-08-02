@@ -11,6 +11,7 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'getContractTemplatesByPackageId': { method: 'GET', isArray: true, url: 'api/contract-templates/contract-package/:id'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

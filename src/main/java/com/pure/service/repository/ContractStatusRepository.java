@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ContractStatusRepository extends JpaRepository<ContractStatus, Long>, JpaSpecificationExecutor<ContractStatus> {
 
+    ContractStatus findByCode(String code);
 }

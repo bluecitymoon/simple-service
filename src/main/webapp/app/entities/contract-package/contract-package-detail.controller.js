@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractPackageDetailController', ContractPackageDetailController);
 
-    ContractPackageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'ContractPackage', 'ContractTemplate', 'CustomerCardType'];
+    ContractPackageDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'ContractPackage', 'ContractTemplate', 'CustomerCardType', 'AlertService'];
 
-    function ContractPackageDetailController($scope, $rootScope, $stateParams, previousState, entity, ContractPackage, ContractTemplate, CustomerCardType) {
+    function ContractPackageDetailController($scope, $rootScope, $stateParams, previousState, entity, ContractPackage, ContractTemplate, CustomerCardType, AlertService) {
         var vm = this;
 
         vm.contractPackage = entity;
@@ -16,13 +16,10 @@
         loadAllTemplates();
 
         function loadAllTemplates () {
-            ContractTemplate.query({
-                page: 0,
-                size: 100
-            }, onSuccess, onError);
+            ContractTemplate.getContractTemplatesByPackageId({id: vm.contractPackage.id}
+            , onSuccess, onError);
 
-            function onSuccess(data, headers) {
-
+            function onSuccess(data) {
                 vm.contractTemplates = data;
             }
             function onError(error) {

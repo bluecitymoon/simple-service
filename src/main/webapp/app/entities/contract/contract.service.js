@@ -25,7 +25,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'createPackageContract': {
+                url: 'api/contracts/package',
+                method: 'POST',
+                isArray: true
+            }
         });
     }
 })();

@@ -52,6 +52,8 @@ public class ContractTemplateCriteria implements Serializable {
 
     private LongFilter contractNatureId;
 
+    private LongFilter contractPackageId;
+
     public ContractTemplateCriteria() {
     }
 
@@ -158,6 +160,14 @@ public class ContractTemplateCriteria implements Serializable {
 //    public void setCustomerCardTypeId(LongFilter customerCardTypeId) {
 //        this.customerCardTypeId = customerCardTypeId;
 //    }
+
+    public LongFilter getContractPackageId() {
+        return contractPackageId;
+    }
+
+    public void setContractPackageId(LongFilter contractPackageId) {
+        this.contractPackageId = contractPackageId;
+    }
 
     public LongFilter getContractNatureId() {
         return contractNatureId;

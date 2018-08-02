@@ -32,6 +32,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.id"><span>客户</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contractNumber"><span data-translate="simpleServiceApp.contract.contractNumber">Contract Number</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.contract.serialNumber">Serial Number</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="signDate"><span data-translate="simpleServiceApp.contract.signDate">Sign Date</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -58,6 +59,7 @@
             <tbody>
                 <tr ng-repeat="contract in vm.contracts track by contract.id">
                     <td><a ui-sref="contract-detail({id:contract.id})">{{contract.id}}</a></td>
+                    <td><a ui-sref="customer-detail({id:contract.customer.id})">{{contract.customer.name}}</a></td>
                     <td>{{contract.contractNumber}}</td>
                     <td>{{contract.serialNumber}}</td>
                     <td>{{contract.signDate | date:'yyyy-MM-dd hh:mm'}}</td>

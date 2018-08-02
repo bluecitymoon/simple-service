@@ -1,6 +1,8 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.Contract;
+import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.exception.TemplateNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -48,4 +50,8 @@ public interface ContractService {
     void delete(Long id);
 
     boolean contractAlreadyGenerated(String serialNumber);
+
+    List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException;
+
+    String generateContractNumber();
 }

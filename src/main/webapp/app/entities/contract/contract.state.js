@@ -159,8 +159,8 @@
                 },
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        templateUrl: 'app/entities/contract/contract-dialog.html',
-                        controller: 'ContractDialogController',
+                        templateUrl: 'app/entities/contract/contract-dialog-package.html',
+                        controller: 'ContractDialogPackageController',
                         controllerAs: 'vm',
                         backdrop: 'static',
                         size: 'lg',
