@@ -1,62 +1,196 @@
 <div class="page-header">
     <h1 class="page-title" data-translate="simpleServiceApp.contract.home.title">Contracts</h1>
 </div>
+
+<div class="panel panel-primary panel-bordered-dark">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">查询客户列表</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">客户姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.customerName" placeholder="客户姓名"
+                               class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">联系电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.customerContactPhoneNumber" placeholder="联系电话"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">流水号</label>
+                    <div class="col-sm-9">
+
+                        <input type="text" ng-model="vm.searchCondition.serialNumber" placeholder="流水号"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">班级</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="field_product" name="product" ng-model="vm.searchCondition.product"
+                                ng-options="product as product.name for product in vm.products track by product.id">
+                            <option value=""></option>
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">合同号</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.contractNumber" placeholder="合同号"
+                               class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">合同状态</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="field_contractStatus" name="contractStatus"
+                                ng-model="vm.searchCondition.contractStatus"
+                                ng-options="contractStatus as contractStatus.name for contractStatus in vm.contractstatuses track by contractStatus.id">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">课程</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="field_course" name="course" ng-model="vm.searchCondition.course"
+                                ng-options="course as course.name for course in vm.courses track by course.id">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <button class="btn btn-primary btn-block" type="button"
+                                ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                </div>
+                <div class="col-md-3 form-group">
+                </div>
+                <div class="col-md-3 form-group">
+                </div>
+                <div class="col-md-3 form-group">
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
 <jhi-alert></jhi-alert>
 <div class="panel">
     <div class="panel-body">
 
-    <!--<h2 data-translate="simpleServiceApp.contract.home.title">Contracts</h2>-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="contract.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span>
+        <!--<h2 data-translate="simpleServiceApp.contract.home.title">Contracts</h2>-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="contract.new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span>
                         创建常规合同
                     </span>
-                </button>
+                    </button>
 
-                <button class="btn btn-primary" ui-sref="contract.new-packaged-contracts">
-                    <span class="glyphicon glyphicon-adjust"></span>
-                    <span>
+                    <button class="btn btn-primary" ui-sref="contract.new-packaged-contracts">
+                        <span class="glyphicon glyphicon-adjust"></span>
+                        <span>
                         创建套餐合同
                     </span>
-                </button>
+                    </button>
 
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
+        <br/>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="customer.id"><span>客户</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contractNumber"><span data-translate="simpleServiceApp.contract.contractNumber">Contract Number</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.contract.serialNumber">Serial Number</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="signDate"><span data-translate="simpleServiceApp.contract.signDate">Sign Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="startDate"><span data-translate="simpleServiceApp.contract.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.contract.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalMoneyAmount"><span data-translate="simpleServiceApp.contract.totalMoneyAmount">Total Money Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="moneyShouldCollected"><span data-translate="simpleServiceApp.contract.moneyShouldCollected">Money Should Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.contract.moneyCollected">Money Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="promotionAmount"><span data-translate="simpleServiceApp.contract.promotionAmount">Promotion Amount</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="totalHours"><span data-translate="simpleServiceApp.contract.totalHours">Total Hours</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="hoursTaken"><span data-translate="simpleServiceApp.contract.hoursTaken">Hours Taken</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.contract.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.contract.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.contract.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractNumber"><span data-translate="simpleServiceApp.contract.contractNumber">Contract Number</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.contract.serialNumber">Serial Number</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="signDate"><span data-translate="simpleServiceApp.contract.signDate">Sign Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span
+                            data-translate="simpleServiceApp.contract.startDate">Start Date</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.contract.endDate">End Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalMoneyAmount"><span data-translate="simpleServiceApp.contract.totalMoneyAmount">Total Money Amount</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyShouldCollected"><span
+                            data-translate="simpleServiceApp.contract.moneyShouldCollected">Money Should Collected</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.contract.moneyCollected">Money Collected</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="promotionAmount"><span data-translate="simpleServiceApp.contract.promotionAmount">Promotion Amount</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalHours"><span
+                            data-translate="simpleServiceApp.contract.totalHours">Total Hours</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hoursTaken"><span
+                            data-translate="simpleServiceApp.contract.hoursTaken">Hours Taken</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.contract.comments">Comments</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span
+                            data-translate="simpleServiceApp.contract.createdBy">Created By</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.contract.createdDate">Created Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
                     <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.contract.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.contract.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
-                    <th jh-sort-by="course.name"><span data-translate="simpleServiceApp.contract.course">Course</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="contractStatus.name"><span data-translate="simpleServiceApp.contract.contractStatus">Contract Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="product.name"><span data-translate="simpleServiceApp.contract.product">Product</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="customerCard.number"><span data-translate="simpleServiceApp.contract.customerCard">Customer Card</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="course.name"><span data-translate="simpleServiceApp.contract.course">Course</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractStatus.name"><span
+                            data-translate="simpleServiceApp.contract.contractStatus">Contract Status</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="product.name"><span
+                            data-translate="simpleServiceApp.contract.product">Product</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerCard.number"><span data-translate="simpleServiceApp.contract.customerCard">Customer Card</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <tr ng-repeat="contract in vm.contracts track by contract.id">
                     <td><a ui-sref="contract-detail({id:contract.id})">{{contract.id}}</a></td>
                     <td><a ui-sref="customer-detail({id:contract.customer.id})">{{contract.customer.name}}</a></td>
@@ -111,12 +245,13 @@
                         </div>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-    </div>
-</div>
 </div>

@@ -239,12 +239,16 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                            <li class="dropdown-header">客户</li>
                             <li>
                                 <a ui-sref="customer({dept: 'operation'})">
                                     <span class="glyphicon glyphicon-tags"></span>
                                     <span>客户列表</span>
                                 </a>
                             </li>
+
+                            <li class="dropdown-header">卡</li>
+
                             <li>
                                 <a ui-sref="customer-card">
                                     <span class="glyphicon glyphicon-credit-card"></span>
@@ -259,13 +263,14 @@
                                 </a>
                             </li>
 
+                            <li class="dropdown-header">合同</li>
+
                             <li>
                                 <a ui-sref="contract">
                                     <span class="glyphicon glyphicon-paperclip"></span>
                                     <span>合同列表</span>
                                 </a>
                             </li>
-
 
                             <li>
                                 <a ui-sref="contract-template">

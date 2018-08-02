@@ -1,22 +1,28 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.Contract;
+import com.pure.service.domain.ContractStatus_;
+import com.pure.service.domain.Contract_;
+import com.pure.service.domain.Course_;
+import com.pure.service.domain.CustomerCard_;
+import com.pure.service.domain.Customer_;
+import com.pure.service.domain.Product_;
+import com.pure.service.domain.Student_;
+import com.pure.service.repository.ContractRepository;
+import com.pure.service.service.dto.ContractCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.Contract;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.ContractRepository;
-import com.pure.service.service.dto.ContractCriteria;
+import java.util.List;
 
 
 /**
@@ -138,8 +144,27 @@ public class ContractQueryService extends QueryService<Contract> {
             if (criteria.getCustomerId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerId(), Contract_.customer, Customer_.id));
             }
+            if (!StringUtils.isEmpty(criteria.getCustomerName())) {
+                specification = specification.and(customerName(criteria.getCustomerName()));
+            }
+
+            if (!StringUtils.isEmpty(criteria.getContractNumber())) {
+                specification = specification.and(customerContractPhoneNumber(criteria.getCustomerContactPhoneNumber()));
+            }
+
         }
         return specification;
     }
 
+    private Specification customerName(String customerName) {
+
+        return (root, query, cb) -> cb.like(root.get(Contract_.customer).get(Customer_.name), customerName);
+
+    }
+
+    private Specification customerContractPhoneNumber(String phoneNumber) {
+
+        return (root, query, cb) -> cb.like(root.get(Contract_.customer).get(Customer_.contactPhoneNumber), phoneNumber);
+
+    }
 }
