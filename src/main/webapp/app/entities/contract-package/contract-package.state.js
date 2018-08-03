@@ -187,7 +187,97 @@
                     $state.go('^');
                 });
             }]
-        });
+        })
+
+            .state('contract-package.new-template', {
+                parent: 'contract-package-detail',
+                url: '/new',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/contract-template/contract-template-dialog.html',
+                        controller: 'ContractTemplateDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: function () {
+                                return {
+                                    totalMoneyAmount: null,
+                                    classCount: null,
+                                    totalMinutes: null,
+                                    totalHours: null,
+                                    years: null,
+                                    promotionAmount: null,
+                                    createdBy: null,
+                                    createdDate: null,
+                                    lastModifiedBy: null,
+                                    lastModifiedDate: null,
+                                    name: null,
+                                    id: null
+                                };
+                            }
+                        }
+                    }).result.then(function() {
+                        $state.go('^');
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
+            .state('contract-package.edit-template', {
+                parent: 'contract-package-detail',
+                url: '/{id}/edit',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/contract-template/contract-template-dialog.html',
+                        controller: 'ContractTemplateDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['ContractTemplate', function(ContractTemplate) {
+                                return ContractTemplate.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('^');
+
+                    }, function() {
+                        $state.go('^');
+
+                    });
+                }]
+            })
+            .state('contract-package-template.delete', {
+                parent: 'contract-package-detail',
+                url: '/{id}/delete',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/contract-template/contract-template-delete-dialog.html',
+                        controller: 'ContractTemplateDeleteController',
+                        controllerAs: 'vm',
+                        size: 'md',
+                        resolve: {
+                            entity: ['ContractTemplate', function(ContractTemplate) {
+                                return ContractTemplate.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+
+                    }, function() {
+
+                    });
+                }]
+            });
     }
 
 })();

@@ -25,6 +25,14 @@
             <!--<dd>-->
             <br>
             <span class="panel-title">套餐内容</span>
+
+            <button type="submit"
+               ng-click="vm.openAddTemplateDialog()"
+               class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-new-window"></span>
+                <span class="hidden-sm-down">录入新的合同模板</span>
+            </button>
+
             <br>
             <div class="table-responsive panel panel-bordered-primary">
                 <table class="jh-table table table-striped">
@@ -103,18 +111,18 @@
                                     <span class="glyphicon glyphicon-eye-open"></span>
                                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                                 </a>
-                                <!--<button type="submit"-->
-                                        <!--ui-sref="contract-template.edit({id:contractTemplate.id})"-->
-                                        <!--class="btn btn-primary btn-sm">-->
-                                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                    <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                                <!--</button>-->
-                                <!--<button type="submit"-->
-                                        <!--ui-sref="contract-template.delete({id:contractTemplate.id})"-->
-                                        <!--class="btn btn-danger btn-sm">-->
-                                    <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                    <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                                <!--</button>-->
+                                <button type="submit"
+                                        ng-click="vm.openEditTemplateDialog(contractTemplate)"
+                                        class="btn btn-primary btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                                </button>
+                                <button type="submit"
+                                        ng-click="vm.openDeleteTemplateDialog(contractTemplate)"
+                                        class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-remove-circle"></span>
+                                    <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                                </button>
                             </div>
                         </td>
                     </tr>

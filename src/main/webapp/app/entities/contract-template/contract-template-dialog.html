@@ -9,27 +9,20 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
+
+
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.name" for="field_name">Name</label>
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.name"
+                           for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            ng-model="vm.contractTemplate.name"
                     />
                 </div>
             </div>
-            <div class="col-md-4">
 
-                <div class="form-group">
-                    <label>套餐包</label>
-                    <select class="form-control" id="field_customerCardType" name="customerCardType"
-                            ng-model="vm.contractTemplate.contractPackage"
-                            ng-options="contractPackage as contractPackage.name for contractPackage in vm.contractpackages track by contractPackage.id">
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
 
                 <div class="form-group">
                     <label data-translate="simpleServiceApp.contractTemplate.contractNature" for="field_contractNature">Contract
@@ -42,6 +35,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+
+            <div class="col-md-12" ng-if="!vm.onPackageDetailPage">
+
+                <div class="form-group">
+                    <label>套餐包</label>
+                    <select class="form-control" id="field_customerCardType" name="customerCardType"
+                            ng-model="vm.contractTemplate.contractPackage"
+                            ng-options="contractPackage as contractPackage.name for contractPackage in vm.contractpackages track by contractPackage.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -86,7 +96,8 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.years" for="field_years">Years</label>
+                    <label class="control-label" data-translate="simpleServiceApp.contractTemplate.years"
+                           for="field_years">Years</label>
                     <input type="number" class="form-control" name="years" id="field_years"
                            ng-model="vm.contractTemplate.years"
                     />
@@ -97,19 +108,20 @@
             </div>
         </div>
         <!--<div class="row">-->
-            <!--<div class="col-md-6"></div>-->
-            <!--<div class="col-md-6"></div>-->
+        <!--<div class="col-md-6"></div>-->
+        <!--<div class="col-md-6"></div>-->
         <!--</div>-->
 
 
-       <!---->
-       <!---->
+        <!---->
+        <!---->
         <!---->
 
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>

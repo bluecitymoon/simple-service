@@ -11,6 +11,10 @@
         var vm = this;
 
         vm.contractTemplate = entity;
+
+         if (vm.contractTemplate.contractPackage ) {
+             vm.onPackageDetailPage = true;
+        }
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;

@@ -365,12 +365,13 @@ public class CustomerServiceImpl implements CustomerService {
                 + element.getNoWillingCount() + element.getScheduledCount();
             element.setTotalCount(totalCount);
 
-            Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) * 100 / totalCount;
+            if (totalCount > 0) {
+                Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) * 100 / totalCount;
 
-            BigDecimal finishRateDecimal = new BigDecimal(finishRate);
-            BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
-            element.setFinishRate(roundedDecimal.toString() + "%");
-
+                BigDecimal finishRateDecimal = new BigDecimal(finishRate);
+                BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+                element.setFinishRate(roundedDecimal.toString() + "%");
+            }
         });
 
         report.setData(elements);
