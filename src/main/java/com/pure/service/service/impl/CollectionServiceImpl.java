@@ -118,6 +118,11 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public void confirmCustomerCollection(Collection collection) {
+
+        CollectionStatus collectionStatus = collectionStatusRepository.findByCode(CollectionStatusEnum.collected.name());
+        collection.setStatus(collectionStatus);
+
+        save(collection);
 //
 //        //确实收款后生成合同
 //        String sequenceNumber = collection.getSequenceNumber();

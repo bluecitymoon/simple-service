@@ -155,6 +155,9 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
     private CustomerStatus status;
 
     @ManyToOne
+    private VistedCustomerStatus vistedCustomerStatus;
+
+    @ManyToOne
     private MarketChannelCategory channel;
 
     @ManyToOne
@@ -165,6 +168,14 @@ public class Customer extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
+
+    public VistedCustomerStatus getVistedCustomerStatus() {
+        return vistedCustomerStatus;
+    }
+
+    public void setVistedCustomerStatus(VistedCustomerStatus vistedCustomerStatus) {
+        this.vistedCustomerStatus = vistedCustomerStatus;
+    }
 
     public String getNextTrackComments() {
         return nextTrackComments;

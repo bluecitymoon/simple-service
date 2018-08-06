@@ -8,6 +8,7 @@ import com.pure.service.domain.FreeClassRecord_;
 import com.pure.service.domain.MarketChannelCategory_;
 import com.pure.service.domain.NewOrderResourceLocation_;
 import com.pure.service.domain.User_;
+import com.pure.service.domain.VistedCustomerStatus_;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.service.dto.CustomerCriteria;
 import io.github.jhipster.service.QueryService;
@@ -151,6 +152,9 @@ public class CustomerQueryService extends QueryService<Customer> {
             }
             if (criteria.getStatusId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getStatusId(), Customer_.status, CustomerStatus_.id));
+            }
+            if (criteria.getVistedCustomerStatusId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getVistedCustomerStatusId(), Customer_.vistedCustomerStatus, VistedCustomerStatus_.id));
             }
             if (criteria.getChannelId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getChannelId(), Customer_.channel, MarketChannelCategory_.id));

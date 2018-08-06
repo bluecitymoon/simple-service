@@ -98,6 +98,19 @@
                                is-open="vm.datePickerOpenStatus.createEndDate">
                     </div>
                 </div>
+                <div class="col-md-3 form-group" ng-if="vm.department != 'operation'">
+                    <label class="col-sm-3 control-label">客户到访状态</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.visitedCustomerStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.vistedStatus | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
             <div class="row">
 

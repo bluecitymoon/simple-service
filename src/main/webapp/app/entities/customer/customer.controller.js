@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule', 'Cache'];
+    CustomerController.$inject = ['$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule', 'Cache', 'VistedCustomerStatus'];
 
-    function CustomerController($uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule, Cache) {
+    function CustomerController($uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule, Cache, VistedCustomerStatus) {
 
         var vm = this;
 
@@ -32,6 +32,8 @@
         vm.sales = User.getAllSales();
         vm.consultants = User.getAllCourseConsultant();
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
+
+        vm.vistedStatus = VistedCustomerStatus.query({size: 100});
         vm.yesOrNo = [
             {id : 1, value: "已到访", visited: true},
             {id : 2, value: "未到访", visited: false}
@@ -133,6 +135,9 @@
             }
             if (vm.searchCondition.customerStatus) {
                 parameters["statusId.equals"] = vm.searchCondition.customerStatus.id;
+            }
+            if (vm.searchCondition.visitedCustomerStatus) {
+                parameters["vistedCustomerStatusId.equals"] = vm.searchCondition.visitedCustomerStatus.id;
             }
 
             if (vm.searchCondition.ccAssignStatus) {

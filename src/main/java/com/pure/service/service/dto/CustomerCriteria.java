@@ -58,6 +58,7 @@ public class CustomerCriteria implements Serializable {
     private LongFilter newOrderId;
 
     private LongFilter statusId;
+    private LongFilter vistedCustomerStatusId;
 
     private LongFilter channelId;
 
@@ -77,6 +78,14 @@ public class CustomerCriteria implements Serializable {
     private String ccAssignStatus;
 
     public CustomerCriteria() {
+    }
+
+    public LongFilter getVistedCustomerStatusId() {
+        return vistedCustomerStatusId;
+    }
+
+    public void setVistedCustomerStatusId(LongFilter vistedCustomerStatusId) {
+        this.vistedCustomerStatusId = vistedCustomerStatusId;
     }
 
     public InstantFilter getAssignDate() {

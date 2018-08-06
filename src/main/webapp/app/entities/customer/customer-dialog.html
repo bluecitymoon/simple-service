@@ -179,12 +179,22 @@
                     <!--</select>-->
                 <!--</div>-->
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
 
                 <div class="form-group">
                     <label data-translate="simpleServiceApp.customer.status" for="field_status">Status</label>
                     <select class="form-control" id="field_status" name="status" ng-model="vm.customer.status"
                             ng-options="customerStatus as customerStatus.name for customerStatus in vm.customerstatuses track by customerStatus.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label>到访状态</label>
+                    <select class="form-control" ng-model="vm.customer.vistedCustomerStatus"
+                            ng-options="customerStatus as customerStatus.name for customerStatus in vm.vistedStatus track by customerStatus.id">
                         <option value=""></option>
                     </select>
                 </div>

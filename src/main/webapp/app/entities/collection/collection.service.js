@@ -22,7 +22,11 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'confirm': {
+                method: 'POST',
+                url: 'api/collections/confirm'
+            }
         });
     }
 })();

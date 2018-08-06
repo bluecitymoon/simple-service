@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerDialogController', CustomerDialogController);
 
-    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Customer', 'FreeClassRecord', 'CustomerStatus', 'MarketChannelCategory', "NewOrderResourceLocation"];
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', '$q', 'entity', 'Customer', 'FreeClassRecord', 'CustomerStatus', 'MarketChannelCategory', "NewOrderResourceLocation", "VistedCustomerStatus"];
 
-    function CustomerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Customer, FreeClassRecord, CustomerStatus, MarketChannelCategory, NewOrderResourceLocation) {
+    function CustomerDialogController ($timeout, $scope, $stateParams, $uibModalInstance, $q, entity, Customer, FreeClassRecord, CustomerStatus, MarketChannelCategory, NewOrderResourceLocation, VistedCustomerStatus) {
         var vm = this;
 
         vm.customer = entity;
@@ -15,6 +15,7 @@
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
+        vm.vistedStatus = VistedCustomerStatus.query({size: 100});
 
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
         vm.neworders = FreeClassRecord.query({filter: 'customer-is-null'});

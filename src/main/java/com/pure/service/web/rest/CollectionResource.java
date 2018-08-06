@@ -71,7 +71,7 @@ public class CollectionResource {
 
     @PostMapping("/collections/confirm")
     @Timed
-    public ResponseEntity<Collection> confirmCustomerCollection(@RequestBody Collection collection) throws URISyntaxException {
+    public ResponseEntity<Collection> confirmCustomerCollection(@RequestBody Collection collection) {
         log.debug("REST request to save Collection : {}", collection);
         if (collection.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new collection cannot already have an ID")).body(null);
@@ -80,14 +80,12 @@ public class CollectionResource {
 //        if (contractService.contractAlreadyGenerated(collection.getSequenceNumber())) {
 //            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "contractalreadygenerate", "合同已生成")).body(null);
 //        }
-
-        Collection result = collectionService.save(collection);
+//
+//        Collection result = collectionService.save(collection);
 
         collectionService.confirmCustomerCollection(collection);
 
-        return ResponseEntity.created(new URI("/api/collections/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().build();
     }
 
 
