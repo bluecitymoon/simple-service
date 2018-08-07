@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('contract');
+                    $translatePartialLoader.addPart('student');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]

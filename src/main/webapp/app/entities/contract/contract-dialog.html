@@ -1,246 +1,286 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
-    <div class="modal-header">
+    <div class="modal-header text-center">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myContractLabel" data-translate="simpleServiceApp.contract.home.createOrEditLabel">
-            Create or edit a Contract</h4>
+        <!--<h4 class="modal-title" id="myContractLabel" data-translate="simpleServiceApp.contract.home.createOrEditLabel">-->
+        <!--Create or edit a Contract</h4>-->
     </div>
 
     <jhi-alert></jhi-alert>
 
-    <div class="modal-body">
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label data-translate="simpleServiceApp.contract.customer">Customer</label>
-                    <small>（输入客户姓名或者手机号关键字搜索）</small>
-
-                    <ui-select ng-model="vm.contract.customer">
-                        <ui-select-match>
-                            {{$select.selected.name}}
-                        </ui-select-match>
-                        <ui-select-choices refresh="vm.searchPersonWithKeyword($select.search)"
-                                           repeat="item in (vm.customers | filter: $select.search) track by item.id">
-                            <span ng-bind="item.name"></span><span class="pull-right"
-                                                                   ng-bind="item.contactPhoneNumber"></span>
-                        </ui-select-choices>
-                    </ui-select>
-                </div>
-
+    <div class="pad-lft pad-rgt">
+        <div class="panel panel-bordered-mint">
+            <div class="panel-heading">
+                <h3 class="panel-title">合同信息</h3>
             </div>
+            <div class="panel-body">
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label data-translate="simpleServiceApp.contract.customerCard" for="field_customerCard">Customer
-                        Card</label>
-                    <select class="form-control" id="field_customerCard" name="customerCard"
-                            ng-model="vm.contract.customerCard"
-                            ng-options="customerCard as customerCard.number for customerCard in vm.customercards track by customerCard.id">
-                        <option value=""></option>
-                    </select>
-                </div>
+                <div class="modal-body">
 
-            </div>
-        </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label data-translate="simpleServiceApp.contract.customer">Customer</label>
+                                <small>（输入客户姓名或者手机号关键字搜索）</small>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.contractNumber"
-                           for="field_contractNumber">Contract Number</label>
-                    <input type="text" class="form-control" name="contractNumber" id="field_contractNumber"
-                           ng-model="vm.contract.contractNumber" readonly
-                    />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.serialNumber"
-                           for="field_serialNumber">Serial
-                        Number</label>
-                    <input type="text" class="form-control" name="serialNumber" id="field_serialNumber"
-                           ng-model="vm.contract.serialNumber" readonly
-                    />
-                </div>
-            </div>
-        </div>
+                                <ui-select ng-model="vm.contract.customer">
+                                    <ui-select-match>
+                                        {{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices refresh="vm.searchPersonWithKeyword($select.search)"
+                                                       repeat="item in (vm.customers | filter: $select.search) track by item.id">
+                                        <span ng-bind="item.name"></span><span class="pull-right"
+                                                                               ng-bind="item.contactPhoneNumber"></span>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
 
-        <div class="row">
-            <div class="col-md-4">
+                        </div>
 
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.signDate"
-                           for="field_signDate">Sign
-                        Date</label>
-                    <div class="input-group">
-                        <input id="field_signDate" type="text" class="form-control" name="signDate"
-                               datetime-picker="{{dateformat}}"
-                               ng-model="vm.contract.signDate" is-open="vm.datePickerOpenStatus.signDate"
-                        />
-                        <span class="input-group-btn">
+                        <div class="col-md-6">
+
+                            <label>学员</label>
+
+                            <div class="input-group mar-btm">
+
+                                <select class="form-control" name="student"
+                                        ng-model="vm.contract.student"
+                                        ng-options="s as s.name for s in vm.students track by s.id">
+                                    <option value=""></option>
+                                </select>
+                                <span class="input-group-btn">
+                                    <a class="btn btn-mint" type="button" ng-click="vm.openAddStudentDialog()"><i class="glyphicon glyphicon-plus"></i></a>
+                                    <!--<button class="btn btn-pink" type="button"><i class="glyphicon glyphicon-refresh"></i></button>-->
+					            </span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label data-translate="simpleServiceApp.contract.customerCard" for="field_customerCard">Customer
+                                    Card</label>
+                                <select class="form-control" id="field_customerCard" name="customerCard"
+                                        ng-model="vm.contract.customerCard"
+                                        ng-options="customerCard as customerCard.number for customerCard in vm.customercards track by customerCard.id">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.contractNumber"
+                                       for="field_contractNumber">Contract Number</label>
+                                <input type="text" class="form-control" name="contractNumber" id="field_contractNumber"
+                                       ng-model="vm.contract.contractNumber" readonly
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.serialNumber"
+                                       for="field_serialNumber">Serial
+                                    Number</label>
+                                <input type="text" class="form-control" name="serialNumber" id="field_serialNumber"
+                                       ng-model="vm.contract.serialNumber" readonly
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.signDate"
+                                       for="field_signDate">Sign
+                                    Date</label>
+                                <div class="input-group">
+                                    <input id="field_signDate" type="text" class="form-control" name="signDate"
+                                           datetime-picker="{{dateformat}}"
+                                           ng-model="vm.contract.signDate" is-open="vm.datePickerOpenStatus.signDate"
+                                    />
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('signDate')"><i
                                 class="glyphicon glyphicon-calendar"></i></button>
                     </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.startDate"
-                           for="field_startDate">Start
-                        Date</label>
-                    <div class="input-group">
-                        <input id="field_startDate" type="text" class="form-control" name="startDate"
-                               datetime-picker="{{dateformat}}" ng-model="vm.contract.startDate"
-                               is-open="vm.datePickerOpenStatus.startDate"
-                        />
-                        <span class="input-group-btn">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.startDate"
+                                       for="field_startDate">Start
+                                    Date</label>
+                                <div class="input-group">
+                                    <input id="field_startDate" type="text" class="form-control" name="startDate"
+                                           datetime-picker="{{dateformat}}" ng-model="vm.contract.startDate"
+                                           is-open="vm.datePickerOpenStatus.startDate"
+                                    />
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i
                                 class="glyphicon glyphicon-calendar"></i></button>
                     </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
 
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.endDate" for="field_endDate">End
-                        Date</label>
-                    <div class="input-group">
-                        <input id="field_endDate" type="text" class="form-control" name="endDate"
-                               datetime-picker="{{dateformat}}"
-                               ng-model="vm.contract.endDate" is-open="vm.datePickerOpenStatus.endDate"
-                        />
-                        <span class="input-group-btn">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.endDate"
+                                       for="field_endDate">End
+                                    Date</label>
+                                <div class="input-group">
+                                    <input id="field_endDate" type="text" class="form-control" name="endDate"
+                                           datetime-picker="{{dateformat}}"
+                                           ng-model="vm.contract.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                                    />
+                                    <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i
                                 class="glyphicon glyphicon-calendar"></i></button>
                     </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.totalMoneyAmount"
+                                       for="field_totalMoneyAmount">Total Money Amount</label>
+                                <input type="number" class="form-control" name="totalMoneyAmount"
+                                       id="field_totalMoneyAmount"
+                                       ng-model="vm.contract.totalMoneyAmount"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label"
+                                       data-translate="simpleServiceApp.contract.moneyShouldCollected"
+                                       for="field_moneyShouldCollected">Money Should Collected</label>
+                                <input type="number" class="form-control" name="moneyShouldCollected"
+                                       id="field_moneyShouldCollected"
+                                       ng-model="vm.contract.moneyShouldCollected"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.moneyCollected"
+                                       for="field_moneyCollected">Money Collected</label>
+                                <input type="number" class="form-control" name="moneyCollected"
+                                       id="field_moneyCollected"
+                                       ng-model="vm.contract.moneyCollected"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.promotionAmount"
+                                       for="field_promotionAmount">Promotion Amount</label>
+                                <input type="number" class="form-control" name="promotionAmount"
+                                       id="field_promotionAmount"
+                                       ng-model="vm.contract.promotionAmount"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.totalHours"
+                                       for="field_totalHours">Total
+                                    Hours</label>
+                                <input type="number" class="form-control" name="totalHours" id="field_totalHours"
+                                       ng-model="vm.contract.totalHours"
+                                />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.hoursTaken"
+                                       for="field_hoursTaken">Hours
+                                    Taken</label>
+                                <input type="number" class="form-control" name="hoursTaken" id="field_hoursTaken"
+                                       ng-model="vm.contract.hoursTaken" readonly
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label data-translate="simpleServiceApp.contract.course"
+                                       for="field_course">Course</label>
+                                <select class="form-control" id="field_course" name="course"
+                                        ng-model="vm.contract.course"
+                                        ng-options="course as course.name for course in vm.courses track by course.id">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label data-translate="simpleServiceApp.contract.product"
+                                       for="field_product">Product</label>
+                                <select class="form-control" id="field_product" name="product"
+                                        ng-model="vm.contract.product"
+                                        ng-options="product as product.name for product in vm.products track by product.id">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label data-translate="simpleServiceApp.contract.contractStatus"
+                                       for="field_contractStatus">Contract
+                                    Status</label>
+                                <select class="form-control" id="field_contractStatus" name="contractStatus"
+                                        ng-model="vm.contract.contractStatus"
+                                        ng-options="contractStatus as contractStatus.name for contractStatus in vm.contractstatuses track by contractStatus.id">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label class="control-label" data-translate="simpleServiceApp.contract.comments"
+                                       for="field_comments">Comments</label>
+                                <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"
+                                          ng-model="vm.contract.comments"
+                                ></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                        </div>
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3">
-
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.totalMoneyAmount"
-                           for="field_totalMoneyAmount">Total Money Amount</label>
-                    <input type="number" class="form-control" name="totalMoneyAmount" id="field_totalMoneyAmount"
-                           ng-model="vm.contract.totalMoneyAmount"
-                    />
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.moneyShouldCollected"
-                           for="field_moneyShouldCollected">Money Should Collected</label>
-                    <input type="number" class="form-control" name="moneyShouldCollected"
-                           id="field_moneyShouldCollected"
-                           ng-model="vm.contract.moneyShouldCollected"
-                    />
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.moneyCollected"
-                           for="field_moneyCollected">Money Collected</label>
-                    <input type="number" class="form-control" name="moneyCollected" id="field_moneyCollected"
-                           ng-model="vm.contract.moneyCollected"
-                    />
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.promotionAmount"
-                           for="field_promotionAmount">Promotion Amount</label>
-                    <input type="number" class="form-control" name="promotionAmount" id="field_promotionAmount"
-                           ng-model="vm.contract.promotionAmount"
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.totalHours"
-                           for="field_totalHours">Total
-                        Hours</label>
-                    <input type="number" class="form-control" name="totalHours" id="field_totalHours"
-                           ng-model="vm.contract.totalHours"
-                    />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.hoursTaken"
-                           for="field_hoursTaken">Hours
-                        Taken</label>
-                    <input type="number" class="form-control" name="hoursTaken" id="field_hoursTaken"
-                           ng-model="vm.contract.hoursTaken" readonly
-                    />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label data-translate="simpleServiceApp.contract.course" for="field_course">Course</label>
-                    <select class="form-control" id="field_course" name="course" ng-model="vm.contract.course"
-                            ng-options="course as course.name for course in vm.courses track by course.id">
-                        <option value=""></option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="col-md-5">
-                <div class="form-group">
-                    <label data-translate="simpleServiceApp.contract.product" for="field_product">Product</label>
-                    <select class="form-control" id="field_product" name="product" ng-model="vm.contract.product"
-                            ng-options="product as product.name for product in vm.products track by product.id">
-                        <option value=""></option>
-                    </select>
-                </div>
-
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label data-translate="simpleServiceApp.contract.contractStatus" for="field_contractStatus">Contract
-                        Status</label>
-                    <select class="form-control" id="field_contractStatus" name="contractStatus"
-                            ng-model="vm.contract.contractStatus"
-                            ng-options="contractStatus as contractStatus.name for contractStatus in vm.contractstatuses track by contractStatus.id">
-                        <option value=""></option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.contract.comments"
-                           for="field_comments">Comments</label>
-                    <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"
-                              ng-model="vm.contract.comments"
-                    ></textarea>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-
-            </div>
-            <div class="col-md-6">
-
-            </div>
-        </div>
-
     </div>
+
+
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span

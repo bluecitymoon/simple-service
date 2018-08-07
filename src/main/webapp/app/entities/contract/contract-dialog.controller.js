@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractDialogController', ContractDialogController);
 
-    ContractDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService', 'DateUtils'];
+    ContractDialogController.$inject = ['$uibModal','$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService', 'DateUtils'];
 
-    function ContractDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService, DateUtils) {
+    function ContractDialogController ($uibModal, $timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService, DateUtils) {
         var vm = this;
 
         vm.contract = entity;
@@ -46,6 +46,8 @@
                         vm.contract.customerCard = cards[0];
                     }
                 });
+
+                loadStudents(newVal.id);
             }
         });
 
@@ -100,6 +102,43 @@
             }
         }
 
+        vm.openAddStudentDialog = function () {
+
+            if (!vm.contract.customer) {
+                AlertService.warning("未知的客户信息，无法为该客户添加学员");
+
+                return;
+            }
+
+            $uibModal.open({
+                templateUrl: 'app/entities/student/student-dialog.html',
+                controller: 'StudentDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: function () {
+                        return {
+                            name: null,
+                            phone: null,
+                            gender: null,
+                            birthday: null,
+                            address: null,
+                            school: null,
+                            qq: null,
+                            comments: null,
+                            id: null,
+                            customer: vm.contract.customer
+                        };
+                    }
+                }
+            }).result.then(function() {
+                loadStudents(vm.contract.customer.id);
+
+            }, function() {
+            });
+        };
+
         generateContractNumber();
 
         function generateContractNumber() {
@@ -108,6 +147,26 @@
                 vm.contract.contractNumber  = data.number;
             }, function (error) {
                 AlertService.error('生成流水号失败 ' + error);
+            });
+        }
+
+        //loadStudents();
+
+        function loadStudents(customerId) {
+
+            Student.query({
+                page: 0,
+                size: 100,
+                sort: 'id',
+                'customerId.equals': customerId
+            }, function (data) {
+                vm.students = data;
+
+                if (!data || data.length == 0) {
+                    AlertService.info("该客户无相关学员信息，请点击加号增加学员。");
+                }
+            }, function (error) {
+                //
             });
         }
         vm.datePickerOpenStatus.signDate = false;

@@ -1,7 +1,5 @@
 package com.pure.service.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,8 +62,7 @@ public class Contract extends AbstractAuditingEntity {
 
     private Boolean active;
 
-    @OneToOne(mappedBy = "contract")
-    @JsonIgnore
+    @OneToOne
     private Student student;
 
     @ManyToOne
