@@ -3,6 +3,7 @@ package com.pure.service.service;
 import com.pure.service.domain.Contract;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
+import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -52,7 +53,7 @@ public interface ContractService {
 
     boolean contractAlreadyGenerated(String serialNumber);
 
-    List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException;
+    List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException, CollectionNotPaidException, ContractsExceedLimitException;
 
     String generateContractNumber();
 }

@@ -11,11 +11,14 @@
 
         <div class="form-group" ng-if="!vm.customerId">
             <label data-translate="simpleServiceApp.customerCard.customer">Customer</label>
+            <small>（输入客户姓名或者手机号关键字搜索）</small>
             <ui-select ng-model="vm.customerCard.customer">
                 <ui-select-match>
                     {{$select.selected.name}}
                 </ui-select-match>
-                <ui-select-choices repeat="item in (vm.customers | filter: $select.search) track by item.id">
+                <ui-select-choices
+                        refresh="vm.searchPersonWithKeyword($select.search)"
+                        repeat="item in (vm.customers | filter: $select.search) track by item.id">
                     <span ng-bind="item.name"></span><span class="pull-right" ng-bind="item.contactPhoneNumber"></span>
                 </ui-select-choices>
             </ui-select>

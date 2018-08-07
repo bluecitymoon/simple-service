@@ -16,4 +16,6 @@ import java.util.List;
 public interface ContractRepository extends JpaRepository<Contract, Long>, JpaSpecificationExecutor<Contract> {
 
     List<Contract> findBySerialNumber(String serialNumber);
+
+    List<Contract> findByCustomerCard_Id(Long cardId);
 }

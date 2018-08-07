@@ -16,18 +16,27 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.customerId = $stateParams.cid;
+        vm.customers = [];
 
-        if (!vm.customerId) {
+        vm.searchPersonWithKeyword = function (keyword) {
 
-            var parameters = {
-                page: 0,
-                size: 100000,
-                sort: 'id,desc',
-                department: 'operation'
-            };
+            if (!keyword) return;
 
-            vm.customers = Customer.query(parameters);
-        }
+            Customer.queryByKeyword({keyword: keyword, sort: 'id,desc', department: 'operation', size: 50}, function (response) {
+                vm.customers = response;
+            })
+        };
+        // if (!vm.customerId) {
+        //
+        //     var parameters = {
+        //         page: 0,
+        //         size: 100000,
+        //         sort: 'id,desc',
+        //         department: 'operation'
+        //     };
+        //
+        //     vm.customers = Customer.query(parameters);
+        // }
 
         vm.customercardtypes = CustomerCardType.query({ page: 0,  size: 1000 });
         vm.courses = Course.query({ page: 0,  size: 1000 });

@@ -20,6 +20,7 @@ import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.dto.enumurations.ContractStatusEnum;
 import com.pure.service.service.dto.enumurations.CustomerCommunicationLogTypeEnum;
 import com.pure.service.service.exception.CollectionNotPaidException;
+import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -42,7 +43,7 @@ import java.util.stream.StreamSupport;
  */
 @Service
 @Transactional
-public class ContractServiceImpl implements ContractService{
+public class ContractServiceImpl implements ContractService {
 
     private final Logger log = LoggerFactory.getLogger(ContractServiceImpl.class);
 
@@ -90,17 +91,15 @@ public class ContractServiceImpl implements ContractService{
 
                 throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
             }
-
-
         }
         return contractRepository.save(contract);
     }
 
     /**
-     *  Get all the contracts.
+     * Get all the contracts.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -111,8 +110,9 @@ public class ContractServiceImpl implements ContractService{
 
 
     /**
-     *  get all the contracts where Student is null.
-     *  @return the list of entities
+     * get all the contracts where Student is null.
+     *
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public List<Contract> findAllWhereStudentIsNull() {
@@ -124,10 +124,10 @@ public class ContractServiceImpl implements ContractService{
     }
 
     /**
-     *  Get one contract by id.
+     * Get one contract by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -137,9 +137,9 @@ public class ContractServiceImpl implements ContractService{
     }
 
     /**
-     *  Delete the  contract by id.
+     * Delete the  contract by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -156,13 +156,27 @@ public class ContractServiceImpl implements ContractService{
     }
 
     @Override
-    public List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException {
+    public List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException, CollectionNotPaidException, ContractsExceedLimitException {
 
         List<ContractTemplate> templates = contractTemplateRepository.findByContractPackage_Id(packageContractRequest.getPackageId());
 
         if (CollectionUtils.isEmpty(templates)) throw new TemplateNotFoundException("该套餐没有套餐内容，需要添加合同模板");
 
         CustomerCard customerCard = customerCardService.findOne(packageContractRequest.getCustomerCardId());
+
+        String serialNumber = customerCard.getSerialNumber();
+        if (!collectionService.customerCardPaid(serialNumber)) {
+
+            throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
+        }
+
+        List<Contract> existedContracts = contractRepository.findByCustomerCard_Id(customerCard.getId());
+        if (!CollectionUtils.isEmpty(existedContracts)) {
+
+            if (existedContracts.size() >= templates.size()) {
+                throw new ContractsExceedLimitException("已经存在" + existedContracts.size() + "份合同，无法生成更多合同，该合同套餐可以生成" + templates.size() + "份合同");
+            }
+        }
 
         ContractStatus generated = contractStatusRepository.findByCode(ContractStatusEnum.generated.name());
 
@@ -197,7 +211,7 @@ public class ContractServiceImpl implements ContractService{
         log.setCustomer(customer);
         log.setComments("客户生成套餐合同，流水号 " + serialNumber);
 
-        CustomerCommunicationLogType type =customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.contract_generated.name());
+        CustomerCommunicationLogType type = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.contract_generated.name());
         log.setLogType(type);
 
         customerCommunicationLogRepository.save(log);

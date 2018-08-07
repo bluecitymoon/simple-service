@@ -48,7 +48,7 @@
                 parameters["contractNumber.equals"] = vm.searchCondition.contractNumber;
             }
             if (vm.searchCondition.serialNumber) {
-                parameters["serialNumber.equals"] = vm.searchCondition.serialNumber;
+                parameters["sequenceNumber.equals"] = vm.searchCondition.serialNumber;
             }
 
             Collection.query(parameters, onSuccess, onError);

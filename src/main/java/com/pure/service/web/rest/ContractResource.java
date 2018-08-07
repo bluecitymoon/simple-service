@@ -7,6 +7,7 @@ import com.pure.service.service.ContractService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
+import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -75,7 +76,7 @@ public class ContractResource {
 
     @PostMapping("/contracts/package")
     @Timed
-    public ResponseEntity<List<Contract>> createPackageContract(@RequestBody PackageContractRequest packageContractRequest) {
+    public ResponseEntity<List<Contract>> createPackageContract(@RequestBody PackageContractRequest packageContractRequest) throws CollectionNotPaidException, ContractsExceedLimitException {
 
         log.debug("REST request to save Contract in package : {}", packageContractRequest);
 
