@@ -6,6 +6,7 @@ import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -61,7 +62,7 @@ public class ContractResource {
      */
     @PostMapping("/contracts")
     @Timed
-    public ResponseEntity<Contract> createContract(@RequestBody Contract contract) throws URISyntaxException {
+    public ResponseEntity<Contract> createContract(@RequestBody Contract contract) throws URISyntaxException, CollectionNotPaidException {
         log.debug("REST request to save Contract : {}", contract);
         if (contract.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new contract cannot already have an ID")).body(null);
@@ -102,7 +103,7 @@ public class ContractResource {
      */
     @PutMapping("/contracts")
     @Timed
-    public ResponseEntity<Contract> updateContract(@RequestBody Contract contract) throws URISyntaxException {
+    public ResponseEntity<Contract> updateContract(@RequestBody Contract contract) throws URISyntaxException, CollectionNotPaidException {
         log.debug("REST request to update Contract : {}", contract);
         if (contract.getId() == null) {
             return createContract(contract);

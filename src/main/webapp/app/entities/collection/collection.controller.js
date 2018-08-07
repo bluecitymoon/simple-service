@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CollectionController', CollectionController);
 
-    CollectionController.$inject = ['$state', 'Collection', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CollectionController.$inject = ['$scope', '$state', 'Collection', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function CollectionController($state, Collection, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CollectionController($scope, $state, Collection, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -16,15 +16,42 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.searchCondition = {};
+        $scope.pagination = {
+            currentPageNumber: 1,
+            totalItems: 0
+        };
 
-        loadAll();
+        vm.confirmCollection = function (collection) {
+            Collection.confirm(collection, function () {
+                AlertService.success("确定收款成功！");
+            }, function () {
+                AlertService.error("确实收款失败!");
+            })
+        };
 
-        function loadAll () {
-            Collection.query({
-                page: pagingParams.page - 1,
+
+        vm.loadAll = function loadAll() {
+            var parameters = {
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
-            }, onSuccess, onError);
+            };
+
+            if (vm.searchCondition.customerName) {
+                parameters["customerName"] = vm.searchCondition.customerName;
+            }
+            if (vm.searchCondition.customerContactPhoneNumber) {
+                parameters["customerContactPhoneNumber"] = vm.searchCondition.customerContactPhoneNumber;
+            }
+            if (vm.searchCondition.contractNumber) {
+                parameters["contractNumber.equals"] = vm.searchCondition.contractNumber;
+            }
+            if (vm.searchCondition.serialNumber) {
+                parameters["serialNumber.equals"] = vm.searchCondition.serialNumber;
+            }
+
+            Collection.query(parameters, onSuccess, onError);
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -42,7 +69,9 @@
             function onError(error) {
                 AlertService.error(error.data.message);
             }
-        }
+        };
+
+        vm.loadAll();
 
         function loadPage(page) {
             vm.page = page;

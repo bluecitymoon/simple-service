@@ -1,0 +1,62 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerCollectionLoghome.title">Customer Collection Logs</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.serialNumber">Serial Number</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.serialNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.moneyShouldCollected">Money Should Collected</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.moneyShouldCollected}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.moneyCollected">Money Collected</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.moneyCollected}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.balance">Balance</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.balance}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.customerCollectionLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.collection">Collection</span></dt>
+        <dd>
+            <a ui-sref="collection-detail({id:vm.customerCollectionLog.collection.id})">{{vm.customerCollectionLog.collection.sequenceNumber}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCollectionLog.customer">Customer</span></dt>
+        <dd>
+            <a ui-sref="customer-detail({id:vm.customerCollectionLog.customer.id})">{{vm.customerCollectionLog.customer.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-collection-log-detail.edit({id:vm.customerCollectionLog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

@@ -36,7 +36,7 @@
                         </ui-select>
                     </div>
                 </div>
-                <div class="col-md-3 form-group">
+                <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_SALES">
                     <label class="col-sm-3 control-label">客户状态</label>
                     <div class="col-sm-9">
                         <ui-select ng-model="vm.searchCondition.customerStatus">
@@ -98,19 +98,7 @@
                                is-open="vm.datePickerOpenStatus.createEndDate">
                     </div>
                 </div>
-                <div class="col-md-3 form-group" ng-if="vm.department != 'operation'">
-                    <label class="col-sm-3 control-label">客户到访状态</label>
-                    <div class="col-sm-9">
-                        <ui-select ng-model="vm.searchCondition.visitedCustomerStatus">
-                            <ui-select-match>
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.vistedStatus | filter: $select.search) track by item.id">
-                                <span ng-bind="item.name"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
+
             </div>
             <div class="row">
 
@@ -127,6 +115,21 @@
                             </ui-select-choices>
                         </ui-select>
 
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">课程顾问分配状态</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.ccAssignStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    repeat="item in (vm.ccAssignStatusList | filter: $select.search) track by item.code">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
                 <div class="col-md-3 form-group">
@@ -147,21 +150,7 @@
                                is-open="vm.datePickerOpenStatus.nextTrackEndDate">
                     </div>
                 </div>
-                <div class="col-md-3 form-group">
 
-                    <label class="col-sm-3 control-label">课程顾问分配状态</label>
-                    <div class="col-sm-9">
-                        <ui-select ng-model="vm.searchCondition.ccAssignStatus">
-                            <ui-select-match>
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices
-                                    repeat="item in (vm.ccAssignStatusList | filter: $select.search) track by item.code">
-                                <span ng-bind="item.name"></span>
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <!-- TODO 目前不要客户经理，由课程顾问代替 , 7月21再次改回去-->
@@ -224,6 +213,21 @@
                         <button class="btn btn-block btn-info" type="button" ui-sref="customer.new-order"><i
                                 class="fa fa-plus" ></i>新增客户
                         </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_RECEPTION">
+                    <label class="col-sm-3 control-label">客户到访状态</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.visitedCustomerStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.vistedStatus | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
                     </div>
                 </div>
             </div>

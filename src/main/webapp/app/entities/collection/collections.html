@@ -1,6 +1,51 @@
 <div class="page-header">
     <h1 class="page-title">应收</h1>
 </div>
+
+<div class="panel panel-primary panel-bordered-dark">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">查询客户列表</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">流水号</label>
+                    <div class="col-sm-9">
+
+                        <input type="text" ng-model="vm.searchCondition.serialNumber" placeholder="流水号"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+
+                <div class="col-md-3 form-group">
+
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-4">
+
+                        <button class="btn btn-primary btn-block" type="button"
+                                ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 <jhi-alert></jhi-alert>
 <div class="panel">
     <div class="panel-body">
@@ -22,15 +67,15 @@
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="financeCategory.name"><span
-                        data-translate="simpleServiceApp.collection.financeCategory">Finance Category</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            data-translate="simpleServiceApp.collection.financeCategory">Finance Category</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
 
                     <th jh-sort-by="status.name"><span>状态</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="moneyShouldCollected"><span
-                        data-translate="simpleServiceApp.collection.moneyShouldCollected">Money Should Collected</span>
+                            data-translate="simpleServiceApp.collection.moneyShouldCollected">Money Should Collected</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.collection.moneyCollected">Money Collected</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -39,11 +84,11 @@
                     <th jh-sort-by="sequenceNumber"><span data-translate="simpleServiceApp.collection.sequenceNumber">Sequence Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="payerName"><span
-                        data-translate="simpleServiceApp.collection.payerName">Payer Name</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            data-translate="simpleServiceApp.collection.payerName">Payer Name</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span
-                        data-translate="simpleServiceApp.collection.createdBy">Created By</span> <span
-                        class="glyphicon glyphicon-sort"></span></th>
+                            data-translate="simpleServiceApp.collection.createdBy">Created By</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.collection.createdDate">Created Date</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.collection.lastModifiedBy">Last Modified By</span>-->
@@ -81,7 +126,7 @@
                         <div class="btn-group flex-btn-group-container">
 
                             <button type="submit"
-                                    ui-sref="collection-detail({id:collection.id})"
+                                    ng-click="vm.confirmCollection(collection)"
                                     class="btn btn-mint btn-sm">
                                 <span class="glyphicon glyphicon-hand-up"></span>
                                 <span class="hidden-sm-down">确认收款</span>

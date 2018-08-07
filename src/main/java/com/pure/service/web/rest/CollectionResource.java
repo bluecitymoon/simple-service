@@ -72,10 +72,10 @@ public class CollectionResource {
     @PostMapping("/collections/confirm")
     @Timed
     public ResponseEntity<Collection> confirmCustomerCollection(@RequestBody Collection collection) {
-        log.debug("REST request to save Collection : {}", collection);
-        if (collection.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new collection cannot already have an ID")).body(null);
-        }
+        log.debug("REST request to confirm Collection : {}", collection);
+//        if (collection.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new collection cannot already have an ID")).body(null);
+//        }
 //
 //        if (contractService.contractAlreadyGenerated(collection.getSequenceNumber())) {
 //            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "contractalreadygenerate", "合同已生成")).body(null);

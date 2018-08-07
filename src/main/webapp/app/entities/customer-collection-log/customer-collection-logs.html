@@ -1,0 +1,88 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerCollectionLog.home.title">Customer Collection Logs</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.customerCollectionLog.home.title">Customer Collection Logs</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="customer-collection-log.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.customerCollectionLog.home.createLabel">
+                        Create new Customer Collection Log
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.customerCollectionLog.serialNumber">Serial Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyShouldCollected"><span data-translate="simpleServiceApp.customerCollectionLog.moneyShouldCollected">Money Should Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.customerCollectionLog.moneyCollected">Money Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="balance"><span data-translate="simpleServiceApp.customerCollectionLog.balance">Balance</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerCollectionLog.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerCollectionLog.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerCollectionLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerCollectionLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="collection.sequenceNumber"><span data-translate="simpleServiceApp.customerCollectionLog.collection">Collection</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span data-translate="simpleServiceApp.customerCollectionLog.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerCollectionLog in vm.customerCollectionLogs track by customerCollectionLog.id">
+                    <td><a ui-sref="customer-collection-log-detail({id:customerCollectionLog.id})">{{customerCollectionLog.id}}</a></td>
+                    <td>{{customerCollectionLog.serialNumber}}</td>
+                    <td>{{customerCollectionLog.moneyShouldCollected}}</td>
+                    <td>{{customerCollectionLog.moneyCollected}}</td>
+                    <td>{{customerCollectionLog.balance}}</td>
+                    <td>{{customerCollectionLog.createdBy}}</td>
+                    <td>{{customerCollectionLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCollectionLog.lastModifiedBy}}</td>
+                    <td>{{customerCollectionLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        <a ui-sref="collection-detail({id:customerCollectionLog.collection.id})">{{customerCollectionLog.collection.sequenceNumber}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="customer-detail({id:customerCollectionLog.customer.id})">{{customerCollectionLog.customer.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer-collection-log-detail({id:customerCollectionLog.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-collection-log.edit({id:customerCollectionLog.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-collection-log.delete({id:customerCollectionLog.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

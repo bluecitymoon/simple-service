@@ -1,0 +1,57 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "collection",
+            "otherEntityName": "collection",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "sequenceNumber"
+        },
+        {
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "serialNumber",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "moneyShouldCollected",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "moneyCollected",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "balance",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180806061102",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_collection_log",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

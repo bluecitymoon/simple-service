@@ -54,6 +54,7 @@
                 "collectionStatus": "Collection Status",
                 "contractPackage": "Contract Package",
                 "vistedCustomerStatus": "Visted Customer Status",
+                "customerCollectionLog": "Customer Collection Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

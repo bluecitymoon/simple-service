@@ -41,4 +41,6 @@ public interface CollectionService {
     void delete(Long id);
 
     void confirmCustomerCollection(Collection collection);
+
+    boolean customerCardPaid(String serialNumber);
 }

@@ -2,6 +2,8 @@ package com.pure.service.service.impl;
 
 import com.pure.service.domain.Collection;
 import com.pure.service.domain.CollectionStatus;
+import com.pure.service.domain.CustomerCard;
+import com.pure.service.domain.CustomerCollectionLog;
 import com.pure.service.repository.CollectionRepository;
 import com.pure.service.repository.CollectionStatusRepository;
 import com.pure.service.repository.ContractRepository;
@@ -9,6 +11,7 @@ import com.pure.service.repository.ContractTemplateRepository;
 import com.pure.service.repository.CustomerCardRepository;
 import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractService;
+import com.pure.service.service.CustomerCollectionLogService;
 import com.pure.service.service.dto.enumurations.CollectionStatusEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 
 /**
@@ -44,6 +50,10 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Autowired
     private CustomerCardRepository customerCardRepository;
+
+    @Autowired
+    private CustomerCollectionLogService customerCollectionLogService;
+
 
 
     public CollectionServiceImpl(CollectionRepository collectionRepository) {
@@ -122,7 +132,22 @@ public class CollectionServiceImpl implements CollectionService {
         CollectionStatus collectionStatus = collectionStatusRepository.findByCode(CollectionStatusEnum.collected.name());
         collection.setStatus(collectionStatus);
 
-        save(collection);
+        Collection savedCollection = collectionRepository.save(collection);
+
+        List<CustomerCard> cards = customerCardRepository.findBySerialNumber(collection.getSequenceNumber());
+
+        CustomerCollectionLog log = new CustomerCollectionLog();
+        log = log.collection(savedCollection)
+            .balance(collection.getBalance())
+            .serialNumber(collection.getSequenceNumber())
+            .moneyCollected(collection.getMoneyCollected())
+            .moneyShouldCollected(collection.getMoneyShouldCollected());
+
+        if (!CollectionUtils.isEmpty(cards)) {
+            log.setCustomer(cards.get(0).getCustomer());
+        }
+
+        customerCollectionLogService.save(log);
 //
 //        //确实收款后生成合同
 //        String sequenceNumber = collection.getSequenceNumber();
@@ -133,7 +158,6 @@ public class CollectionServiceImpl implements CollectionService {
 //            return;
 //        }
 //
-//        List<CustomerCard> cards = customerCardRepository.findBySerialNumber(sequenceNumber);
 //        if (CollectionUtils.isEmpty(cards)) {
 //
 //            log.info("该客户没有生成卡，确认收款时不自动生成合同，流水号 {}", sequenceNumber);
@@ -151,5 +175,17 @@ public class CollectionServiceImpl implements CollectionService {
 //
 //            contract.setActive(true);
 //        }
+    }
+
+    @Override
+    public boolean customerCardPaid(String serialNumber) {
+
+        Collection collection = collectionRepository.findBySequenceNumber(serialNumber);
+
+        if (collection == null) {
+            return false;
+        }
+
+        return collection.getStatus().getCode().equals(CollectionStatusEnum.collected.name());
     }
 }

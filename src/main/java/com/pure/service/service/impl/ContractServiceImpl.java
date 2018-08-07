@@ -7,16 +7,19 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.repository.CollectionRepository;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.ContractStatusRepository;
 import com.pure.service.repository.ContractTemplateRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
+import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.dto.enumurations.ContractStatusEnum;
 import com.pure.service.service.dto.enumurations.CustomerCommunicationLogTypeEnum;
+import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -60,6 +63,12 @@ public class ContractServiceImpl implements ContractService{
     @Autowired
     private CustomerCommunicationLogRepository customerCommunicationLogRepository;
 
+    @Autowired
+    private CollectionRepository collectionRepository;
+
+    @Autowired
+    private CollectionService collectionService;
+
     public ContractServiceImpl(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
     }
@@ -71,8 +80,19 @@ public class ContractServiceImpl implements ContractService{
      * @return the persisted entity
      */
     @Override
-    public Contract save(Contract contract) {
+    public Contract save(Contract contract) throws CollectionNotPaidException {
         log.debug("Request to save Contract : {}", contract);
+
+        if (contract.getId() == null) {
+
+            String serialNumber = contract.getSerialNumber();
+            if (!collectionService.customerCardPaid(serialNumber)) {
+
+                throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
+            }
+
+
+        }
         return contractRepository.save(contract);
     }
 

@@ -2,6 +2,7 @@ package com.pure.service.service;
 
 import com.pure.service.domain.Contract;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,7 @@ public interface ContractService {
      * @param contract the entity to save
      * @return the persisted entity
      */
-    Contract save(Contract contract);
+    Contract save(Contract contract) throws CollectionNotPaidException;
 
     /**
      *  Get all the contracts.
