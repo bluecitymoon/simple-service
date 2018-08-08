@@ -18,18 +18,14 @@
         vm.save = save;
         vm.customerId = $stateParams.cid;
 
-        if (!vm.customerId) {
+        vm.searchPersonWithKeyword = function (keyword) {
 
-            //TODO
-            var parameters = {
-                page: 0,
-                size: 100000,
-                sort: 'id,desc',
-                department: 'operation'
-            };
+            if (!keyword) return;
 
-            vm.customers = Customer.query(parameters);
-        }
+            Customer.queryByKeyword({keyword: keyword, sort: 'id,desc', department: 'operation', size: 50}, function (response) {
+                vm.customers = response;
+            })
+        };
 
         $scope.$watch("vm.student.customer", function (newVal, oldVal) {
 

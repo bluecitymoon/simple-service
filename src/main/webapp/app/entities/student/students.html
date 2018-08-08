@@ -2,22 +2,65 @@
     <h1 class="page-title">学员列表</h1>
 </div>
 
+<div class="panel panel-primary panel-bordered-dark">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">查询学员</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">客户姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.customerName" placeholder="客户姓名"
+                               class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">学员姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.name" placeholder="学员姓名"
+                               class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">联系电话（客户）</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.customerPhoneNumber" placeholder="联系电话"
+                               class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary btn-block" type="button"
+                                ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-block btn-info" type="button" ui-sref="student.new"><i
+                                class="fa fa-plus"></i>新增学员
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
 <jhi-alert></jhi-alert>
 
 <div class="panel">
     <div class="panel-body">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-4 no-padding-left">
-                    <button class="btn btn-primary" ui-sref="student.new">
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span data-translate="simpleServiceApp.student.home.createLabel">
-                        Create new Student
-                    </span>
-                    </button>
-                </div>
-            </div>
-        </div>
+
         <br/>
         <div class="table-responsive">
             <table class="jh-table table table-striped">

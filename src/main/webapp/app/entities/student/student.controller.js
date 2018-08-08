@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope'];
 
-    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope) {
 
         var vm = this;
 
@@ -17,14 +17,35 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
-        loadAll();
+        vm.clearConditions = function () {
+            vm.searchCondition = {};
+        };
 
-        function loadAll () {
-            Student.query({
-                page: pagingParams.page - 1,
+        $scope.pagination = {
+            currentPageNumber: 1,
+            totalItems: 0
+        };
+        vm.loadAll = function () {
+
+            var parameters = {
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
-            }, onSuccess, onError);
+            };
+
+            if (vm.searchCondition.name) {
+                parameters["name.contains"] = vm.searchCondition.name;
+            }
+            if (vm.searchCondition.customerName) {
+                parameters["customerName"] = vm.searchCondition.customerName;
+            }
+
+            if (vm.searchCondition.customerPhoneNumber) {
+                parameters["customerPhoneNumber"] = vm.searchCondition.customerPhoneNumber;
+            }
+
+            Student.query(parameters, onSuccess, onError);
+
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -42,7 +63,7 @@
             function onError(error) {
                 AlertService.error(error.data.message);
             }
-        }
+        };
 
         function loadPage(page) {
             vm.page = page;
