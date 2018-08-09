@@ -136,8 +136,8 @@
             if (vm.searchCondition.customerStatus) {
                 parameters["statusId.equals"] = vm.searchCondition.customerStatus.id;
             }
-            if (vm.searchCondition.customerStatus) {
-                parameters["vistedCustomerStatusId.equals"] = vm.searchCondition.vistedStatus.id;
+            if (vm.searchCondition.visitedCustomerStatus) {
+                parameters["vistedCustomerStatusId.equals"] = vm.searchCondition.visitedCustomerStatus.id;
             }
 
             if (vm.searchCondition.ccAssignStatus) {

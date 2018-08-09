@@ -38,7 +38,7 @@ public class DateUtil {
     }
 
     public static Instant getLastSecondOfMonth() {
-        LocalDateTime localDateTime =LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
 
         int year = localDateTime.getYear(), month = localDateTime.getMonthValue();
         int lastDayOfMonth = getLastDayOfMonth(year, month);
@@ -53,7 +53,7 @@ public class DateUtil {
     }
 
     public static Instant getFirstSecondOfMonth() {
-        LocalDateTime localDateTime =LocalDateTime.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
 
         int year = localDateTime.getYear(), month = localDateTime.getMonthValue();
 
@@ -61,7 +61,7 @@ public class DateUtil {
         if (month < 10) {
             mouthString = "0" + month;
         }
-        String firstSecond = "" + year + "-" + mouthString + "-"  + "01T00:00:01.00Z";
+        String firstSecond = "" + year + "-" + mouthString + "-" + "01T00:00:01.00Z";
 
         return Instant.parse(firstSecond);
     }
@@ -71,7 +71,7 @@ public class DateUtil {
         Calendar calendar = Calendar.getInstance();
 
         calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month -1);
+        calendar.set(Calendar.MONTH, month - 1);
 
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
