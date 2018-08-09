@@ -362,7 +362,7 @@ public class CustomerServiceImpl implements CustomerService {
         elements.forEach(element -> {
 
             Integer totalCount =  element.getConsideringCount() + element.getDealedCount() + element.getErrorInformation() + element.getAgeTooSmallCount() + element.getNewCreatedCount()
-                + element.getNoWillingCount() + element.getScheduledCount();
+                + element.getNoWillingCount() + element.getScheduledCount() +element.getVisitedCount();
             element.setTotalCount(totalCount);
 
             if (totalCount > 0) {
@@ -436,7 +436,20 @@ public class CustomerServiceImpl implements CustomerService {
         }
 
         List<StatusReportElement> elements = new ArrayList<>(locationBasedReportMap.values());
+        elements.forEach(element -> {
 
+            Integer totalCount =  element.getConsideringCount() + element.getDealedCount() + element.getErrorInformation() + element.getAgeTooSmallCount() + element.getNewCreatedCount()
+                + element.getNoWillingCount() + element.getScheduledCount() + element.getVisitedCount();
+            element.setTotalCount(totalCount);
+
+            if (totalCount > 0) {
+                Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) * 100 / totalCount;
+
+                BigDecimal finishRateDecimal = new BigDecimal(finishRate);
+                BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+                element.setFinishRate(roundedDecimal.toString() + "%");
+            }
+        });
         return elements;
     }
     @Override

@@ -19,6 +19,15 @@ public class StatusReportElement implements Serializable {
     private Integer newCreatedCount = 0;
     private Integer totalCount = 0;
     private String valuableRate = "0";
+    private String finishRate = "0";
+
+    public String getFinishRate() {
+        return finishRate;
+    }
+
+    public void setFinishRate(String finishRate) {
+        this.finishRate = finishRate;
+    }
 
     public String getLocation() {
         return location;

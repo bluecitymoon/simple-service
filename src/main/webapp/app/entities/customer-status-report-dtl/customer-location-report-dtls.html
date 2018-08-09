@@ -135,42 +135,45 @@
 <!--</div>-->
 <!--</div>-->
 
+<!--<div class="panel">-->
+    <!--<div class="panel-body">-->
+        <!--<uib-tabset>-->
+            <!--<uib-tab heading="总览">-->
+
+                <!--<div class="pad-all" style="">-->
+                    <!--<ng-echarts class="echarts" ec-config="lineConfig" ec-option="lineOption"-->
+                                <!--style="height: 455px; width: 1380px"></ng-echarts>-->
+                <!--</div>-->
+            <!--</uib-tab>-->
+            <!--<uib-tab heading="基于客户状态的TMK报告图表集">-->
+
+                <!--<div ng-repeat="chart in chartdtls track by chart.chartCode">-->
+                    <!--<div class="col-md-4">-->
+
+                        <!--<h3 class="panel-title">{{chart.chartName}}</h3>-->
+                        <!--<ng-echarts class="echarts" ec-config="lineConfig" ec-option="chart.lineOption"-->
+                                    <!--style="height: 455px; width: 300px"></ng-echarts>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</uib-tab>-->
+        <!--</uib-tabset>-->
+    <!--</div>-->
+<!--</div>-->
+
+
 <div class="panel">
+
+    <h3 class="panel-title">区域报告概览列表</h3>
+
     <div class="panel-body">
-        <uib-tabset>
-            <uib-tab heading="总览">
 
-                <div class="pad-all" style="">
-                    <ng-echarts class="echarts" ec-config="lineConfig" ec-option="lineOption"
-                                style="height: 455px; width: 1380px"></ng-echarts>
-                </div>
-            </uib-tab>
-            <uib-tab heading="基于客户状态的TMK报告图表集">
-
-                <div ng-repeat="chart in chartdtls track by chart.chartCode">
-                    <div class="col-md-4">
-
-                        <h3 class="panel-title">{{chart.chartName}}</h3>
-                        <ng-echarts class="echarts" ec-config="lineConfig" ec-option="chart.lineOption"
-                                    style="height: 455px; width: 300px"></ng-echarts>
-                    </div>
-
-                </div>
-            </uib-tab>
-        </uib-tabset>
-    </div>
-</div>
-<div class="panel">
-    <div class="panel-body">
-        <h3 class="panel-title">TMK报告概览列表</h3>
         <div class="table-responsive">
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> </th>-->
-                    <th><span data-translate="simpleServiceApp.customerStatusReportDtl.userId">User Id</span>
-                    </th>
-                    <th><span data-translate="simpleServiceApp.customerStatusReportDtl.userName">User Name</span>
+                    <th><span>区域</span>
                     </th>
                     <th><span
                             data-translate="simpleServiceApp.customerStatusReportDtl.ageTooSmallCount">Age Too Small Count</span>
@@ -187,8 +190,7 @@
                     <th><span
                             data-translate="simpleServiceApp.customerStatusReportDtl.scheduledCount">Scheduled Count</span>
                     </th>
-                    <th>
-                        <span>已到访</span>
+                    <th><span>已到访</span>
                     </th>
                     <th><span
                             data-translate="simpleServiceApp.customerStatusReportDtl.dealedCount">Dealed Count</span>
@@ -206,10 +208,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customerStatusReportDtl in vm.customerStatusReportDtls track by customerStatusReportDtl.userId">
-                    <!--<td><a ui-sref="customer-status-report-dtl-detail({id:customerStatusReportDtl.id})">{{customerStatusReportDtl.id}}</a></td>-->
-                    <td>{{customerStatusReportDtl.userId}}</td>
-                    <td>{{customerStatusReportDtl.userName}}</td>
+                <tr ng-repeat="customerStatusReportDtl in vm.locationCustomerStatusReportDtls track by customerStatusReportDtl.locationId">
+                    <td>{{customerStatusReportDtl.location}}</td>
                     <td>{{customerStatusReportDtl.ageTooSmallCount}}</td>
                     <td>{{customerStatusReportDtl.errorInformation}}</td>
                     <td>{{customerStatusReportDtl.noWillingCount}}</td>

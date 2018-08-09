@@ -55,6 +55,27 @@
 
         }
 
+        function reloadChart() {
+
+            var dataSeries = [];
+            angular.forEach(vm.customerStatusReportDtls, function (element) {
+                $scope.lineOption.legend.data.push(element.userName);
+
+                var singleElement = {
+                    name: element.userName,
+                    type: 'bar',
+                    barGap: 0,
+                    label: labelOption,
+                    data: [element.totalCount, element.newCreatedCount, element.dealedCount, element.errorInformation, element.scheduledCount, element.consideringCount]
+                };
+
+                dataSeries.push(singleElement);
+            });
+
+            $scope.lineOption.series = dataSeries;
+
+        }
+
         function loadAll (type) {
 
             vm.searchCondition.queryType = type;
@@ -76,6 +97,8 @@
             function onSuccess(data, headers) {
                 vm.customerStatusReportDtls = data.data;
                 $scope.chartdtls = data.chart;
+
+                reloadChart();
 
                 angular.forEach($scope.chartdtls, function (chart) {
 
@@ -132,7 +155,6 @@
 
                 console.log(vm.chartdtls);
 
-               // reloadChart();
             }
             function onError(error) {
                 AlertService.error(error.data.message);
@@ -156,26 +178,7 @@
             vm.datePickerOpenStatus[date] = true;
         }
 
-        function reloadChart() {
 
-            var dataSeries = [];
-            angular.forEach(vm.customerStatusReportDtls, function (element) {
-                $scope.lineOption.legend.data.push(element.userName);
-
-                var singleElement = {
-                    name: element.userName,
-                    type: 'bar',
-                    barGap: 0,
-                    label: labelOption,
-                    data: [element.totalCount, element.newCreatedCount, element.dealedCount, element.errorInformation, element.scheduledCount, element.consideringCount]
-                };
-
-                dataSeries.push(singleElement);
-            });
-
-            $scope.lineOption.series = dataSeries;
-
-        }
         $scope.lineConfig = {
             theme:'shine',
             // event: [{click:onClick}],
