@@ -62,4 +62,8 @@ public interface CustomerService {
     void updateCustomerStatusForNewSchedule(CustomerCommunicationSchedule schedule);
 
     List<StatusReportElement> getLocationStatusReport(CustomerStatusRequest customerStatusRequest);
+
+    Customer preloadMergedCustomer(Long oid, Long tid);
+
+    Customer mergeCustomer(Long originalId, Long targetId, Customer customer);
 }

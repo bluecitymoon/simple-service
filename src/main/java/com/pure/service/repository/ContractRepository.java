@@ -18,4 +18,6 @@ public interface ContractRepository extends JpaRepository<Contract, Long>, JpaSp
     List<Contract> findBySerialNumber(String serialNumber);
 
     List<Contract> findByCustomerCard_Id(Long cardId);
+
+    List<Contract> findByCustomer_Id(Long id);
 }

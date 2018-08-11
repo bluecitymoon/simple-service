@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title" id="myCustomerLabel">合并客户资料</h4>
+</div>
+<div class="modal-body">
+    <jhi-alert></jhi-alert>
+
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+
+            <div class="form-group" >
+                <label class="text-mint">合并目标客户</label>
+                <small>（输入客户姓名或者手机号关键字搜索）</small>
+                <ui-select ng-model="vm.targetCustomer">
+                    <ui-select-match>
+                        {{$select.selected.name}}
+                    </ui-select-match>
+                    <ui-select-choices
+                            refresh="vm.searchPersonWithKeyword($select.search)"
+                            repeat="item in (vm.customers | filter: $select.search) track by item.id">
+                        <span ng-bind="item.name"></span><span class="pull-right" ng-bind="item.contactPhoneNumber"></span>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div ng-include="'app/entities/customer/left-customer.html'"></div>
+        </div>
+        <div class="col-md-4">
+            <div ng-include="'app/entities/customer/right-customer.html'"></div>
+        </div>
+        <div class="col-md-4">
+            <div ng-include="'app/entities/customer/final-customer.html'"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+            data-translate="entity.action.cancel">Cancel</span>
+    </button>
+    <button ng-click="vm.mergeCustomer()" type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+        <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确认合并</span>
+    </button>
+</div>

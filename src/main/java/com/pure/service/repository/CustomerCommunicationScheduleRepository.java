@@ -16,4 +16,6 @@ public interface CustomerCommunicationScheduleRepository extends JpaRepository<C
     @Query("select customer_schedule from CustomerCommunicationSchedule customer_schedule where customer_schedule.follower.login = ?#{principal.username}")
     List<CustomerCommunicationSchedule> findByFollowerIsCurrentUser();
 
+    List<CustomerCommunicationSchedule> findByCustomer_Id(Long id);
+
 }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.util.List;
+
 
 /**
  * Spring Data JPA repository for the CustomerCommunicationLog entity.
@@ -13,4 +15,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CustomerCommunicationLogRepository extends JpaRepository<CustomerCommunicationLog, Long>, JpaSpecificationExecutor<CustomerCommunicationLog> {
 
+    List<CustomerCommunicationLog> findByCustomer_Id(Long customerId);
 }

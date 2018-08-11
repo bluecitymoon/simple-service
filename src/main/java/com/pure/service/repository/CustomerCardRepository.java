@@ -20,4 +20,6 @@ public interface CustomerCardRepository extends JpaRepository<CustomerCard, Long
     Integer getCustomerCardCount(Integer customerId);
 
     List<CustomerCard> findBySerialNumber(String serialNumber);
+
+    List<CustomerCard> findByCustomer_Id(Long id);
 }

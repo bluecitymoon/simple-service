@@ -15,6 +15,7 @@ import com.pure.service.service.dto.CustomerFollowLog;
 import com.pure.service.service.dto.dto.CombinedReport;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.MergeCustomer;
 import com.pure.service.service.dto.request.StatusReportElement;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -95,6 +96,19 @@ public class CustomerResource {
             .body(result);
     }
 
+    @PostMapping("/customers/merge")
+    @Timed
+    public ResponseEntity<Customer> mergeCustomer( @RequestBody MergeCustomer customer) throws URISyntaxException {
+        log.debug("REST request to merge Customer : {}", customer);
+//        if (customer.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new customer cannot already have an ID")).body(null);
+//        }
+        Customer result = customerService.mergeCustomer(customer.getOriginalId(), customer.getTargetId(), customer.getCustomer());
+
+        return ResponseEntity.created(new URI("/api/customers/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
     /**
      * PUT  /customers : Updates an existing customer.
      *
@@ -166,7 +180,7 @@ public class CustomerResource {
         return customerService.getCurrentUserOverview();
     }
 
-    public void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
+    private void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
 
         Integer month = customerStatusRequest.getMonth();
         Integer year = customerStatusRequest.getYear();
@@ -405,6 +419,15 @@ public class CustomerResource {
     public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
         log.debug("REST request to get Customer : {}", id);
         Customer customer = customerService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(customer));
+    }
+
+    @GetMapping("/customers/premerge/{oid}/{tid}")
+    @Timed
+    public ResponseEntity<Customer> preloadMergedCustomer(@PathVariable Long oid, @PathVariable Long tid) {
+
+        Customer customer = customerService.preloadMergedCustomer(oid, tid);
+
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(customer));
     }
 

@@ -115,6 +115,33 @@
                 });
             }]
         })
+
+            .state('customer-detail.merge', {
+                parent: 'customer-detail',
+                url: '/detail/merge',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/customer/customer-merge-dialog.html',
+                        controller: 'CustomerMergeDialogController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Customer', function(Customer) {
+                                return Customer.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('^', {}, { reload: false });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
+
         .state('customer.new', {
             parent: 'customer',
             url: '/new',

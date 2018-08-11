@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class AutoReassignCustomerTask {
 
@@ -17,6 +19,8 @@ public class AutoReassignCustomerTask {
     @Scheduled(cron = "01 01 00 1 * ?")
 //    @Scheduled(cron = "01 59 20 8 * ?")
     public void reassign() {
+
+        LocalDateTime now = LocalDateTime.now();
 
         log.info("开始启动自动重分配任务");
     }

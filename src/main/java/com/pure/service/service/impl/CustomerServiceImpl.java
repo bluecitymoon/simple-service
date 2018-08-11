@@ -1,20 +1,29 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Contract;
 import com.pure.service.domain.Customer;
+import com.pure.service.domain.CustomerCard;
+import com.pure.service.domain.CustomerCollectionLog;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.Student;
 import com.pure.service.domain.Task;
 import com.pure.service.domain.TaskStatus;
 import com.pure.service.domain.User;
+import com.pure.service.repository.ContractRepository;
+import com.pure.service.repository.CustomerCardRepository;
+import com.pure.service.repository.CustomerCollectionLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
+import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
+import com.pure.service.repository.StudentRepository;
 import com.pure.service.repository.TaskStatusRepository;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.security.SecurityUtils;
@@ -37,12 +46,14 @@ import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -77,6 +88,24 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CustomerCommunicationScheduleRepository scheduleRepository;
+
+    @Autowired
+    private CustomerCommunicationLogRepository logRepository;
+
+    @Autowired
+    private CustomerCardRepository cardRepository;
+
+    @Autowired
+    private CustomerCollectionLogRepository collectionLogRepository;
+
+    @Autowired
+    private ContractRepository contractRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
@@ -452,6 +481,146 @@ public class CustomerServiceImpl implements CustomerService {
         });
         return elements;
     }
+
+    @Override
+    public Customer preloadMergedCustomer(Long oid, Long tid) {
+
+        Customer leftCustomer = findOne(oid);
+        Customer rightCustomer = findOne(tid);
+
+        Customer mergedCustomer = new Customer();
+
+        BeanUtils.copyProperties(leftCustomer, mergedCustomer);
+        mergedCustomer.setId(null);
+
+        String leftName = StringUtils.isEmpty(leftCustomer.getName())? "": leftCustomer.getName();
+        String rightName = StringUtils.isEmpty(rightCustomer.getName())? "": rightCustomer.getName();
+
+        mergedCustomer.setName(leftName + "/" + rightName);
+        mergedCustomer.setContactPhoneNumber(leftCustomer.getContactPhoneNumber() + "/" + rightCustomer.getContactPhoneNumber());
+
+        return mergedCustomer;
+    }
+
+    @Override
+    public Customer mergeCustomer(Long originalId, Long targetId, Customer customer) {
+
+        customer.setNewOrder(null);
+        Customer finalCustomer = save(customer);
+
+        Customer leftCustomer = findOne(originalId);
+        Customer rightCustomer = findOne(targetId);
+
+        finalCustomer.setStatus(leftCustomer.getStatus());
+
+        mergeSchedules(leftCustomer, rightCustomer, finalCustomer);
+        mergeLogs(leftCustomer, rightCustomer, finalCustomer);
+        mergeTasks(leftCustomer, rightCustomer, finalCustomer);
+        mergeCards(leftCustomer, rightCustomer, finalCustomer);
+        mergeCollectionLogs(leftCustomer, rightCustomer, finalCustomer);
+        mergeContracts(leftCustomer, rightCustomer, finalCustomer);
+        mergeStudents(leftCustomer, rightCustomer, finalCustomer);
+
+        //delete old customers
+        delete(leftCustomer.getId());
+        delete(rightCustomer.getId());
+
+        saveMergeLog(finalCustomer);
+
+        return finalCustomer;
+    }
+
+    private void mergeStudents(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+
+        List<Student> leftStudents = studentRepository.findByCustomer_Id(leftCustomer.getId());
+        List<Student> rightStudents = studentRepository.findByCustomer_Id(rightCustomer.getId());
+
+        leftStudents.addAll(rightStudents);
+
+        leftStudents.forEach(student -> student.setCustomer(finalCustomer));
+
+        studentRepository.save(leftStudents);
+    }
+
+    private void saveMergeLog(Customer finalCustomer) {
+
+        CustomerCommunicationLog log = new CustomerCommunicationLog();
+        log.setCustomer(finalCustomer);
+        log.setComments("客户信息合并");
+
+        customerCommunicationLogRepository.save(log);
+    }
+
+    private void mergeContracts(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+
+        List<Contract> leftContracts = contractRepository.findByCustomer_Id(leftCustomer.getId());
+        List<Contract> rightContracts = contractRepository.findByCustomer_Id(rightCustomer.getId());
+
+        leftContracts.addAll(rightContracts);
+
+        leftContracts.forEach(contract -> contract.setCustomer(finalCustomer));
+
+        contractRepository.save(leftContracts);
+    }
+
+    private void mergeCollectionLogs(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+
+        List<CustomerCollectionLog> leftLogs = collectionLogRepository.findByCustomer_Id(leftCustomer.getId());
+        List<CustomerCollectionLog> rightLogs = collectionLogRepository.findByCustomer_Id(rightCustomer.getId());
+
+        leftLogs.addAll(rightLogs);
+
+        leftLogs.forEach(customerCollectionLog -> customerCollectionLog.setCustomer(finalCustomer));
+
+        collectionLogRepository.save(leftLogs);
+    }
+
+
+    private void mergeCards(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+
+        List<CustomerCard> leftCards = cardRepository.findByCustomer_Id(leftCustomer.getId());
+        List<CustomerCard> rightCards = cardRepository.findByCustomer_Id(rightCustomer.getId());
+
+        leftCards.addAll(rightCards);
+
+        leftCards.forEach(customerCard -> customerCard.setCustomer(finalCustomer));
+        cardRepository.save(leftCards);
+    }
+
+    private void mergeTasks(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+        List<CustomerTrackTask> leftTasks = customerTrackTaskRepository.findByCustomer_Id(leftCustomer.getId());
+        List<CustomerTrackTask> rightTasks = customerTrackTaskRepository.findByCustomer_Id(rightCustomer.getId());
+
+        leftTasks.addAll(rightTasks);
+
+        leftTasks.forEach(customerTrackTask -> customerTrackTask.setCustomer(finalCustomer));
+
+        customerTrackTaskRepository.save(leftTasks);
+
+    }
+
+    private void mergeLogs(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+
+        List<CustomerCommunicationLog> leftLogs = customerCommunicationLogRepository.findByCustomer_Id(leftCustomer.getId());
+        List<CustomerCommunicationLog> rightLogs = customerCommunicationLogRepository.findByCustomer_Id(rightCustomer.getId());
+        leftLogs.addAll(rightLogs);
+
+        leftLogs.forEach(log -> log.setCustomer(finalCustomer));
+
+        logRepository.save(leftLogs);
+    }
+
+    private void mergeSchedules(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
+
+        List<CustomerCommunicationSchedule> leftSchdules = scheduleRepository.findByCustomer_Id(leftCustomer.getId());
+        List<CustomerCommunicationSchedule> rightSchedules = scheduleRepository.findByCustomer_Id(rightCustomer.getId());
+
+        leftSchdules.addAll(rightSchedules);
+        leftSchdules.forEach(schedule -> schedule.setCustomer(finalCustomer));
+
+        scheduleRepository.save(leftSchdules);
+    }
+
     @Override
     public Overview getCurrentUserOverview() {
 

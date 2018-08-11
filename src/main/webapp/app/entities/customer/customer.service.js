@@ -34,6 +34,12 @@
             'getOverview' : {
                 method: 'GET',
                 url: 'api/customers/overview'
+            },
+            'preloadMergedCustomer': {
+                url: 'api/customers/premerge/:oid/:tid', method: 'GET'
+            },
+            'mergeCustomer': {
+                url: 'api/customers/merge', method: 'POST'
             }
         });
     }
