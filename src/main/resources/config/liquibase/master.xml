@@ -56,6 +56,7 @@
     <include file="config/liquibase/changelog/20180815032729_added_entity_ClassArrangement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180815032823_added_entity_ClassArrangementStatus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180815034331_added_entity_StudentClassLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815100416_added_entity_CountNumber.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -92,6 +93,9 @@
     <include file="config/liquibase/changelog/20180801020605_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180801063747_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180803152352_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815064145_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815100925_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815122248_changelog.xml" relativeToChangelogFile="false"/>
 
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
@@ -114,5 +118,6 @@
     <include file="config/liquibase/changelog/20180806061102_added_entity_constraints_CustomerCollectionLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180815032729_added_entity_constraints_ClassArrangement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180815034331_added_entity_constraints_StudentClassLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815100416_added_entity_constraints_CountNumber.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

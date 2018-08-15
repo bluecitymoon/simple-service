@@ -26,14 +26,15 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="startDate"><span data-translate="simpleServiceApp.classArrangement.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.classArrangement.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="planedTeacher.name"><span data-translate="simpleServiceApp.classArrangement.planedTeacher">Planed Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actualTeacher.name"><span data-translate="simpleServiceApp.classArrangement.actualTeacher">Actual Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status.name"><span data-translate="simpleServiceApp.classArrangement.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="clazz.name"><span data-translate="simpleServiceApp.classArrangement.clazz">Clazz</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.classArrangement.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.classArrangement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.classArrangement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.classArrangement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="planedTeacher.name"><span data-translate="simpleServiceApp.classArrangement.planedTeacher">Planed Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="actualTeacher.name"><span data-translate="simpleServiceApp.classArrangement.actualTeacher">Actual Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="status.name"><span data-translate="simpleServiceApp.classArrangement.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                   <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,10 +42,6 @@
                     <td><a ui-sref="class-arrangement-detail({id:classArrangement.id})">{{classArrangement.id}}</a></td>
                     <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{classArrangement.createdBy}}</td>
-                    <td>{{classArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{classArrangement.lastModifiedBy}}</td>
-                    <td>{{classArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>
                         <a ui-sref="teacher-detail({id:classArrangement.planedTeacher.id})">{{classArrangement.planedTeacher.name}}</a>
                     </td>
@@ -54,6 +51,14 @@
                     <td>
                         <a ui-sref="class-arrangement-status-detail({id:classArrangement.status.id})">{{classArrangement.status.name}}</a>
                     </td>
+                    <td>
+                        <a ui-sref="product-detail({id:classArrangement.clazz.id})">{{classArrangement.clazz.name}}</a>
+                    </td>
+                    <td>{{classArrangement.createdBy}}</td>
+                    <td>{{classArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.lastModifiedBy}}</td>
+                    <td>{{classArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

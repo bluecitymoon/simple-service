@@ -23,10 +23,7 @@ public class ClassArrangementRule implements Serializable {
     private Instant estimateStartDate;
 
     @Column(name = "estimate_end_date")
-    private Instant estimateDate;
-
-    @Column(name = "count_number")
-    private Integer countNumber;
+    private Instant estimateEndDate;
 
     @Column(name = "estimate_start_time")
     private String estimateStartTime;
@@ -42,6 +39,9 @@ public class ClassArrangementRule implements Serializable {
 
     @ManyToOne
     private ClassArrangementRuleLoopWay loopWay;
+
+    @ManyToOne
+    private CountNumber countNumber;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -61,21 +61,30 @@ public class ClassArrangementRule implements Serializable {
         return this;
     }
 
-    public Instant getEstimateDate() {
-        return estimateDate;
+    public Instant getEstimateEndDate() {
+        return estimateEndDate;
     }
 
-    public void setEstimateDate(Instant estimateDate) {
-        this.estimateDate = estimateDate;
+    public void setEstimateEndDate(Instant estimateEndDate) {
+        this.estimateEndDate = estimateEndDate;
     }
 
-    public Integer getCountNumber() {
+    public CountNumber getCountNumber() {
         return countNumber;
     }
 
-    public void setCountNumber(Integer countNumber) {
+    public void setCountNumber(CountNumber countNumber) {
         this.countNumber = countNumber;
     }
+
+    //
+//    public Integer getCountNumber() {
+//        return countNumber;
+//    }
+//
+//    public void setCountNumber(Integer countNumber) {
+//        this.countNumber = countNumber;
+//    }
 
     public void setEstimateStartDate(Instant estimateStartDate) {
         this.estimateStartDate = estimateStartDate;

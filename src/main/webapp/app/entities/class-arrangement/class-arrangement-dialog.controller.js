@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ClassArrangementDialogController', ClassArrangementDialogController);
 
-    ClassArrangementDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ClassArrangement', 'Teacher', 'ClassArrangementStatus'];
+    ClassArrangementDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ClassArrangement', 'Teacher', 'ClassArrangementStatus', 'Product'];
 
-    function ClassArrangementDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ClassArrangement, Teacher, ClassArrangementStatus) {
+    function ClassArrangementDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ClassArrangement, Teacher, ClassArrangementStatus, Product) {
         var vm = this;
 
         vm.classArrangement = entity;
@@ -17,6 +17,7 @@
         vm.save = save;
         vm.teachers = Teacher.query();
         vm.classarrangementstatuses = ClassArrangementStatus.query();
+        vm.products = Product.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

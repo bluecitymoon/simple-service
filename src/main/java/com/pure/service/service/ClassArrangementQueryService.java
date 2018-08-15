@@ -99,6 +99,9 @@ public class ClassArrangementQueryService extends QueryService<ClassArrangement>
             if (criteria.getStatusId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getStatusId(), ClassArrangement_.status, ClassArrangementStatus_.id));
             }
+            if (criteria.getClazzId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getClazzId(), ClassArrangement_.clazz, Product_.id));
+            }
         }
         return specification;
     }

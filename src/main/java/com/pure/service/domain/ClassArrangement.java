@@ -30,7 +30,6 @@ public class ClassArrangement extends AbstractAuditingEntity {
     @Column(name = "end_date")
     private Instant endDate;
 
-
     @ManyToOne
     private Teacher planedTeacher;
 
@@ -39,6 +38,9 @@ public class ClassArrangement extends AbstractAuditingEntity {
 
     @ManyToOne
     private ClassArrangementStatus status;
+
+    @ManyToOne
+    private Product clazz;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -113,6 +115,19 @@ public class ClassArrangement extends AbstractAuditingEntity {
 
     public void setStatus(ClassArrangementStatus classArrangementStatus) {
         this.status = classArrangementStatus;
+    }
+
+    public Product getClazz() {
+        return clazz;
+    }
+
+    public ClassArrangement clazz(Product product) {
+        this.clazz = product;
+        return this;
+    }
+
+    public void setClazz(Product product) {
+        this.clazz = product;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

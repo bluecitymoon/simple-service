@@ -42,6 +42,10 @@
         <dd>
             <a ui-sref="class-arrangement-status-detail({id:vm.classArrangement.status.id})">{{vm.classArrangement.status.name}}</a>
         </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.clazz">Clazz</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.classArrangement.clazz.id})">{{vm.classArrangement.clazz.name}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

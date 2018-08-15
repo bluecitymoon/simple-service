@@ -2,28 +2,29 @@
     "simpleServiceApp": {
         "classArrangement" : {
             "home": {
-                "title": "ÅÅ¿Î¼ÇÂ¼",
-                "createLabel": "ÅÅ¿Î",
-                "createOrEditLabel": "¹ÜÀíÅÅ¿Î"
+                "title": "æ’è¯¾è®°å½•",
+                "createLabel": "æ’è¯¾",
+                "createOrEditLabel": "ç®¡ç†æ’è¯¾"
             },
-            "created": "´´½¨³É¹¦£¡",
-            "updated": "¸üĞÂ³É¹¦£¡",
-            "deleted": "É¾³ı³É¹¦£¡",
+            "created": "åˆ›å»ºæˆåŠŸï¼",
+            "updated": "æ›´æ–°æˆåŠŸï¼",
+            "deleted": "åˆ é™¤æˆåŠŸï¼",
             "delete": {
-                "question": "ÄãÈ·¶¨ÒªÉ¾³ıÕâÌõ¼ÇÂ¼£¿"
+                "question": "ä½ ç¡®å®šè¦åˆ é™¤è¿™æ¡è®°å½•ï¼Ÿ"
             },
             "detail": {
-                "title": "ÅÅ¿ÎÏêÇé"
+                "title": "æ’è¯¾è¯¦æƒ…"
             },
-            "startDate": "¿ªÊ¼Ê±¼ä",
-            "endDate": "½áÊøÊ±¼ä",
-            "createdBy": "´´½¨ÈË",
-            "createdDate": "´´½¨Ê±¼ä",
-            "lastModifiedBy": "×î½üĞŞ¸ÄÈË",
-            "lastModifiedDate": "×î½üĞŞ¸ÄÊ±¼ä",
-            "planedTeacher": "¼Æ»®ÉÏ¿ÎÀÏÊ¦",
-            "actualTeacher": "Êµ¼ÊÉÏ¿ÎÀÏÊ¦",
-            "status": "×´Ì¬"
+            "startDate": "å¼€å§‹æ—¶é—´",
+            "endDate": "ç»“æŸæ—¶é—´",
+            "createdBy": "åˆ›å»ºäºº",
+            "createdDate": "åˆ›å»ºæ—¶é—´",
+            "lastModifiedBy": "æœ€è¿‘ä¿®æ”¹äºº",
+            "lastModifiedDate": "æœ€è¿‘ä¿®æ”¹æ—¶é—´",
+            "planedTeacher": "è®¡åˆ’ä¸Šè¯¾è€å¸ˆ",
+            "actualTeacher": "å®é™…ä¸Šè¯¾è€å¸ˆ",
+            "status": "çŠ¶æ€",
+            "clazz": "ç­çº§"
         }
     }
 }

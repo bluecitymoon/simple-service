@@ -46,6 +46,8 @@ public class ClassArrangementCriteria implements Serializable {
 
     private LongFilter statusId;
 
+    private LongFilter clazzId;
+
     public ClassArrangementCriteria() {
     }
 
@@ -129,6 +131,14 @@ public class ClassArrangementCriteria implements Serializable {
         this.statusId = statusId;
     }
 
+    public LongFilter getClazzId() {
+        return clazzId;
+    }
+
+    public void setClazzId(LongFilter clazzId) {
+        this.clazzId = clazzId;
+    }
+
     @Override
     public String toString() {
         return "ClassArrangementCriteria{" +
@@ -142,6 +152,7 @@ public class ClassArrangementCriteria implements Serializable {
                 (planedTeacherId != null ? "planedTeacherId=" + planedTeacherId + ", " : "") +
                 (actualTeacherId != null ? "actualTeacherId=" + actualTeacherId + ", " : "") +
                 (statusId != null ? "statusId=" + statusId + ", " : "") +
+                (clazzId != null ? "clazzId=" + clazzId + ", " : "") +
             "}";
     }
 

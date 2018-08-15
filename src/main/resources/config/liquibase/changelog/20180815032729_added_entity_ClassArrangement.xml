@@ -58,6 +58,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="clazz_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="class_arrangement" columnName="start_date" columnDataType="datetime"/>

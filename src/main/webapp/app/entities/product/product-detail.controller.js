@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ProductDetailController', ProductDetailController);
 
-    ProductDetailController.$inject = ['$uibModal', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassArrangementRule', 'AlertService'];
+    ProductDetailController.$inject = ['$uibModal', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassArrangementRule', 'AlertService', 'DateUtils'];
 
-    function ProductDetailController($uibModal, $scope, $rootScope, $stateParams, previousState, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassArrangementRule, AlertService) {
+    function ProductDetailController($uibModal, $scope, $rootScope, $stateParams, previousState, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassArrangementRule, AlertService, DateUtils) {
         var vm = this;
 
         vm.product = entity;
@@ -38,20 +38,26 @@
                 size: 'lg',
                 resolve: {
                     entity: ['ClassArrangementRule', function(ClassArrangementRule) {
-                        return arrangement;
+                        var data = null;
+                        if (arrangement) {
+                            data = angular.fromJson(arrangement);
+                            data.estimateStartDate = DateUtils.convertDateTimeFromServer(data.estimateStartDate);
+                            data.estimateEndDate = DateUtils.convertDateTimeFromServer(data.estimateEndDate);
+                        }
+                        return data;
                     }],
                     clazz: function () {
+
                         return vm.product;
                     }
                 }
             }).result.then(function() {
                 loadArrangementRule();
             }, function() {
-                $state.go('^');
             });
         };
 
-        vm.openAddDialog = function (arrangement) {
+        vm.openAddDialog = function () {
             $uibModal.open({
                 templateUrl: 'app/entities/class-arrangement-rule/class-arrangement-rule-dialog.html',
                 controller: 'ClassArrangementRuleDialogController',
@@ -65,7 +71,8 @@
                             estimateStartTime: null,
                             estimateEndTime: null,
                             maxLoopCount: null,
-                            id: null
+                            id: null,
+                            targetClass: vm.product
                         };
                     },
                     clazz: function () {
@@ -73,9 +80,9 @@
                     }
                 }
             }).result.then(function() {
-                $state.go('class-arrangement-rule', null, { reload: 'class-arrangement-rule' });
+                loadArrangementRule();
             }, function() {
-                $state.go('class-arrangement-rule');
+
             });
         };
 

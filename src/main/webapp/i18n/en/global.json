@@ -58,6 +58,7 @@
                 "classArrangement": "Class Arrangement",
                 "classArrangementStatus": "Class Arrangement Status",
                 "studentClassLog": "Student Class Log",
+                "countNumber": "Count Number",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

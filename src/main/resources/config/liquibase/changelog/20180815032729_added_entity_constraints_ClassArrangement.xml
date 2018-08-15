@@ -26,5 +26,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="class_arrangement_status"/>
 
+        <addForeignKeyConstraint baseColumnNames="clazz_id"
+                                 baseTableName="class_arrangement"
+                                 constraintName="fk_class_arrangement_clazz_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
     </changeSet>
 </databaseChangeLog>

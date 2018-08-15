@@ -2,9 +2,9 @@
 
 describe('Controller Tests', function() {
 
-    describe('ClassArrangement Management Detail Controller', function() {
+    describe('CountNumber Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockClassArrangement, MockTeacher, MockClassArrangementStatus, MockProduct;
+        var MockEntity, MockPreviousState, MockCountNumber, MockClassArrangementRuleLoopWay;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -12,10 +12,8 @@ describe('Controller Tests', function() {
             $scope = $rootScope.$new();
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
-            MockClassArrangement = jasmine.createSpy('MockClassArrangement');
-            MockTeacher = jasmine.createSpy('MockTeacher');
-            MockClassArrangementStatus = jasmine.createSpy('MockClassArrangementStatus');
-            MockProduct = jasmine.createSpy('MockProduct');
+            MockCountNumber = jasmine.createSpy('MockCountNumber');
+            MockClassArrangementRuleLoopWay = jasmine.createSpy('MockClassArrangementRuleLoopWay');
             
 
             var locals = {
@@ -23,20 +21,18 @@ describe('Controller Tests', function() {
                 '$rootScope': $rootScope,
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
-                'ClassArrangement': MockClassArrangement,
-                'Teacher': MockTeacher,
-                'ClassArrangementStatus': MockClassArrangementStatus,
-                'Product': MockProduct
+                'CountNumber': MockCountNumber,
+                'ClassArrangementRuleLoopWay': MockClassArrangementRuleLoopWay
             };
             createController = function() {
-                $injector.get('$controller')("ClassArrangementDetailController", locals);
+                $injector.get('$controller')("CountNumberDetailController", locals);
             };
         }));
 
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'simpleServiceApp:classArrangementUpdate';
+                var eventType = 'simpleServiceApp:countNumberUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

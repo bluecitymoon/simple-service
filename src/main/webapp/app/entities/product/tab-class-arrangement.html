@@ -8,10 +8,10 @@
                 <p class="text-bold text-main text-sm">当前的排课规则列表</p>
             </div>
             <div class="col-md-6">
-                <button class="btn btn-sm btn-primary pull-right" ui-sref="class-arrangement-rule.new">
+                <button class="btn btn-sm btn-primary pull-right" ng-click="vm.openAddDialog()">
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span data-translate="simpleServiceApp.classArrangementRule.home.createLabel">
-                        Create new Class Arrangement Rule
+                    <span>
+                        录入排课规律
                     </span>
                 </button>
             </div>
@@ -33,19 +33,19 @@
                             <th jh-sort-by="loopWay.name"><span
                                     data-translate="simpleServiceApp.classArrangementRule.loopWay">Loop Way</span> <span
                                     class="glyphicon glyphicon-sort"></span></th>
-                            <th jh-sort-by="estimateStartDate"><span
-                                    data-translate="simpleServiceApp.classArrangementRule.estimateStartDate">Estimate Start Date</span>
-                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th><span>星期几/几号</span> </th>
+
                             <th jh-sort-by="estimateStartTime"><span
                                     data-translate="simpleServiceApp.classArrangementRule.estimateStartTime">Estimate Start Time</span>
                                 <span class="glyphicon glyphicon-sort"></span></th>
                             <th jh-sort-by="estimateEndTime"><span
                                     data-translate="simpleServiceApp.classArrangementRule.estimateEndTime">Estimate End Time</span>
                                 <span class="glyphicon glyphicon-sort"></span></th>
-                            <th jh-sort-by="maxLoopCount"><span
-                                    data-translate="simpleServiceApp.classArrangementRule.maxLoopCount">Max Loop Count</span>
+                            <th jh-sort-by="estimateStartDate"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.estimateStartDate">Estimate Start Date</span>
                                 <span class="glyphicon glyphicon-sort"></span></th>
-
+                            <th><span>预计结课日期</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
                             <th></th>
                         </tr>
                         </thead>
@@ -59,10 +59,11 @@
                             <td>
                                 <a ui-sref="class-arrangement-rule-loop-way-detail({id:classArrangementRule.loopWay.id})">{{classArrangementRule.loopWay.name}}</a>
                             </td>
-                            <td>{{classArrangementRule.estimateStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{classArrangementRule.countNumber.name}}</td>
                             <td>{{classArrangementRule.estimateStartTime}}</td>
                             <td>{{classArrangementRule.estimateEndTime}}</td>
-                            <td>{{classArrangementRule.maxLoopCount}}</td>
+                            <td>{{classArrangementRule.estimateStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{classArrangementRule.estimateEndDate | date:'yyyy-MM-dd hh:mm'}}</td>
 
                             <td class="text-right">
                                 <div class="btn-group flex-btn-group-container">

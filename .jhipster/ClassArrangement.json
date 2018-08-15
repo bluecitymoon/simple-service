@@ -18,6 +18,12 @@
             "otherEntityName": "classArrangementStatus",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "clazz",
+            "otherEntityName": "product",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [

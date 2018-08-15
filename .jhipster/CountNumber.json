@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "loopWay",
+            "otherEntityName": "classArrangementRuleLoopWay",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180815100416",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "count_number",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

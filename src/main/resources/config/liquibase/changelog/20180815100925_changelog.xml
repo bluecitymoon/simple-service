@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1534327778207-1">
+        <addColumn tableName="class_arrangement_rule">
+            <column name="count_number_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1534327778207-2">
+        <addForeignKeyConstraint baseColumnNames="count_number_id" baseTableName="class_arrangement_rule" constraintName="FK8y6717hdki3bxvwmuhadg8cn" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="count_number"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1534327778207-4">
+        <dropColumn columnName="count_number" tableName="class_arrangement_rule"/>
+    </changeSet>
+</databaseChangeLog>

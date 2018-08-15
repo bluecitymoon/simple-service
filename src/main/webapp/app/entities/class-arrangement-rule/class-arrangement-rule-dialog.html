@@ -10,7 +10,7 @@
     <div class="modal-body">
         <jhi-alert></jhi-alert>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label"
                            data-translate="simpleServiceApp.classArrangementRule.estimateStartDate"
@@ -27,29 +27,23 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label class="control-label"
-                           data-translate="simpleServiceApp.classArrangementRule.estimateStartTime"
-                           for="field_estimateStartTime">Estimate Start Time</label>
-                    <input type="text" class="form-control" name="estimateStartTime" id="field_estimateStartTime"
-                           ng-model="vm.classArrangementRule.estimateStartTime"
-                    />
+                    <label class="control-label">预计结束日期</label>
+                    <div class="input-group">
+                        <input id="field_estimateEndDate" type="text" class="form-control" name="estimateEndDate"
+                               datetime-picker="{{dateformat}}" ng-model="vm.classArrangementRule.estimateEndDate"
+                               is-open="vm.datePickerOpenStatus.estimateEndDate"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('estimateEndDate')"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.estimateEndTime"
-                           for="field_estimateEndTime">Estimate End Time</label>
-                    <input type="text" class="form-control" name="estimateEndTime" id="field_estimateEndTime"
-                           ng-model="vm.classArrangementRule.estimateEndTime"
-                    />
-                </div>
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
 
                 <div class="form-group">
                     <label data-translate="simpleServiceApp.classArrangementRule.loopWay" for="field_loopWay">Loop
@@ -61,32 +55,61 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
 
                 <div class="form-group">
-                    <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.maxLoopCount"
-                           for="field_maxLoopCount">Max Loop Count</label>
-                    <input type="number" class="form-control" name="maxLoopCount" id="field_maxLoopCount"
-                           ng-model="vm.classArrangementRule.maxLoopCount"
+                    <label class="control-label">星期几或几号</label>
+                    <!--<input type="text" class="form-control" name="countNumber" id="field_maxLoopCount"-->
+                           <!--ng-model="vm.classArrangementRule.countNumber"-->
+                    <!--/>-->
+
+                    <select class="form-control" name="countNumber"
+                            ng-model="vm.classArrangementRule.countNumber"
+                            ng-options="day as day.name for day in vm.countNumbers track by day.id">
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label"
+                           data-translate="simpleServiceApp.classArrangementRule.estimateStartTime"
+                           for="field_estimateStartTime">Estimate Start Time</label>
+                    <input type="text" class="form-control" name="estimateStartTime" id="field_estimateStartTime"
+                           ng-model="vm.classArrangementRule.estimateStartTime"
                     />
                 </div>
-
             </div>
-            <div class="col-md-4">
-
-
+            <div class="col-md-6">
                 <div class="form-group">
-                    <label data-translate="simpleServiceApp.classArrangementRule.targetClass" for="field_targetClass">Target
-                        Class</label>
-                    <select class="form-control" id="field_targetClass" name="targetClass"
-                            ng-model="vm.classArrangementRule.targetClass"
-                            ng-options="product as product.name for product in vm.products track by product.id">
-                        <option value=""></option>
-                    </select>
+                    <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.estimateEndTime"
+                           for="field_estimateEndTime">Estimate End Time</label>
+                    <input type="text" class="form-control" name="estimateEndTime" id="field_estimateEndTime"
+                           ng-model="vm.classArrangementRule.estimateEndTime"
+                    />
                 </div>
-
             </div>
         </div>
+
+        <!--<div class="row">-->
+            <!---->
+            <!--<div class="col-md-4">-->
+
+
+                <!--<div class="form-group">-->
+                    <!--<label data-translate="simpleServiceApp.classArrangementRule.targetClass" for="field_targetClass">Target-->
+                        <!--Class</label>-->
+                    <!--<select class="form-control" id="field_targetClass" name="targetClass"-->
+                            <!--ng-model="vm.classArrangementRule.targetClass"-->
+                            <!--ng-options="product as product.name for product in vm.products track by product.id">-->
+                        <!--<option value=""></option>-->
+                    <!--</select>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
