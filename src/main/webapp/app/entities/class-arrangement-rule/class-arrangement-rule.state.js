@@ -130,6 +130,9 @@
                                 maxLoopCount: null,
                                 id: null
                             };
+                        },
+                        clazz: function () {
+                            return null;
                         }
                     }
                 }).result.then(function() {

@@ -45,7 +45,7 @@
 
                 if (!vm.targetCustomer.id) {
 
-                    AlertService.info("请选择目标客户");
+                    AlertService.info ("请选择目标客户");
                     return;
                 }
 

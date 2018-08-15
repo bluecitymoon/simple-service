@@ -1,63 +1,97 @@
-
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myClassArrangementRuleLabel" data-translate="simpleServiceApp.classArrangementRule.home.createOrEditLabel">Create or edit a Class Arrangement Rule</h4>
+        <h4 class="modal-title" id="myClassArrangementRuleLabel"
+            data-translate="simpleServiceApp.classArrangementRule.home.createOrEditLabel">Create or edit a Class
+            Arrangement Rule</h4>
     </div>
     <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.classArrangementRule.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.classArrangementRule.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.estimateStartDate" for="field_estimateStartDate">Estimate Start Date</label>
-                <div class="input-group">
-                    <input id="field_estimateStartDate" type="text" class="form-control" name="estimateStartDate" datetime-picker="{{dateformat}}" ng-model="vm.classArrangementRule.estimateStartDate" is-open="vm.datePickerOpenStatus.estimateStartDate"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('estimateStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+        <jhi-alert></jhi-alert>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label"
+                           data-translate="simpleServiceApp.classArrangementRule.estimateStartDate"
+                           for="field_estimateStartDate">Estimate Start Date</label>
+                    <div class="input-group">
+                        <input id="field_estimateStartDate" type="text" class="form-control" name="estimateStartDate"
+                               datetime-picker="{{dateformat}}" ng-model="vm.classArrangementRule.estimateStartDate"
+                               is-open="vm.datePickerOpenStatus.estimateStartDate"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('estimateStartDate')"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
                     </span>
+                    </div>
                 </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.estimateStartTime" for="field_estimateStartTime">Estimate Start Time</label>
-            <input type="text" class="form-control" name="estimateStartTime" id="field_estimateStartTime"
-                    ng-model="vm.classArrangementRule.estimateStartTime"
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label"
+                           data-translate="simpleServiceApp.classArrangementRule.estimateStartTime"
+                           for="field_estimateStartTime">Estimate Start Time</label>
+                    <input type="text" class="form-control" name="estimateStartTime" id="field_estimateStartTime"
+                           ng-model="vm.classArrangementRule.estimateStartTime"
                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.estimateEndTime" for="field_estimateEndTime">Estimate End Time</label>
-            <input type="text" class="form-control" name="estimateEndTime" id="field_estimateEndTime"
-                    ng-model="vm.classArrangementRule.estimateEndTime"
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.estimateEndTime"
+                           for="field_estimateEndTime">Estimate End Time</label>
+                    <input type="text" class="form-control" name="estimateEndTime" id="field_estimateEndTime"
+                           ng-model="vm.classArrangementRule.estimateEndTime"
                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.maxLoopCount" for="field_maxLoopCount">Max Loop Count</label>
-            <input type="number" class="form-control" name="maxLoopCount" id="field_maxLoopCount"
-                    ng-model="vm.classArrangementRule.maxLoopCount"
-                    />
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.classArrangementRule.targetClass" for="field_targetClass">Target Class</label>
-            <select class="form-control" id="field_targetClass" name="targetClass" ng-model="vm.classArrangementRule.targetClass" ng-options="product as product.name for product in vm.products track by product.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.classArrangementRule.loopWay" for="field_loopWay">Loop Way</label>
-            <select class="form-control" id="field_loopWay" name="loopWay" ng-model="vm.classArrangementRule.loopWay" ng-options="classArrangementRuleLoopWay as classArrangementRuleLoopWay.name for classArrangementRuleLoopWay in vm.classarrangementruleloopways track by classArrangementRuleLoopWay.id">
-                <option value=""></option>
-            </select>
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.classArrangementRule.loopWay" for="field_loopWay">Loop
+                        Way</label>
+                    <select class="form-control" id="field_loopWay" name="loopWay"
+                            ng-model="vm.classArrangementRule.loopWay"
+                            ng-options="classArrangementRuleLoopWay as classArrangementRuleLoopWay.name for classArrangementRuleLoopWay in vm.classarrangementruleloopways track by classArrangementRuleLoopWay.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.classArrangementRule.maxLoopCount"
+                           for="field_maxLoopCount">Max Loop Count</label>
+                    <input type="number" class="form-control" name="maxLoopCount" id="field_maxLoopCount"
+                           ng-model="vm.classArrangementRule.maxLoopCount"
+                    />
+                </div>
+
+            </div>
+            <div class="col-md-4">
+
+
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.classArrangementRule.targetClass" for="field_targetClass">Target
+                        Class</label>
+                    <select class="form-control" id="field_targetClass" name="targetClass"
+                            ng-model="vm.classArrangementRule.targetClass"
+                            ng-options="product as product.name for product in vm.products track by product.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+
+            </div>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>

@@ -5,12 +5,16 @@
         .module('simpleServiceApp')
         .controller('ClassArrangementRuleDialogController', ClassArrangementRuleDialogController);
 
-    ClassArrangementRuleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ClassArrangementRule', 'Product', 'ClassArrangementRuleLoopWay'];
+    ClassArrangementRuleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'clazz', 'ClassArrangementRule', 'Product', 'ClassArrangementRuleLoopWay'];
 
-    function ClassArrangementRuleDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ClassArrangementRule, Product, ClassArrangementRuleLoopWay) {
+    function ClassArrangementRuleDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, clazz, ClassArrangementRule, Product, ClassArrangementRuleLoopWay) {
         var vm = this;
 
         vm.classArrangementRule = entity;
+
+        if (!clazz) {
+            vm.classArrangementRule.product = clazz;
+        }
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;

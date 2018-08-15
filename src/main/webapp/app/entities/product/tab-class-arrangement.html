@@ -1,59 +1,113 @@
-
 <ul class="sortable-list tasklist list-unstyled ui-sortable" style="padding: 0px !important;">
+
     <li class="task-warning ui-sortable-handle">
-        <p class="text-bold text-main text-sm">当前的排课规则</p>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <p class="text-bold text-main text-sm">当前的排课规则列表</p>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-sm btn-primary pull-right" ui-sref="class-arrangement-rule.new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span data-translate="simpleServiceApp.classArrangementRule.home.createLabel">
+                        Create new Class Arrangement Rule
+                    </span>
+                </button>
+            </div>
+
+
+        </div>
 
         <div class="panel panel-bordered-dark">
             <div class="panel-body">
-                <dl class="dl-horizontal jh-entity-details">
-                    <dt><span data-translate="simpleServiceApp.classArrangementRule.estimateStartDate">Estimate Start Date</span>
-                    </dt>
-                    <dd>
-                        <span>{{vm.classArrangementRule.estimateStartDate | date:'yyyy-MM-dd hh:mm'}}</span>
-                    </dd>
-                    <dt><span data-translate="simpleServiceApp.classArrangementRule.estimateStartTime">Estimate Start Time</span>
-                    </dt>
-                    <dd>
-                        <span>{{vm.classArrangementRule.estimateStartTime}}</span>
-                    </dd>
-                    <dt><span
-                            data-translate="simpleServiceApp.classArrangementRule.estimateEndTime">Estimate End Time</span>
-                    </dt>
-                    <dd>
-                        <span>{{vm.classArrangementRule.estimateEndTime}}</span>
-                    </dd>
-                    <dt><span data-translate="simpleServiceApp.classArrangementRule.maxLoopCount">Max Loop Count</span>
-                    </dt>
-                    <dd>
-                        <span>{{vm.classArrangementRule.maxLoopCount}}</span>
-                    </dd>
-                    <dt><span data-translate="simpleServiceApp.classArrangementRule.targetClass">Target Class</span>
-                    </dt>
-                    <dd>
-                        <a ui-sref="product-detail({id:vm.classArrangementRule.targetClass.id})">{{vm.classArrangementRule.targetClass.name}}</a>
-                    </dd>
-                    <dt><span data-translate="simpleServiceApp.classArrangementRule.loopWay">Loop Way</span></dt>
-                    <dd>
-                        <a ui-sref="class-arrangement-rule-loop-way-detail({id:vm.classArrangementRule.loopWay.id})">{{vm.classArrangementRule.loopWay.name}}</a>
-                    </dd>
-                </dl>
+                <div class="table-responsive">
+                    <table class="jh-table table table-striped">
+                        <thead>
+                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                            <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="targetClass.name"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.targetClass">Target Class</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="loopWay.name"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.loopWay">Loop Way</span> <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="estimateStartDate"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.estimateStartDate">Estimate Start Date</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="estimateStartTime"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.estimateStartTime">Estimate Start Time</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="estimateEndTime"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.estimateEndTime">Estimate End Time</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="maxLoopCount"><span
+                                    data-translate="simpleServiceApp.classArrangementRule.maxLoopCount">Max Loop Count</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <button type="button" ui-sref="product-detail.editarrangment({id:vm.classArrangementRule.id})"
-                                class="btn btn-mint btn-block">
-                            <span class="fa fa-user-edit"></span>
-                            <span class="hidden-sm-down">修改排课规则</span>
-                        </button>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="button" ui-sref="product-detail.editarrangment({id:vm.classArrangementRule.id})"
-                                class="btn btn-pink btn-block">
-                            <span class="fa fa-list"></span>
-                            <span class="hidden-sm-down">生成课程表</span>
-                        </button>
-                    </div>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="classArrangementRule in vm.classArrangementRules track by classArrangementRule.id">
+                            <td><a ui-sref="class-arrangement-rule-detail({id:classArrangementRule.id})">{{classArrangementRule.id}}</a>
+                            </td>
+                            <td>
+                                <a ui-sref="product-detail({id:classArrangementRule.targetClass.id})">{{classArrangementRule.targetClass.name}}</a>
+                            </td>
+                            <td>
+                                <a ui-sref="class-arrangement-rule-loop-way-detail({id:classArrangementRule.loopWay.id})">{{classArrangementRule.loopWay.name}}</a>
+                            </td>
+                            <td>{{classArrangementRule.estimateStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{classArrangementRule.estimateStartTime}}</td>
+                            <td>{{classArrangementRule.estimateEndTime}}</td>
+                            <td>{{classArrangementRule.maxLoopCount}}</td>
+
+                            <td class="text-right">
+                                <div class="btn-group flex-btn-group-container">
+
+                                    <button type="submit"
+                                            ng-click="vm.openEditDialog(classArrangementRule)"
+                                            class="btn btn-primary btn-sm">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                                    </button>
+                                    <button type="submit"
+                                            ng-click="vm.generateClassSchedule(classArrangementRule)"
+                                            class="btn btn-mint btn-sm">
+                                        <span class="fa fa-list"></span>
+                                        <span class="hidden-sm-down">生成课程表</span>
+                                    </button>
+                                    <button type="submit"
+                                            ui-sref="class-arrangement-rule.delete({id:classArrangementRule.id})"
+                                            class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+
+                <!--<div class="row">-->
+                    <!--<div class="col-md-3">-->
+                        <!--<button type="button" ui-sref="product-detail.editarrangment({id:vm.classArrangementRule.id})"-->
+                                <!--class="btn btn-mint btn-block">-->
+                            <!--<span class="fa fa-user-edit"></span>-->
+                            <!--<span class="hidden-sm-down">修改排课规则</span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3">-->
+                        <!--<button type="button" ui-sref="product-detail.editarrangment({id:vm.classArrangementRule.id})"-->
+                                <!--class="btn btn-pink btn-block">-->
+                            <!--<span class="fa fa-list"></span>-->
+                            <!--<span class="hidden-sm-down">生成课程表</span>-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
 
             </div>
         </div>
