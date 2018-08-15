@@ -22,6 +22,12 @@ public class ClassArrangementRule implements Serializable {
     @Column(name = "estimate_start_date")
     private Instant estimateStartDate;
 
+    @Column(name = "estimate_end_date")
+    private Instant estimateDate;
+
+    @Column(name = "count_number")
+    private Integer countNumber;
+
     @Column(name = "estimate_start_time")
     private String estimateStartTime;
 
@@ -53,6 +59,22 @@ public class ClassArrangementRule implements Serializable {
     public ClassArrangementRule estimateStartDate(Instant estimateStartDate) {
         this.estimateStartDate = estimateStartDate;
         return this;
+    }
+
+    public Instant getEstimateDate() {
+        return estimateDate;
+    }
+
+    public void setEstimateDate(Instant estimateDate) {
+        this.estimateDate = estimateDate;
+    }
+
+    public Integer getCountNumber() {
+        return countNumber;
+    }
+
+    public void setCountNumber(Integer countNumber) {
+        this.countNumber = countNumber;
     }
 
     public void setEstimateStartDate(Instant estimateStartDate) {

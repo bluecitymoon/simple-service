@@ -1,0 +1,58 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.studentClassLoghome.title">Student Class Logs</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.studentClassLog.actualTakenDate">Actual Taken Date</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.actualTakenDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.point">Point</span></dt>
+        <dd>
+            <span>{{vm.studentClassLog.point}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.student">Student</span></dt>
+        <dd>
+            <a ui-sref="student-detail({id:vm.studentClassLog.student.id})">{{vm.studentClassLog.student.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLog.arrangement">Arrangement</span></dt>
+        <dd>
+            <a ui-sref="class-arrangement-detail({id:vm.studentClassLog.arrangement.id})">{{vm.studentClassLog.arrangement.startDate}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="student-class-log-detail.edit({id:vm.studentClassLog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

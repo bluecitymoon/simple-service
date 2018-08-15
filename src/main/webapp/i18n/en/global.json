@@ -55,6 +55,9 @@
                 "contractPackage": "Contract Package",
                 "vistedCustomerStatus": "Visted Customer Status",
                 "customerCollectionLog": "Customer Collection Log",
+                "classArrangement": "Class Arrangement",
+                "classArrangementStatus": "Class Arrangement Status",
+                "studentClassLog": "Student Class Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

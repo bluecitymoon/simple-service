@@ -1,0 +1,29 @@
+{
+    "simpleServiceApp": {
+        "classArrangement" : {
+            "home": {
+                "title": "排课记录",
+                "createLabel": "排课",
+                "createOrEditLabel": "管理排课"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条记录？"
+            },
+            "detail": {
+                "title": "排课详情"
+            },
+            "startDate": "开始时间",
+            "endDate": "结束时间",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "planedTeacher": "计划上课老师",
+            "actualTeacher": "实际上课老师",
+            "status": "状态"
+        }
+    }
+}

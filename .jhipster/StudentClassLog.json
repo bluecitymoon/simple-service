@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "arrangement",
+            "otherEntityName": "classArrangement",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "startDate"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "actualTakenDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "point",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180815034331",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "student_class_log",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

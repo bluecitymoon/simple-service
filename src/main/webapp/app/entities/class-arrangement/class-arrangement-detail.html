@@ -1,0 +1,58 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.classArrangementhome.title">Class Arrangements</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.classArrangement.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{vm.classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.classArrangement.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.classArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.classArrangement.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.classArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.planedTeacher">Planed Teacher</span></dt>
+        <dd>
+            <a ui-sref="teacher-detail({id:vm.classArrangement.planedTeacher.id})">{{vm.classArrangement.planedTeacher.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.actualTeacher">Actual Teacher</span></dt>
+        <dd>
+            <a ui-sref="teacher-detail({id:vm.classArrangement.actualTeacher.id})">{{vm.classArrangement.actualTeacher.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classArrangement.status">Status</span></dt>
+        <dd>
+            <a ui-sref="class-arrangement-status-detail({id:vm.classArrangement.status.id})">{{vm.classArrangement.status.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="class-arrangement-detail.edit({id:vm.classArrangement.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

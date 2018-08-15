@@ -53,6 +53,9 @@
     <include file="config/liquibase/changelog/20180801062216_added_entity_ContractPackage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180803144202_added_entity_VistedCustomerStatus.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180806061102_added_entity_CustomerCollectionLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815032729_added_entity_ClassArrangement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815032823_added_entity_ClassArrangementStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815034331_added_entity_StudentClassLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -109,5 +112,7 @@
     <include file="config/liquibase/changelog/20180730122821_added_entity_constraints_Contract.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180801062216_added_entity_constraints_ContractPackage.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180806061102_added_entity_constraints_CustomerCollectionLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815032729_added_entity_constraints_ClassArrangement.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180815034331_added_entity_constraints_StudentClassLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>
