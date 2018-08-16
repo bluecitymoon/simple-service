@@ -2,25 +2,33 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.repository.ClassArrangementRepository;
+import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
+import com.pure.service.service.dto.ClassArrangementCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
-import com.pure.service.service.dto.ClassArrangementCriteria;
-import com.pure.service.service.ClassArrangementQueryService;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +46,9 @@ public class ClassArrangementResource {
     private final ClassArrangementService classArrangementService;
 
     private final ClassArrangementQueryService classArrangementQueryService;
+
+    @Autowired
+    private ClassArrangementRepository arrangementRepository;
 
     public ClassArrangementResource(ClassArrangementService classArrangementService, ClassArrangementQueryService classArrangementQueryService) {
         this.classArrangementService = classArrangementService;
@@ -62,6 +73,16 @@ public class ClassArrangementResource {
         return ResponseEntity.created(new URI("/api/class-arrangements/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @GetMapping("/class-arrangements/generate-by-rule/{id}")
+    @Timed
+    public ResponseEntity<Void> createClassArrangementsByRule(@PathVariable Long id) {
+        log.debug("REST request to generate arrangements by rule : {}", id);
+
+        classArrangementService.createClassArrangementsByRule(id);
+
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -101,6 +122,15 @@ public class ClassArrangementResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/class-arrangements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    @GetMapping("/class-arrangements/by-class-id/{id}")
+    @Timed
+    public ResponseEntity<List<ClassArrangement>> getAllClassArrangementsByProductId(@PathVariable Long id) {
+
+        List<ClassArrangement> page = arrangementRepository.findByClazz_Id(id);
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
 
     /**
      * GET  /class-arrangements/:id : get the "id" classArrangement.

@@ -1,10 +1,16 @@
 package com.pure.service.service.util;
 
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class DateUtil {
 
@@ -76,11 +82,41 @@ public class DateUtil {
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
 
     }
+
+    public static Instant getEveryWeekday(int year, int month, int week, int count) {
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.WEEK_OF_MONTH, week);
+        calendar.set(Calendar.DAY_OF_WEEK, count);
+
+        return calendar.toInstant();
+    }
+
+   public static List<Instant> getCountWeekdayInRange(Instant startDate, Instant endDate, int count, String startTimeStr) {
+
+        List<Instant> countDays = new ArrayList<>();
+
+        LocalDateTime startTime = LocalDateTime.ofInstant(startDate, ZoneId.systemDefault());
+        LocalDateTime endTime = LocalDateTime.ofInstant(endDate, ZoneId.systemDefault());
+
+        LocalDateTime nextCountDay = startTime.with(TemporalAdjusters.nextOrSame(DayOfWeek.of(count)));
+        String[] hourMinutes = startTimeStr.split(":");
+        nextCountDay.withHour(Integer.valueOf(hourMinutes[0]) + 1);
+        nextCountDay.withMinute(Integer.valueOf(hourMinutes[1]));
+
+        while (nextCountDay.isBefore(endTime)) {
+
+            countDays.add(Instant.ofEpochSecond(nextCountDay.toEpochSecond(ZoneOffset.UTC)));
+
+            nextCountDay = nextCountDay.plusWeeks(1);
+        }
+
+        return countDays;
+   }
 //
 //    public static void main(String[] args) {
-//        int year = 2018, month = 4;
-////        System.out.println(getLastDayOfMonth(year, month));
-//        System.out.println(getSimpleTodayInstantBegin());
-//        System.out.println(getSimpleTodayInstantEnd());
+//
 //    }
 }

@@ -31,6 +31,9 @@ public class ClassArrangementRule implements Serializable {
     @Column(name = "estimate_end_time")
     private String estimateEndTime;
 
+    @Column(name = "duration_minutes")
+    private Integer durationMinutes;
+
     @Column(name = "max_loop_count")
     private Integer maxLoopCount;
 
@@ -50,6 +53,14 @@ public class ClassArrangementRule implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getDurationMinutes() {
+        return durationMinutes;
+    }
+
+    public void setDurationMinutes(Integer durationMinutes) {
+        this.durationMinutes = durationMinutes;
     }
 
     public Instant getEstimateStartDate() {

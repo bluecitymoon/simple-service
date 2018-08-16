@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('product');
+                    $translatePartialLoader.addPart('classArrangement`');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]

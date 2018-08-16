@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ProductDetailController', ProductDetailController);
 
-    ProductDetailController.$inject = ['$uibModal', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassArrangementRule', 'AlertService', 'DateUtils'];
+    ProductDetailController.$inject = ['$uibModal', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassArrangementRule', 'AlertService', 'DateUtils', 'ClassArrangement'];
 
-    function ProductDetailController($uibModal, $scope, $rootScope, $stateParams, previousState, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassArrangementRule, AlertService, DateUtils) {
+    function ProductDetailController($uibModal, $scope, $rootScope, $stateParams, previousState, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassArrangementRule, AlertService, DateUtils, ClassArrangement) {
         var vm = this;
 
         vm.product = entity;
@@ -86,8 +86,14 @@
             });
         };
 
-        vm.generateClassSchedule = function (arrangement) {
+        function reloadArrangements() {
 
+        }
+        vm.generateClassSchedule = function (ruleId) {
+            ClassArrangement.generateClassSchedule({id: ruleId}, function () {
+
+                reloadArrangements();
+            })
         };
 
         var unsubscribe = $rootScope.$on('simpleServiceApp:productUpdate', function(event, result) {

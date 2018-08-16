@@ -24,7 +24,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'generateClassSchedule': { url: 'api/class-arrangements/generate-by-rule/:id', method: 'GET'}
         });
     }
 })();

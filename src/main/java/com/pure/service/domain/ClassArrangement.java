@@ -77,7 +77,6 @@ public class ClassArrangement extends AbstractAuditingEntity {
         this.endDate = endDate;
     }
 
-
     public Teacher getPlanedTeacher() {
         return planedTeacher;
     }
