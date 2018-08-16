@@ -13,6 +13,7 @@
         vm.product = entity;
         vm.previousState = previousState.name;
         vm.classArrangementRule = {};
+        vm.classArrangementRules = [];
         loadArrangementRule();
 
         function loadArrangementRule() {
@@ -88,7 +89,13 @@
 
         function reloadArrangements() {
 
+            ClassArrangement.loadArrangements({id: vm.product.id}, function (data) {
+                vm.classArrangements = data;
+            });
         }
+
+        reloadArrangements();
+
         vm.generateClassSchedule = function (ruleId) {
             ClassArrangement.generateClassSchedule({id: ruleId}, function () {
 

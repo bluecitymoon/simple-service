@@ -1,0 +1,26 @@
+{
+    "simpleServiceApp": {
+        "studentClass" : {
+            "home": {
+                "title": "Student Classes",
+                "createLabel": "Create a new Student Class",
+                "createOrEditLabel": "Create or edit a Student Class"
+            },
+            "created": "A new Student Class is created with identifier {{ param }}",
+            "updated": "A Student Class is updated with identifier {{ param }}",
+            "deleted": "A Student Class is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Student Class {{ id }}?"
+            },
+            "detail": {
+                "title": "Student Class"
+            },
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "student": "Student",
+            "product": "Product"
+        }
+    }
+}

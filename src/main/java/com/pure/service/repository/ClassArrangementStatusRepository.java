@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ClassArrangementStatusRepository extends JpaRepository<ClassArrangementStatus, Long>, JpaSpecificationExecutor<ClassArrangementStatus> {
 
+    ClassArrangementStatus findByCode(String code);
+
 }

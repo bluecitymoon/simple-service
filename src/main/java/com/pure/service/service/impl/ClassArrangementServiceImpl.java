@@ -2,8 +2,10 @@ package com.pure.service.service.impl;
 
 import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
+import com.pure.service.domain.ClassArrangementStatus;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
+import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.util.DateUtil;
 import org.slf4j.Logger;
@@ -34,6 +36,9 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     @Autowired
     private ClassArrangementRuleRepository ruleRepository;
+
+    @Autowired
+    private ClassArrangementStatusRepository statusRepository;
 
     public ClassArrangementServiceImpl(ClassArrangementRepository classArrangementRepository) {
         this.classArrangementRepository = classArrangementRepository;
@@ -126,6 +131,9 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                             .startDate(day)
                             .endDate(day.plus(rule.getDurationMinutes(), ChronoUnit.MINUTES))
                             .planedTeacher(rule.getTargetClass().getTeacher());
+
+            ClassArrangementStatus initStatus = statusRepository.findByCode("notTaken");
+            arrangement.setStatus(initStatus);
 
             classArrangements.add(arrangement);
         });

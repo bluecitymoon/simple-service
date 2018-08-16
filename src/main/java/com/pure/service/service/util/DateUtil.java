@@ -103,12 +103,12 @@ public class DateUtil {
 
         LocalDateTime nextCountDay = startTime.with(TemporalAdjusters.nextOrSame(DayOfWeek.of(count)));
         String[] hourMinutes = startTimeStr.split(":");
-        nextCountDay.withHour(Integer.valueOf(hourMinutes[0]) + 1);
-        nextCountDay.withMinute(Integer.valueOf(hourMinutes[1]));
+
+        nextCountDay = nextCountDay.withHour(Integer.valueOf(hourMinutes[0])).withMinute(Integer.valueOf(hourMinutes[1]));
 
         while (nextCountDay.isBefore(endTime)) {
 
-            countDays.add(Instant.ofEpochSecond(nextCountDay.toEpochSecond(ZoneOffset.UTC)));
+            countDays.add(nextCountDay.toInstant(ZoneOffset.ofHours(8)));
 
             nextCountDay = nextCountDay.plusWeeks(1);
         }
