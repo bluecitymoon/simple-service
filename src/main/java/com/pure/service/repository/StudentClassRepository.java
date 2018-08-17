@@ -13,4 +13,6 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface StudentClassRepository extends JpaRepository<StudentClass, Long>, JpaSpecificationExecutor<StudentClass> {
 
+    StudentClass findByStudent_IdAndProduct_Id(Long studentId, Long classId);
+
 }

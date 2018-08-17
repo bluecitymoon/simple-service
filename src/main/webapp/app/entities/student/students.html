@@ -60,12 +60,34 @@
 
 <div class="panel">
     <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-4" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
 
-        <br/>
+                <div class="input-group mar-btm">
+                    <ui-select ng-model="vm.selectedClass" placeholder="输入班级搜索">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices multiple repeat="item in (vm.classes | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                    <span class="input-group-btn">
+					          <button class="btn btn-primary" type="button"
+                                      ng-click="vm.batchAssignStudentIntoClass()">分配选中学员进班</button>
+					    </span>
+                </div>
+
+            </div>
+
+        </div>
         <div class="table-responsive">
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th class="text-center"><input type="checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()">全选
+                    </th>
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.student.name">Name</span> <span
@@ -91,7 +113,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="student in vm.students track by student.id">
+                <tr ng-repeat="student in vm.students track by student.id" ng-class="student.selected? 'bg-info': ''">
+                    <td class="text-center"><input type="checkbox" ng-model="student.selected"></td>
+                    </td>
                     <td><a ui-sref="student-detail({id:student.id})">{{student.id}}</a></td>
                     <td>{{student.name}}</td>
                     <td>{{student.phone}}</td>

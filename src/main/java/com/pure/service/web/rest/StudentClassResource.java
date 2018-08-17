@@ -3,6 +3,8 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.service.StudentClassService;
+import com.pure.service.service.dto.dto.CommonResponse;
+import com.pure.service.service.dto.request.StudentsClassRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentClassCriteria;
@@ -63,6 +65,17 @@ public class StudentClassResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    @PostMapping("/student-classes/batch-assign")
+    @Timed
+    public ResponseEntity<CommonResponse> createStudentClass(@RequestBody StudentsClassRequest studentsClassRequest) {
+        log.debug("REST request to batch assign students into class : {}", studentsClassRequest);
+
+        CommonResponse response = studentClassService.batchAssign(studentsClassRequest);
+
+        return ResponseEntity.ok(response);
+    }
+
 
     /**
      * PUT  /student-classes : Updates an existing studentClass.

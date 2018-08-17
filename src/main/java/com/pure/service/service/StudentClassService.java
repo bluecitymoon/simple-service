@@ -1,6 +1,8 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.StudentClass;
+import com.pure.service.service.dto.dto.CommonResponse;
+import com.pure.service.service.dto.request.StudentsClassRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,4 +41,6 @@ public interface StudentClassService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    CommonResponse batchAssign(StudentsClassRequest studentsClassRequest);
 }

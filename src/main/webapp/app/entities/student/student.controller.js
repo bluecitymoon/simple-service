@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope'];
+    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product'];
 
-    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope) {
+    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product) {
 
         var vm = this;
 
@@ -17,9 +17,36 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.searchCondition = {};
+        vm.students = [];
+        vm.allSelected = false;
 
         vm.clearConditions = function () {
             vm.searchCondition = {};
+        };
+        vm.classes = Product.query({ page: 0,  size: 1000 });
+        vm.toggleAll = function () {
+            angular.forEach(vm.students, function (student) {
+                student.selected = vm.allSelected;
+            });
+            // vm.students.forEach(function (record) {
+            //     record.selected = vm.allSelected;
+            // })
+        };
+        vm.batchAssignStudentIntoClass = function () {
+
+            var selectedRecords = vm.students.filter(function (r) {
+                return r.selected;
+            });
+
+            if (!selectedRecords || selectedRecords.length == 0) {
+                AlertService.error("请选择目标学员！");
+                return;
+            }
+
+            if (!vm.selectedClass) {
+                AlertService.error("请选择目标班级！");
+                return;
+            }
         };
 
         $scope.pagination = {
@@ -60,6 +87,7 @@
                 vm.queryCount = vm.totalItems;
                 vm.students = data;
                 vm.page = pagingParams.page;
+                vm.allSelected = false;
             }
             function onError(error) {
                 AlertService.error(error.data.message);
