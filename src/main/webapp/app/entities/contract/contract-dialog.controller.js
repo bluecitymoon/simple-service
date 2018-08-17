@@ -53,7 +53,7 @@
 
         $scope.$watch("vm.contract.customerCard", function (newVal, oldVal) {
 
-            if (newVal) {
+            if (newVal && !vm.contract.id) {
                 //angular.copy(newVal, vm.contract);
                 console.log(newVal);
                 vm.contract.classCount = newVal.classCount;

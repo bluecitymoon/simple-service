@@ -86,7 +86,7 @@
             <table class="jh-table table table-striped">
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th class="text-center"><input type="checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()">全选
+                    <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label for="email-list-all">全选</label>
                     </th>
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
@@ -114,7 +114,10 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="student in vm.students track by student.id" ng-class="student.selected? 'bg-info': ''">
-                    <td class="text-center"><input type="checkbox" ng-model="student.selected"></td>
+                    <td class="text-center">
+                        <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox" ng-model="student.selected">
+                        <label for="email-list-{{student.id}}"></label>
+                    </td>
                     </td>
                     <td><a ui-sref="student-detail({id:student.id})">{{student.id}}</a></td>
                     <td>{{student.name}}</td>

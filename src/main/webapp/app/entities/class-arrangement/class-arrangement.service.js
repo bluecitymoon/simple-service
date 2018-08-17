@@ -12,6 +12,7 @@
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'loadArrangements': { url:'api/class-arrangements/by-class-id/:id', method: 'GET', isArray: true},
+            'getClassArrangementsToday': { url:'api/class-arrangements/today', method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

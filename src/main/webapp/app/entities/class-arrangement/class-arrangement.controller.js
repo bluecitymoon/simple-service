@@ -17,6 +17,19 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
+        vm.todayClassArrangments = [];
+        vm.openClassSignDialog = function (classArrangement) {
+
+        };
+
+        function getArrangementsToday() {
+            ClassArrangement.getClassArrangementsToday({}, function (data) {
+                vm.todayClassArrangments = data;
+            })
+        };
+
+        getArrangementsToday();
+
         loadAll();
 
         function loadAll () {

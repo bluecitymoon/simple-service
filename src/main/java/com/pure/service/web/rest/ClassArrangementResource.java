@@ -6,8 +6,10 @@ import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.ClassArrangementCriteria;
+import com.pure.service.service.util.DateUtil;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -128,6 +131,25 @@ public class ClassArrangementResource {
     public ResponseEntity<List<ClassArrangement>> getAllClassArrangementsByProductId(@PathVariable Long id) {
 
         List<ClassArrangement> page = arrangementRepository.findByClazz_Id(id);
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
+    @GetMapping("/class-arrangements/today")
+    @Timed
+    public ResponseEntity<List<ClassArrangement>> getClassArrangementsToday() {
+
+        Instant start = DateUtil.getSimpleTodayInstantBegin();
+        Instant end = DateUtil.getSimpleTodayInstantEnd();
+
+        ClassArrangementCriteria classArrangementCriteria = new ClassArrangementCriteria();
+
+        InstantFilter instantFilter = new InstantFilter();
+        instantFilter.setLessOrEqualThan(end);
+        instantFilter.setGreaterOrEqualThan(start);
+        classArrangementCriteria.setStartDate(instantFilter);
+
+        List<ClassArrangement> page = classArrangementQueryService.findByCriteria(classArrangementCriteria);
+
         return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 

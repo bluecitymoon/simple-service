@@ -1,0 +1,89 @@
+<div class="panel">
+    <div class="panel-body">
+
+        <!--<h2 data-translate="simpleServiceApp.classArrangement.home.title">Class Arrangements</h2>-->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-4 no-padding-left">
+                    <button class="btn btn-primary" ui-sref="class-arrangement.new" >
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span  data-translate="simpleServiceApp.classArrangement.home.createLabel">
+                        Create new Class Arrangement
+                    </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="startDate"><span data-translate="simpleServiceApp.classArrangement.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.classArrangement.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="planedTeacher.name"><span data-translate="simpleServiceApp.classArrangement.planedTeacher">Planed Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actualTeacher.name"><span data-translate="simpleServiceApp.classArrangement.actualTeacher">Actual Teacher</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status.name"><span data-translate="simpleServiceApp.classArrangement.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="clazz.name"><span data-translate="simpleServiceApp.classArrangement.clazz">Clazz</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.classArrangement.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.classArrangement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.classArrangement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.classArrangement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id">
+                    <td><a ui-sref="class-arrangement-detail({id:classArrangement.id})">{{classArrangement.id}}</a></td>
+                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        <a ui-sref="teacher-detail({id:classArrangement.planedTeacher.id})">{{classArrangement.planedTeacher.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="teacher-detail({id:classArrangement.actualTeacher.id})">{{classArrangement.actualTeacher.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="class-arrangement-status-detail({id:classArrangement.status.id})">{{classArrangement.status.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="product-detail({id:classArrangement.clazz.id})">{{classArrangement.clazz.name}}</a>
+                    </td>
+                    <td>{{classArrangement.createdBy}}</td>
+                    <td>{{classArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.lastModifiedBy}}</td>
+                    <td>{{classArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ng-click="vm.openClassSignDialog(classArrangement)"
+                                    class="btn btn-mint btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down">签到耗课</span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="class-arrangement.edit({id:classArrangement.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="class-arrangement.delete({id:classArrangement.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+            <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        </div>
+    </div>
+</div>
