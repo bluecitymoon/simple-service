@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product'];
+    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product', 'StudentClass'];
 
-    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product) {
+    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product, StudentClass) {
 
         var vm = this;
 
@@ -47,6 +47,17 @@
                 AlertService.error("请选择目标班级！");
                 return;
             }
+
+            var data = {
+                product: vm.selectedClass,
+                students: selectedRecords
+            };
+
+            StudentClass.batchAssignStudentIntoClass(data, function (response) {
+                AlertService.success(response.message);
+            }, function (error) {
+                AlertService.error(error);
+            })
         };
 
         $scope.pagination = {

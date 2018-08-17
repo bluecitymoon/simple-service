@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('simpleServiceApp')
-        .factory('StudentClass', StudentClass);
+        .factory('StudentClassInOutLog', StudentClassInOutLog);
 
-    StudentClass.$inject = ['$resource', 'DateUtils'];
+    StudentClassInOutLog.$inject = ['$resource', 'DateUtils'];
 
-    function StudentClass ($resource, DateUtils) {
-        var resourceUrl =  'api/student-classes/:id';
+    function StudentClassInOutLog ($resource, DateUtils) {
+        var resourceUrl =  'api/student-class-in-out-logs/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
@@ -22,8 +22,7 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' },
-            'batchAssignStudentIntoClass' : { url: 'api/student-classes/batch-assign', method:'POST' }
+            'update': { method:'PUT' }
         });
     }
 })();

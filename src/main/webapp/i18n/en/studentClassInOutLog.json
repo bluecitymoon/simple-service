@@ -1,0 +1,28 @@
+{
+    "simpleServiceApp": {
+        "studentClassInOutLog" : {
+            "home": {
+                "title": "Student Class In Out Logs",
+                "createLabel": "Create a new Student Class In Out Log",
+                "createOrEditLabel": "Create or edit a Student Class In Out Log"
+            },
+            "created": "A new Student Class In Out Log is created with identifier {{ param }}",
+            "updated": "A Student Class In Out Log is updated with identifier {{ param }}",
+            "deleted": "A Student Class In Out Log is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Student Class In Out Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Student Class In Out Log"
+            },
+            "comments": "Comments",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "student": "Student",
+            "oldClass": "Old Class",
+            "newClass": "New Class"
+        }
+    }
+}

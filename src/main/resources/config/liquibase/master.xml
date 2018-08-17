@@ -58,6 +58,7 @@
     <include file="config/liquibase/changelog/20180815034331_added_entity_StudentClassLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180815100416_added_entity_CountNumber.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180816141812_added_entity_StudentClass.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180817015838_added_entity_StudentClassInOutLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -122,5 +123,6 @@
     <include file="config/liquibase/changelog/20180815034331_added_entity_constraints_StudentClassLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180815100416_added_entity_constraints_CountNumber.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180816141812_added_entity_constraints_StudentClass.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180817015838_added_entity_constraints_StudentClassInOutLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

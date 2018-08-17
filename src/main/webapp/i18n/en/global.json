@@ -60,6 +60,7 @@
                 "studentClassLog": "Student Class Log",
                 "countNumber": "Count Number",
                 "studentClass": "Student Class",
+                "studentClassInOutLog": "Student Class In Out Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

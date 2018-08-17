@@ -2,6 +2,8 @@ package com.pure.service.service.impl;
 
 import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
+import com.pure.service.domain.StudentClassInOutLog;
+import com.pure.service.repository.StudentClassInOutLogRepository;
 import com.pure.service.service.StudentClassService;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.repository.StudentClassRepository;
@@ -9,6 +11,7 @@ import com.pure.service.service.dto.dto.CommonResponse;
 import com.pure.service.service.dto.request.StudentsClassRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,8 @@ public class StudentClassServiceImpl implements StudentClassService{
 
     private final StudentClassRepository studentClassRepository;
 
+    @Autowired
+    private StudentClassInOutLogRepository inOutLogRepository;
 
     public StudentClassServiceImpl(StudentClassRepository studentClassRepository) {
         this.studentClassRepository = studentClassRepository;
@@ -102,6 +107,13 @@ public class StudentClassServiceImpl implements StudentClassService{
             StudentClass savedStudentClass = save(studentClass);
 
             successMessageBuilder.append(student.getName() + " ");
+
+            StudentClassInOutLog inOutLog = new StudentClassInOutLog();
+            inOutLog.setComments(student.getName() + "进班成功! 排班id = " + savedStudentClass.getId());
+            inOutLog.setStudent(student);
+            inOutLog.setNewClass(clazz);
+
+            inOutLogRepository.save(inOutLog);
         }
 
         String errorMessage = errorMessageBuilder.toString().isEmpty()? "": errorMessageBuilder.toString() + "已在该班级里面；";

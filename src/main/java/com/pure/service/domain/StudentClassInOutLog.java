@@ -1,6 +1,7 @@
 package com.pure.service.domain;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,11 +11,11 @@ import javax.persistence.Table;
 import java.util.Objects;
 
 /**
- * A StudentClass.
+ * A StudentClassInOutLog.
  */
 @Entity
-@Table(name = "student_class")
-public class StudentClass extends AbstractAuditingEntity {
+@Table(name = "student_class_in_out_log")
+public class StudentClassInOutLog extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,11 +23,17 @@ public class StudentClass extends AbstractAuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "comments")
+    private String comments;
+
     @ManyToOne
     private Student student;
 
     @ManyToOne
-    private Product product;
+    private Product oldClass;
+
+    @ManyToOne
+    private Product newClass;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -37,12 +44,25 @@ public class StudentClass extends AbstractAuditingEntity {
         this.id = id;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public StudentClassInOutLog comments(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
 
     public Student getStudent() {
         return student;
     }
 
-    public StudentClass student(Student student) {
+    public StudentClassInOutLog student(Student student) {
         this.student = student;
         return this;
     }
@@ -51,17 +71,30 @@ public class StudentClass extends AbstractAuditingEntity {
         this.student = student;
     }
 
-    public Product getProduct() {
-        return product;
+    public Product getOldClass() {
+        return oldClass;
     }
 
-    public StudentClass product(Product product) {
-        this.product = product;
+    public StudentClassInOutLog oldClass(Product product) {
+        this.oldClass = product;
         return this;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setOldClass(Product product) {
+        this.oldClass = product;
+    }
+
+    public Product getNewClass() {
+        return newClass;
+    }
+
+    public StudentClassInOutLog newClass(Product product) {
+        this.newClass = product;
+        return this;
+    }
+
+    public void setNewClass(Product product) {
+        this.newClass = product;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -73,11 +106,11 @@ public class StudentClass extends AbstractAuditingEntity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        StudentClass studentClass = (StudentClass) o;
-        if (studentClass.getId() == null || getId() == null) {
+        StudentClassInOutLog studentClassInOutLog = (StudentClassInOutLog) o;
+        if (studentClassInOutLog.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), studentClass.getId());
+        return Objects.equals(getId(), studentClassInOutLog.getId());
     }
 
     @Override
@@ -87,8 +120,9 @@ public class StudentClass extends AbstractAuditingEntity {
 
     @Override
     public String toString() {
-        return "StudentClass{" +
+        return "StudentClassInOutLog{" +
             "id=" + getId() +
+            ", comments='" + getComments() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
