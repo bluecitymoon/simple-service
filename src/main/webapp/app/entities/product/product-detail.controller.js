@@ -5,15 +5,16 @@
         .module('simpleServiceApp')
         .controller('ProductDetailController', ProductDetailController);
 
-    ProductDetailController.$inject = ['$uibModal', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassArrangementRule', 'AlertService', 'DateUtils', 'ClassArrangement'];
+    ProductDetailController.$inject = ['$uibModal', '$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassArrangementRule', 'AlertService', 'DateUtils', 'ClassArrangement', 'StudentClass'];
 
-    function ProductDetailController($uibModal, $scope, $rootScope, $stateParams, previousState, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassArrangementRule, AlertService, DateUtils, ClassArrangement) {
+    function ProductDetailController($uibModal, $scope, $rootScope, $stateParams, previousState, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassArrangementRule, AlertService, DateUtils, ClassArrangement, StudentClass) {
         var vm = this;
 
         vm.product = entity;
         vm.previousState = previousState.name;
         vm.classArrangementRule = {};
         vm.classArrangementRules = [];
+        vm.students = [];
         loadArrangementRule();
 
         function loadArrangementRule() {
@@ -96,6 +97,14 @@
 
         reloadArrangements();
 
+        function loadStudentsInClass() {
+
+            StudentClass.getAllStudentInClass({classId: vm.product.id}, function (data) {
+                vm.students = data;
+            });
+        }
+
+        loadStudentsInClass();
         vm.generateClassSchedule = function (ruleId) {
             ClassArrangement.generateClassSchedule({id: ruleId}, function () {
 

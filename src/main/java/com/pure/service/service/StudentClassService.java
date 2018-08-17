@@ -1,10 +1,13 @@
 package com.pure.service.service;
 
+import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.service.dto.dto.CommonResponse;
 import com.pure.service.service.dto.request.StudentsClassRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * Service Interface for managing StudentClass.
@@ -43,4 +46,6 @@ public interface StudentClassService {
     void delete(Long id);
 
     CommonResponse batchAssign(StudentsClassRequest studentsClassRequest);
+
+    List<Student> findStudentsInClass(Long classId);
 }

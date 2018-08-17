@@ -1,6 +1,7 @@
 package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.service.StudentClassService;
 import com.pure.service.service.dto.dto.CommonResponse;
@@ -113,6 +114,15 @@ public class StudentClassResource {
         Page<StudentClass> page = studentClassQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/student-classes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/student-classes/students/{classId}")
+    @Timed
+    public ResponseEntity<List<Student>> getAllStudentInClass(@PathVariable Long classId) {
+
+        List<Student> students = studentClassService.findStudentsInClass(classId);
+
+        return new ResponseEntity<>(students, null, HttpStatus.OK);
     }
 
     /**

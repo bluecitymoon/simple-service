@@ -28,10 +28,8 @@
             angular.forEach(vm.students, function (student) {
                 student.selected = vm.allSelected;
             });
-            // vm.students.forEach(function (record) {
-            //     record.selected = vm.allSelected;
-            // })
         };
+
         vm.batchAssignStudentIntoClass = function () {
 
             var selectedRecords = vm.students.filter(function (r) {
@@ -59,6 +57,7 @@
                 AlertService.error(error);
             })
         };
+
 
         $scope.pagination = {
             currentPageNumber: 1,

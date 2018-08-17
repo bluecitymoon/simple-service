@@ -1,10 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<ul class="sortable-list tasklist list-unstyled ui-sortable" style="padding: 0px !important;">
 
-</body>
-</html>
+    <li class="task-info ui-sortable-handle">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <p class="text-bold text-main text-sm">学员列表</p>
+            </div>
+
+        </div>
+
+        <div class="panel panel-bordered-dark">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="jh-table table table-striped">
+                        <thead>
+                        <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                            <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="name"><span data-translate="simpleServiceApp.student.name">Name</span> <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="phone"><span data-translate="simpleServiceApp.student.phone">Phone</span>
+                                <span
+                                        class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="gender"><span data-translate="simpleServiceApp.student.gender">Gender</span>
+                                <span
+                                        class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="birthday"><span
+                                    data-translate="simpleServiceApp.student.birthday">Birthday</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="address"><span
+                                    data-translate="simpleServiceApp.student.address">Address</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="school"><span data-translate="simpleServiceApp.student.school">School</span>
+                                <span
+                                        class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="qq"><span data-translate="simpleServiceApp.student.qq">Qq</span> <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="comments"><span
+                                    data-translate="simpleServiceApp.student.comments">Comments</span>
+                                <span class="glyphicon glyphicon-sort"></span></th>
+                            <th jh-sort-by="customer.name"><span
+                                    data-translate="simpleServiceApp.student.customer">Customer</span> <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="student in vm.students track by student.id"
+                            ng-class="student.selected? 'bg-info': ''">
+                            <td><a ui-sref="student-detail({id:student.id})">{{student.id}}</a></td>
+                            <td>{{student.name}}</td>
+                            <td>{{student.phone}}</td>
+                            <td>{{student.gender}}</td>
+                            <td>{{student.birthday | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{student.address}}</td>
+                            <td>{{student.school}}</td>
+                            <td>{{student.qq}}</td>
+                            <td>{{student.comments}}</td>
+                            <td>
+                                <a ui-sref="customer-detail({id:student.customer.id})">{{student.customer.name}}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>

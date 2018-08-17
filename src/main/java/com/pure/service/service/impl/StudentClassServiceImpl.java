@@ -2,11 +2,11 @@ package com.pure.service.service.impl;
 
 import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
+import com.pure.service.domain.StudentClass;
 import com.pure.service.domain.StudentClassInOutLog;
 import com.pure.service.repository.StudentClassInOutLogRepository;
-import com.pure.service.service.StudentClassService;
-import com.pure.service.domain.StudentClass;
 import com.pure.service.repository.StudentClassRepository;
+import com.pure.service.service.StudentClassService;
 import com.pure.service.service.dto.dto.CommonResponse;
 import com.pure.service.service.dto.request.StudentsClassRequest;
 import org.slf4j.Logger;
@@ -16,6 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -123,5 +126,13 @@ public class StudentClassServiceImpl implements StudentClassService{
         response.setMessage(errorMessage + successMessage);
 
         return response;
+    }
+
+    @Override
+    public List<Student> findStudentsInClass(Long classId) {
+
+        List<StudentClass> studentClasses = studentClassRepository.findByProduct_Id(classId);
+
+        return studentClasses.stream().map(StudentClass::getStudent).collect(Collectors.toList());
     }
 }

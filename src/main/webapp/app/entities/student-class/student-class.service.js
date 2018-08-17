@@ -23,7 +23,8 @@
                 }
             },
             'update': { method:'PUT' },
-            'batchAssignStudentIntoClass' : { url: 'api/student-classes/batch-assign', method:'POST' }
+            'batchAssignStudentIntoClass' : { url: 'api/student-classes/batch-assign', method:'POST' },
+            'getAllStudentInClass': { url:'api/student-classes/students/:classId', method: 'GET', isArray: true}
         });
     }
 })();
