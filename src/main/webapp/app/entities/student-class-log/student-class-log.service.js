@@ -23,7 +23,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'batchSignin': {method: 'POST', url: 'api/student-class-logs/batch-sign-in'}
         });
     }
 })();
