@@ -6,6 +6,8 @@ import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.ClassArrangementCriteria;
+import com.pure.service.service.dto.dto.ClassSchedule;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -20,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -153,6 +156,73 @@ public class ClassArrangementResource {
         return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
+    @GetMapping("/class-arrangements/all")
+    @Timed
+    public ResponseEntity<List<ClassSchedule>> getAllClassSchedules() {
+
+        List<ClassSchedule> page = arrangementRepository.getAllSchedules();
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
+    @PostMapping("/class-arrangements/get-by-range")
+    @Timed
+    public ResponseEntity<List<ClassSchedule>> searchSchedulesInRange(@RequestBody CustomerStatusRequest customerStatusRequest) {
+
+            switch (customerStatusRequest.getQueryType()) {
+                case "monthly":
+
+                    if (StringUtils.isEmpty(customerStatusRequest.getYear()) || StringUtils.isEmpty(customerStatusRequest.getMonth())) {
+                        return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                    }
+
+                    preProccessStatusRequest(customerStatusRequest);
+
+                    break;
+                case "dateRange":
+
+                    if (StringUtils.isEmpty(customerStatusRequest.getStartDate()) || StringUtils.isEmpty(customerStatusRequest.getEndDate())) {
+                        return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        List<ClassSchedule> page = classArrangementService.searchSchedulesInRange(customerStatusRequest);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
+
+    private void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
+
+        Integer month = customerStatusRequest.getMonth();
+        Integer year = customerStatusRequest.getYear();
+
+        Integer nextMonth = month + 1;
+        Integer nextYear = year;
+        if (nextMonth == 13) {
+            nextMonth = 1;
+
+            nextYear = year + 1;
+        }
+
+        String monthString = "" + month;
+        String nextMonthString = "" + nextMonth;
+        if (month < 10) {
+            monthString = "0" + monthString;
+        }
+
+        if (nextMonth < 10) {
+            nextMonthString = "0" + nextMonthString;
+        }
+
+        String fullDateStart = "" + year+ "-" + monthString + "-01T00:00:01.00Z";
+        String fullDateEnd = "" + nextYear + "-" + nextMonthString + "-01T00:00:01.00Z";
+
+        customerStatusRequest.setStartDate(Instant.parse(fullDateStart));
+        customerStatusRequest.setEndDate(Instant.parse(fullDateEnd));
+    }
 
     /**
      * GET  /class-arrangements/:id : get the "id" classArrangement.

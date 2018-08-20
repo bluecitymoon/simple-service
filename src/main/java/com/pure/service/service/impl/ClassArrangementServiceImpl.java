@@ -7,6 +7,8 @@ import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.service.ClassArrangementService;
+import com.pure.service.service.dto.dto.ClassSchedule;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,6 +108,12 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             default:
                 break;
         }
+    }
+
+    @Override
+    public List<ClassSchedule> searchSchedulesInRange(CustomerStatusRequest customerStatusRequest) {
+
+        return classArrangementRepository.getAllSchedulesByRange(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
     }
 
     private void generateArrangementWeekly(ClassArrangementRule rule) {

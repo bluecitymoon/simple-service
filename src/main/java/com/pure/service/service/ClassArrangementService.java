@@ -1,8 +1,12 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.service.dto.dto.ClassSchedule;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * Service Interface for managing ClassArrangement.
@@ -41,4 +45,6 @@ public interface ClassArrangementService {
     void delete(Long id);
 
     void createClassArrangementsByRule(Long id);
+
+    List<ClassSchedule> searchSchedulesInRange(CustomerStatusRequest customerStatusRequest);
 }

@@ -61,10 +61,11 @@
             }
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
+                // vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.collections = data;
                 vm.page = pagingParams.page;
+                $scope.pagination.totalItems = headers('X-Total-Count');
             }
             function onError(error) {
                 AlertService.error(error.data.message);

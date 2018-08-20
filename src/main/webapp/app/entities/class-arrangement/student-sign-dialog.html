@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <h4 class="modal-title">学员签到</h4>
+</div>
+
+<div class="panel">
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span>姓名</span></th>
+                    <th><span>性别</span></th>
+                    <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label for="email-list-all">全选</label>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="student in vm.students track by student.id"
+                    ng-class="student.selected? 'bg-info': ''">
+                    <td><a ui-sref="student-detail({id:student.id})" target="_window">{{student.id}}</a></td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.gender}}</td>
+                    <td class="text-center">
+                        <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox" ng-model="student.selected">
+                        <label for="email-list-{{student.id}}"></label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+            </button>
+        </div>
+        <div class="col-md-6">
+            <button type="button"  class="btn btn-block btn-primary" ng-click="vm.signClassInBatch()">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定签到</span>
+            </button>
+        </div>
+    </div>
+
+</div>

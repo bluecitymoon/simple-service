@@ -1,17 +1,24 @@
 <div class="page-header">
-    <h1 class="page-title" data-translate="simpleServiceApp.classArrangement.home.title">Class Arrangements</h1>
+    <h1 class="page-title">本月课程安排</h1>
 </div>
 
 <jhi-alert></jhi-alert>
 
-<uib-tabset>
-    <uib-tab heading="今日课程">
+<div ng-include="'app/entities/class-arrangement/tab-class-arrangements-today.html'"></div>
 
-        <div ng-include="'app/entities/class-arrangement/tab-class-arrangements-today.html'"></div>
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.classArrangement.home.title">Class Arrangements</h1>
+</div>
 
-    </uib-tab>
-    <uib-tab heading="课程列表">
-        <div ng-include="'app/entities/class-arrangement/tab-class-arrangements.html'"></div>
+<div ng-include="'app/entities/class-arrangement/tab-class-range-class-schdules.html'"></div>
+<!--<uib-tabset>-->
+    <!--<uib-tab heading="课程表">-->
 
-    </uib-tab>
-</uib-tabset>
+        <!--<div ng-include="'app/entities/class-arrangement/tab-class-arrangements-today.html'"></div>-->
+
+    <!--</uib-tab>-->
+    <!--<uib-tab heading="课程列表">-->
+        <!--<div ng-include="'app/entities/class-arrangement/tab-class-arrangements.html'"></div>-->
+
+    <!--</uib-tab>-->
+<!--</uib-tabset>-->

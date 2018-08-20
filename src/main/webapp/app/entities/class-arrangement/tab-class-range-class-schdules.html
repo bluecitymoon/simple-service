@@ -1,0 +1,126 @@
+
+
+<uib-tabset>
+    <uib-tab heading="查询排课-按年月">
+        <div class="panel">
+            <form class="form-horizontal">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">年份</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.searchCondition.yearObject"
+                                        ng-options="year as year.id for year in vm.years">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">月份</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.searchCondition.monthObject"
+                                        ng-options="month as month.id for month in vm.months">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 form-group">
+
+                            <button class="btn btn-primary btn-block" type="button"
+                                    ng-click="vm.searchCalendars('monthly')"><i
+                                    class="fa fa-search-minus"></i>查询
+                            </button>
+
+                        </div>
+                        <div class="col-md-2 form-group">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </uib-tab>
+    <uib-tab heading="查询排课-按日期范围">
+        <div class="panel">
+            <form class="form-horizontal">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">开始日期</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="开始时间" class="form-control"
+                                       ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                                       ng-model="vm.searchCondition.startDate"
+                                       is-open="vm.datePickerOpenStatus.startDate">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">结束日期</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="结束时间" class="form-control"
+                                       ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                                       ng-model="vm.searchCondition.endDate"
+                                       is-open="vm.datePickerOpenStatus.endDate">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 form-group">
+
+                            <button class="btn btn-primary btn-block" type="button"
+                                    ng-click="vm.searchCalendars('dateRange')">
+                                <i
+                                        class="fa fa-search-minus"></i>查询
+                            </button>
+
+                        </div>
+                        <div class="col-md-2 form-group">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </uib-tab>
+
+</uib-tabset>
+
+<div class="panel">
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr>
+                    <th>教师</th>
+                    <th>标题</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>班级</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="classArrangement in vm.schedules">
+                    <td>{{classArrangement.teacherName}}</td>
+                    <td>{{classArrangement.title}}</td>
+                    <td>{{classArrangement.start | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.end | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.className}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ng-click="vm.openClassSignDialog(classArrangement)"
+                                    class="btn btn-mint btn-sm btn-block">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down">学员签到</span>
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

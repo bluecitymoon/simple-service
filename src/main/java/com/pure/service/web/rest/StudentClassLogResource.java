@@ -3,6 +3,7 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.service.StudentClassLogService;
+import com.pure.service.service.dto.request.BatchSigninStudent;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentClassLogCriteria;
@@ -62,6 +63,15 @@ public class StudentClassLogResource {
         return ResponseEntity.created(new URI("/api/student-class-logs/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/student-class-logs/batch-sign-in")
+    @Timed
+    public ResponseEntity<StudentClassLog> batchSignin(@RequestBody BatchSigninStudent students) {
+
+        studentClassLogService.batchSignIn(students);
+
+        return ResponseEntity.ok().build();
     }
 
     /**

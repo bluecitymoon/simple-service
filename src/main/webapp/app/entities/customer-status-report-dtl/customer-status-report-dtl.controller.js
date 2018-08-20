@@ -35,7 +35,7 @@
                 vm.years.push({id : i, label: i});
             }
 
-            for (var j = 1; j < 11; j ++) {
+            for (var j = 1; j < 13; j ++) {
                 vm.months.push({id : j, label: j});
             }
 
@@ -54,6 +54,7 @@
             vm.searchCondition.monthObject = thisMonth;
 
         }
+
 
         function reloadChart() {
 

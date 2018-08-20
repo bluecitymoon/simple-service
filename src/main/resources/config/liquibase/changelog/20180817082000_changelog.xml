@@ -5,4 +5,7 @@
             <column name="student_id" type="bigint"/>
         </addColumn>
     </changeSet>
+    <changeSet author="Jerry (generated)" id="1534494015278-2">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="contract" constraintName="FK14c8jlug1v4bjjut2qm9k1oa2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
 </databaseChangeLog>

@@ -1,12 +1,20 @@
 package com.pure.service.domain;
 
 
+import com.pure.service.service.dto.dto.ClassSchedule;
+
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.persistence.Table;
 import java.time.Instant;
 import java.util.Objects;
@@ -14,6 +22,38 @@ import java.util.Objects;
 /**
  * A ClassArrangement.
  */
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "ClassArrangement.getAllSchedules",
+        query = "select ca.id as arrangementId, p.id as classId, concat(p.name, ' ', t.name, ' ', DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i')) as title, p.name as className, t.name as teacherName, ca.start_date as start, ca.end_date as end\n" +
+            " from class_arrangement ca \n" +
+            " left join product p on ca.clazz_id = p.id \n" +
+            " left join teacher t on ca.planed_teacher_id = t.id" +
+            " order by ca.start_date",
+        resultSetMapping = "scheduleMapping"),
+    @NamedNativeQuery(name = "ClassArrangement.getAllSchedulesByRange",
+        query = "select  ca.id as arrangementId, p.id as classId, concat(DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i'),  ' ', p.name, ' ', t.name) as title, p.name as className, t.name as teacherName, ca.start_date as start, ca.end_date as end\n" +
+            " from class_arrangement ca \n" +
+            " cross join product p on ca.clazz_id = p.id \n" +
+            " cross join teacher t on ca.planed_teacher_id = t.id\n" +
+            " and ca.start_date > :1\n" +
+            " and ca.end_date < :2\n" +
+            " order by ca.start_date asc",
+        resultSetMapping = "scheduleMapping")})
+
+@SqlResultSetMappings(
+    {@SqlResultSetMapping(name = "scheduleMapping",
+        classes = @ConstructorResult(targetClass = ClassSchedule.class,
+            columns = {
+                @ColumnResult(name = "arrangementId", type = Long.class),
+                @ColumnResult(name = "classId", type = Long.class),
+                @ColumnResult(name = "title", type = String.class),
+                @ColumnResult(name = "className", type = String.class),
+                @ColumnResult(name = "teacherName", type = String.class),
+                @ColumnResult(name = "start", type = Instant.class),
+                @ColumnResult(name = "end", type = Instant.class)
+            }))
+})
+
 @Entity
 @Table(name = "class_arrangement")
 public class ClassArrangement extends AbstractAuditingEntity {
