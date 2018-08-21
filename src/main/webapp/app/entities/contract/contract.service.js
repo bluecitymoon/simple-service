@@ -26,6 +26,7 @@
                 }
             },
             'update': { method:'PUT' },
+            'createFreeContract': { method:'POST', url: 'api/contracts/free' },
             'createPackageContract': {
                 url: 'api/contracts/package',
                 method: 'POST',

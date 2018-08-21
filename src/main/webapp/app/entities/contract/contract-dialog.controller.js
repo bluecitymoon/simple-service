@@ -11,6 +11,12 @@
         var vm = this;
 
         vm.contract = entity;
+        if (vm.contract.contractType && vm.contract.contractType == 'free') {
+
+            vm.contract.moneyShouldCollected = 0;
+            vm.contract.totalMoneyAmount = 0;
+        }
+
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -59,15 +65,15 @@
                 vm.contract.classCount = newVal.classCount;
                 vm.contract.course = newVal.course;
                 vm.contract.endDate = DateUtils.convertDateTimeFromServer(newVal.endDate);
-                vm.contract.moneyCollected = newVal.moneyCollected;
-                vm.contract.moneyShouldCollected = newVal.moneyShouldCollected;
+                // vm.contract.moneyCollected = newVal.moneyCollected;
+                // vm.contract.moneyShouldCollected = newVal.moneyShouldCollected;
                 vm.contract.promotionAmount = newVal.promotionAmount;
                 vm.contract.serialNumber = newVal.serialNumber;
                 vm.contract.signDate = DateUtils.convertDateTimeFromServer(newVal.signDate);
                 vm.contract.specialPromotionAmount = newVal.specialPromotionAmount;
                 vm.contract.startDate = DateUtils.convertDateTimeFromServer(newVal.startDate);
                 vm.contract.totalHours = newVal.totalMinutes;
-                vm.contract.totalMoneyAmount = newVal.totalMoneyAmount;
+                // vm.contract.totalMoneyAmount = newVal.totalMoneyAmount;
             }
         });
 
@@ -84,7 +90,14 @@
             if (vm.contract.id !== null) {
                 Contract.update(vm.contract, onSaveSuccess, onSaveError);
             } else {
-                Contract.save(vm.contract, onSaveSuccess, onSaveError);
+
+                if (vm.contract.contractType && vm.contract.contractType == 'free') {
+
+                    Contract.createFreeContract(vm.contract, onSaveSuccess, onSaveError);
+                } else {
+                    Contract.save(vm.contract, onSaveSuccess, onSaveError);
+
+                }
             }
         }
 

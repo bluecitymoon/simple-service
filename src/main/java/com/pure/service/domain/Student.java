@@ -1,15 +1,12 @@
 package com.pure.service.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.Instant;
@@ -54,10 +51,6 @@ public class Student implements Serializable {
 
     @ManyToOne
     private Customer customer;
-
-    @OneToOne(mappedBy = "student")
-    @JsonIgnore
-    private Contract contract;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -185,13 +178,6 @@ public class Student implements Serializable {
         this.customer = customer;
     }
 
-    public Contract getContract() {
-        return contract;
-    }
-
-    public void setContract(Contract contract) {
-        this.contract = contract;
-    }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

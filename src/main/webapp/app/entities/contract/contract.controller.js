@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractController', ContractController);
 
-    ContractController.$inject = ['$scope', '$state', 'Contract', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Course', 'ContractStatus', 'Product'];
+    ContractController.$inject = ['$uibModal', '$scope', '$state', 'Contract', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Course', 'ContractStatus', 'Product'];
 
-    function ContractController($scope, $state, Contract, ParseLinks, AlertService, paginationConstants, pagingParams, Course, ContractStatus, Product) {
+    function ContractController($uibModal, $scope, $state, Contract, ParseLinks, AlertService, paginationConstants, pagingParams, Course, ContractStatus, Product) {
 
         var vm = this;
 
@@ -99,6 +99,45 @@
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
+            });
+        }
+
+        vm.openFreeContractDialog = function () {
+
+            $uibModal.open({
+                templateUrl: 'app/entities/contract/contract-dialog.html',
+                controller: 'ContractDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: function () {
+                        return {
+                            contractNumber: null,
+                            serialNumber: null,
+                            signDate: null,
+                            startDate: null,
+                            endDate: null,
+                            totalMoneyAmount: null,
+                            moneyShouldCollected: null,
+                            moneyCollected: null,
+                            promotionAmount: null,
+                            totalHours: null,
+                            hoursTaken: null,
+                            comments: null,
+                            createdBy: null,
+                            createdDate: null,
+                            lastModifiedBy: null,
+                            lastModifiedDate: null,
+                            id: null,
+                            contractType: 'free'
+                        };
+                    }
+                }
+            }).result.then(function() {
+                $state.go('contract', null, { reload: 'contract' });
+            }, function() {
+                $state.go('contract');
             });
         }
     }

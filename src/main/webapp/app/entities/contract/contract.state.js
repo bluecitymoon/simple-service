@@ -116,6 +116,7 @@
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+
                 $uibModal.open({
                     templateUrl: 'app/entities/contract/contract-dialog.html',
                     controller: 'ContractDialogController',
@@ -141,7 +142,8 @@
                                 createdDate: null,
                                 lastModifiedBy: null,
                                 lastModifiedDate: null,
-                                id: null
+                                id: null,
+                                contractType: $stateParams.type
                             };
                         }
                     }

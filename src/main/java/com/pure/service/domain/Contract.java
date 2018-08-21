@@ -79,7 +79,20 @@ public class Contract extends AbstractAuditingEntity {
     @ManyToOne
     private Customer customer;
 
+    @ManyToOne
+    private ContractNature contractNature;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
+
+    public ContractNature getContractNature() {
+        return contractNature;
+    }
+
+    public void setContractNature(ContractNature contractNature) {
+        this.contractNature = contractNature;
+    }
+
     public Long getId() {
         return id;
     }

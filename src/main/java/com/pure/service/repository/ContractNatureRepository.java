@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface ContractNatureRepository extends JpaRepository<ContractNature, Long>, JpaSpecificationExecutor<ContractNature> {
 
+    ContractNature findByCode(String code);
 }

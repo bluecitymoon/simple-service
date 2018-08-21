@@ -117,10 +117,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xs-4 no-padding-left">
-                    <button class="btn btn-primary" ui-sref="contract.new">
+                    <button class="btn btn-primary" ng-click="vm.openFreeContractDialog()">
                         <span class="glyphicon glyphicon-plus"></span>
                         <span>
-                        创建常规合同
+                        创建赠送合同
                     </span>
                     </button>
 
@@ -145,6 +145,7 @@
                     <th jh-sort-by="student.id"><span>学员</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="contractNumber"><span data-translate="simpleServiceApp.contract.contractNumber">Contract Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>合同性质</th>
                     <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.contract.serialNumber">Serial Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="signDate"><span data-translate="simpleServiceApp.contract.signDate">Sign Date</span>
@@ -197,6 +198,7 @@
                     <td><a ui-sref="customer-detail({id:contract.customer.id})">{{contract.customer.name}}</a></td>
                     <td><a ui-sref="student-detail({id:contract.student.id})">{{contract.student.name}}</a></td>
                     <td>{{contract.contractNumber}}</td>
+                    <td>{{contract.contractNature.name}}</td>
                     <td>{{contract.serialNumber}}</td>
                     <td>{{contract.signDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{contract.startDate | date:'yyyy-MM-dd hh:mm'}}</td>

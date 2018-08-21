@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Contract;
+import com.pure.service.domain.ContractNature;
+import com.pure.service.repository.ContractNatureRepository;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.dto.ContractCriteria;
@@ -15,6 +17,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -49,6 +52,9 @@ public class ContractResource {
 
     private final ContractQueryService contractQueryService;
 
+    @Autowired
+    private ContractNatureRepository contractNatureRepository;
+
     public ContractResource(ContractService contractService, ContractQueryService contractQueryService) {
         this.contractService = contractService;
         this.contractQueryService = contractQueryService;
@@ -68,6 +74,23 @@ public class ContractResource {
         if (contract.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new contract cannot already have an ID")).body(null);
         }
+        Contract result = contractService.save(contract);
+        return ResponseEntity.created(new URI("/api/contracts/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/contracts/free")
+    @Timed
+    public ResponseEntity<Contract> createFreeContract(@RequestBody Contract contract) throws URISyntaxException, CollectionNotPaidException {
+        log.debug("REST request to save Contract : {}", contract);
+        if (contract.getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new contract cannot already have an ID")).body(null);
+        }
+
+        ContractNature free = contractNatureRepository.findByCode("free");
+        contract.setContractNature(free);
+
         Contract result = contractService.save(contract);
         return ResponseEntity.created(new URI("/api/contracts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
