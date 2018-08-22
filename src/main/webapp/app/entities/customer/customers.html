@@ -370,7 +370,7 @@
         <div class="text-center">
             <jhi-item-count page="pagination.currentPageNumber" total="pagination.totalItems" items-per-page="vm.itemsPerPage"></jhi-item-count>
             <uib-pagination class="pagination-sm" total-items="pagination.totalItems" items-per-page="vm.itemsPerPage"
-                            ng-model="pagination.currentPageNumber" ng-change="vm.loadAll()"></uib-pagination>
+                            ng-model="pagination.currentPageNumber" ng-click="vm.loadAll()"></uib-pagination>
         </div>
     </div>
 </div>

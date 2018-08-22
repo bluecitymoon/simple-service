@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerController', CustomerController);
 
-    CustomerController.$inject = ['$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule', 'Cache', 'VistedCustomerStatus'];
+    CustomerController.$inject = ['$timeout', '$uibModal', '$scope','$state', '$stateParams', 'Customer', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'MarketChannelCategory', 'User', 'NewOrderResourceLocation', 'TaskStatus', 'CustomerStatus', 'Principal', '$localStorage', 'CustomerCommunicationSchedule', 'Cache', 'VistedCustomerStatus'];
 
-    function CustomerController($uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule, Cache, VistedCustomerStatus) {
+    function CustomerController($timeout, $uibModal, $scope, $state, $stateParams, Customer, ParseLinks, AlertService, paginationConstants, pagingParams, MarketChannelCategory, User, NewOrderResourceLocation, TaskStatus, CustomerStatus, Principal, $localStorage, CustomerCommunicationSchedule, Cache, VistedCustomerStatus) {
 
         var vm = this;
 
@@ -56,15 +56,21 @@
             vm.searchCondition = {};
         };
 
+        var currentPageNumber = 1;
+        var cacheCondition = Cache.getCustomerSearchCondition();
+
+        if (cacheCondition) {
+            currentPageNumber = cacheCondition.currentPageNumber;
+        }
+
         $scope.pagination = {
-            currentPageNumber: 1,
+            currentPageNumber: currentPageNumber,
             totalItems: 0
         };
 
-
-
         vm.allSelected = false;
         vm.loadAll = function() {
+
             var user = $localStorage.user;
             var isAdmin = false;
             angular.forEach(user.authorities, function (authority) {
@@ -144,7 +150,14 @@
                 parameters["ccAssignStatus"] = vm.searchCondition.ccAssignStatus.code;
             }
 
-            Cache.setCustomerSearchCondition(vm.searchCondition);
+            var cacheCondition = {
+                condition: vm.searchCondition,
+                currentPageNumber : $scope.pagination.currentPageNumber
+            };
+            Cache.setCustomerSearchCondition(cacheCondition);
+
+            console.log("searching with ");
+            console.log(cacheCondition);
 
             Customer.query(parameters, onSuccess, onError);
 
@@ -166,13 +179,21 @@
                 AlertService.error(error.data.message);
             }
         };
-        reloadLastSearchPage();
+
+        $timeout(function () {
+            reloadLastSearchPage();
+        }, 1000);
 
         function reloadLastSearchPage() {
-            var condition = Cache.getCustomerSearchCondition();
+            var cacheCondition = Cache.getCustomerSearchCondition();
 
-            if (condition) {
-                vm.searchCondition = condition;
+            console.log("reload page with condtion ");
+            console.log(cacheCondition);
+
+            if (cacheCondition) {
+
+                vm.searchCondition = cacheCondition.condition;
+                $scope.pagination.currentPageNumber = cacheCondition.currentPageNumber;
 
                 vm.loadAll();
             }
@@ -203,8 +224,13 @@
             function () {
                 AlertService.success("签到成功!");
             },
-            function () {
-                AlertService.error("签到失败");
+            function (error) {
+                if (error.data.detail) {
+                    AlertService.error(error.data.detail);
+
+                } else {
+                    AlertService.error("签到失败");
+                }
             })
         };
 
