@@ -6,6 +6,7 @@ import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.ClassArrangementCriteria;
+import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
@@ -189,6 +190,15 @@ public class ClassArrangementResource {
                     break;
             }
         List<ClassSchedule> page = classArrangementService.searchSchedulesInRange(customerStatusRequest);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
+    @PostMapping("/class-arrangements/get-this-week")
+    @Timed
+    public ResponseEntity<List<ClassArrangementWeekElement>> getArrangementsInCurrentWeek() {
+
+        List<ClassArrangementWeekElement> page = classArrangementService.getArrangementsInCurrentWeek();
 
         return new ResponseEntity<>(page, null, HttpStatus.OK);
     }

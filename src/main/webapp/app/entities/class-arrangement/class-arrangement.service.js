@@ -15,6 +15,7 @@
             'getClassArrangementsToday': { url:'api/class-arrangements/today', method: 'GET', isArray: true},
             'getAllClassSchedules': { url:'api/class-arrangements/all', method: 'GET', isArray: true},
             'searchSchedulesInRange': { url:'api/class-arrangements/get-by-range', method: 'POST', isArray: true},
+            'getArrangementsInCurrentWeek': { url:'api/class-arrangements/get-this-week', method: 'POST', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

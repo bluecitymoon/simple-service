@@ -1,0 +1,71 @@
+<div class="panel">
+    <div class="panel-body">
+
+        <div class="row">
+            <div class="col-md-12 panel-bordered-primary panel-bordered" ng-repeat="weekday in vm.weekClasses">
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="text-center" colspan="{{weekday.classrooms.length + 1}}">{{weekday.weekdayName}}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="text-center" ng-repeat="classRoom in weekday.classrooms">{{classRoom}}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="text-center" ng-repeat="course in weekday.courses track by $index">{{course}}</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="text-center" ng-repeat="teacher in weekday.teachers track by $index">{{teacher}}</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>09:00-10:30</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningFirstHalf">{{mf.className}}</td>
+
+                        </tr>
+                        <tr>
+                            <td>10:45-12:15</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningSecondHalf">{{mf.className}}</td>
+                        </tr>
+                        <tr>
+                            <td>12:15-13:00</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.moonRest">{{mf.className}}</td>
+                        </tr>
+                        <tr>
+                            <td>13:00-14:30</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonFirstHalf">{{mf.className}}</td>
+                        </tr>
+                        <tr>
+                            <td>14:45-16:15</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonSecondHalf">{{mf.className}}</td>
+                        </tr>
+                        <tr>
+                            <td>16:30-18:00</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonThiredHalf">{{mf.className}}</td>
+                        </tr>                        <tr>
+                            <td>18:00-18:30</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonRest">{{mf.className}}</td>
+                        </tr>
+                        <tr>
+                            <td>18:30-20:00</td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.evenning">
+                                {{mf.className}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>

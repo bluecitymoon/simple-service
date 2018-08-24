@@ -12,7 +12,21 @@ public class ClassSchedule implements Serializable {
     private String teacherName;
     private Instant start;
     private Instant end;
+    private String classroomName;
+    private String courseName;
     private Boolean allDay = true;
+
+    public ClassSchedule(Long arrangementId, Long classId, String title, String className, String teacherName, Instant start, Instant end, String classroomName, String courseName) {
+        this.arrangementId = arrangementId;
+        this.classId = classId;
+        this.title = title;
+        this.className = className;
+        this.teacherName = teacherName;
+        this.start = start;
+        this.end = end;
+        this.classroomName = classroomName;
+        this.courseName = courseName;
+    }
 
     public ClassSchedule(Long arrangementId, Long classId, String title, String className, String teacherName, Instant start, Instant end) {
         this.arrangementId = arrangementId;
@@ -48,6 +62,23 @@ public class ClassSchedule implements Serializable {
         this.start = start;
         this.end = end;
         this.allDay = allDay;
+    }
+
+
+    public String getClassroomName() {
+        return classroomName;
+    }
+
+    public void setClassroomName(String classroomName) {
+        this.classroomName = classroomName;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public Long getArrangementId() {

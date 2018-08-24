@@ -76,7 +76,14 @@
             })
         }
 
-        loadSchedulesThisMonth();
+        function loadClassesThisWeek() {
+            ClassArrangement.getArrangementsInCurrentWeek({}, function (data) {
+                vm.weekClasses = data;
+            })
+        }
+
+        loadClassesThisWeek();
+        //loadSchedulesThisMonth();
 
         function initData() {
 

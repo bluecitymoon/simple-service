@@ -94,7 +94,7 @@ public class DateUtil {
         return calendar.toInstant();
     }
 
-   public static List<Instant> getCountWeekdayInRange(Instant startDate, Instant endDate, int count, String startTimeStr) {
+    public static List<Instant> getCountWeekdayInRange(Instant startDate, Instant endDate, int count, String startTimeStr) {
 
         List<Instant> countDays = new ArrayList<>();
 
@@ -114,9 +114,59 @@ public class DateUtil {
         }
 
         return countDays;
-   }
-//
+    }
+
+    private static Date getMondayOfWeek() {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        if (dayOfWeek == 1) {
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
+        }
+
+        calendar.setFirstDayOfWeek(Calendar.MONDAY);
+
+        int todayCount = calendar.get(Calendar.DAY_OF_WEEK);
+        calendar.add(Calendar.DATE, calendar.getFirstDayOfWeek() - todayCount);
+
+        Date monday = calendar.getTime();
+
+        return monday;
+    }
+
+    public static Instant getCurrentMondayStartSecond() {
+
+        Date monday = getMondayOfWeek();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        String mondayDateString = simpleDateFormat.format(monday);
+
+        String fullString = mondayDateString + "T00:00:00.00Z";
+
+        return Instant.parse(fullString);
+    }
+
+    public static LocalDateTime instantToLocalDateTime(Instant instant) {
+
+        return LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
+    }
+
+    public static Instant getInstantWithSpecialHourMinutes(Instant instant, String hour, String minutes) {
+
+        LocalDateTime localDateTime = instantToLocalDateTime(instant);
+
+        localDateTime = localDateTime.withHour(Integer.valueOf(hour)).withMinute(Integer.valueOf(minutes));
+
+        return localDateTime.toInstant(ZoneOffset.UTC);
+    }
+
 //    public static void main(String[] args) {
+//
+//        Instant mytime = getInstantWithSpecialHourMinutes(Instant.now(), "9", "55");
+//
+//        System.out.println(mytime);
 //
 //    }
 }

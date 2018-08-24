@@ -1,6 +1,7 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import org.springframework.data.domain.Page;
@@ -47,4 +48,6 @@ public interface ClassArrangementService {
     void createClassArrangementsByRule(Long id);
 
     List<ClassSchedule> searchSchedulesInRange(CustomerStatusRequest customerStatusRequest);
+
+    List<ClassArrangementWeekElement> getArrangementsInCurrentWeek();
 }
