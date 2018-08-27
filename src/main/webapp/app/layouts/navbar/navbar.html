@@ -197,6 +197,12 @@
 
                             <li class="divider"></li>
                             <li class="dropdown-header" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">微信小程序</li>
+                            <li ui-sref-active="active">
+                                <a ui-sref="free-class-plan" ng-click="vm.collapseNavbar()">
+                                    <span class="glyphicon glyphicon-scale"></span>&nbsp;
+                                    <span>小程序预约计划配置</span>
+                                </a>
+                            </li>
                             <li ui-sref-active="active" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
                                 <a ui-sref="ad" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-tree-deciduous"></span>&nbsp;

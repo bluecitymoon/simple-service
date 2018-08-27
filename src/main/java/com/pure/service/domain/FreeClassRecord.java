@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -58,6 +59,12 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "class_level")
     private String classLevel;
 
+    @Column(name = "source_type")
+    private String sourceType;
+
+    @Transient
+    private Instant scheduleDate;
+
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
@@ -78,6 +85,22 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     @ManyToOne
     private NewOrderWechatUserInfo newOrderWechatUserInfo;
+
+    public Instant getScheduleDate() {
+        return scheduleDate;
+    }
+
+    public void setScheduleDate(Instant scheduleDate) {
+        this.scheduleDate = scheduleDate;
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
 
     public String getComments() {
         return comments;

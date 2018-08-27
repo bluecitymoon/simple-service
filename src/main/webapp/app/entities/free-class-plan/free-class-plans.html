@@ -1,0 +1,116 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.freeClassPlan.home.title">Free Class Plans</h1>
+</div>
+
+<div class="panel panel-primary panel-bordered-dark">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">查询客户列表</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">计划日期</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="开始时间" class="form-control"
+                               ng-focus="vm.openCalendar('createStartDate')" datetime-picker="{{dateformat}}"
+                               ng-model="vm.searchCondition.createStartDate"
+                               is-open="vm.datePickerOpenStatus.createStartDate">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="结束时间" class="form-control"
+                               ng-focus="vm.openCalendar('createEndDate')" datetime-picker="{{dateformat}}"
+                               ng-model="vm.searchCondition.createEndDate"
+                               is-open="vm.datePickerOpenStatus.createEndDate">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.freeClassPlan.home.title">Free Class Plans</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="free-class-plan.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.freeClassPlan.home.createLabel">
+                        Create new Free Class Plan
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="planDate"><span data-translate="simpleServiceApp.freeClassPlan.planDate">Plan Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="limitCount"><span data-translate="simpleServiceApp.freeClassPlan.limitCount">Limit Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actualCount"><span data-translate="simpleServiceApp.freeClassPlan.actualCount">Actual Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="freeClassPlan in vm.freeClassPlans track by freeClassPlan.id">
+                    <td><a ui-sref="free-class-plan-detail({id:freeClassPlan.id})">{{freeClassPlan.id}}</a></td>
+                    <td>{{freeClassPlan.planDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{freeClassPlan.limitCount}}</td>
+                    <td>{{freeClassPlan.actualCount}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="free-class-plan-detail({id:freeClassPlan.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="free-class-plan.edit({id:freeClassPlan.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="free-class-plan.delete({id:freeClassPlan.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>
