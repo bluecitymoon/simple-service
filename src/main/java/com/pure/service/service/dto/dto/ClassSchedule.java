@@ -15,6 +15,10 @@ public class ClassSchedule implements Serializable {
     private String classroomName;
     private String courseName;
     private Boolean allDay = true;
+    private Boolean clickable = false;
+
+    public ClassSchedule() {
+    }
 
     public ClassSchedule(Long arrangementId, Long classId, String title, String className, String teacherName, Instant start, Instant end, String classroomName, String courseName) {
         this.arrangementId = arrangementId;
@@ -64,6 +68,13 @@ public class ClassSchedule implements Serializable {
         this.allDay = allDay;
     }
 
+    public Boolean getClickable() {
+        return clickable;
+    }
+
+    public void setClickable(Boolean clickable) {
+        this.clickable = clickable;
+    }
 
     public String getClassroomName() {
         return classroomName;

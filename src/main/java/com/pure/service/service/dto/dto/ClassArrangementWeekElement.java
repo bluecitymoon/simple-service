@@ -10,14 +10,14 @@ public class ClassArrangementWeekElement implements Serializable {
     private List<String> classrooms = new ArrayList<>();
     private List<String> courses = new ArrayList<>();
     private List<String> teachers = new ArrayList<>();
-    private List<ClassNameElement> morningFirstHalf = new ArrayList<>();
-    private List<ClassNameElement> morningSecondHalf = new ArrayList<>();
-    private List<ClassNameElement> moonRest = new ArrayList<>();
-    private List<ClassNameElement> afternoonFirstHalf = new ArrayList<>();
-    private List<ClassNameElement> afternoonSecondHalf = new ArrayList<>();
-    private List<ClassNameElement> afternoonThiredHalf = new ArrayList<>();
-    private List<ClassNameElement> afternoonRest = new ArrayList<>();
-    private List<ClassNameElement> evenning = new ArrayList<>();
+    private List<ClassSchedule> morningFirstHalf = new ArrayList<>();
+    private List<ClassSchedule> morningSecondHalf = new ArrayList<>();
+    private List<ClassSchedule> moonRest = new ArrayList<>();
+    private List<ClassSchedule> afternoonFirstHalf = new ArrayList<>();
+    private List<ClassSchedule> afternoonSecondHalf = new ArrayList<>();
+    private List<ClassSchedule> afternoonThiredHalf = new ArrayList<>();
+    private List<ClassSchedule> afternoonRest = new ArrayList<>();
+    private List<ClassSchedule> evenning = new ArrayList<>();
 
     public String getWeekdayName() {
         return weekdayName;
@@ -51,67 +51,67 @@ public class ClassArrangementWeekElement implements Serializable {
         this.teachers = teachers;
     }
 
-    public List<ClassNameElement> getMorningFirstHalf() {
+    public List<ClassSchedule> getMorningFirstHalf() {
         return morningFirstHalf;
     }
 
-    public void setMorningFirstHalf(List<ClassNameElement> morningFirstHalf) {
+    public void setMorningFirstHalf(List<ClassSchedule> morningFirstHalf) {
         this.morningFirstHalf = morningFirstHalf;
     }
 
-    public List<ClassNameElement> getMorningSecondHalf() {
+    public List<ClassSchedule> getMorningSecondHalf() {
         return morningSecondHalf;
     }
 
-    public void setMorningSecondHalf(List<ClassNameElement> morningSecondHalf) {
+    public void setMorningSecondHalf(List<ClassSchedule> morningSecondHalf) {
         this.morningSecondHalf = morningSecondHalf;
     }
 
-    public List<ClassNameElement> getMoonRest() {
+    public List<ClassSchedule> getMoonRest() {
         return moonRest;
     }
 
-    public void setMoonRest(List<ClassNameElement> moonRest) {
+    public void setMoonRest(List<ClassSchedule> moonRest) {
         this.moonRest = moonRest;
     }
 
-    public List<ClassNameElement> getAfternoonFirstHalf() {
+    public List<ClassSchedule> getAfternoonFirstHalf() {
         return afternoonFirstHalf;
     }
 
-    public void setAfternoonFirstHalf(List<ClassNameElement> afternoonFirstHalf) {
+    public void setAfternoonFirstHalf(List<ClassSchedule> afternoonFirstHalf) {
         this.afternoonFirstHalf = afternoonFirstHalf;
     }
 
-    public List<ClassNameElement> getAfternoonSecondHalf() {
+    public List<ClassSchedule> getAfternoonSecondHalf() {
         return afternoonSecondHalf;
     }
 
-    public void setAfternoonSecondHalf(List<ClassNameElement> afternoonSecondHalf) {
+    public void setAfternoonSecondHalf(List<ClassSchedule> afternoonSecondHalf) {
         this.afternoonSecondHalf = afternoonSecondHalf;
     }
 
-    public List<ClassNameElement> getAfternoonThiredHalf() {
+    public List<ClassSchedule> getAfternoonThiredHalf() {
         return afternoonThiredHalf;
     }
 
-    public void setAfternoonThiredHalf(List<ClassNameElement> afternoonThiredHalf) {
+    public void setAfternoonThiredHalf(List<ClassSchedule> afternoonThiredHalf) {
         this.afternoonThiredHalf = afternoonThiredHalf;
     }
 
-    public List<ClassNameElement> getAfternoonRest() {
+    public List<ClassSchedule> getAfternoonRest() {
         return afternoonRest;
     }
 
-    public void setAfternoonRest(List<ClassNameElement> afternoonRest) {
+    public void setAfternoonRest(List<ClassSchedule> afternoonRest) {
         this.afternoonRest = afternoonRest;
     }
 
-    public List<ClassNameElement> getEvenning() {
+    public List<ClassSchedule> getEvenning() {
         return evenning;
     }
 
-    public void setEvenning(List<ClassNameElement> evenning) {
+    public void setEvenning(List<ClassSchedule> evenning) {
         this.evenning = evenning;
     }
 }

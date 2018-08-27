@@ -10,7 +10,6 @@ import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.repository.ClassRoomRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
-import com.pure.service.service.dto.dto.ClassNameElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
@@ -127,7 +126,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
     }
 
     private static Map<Integer, String> gapWeekdayNameMap = new HashMap<>();
-    private static Map<TimePeriod, List<ClassNameElement>> timePeriodListMap = new HashMap<>();
+    private static Map<TimePeriod, List<ClassSchedule>> timePeriodListMap = new HashMap<>();
 
     static {
         gapWeekdayNameMap.put(0, "星期一");
@@ -160,8 +159,9 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
             for (int i = 0; i < classRooms.size(); i ++) {
                 //add rest marks, fixed array as class room
-                ClassNameElement rest = new ClassNameElement();
+                ClassSchedule rest = new ClassSchedule();
                 rest.setClassName("休");
+                rest.setClickable(false);
                 singledDay.getMoonRest().add(rest);
                 singledDay.getAfternoonRest().add(rest);
 
@@ -191,22 +191,19 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                 List<ClassSchedule> scheduleListInClassRoom = findClassInClassRoom(classRoom.getName(), schedules);
 
                 boolean foundTeacher = false;
-                for (Map.Entry<TimePeriod, List<ClassNameElement>> timePeriodListEntry : timePeriodListMap.entrySet()) {
+                for (Map.Entry<TimePeriod, List<ClassSchedule>> timePeriodListEntry : timePeriodListMap.entrySet()) {
 
                     TimePeriod timePeriod = timePeriodListEntry.getKey();
-                    List<ClassNameElement> classNameElements = timePeriodListEntry.getValue();
+                    List<ClassSchedule> classNameElements = timePeriodListEntry.getValue();
 
                     ClassSchedule periodSchedule = findClassInRange(scheduleListInClassRoom, timePeriod.getStart(), timePeriod.getEnd());
 
                     if (periodSchedule == null) {
-                        classNameElements.add(new ClassNameElement());
+                        classNameElements.add(new ClassSchedule());
                     } else {
 
-                        ClassNameElement classNameElement = new ClassNameElement();
-                        classNameElement.setClassName(periodSchedule.getClassName());
-                        classNameElement.setSignable(true);
-                        classNameElement.setClassId(periodSchedule.getClassId());
-                        classNameElements.add(classNameElement);
+                        periodSchedule.setClickable(true);
+                        classNameElements.add(periodSchedule);
 
                         if (!foundTeacher) {
 

@@ -114,6 +114,10 @@
         vm.todayClassArrangments = [];
         vm.openClassSignDialog = function (classArrangement) {
 
+            if (!classArrangement || !classArrangement.clickable) {
+                return;
+            }
+
             $uibModal.open({
                 templateUrl: 'app/entities/class-arrangement/student-sign-dialog.html',
                 controller: 'StudentSignDialogController',
