@@ -3,7 +3,9 @@ package com.pure.service.service.util;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjusters;
@@ -41,6 +43,18 @@ public class DateUtil {
         String fullToday = shortToday + "T23:59:59.00Z";
 
         return Instant.parse(fullToday);
+    }
+
+    public static Instant getBeginningOfInstant(Instant instant) {
+
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.UTC);
+    }
+
+    public static Instant getEndingOfInstant(Instant instant) {
+
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.UTC);
     }
 
     public static Instant getLastSecondOfMonth() {
@@ -162,11 +176,19 @@ public class DateUtil {
         return localDateTime.toInstant(ZoneOffset.UTC);
     }
 
+    public static boolean isSameday(Instant first, Instant second) {
+
+        LocalDate firstDate = LocalDateTime.ofInstant(first, ZoneId.systemDefault()).toLocalDate();
+        LocalDate secondDate = LocalDateTime.ofInstant(second, ZoneId.systemDefault()).toLocalDate();
+
+        return firstDate.equals(secondDate);
+    }
 //    public static void main(String[] args) {
 //
-//        Instant mytime = getInstantWithSpecialHourMinutes(Instant.now(), "9", "55");
+//        Instant mytime = Instant.now();
 //
-//        System.out.println(mytime);
+//        System.out.println(getBeginningOfInstant(mytime));
+//        System.out.println(getEndingOfInstant(mytime));
 //
 //    }
 }

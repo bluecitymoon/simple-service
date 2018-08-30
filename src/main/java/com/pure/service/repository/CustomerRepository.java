@@ -28,4 +28,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
 
     @Query(nativeQuery = true)
     Overview searchCurrentUserOverview(Long userId, Instant endDate, Instant startDate);
+
+    Customer findByNewOrder_Id(Long newOrderId);
 }

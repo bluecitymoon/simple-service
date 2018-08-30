@@ -22,7 +22,7 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.students = Student.query();
-        vm.courses = Course.query();
+        vm.courses = Course.query({size: 300});
         vm.contractstatuses = ContractStatus.query();
         vm.products = Product.query();
         vm.customercards = [];

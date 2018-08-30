@@ -90,7 +90,9 @@ public class FreeClassRecordResource {
 
         List<FreeClassRecord> existed = freeClassRecordQueryService.findByCriteria(freeClassRecordCriteria);
 
-        if (!CollectionUtils.isEmpty(existed)) {
+        if (!CollectionUtils.isEmpty(existed) && StringUtils.isEmpty(freeClassRecord.getSourceType())) {
+
+
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "phonenumberexists", "手机号码已存在！")).body(null);
         }
 

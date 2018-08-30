@@ -3,22 +3,30 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.domain.FreeClassPlan;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.User;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
+import com.pure.service.repository.CustomerRepository;
+import com.pure.service.repository.FreeClassPlanRepository;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.service.CustomerCommunicationScheduleService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
+import com.pure.service.service.FreeClassRecordQueryService;
 import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.BatchCustomers;
 import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.CustomerCriteria;
+import com.pure.service.service.dto.FreeClassRecordCriteria;
 import com.pure.service.service.util.BatchCustomerUtil;
+import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -30,6 +38,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +70,16 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     private CustomerQueryService customerQueryService;
 
     @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
     private BatchCustomerUtil batchCustomerUtil;
+
+    @Autowired
+    private FreeClassPlanRepository freeClassPlanRepository;
+
+    @Autowired
+    private FreeClassRecordQueryService freeClassRecordQueryService;
 
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
@@ -161,9 +179,83 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         }
 
+        scheduleForCustomer(freeClassRecord);
+
         return saved;
     }
 
+    private void scheduleForCustomer(FreeClassRecord saved) {
+
+        String sourceType = saved.getSourceType();
+        if (StringUtils.isEmpty(sourceType) || !sourceType.equalsIgnoreCase("wechat")) {
+            return;
+        }
+
+        Instant scheduleDate = saved.getScheduleDate();
+        if (scheduleDate == null) {
+            return;
+        }
+
+        List<FreeClassPlan> plans = freeClassPlanRepository.findAll();
+        FreeClassPlan plan = null;
+        for (FreeClassPlan freeClassPlan : plans) {
+
+            if (freeClassPlan.getPlanDate() == null) {
+                continue;
+            }
+
+            if (DateUtil.isSameday(scheduleDate, freeClassPlan.getPlanDate())) {
+                plan = freeClassPlan;
+            }
+        }
+
+        if (plan == null) {
+
+            log.info("这一天没排活动计划，直接预约 {}", scheduleDate);
+
+            saveSchedule(scheduleDate, saved);
+
+        } else {
+
+            InstantFilter targetDateFilter = new InstantFilter();
+            targetDateFilter.setGreaterOrEqualThan(DateUtil.getBeginningOfInstant(plan.getPlanDate()));
+            targetDateFilter.setLessOrEqualThan(DateUtil.getEndingOfInstant(plan.getPlanDate()));
+
+            FreeClassRecordCriteria classRecordCriteria = new FreeClassRecordCriteria();
+            classRecordCriteria.setCreatedDate(targetDateFilter);
+
+            Integer orderedCount = freeClassRecordQueryService.findByCriteria(classRecordCriteria).size();
+
+            if (orderedCount >= plan.getLimitCount()) {
+
+                throw new RuntimeException("预约已满！");
+            }
+
+            saveSchedule(scheduleDate, saved);
+
+            //increase count
+            if (plan.getLimitCount() == null) {
+                plan.setLimitCount(1);
+            } else {
+                plan.setLimitCount(plan.getLimitCount() + 1);
+            }
+
+            freeClassPlanRepository.save(plan);
+        }
+
+    }
+
+    private void saveSchedule(Instant scheduleDate, FreeClassRecord saved) {
+
+        CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
+        schedule.setSceduleDate(scheduleDate);
+
+        Customer customer = customerRepository.findByNewOrder_Id(saved.getId());
+        schedule.setCustomer(customer);
+        schedule.setComments("客户从小程序提交的预约");
+
+        scheduleService.save(schedule);
+    }
     /**
      *  Get all the freeClassRecords.
      *
