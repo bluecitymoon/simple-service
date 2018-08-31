@@ -33,6 +33,9 @@ public class CustomerCommunicationSchedule extends AbstractAuditingEntity {
     @Column(name = "actuall_meet_date")
     private Instant actuallMeetDate;
 
+    @Column(name = "source_type")
+    private String sourceType;
+
     @ManyToOne
     private Customer customer;
 
@@ -43,6 +46,16 @@ public class CustomerCommunicationSchedule extends AbstractAuditingEntity {
     private CustomerScheduleStatus scheduleStatus;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
+    }
+
     public Long getId() {
         return id;
     }

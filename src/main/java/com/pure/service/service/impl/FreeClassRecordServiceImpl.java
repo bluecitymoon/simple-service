@@ -10,11 +10,13 @@ import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.User;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
+import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.FreeClassPlanRepository;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
 import com.pure.service.repository.UserRepository;
+import com.pure.service.service.CustomerCommunicationScheduleQueryService;
 import com.pure.service.service.CustomerCommunicationScheduleService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
@@ -22,12 +24,13 @@ import com.pure.service.service.FreeClassRecordQueryService;
 import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.BatchCustomers;
 import com.pure.service.service.dto.BatchCustomersResponse;
+import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
-import com.pure.service.service.dto.FreeClassRecordCriteria;
 import com.pure.service.service.util.BatchCustomerUtil;
 import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
+import io.github.jhipster.service.filter.StringFilter;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -52,7 +55,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class FreeClassRecordServiceImpl implements FreeClassRecordService{
+public class FreeClassRecordServiceImpl implements FreeClassRecordService {
 
     private final Logger log = LoggerFactory.getLogger(FreeClassRecordServiceImpl.class);
 
@@ -81,6 +84,12 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     @Autowired
     private FreeClassRecordQueryService freeClassRecordQueryService;
 
+    @Autowired
+    private CustomerCommunicationScheduleRepository communicationScheduleRepository;
+
+    @Autowired
+    private CustomerCommunicationScheduleQueryService scheduleQueryService;
+
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
                                       CustomerCommunicationLogRepository customerCommunicationLogRepository,
@@ -105,7 +114,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     public FreeClassRecord save(FreeClassRecord freeClassRecord) {
         log.debug("Request to save FreeClassRecord : {}", freeClassRecord);
 
-        if (freeClassRecord.getId() == null){
+        if (freeClassRecord.getId() == null) {
             freeClassRecord.setStatus("新单");
         }
 
@@ -120,10 +129,10 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
             FreeClassRecord oldFreeClassRecord = freeClassRecordRepository.findOne(freeClassRecord.getId());
 
-            String olderFollowerLogin = oldFreeClassRecord.getSalesFollower() == null? "" : oldFreeClassRecord.getSalesFollower().getLogin();
-            String olderFollowerName = oldFreeClassRecord.getSalesFollower() == null? "" : oldFreeClassRecord.getSalesFollower().getFirstName();
-            String newFollowerLogin = freeClassRecord.getSalesFollower() == null? "" : freeClassRecord.getSalesFollower().getLogin();
-            String newFollowerName = freeClassRecord.getSalesFollower() == null? "": freeClassRecord.getSalesFollower().getFirstName();
+            String olderFollowerLogin = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getLogin();
+            String olderFollowerName = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getFirstName();
+            String newFollowerLogin = freeClassRecord.getSalesFollower() == null ? "" : freeClassRecord.getSalesFollower().getLogin();
+            String newFollowerName = freeClassRecord.getSalesFollower() == null ? "" : freeClassRecord.getSalesFollower().getFirstName();
 
             if (!olderFollowerLogin.equals(newFollowerLogin)) {
 
@@ -148,7 +157,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
 
         FreeClassRecord saved = freeClassRecordRepository.saveAndFlush(freeClassRecord);
 
-        log.debug("Saved new order {} " + saved );
+        log.debug("Saved new order {} " + saved);
         //Save log for new order created.
         if (newOrder) {
 
@@ -167,31 +176,96 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
             Customer newCustomer = customerService.importCustomerFromNewOrder(saved.getId());
 
             log.debug("Default customer saved for the new order, customer is {} ", newCustomer);
-            //create default schedule for the new customer so that the recipient could check.
-//            CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
-//
-//            schedule.setCustomer(newCustomer);
-//            schedule.setFollower(newCustomer.getSalesFollower());
-//
-//            log.debug("Default schedule saved for the new order, schedule is {} ", schedule);
-//
-//            scheduleService.save(schedule);
 
         }
 
-        scheduleForCustomer(freeClassRecord);
+//        scheduleForCustomer(freeClassRecord);
 
         return saved;
     }
+//
+//    private void scheduleForCustomer(FreeClassRecord saved) {
+//
+//        String sourceType = saved.getSourceType();
+//        if (StringUtils.isEmpty(sourceType) || !sourceType.equalsIgnoreCase("wechat")) {
+//            return;
+//        }
+//
+//        Instant scheduleDate = saved.getScheduleDate();
+//        if (scheduleDate == null) {
+//            return;
+//        }
+//
+//        List<FreeClassPlan> plans = freeClassPlanRepository.findAll();
+//        FreeClassPlan plan = null;
+//        for (FreeClassPlan freeClassPlan : plans) {
+//
+//            if (freeClassPlan.getPlanDate() == null) {
+//                continue;
+//            }
+//
+//            if (DateUtil.isSameday(scheduleDate, freeClassPlan.getPlanDate())) {
+//                plan = freeClassPlan;
+//            }
+//        }
+//
+//        if (plan == null) {
+//
+//            log.info("这一天没排活动计划，直接预约 {}", scheduleDate);
+//
+//            saveSchedule(scheduleDate, saved);
+//
+//        } else {
+//
+//            InstantFilter targetDateFilter = new InstantFilter();
+//            targetDateFilter.setGreaterOrEqualThan(DateUtil.getBeginningOfInstant(plan.getPlanDate()));
+//            targetDateFilter.setLessOrEqualThan(DateUtil.getEndingOfInstant(plan.getPlanDate()));
+//
+//            FreeClassRecordCriteria classRecordCriteria = new FreeClassRecordCriteria();
+//            classRecordCriteria.setCreatedDate(targetDateFilter);
+//
+//            Integer orderedCount = freeClassRecordQueryService.findByCriteria(classRecordCriteria).size();
+//
+//            if (orderedCount >= plan.getLimitCount()) {
+//
+//                throw new RuntimeException("预约已满！");
+//            }
+//
+//            saveSchedule(scheduleDate, );
+//
+//            //increase count
+//            if (plan.getLimitCount() == null) {
+//                plan.setLimitCount(1);
+//            } else {
+//                plan.setLimitCount(plan.getLimitCount() + 1);
+//            }
+//
+//            freeClassPlanRepository.save(plan);
+//        }
+//
+//    }
 
-    private void scheduleForCustomer(FreeClassRecord saved) {
+    private void saveSchedule(Instant scheduleDate, Customer customer) {
 
-        String sourceType = saved.getSourceType();
+
+        CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
+
+        schedule.setSceduleDate(scheduleDate);
+        schedule.setCustomer(customer);
+        schedule.setComments("客户从小程序提交的预约");
+        schedule.setSourceType("WeChat");
+        schedule.setCreatedBy("" + customer.getId());
+
+        scheduleService.save(schedule);
+    }
+
+    @Override
+    public void createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType) {
+
         if (StringUtils.isEmpty(sourceType) || !sourceType.equalsIgnoreCase("wechat")) {
             return;
         }
 
-        Instant scheduleDate = saved.getScheduleDate();
         if (scheduleDate == null) {
             return;
         }
@@ -209,58 +283,58 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
             }
         }
 
+        //无计划的直接预约
         if (plan == null) {
+            saveSchedule(scheduleDate, customer);
 
-            log.info("这一天没排活动计划，直接预约 {}", scheduleDate);
-
-            saveSchedule(scheduleDate, saved);
-
-        } else {
-
-            InstantFilter targetDateFilter = new InstantFilter();
-            targetDateFilter.setGreaterOrEqualThan(DateUtil.getBeginningOfInstant(plan.getPlanDate()));
-            targetDateFilter.setLessOrEqualThan(DateUtil.getEndingOfInstant(plan.getPlanDate()));
-
-            FreeClassRecordCriteria classRecordCriteria = new FreeClassRecordCriteria();
-            classRecordCriteria.setCreatedDate(targetDateFilter);
-
-            Integer orderedCount = freeClassRecordQueryService.findByCriteria(classRecordCriteria).size();
-
-            if (orderedCount >= plan.getLimitCount()) {
-
-                throw new RuntimeException("预约已满！");
-            }
-
-            saveSchedule(scheduleDate, saved);
-
-            //increase count
-            if (plan.getLimitCount() == null) {
-                plan.setLimitCount(1);
-            } else {
-                plan.setLimitCount(plan.getLimitCount() + 1);
-            }
-
-            freeClassPlanRepository.save(plan);
+            return;
         }
 
+        InstantFilter targetDateFilter = new InstantFilter();
+        targetDateFilter.setGreaterOrEqualThan(DateUtil.getBeginningOfInstant(plan.getPlanDate()));
+        targetDateFilter.setLessOrEqualThan(DateUtil.getEndingOfInstant(plan.getPlanDate()));
+
+        StringFilter stringFilter = new StringFilter();
+        stringFilter.setEquals("WeChat");
+
+        CustomerCommunicationScheduleCriteria criteria = new CustomerCommunicationScheduleCriteria();
+        criteria.setSceduleDate(targetDateFilter);
+        criteria.setSourceType(stringFilter);
+
+        Integer orderedCount = scheduleQueryService.findByCriteria(criteria).size();
+
+        if (orderedCount >= plan.getLimitCount()) {
+
+            throw new RuntimeException("预约已满！");
+        }
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(customer.getId());
+
+        criteria.setCustomerId(longFilter);
+
+        Integer userOrderCount = scheduleQueryService.findByCriteria(criteria).size();
+        if (userOrderCount > 0) {
+            throw new RuntimeException("已预约，无法再次预约！");
+        }
+
+        saveSchedule(scheduleDate, customer);
+
+        //increase count
+        if (plan.getActualCount() == null) {
+            plan.setActualCount(1);
+        } else {
+            plan.setActualCount(plan.getLimitCount() + 1);
+        }
+
+        freeClassPlanRepository.save(plan);
     }
 
-    private void saveSchedule(Instant scheduleDate, FreeClassRecord saved) {
-
-        CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
-        schedule.setSceduleDate(scheduleDate);
-
-        Customer customer = customerRepository.findByNewOrder_Id(saved.getId());
-        schedule.setCustomer(customer);
-        schedule.setComments("客户从小程序提交的预约");
-
-        scheduleService.save(schedule);
-    }
     /**
-     *  Get all the freeClassRecords.
+     * Get all the freeClassRecords.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -270,10 +344,10 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     }
 
     /**
-     *  Get one freeClassRecord by id.
+     * Get one freeClassRecord by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -283,9 +357,9 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
     }
 
     /**
-     *  Delete the  freeClassRecord by id.
+     * Delete the  freeClassRecord by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
@@ -308,9 +382,9 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
             if (existedNewOrder == null) {
                 save(freeClassRecord);
 
-                importCount ++;
+                importCount++;
             } else {
-                existedCount ++;
+                existedCount++;
             }
         }
 
@@ -340,6 +414,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService{
         }
         return null;
     }
+
 
     @Override
     public List<FreeClassRecord> batchSave(List<FreeClassRecord> freeClassRecords) {

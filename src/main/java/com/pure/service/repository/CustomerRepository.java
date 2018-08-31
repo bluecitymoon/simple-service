@@ -30,4 +30,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
     Overview searchCurrentUserOverview(Long userId, Instant endDate, Instant startDate);
 
     Customer findByNewOrder_Id(Long newOrderId);
+
+    Customer findByContactPhoneNumber(String contactPhoneNumber);
 }

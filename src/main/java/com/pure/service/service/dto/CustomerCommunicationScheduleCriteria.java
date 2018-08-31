@@ -46,6 +46,8 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private StringFilter customerName;
     private StringFilter contactPhoneNumber;
 
+    private StringFilter sourceType;
+
     private Long channelId;
     private Long pwiId;
     private Long tmkId;
@@ -53,6 +55,14 @@ public class CustomerCommunicationScheduleCriteria implements Serializable {
     private Long courseConsultantId;
 
     public CustomerCommunicationScheduleCriteria() {
+    }
+
+    public StringFilter getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(StringFilter sourceType) {
+        this.sourceType = sourceType;
     }
 
     public String getCustomerCreatedBy() {

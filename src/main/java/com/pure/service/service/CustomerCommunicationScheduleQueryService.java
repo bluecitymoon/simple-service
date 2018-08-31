@@ -133,6 +133,9 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
             if (criteria.getScheduleStatusId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getScheduleStatusId(), CustomerCommunicationSchedule_.scheduleStatus, CustomerScheduleStatus_.id));
             }
+            if (criteria.getSourceType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getSourceType(), CustomerCommunicationSchedule_.sourceType));
+            }
         }
         return specification;
     }

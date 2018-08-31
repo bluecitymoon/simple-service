@@ -1,8 +1,10 @@
 package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.pure.service.domain.Customer;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.User;
+import com.pure.service.repository.CustomerRepository;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.FreeClassRecordQueryService;
 import com.pure.service.service.FreeClassRecordService;
@@ -18,6 +20,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -58,6 +61,9 @@ public class FreeClassRecordResource {
     private final FreeClassRecordQueryService freeClassRecordQueryService;
     private final UserService userService;
 
+    @Autowired
+    private CustomerRepository customerRepository;
+
     public FreeClassRecordResource(FreeClassRecordService freeClassRecordService, FreeClassRecordQueryService freeClassRecordQueryService, UserService userService) {
         this.freeClassRecordService = freeClassRecordService;
         this.freeClassRecordQueryService = freeClassRecordQueryService;
@@ -90,13 +96,23 @@ public class FreeClassRecordResource {
 
         List<FreeClassRecord> existed = freeClassRecordQueryService.findByCriteria(freeClassRecordCriteria);
 
-        if (!CollectionUtils.isEmpty(existed) && StringUtils.isEmpty(freeClassRecord.getSourceType())) {
+        //no source type from web ui
+        if (!CollectionUtils.isEmpty(existed)) {
 
+            //
+            saveSchedule(freeClassRecord);
+
+            if (!StringUtils.isEmpty(freeClassRecord.getSourceType()) && freeClassRecord.getSourceType().equalsIgnoreCase("wechat")) {
+
+                return ResponseEntity.created(new URI("/api/free-class-records/")).body(null);
+            }
 
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "phonenumberexists", "手机号码已存在！")).body(null);
         }
 
         FreeClassRecord result = freeClassRecordService.save(freeClassRecord);
+
+        saveSchedule(freeClassRecord);
 
         return ResponseEntity.created(new URI("/api/free-class-records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -104,6 +120,13 @@ public class FreeClassRecordResource {
 
     }
 
+    private void saveSchedule(FreeClassRecord freeClassRecord) {
+
+        Customer customer = customerRepository.findByContactPhoneNumber(freeClassRecord.getContactPhoneNumber());
+
+        freeClassRecordService.createScheduleForCustomer(freeClassRecord.getScheduleDate(), customer, freeClassRecord.getSourceType());
+
+    }
     @PostMapping("/free-class-records/upload")
     @Timed
     public ResponseEntity<BatchCustomersResponse> batchUploadCustomers(@RequestBody BatchCustomers customers) {

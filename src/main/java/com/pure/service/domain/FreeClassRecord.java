@@ -11,7 +11,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
@@ -62,7 +61,7 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "source_type")
     private String sourceType;
 
-    @Transient
+    @Column(name = "schedule_date")
     private Instant scheduleDate;
 
     @ManyToOne

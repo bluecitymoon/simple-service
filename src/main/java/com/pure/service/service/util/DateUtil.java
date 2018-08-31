@@ -47,14 +47,14 @@ public class DateUtil {
 
     public static Instant getBeginningOfInstant(Instant instant) {
 
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
-        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.UTC);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
+        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.ofHours(8));
     }
 
     public static Instant getEndingOfInstant(Instant instant) {
 
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
-        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.UTC);
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
+        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.ofHours(8));
     }
 
     public static Instant getLastSecondOfMonth() {
