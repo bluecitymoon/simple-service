@@ -23,10 +23,10 @@ public class FreeClassPlan implements Serializable {
     private Instant planDate;
 
     @Column(name = "limit_count")
-    private Integer limitCount;
+    private Integer limitCount = 0;
 
     @Column(name = "actual_count")
-    private Integer actualCount;
+    private Integer actualCount = 0;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {

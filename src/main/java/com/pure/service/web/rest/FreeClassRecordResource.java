@@ -12,6 +12,7 @@ import com.pure.service.service.UserService;
 import com.pure.service.service.dto.BatchCustomers;
 import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.FreeClassRecordCriteria;
+import com.pure.service.service.dto.dto.FreeClassPlanElement;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.service.filter.LongFilter;
@@ -231,6 +232,16 @@ public class FreeClassRecordResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/free-class-records");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    @GetMapping("/free-class-records/plans")
+    @Timed
+    public ResponseEntity<List<FreeClassPlanElement>> getSchedulePlanList() {
+        log.debug("REST request to get all schedule plans");
+
+        List<FreeClassPlanElement> page = freeClassRecordService.getSchedulePlanList();
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
 
     /**
      * GET  /free-class-records/:id : get the "id" freeClassRecord.

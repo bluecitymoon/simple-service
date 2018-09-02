@@ -158,6 +158,7 @@ public class OAuth2ServerConfiguration {
                 .antMatchers("/api/register").permitAll()
                 .antMatchers("/api/profile-info").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/free-class-records").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/free-class-records/plans").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/market-channel-categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/class-categories").permitAll()
                 .antMatchers(HttpMethod.GET, "/.well-known/pki-validation/fileauth.txt").permitAll()

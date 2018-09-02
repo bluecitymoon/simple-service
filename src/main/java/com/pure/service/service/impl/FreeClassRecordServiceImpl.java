@@ -26,6 +26,7 @@ import com.pure.service.service.dto.BatchCustomers;
 import com.pure.service.service.dto.BatchCustomersResponse;
 import com.pure.service.service.dto.CustomerCommunicationScheduleCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
+import com.pure.service.service.dto.dto.FreeClassPlanElement;
 import com.pure.service.service.util.BatchCustomerUtil;
 import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.InstantFilter;
@@ -46,8 +47,13 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -328,6 +334,72 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         }
 
         freeClassPlanRepository.save(plan);
+    }
+
+    @Override
+    public List<FreeClassPlanElement> getSchedulePlanList() {
+
+        List<FreeClassPlan> plans = freeClassPlanRepository.findAll();
+
+        List<FreeClassPlanElement> elements = new ArrayList<>();
+
+        int daysWant = 30;
+        Instant now = Instant.now();
+
+        for (int i = 0; i < daysWant; i++) {
+
+            FreeClassPlanElement element = new FreeClassPlanElement();
+            Instant scheduleDate = now.plus(i, ChronoUnit.DAYS);
+            element.setScheduleDate(scheduleDate);
+            element.setId(i + 1);
+
+            FreeClassPlan freeClassPlan = findPlanInDay(plans, scheduleDate);
+
+            String scheduleFormateString = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)
+                .withLocale( Locale.CHINA )
+                .withZone( ZoneId.systemDefault())
+                .format(scheduleDate);
+
+            if (freeClassPlan == null) {
+                element.setAvaliable(true);
+                element.setLabel(scheduleFormateString + "  可预约");
+
+                elements.add(element);
+
+                continue;
+            }
+
+            int avaliableCount = (freeClassPlan.getLimitCount() == null? 0: freeClassPlan.getLimitCount()) - (freeClassPlan.getActualCount() == null? 0: freeClassPlan.getActualCount());
+
+            if (avaliableCount < 1) {
+                element.setAvaliable(false);
+                element.setLabel(scheduleFormateString + "  已约满");
+            } else {
+                element.setAvaliable(false);
+                element.setLabel(scheduleFormateString + "  剩余" + avaliableCount + "席位可约");
+            }
+
+            elements.add(element);
+        }
+
+        return elements;
+    }
+
+    private FreeClassPlan findPlanInDay(List<FreeClassPlan> plans, Instant scheduleDate) {
+
+        FreeClassPlan plan = null;
+        for (FreeClassPlan freeClassPlan : plans) {
+
+            if (freeClassPlan.getPlanDate() == null) {
+                continue;
+            }
+
+            if (DateUtil.isSameday(scheduleDate, freeClassPlan.getPlanDate())) {
+                plan = freeClassPlan;
+            }
+        }
+
+        return plan;
     }
 
     /**

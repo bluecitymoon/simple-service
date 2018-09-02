@@ -4,6 +4,7 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.service.dto.BatchCustomers;
 import com.pure.service.service.dto.BatchCustomersResponse;
+import com.pure.service.service.dto.dto.FreeClassPlanElement;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -54,4 +55,6 @@ public interface FreeClassRecordService {
     BatchCustomersResponse upload(InputStream inputStream, String name);
 
     void createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType);
+
+    List<FreeClassPlanElement> getSchedulePlanList();
 }
