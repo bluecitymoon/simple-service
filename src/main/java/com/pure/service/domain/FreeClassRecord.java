@@ -64,6 +64,9 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
     @Column(name = "schedule_date")
     private Instant scheduleDate;
 
+    @Column(name = "gift_code")
+    private String giftCode;
+
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
@@ -136,6 +139,14 @@ public class FreeClassRecord extends AbstractAuditingEntity implements Serializa
 
     public User getReferer() {
         return referer;
+    }
+
+    public String getGiftCode() {
+        return giftCode;
+    }
+
+    public void setGiftCode(String giftCode) {
+        this.giftCode = giftCode;
     }
 
     public FreeClassRecord setReferer(User referer) {

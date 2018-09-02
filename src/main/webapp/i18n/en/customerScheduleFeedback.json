@@ -1,0 +1,28 @@
+{
+    "simpleServiceApp": {
+        "customerScheduleFeedback" : {
+            "home": {
+                "title": "Customer Schedule Feedbacks",
+                "createLabel": "Create a new Customer Schedule Feedback",
+                "createOrEditLabel": "Create or edit a Customer Schedule Feedback"
+            },
+            "created": "操作成功！",
+            "updated": "操作成功！",
+            "deleted": "A Customer Schedule Feedback is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Schedule Feedback {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Schedule Feedback"
+            },
+            "giftCode": "兑换码",
+            "giftStatus": "状态",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "customer": "客户",
+            "schedule": "预约编号"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerScheduleFeedbackhome.title">Customer Schedule Feedbacks</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.giftCode">Gift Code</span></dt>
+        <dd>
+            <span>{{vm.customerScheduleFeedback.giftCode}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.giftStatus">Gift Status</span></dt>
+        <dd>
+            <span>{{vm.customerScheduleFeedback.giftStatus}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.customerScheduleFeedback.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.customerScheduleFeedback.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.customerScheduleFeedback.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.customerScheduleFeedback.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.customer">Customer</span></dt>
+        <dd>
+            <a ui-sref="customer-detail({id:vm.customerScheduleFeedback.customer.id})">{{vm.customerScheduleFeedback.customer.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerScheduleFeedback.schedule">Schedule</span></dt>
+        <dd>
+            <a ui-sref="customer-communication-schedule-detail({id:vm.customerScheduleFeedback.schedule.id})">{{vm.customerScheduleFeedback.schedule.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-schedule-feedback-detail.edit({id:vm.customerScheduleFeedback.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

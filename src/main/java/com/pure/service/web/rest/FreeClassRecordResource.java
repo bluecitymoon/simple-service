@@ -101,11 +101,12 @@ public class FreeClassRecordResource {
         if (!CollectionUtils.isEmpty(existed)) {
 
             //
-            saveSchedule(freeClassRecord);
+            String code = saveSchedule(freeClassRecord);
 
             if (!StringUtils.isEmpty(freeClassRecord.getSourceType()) && freeClassRecord.getSourceType().equalsIgnoreCase("wechat")) {
 
-                return ResponseEntity.created(new URI("/api/free-class-records/")).body(null);
+                freeClassRecord.setGiftCode(code);
+                return ResponseEntity.created(new URI("/api/free-class-records/")).body(freeClassRecord);
             }
 
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "phonenumberexists", "手机号码已存在！")).body(null);
@@ -113,7 +114,9 @@ public class FreeClassRecordResource {
 
         FreeClassRecord result = freeClassRecordService.save(freeClassRecord);
 
-        saveSchedule(freeClassRecord);
+        String code = saveSchedule(freeClassRecord);
+
+        result.setGiftCode(code);
 
         return ResponseEntity.created(new URI("/api/free-class-records/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -121,11 +124,11 @@ public class FreeClassRecordResource {
 
     }
 
-    private void saveSchedule(FreeClassRecord freeClassRecord) {
+    private String saveSchedule(FreeClassRecord freeClassRecord) {
 
         Customer customer = customerRepository.findByContactPhoneNumber(freeClassRecord.getContactPhoneNumber());
 
-        freeClassRecordService.createScheduleForCustomer(freeClassRecord.getScheduleDate(), customer, freeClassRecord.getSourceType());
+        return freeClassRecordService.createScheduleForCustomer(freeClassRecord.getScheduleDate(), customer, freeClassRecord.getSourceType());
 
     }
     @PostMapping("/free-class-records/upload")

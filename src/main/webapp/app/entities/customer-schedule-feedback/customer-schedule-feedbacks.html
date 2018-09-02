@@ -1,0 +1,74 @@
+<div class="page-header">
+    <h1 class="page-title">礼品记录</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.customerScheduleFeedback.home.title">Customer Schedule Feedbacks</h2>-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="customer-schedule-feedback.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.customerScheduleFeedback.home.createLabel">-->
+                        <!--Create new Customer Schedule Feedback-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span data-translate="simpleServiceApp.customerScheduleFeedback.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="schedule.id"><span data-translate="simpleServiceApp.customerScheduleFeedback.schedule">Schedule</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="giftCode"><span data-translate="simpleServiceApp.customerScheduleFeedback.giftCode">Gift Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="giftStatus"><span data-translate="simpleServiceApp.customerScheduleFeedback.giftStatus">Gift Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerScheduleFeedback.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerScheduleFeedback.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerScheduleFeedback.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerScheduleFeedback.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                   <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerScheduleFeedback in vm.customerScheduleFeedbacks track by customerScheduleFeedback.id">
+                    <td><a target="_window" ui-sref="customer-schedule-feedback-detail({id:customerScheduleFeedback.id})">{{customerScheduleFeedback.id}}</a></td>
+                    <td>
+                        <a target="_window" ui-sref="customer-detail({id:customerScheduleFeedback.customer.id})">{{customerScheduleFeedback.customer.name}}</a>
+                    </td>
+                    <td>
+                        <a target="_window" ui-sref="customer-communication-schedule-detail({id:customerScheduleFeedback.schedule.id})">{{customerScheduleFeedback.schedule.id}}</a>
+                    </td>
+                    <td>{{customerScheduleFeedback.giftCode}}</td>
+                    <td>{{customerScheduleFeedback.giftStatus}}</td>
+                    <td>{{customerScheduleFeedback.createdBy}}</td>
+                    <td>{{customerScheduleFeedback.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerScheduleFeedback.lastModifiedBy}}</td>
+                    <td>{{customerScheduleFeedback.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ng-click="vm.confirmGiftGiven(customerScheduleFeedback)"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-hand-up"></span>
+                                <span>确认礼物已发放</span>
+                            </button>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

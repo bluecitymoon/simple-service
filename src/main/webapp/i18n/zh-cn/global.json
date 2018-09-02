@@ -62,6 +62,7 @@
                 "studentClass": "Student Class",
                 "studentClassInOutLog": "Student Class In Out Log",
                 "freeClassPlan": "Free Class Plan",
+                "customerScheduleFeedback": "礼品发放",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

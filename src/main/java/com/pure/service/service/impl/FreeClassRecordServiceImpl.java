@@ -4,6 +4,7 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.domain.CustomerScheduleFeedback;
 import com.pure.service.domain.FreeClassPlan;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
@@ -12,6 +13,7 @@ import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.repository.CustomerRepository;
+import com.pure.service.repository.CustomerScheduleFeedbackRepository;
 import com.pure.service.repository.FreeClassPlanRepository;
 import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.NewOrderAssignHistoryRepository;
@@ -32,6 +34,7 @@ import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -95,6 +98,9 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
 
     @Autowired
     private CustomerCommunicationScheduleQueryService scheduleQueryService;
+
+    @Autowired
+    private CustomerScheduleFeedbackRepository feedbackRepository;
 
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
@@ -251,7 +257,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
 //
 //    }
 
-    private void saveSchedule(Instant scheduleDate, Customer customer) {
+    private String saveSchedule(Instant scheduleDate, Customer customer) {
 
 
         CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
@@ -262,18 +268,29 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         schedule.setSourceType("WeChat");
         schedule.setCreatedBy("" + customer.getId());
 
-        scheduleService.save(schedule);
+        CustomerCommunicationSchedule savedSchedule = scheduleService.save(schedule);
+
+        String giftCode = RandomStringUtils.randomNumeric(4);
+        CustomerScheduleFeedback feedback = new CustomerScheduleFeedback();
+        feedback.setCustomer(customer);
+        feedback.setSchedule(savedSchedule);
+        feedback.setGiftStatus("未领取");
+        feedback.setGiftCode(giftCode);
+
+        feedbackRepository.save(feedback);
+
+        return giftCode;
     }
 
     @Override
-    public void createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType) {
+    public String createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType) {
 
         if (StringUtils.isEmpty(sourceType) || !sourceType.equalsIgnoreCase("wechat")) {
-            return;
+            return "";
         }
 
         if (scheduleDate == null) {
-            return;
+            return "";
         }
 
         List<FreeClassPlan> plans = freeClassPlanRepository.findAll();
@@ -293,7 +310,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         if (plan == null) {
             saveSchedule(scheduleDate, customer);
 
-            return;
+            return "";
         }
 
         InstantFilter targetDateFilter = new InstantFilter();
@@ -324,7 +341,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
             throw new RuntimeException("已预约，无法再次预约！");
         }
 
-        saveSchedule(scheduleDate, customer);
+        String code = saveSchedule(scheduleDate, customer);
 
         //increase count
         if (plan.getActualCount() == null) {
@@ -334,6 +351,8 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         }
 
         freeClassPlanRepository.save(plan);
+
+        return code;
     }
 
     @Override

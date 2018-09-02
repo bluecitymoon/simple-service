@@ -79,7 +79,7 @@
             <tbody>
                 <tr ng-repeat="freeClassPlan in vm.freeClassPlans track by freeClassPlan.id">
                     <td><a ui-sref="free-class-plan-detail({id:freeClassPlan.id})">{{freeClassPlan.id}}</a></td>
-                    <td>{{freeClassPlan.planDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{freeClassPlan.planDate | date:'yyyy-MM-dd'}}</td>
                     <td>{{freeClassPlan.limitCount}}</td>
                     <td>{{freeClassPlan.actualCount}}</td>
                     <td class="text-right">

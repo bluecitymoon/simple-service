@@ -54,7 +54,7 @@ public interface FreeClassRecordService {
 
     BatchCustomersResponse upload(InputStream inputStream, String name);
 
-    void createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType);
+    String createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType);
 
     List<FreeClassPlanElement> getSchedulePlanList();
 }
