@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerScheduleFeedbackController', CustomerScheduleFeedbackController);
 
-    CustomerScheduleFeedbackController.$inject = ['$state', 'CustomerScheduleFeedback', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CustomerScheduleFeedbackController.$inject = ['$scope','$state', 'CustomerScheduleFeedback', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function CustomerScheduleFeedbackController($state, CustomerScheduleFeedback, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CustomerScheduleFeedbackController($scope, $state, CustomerScheduleFeedback, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -16,15 +16,35 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.searchCondition = {};
+        vm.clearConditions = function () {
+            vm.searchCondition = {};
+        };
 
-        loadAll();
+        $scope.pagination = {
+            currentPageNumber: 1,
+            totalItems: 0
+        };
+        vm.loadAll = loadAll;
 
         function loadAll () {
-            CustomerScheduleFeedback.query({
-                page: pagingParams.page - 1,
+
+            var parameters = {
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
-            }, onSuccess, onError);
+            };
+
+
+            if (vm.searchCondition.giftCode) {
+                parameters["giftCode.equals"] = vm.searchCondition.giftCode;
+            }
+
+            if (vm.searchCondition.customerPhoneNumber) {
+                parameters["customerPhoneNumber"] = vm.searchCondition.customerPhoneNumber;
+            }
+
+            CustomerScheduleFeedback.query(parameters, onSuccess, onError);
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -36,6 +56,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
+                $scope.pagination.totalItems = vm.totalItems;
                 vm.customerScheduleFeedbacks = data;
                 vm.page = pagingParams.page;
             }

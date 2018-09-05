@@ -25,6 +25,7 @@
             "ROLE_ADMIN",
             "ROLE_HEADMASTER",
             "ROLE_SALES",
+            "ROLE_SALES_MANAGER",
             "ROLE_COURSE_CONSULTANT",
             "ROLE_RECEPTION",
             "ROLE_PWI",

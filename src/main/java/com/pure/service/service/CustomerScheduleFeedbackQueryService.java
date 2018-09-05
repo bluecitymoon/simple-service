@@ -1,22 +1,24 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.CustomerCommunicationSchedule_;
+import com.pure.service.domain.CustomerScheduleFeedback;
+import com.pure.service.domain.CustomerScheduleFeedback_;
+import com.pure.service.domain.Customer_;
+import com.pure.service.repository.CustomerScheduleFeedbackRepository;
+import com.pure.service.service.dto.CustomerScheduleFeedbackCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.CustomerScheduleFeedback;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.CustomerScheduleFeedbackRepository;
-import com.pure.service.service.dto.CustomerScheduleFeedbackCriteria;
+import java.util.List;
 
 
 /**
@@ -96,8 +98,15 @@ public class CustomerScheduleFeedbackQueryService extends QueryService<CustomerS
             if (criteria.getScheduleId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getScheduleId(), CustomerScheduleFeedback_.schedule, CustomerCommunicationSchedule_.id));
             }
+            if (!StringUtils.isEmpty(criteria.getCustomerPhoneNumber())) {
+                specification = specification.and(customerPhoneNumber(criteria.getCustomerPhoneNumber()));
+            }
         }
         return specification;
+    }
+
+    private Specification customerPhoneNumber(String customerPhoneNumber) {
+        return (root, query, cb) -> cb.equal(root.get(CustomerScheduleFeedback_.customer).get(Customer_.contactPhoneNumber), customerPhoneNumber);
     }
 
 }

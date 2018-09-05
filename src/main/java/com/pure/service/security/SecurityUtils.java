@@ -70,4 +70,8 @@ public final class SecurityUtils {
 
         return isCurrentUserInRole(AuthoritiesConstants.ADMIN) || isCurrentUserInRole(AuthoritiesConstants.HEADMASTER);
     }
+    public static boolean isCurrentUserHeadmasterOrAdminOrSalesManager() {
+
+        return isCurrentUserInRole(AuthoritiesConstants.ADMIN) || isCurrentUserInRole(AuthoritiesConstants.HEADMASTER) || isCurrentUserInRole(AuthoritiesConstants.SALESMANAGER);
+    }
 }

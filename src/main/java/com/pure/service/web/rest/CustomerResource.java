@@ -151,7 +151,7 @@ public class CustomerResource {
 
         User currentUser = userService.getUserWithAuthorities();
         //Only Admin and Headmaster can have all the new orders
-        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdminOrSalesManager()) {
 
             LongFilter userIdFilter = new LongFilter();
             userIdFilter.setEquals(currentUser.getId());
@@ -284,7 +284,7 @@ public class CustomerResource {
 
         User currentUser = userService.getUserWithAuthorities();
         //Only Admin and Headmaster can have all the new orders
-        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdminOrSalesManager()) {
 
             LongFilter userIdFilter = new LongFilter();
             userIdFilter.setEquals(currentUser.getId());
@@ -337,7 +337,7 @@ public class CustomerResource {
 
         User currentUser = userService.getUserWithAuthorities();
         //Only Admin and Headmaster can have all the new orders
-        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdminOrSalesManager()) {
 
             LongFilter userIdFilter = new LongFilter();
             userIdFilter.setEquals(currentUser.getId());

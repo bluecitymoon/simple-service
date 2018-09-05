@@ -123,7 +123,7 @@
                 controller: 'StudentSignDialogController',
                 controllerAs: 'vm',
                 backdrop: 'static',
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                     entity: function () {
                         return classArrangement;
