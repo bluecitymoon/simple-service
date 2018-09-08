@@ -77,7 +77,17 @@ public class CustomerCriteria implements Serializable {
 
     private String ccAssignStatus;
 
+    private String sourceType;
+
     public CustomerCriteria() {
+    }
+
+    public String getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(String sourceType) {
+        this.sourceType = sourceType;
     }
 
     public LongFilter getVistedCustomerStatusId() {

@@ -72,8 +72,35 @@ public class DateUtil {
         return Instant.parse(lastSecond);
     }
 
+    public static Instant getLastSecondOfMonth(LocalDateTime localDateTime) {
+
+        int year = localDateTime.getYear(), month = localDateTime.getMonthValue();
+        int lastDayOfMonth = getLastDayOfMonth(year, month);
+
+        String mouthString = "" + month;
+        if (month < 10) {
+            mouthString = "0" + month;
+        }
+        String lastSecond = "" + year + "-" + mouthString + "-" + lastDayOfMonth + "T23:59:59.00Z";
+
+        return Instant.parse(lastSecond);
+    }
+
     public static Instant getFirstSecondOfMonth() {
         LocalDateTime localDateTime = LocalDateTime.now();
+
+        int year = localDateTime.getYear(), month = localDateTime.getMonthValue();
+
+        String mouthString = "" + month;
+        if (month < 10) {
+            mouthString = "0" + month;
+        }
+        String firstSecond = "" + year + "-" + mouthString + "-" + "01T00:00:01.00Z";
+
+        return Instant.parse(firstSecond);
+    }
+
+    public static Instant getFirstSecondOfMonth(LocalDateTime localDateTime) {
 
         int year = localDateTime.getYear(), month = localDateTime.getMonthValue();
 

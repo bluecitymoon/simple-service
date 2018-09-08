@@ -51,6 +51,12 @@ public class CustomerStatusReportDtl implements Serializable {
     @Column(name = "finish_rate")
     private Double finishRate;
 
+    @Column(name = "year")
+    private String year;
+
+    @Column(name = "month")
+    private String month;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -58,6 +64,22 @@ public class CustomerStatusReportDtl implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public Long getUserId() {

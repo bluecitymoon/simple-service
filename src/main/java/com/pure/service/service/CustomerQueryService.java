@@ -170,6 +170,10 @@ public class CustomerQueryService extends QueryService<Customer> {
             if (criteria.getLocationId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getLocationId(), Customer_.newOrderResourceLocation, NewOrderResourceLocation_.id));
             }
+
+            if (!StringUtils.isEmpty(criteria.getSourceType())) {
+                specification = specification.and(sourceType(criteria.getSourceType()));
+            }
         }
         return specification;
     }
@@ -182,5 +186,10 @@ public class CustomerQueryService extends QueryService<Customer> {
             return (root, query, cb) -> cb.isNull(root.get(Customer_.courseConsultant));
         }
         return null;
+    }
+
+    private Specification sourceType(String sourceType) {
+
+        return (root, query, cb) -> cb.equal(root.get(Customer_.newOrder).get(FreeClassRecord_.sourceType), sourceType);
     }
 }

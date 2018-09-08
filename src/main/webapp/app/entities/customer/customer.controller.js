@@ -52,6 +52,11 @@
             {name: "已分配", code: "assigned"},
             {name: "未分配", code: "not_assigned"}
         ];
+        vm.sourceTypes = [
+            {id: 1, name: "小程序", code: "WeChat"},
+            {id: 2, name: "非小程序", code: ""}
+        ];
+
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -150,6 +155,9 @@
                 parameters["ccAssignStatus"] = vm.searchCondition.ccAssignStatus.code;
             }
 
+            if (vm.searchCondition.sourceType) {
+                parameters["sourceType"] = vm.searchCondition.sourceType.code;
+            }
             var cacheCondition = {
                 condition: vm.searchCondition,
                 currentPageNumber : $scope.pagination.currentPageNumber
