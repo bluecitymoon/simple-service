@@ -8,7 +8,9 @@
                     <table class="table table-bordered">
                         <thead>
                         <tr>
-                            <th class="text-center" colspan="{{weekday.classrooms.length + 1}}">{{weekday.weekdayName}}</th>
+                            <th class="text-center" colspan="{{weekday.classrooms.length + 1}}">
+                                {{weekday.weekdayName}}
+                            </th>
                         </tr>
                         <tr>
                             <th></th>
@@ -16,47 +18,109 @@
                         </tr>
                         <tr>
                             <th></th>
-                            <th class="text-center" ng-repeat="course in weekday.courses track by $index">{{course}}</th>
+                            <th class="text-center" ng-repeat="course in weekday.courses track by $index">{{course}}
+                            </th>
                         </tr>
                         <tr>
                             <th></th>
-                            <th class="text-center" ng-repeat="teacher in weekday.teachers track by $index">{{teacher}}</th>
+                            <th class="text-center" ng-repeat="teacher in weekday.teachers track by $index">
+                                {{teacher}}
+                            </th>
                         </tr>
 
                         </thead>
                         <tbody>
                         <tr>
                             <td>09:00-10:30</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningFirstHalf"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningFirstHalf">
+
+                                <div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">
+                                    <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+
+                                        <li class="nav-item" uib-dropdown>
+
+                                            <button uib-dropdown-toggle href="" class="navbar-link btn btn-default btn-block">{{mf.className || '无课程安排'}}</button>
+
+                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.createNewClassArrangements(mf, '09:00', '10:30')">
+                                                        <span>排课</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.openClassSignDialog(mf)">
+                                                        <span>签到</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.studentLeaveRequest(mf)">
+                                                        <span>请假</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)"></button>-->
+
+                            </td>
 
                         </tr>
                         <tr>
                             <td>10:45-12:15</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningSecondHalf"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningSecondHalf">
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>12:15-13:00</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.moonRest"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.moonRest">
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>13:00-14:30</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonFirstHalf"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonFirstHalf">
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>14:45-16:15</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonSecondHalf"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonSecondHalf">
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>16:30-18:00</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonThiredHalf"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
-                        </tr>                        <tr>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonThiredHalf">
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
                             <td>18:00-18:30</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonRest"><button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button></td>
+                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonRest">
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>18:30-20:00</td>
                             <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.evenning">
-                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">{{mf.className}}</button>
+                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
+                                    {{mf.className}}
+                                </button>
                             </td>
                         </tr>
                         </tbody>

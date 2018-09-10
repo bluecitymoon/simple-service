@@ -43,6 +43,7 @@ import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.dto.request.ReportElement;
 import com.pure.service.service.dto.request.StatusReportElement;
 import com.pure.service.service.util.DateUtil;
+import com.pure.service.task.AutoReassignCustomerTask;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -106,6 +107,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private AutoReassignCustomerTask autoReassignCustomerTask;
 
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
@@ -528,6 +532,11 @@ public class CustomerServiceImpl implements CustomerService {
         saveMergeLog(finalCustomer);
 
         return finalCustomer;
+    }
+
+    @Override
+    public void backupReport() {
+        autoReassignCustomerTask.reassign();
     }
 
     private void mergeStudents(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {

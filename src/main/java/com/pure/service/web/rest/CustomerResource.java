@@ -323,6 +323,15 @@ public class CustomerResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/customers/report/backup")
+    @Timed
+    public ResponseEntity backupAndReassign() {
+
+        customerService.backupReport();
+
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * GET  /customers : get all the customers.
      *

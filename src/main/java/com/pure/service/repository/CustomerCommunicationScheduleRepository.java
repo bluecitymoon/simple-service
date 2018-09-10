@@ -17,5 +17,6 @@ public interface CustomerCommunicationScheduleRepository extends JpaRepository<C
     List<CustomerCommunicationSchedule> findByFollowerIsCurrentUser();
 
     List<CustomerCommunicationSchedule> findByCustomer_Id(Long id);
+    List<CustomerCommunicationSchedule> findByCustomer_IdAndSourceType(Long id, String sourceType);
 
 }

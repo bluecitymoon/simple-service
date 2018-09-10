@@ -134,6 +134,14 @@
             });
         };
 
+        vm.createNewClassArrangements = function (mf, startHour, endHour) {
+
+        };
+
+        vm.studentLeaveRequest = function (mf) {
+
+        };
+
         function getArrangementsToday() {
             ClassArrangement.getClassArrangementsToday({}, function (data) {
                 vm.todayClassArrangments = data;

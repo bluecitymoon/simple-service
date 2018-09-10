@@ -66,4 +66,6 @@ public interface CustomerService {
     Customer preloadMergedCustomer(Long oid, Long tid);
 
     Customer mergeCustomer(Long originalId, Long targetId, Customer customer);
+
+    void backupReport();
 }

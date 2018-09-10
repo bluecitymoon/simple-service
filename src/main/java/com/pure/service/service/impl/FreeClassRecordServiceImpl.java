@@ -102,6 +102,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
     @Autowired
     private CustomerScheduleFeedbackRepository feedbackRepository;
 
+
     public FreeClassRecordServiceImpl(FreeClassRecordRepository freeClassRecordRepository,
                                       NewOrderAssignHistoryRepository newOrderAssignHistoryRepository,
                                       CustomerCommunicationLogRepository customerCommunicationLogRepository,
@@ -293,6 +294,8 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
             return "";
         }
 
+        checkCustomerAlreadyScheduled(customer);
+
         List<FreeClassPlan> plans = freeClassPlanRepository.findAll();
         FreeClassPlan plan = null;
         for (FreeClassPlan freeClassPlan : plans) {
@@ -353,6 +356,16 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         freeClassPlanRepository.save(plan);
 
         return code;
+    }
+
+    private void checkCustomerAlreadyScheduled(Customer customer) {
+
+        List<CustomerCommunicationSchedule> schedules = communicationScheduleRepository.findByCustomer_IdAndSourceType(customer.getId(), "WeChat");
+
+        if (!CollectionUtils.isEmpty(schedules)) {
+
+            throw new RuntimeException("已经预约过，无法再次预约！");
+        }
     }
 
     @Override
