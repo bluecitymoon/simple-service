@@ -11,7 +11,7 @@
         <div class="form-group">
             <label class="control-label" for="field_sceduleDate">预约时间</label>
             <div class="input-group">
-                <input ng-focus="vm.openCalendar('sceduleDate')" id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
+                <input ng-focus="vm.openCalendar('sceduleDate')" id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
                 />
                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('sceduleDate')"><i class="glyphicon glyphicon-calendar"></i></button>

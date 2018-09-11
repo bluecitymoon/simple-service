@@ -84,7 +84,7 @@
                     <label class="col-sm-3 control-label">录入时间</label>
                     <div class="col-sm-9">
                         <input type="text" placeholder="开始时间" class="form-control"
-                               ng-focus="vm.openCalendar('createStartDate')" datetime-picker="{{dateformat}}"
+                               ng-focus="vm.openCalendar('createStartDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                ng-model="vm.searchCondition.createStartDate"
                                is-open="vm.datePickerOpenStatus.createStartDate">
                     </div>
@@ -93,7 +93,7 @@
 
                     <div class="col-sm-9">
                         <input type="text" placeholder="结束时间" class="form-control"
-                               ng-focus="vm.openCalendar('createEndDate')" datetime-picker="{{dateformat}}"
+                               ng-focus="vm.openCalendar('createEndDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                ng-model="vm.searchCondition.createEndDate"
                                is-open="vm.datePickerOpenStatus.createEndDate">
                     </div>
@@ -136,7 +136,7 @@
                     <label class="col-sm-3 control-label">下次追踪时间</label>
                     <div class="col-sm-9">
                         <input type="text" placeholder="开始时间" class="form-control"
-                               ng-focus="vm.openCalendar('nextTrackStartDate')" datetime-picker="{{dateformat}}"
+                               ng-focus="vm.openCalendar('nextTrackStartDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                ng-model="vm.searchCondition.nextTrackStartDate"
                                is-open="vm.datePickerOpenStatus.nextTrackStartDate">
                     </div>
@@ -145,7 +145,7 @@
 
                     <div class="col-sm-9">
                         <input type="text" placeholder="结束时间" class="form-control"
-                               ng-focus="vm.openCalendar('nextTrackEndDate')" datetime-picker="{{dateformat}}"
+                               ng-focus="vm.openCalendar('nextTrackEndDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                ng-model="vm.searchCondition.nextTrackEndDate"
                                is-open="vm.datePickerOpenStatus.nextTrackEndDate">
                     </div>

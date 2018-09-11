@@ -14,7 +14,7 @@
 
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.save = save;
         vm.customercommunicationlogtypes = CustomerCommunicationLogType.query({ page: 0,  size: 1000 });
         vm.customers = Customer.query({ page: 0,  size: 1000 });

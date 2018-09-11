@@ -26,7 +26,7 @@
         var year = new Date().getFullYear();
         var month = new Date().getMonth() + 1;
 
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
 
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;

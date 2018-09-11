@@ -17,7 +17,7 @@
         // }
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.save = save;
         // vm.customers = Customer.query({ page: 0,  size: 1000 });
         vm.users = User.query({ page: 0,  size: 1000 });

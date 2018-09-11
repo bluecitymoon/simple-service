@@ -13,7 +13,7 @@
         vm.freeClassRecord = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.save = save;
         vm.marketchannelcategories = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.classcategories = ClassCategory.query({ page: 0,  size: 1000 });

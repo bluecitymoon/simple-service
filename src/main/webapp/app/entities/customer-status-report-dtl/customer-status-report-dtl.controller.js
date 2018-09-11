@@ -23,7 +23,7 @@
             yearObject: {id: new Date().getFullYear(), label: new Date().getFullYear()},
             monthObject: {id: new Date().getMonth(), label: new Date().getMonth()}
         };
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.loadAll = loadAll;
 
         initData();

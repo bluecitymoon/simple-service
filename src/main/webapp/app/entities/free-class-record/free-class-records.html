@@ -33,14 +33,15 @@
                 </div>
                 <div class="col-md-2 form-group">
                     <input type="text" name="startDate" placeholder="录入开始日期" class="form-control"
-                           ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                           ng-focus="vm.openCalendar('startDate')"
+                           datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  timepicker-options="vm.datePickerOptions"
                            ng-model="vm.searchCondition.startDate"
                            is-open="vm.datePickerOpenStatus.startDate">
 
                 </div>
                 <div class="col-md-2 form-group">
                     <input type="text" placeholder="录入结束日期" class="form-control"
-                           ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                           ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                            ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
                 </div>
                 <div class="col-md-1">
@@ -135,7 +136,18 @@
                 </div>
 
                 <div class="col-md-3 form-group">
-
+                    <label class="col-sm-3 control-label">客户状态</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.customerStatus">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.customerStatus | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                                <span class="pull-right {{item.cssStyle}}"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
                 </div>
 
                 <div class="col-md-3 form-group">

@@ -74,7 +74,7 @@
                            for="field_signDate">Sign Date</label>
                     <div class="input-group">
                         <input ng-focus="vm.openCalendar('signDate')" id="field_signDate" type="text"
-                               class="form-control" name="signDate" datetime-picker="{{dateformat}}"
+                               class="form-control" name="signDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                ng-model="vm.customerCard.signDate" is-open="vm.datePickerOpenStatus.signDate"
                         />
                         <span class="input-group-btn">
@@ -140,7 +140,7 @@
                            for="field_startDate">Start Date</label>
                     <div class="input-group">
                         <input ng-focus="vm.openCalendar('startDate')" id="field_startDate" type="text"
-                               class="form-control" name="startDate" datetime-picker="{{dateformat}}"
+                               class="form-control" name="startDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                ng-model="vm.customerCard.startDate" is-open="vm.datePickerOpenStatus.startDate"
                         />
                         <span class="input-group-btn">
@@ -156,7 +156,7 @@
                            for="field_endDate">End Date</label>
                     <div class="input-group">
                         <input ng-focus="vm.openCalendar('endDate')" id="field_endDate" type="text" class="form-control"
-                               name="endDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCard.endDate"
+                               name="endDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.customerCard.endDate"
                                is-open="vm.datePickerOpenStatus.endDate"
                         />
                         <span class="input-group-btn">

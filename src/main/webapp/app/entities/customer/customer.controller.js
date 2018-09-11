@@ -23,7 +23,7 @@
         vm.searchCondition = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.taskstatuses = TaskStatus.query();
         vm.customerStatus = CustomerStatus.query();
 

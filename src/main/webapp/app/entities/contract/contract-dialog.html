@@ -100,7 +100,7 @@
                                     Date</label>
                                 <div class="input-group">
                                     <input id="field_signDate" type="text" class="form-control" name="signDate"
-                                           datetime-picker="{{dateformat}}"
+                                           datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                            ng-model="vm.contract.signDate" is-open="vm.datePickerOpenStatus.signDate"
                                     />
                                     <span class="input-group-btn">
@@ -117,7 +117,7 @@
                                     Date</label>
                                 <div class="input-group">
                                     <input id="field_startDate" type="text" class="form-control" name="startDate"
-                                           datetime-picker="{{dateformat}}" ng-model="vm.contract.startDate"
+                                           datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.contract.startDate"
                                            is-open="vm.datePickerOpenStatus.startDate"
                                     />
                                     <span class="input-group-btn">
@@ -135,7 +135,7 @@
                                     Date</label>
                                 <div class="input-group">
                                     <input id="field_endDate" type="text" class="form-control" name="endDate"
-                                           datetime-picker="{{dateformat}}"
+                                           datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                                            ng-model="vm.contract.endDate" is-open="vm.datePickerOpenStatus.endDate"
                                     />
                                     <span class="input-group-btn">

@@ -13,7 +13,7 @@
         vm.customerCollectionLog = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.save = save;
         vm.collections = Collection.query();
         vm.customers = Customer.query();

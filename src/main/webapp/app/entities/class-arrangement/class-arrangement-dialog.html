@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.classArrangement.startDate" for="field_startDate">Start Date</label>
                     <div class="input-group">
-                        <input id="field_startDate" type="text" class="form-control" name="startDate" datetime-picker="{{dateformat}}" ng-model="vm.classArrangement.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                        <input id="field_startDate" type="text" class="form-control" name="startDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.classArrangement.startDate" is-open="vm.datePickerOpenStatus.startDate"
                         />
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.classArrangement.endDate" for="field_endDate">End Date</label>
                     <div class="input-group">
-                        <input id="field_endDate" type="text" class="form-control" name="endDate" datetime-picker="{{dateformat}}" ng-model="vm.classArrangement.endDate" is-open="vm.datePickerOpenStatus.endDate"
+                        <input id="field_endDate" type="text" class="form-control" name="endDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.classArrangement.endDate" is-open="vm.datePickerOpenStatus.endDate"
                         />
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i class="glyphicon glyphicon-calendar"></i></button>

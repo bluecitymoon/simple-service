@@ -14,7 +14,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.freeClassPlan.planDate" for="field_planDate">Plan Date</label>
                     <div class="input-group">
-                        <input id="field_planDate" type="text" class="form-control" name="planDate" datetime-picker="{{dateformat}}" ng-model="vm.freeClassPlan.planDate" is-open="vm.datePickerOpenStatus.planDate"
+                        <input id="field_planDate" type="text" class="form-control" name="planDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.freeClassPlan.planDate" is-open="vm.datePickerOpenStatus.planDate"
                         />
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('planDate')"><i class="glyphicon glyphicon-calendar"></i></button>

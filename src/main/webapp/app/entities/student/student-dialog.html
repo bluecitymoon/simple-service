@@ -61,7 +61,7 @@
                            for="field_birthday">Birthday</label>
                     <div class="input-group">
                         <input id="field_birthday" type="text" class="form-control" name="birthday"
-                               datetime-picker="{{dateformat}}" ng-model="vm.student.birthday"
+                               datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.student.birthday"
                                is-open="vm.datePickerOpenStatus.birthday"
                         />
                         <span class="input-group-btn">

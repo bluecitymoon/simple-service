@@ -14,7 +14,7 @@
         vm.customerCommunicationSchedule = {};
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.save = save;
         vm.neworders = FreeClassRecord.query({filter: 'customer-is-null'});
         $q.all([vm.customer.$promise, vm.neworders.$promise]).then(function() {

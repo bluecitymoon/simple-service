@@ -28,14 +28,14 @@
                 </div>
                 <div class="col-md-2 form-group">
                     <input type="text" name="startDate" placeholder="预约开始时间" class="form-control"
-                           ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                           ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                            ng-model="vm.searchCondition.startDate"
                            is-open="vm.datePickerOpenStatus.startDate">
 
                 </div>
                 <div class="col-md-2 form-group">
                     <input type="text" placeholder="预约结束时间" class="form-control"
-                           ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                           ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                            ng-model="vm.searchCondition.endDate" is-open="vm.datePickerOpenStatus.endDate">
                 </div>
                 <div class="col-md-1">
@@ -84,14 +84,14 @@
                 </div>
                 <div class="col-md-2 form-group">
                     <input type="text" name="startDate" placeholder="实际到访开始时间" class="form-control"
-                           ng-focus="vm.openCalendar('actualStartDate')" datetime-picker="{{dateformat}}"
+                           ng-focus="vm.openCalendar('actualStartDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                            ng-model="vm.searchCondition.actualStartDate"
                            is-open="vm.datePickerOpenStatus.actualStartDate">
 
                 </div>
                 <div class="col-md-2 form-group">
                     <input type="text" placeholder="实际到访结束时间" class="form-control"
-                           ng-focus="vm.openCalendar('actualEndDate')" datetime-picker="{{dateformat}}"
+                           ng-focus="vm.openCalendar('actualEndDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
                            ng-model="vm.searchCondition.actualEndDate" is-open="vm.datePickerOpenStatus.actualEndDate">
                 </div>
                 <div class="col-md-1">

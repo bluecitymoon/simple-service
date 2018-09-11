@@ -14,7 +14,7 @@
         vm.customerTrackTask = {};
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.save = save;
         // vm.users = User.query();
         // vm.taskstatuses = TaskStatus.query();

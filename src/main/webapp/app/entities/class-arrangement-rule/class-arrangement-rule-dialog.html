@@ -17,7 +17,7 @@
                            for="field_estimateStartDate">Estimate Start Date</label>
                     <div class="input-group">
                         <input id="field_estimateStartDate" type="text" class="form-control" name="estimateStartDate"
-                               datetime-picker="{{dateformat}}" ng-model="vm.classArrangementRule.estimateStartDate"
+                               datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.classArrangementRule.estimateStartDate"
                                is-open="vm.datePickerOpenStatus.estimateStartDate"
                         />
                         <span class="input-group-btn">
@@ -32,7 +32,7 @@
                     <label class="control-label">预计结束日期</label>
                     <div class="input-group">
                         <input id="field_estimateEndDate" type="text" class="form-control" name="estimateEndDate"
-                               datetime-picker="{{dateformat}}" ng-model="vm.classArrangementRule.estimateEndDate"
+                               datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.classArrangementRule.estimateEndDate"
                                is-open="vm.datePickerOpenStatus.estimateEndDate"
                         />
                         <span class="input-group-btn">

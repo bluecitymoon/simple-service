@@ -18,7 +18,7 @@
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.customerschedulestatuses = CustomerScheduleStatus.query({ page: 0,  size: 1000 });
         vm.datePickerOpenStatus = {};
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
         vm.searchCondition = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.pwis = User.getAllPwis();

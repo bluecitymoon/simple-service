@@ -88,7 +88,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.payment.paidDate" for="field_paidDate">Paid Date</label>
                     <div class="input-group">
-                        <input id="field_paidDate" type="text" class="form-control" name="paidDate" datetime-picker="{{dateformat}}" ng-model="vm.payment.paidDate" is-open="vm.datePickerOpenStatus.paidDate"
+                        <input id="field_paidDate" type="text" class="form-control" name="paidDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.payment.paidDate" is-open="vm.datePickerOpenStatus.paidDate"
                         />
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('paidDate')"><i class="glyphicon glyphicon-calendar"></i></button>

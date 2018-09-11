@@ -13,7 +13,8 @@
             convertDateTimeFromServer: convertDateTimeFromServer,
             convertLocalDateFromServer: convertLocalDateFromServer,
             convertLocalDateToServer: convertLocalDateToServer,
-            dateformat: dateformat
+            dateformat: dateformat,
+            dateOptions: dateOptions
         };
 
         return service;
@@ -43,7 +44,13 @@
         }
 
         function dateformat() {
-            return 'yyyy-MM-dd HH:mm';
+            return 'yyyy-MM-dd hh:mm';
+        }
+
+        function dateOptions() {
+            return {
+                showMeridian: false
+            }
         }
     }
 

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('FreeClassRecordController', FreeClassRecordController);
 
-    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation', 'FileUploader', 'Cache'];
+    FreeClassRecordController.$inject = ['$scope','$timeout', '$state', 'FreeClassRecord', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'User', 'MarketChannelCategory', 'NewOrderResourceLocation', 'FileUploader', 'Cache', 'CustomerStatus'];
 
-    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation, FileUploader, Cache) {
+    function FreeClassRecordController($scope, $timeout, $state, FreeClassRecord, ParseLinks, AlertService, paginationConstants, pagingParams, User, MarketChannelCategory, NewOrderResourceLocation, FileUploader, Cache, CustomerStatus) {
 
         var vm = this;
 
@@ -28,13 +28,18 @@
         vm.pwis = User.getAllPwis();
         vm.sales = User.getAllSales();
         vm.showUploadTextArea = false;
+        vm.customerStatus = CustomerStatus.query();
         vm.salesAssignStatusList = [
+
             {name: "已分配", code: "assigned"},
             {name: "未分配", code: "not_assigned"}
         ];
 
 
-        vm.openCalendar = openCalendar;
+        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
+        vm.datePickerOptions = {
+            showMeridian: false
+        };
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -47,6 +52,11 @@
         vm.batchUploadNewOrders = function () {
 
         };
+
+        vm.datePickerOptions = {
+            showMeridian: false
+        };
+
         vm.batchAssignNewOrder = function () {
             var selectedRecords = vm.freeClassRecords.filter(function (r) {
                 return r.selected;
@@ -160,6 +170,10 @@
 
             if (vm.searchCondition.salesAssignStatus) {
                 vm.parameters["salesFollowerAssignStatus"] = vm.searchCondition.salesAssignStatus.code;
+            }
+
+            if (vm.searchCondition.customerStatus) {
+                vm.parameters["status.equals"] = vm.searchCondition.customerStatus.name;
             }
             FreeClassRecord.query(vm.parameters, onSuccess, onError);
 

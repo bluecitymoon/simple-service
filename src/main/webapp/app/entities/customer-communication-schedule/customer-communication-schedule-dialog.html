@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.sceduleDate" for="field_sceduleDate">Scedule Date</label>
                     <div class="input-group">
-                        <input id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" ng-focus="vm.openCalendar('sceduleDate')" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
+                        <input id="field_sceduleDate" type="text" class="form-control" name="sceduleDate" ng-focus="vm.openCalendar('sceduleDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.customerCommunicationSchedule.sceduleDate" is-open="vm.datePickerOpenStatus.sceduleDate"
                         />
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('sceduleDate')"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.customerCommunicationSchedule.actuallMeetDate" for="field_actuallMeetDate">Actuall Meet Date</label>
                     <div class="input-group">
-                        <input id="field_actuallMeetDate" type="text" class="form-control" ng-focus="vm.openCalendar('actuallMeetDate')" name="actuallMeetDate" datetime-picker="{{dateformat}}" ng-model="vm.customerCommunicationSchedule.actuallMeetDate" is-open="vm.datePickerOpenStatus.actuallMeetDate"
+                        <input id="field_actuallMeetDate" type="text" class="form-control" ng-focus="vm.openCalendar('actuallMeetDate')" name="actuallMeetDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.customerCommunicationSchedule.actuallMeetDate" is-open="vm.datePickerOpenStatus.actuallMeetDate"
                         />
                         <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('actuallMeetDate')"><i class="glyphicon glyphicon-calendar"></i></button>
