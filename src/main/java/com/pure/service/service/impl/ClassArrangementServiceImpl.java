@@ -280,6 +280,12 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
         classArrangementRepository.save(classArrangements);
 
     }
+
+    private boolean checkDuplicateArrangement() {
+
+        return false;
+    }
+
     private class TimePeriod {
 
         public TimePeriod(Instant start, Instant end) {

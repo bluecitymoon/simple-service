@@ -134,8 +134,9 @@
             });
         };
 
-        vm.createNewClassArrangements = function (mf, startHour, endHour) {
-
+        vm.createNewClassArrangements = function (mf, startHour, endHour, index) {
+            console.log(mf);
+            console.log(index);
         };
 
         vm.studentLeaveRequest = function (mf) {
