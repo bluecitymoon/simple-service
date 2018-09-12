@@ -7,7 +7,7 @@ import java.util.List;
 public class ClassArrangementWeekElement implements Serializable {
 
     private String weekdayName;
-    private List<String> classrooms = new ArrayList<>();
+    private List<ClassroomDto> classrooms = new ArrayList<>();
     private List<String> courses = new ArrayList<>();
     private List<String> teachers = new ArrayList<>();
     private List<ClassSchedule> morningFirstHalf = new ArrayList<>();
@@ -27,11 +27,11 @@ public class ClassArrangementWeekElement implements Serializable {
         this.weekdayName = weekdayName;
     }
 
-    public List<String> getClassrooms() {
+    public List<ClassroomDto> getClassrooms() {
         return classrooms;
     }
 
-    public void setClassrooms(List<String> classrooms) {
+    public void setClassrooms(List<ClassroomDto> classrooms) {
         this.classrooms = classrooms;
     }
 

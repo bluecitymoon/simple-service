@@ -11,6 +11,7 @@ import com.pure.service.repository.ClassRoomRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
+import com.pure.service.service.dto.dto.ClassroomDto;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
 import org.slf4j.Logger;
@@ -165,7 +166,11 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                 singledDay.getMoonRest().add(rest);
                 singledDay.getAfternoonRest().add(rest);
 
-                singledDay.getClassrooms().add(classRooms.get(i).getName());
+                ClassroomDto classroomDto = new ClassroomDto();
+                classroomDto.setId(classRooms.get(i).getId());
+                classroomDto.setName(classRooms.get(i).getName());
+
+                singledDay.getClassrooms().add(classroomDto);
             }
 
             timePeriodListMap.clear();

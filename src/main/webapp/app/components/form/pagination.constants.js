@@ -4,6 +4,6 @@
     angular
         .module('simpleServiceApp')
         .constant('paginationConstants', {
-            'itemsPerPage': 20
+            'itemsPerPage': 50
         });
 })();
