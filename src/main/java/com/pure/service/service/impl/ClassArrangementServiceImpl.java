@@ -4,10 +4,12 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.domain.ClassArrangementStatus;
 import com.pure.service.domain.ClassRoom;
+import com.pure.service.domain.Product;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.repository.ClassRoomRepository;
+import com.pure.service.repository.ProductRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
@@ -51,6 +53,9 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     @Autowired
     private ClassRoomRepository classRoomRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     public ClassArrangementServiceImpl(ClassArrangementRepository classArrangementRepository) {
         this.classArrangementRepository = classArrangementRepository;
@@ -229,6 +234,15 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
         }
 
         return elements;
+    }
+
+    @Override
+    public ClassSchedule createClassSchedule(ClassSchedule classSchedule) {
+
+        Product clazz = productRepository.findOne(classSchedule.getClassId());
+
+
+        return null;
     }
 
     private ClassSchedule findClassInRange(List<ClassSchedule> roomClasses, Instant classStart, Instant classEnd) {

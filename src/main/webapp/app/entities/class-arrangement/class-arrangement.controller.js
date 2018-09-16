@@ -137,6 +137,24 @@
         vm.createNewClassArrangements = function (mf, startHour, endHour, index) {
             console.log(mf);
             console.log(index);
+
+
+            $uibModal.open({
+                templateUrl: 'app/entities/customer/customer-dialog.html',
+                controller: 'CustomerDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: ['Customer', function(Customer) {
+                        return Customer.get({id : customerId}).$promise;
+                    }]
+                }
+            }).result.then(function() {
+                vm.loadAll();
+            }, function() {
+                // $state.go('^');
+            });
         };
 
         vm.studentLeaveRequest = function (mf) {

@@ -50,4 +50,6 @@ public interface ClassArrangementService {
     List<ClassSchedule> searchSchedulesInRange(CustomerStatusRequest customerStatusRequest);
 
     List<ClassArrangementWeekElement> getArrangementsInCurrentWeek();
+
+    ClassSchedule createClassSchedule(ClassSchedule classSchedule);
 }

@@ -350,7 +350,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         if (plan.getActualCount() == null) {
             plan.setActualCount(1);
         } else {
-            plan.setActualCount(plan.getLimitCount() + 1);
+            plan.setActualCount(plan.getActualCount() + 1);
         }
 
         freeClassPlanRepository.save(plan);

@@ -194,6 +194,16 @@ public class ClassArrangementResource {
         return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
+    @PostMapping("/class-arrangements/create-schedule")
+    @Timed
+    public ResponseEntity<ClassSchedule> createClassSchedule(@RequestBody ClassSchedule classSchedule) {
+
+
+        ClassSchedule savedClassSchedule = classArrangementService.createClassSchedule(classSchedule);
+
+        return new ResponseEntity<>(savedClassSchedule, null, HttpStatus.OK);
+    }
+
     @PostMapping("/class-arrangements/get-this-week")
     @Timed
     public ResponseEntity<List<ClassArrangementWeekElement>> getArrangementsInCurrentWeek() {
