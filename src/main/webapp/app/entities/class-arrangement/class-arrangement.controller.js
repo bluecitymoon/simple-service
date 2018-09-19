@@ -114,11 +114,11 @@
         $scope.$on("simpleServiceApp:classArrangementsGenerated", function (event) {
             loadClassesThisWeek();
         });
-        
+
         vm.todayClassArrangments = [];
         vm.openClassSignDialog = function (classArrangement) {
 
-            if (!classArrangement || !classArrangement.clickable) {
+            if (!classArrangement) {
                 return;
             }
 
