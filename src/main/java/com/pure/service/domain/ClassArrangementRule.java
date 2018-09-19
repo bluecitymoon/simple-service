@@ -37,6 +37,10 @@ public class ClassArrangementRule implements Serializable {
     @Column(name = "max_loop_count")
     private Integer maxLoopCount;
 
+    @Column(name = "consume_class_count")
+    private Integer consumeClassCount;
+
+
     @ManyToOne
     private Product targetClass;
 
@@ -53,6 +57,14 @@ public class ClassArrangementRule implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getConsumeClassCount() {
+        return consumeClassCount;
+    }
+
+    public void setConsumeClassCount(Integer consumeClassCount) {
+        this.consumeClassCount = consumeClassCount;
     }
 
     public Integer getDurationMinutes() {

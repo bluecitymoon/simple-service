@@ -2,6 +2,7 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
@@ -196,12 +197,11 @@ public class ClassArrangementResource {
 
     @PostMapping("/class-arrangements/create-schedule")
     @Timed
-    public ResponseEntity<ClassSchedule> createClassSchedule(@RequestBody ClassSchedule classSchedule) {
+    public ResponseEntity createClassSchedule(@RequestBody ClassArrangementRule rule) {
 
+        classArrangementService.createClassSchedule(rule);
 
-        ClassSchedule savedClassSchedule = classArrangementService.createClassSchedule(classSchedule);
-
-        return new ResponseEntity<>(savedClassSchedule, null, HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/class-arrangements/get-this-week")

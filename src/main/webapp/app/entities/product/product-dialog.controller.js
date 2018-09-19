@@ -17,9 +17,25 @@
         vm.save = save;
         vm.classagelevels = ClassAgeLevel.query({ page: 0,  size: 1000 });
         vm.teachers = Teacher.query({ page: 0,  size: 1000 });
-        vm.classrooms = ClassRoom.query({ page: 0,  size: 1000 });
         vm.courses = Course.query({ page: 0,  size: 1000 });
 
+        loadClassRooms();
+        function loadClassRooms() {
+
+            ClassRoom.query({ page: 0,  size: 100 }, function (data) {
+                vm.classrooms = data;
+
+                if (vm.product.classRoomId) {
+                    angular.forEach(vm.classrooms, function (room) {
+
+                        if (room.id == vm.product.classRoomId) {
+                            vm.product.classRoom = room;
+                        }
+                    })
+                }
+
+            });
+        }
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });

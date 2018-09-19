@@ -111,6 +111,10 @@
 
         }
 
+        $scope.$on("simpleServiceApp:classArrangementsGenerated", function (event) {
+            loadClassesThisWeek();
+        });
+        
         vm.todayClassArrangments = [];
         vm.openClassSignDialog = function (classArrangement) {
 
@@ -134,26 +138,32 @@
             });
         };
 
-        vm.createNewClassArrangements = function (mf, startHour, endHour, index) {
-            console.log(mf);
-            console.log(index);
+        vm.createNewClassArrangements = function (mf, startHour, endHour, index, weekday) {
 
+            var classroomId = vm.weekClasses[0].classrooms[index].id;
+            if (!mf.id) {
+                mf.classroomId = classroomId;
+            }
+
+            var schedule = {
+                classSchedule: mf,
+                start: startHour,
+                end: endHour,
+                index: index,
+                weekdayName: weekday
+            };
+
+            $scope.dialogSchedule = schedule;
 
             $uibModal.open({
-                templateUrl: 'app/entities/customer/customer-dialog.html',
-                controller: 'CustomerDialogController',
+                templateUrl: 'app/entities/class-arrangement/single-class-arrangement-dialog.controller.html',
+                controller: 'SingleClassArrangmentDialogController',
                 controllerAs: 'vm',
                 backdrop: 'static',
                 size: 'lg',
-                resolve: {
-                    entity: ['Customer', function(Customer) {
-                        return Customer.get({id : customerId}).$promise;
-                    }]
-                }
+                scope: $scope
             }).result.then(function() {
-                vm.loadAll();
             }, function() {
-                // $state.go('^');
             });
         };
 

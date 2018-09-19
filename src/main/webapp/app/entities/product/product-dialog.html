@@ -8,44 +8,103 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.product.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.product.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.product.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.product.name"
+        <!--<div class="form-group" ng-show="vm.product.id">-->
+            <!--<label for="id" data-translate="global.field.id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                    <!--ng-model="vm.product.id" readonly />-->
+        <!--</div>-->
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.product.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           ng-model="vm.product.name"
                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.product.code" for="field_code">Code</label>
-            <input type="text" class="form-control" name="code" id="field_code"
-                    ng-model="vm.product.code"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.product.minutesPerClass" for="field_minutesPerClass">Minutes Per Class</label>
-            <input type="number" class="form-control" name="minutesPerClass" id="field_minutesPerClass"
-                    ng-model="vm.product.minutesPerClass"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="simpleServiceApp.product.planedStartDate" for="field_planedStartDate">Planed Start Date</label>
-                <div class="input-group">
-                    <input id="field_planedStartDate" type="text" class="form-control" name="planedStartDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.product.planedStartDate" is-open="vm.datePickerOpenStatus.planedStartDate"
-                    />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('planedStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
                 </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.product.code" for="field_code">Code</label>
+                    <input type="text" class="form-control" name="code" id="field_code"
+                           ng-model="vm.product.code"
+                    />
+                </div>
+
+            </div>
         </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.product.classAgeLevel" for="field_classAgeLevel">Class Age Level</label>
+                    <select class="form-control" id="field_classAgeLevel" name="classAgeLevel" ng-model="vm.product.classAgeLevel" ng-options="classAgeLevel as classAgeLevel.name for classAgeLevel in vm.classagelevels track by classAgeLevel.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.product.teacher" for="field_teacher">Teacher</label>
+                    <select class="form-control" id="field_teacher" name="teacher" ng-model="vm.product.teacher" ng-options="teacher as teacher.name for teacher in vm.teachers track by teacher.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.product.classRoom" for="field_classRoom">Class Room</label>
+                    <select class="form-control" id="field_classRoom" name="classRoom" ng-model="vm.product.classRoom" ng-options="classRoom as classRoom.name for classRoom in vm.classrooms track by classRoom.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.product.course" for="field_course">Course</label>
+                    <select class="form-control" id="field_course" name="course" ng-model="vm.product.course" ng-options="course as course.name for course in vm.courses track by course.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="simpleServiceApp.product.minutesPerClass" for="field_minutesPerClass">Minutes Per Class</label>-->
+            <!--<input type="number" class="form-control" name="minutesPerClass" id="field_minutesPerClass"-->
+                    <!--ng-model="vm.product.minutesPerClass"-->
+                    <!--/>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="simpleServiceApp.product.planedStartDate" for="field_planedStartDate">Planed Start Date</label>-->
+                <!--<div class="input-group">-->
+                    <!--<input id="field_planedStartDate" type="text" class="form-control" name="planedStartDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.product.planedStartDate" is-open="vm.datePickerOpenStatus.planedStartDate"-->
+                    <!--/>-->
+                    <!--<span class="input-group-btn">-->
+                        <!--<button type="button" class="btn btn-default" ng-click="vm.openCalendar('planedStartDate')"><i class="glyphicon glyphicon-calendar"></i></button>-->
+                    <!--</span>-->
+                <!--</div>-->
+        <!--</div>-->
         <div class="form-group">
             <label class="control-label" data-translate="simpleServiceApp.product.comments" for="field_comments">Comments</label>
-            <input type="text" class="form-control" name="comments" id="field_comments"
+            <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"
                     ng-model="vm.product.comments"
-                    />
+                    ></textarea>
         </div>
         <!--<div class="form-group">-->
             <!--<label class="control-label" data-translate="simpleServiceApp.product.createdBy" for="field_createdBy">Created By</label>-->
@@ -80,30 +139,6 @@
                 <!--</div>-->
         <!--</div>-->
 
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.product.classAgeLevel" for="field_classAgeLevel">Class Age Level</label>
-            <select class="form-control" id="field_classAgeLevel" name="classAgeLevel" ng-model="vm.product.classAgeLevel" ng-options="classAgeLevel as classAgeLevel.name for classAgeLevel in vm.classagelevels track by classAgeLevel.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.product.teacher" for="field_teacher">Teacher</label>
-            <select class="form-control" id="field_teacher" name="teacher" ng-model="vm.product.teacher" ng-options="teacher as teacher.name for teacher in vm.teachers track by teacher.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.product.classRoom" for="field_classRoom">Class Room</label>
-            <select class="form-control" id="field_classRoom" name="classRoom" ng-model="vm.product.classRoom" ng-options="classRoom as classRoom.name for classRoom in vm.classrooms track by classRoom.id">
-                <option value=""></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label data-translate="simpleServiceApp.product.course" for="field_course">Course</label>
-            <select class="form-control" id="field_course" name="course" ng-model="vm.product.course" ng-options="course as course.name for course in vm.courses track by course.id">
-                <option value=""></option>
-            </select>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

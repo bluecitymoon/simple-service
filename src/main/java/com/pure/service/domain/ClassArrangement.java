@@ -79,6 +79,9 @@ public class ClassArrangement extends AbstractAuditingEntity {
     @Column(name = "end_date")
     private Instant endDate;
 
+    @Column(name = "consume_class_count")
+    private Integer consumeClassCount;
+
     @ManyToOne
     private Teacher planedTeacher;
 
@@ -98,6 +101,14 @@ public class ClassArrangement extends AbstractAuditingEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getConsumeClassCount() {
+        return consumeClassCount;
+    }
+
+    public void setConsumeClassCount(Integer consumeClassCount) {
+        this.consumeClassCount = consumeClassCount;
     }
 
     public Instant getStartDate() {

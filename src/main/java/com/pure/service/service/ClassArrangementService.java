@@ -1,6 +1,7 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
@@ -51,5 +52,5 @@ public interface ClassArrangementService {
 
     List<ClassArrangementWeekElement> getArrangementsInCurrentWeek();
 
-    ClassSchedule createClassSchedule(ClassSchedule classSchedule);
+    void createClassSchedule(ClassArrangementRule rule);
 }

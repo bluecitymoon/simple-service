@@ -4,7 +4,6 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.domain.ClassArrangementStatus;
 import com.pure.service.domain.ClassRoom;
-import com.pure.service.domain.Product;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
@@ -23,8 +22,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -237,12 +240,10 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
     }
 
     @Override
-    public ClassSchedule createClassSchedule(ClassSchedule classSchedule) {
+    public void createClassSchedule(ClassArrangementRule rule) {
 
-        Product clazz = productRepository.findOne(classSchedule.getClassId());
+        generateArrangementWeekly(rule);
 
-
-        return null;
     }
 
     private ClassSchedule findClassInRange(List<ClassSchedule> roomClasses, Instant classStart, Instant classEnd) {
@@ -282,16 +283,25 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
         List<ClassArrangement> classArrangements = new ArrayList<>();
         countDays.forEach(day -> {
+
+            LocalDateTime endDateLocalDateTime = LocalDateTime.ofInstant(day, ZoneId.systemDefault());
+            String[] hourMinutes = rule.getEstimateEndTime().split(":");
+            endDateLocalDateTime = endDateLocalDateTime.withHour(Integer.valueOf(hourMinutes[0])).withMinute(Integer.valueOf(hourMinutes[1]));
+
             ClassArrangement arrangement = new ClassArrangement();
             arrangement = arrangement.clazz(rule.getTargetClass())
                 .startDate(day)
-                .endDate(day.plus(rule.getDurationMinutes(), ChronoUnit.MINUTES))
+                .endDate(endDateLocalDateTime.toInstant(ZoneOffset.ofHours(8)))
                 .planedTeacher(rule.getTargetClass().getTeacher());
+
+            arrangement.setConsumeClassCount(rule.getConsumeClassCount());
 
             ClassArrangementStatus initStatus = statusRepository.findByCode("notTaken");
             arrangement.setStatus(initStatus);
 
-            classArrangements.add(arrangement);
+            if (!hasDuplicateArrangement(arrangement)) {
+                classArrangements.add(arrangement);
+            }
         });
 
         log.debug("Generate classes: {}", classArrangements);
@@ -300,9 +310,13 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     }
 
-    private boolean checkDuplicateArrangement() {
+    private boolean hasDuplicateArrangement(ClassArrangement classArrangement) {
 
-        return false;
+        log.debug("Checking if the arrangement exists {} ", classArrangement);
+
+        List<ClassArrangement> existedArrangements = classArrangementRepository.findByStartDateAndEndDateAndClazz_Id(classArrangement.getStartDate(), classArrangement.getEndDate(), classArrangement.getClazz().getId());
+
+        return !CollectionUtils.isEmpty(existedArrangements);
     }
 
     private class TimePeriod {

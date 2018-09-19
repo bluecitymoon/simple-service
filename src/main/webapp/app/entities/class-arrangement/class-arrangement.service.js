@@ -32,7 +32,8 @@
                 }
             },
             'update': { method:'PUT' },
-            'generateClassSchedule': { url: 'api/class-arrangements/generate-by-rule/:id', method: 'GET'}
+            'generateClassSchedule': { url: 'api/class-arrangements/generate-by-rule/:id', method: 'GET'},
+            'createClassSchedule': { url: 'api/class-arrangements/create-schedule', method: 'POST'}
         });
     }
 })();
