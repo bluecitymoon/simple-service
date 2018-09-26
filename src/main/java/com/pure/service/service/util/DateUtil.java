@@ -210,12 +210,16 @@ public class DateUtil {
 
         return firstDate.equals(secondDate);
     }
+
 //    public static void main(String[] args) {
 //
-//        Instant mytime = Instant.now();
+//        Instant instant = Instant.now();
 //
-//        System.out.println(getBeginningOfInstant(mytime));
-//        System.out.println(getEndingOfInstant(mytime));
+//        LocalDateTime localDateTime = instantToLocalDateTime(instant);
+//        localDateTime = localDateTime.withMinute(16).withMinute(45);
+//
+//        System.out.println(localDateTime);
+//
 //
 //    }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity StudentLeave.
+    -->
+    <changeSet id="20180920132245-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="student_leave"
+                                 constraintName="fk_student_leave_student_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"/>
+
+        <addForeignKeyConstraint baseColumnNames="class_arrangement_id"
+                                 baseTableName="student_leave"
+                                 constraintName="fk_student_leave_class_arrangement_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="class_arrangement"/>
+
+    </changeSet>
+</databaseChangeLog>

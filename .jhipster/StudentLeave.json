@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "student",
+            "otherEntityName": "student",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "classArrangement",
+            "otherEntityName": "classArrangement",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "balance",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "calculateStartDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "calculateEndDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20180920132245",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "student_leave",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

@@ -1,0 +1,87 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.studentLeave.home.title">Student Leaves</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.studentLeave.home.title">Student Leaves</h2>-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="student-leave.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.studentLeave.home.createLabel">-->
+                        <!--Create new Student Leave-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentLeave.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classArrangement.id"><span data-translate="simpleServiceApp.studentLeave.classArrangement">Class Arrangement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="balance"><span data-translate="simpleServiceApp.studentLeave.balance">Balance</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="calculateStartDate"><span data-translate="simpleServiceApp.studentLeave.calculateStartDate">Calculate Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="calculateEndDate"><span data-translate="simpleServiceApp.studentLeave.calculateEndDate">Calculate End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentLeave.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentLeave.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentLeave.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentLeave.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="studentLeave in vm.studentLeaves track by studentLeave.id">
+                    <td><a ui-sref="student-leave-detail({id:studentLeave.id})">{{studentLeave.id}}</a></td>
+                    <td>
+                        <a ui-sref="student-detail({id:studentLeave.student.id})">{{studentLeave.student.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentLeave.classArrangement.id}}</a>
+                    </td>
+                    <td>{{studentLeave.balance}}</td>
+                    <td>{{studentLeave.calculateStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentLeave.calculateEndDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentLeave.createdBy}}</td>
+                    <td>{{studentLeave.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentLeave.lastModifiedBy}}</td>
+                    <td>{{studentLeave.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="student-leave-detail({id:studentLeave.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student-leave.edit({id:studentLeave.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student-leave.delete({id:studentLeave.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

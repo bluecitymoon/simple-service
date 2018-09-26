@@ -1,0 +1,58 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.studentLeavehome.title">Student Leaves</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.studentLeave.balance">Balance</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.balance}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.calculateStartDate">Calculate Start Date</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.calculateStartDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.calculateEndDate">Calculate End Date</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.calculateEndDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.studentLeave.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.student">Student</span></dt>
+        <dd>
+            <a ui-sref="student-detail({id:vm.studentLeave.student.id})">{{vm.studentLeave.student.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentLeave.classArrangement">Class Arrangement</span></dt>
+        <dd>
+            <a ui-sref="class-arrangement-detail({id:vm.studentLeave.classArrangement.id})">{{vm.studentLeave.classArrangement.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="student-leave-detail.edit({id:vm.studentLeave.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>
