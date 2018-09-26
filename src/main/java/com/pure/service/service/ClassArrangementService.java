@@ -53,4 +53,6 @@ public interface ClassArrangementService {
     List<ClassArrangementWeekElement> getArrangementsInCurrentWeek();
 
     void createClassSchedule(ClassArrangementRule rule);
+
+    void fixupClassArrangements();
 }

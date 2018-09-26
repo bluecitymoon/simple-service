@@ -139,6 +139,16 @@ public class ClassArrangementResource {
         return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
+//    @GetMapping("/class-arrangements/timefixup")
+//    @Timed
+//    public ResponseEntity fixupTime() {
+//
+//        classArrangementService.fixupClassArrangements();
+//
+//        return  ResponseEntity.ok().build();
+//    }
+//
+
     @GetMapping("/class-arrangements/today")
     @Timed
     public ResponseEntity<List<ClassArrangement>> getClassArrangementsToday() {

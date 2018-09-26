@@ -26,7 +26,6 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -246,6 +245,22 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     }
 
+    @Override
+    public void fixupClassArrangements() {
+
+        List<ClassArrangement> arrangementList = classArrangementRepository.findAll();
+
+        for (ClassArrangement classArrangement : arrangementList) {
+            Instant start = classArrangement.getStartDate().plus(8, ChronoUnit.HOURS);
+            Instant end = classArrangement.getEndDate().plus(8, ChronoUnit.HOURS);
+
+            classArrangement.setStartDate(start);
+            classArrangement.setEndDate(end);
+
+            classArrangementRepository.save(classArrangement);
+        }
+    }
+
     private ClassSchedule findClassInRange(List<ClassSchedule> roomClasses, Instant classStart, Instant classEnd) {
 
         for (ClassSchedule roomClass : roomClasses) {
@@ -284,7 +299,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
         List<ClassArrangement> classArrangements = new ArrayList<>();
         countDays.forEach(day -> {
 
-            LocalDateTime endDateLocalDateTime = LocalDateTime.ofInstant(day, ZoneId.systemDefault());
+            LocalDateTime endDateLocalDateTime = LocalDateTime.ofInstant(day, ZoneOffset.ofHours(8));
             String[] hourMinutes = rule.getEstimateEndTime().split(":");
             endDateLocalDateTime = endDateLocalDateTime.withHour(Integer.valueOf(hourMinutes[0])).withMinute(Integer.valueOf(hourMinutes[1]));
 
