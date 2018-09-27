@@ -37,6 +37,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -221,6 +223,15 @@ public class ClassArrangementResource {
         List<ClassArrangementWeekElement> page = classArrangementService.getArrangementsInCurrentWeek();
 
         return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
+    @PostMapping("/class-arrangements/testInstantInDifferentServers")
+    public ResponseEntity<String> testInstantInDifferentServers() {
+
+        Instant now = Instant.now();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
+
+        return ResponseEntity.ok(localDateTime.toString());
     }
 
 
