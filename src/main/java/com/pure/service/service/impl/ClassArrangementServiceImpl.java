@@ -265,7 +265,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
         for (ClassSchedule roomClass : roomClasses) {
 
-            Instant correctedTime = roomClass.getStart().plus(8, ChronoUnit.HOURS);
+            Instant correctedTime = roomClass.getStart();
             if (correctedTime.isAfter(classStart.minusSeconds(1)) && correctedTime.isBefore(classEnd)) {
                 return roomClass;
             }
