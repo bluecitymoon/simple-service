@@ -16,6 +16,8 @@ import java.util.List;
 
 public class DateUtil {
 
+    public static ZoneId defaultShanghaiZoneId = ZoneId.of("Asia/Shanghai");
+
     public static String getSimpleToday() {
 
         return new SimpleDateFormat("yyyyMMdd").format(new Date());
@@ -139,8 +141,8 @@ public class DateUtil {
 
         List<Instant> countDays = new ArrayList<>();
 
-        LocalDateTime startTime = LocalDateTime.ofInstant(startDate, ZoneId.systemDefault());
-        LocalDateTime endTime = LocalDateTime.ofInstant(endDate, ZoneId.systemDefault());
+        LocalDateTime startTime = LocalDateTime.ofInstant(startDate, DateUtil.defaultShanghaiZoneId);
+        LocalDateTime endTime = LocalDateTime.ofInstant(endDate, DateUtil.defaultShanghaiZoneId);
 
         LocalDateTime nextCountDay = startTime.with(TemporalAdjusters.nextOrSame(DayOfWeek.of(count)));
         String[] hourMinutes = startTimeStr.split(":");

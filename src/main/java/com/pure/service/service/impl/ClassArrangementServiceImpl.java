@@ -299,7 +299,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
         List<ClassArrangement> classArrangements = new ArrayList<>();
         countDays.forEach(day -> {
 
-            LocalDateTime endDateLocalDateTime = LocalDateTime.ofInstant(day, ZoneOffset.ofHours(8));
+            LocalDateTime endDateLocalDateTime = LocalDateTime.ofInstant(day, DateUtil.defaultShanghaiZoneId);
             String[] hourMinutes = rule.getEstimateEndTime().split(":");
             endDateLocalDateTime = endDateLocalDateTime.withHour(Integer.valueOf(hourMinutes[0])).withMinute(Integer.valueOf(hourMinutes[1]));
 
