@@ -1,0 +1,62 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.timetableItemhome.title">Timetable Items</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.timetableItem.weekdayName">Weekday Name</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.weekdayName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.classroom">Classroom</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.classroom}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.courseName">Course Name</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.courseName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.teacherName">Teacher Name</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.teacherName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.timetableItem.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.clazz">Clazz</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.timetableItem.clazz.id})">{{vm.timetableItem.clazz.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timetableItem.timeSegment">Time Segment</span></dt>
+        <dd>
+            <a ui-sref="time-segment-detail({id:vm.timetableItem.timeSegment.id})">{{vm.timetableItem.timeSegment.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="timetable-item-detail.edit({id:vm.timetableItem.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

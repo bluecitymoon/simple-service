@@ -1,0 +1,30 @@
+{
+    "simpleServiceApp": {
+        "timetableItem" : {
+            "home": {
+                "title": "Timetable Items",
+                "createLabel": "Create a new Timetable Item",
+                "createOrEditLabel": "Create or edit a Timetable Item"
+            },
+            "created": "A new Timetable Item is created with identifier {{ param }}",
+            "updated": "A Timetable Item is updated with identifier {{ param }}",
+            "deleted": "A Timetable Item is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Timetable Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Timetable Item"
+            },
+            "weekdayName": "Weekday Name",
+            "classroom": "Classroom",
+            "courseName": "Course Name",
+            "teacherName": "Teacher Name",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "clazz": "Clazz",
+            "timeSegment": "Time Segment"
+        }
+    }
+}

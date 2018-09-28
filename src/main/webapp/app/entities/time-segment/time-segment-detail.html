@@ -1,0 +1,38 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.timeSegmenthome.title">Time Segments</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.timeSegment.name">Name</span></dt>
+        <dd>
+            <span>{{vm.timeSegment.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timeSegment.code">Code</span></dt>
+        <dd>
+            <span>{{vm.timeSegment.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timeSegment.start">Start</span></dt>
+        <dd>
+            <span>{{vm.timeSegment.start}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.timeSegment.end">End</span></dt>
+        <dd>
+            <span>{{vm.timeSegment.end}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="time-segment-detail.edit({id:vm.timeSegment.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

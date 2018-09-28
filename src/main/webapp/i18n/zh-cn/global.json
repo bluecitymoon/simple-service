@@ -64,6 +64,8 @@
                 "freeClassPlan": "Free Class Plan",
                 "customerScheduleFeedback": "礼品发放",
                 "studentLeave": "Student Leave",
+                "timeSegment": "Time Segment",
+                "timetableItem": "Timetable Item",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

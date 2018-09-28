@@ -1,0 +1,24 @@
+{
+    "simpleServiceApp": {
+        "timeSegment" : {
+            "home": {
+                "title": "Time Segments",
+                "createLabel": "Create a new Time Segment",
+                "createOrEditLabel": "Create or edit a Time Segment"
+            },
+            "created": "A new Time Segment is created with identifier {{ param }}",
+            "updated": "A Time Segment is updated with identifier {{ param }}",
+            "deleted": "A Time Segment is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Time Segment {{ id }}?"
+            },
+            "detail": {
+                "title": "Time Segment"
+            },
+            "name": "Name",
+            "code": "Code",
+            "start": "Start",
+            "end": "End"
+        }
+    }
+}

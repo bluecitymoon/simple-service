@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "start",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "end",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180928081933",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "time_segment",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

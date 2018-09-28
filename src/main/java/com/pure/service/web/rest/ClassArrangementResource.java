@@ -231,7 +231,7 @@ public class ClassArrangementResource {
         Instant now = Instant.now();
         LocalDateTime localDateTime = LocalDateTime.ofInstant(now, ZoneId.of("Asia/Shanghai"));
 
-        return ResponseEntity.ok(localDateTime.toString());
+        return ResponseEntity.ok(now.toString());
     }
 
 

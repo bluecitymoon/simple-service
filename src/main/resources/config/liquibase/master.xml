@@ -62,6 +62,8 @@
     <include file="config/liquibase/changelog/20180827125622_added_entity_FreeClassPlan.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180902151032_added_entity_CustomerScheduleFeedback.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180920132245_added_entity_StudentLeave.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180928081933_added_entity_TimeSegment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180928084252_added_entity_TimetableItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -140,5 +142,6 @@
     <include file="config/liquibase/changelog/20180817015838_added_entity_constraints_StudentClassInOutLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180902151032_added_entity_constraints_CustomerScheduleFeedback.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180920132245_added_entity_constraints_StudentLeave.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180928084252_added_entity_constraints_TimetableItem.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

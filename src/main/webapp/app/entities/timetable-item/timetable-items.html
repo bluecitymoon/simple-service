@@ -1,0 +1,88 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.timetableItem.home.title">Timetable Items</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.timetableItem.home.title">Timetable Items</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="timetable-item.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.timetableItem.home.createLabel">
+                        Create new Timetable Item
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="weekdayName"><span data-translate="simpleServiceApp.timetableItem.weekdayName">Weekday Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classroom"><span data-translate="simpleServiceApp.timetableItem.classroom">Classroom</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="courseName"><span data-translate="simpleServiceApp.timetableItem.courseName">Course Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="teacherName"><span data-translate="simpleServiceApp.timetableItem.teacherName">Teacher Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.timetableItem.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.timetableItem.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.timetableItem.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.timetableItem.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="clazz.name"><span data-translate="simpleServiceApp.timetableItem.clazz">Clazz</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="timeSegment.name"><span data-translate="simpleServiceApp.timetableItem.timeSegment">Time Segment</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="timetableItem in vm.timetableItems track by timetableItem.id">
+                    <td><a ui-sref="timetable-item-detail({id:timetableItem.id})">{{timetableItem.id}}</a></td>
+                    <td>{{timetableItem.weekdayName}}</td>
+                    <td>{{timetableItem.classroom}}</td>
+                    <td>{{timetableItem.courseName}}</td>
+                    <td>{{timetableItem.teacherName}}</td>
+                    <td>{{timetableItem.createdBy}}</td>
+                    <td>{{timetableItem.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{timetableItem.lastModifiedBy}}</td>
+                    <td>{{timetableItem.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        <a ui-sref="product-detail({id:timetableItem.clazz.id})">{{timetableItem.clazz.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="time-segment-detail({id:timetableItem.timeSegment.id})">{{timetableItem.timeSegment.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="timetable-item-detail({id:timetableItem.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="timetable-item.edit({id:timetableItem.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="timetable-item.delete({id:timetableItem.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

@@ -1,0 +1,94 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTimetableItemLabel" data-translate="simpleServiceApp.timetableItem.home.createOrEditLabel">Create or edit a Timetable Item</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.timetableItem.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.timetableItem.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.weekdayName" for="field_weekdayName">Weekday Name</label>
+            <input type="text" class="form-control" name="weekdayName" id="field_weekdayName"
+                    ng-model="vm.timetableItem.weekdayName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.classroom" for="field_classroom">Classroom</label>
+            <input type="text" class="form-control" name="classroom" id="field_classroom"
+                    ng-model="vm.timetableItem.classroom"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.courseName" for="field_courseName">Course Name</label>
+            <input type="text" class="form-control" name="courseName" id="field_courseName"
+                    ng-model="vm.timetableItem.courseName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.teacherName" for="field_teacherName">Teacher Name</label>
+            <input type="text" class="form-control" name="teacherName" id="field_teacherName"
+                    ng-model="vm.timetableItem.teacherName"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.createdBy" for="field_createdBy">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                    ng-model="vm.timetableItem.createdBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.createdDate" for="field_createdDate">Created Date</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.timetableItem.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                    ng-model="vm.timetableItem.lastModifiedBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.timetableItem.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                <div class="input-group">
+                    <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.timetableItem.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.timetableItem.clazz" for="field_clazz">Clazz</label>
+            <select class="form-control" id="field_clazz" name="clazz" ng-model="vm.timetableItem.clazz" ng-options="product as product.name for product in vm.products track by product.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.timetableItem.timeSegment" for="field_timeSegment">Time Segment</label>
+            <select class="form-control" id="field_timeSegment" name="timeSegment" ng-model="vm.timetableItem.timeSegment" ng-options="timeSegment as timeSegment.name for timeSegment in vm.timesegments track by timeSegment.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
