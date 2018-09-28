@@ -151,7 +151,10 @@ public class DateUtil {
 
         while (nextCountDay.isBefore(endTime)) {
 
-            countDays.add(nextCountDay.toInstant(ZoneOffset.ofHours(8)));
+            Instant nextCountDayInstant = nextCountDay.atZone(DateUtil.defaultShanghaiZoneId).toInstant();
+            countDays.add(nextCountDayInstant);
+
+            System.out.println(nextCountDayInstant.toString());
 
             nextCountDay = nextCountDay.plusWeeks(1);
         }
