@@ -26,6 +26,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -305,7 +306,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             ClassArrangement arrangement = new ClassArrangement();
             arrangement = arrangement.clazz(rule.getTargetClass())
                 .startDate(day)
-                .endDate(endDateLocalDateTime.atZone(DateUtil.defaultShanghaiZoneId).toInstant())
+                .endDate(endDateLocalDateTime.toInstant(ZoneOffset.UTC))
                 .planedTeacher(rule.getTargetClass().getTeacher());
 
             arrangement.setConsumeClassCount(rule.getConsumeClassCount());

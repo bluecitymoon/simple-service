@@ -151,7 +151,7 @@ public class DateUtil {
 
         while (nextCountDay.isBefore(endTime)) {
 
-            Instant nextCountDayInstant = nextCountDay.atZone(DateUtil.defaultShanghaiZoneId).toInstant();
+            Instant nextCountDayInstant = nextCountDay.toInstant(ZoneOffset.UTC);
             countDays.add(nextCountDayInstant);
 
             System.out.println(nextCountDayInstant.toString());
