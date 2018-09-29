@@ -1,0 +1,110 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <!--<h4 class="modal-title">学员管理</h4>-->
+</div>
+
+<div class="pad-lft pad-rgt">
+
+
+    <jhi-alert></jhi-alert>
+
+    <uib-tabset>
+        <uib-tab heading="学员列表">
+
+            <div class="panel panel-bordered-mint">
+
+                <div class="panel-body">
+
+
+                    <div class="table-responsive">
+                        <table class="jh-table table table-striped">
+                            <thead>
+                            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                                        class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="name"><span>姓名</span></th>
+                                <th><span>性别</span></th>
+                                <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox"
+                                                               ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label
+                                        for="email-list-all">全选</label>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="student in vm.students track by student.id"
+                                ng-class="student.selected? 'bg-info': ''">
+                                <td><a ui-sref="student-detail({id:student.id})" target="_window">{{student.id}}</a></td>
+                                <td>{{student.name}}</td>
+                                <td>{{student.gender}}</td>
+                                <td class="text-center">
+                                    <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox"
+                                           ng-model="student.selected">
+                                    <label for="email-list-{{student.id}}"></label>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+        </uib-tab>
+
+        <uib-tab heading="进班">
+
+            <div class="row pad-all">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <div class="input-group mar-btm">
+
+                        <ui-select ng-model="vm.selectedStudent">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices refresh="vm.searchStudentWithKeyword($select.search)"
+                                               repeat="item in (vm.preSelectedStudents | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                                <span class="pull-right" ng-bind="item.phone"></span>
+                            </ui-select-choices>
+                        </ui-select>
+
+                        <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-click="vm.assignStudentIntoClass()">分配学员进班</button>
+				</span>
+                    </div>
+                </div>
+
+                <div class="col-md-1"></div>
+
+            </div>
+        </uib-tab>
+    </uib-tabset>
+
+
+</div>
+
+<!--<div class="panel">-->
+<!--<div class="panel-body">-->
+<!---->
+<!--</div>-->
+<!--</div>-->
+
+<div class="modal-footer">
+    <!--<div class="row">-->
+    <!--<div class="col-md-6">-->
+    <!--<button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">-->
+    <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+    <!--&lt;!&ndash;<button type="button" class="btn btn-block btn-primary" ng-click="vm.signClassInBatch()">&ndash;&gt;-->
+    <!--&lt;!&ndash;<span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定签到</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;</button>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
+
+</div>

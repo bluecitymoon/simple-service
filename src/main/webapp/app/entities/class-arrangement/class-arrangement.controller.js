@@ -116,9 +116,31 @@
         });
 
         vm.todayClassArrangments = [];
+        vm.openStudentsManagementDialog = function (classArrangement) {
+
+            if (!classArrangement.arrangementId) {
+                return;
+            }
+
+            $uibModal.open({
+                templateUrl: 'app/entities/class-arrangement/student-mgr-dialog.html',
+                controller: 'StudentMgrDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: function () {
+                        return classArrangement;
+                    }
+                }
+            }).result.then(function() {
+            }, function() {
+            });
+        };
+
         vm.openClassSignDialog = function (classArrangement) {
 
-            if (!classArrangement) {
+            if (!classArrangement.arrangementId) {
                 return;
             }
 
@@ -127,7 +149,7 @@
                 controller: 'StudentSignDialogController',
                 controllerAs: 'vm',
                 backdrop: 'static',
-                size: 'sm',
+                size: 'lg',
                 resolve: {
                     entity: function () {
                         return classArrangement;

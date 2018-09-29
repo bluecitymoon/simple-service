@@ -21,7 +21,9 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'searchStudentsWithKeyword': { url: 'api/students/search/:keyword', method: 'GET', isArray: true}
+
         });
     }
 })();

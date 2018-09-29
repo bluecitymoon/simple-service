@@ -62,7 +62,7 @@
             vm.isSaving = false;
         }
 
-        function onSaveError () {
+        function onSaveError (error) {
             vm.isSaving = false;
             if (error.data && error.data.detail) {
 

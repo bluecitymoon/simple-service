@@ -5,6 +5,7 @@ import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.service.StudentClassService;
 import com.pure.service.service.dto.dto.CommonResponse;
+import com.pure.service.service.dto.request.SingleStudentClassRequest;
 import com.pure.service.service.dto.request.StudentsClassRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -73,6 +74,15 @@ public class StudentClassResource {
         log.debug("REST request to batch assign students into class : {}", studentsClassRequest);
 
         CommonResponse response = studentClassService.batchAssign(studentsClassRequest);
+
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/student-classes/single-assign")
+    @Timed
+    public ResponseEntity<StudentClass> createSingleStudentClass(@RequestBody SingleStudentClassRequest studentsClassRequest) {
+        log.debug("REST request to batch assign students into class : {}", studentsClassRequest);
+
+        StudentClass response = studentClassService.singleAssign(studentsClassRequest);
 
         return ResponseEntity.ok(response);
     }

@@ -9,12 +9,14 @@
                         <thead>
                         <tr>
                             <th class="text-center" colspan="{{weekday.classrooms.length + 1}}">
-                                {{weekday.weekdayName}}
+                                <h4>{{weekday.weekdayName}}</h4>
                             </th>
                         </tr>
                         <tr>
                             <th></th>
-                            <th class="text-center" ng-repeat="classRoom in weekday.classrooms">{{classRoom.name}}</th>
+                            <th class="text-center" ng-repeat="classRoom in weekday.classrooms">
+                                <h5>{{classRoom.name}}</h5>
+                            </th>
                         </tr>
                         <tr>
                             <th></th>
@@ -44,6 +46,11 @@
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
                                                 <li ui-sref-active="active">
+                                                    <a ng-click="vm.openStudentsManagementDialog(mf)">
+                                                        <span>学员列表</span>
+                                                    </a>
+                                                </li>
+                                                <li ui-sref-active="active">
                                                     <a ng-click="vm.createNewClassArrangements(mf, '09:00', '10:30', $index, weekday.weekdayName)">
                                                         <span>排课</span>
                                                     </a>
@@ -62,7 +69,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!--<button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)"></button>-->
 
                             </td>
 
@@ -78,6 +84,12 @@
                                             <button uib-dropdown-toggle href="" class="navbar-link btn btn-default btn-block">{{mf.className || '&nbsp;&nbsp;'}}</button>
 
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.openStudentsManagementDialog(mf)">
+                                                        <span>学员列表</span>
+                                                    </a>
+                                                </li>
 
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.createNewClassArrangements(mf, '10:45', '12:15', $index, weekday.weekdayName)">
@@ -119,6 +131,12 @@
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
                                                 <li ui-sref-active="active">
+                                                    <a ng-click="vm.openStudentsManagementDialog(mf)">
+                                                        <span>学员列表</span>
+                                                    </a>
+                                                </li>
+
+                                                <li ui-sref-active="active">
                                                     <a ng-click="vm.createNewClassArrangements(mf, '13:00', '14:30', $index, weekday.weekdayName)">
                                                         <span>排课</span>
                                                     </a>
@@ -150,7 +168,11 @@
                                             <button uib-dropdown-toggle href="" class="navbar-link btn btn-default btn-block">{{mf.className || '&nbsp;&nbsp;'}}</button>
 
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
-
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.openStudentsManagementDialog(mf)">
+                                                        <span>学员列表</span>
+                                                    </a>
+                                                </li>
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.createNewClassArrangements(mf, '14:45', '16:15', $index, weekday.weekdayName)">
                                                         <span>排课</span>
@@ -184,6 +206,11 @@
 
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.openStudentsManagementDialog(mf)">
+                                                        <span>学员列表</span>
+                                                    </a>
+                                                </li>
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.createNewClassArrangements(mf, '16:30', '18:00', $index, weekday.weekdayName)">
                                                         <span>排课</span>
@@ -219,8 +246,12 @@
 
                                             <button uib-dropdown-toggle href="" class="navbar-link btn btn-default btn-block">{{mf.className || '&nbsp;&nbsp;'}}</button>
 
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu> 
-
+                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                                <li ui-sref-active="active">
+                                                    <a ng-click="vm.openStudentsManagementDialog(mf)">
+                                                        <span>学员列表</span>
+                                                    </a>
+                                                </li>
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.createNewClassArrangements(mf, '18:30', '20:00', $index, weekday.weekdayName)">
                                                         <span>排课</span>

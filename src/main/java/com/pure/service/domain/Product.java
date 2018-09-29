@@ -51,6 +51,9 @@ public class Product extends AbstractAuditingEntity {
     @ManyToOne
     private Course course;
 
+    @ManyToOne
+    private ClassStatus status;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -168,6 +171,14 @@ public class Product extends AbstractAuditingEntity {
 
     public Course getCourse() {
         return course;
+    }
+
+    public ClassStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ClassStatus status) {
+        this.status = status;
     }
 
     public Product course(Course course) {

@@ -7,8 +7,10 @@ import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentCriteria;
 import com.pure.service.service.StudentQueryService;
+import io.github.jhipster.service.filter.StringFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -100,6 +102,35 @@ public class StudentResource {
         Page<Student> page = studentQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/students");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/students/search/{keyword}")
+    @Timed
+    public ResponseEntity<List<Student>> searchStudentsWithKeyword(@PathVariable String keyword) {
+        log.debug("REST request to get Students by keyword: {}", keyword);
+
+        StudentCriteria studentCriteria = new StudentCriteria();
+        StringFilter nameFilter = new StringFilter();
+        nameFilter.setContains(keyword);
+
+        if (NumberUtils.isCreatable(keyword)) {
+
+            StringFilter phoneNumberFilter = new StringFilter();
+            phoneNumberFilter.setContains(keyword);
+
+            studentCriteria.setPhone(phoneNumberFilter);
+
+        } else {
+
+            StringFilter customerNameFilter = new StringFilter();
+            customerNameFilter.setContains(keyword);
+
+            studentCriteria.setName(customerNameFilter);
+        }
+
+        List<Student> filteredStudents = studentQueryService.findByCriteria(studentCriteria);
+
+        return new ResponseEntity<>(filteredStudents, null, HttpStatus.OK);
     }
 
     /**

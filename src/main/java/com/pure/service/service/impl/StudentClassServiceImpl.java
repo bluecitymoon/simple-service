@@ -4,11 +4,17 @@ import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.domain.StudentClassInOutLog;
+import com.pure.service.repository.ProductRepository;
 import com.pure.service.repository.StudentClassInOutLogRepository;
 import com.pure.service.repository.StudentClassRepository;
+import com.pure.service.repository.StudentRepository;
+import com.pure.service.service.StudentClassQueryService;
 import com.pure.service.service.StudentClassService;
+import com.pure.service.service.dto.StudentClassCriteria;
 import com.pure.service.service.dto.dto.CommonResponse;
+import com.pure.service.service.dto.request.SingleStudentClassRequest;
 import com.pure.service.service.dto.request.StudentsClassRequest;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +40,16 @@ public class StudentClassServiceImpl implements StudentClassService{
     private final StudentClassRepository studentClassRepository;
 
     @Autowired
+    private StudentRepository studentRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
     private StudentClassInOutLogRepository inOutLogRepository;
+
+    @Autowired
+    private StudentClassQueryService studentClassQueryService;
 
     public StudentClassServiceImpl(StudentClassRepository studentClassRepository) {
         this.studentClassRepository = studentClassRepository;
@@ -48,7 +64,20 @@ public class StudentClassServiceImpl implements StudentClassService{
     @Override
     public StudentClass save(StudentClass studentClass) {
         log.debug("Request to save StudentClass : {}", studentClass);
-        return studentClassRepository.save(studentClass);
+        StudentClass savedStudentClass = studentClassRepository.save(studentClass);
+
+        if (savedStudentClass.getId() == null) {
+
+            StudentClassInOutLog inOutLog = new StudentClassInOutLog();
+            inOutLog.setComments(savedStudentClass.getStudent().getName() + "进班成功! 排班id = " + savedStudentClass.getId());
+            inOutLog.setStudent(savedStudentClass.getStudent());
+            inOutLog.setNewClass(savedStudentClass.getProduct());
+
+            inOutLogRepository.save(inOutLog);
+        }
+
+
+        return savedStudentClass;
     }
 
     /**
@@ -107,16 +136,11 @@ public class StudentClassServiceImpl implements StudentClassService{
             StudentClass studentClass = new StudentClass();
             studentClass = studentClass.student(student).product(clazz);
 
-            StudentClass savedStudentClass = save(studentClass);
+             save(studentClass);
 
             successMessageBuilder.append(student.getName() + " ");
 
-            StudentClassInOutLog inOutLog = new StudentClassInOutLog();
-            inOutLog.setComments(student.getName() + "进班成功! 排班id = " + savedStudentClass.getId());
-            inOutLog.setStudent(student);
-            inOutLog.setNewClass(clazz);
 
-            inOutLogRepository.save(inOutLog);
         }
 
         String errorMessage = errorMessageBuilder.toString().isEmpty()? "": errorMessageBuilder.toString() + "已在该班级里面；";
@@ -134,5 +158,33 @@ public class StudentClassServiceImpl implements StudentClassService{
         List<StudentClass> studentClasses = studentClassRepository.findByProduct_Id(classId);
 
         return studentClasses.stream().map(StudentClass::getStudent).collect(Collectors.toList());
+    }
+
+    @Override
+    public StudentClass singleAssign(SingleStudentClassRequest request) {
+
+        StudentClassCriteria studentClassCriteria = new StudentClassCriteria();
+        LongFilter studentFilter = new LongFilter();
+        studentFilter.setEquals(request.getStudentId());
+
+        LongFilter classFilter = new LongFilter();
+        classFilter.setEquals(request.getClassId());
+
+        studentClassCriteria.setProductId(classFilter);
+        studentClassCriteria.setStudentId(studentFilter);
+
+        List<StudentClass> existedClass = studentClassQueryService.findByCriteria(studentClassCriteria);
+        if (!CollectionUtils.isEmpty(existedClass)) {
+            throw new RuntimeException("该学员已在该班级");
+        }
+
+        Student student = studentRepository.findOne(request.getStudentId());
+        Product clazz = productRepository.findOne(request.getClassId());
+
+        StudentClass studentClass = new StudentClass();
+        studentClass.setStudent(student);
+        studentClass.setProduct(clazz);
+
+        return save(studentClass);
     }
 }
