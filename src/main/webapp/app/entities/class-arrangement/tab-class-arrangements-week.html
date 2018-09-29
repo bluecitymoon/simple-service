@@ -102,10 +102,8 @@
                         </tr>
                         <tr>
                             <td>12:15-13:00</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.moonRest">
-                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
-                                    {{mf.className}}
-                                </button>
+                            <td class="{{mf.statusColor}} text-center bg-warning" ng-repeat="mf in weekday.moonRest">
+                                休
                             </td>
                         </tr>
                         <tr>
@@ -209,11 +207,7 @@
                         </tr>
                         <tr>
                             <td>18:00-18:30</td>
-                            <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonRest">
-                                <button class="btn btn-block btn-default" ng-click="vm.openClassSignDialog(mf)">
-                                    {{mf.className}}
-                                </button>
-                            </td>
+                            <td class="bg-warning text-center" ng-repeat="mf in weekday.afternoonRest">休</td>
                         </tr>
                         <tr>
                             <td>18:30-20:00</td>

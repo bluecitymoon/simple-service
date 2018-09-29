@@ -1,14 +1,17 @@
 package com.pure.service.service.impl;
 
-import com.pure.service.service.ProductService;
 import com.pure.service.domain.Product;
 import com.pure.service.repository.ProductRepository;
+import com.pure.service.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 
 /**
@@ -35,6 +38,21 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public Product save(Product product) {
         log.debug("Request to save Product : {}", product);
+
+        String classCode = product.getCode();
+        List<Product> existedCodeClass = productRepository.findByCode(classCode);
+
+//        String className = product.getName();
+//        List<Product> existedNameClass = productRepository.findByName(className);
+
+        if (product.getId() == null) {
+
+            if (!CollectionUtils.isEmpty(existedCodeClass)) {
+                throw new RuntimeException("该编号已存在");
+            }
+
+        }
+
         return productRepository.save(product);
     }
 

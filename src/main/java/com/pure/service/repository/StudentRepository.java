@@ -17,4 +17,6 @@ public interface StudentRepository extends JpaRepository<Student, Long>, JpaSpec
 
     List<Student> findByCustomer_Id(Long id);
 
+    List<Student> findByNameAndPhone(String name, String phone);
+
 }

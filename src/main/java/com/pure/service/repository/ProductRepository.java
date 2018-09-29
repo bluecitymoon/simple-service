@@ -16,4 +16,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
     List<Product> findByClassRoom_Id(Long classroomId);
+
+    List<Product> findByCode(String code);
+    List<Product> findByName(String name);
 }

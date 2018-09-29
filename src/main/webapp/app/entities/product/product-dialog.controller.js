@@ -61,6 +61,10 @@
 
         function onSaveError () {
             vm.isSaving = false;
+            if (error.data && error.data.detail) {
+
+                AlertService.error(error.data.detail);
+            }
         }
 
         vm.datePickerOpenStatus.planedStartDate = false;

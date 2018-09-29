@@ -9,6 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 
 /**
@@ -35,6 +38,14 @@ public class StudentServiceImpl implements StudentService{
     @Override
     public Student save(Student student) {
         log.debug("Request to save Student : {}", student);
+
+        if (student.getId() == null) {
+
+            List<Student> students = studentRepository.findByNameAndPhone(student.getName(), student.getPhone());
+            if (!CollectionUtils.isEmpty(students)) {
+                throw new RuntimeException("该学员已存在，无法再次创建");
+            }
+        }
         return studentRepository.save(student);
     }
 
