@@ -119,6 +119,7 @@
         vm.openStudentsManagementDialog = function (classArrangement) {
 
             if (!classArrangement.arrangementId) {
+                AlertService.info("这个时间段没有排班。");
                 return;
             }
 
@@ -141,6 +142,7 @@
         vm.openClassSignDialog = function (classArrangement) {
 
             if (!classArrangement.arrangementId) {
+                AlertService.info("这个时间段没有排班。");
                 return;
             }
 

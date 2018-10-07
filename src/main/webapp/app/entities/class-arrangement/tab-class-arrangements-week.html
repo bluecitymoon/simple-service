@@ -36,12 +36,13 @@
                             <td>09:00-10:30</td>
                             <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningFirstHalf">
 
-                                <div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">
+                                <!--<div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">-->
                                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
 
-                                        <li class="nav-item" uib-dropdown>
+                                        <li class="nav-item" uib-dropdown style="width: 100%">
 
-                                            <button uib-dropdown-toggle href="" class="navbar-link btn btn-default btn-block">{{mf.className || '&nbsp;&nbsp;'}}</button>
+                                            <!-- navbar-link btn btn-default btn-block -->
+                                            <button uib-dropdown-toggle class="navbar-link btn btn-default btn-block border-0">{{mf.className || '&nbsp;&nbsp;'}}</button>
 
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
@@ -68,7 +69,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </div>
+                                <!--</div>-->
 
                             </td>
 

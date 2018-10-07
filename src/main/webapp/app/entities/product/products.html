@@ -26,6 +26,7 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="code"><span data-translate="simpleServiceApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="status.name"><span>状态</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="minutesPerClass"><span data-translate="simpleServiceApp.product.minutesPerClass">Minutes Per Class</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="planedStartDate"><span data-translate="simpleServiceApp.product.planedStartDate">Planed Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="comments"><span data-translate="simpleServiceApp.product.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -45,6 +46,7 @@
                     <td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
                     <td>{{product.name}}</td>
                     <td>{{product.code}}</td>
+                    <td>{{product.status.name}}</td>
                     <td>{{product.minutesPerClass}}</td>
                     <td>{{product.planedStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{product.comments}}</td>

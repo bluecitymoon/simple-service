@@ -1,8 +1,13 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -11,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "student_leave")
-public class StudentLeave implements Serializable {
+public class StudentLeave extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,18 +32,6 @@ public class StudentLeave implements Serializable {
 
     @Column(name = "calculate_end_date")
     private Instant calculateEndDate;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "created_date")
-    private Instant createdDate;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private Instant lastModifiedDate;
 
     @ManyToOne
     private Student student;
@@ -92,58 +85,6 @@ public class StudentLeave implements Serializable {
 
     public void setCalculateEndDate(Instant calculateEndDate) {
         this.calculateEndDate = calculateEndDate;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public StudentLeave createdBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
-
-    public StudentLeave createdDate(Instant createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public StudentLeave lastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public StudentLeave lastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-        return this;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
     }
 
     public Student getStudent() {

@@ -14,7 +14,7 @@
                     <!--ng-model="vm.product.id" readonly />-->
         <!--</div>-->
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
 
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.product.name" for="field_name">Name</label>
@@ -24,7 +24,7 @@
                 </div>
 
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.product.code" for="field_code">Code</label>
                     <input type="text" class="form-control" name="code" id="field_code"
@@ -32,6 +32,14 @@
                     />
                 </div>
 
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>班级状态</label>
+                    <select class="form-control" name="classStatus" ng-model="vm.product.status" ng-options="status as status.name for status in vm.statusList track by status.id">
+                        <option value=""></option>
+                    </select>
+                </div>
             </div>
         </div>
 

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ProductDialogController', ProductDialogController);
 
-    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course'];
+    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassStatus'];
 
-    function ProductDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course) {
+    function ProductDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassStatus) {
         var vm = this;
 
         vm.product = entity;
@@ -18,6 +18,7 @@
         vm.classagelevels = ClassAgeLevel.query({ page: 0,  size: 1000 });
         vm.teachers = Teacher.query({ page: 0,  size: 1000 });
         vm.courses = Course.query({ page: 0,  size: 1000 });
+        vm.statusList = ClassStatus.query({ page: 0,  size: 1000 });
 
         loadClassRooms();
         function loadClassRooms() {
