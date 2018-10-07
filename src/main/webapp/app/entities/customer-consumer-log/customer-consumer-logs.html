@@ -1,0 +1,89 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerConsumerLog.home.title">Customer Consumer Logs</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.customerConsumerLog.home.title">Customer Consumer Logs</h2>-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="customer-consumer-log.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.customerConsumerLog.home.createLabel">-->
+                        <!--Create new Customer Consumer Log-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br/>-->
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="count"><span data-translate="simpleServiceApp.customerConsumerLog.count">Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="unit"><span data-translate="simpleServiceApp.customerConsumerLog.unit">Unit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="uniqueNumber"><span data-translate="simpleServiceApp.customerConsumerLog.uniqueNumber">Unique Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="consumerName"><span>消费者姓名</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerConsumerType.name"><span data-translate="simpleServiceApp.customerConsumerLog.customerConsumerType">Customer Consumer Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.customerConsumerLog.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerConsumerLog.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerConsumerLog.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerConsumerLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerConsumerLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerConsumerLog in vm.customerConsumerLogs track by customerConsumerLog.id">
+                    <td><a ui-sref="customer-consumer-log-detail({id:customerConsumerLog.id})">{{customerConsumerLog.id}}</a></td>
+                    <td>{{customerConsumerLog.count}}</td>
+                    <td>{{customerConsumerLog.unit}}</td>
+                    <td>{{customerConsumerLog.uniqueNumber}}</td>
+                    <td>{{customerConsumerLog.consumerName}}</td>
+                    <td>
+                        {{customerConsumerLog.customerConsumerType.name}}
+                    </td>
+                    <td>
+                        <a ui-sref="student-detail({id:customerConsumerLog.student.id})" target="_window">{{customerConsumerLog.student.name}}</a>
+                    </td>
+                    <td>{{customerConsumerLog.createdBy}}</td>
+                    <td>{{customerConsumerLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerConsumerLog.lastModifiedBy}}</td>
+                    <td>{{customerConsumerLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer-consumer-log-detail({id:customerConsumerLog.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="customer-consumer-log.edit({id:customerConsumerLog.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="customer-consumer-log.delete({id:customerConsumerLog.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

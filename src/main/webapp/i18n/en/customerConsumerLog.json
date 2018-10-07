@@ -1,0 +1,30 @@
+{
+    "simpleServiceApp": {
+        "customerConsumerLog" : {
+            "home": {
+                "title": "耗课记录",
+                "createLabel": "录入耗课记录",
+                "createOrEditLabel": "管理耗课"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "耗课详情"
+            },
+            "count": "数量",
+            "unit": "单位",
+            "uniqueNumber": "流水号",
+            "createdBy": "创建人",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "consumerName": "客户",
+            "customerConsumerType": "消费类型",
+            "student": "学员"
+        }
+    }
+}

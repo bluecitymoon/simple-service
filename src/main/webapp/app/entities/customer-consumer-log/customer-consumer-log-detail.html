@@ -1,0 +1,62 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerConsumerLoghome.title">Customer Consumer Logs</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.count">Count</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.count}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.unit">Unit</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.unit}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.uniqueNumber">Unique Number</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.uniqueNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.consumerName">Consumer Name</span></dt>
+        <dd>
+            <span>{{vm.customerConsumerLog.consumerName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.customerConsumerType">Customer Consumer Type</span></dt>
+        <dd>
+            <a ui-sref="customer-consumer-type-detail({id:vm.customerConsumerLog.customerConsumerType.id})">{{vm.customerConsumerLog.customerConsumerType.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerConsumerLog.student">Student</span></dt>
+        <dd>
+            <a ui-sref="student-detail({id:vm.customerConsumerLog.student.id})">{{vm.customerConsumerLog.student.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-consumer-log-detail.edit({id:vm.customerConsumerLog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

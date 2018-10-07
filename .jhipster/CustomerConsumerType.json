@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20181007132755",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_consumer_type",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

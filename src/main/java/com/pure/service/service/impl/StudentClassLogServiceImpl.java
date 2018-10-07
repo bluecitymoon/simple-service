@@ -1,7 +1,6 @@
 package com.pure.service.service.impl;
 
 import com.pure.service.domain.ClassArrangement;
-import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.repository.ProductRepository;
@@ -101,7 +100,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
     @Override
     public void batchSignIn(BatchSigninStudent request) {
 
-        Product clazz = productRepository.findOne(request.getClassId());
+//        Product clazz = productRepository.findOne(request.getClassId());
 
         for (Student student : request.getStudents()) {
 

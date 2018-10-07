@@ -66,6 +66,8 @@
                 "studentLeave": "Student Leave",
                 "timeSegment": "Time Segment",
                 "timetableItem": "Timetable Item",
+                "customerConsumerType": "Customer Consumer Type",
+                "customerConsumerLog": "Customer Consumer Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

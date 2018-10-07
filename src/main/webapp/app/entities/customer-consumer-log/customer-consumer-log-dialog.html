@@ -1,0 +1,88 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCustomerConsumerLogLabel" data-translate="simpleServiceApp.customerConsumerLog.home.createOrEditLabel">Create or edit a Customer Consumer Log</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerConsumerLog.count" for="field_count">Count</label>
+                    <input type="number" class="form-control" name="count" id="field_count"
+                           ng-model="vm.customerConsumerLog.count"
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerConsumerLog.uniqueNumber" for="field_uniqueNumber">Unique Number</label>
+                    <input type="text" class="form-control" name="uniqueNumber" id="field_uniqueNumber"
+                           ng-model="vm.customerConsumerLog.uniqueNumber"
+                    />
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+
+            </div>
+            <div class="col-md-6">
+
+            </div>
+        </div>
+        <!--<div class="form-group" ng-show="vm.customerConsumerLog.id">-->
+            <!--<label for="id" data-translate="global.field.id">ID</label>-->
+            <!--<input type="text" class="form-control" id="id" name="id"-->
+                    <!--ng-model="vm.customerConsumerLog.id" readonly />-->
+        <!--</div>-->
+
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="simpleServiceApp.customerConsumerLog.unit" for="field_unit">Unit</label>-->
+            <!--<input type="text" class="form-control" name="unit" id="field_unit"-->
+                    <!--ng-model="vm.customerConsumerLog.unit"-->
+                    <!--/>-->
+        <!--</div>-->
+
+
+        <!--<div class="form-group">-->
+            <!--<label class="control-label" data-translate="simpleServiceApp.customerConsumerLog.consumerName" for="field_consumerName">Consumer Name</label>-->
+            <!--<input type="text" class="form-control" name="consumerName" id="field_consumerName"-->
+                    <!--ng-model="vm.customerConsumerLog.consumerName"-->
+                    <!--/>-->
+        <!--</div>-->
+
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.customerConsumerLog.customerConsumerType" for="field_customerConsumerType">Customer Consumer Type</label>
+            <select class="form-control" id="field_customerConsumerType" name="customerConsumerType" ng-model="vm.customerConsumerLog.customerConsumerType" ng-options="customerConsumerType as customerConsumerType.name for customerConsumerType in vm.customerconsumertypes track by customerConsumerType.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.customerConsumerLog.student" for="field_student">Student</label>
+            <select class="form-control" id="field_student" name="student" ng-model="vm.customerConsumerLog.student" ng-options="student as student.name for student in vm.students track by student.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
