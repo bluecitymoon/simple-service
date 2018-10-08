@@ -46,7 +46,7 @@ public class ContractCriteria implements Serializable {
 
     private IntegerFilter totalHours;
 
-    private FloatFilter hoursTaken;
+    private IntegerFilter hoursTaken;
 
     private StringFilter comments;
 
@@ -180,11 +180,11 @@ public class ContractCriteria implements Serializable {
         this.totalHours = totalHours;
     }
 
-    public FloatFilter getHoursTaken() {
+    public IntegerFilter getHoursTaken() {
         return hoursTaken;
     }
 
-    public void setHoursTaken(FloatFilter hoursTaken) {
+    public void setHoursTaken(IntegerFilter hoursTaken) {
         this.hoursTaken = hoursTaken;
     }
 

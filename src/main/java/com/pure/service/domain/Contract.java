@@ -53,8 +53,13 @@ public class Contract extends AbstractAuditingEntity {
     @Column(name = "total_hours")
     private Integer totalHours;
 
+    //总购买课时数
+    @Column(name = "total_class_count")
+    private Integer totalClassCount;
+
+    //已上课时数
     @Column(name = "hours_taken")
-    private Float hoursTaken;
+    private Integer hoursTaken;
 
     @Column(name = "comments")
     private String comments;
@@ -84,6 +89,14 @@ public class Contract extends AbstractAuditingEntity {
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
 
+
+    public Integer getTotalClassCount() {
+        return totalClassCount;
+    }
+
+    public void setTotalClassCount(Integer totalClassCount) {
+        this.totalClassCount = totalClassCount;
+    }
 
     public ContractNature getContractNature() {
         return contractNature;
@@ -231,16 +244,16 @@ public class Contract extends AbstractAuditingEntity {
         this.totalHours = totalHours;
     }
 
-    public Float getHoursTaken() {
+    public Integer getHoursTaken() {
         return hoursTaken;
     }
 
-    public Contract hoursTaken(Float hoursTaken) {
+    public Contract hoursTaken(Integer hoursTaken) {
         this.hoursTaken = hoursTaken;
         return this;
     }
 
-    public void setHoursTaken(Float hoursTaken) {
+    public void setHoursTaken(Integer hoursTaken) {
         this.hoursTaken = hoursTaken;
     }
 

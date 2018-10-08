@@ -1,16 +1,24 @@
 package com.pure.service.service.impl;
 
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.domain.Contract;
+import com.pure.service.domain.CustomerConsumerLog;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClassLog;
+import com.pure.service.repository.ContractRepository;
+import com.pure.service.repository.CustomerConsumerLogRepository;
 import com.pure.service.repository.ProductRepository;
 import com.pure.service.repository.StudentClassLogRepository;
 import com.pure.service.service.ClassArrangementService;
+import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.StudentClassLogService;
+import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.request.BatchSigninStudent;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +52,15 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
     @Autowired
     private ClassArrangementService classArrangementService;
 
+    @Autowired
+    private CustomerConsumerLogRepository customerConsumerLogRepository;
+
+    @Autowired
+    private ContractQueryService contractQueryService;
+
+    @Autowired
+    private ContractRepository contractRepository;
+
     public StudentClassLogServiceImpl(StudentClassLogRepository studentClassLogRepository) {
         this.studentClassLogRepository = studentClassLogRepository;
     }
@@ -57,6 +74,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
     @Override
     public StudentClassLog save(StudentClassLog studentClassLog) {
         log.debug("Request to save StudentClassLog : {}", studentClassLog);
+
         return studentClassLogRepository.save(studentClassLog);
     }
 
@@ -127,11 +145,74 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
         }
 
         ClassArrangement classArrangement = classArrangementService.findOne(arrangementId);
+
+        Long currentInstant = Instant.now().getEpochSecond();
+
+        String uniqueNumber = "" + currentInstant + RandomStringUtils.randomNumeric(6);
+
         StudentClassLog studentClassLog = new StudentClassLog();
         studentClassLog.setActualTakenDate(Instant.now());
         studentClassLog.setStudent(student);
         studentClassLog.setArrangement(classArrangement);
+        //流水号
+        studentClassLog.setUniqueNumber(uniqueNumber);
 
+        saveLogWithUniqueNumber(studentClassLog, uniqueNumber);
+    }
+
+    private void saveLogWithUniqueNumber(StudentClassLog studentClassLog, String uniqueNumber) {
+
+        ContractCriteria contractCriteria = new ContractCriteria();
+
+        LongFilter studentIdFilter = new LongFilter();
+        studentIdFilter.setEquals(studentClassLog.getStudent().getId());
+
+        contractCriteria.setStudentId(studentIdFilter);
+
+        Instant now = Instant.now();
+
+        InstantFilter startDateFilter = new InstantFilter();
+        startDateFilter.setLessOrEqualThan(now);
+
+        InstantFilter endDateFilter = new InstantFilter();
+        endDateFilter.setGreaterOrEqualThan(now);
+
+        contractCriteria.setStartDate(startDateFilter);
+        contractCriteria.setEndDate(endDateFilter);
+
+        List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
+
+        if (CollectionUtils.isEmpty(contracts)) {
+            throw new RuntimeException("耗课时没找到学员" + studentClassLog.getStudent().getName() + "的合同信息，无法签到耗课。");
+        }
+
+        //TODO 多合同处理？
+        Contract targetContract = contracts.get(0);
+        Integer classTakenCount = targetContract.getHoursTaken();
+        if (classTakenCount == null) {
+            classTakenCount = 0;
+        }
+        Integer classCount = studentClassLog.getArrangement().getConsumeClassCount();
+
+        classTakenCount = classTakenCount + classCount;
+        targetContract.setHoursTaken(classTakenCount);
+        contractRepository.save(targetContract);
+
+        //保存耗课记录
+        CustomerConsumerLog customerConsumerLog = new CustomerConsumerLog();
+
+
+
+        customerConsumerLog = customerConsumerLog.consumerName(studentClassLog.getStudent().getName())
+            .count(new Float(classCount))
+            .unit("课时")
+            .student(studentClassLog.getStudent())
+            .uniqueNumber(uniqueNumber);
+
+        customerConsumerLogRepository.save(customerConsumerLog);
+
+        //保存签到记录
+        studentClassLog.setUniqueNumber(uniqueNumber);
         save(studentClassLog);
     }
 }

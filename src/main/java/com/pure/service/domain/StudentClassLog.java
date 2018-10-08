@@ -30,6 +30,9 @@ public class StudentClassLog extends AbstractAuditingEntity {
     @Column(name = "comments")
     private String comments;
 
+    @Column(name = "unique_number")
+    private String uniqueNumber;
+
     @Column(name = "point")
     private Integer point;
 
@@ -46,6 +49,14 @@ public class StudentClassLog extends AbstractAuditingEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUniqueNumber() {
+        return uniqueNumber;
+    }
+
+    public void setUniqueNumber(String uniqueNumber) {
+        this.uniqueNumber = uniqueNumber;
     }
 
     public Instant getActualTakenDate() {

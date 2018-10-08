@@ -56,6 +56,11 @@
                 AlertService.success("签到成功！");
                 clear();
                 console.log(data);
+            }, function (error) {
+                if (error.data && error.data.detail) {
+
+                    AlertService.error(error.data.detail);
+                }
             })
         };
 
