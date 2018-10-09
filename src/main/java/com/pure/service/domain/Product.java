@@ -39,6 +39,9 @@ public class Product extends AbstractAuditingEntity {
     @Column(name = "comments")
     private String comments;
 
+    @Column(name = "students_reach_max_numbers")
+    private String studentsReachMaxNumbers;
+
     @ManyToOne
     private ClassAgeLevel classAgeLevel;
 
@@ -70,6 +73,14 @@ public class Product extends AbstractAuditingEntity {
     public Product name(String name) {
         this.name = name;
         return this;
+    }
+
+    public String getStudentsReachMaxNumbers() {
+        return studentsReachMaxNumbers;
+    }
+
+    public void setStudentsReachMaxNumbers(String studentsReachMaxNumbers) {
+        this.studentsReachMaxNumbers = studentsReachMaxNumbers;
     }
 
     public void setName(String name) {

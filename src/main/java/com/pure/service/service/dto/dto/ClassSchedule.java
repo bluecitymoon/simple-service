@@ -9,6 +9,8 @@ public class ClassSchedule implements Serializable {
     private Long classId;
     private String title;
     private String className;
+    private String fullTag;
+    private String statusTag;
     private String teacherName;
     private Instant start;
     private Instant end;
@@ -19,6 +21,21 @@ public class ClassSchedule implements Serializable {
     private Boolean clickable = false;
 
     public ClassSchedule() {
+    }
+
+    public ClassSchedule(Long arrangementId, Long classId, String title, String className, String fullTag, String statusTag, String teacherName, Instant start, Instant end, String classroomName, Long classroomId, String courseName) {
+        this.arrangementId = arrangementId;
+        this.classId = classId;
+        this.title = title;
+        this.className = className;
+        this.fullTag = fullTag;
+        this.statusTag = statusTag;
+        this.teacherName = teacherName;
+        this.start = start;
+        this.end = end;
+        this.classroomName = classroomName;
+        this.classroomId = classroomId;
+        this.courseName = courseName;
     }
 
     public ClassSchedule(Long arrangementId, Long classId, String title, String className, String teacherName, Instant start, Instant end, String classroomName, Long classroomId, String courseName) {
@@ -80,6 +97,22 @@ public class ClassSchedule implements Serializable {
         this.start = start;
         this.end = end;
         this.allDay = allDay;
+    }
+
+    public String getFullTag() {
+        return fullTag;
+    }
+
+    public void setFullTag(String fullTag) {
+        this.fullTag = fullTag;
+    }
+
+    public String getStatusTag() {
+        return statusTag;
+    }
+
+    public void setStatusTag(String statusTag) {
+        this.statusTag = statusTag;
     }
 
     public Long getClassroomId() {

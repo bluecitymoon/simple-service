@@ -1,8 +1,11 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.StudentLeave;
+import com.pure.service.service.dto.dto.StudentLeaveRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * Service Interface for managing StudentLeave.
@@ -39,4 +42,6 @@ public interface StudentLeaveService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    List<StudentLeave> createBatchStudentLeave(StudentLeaveRequest studentLeaveRequest);
 }

@@ -142,7 +142,7 @@
         vm.openClassSignDialog = function (classArrangement) {
 
             if (!classArrangement.arrangementId) {
-                AlertService.info("这个时间段没有排班。");
+                // AlertService.info("这个时间段没有排班。");
                 return;
             }
 
@@ -191,8 +191,26 @@
             });
         };
 
-        vm.studentLeaveRequest = function (mf) {
+        vm.studentLeaveRequest = function (classArrangement) {
+            if (!classArrangement.arrangementId) {
+                // AlertService.info("这个时间段没有排班。");
+                return;
+            }
 
+            $uibModal.open({
+                templateUrl: 'app/entities/class-arrangement/student-leave-dialog.html',
+                controller: 'StudentSignLeaveController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: function () {
+                        return classArrangement;
+                    }
+                }
+            }).result.then(function() {
+            }, function() {
+            });
         };
 
         function getArrangementsToday() {

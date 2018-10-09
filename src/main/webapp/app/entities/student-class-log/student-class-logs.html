@@ -6,18 +6,18 @@
     <div class="panel-body">
 
     <!--<h2 data-translate="simpleServiceApp.studentClassLog.home.title">Student Class Logs</h2>-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="student-class-log.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.studentClassLog.home.createLabel">
-                        Create new Student Class Log
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="student-class-log.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.studentClassLog.home.createLabel">-->
+                        <!--Create new Student Class Log-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <br/>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
@@ -33,7 +33,7 @@
                     <th jh-sort-by="point"><span data-translate="simpleServiceApp.studentClassLog.point">Point</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentClassLog.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="arrangement.startDate"><span data-translate="simpleServiceApp.studentClassLog.arrangement">Arrangement</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <!--<th></th>-->
                 </tr>
             </thead>
             <tbody>
@@ -52,28 +52,28 @@
                     <td>
                         <a ui-sref="class-arrangement-detail({id:studentClassLog.arrangement.id})">{{studentClassLog.arrangement.startDate}}</a>
                     </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="student-class-log-detail({id:studentClassLog.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="student-class-log.edit({id:studentClassLog.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="student-class-log.delete({id:studentClassLog.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>
+                    <!--<td class="text-right">-->
+                        <!--<div class="btn-group flex-btn-group-container">-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-class-log-detail({id:studentClassLog.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-class-log.edit({id:studentClassLog.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-class-log.delete({id:studentClassLog.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</td>-->
                 </tr>
             </tbody>
         </table>

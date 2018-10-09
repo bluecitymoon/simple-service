@@ -3,6 +3,7 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentLeave;
 import com.pure.service.service.StudentLeaveService;
+import com.pure.service.service.dto.dto.StudentLeaveRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentLeaveCriteria;
@@ -16,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -64,6 +66,22 @@ public class StudentLeaveResource {
             .body(result);
     }
 
+    @PostMapping("/student-leaves/batch-leave")
+    @Timed
+    public ResponseEntity<List<StudentLeave>> createBatchStudentLeave(@RequestBody StudentLeaveRequest studentLeaveRequest) throws URISyntaxException {
+
+        if (CollectionUtils.isEmpty(studentLeaveRequest.getArrangements())) {
+            throw new RuntimeException("未选择请假日期");
+        }
+
+        if (CollectionUtils.isEmpty(studentLeaveRequest.getStudents())) {
+            throw new RuntimeException("未选择学员");
+        }
+
+        List<StudentLeave> result = studentLeaveService.createBatchStudentLeave(studentLeaveRequest);
+        return ResponseEntity.created(new URI("/api/student-leaves/"))
+            .body(result);
+    }
     /**
      * PUT  /student-leaves : Updates an existing studentLeave.
      *

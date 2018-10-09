@@ -24,7 +24,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'createBatchStudentLeave': { method:'POST', url: 'api/student-leaves/batch-leave',isArray: true }
         });
     }
 })();

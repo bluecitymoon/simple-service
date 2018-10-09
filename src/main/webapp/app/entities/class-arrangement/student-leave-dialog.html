@@ -1,0 +1,109 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+    <!--<h4 class="modal-title">学员请假</h4>-->
+</div>
+
+<jhi-alert></jhi-alert>
+
+<div class="panel">
+    <div class="panel-body">
+
+        <div class="pad-lft pad-rgt">
+            <div class="panel panel-bordered-mint">
+                <div class="panel-heading">
+                    <h4 class="panel-title">选择请假的学员</h4>
+                </div>
+                <div class="panel-body">
+
+                    <table class="jh-table table table-striped">
+
+                        <tbody>
+                        <tr ng-repeat="student in vm.students track by student.id"
+                            ng-class="student.selected? 'bg-info': ''">
+                            <td>{{student.name}}</td>
+                            <td class="text-center">
+                                <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox"
+                                       ng-model="student.selected">
+                                <label for="email-list-{{student.id}}"></label>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="pad-lft pad-rgt">
+            <div class="panel panel-bordered-mint">
+                <div class="panel-heading">
+                    <h4 class="panel-title">选择请假的排课日期</h4>
+                </div>
+                <div class="panel-body">
+
+                    <table class="jh-table table table-striped">
+                        <thead>
+                        <tr>
+                            <th><input type="text" placeholder="开始时间" class="form-control"
+                                       ng-focus="vm.openCalendar('createStartDate')" datetime-picker="{{dateformat}}"
+                                       timepicker-options="vm.datePickerOptions"
+                                       ng-model="vm.searchCondition.createStartDate"
+                                       is-open="vm.datePickerOpenStatus.createStartDate">
+                            </th>
+                            <th>
+                                <input type="text" placeholder="结束时间" class="form-control"
+                                       ng-focus="vm.openCalendar('createEndDate')" datetime-picker="{{dateformat}}"
+                                       timepicker-options="vm.datePickerOptions"
+                                       ng-model="vm.searchCondition.createEndDate"
+                                       is-open="vm.datePickerOpenStatus.createEndDate">
+
+                            </th>
+                            <th>
+
+                                <button class="btn btn-sm btn-primary btn-block" type="button"
+                                        ng-click="vm.loadClassArrangementsInRange()"><i
+                                        class="fa fa-search-minus"></i>查询
+                                </button>
+                            </th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id">
+                            <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td class="text-center">
+                                <input id="email-list-{{classArrangement.id}}" type="checkbox" class="magic-checkbox"
+                                       ng-model="classArrangement.selected">
+                                <label for="email-list-{{classArrangement.id}}"></label>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal-footer">
+    <div class="row">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">
+                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                    data-translate="entity.action.cancel">取消</span>
+            </button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-block btn-primary" ng-click="vm.createStudentLeaveInBatch()">
+                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定请假</span>
+            </button>
+        </div>
+    </div>
+
+</div>

@@ -24,23 +24,23 @@ import java.util.Objects;
  */
 @NamedNativeQueries({
     @NamedNativeQuery(name = "ClassArrangement.getAllSchedules",
-        query = "select ca.id as arrangementId, p.id as classId, concat(p.name, ' ', t.name, ' ', DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i')) as title, p.name as className, t.name as teacherName, ca.start_date as start, ca.end_date as end, cr.name as classroomName, cr.id as classroomId, c.name as courseName\n" +
-            " from class_arrangement ca \n" +
-            " cross join product p on ca.clazz_id = p.id \n" +
+        query = "select  ca.id as arrangementId, p.id as classId, concat(DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i'),  ' ', p.name, ' ', t.name) as title, p.name as className, p.students_reach_max_numbers as fullTag, cs.name as statusTag, t.name as teacherName, ca.start_date as start, ca.end_date as end, cr.name as classroomName, cr.id as classroomId, c.name as courseName\n" +
+            " from class_arrangement ca\n" +
+            " cross join product p on ca.clazz_id = p.id\n" +
             " cross join teacher t on ca.planed_teacher_id = t.id\n" +
             " cross join class_room cr on p.class_room_id = cr.id\n" +
-            " cross join course c on p.course_id = c.id \n" +
-            " and ca.start_date > :1\n" +
-            " and ca.end_date < :2\n" +
+            " cross join course c on p.course_id = c.id\n" +
+            " left join class_status cs on cs.id = p.status_id \n" +
             " order by ca.start_date asc",
         resultSetMapping = "scheduleMapping"),
     @NamedNativeQuery(name = "ClassArrangement.getAllSchedulesByRange",
-        query = "select  ca.id as arrangementId, p.id as classId, concat(DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i'),  ' ', p.name, ' ', t.name) as title, p.name as className, t.name as teacherName, ca.start_date as start, ca.end_date as end, cr.name as classroomName, cr.id as classroomId, c.name as courseName\n" +
-            " from class_arrangement ca \n" +
-            " cross join product p on ca.clazz_id = p.id \n" +
+        query = "select  ca.id as arrangementId, p.id as classId, concat(DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i'),  ' ', p.name, ' ', t.name) as title, p.name as className, p.students_reach_max_numbers as fullTag, cs.name as statusTag, t.name as teacherName, ca.start_date as start, ca.end_date as end, cr.name as classroomName, cr.id as classroomId, c.name as courseName\n" +
+            " from class_arrangement ca\n" +
+            " cross join product p on ca.clazz_id = p.id\n" +
             " cross join teacher t on ca.planed_teacher_id = t.id\n" +
             " cross join class_room cr on p.class_room_id = cr.id\n" +
-            " cross join course c on p.course_id = c.id \n" +
+            " cross join course c on p.course_id = c.id\n" +
+            " left join class_status cs on cs.id = p.status_id \n" +
             " and ca.start_date > :1\n" +
             " and ca.end_date < :2\n" +
             " order by ca.start_date asc",
@@ -54,6 +54,8 @@ import java.util.Objects;
                 @ColumnResult(name = "classId", type = Long.class),
                 @ColumnResult(name = "title", type = String.class),
                 @ColumnResult(name = "className", type = String.class),
+                @ColumnResult(name = "fullTag", type = String.class),
+                @ColumnResult(name = "statusTag", type = String.class),
                 @ColumnResult(name = "teacherName", type = String.class),
                 @ColumnResult(name = "start", type = Instant.class),
                 @ColumnResult(name = "end", type = Instant.class),
