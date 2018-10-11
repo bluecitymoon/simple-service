@@ -211,6 +211,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                     ClassSchedule periodSchedule = findClassInRange(scheduleListInClassRoom, timePeriod.getStart(), timePeriod.getEnd());
 
                     if (periodSchedule == null) {
+                        //TODO 寻找待开班
                         classNameElements.add(new ClassSchedule());
                     } else {
 

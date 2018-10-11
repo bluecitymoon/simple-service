@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCardController', CustomerCardController);
 
-    CustomerCardController.$inject = ['$state', 'CustomerCard', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CustomerCardController.$inject = ['$state', 'CustomerCard', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerCardType', '$uibModal'];
 
-    function CustomerCardController($state, CustomerCard, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CustomerCardController($state, CustomerCard, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerCardType, $uibModal) {
 
         var vm = this;
 
@@ -16,7 +16,7 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-
+        vm.customercardtypes = CustomerCardType.query({ page: 0,  size: 1000 });
         loadAll();
 
         function loadAll () {
@@ -54,6 +54,24 @@
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
+            });
+        }
+
+        vm.upgradeCard = function (card) {
+
+            $uibModal.open({
+                templateUrl: 'app/entities/customer-card/customer-card-upgrade-dialog.html',
+                controller: 'CustomerCardDialogUpgradeController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: [function() {
+                        return card;
+                    }]
+                }
+            }).result.then(function() {
+            }, function() {
             });
         }
     }

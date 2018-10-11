@@ -75,12 +75,16 @@
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="customer-card.delete({id:customerCard.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
+                            <button class="btn btn-mint btn-sm" ng-click="vm.upgradeCard(customerCard)">
+                                <span class="glyphicon glyphicon-arrow-up"></span>
+                                <span>升级</span>
+                            </button>
+                            <button has-any-authority="ROLE_ADMIN" type="submit"
+                                    ui-sref="customer-card.delete({id:customerCard.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
                         </div>
                     </td>
                 </tr>

@@ -164,11 +164,11 @@ public class ContractServiceImpl implements ContractService {
 
         CustomerCard customerCard = customerCardService.findOne(packageContractRequest.getCustomerCardId());
 
-        String serialNumber = customerCard.getSerialNumber();
-        if (!collectionService.customerCardPaid(serialNumber)) {
-
-            throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
-        }
+//        String serialNumber = customerCard.getSerialNumber();
+//        if (!collectionService.customerCardPaid(serialNumber)) {
+//
+//            throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
+//        }
 
         List<Contract> existedContracts = contractRepository.findByCustomerCard_Id(customerCard.getId());
         if (!CollectionUtils.isEmpty(existedContracts)) {

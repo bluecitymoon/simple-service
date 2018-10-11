@@ -1,0 +1,218 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCustomerCardLabel">卡升级</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.customerCard.customer">Customer</label>
+                    <input type="text" class="form-control" name="customername"
+                           ng-model="vm.customerCard.customer.name" readonly
+                    />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.number"
+                           for="field_number">Number</label>
+                    <input type="text" class="form-control" name="number" id="field_number"
+                           ng-model="vm.customerCard.number" readonly
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>升级前卡类型</label>
+                    <input type="text" class="form-control" name="originalCardType"
+                           ng-model="vm.customerCard.customerCardType.name" readonly
+                    />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>升级后卡类型</label>
+                    <ui-select ng-model="vm.customerCard.newCustomerCardType">
+                        <ui-select-match>
+                            {{$select.selected.name}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="item in (vm.customercardtypes | filter: $select.search) track by item.id">
+                            <span ng-bind="item.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.serialNumber"
+                           for="field_serialNumber">Serial Number</label>
+                    <input type="text" class="form-control" name="serialNumber" id="field_serialNumber"
+                           ng-model="vm.customerCard.serialNumber" readonly
+                    />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.signDate"
+                           for="field_signDate">Sign Date</label>
+                    <div class="input-group">
+                        <input ng-focus="vm.openCalendar('signDate')" id="field_signDate" type="text"
+                               class="form-control" name="signDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                               ng-model="vm.customerCard.signDate" is-open="vm.datePickerOpenStatus.signDate"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('signDate')"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.totalMoneyAmount"
+                           for="field_totalMoneyAmount">Total Money Amount</label>
+                    <input type="number" class="form-control" name="totalMoneyAmount" id="field_totalMoneyAmount"
+                           ng-model="vm.customerCard.totalMoneyAmount"
+                    />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.promotionAmount"
+                           for="field_promotionAmount">Promotion Amount</label>
+                    <input type="number" class="form-control" name="promotionAmount" id="field_promotionAmount"
+                           ng-model="vm.customerCard.promotionAmount"
+                    />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group" has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.specialPromotionAmount"
+                           for="field_specialPromotionAmount">Special Promotion Amount</label>
+                    <input type="number" class="form-control" name="specialPromotionAmount" id="field_specialPromotionAmount"
+                           ng-model="vm.customerCard.specialPromotionAmount"
+                    />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label" for="field_moneyShouldCollected">应收金额</label>
+                    <input type="number" class="form-control" name="moneyShouldCollected" id="field_moneyShouldCollected"
+                           ng-model="vm.customerCard.moneyShouldCollected"
+                    />
+                </div>
+            </div>
+            <!--<div class="col-md-2">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label" data-translate="simpleServiceApp.customerCard.moneyCollected"-->
+                           <!--for="field_moneyCollected">Money Collected</label>-->
+                    <!--<input type="number" class="form-control" name="moneyCollected" id="field_moneyCollected"-->
+                           <!--ng-model="vm.customerCard.moneyCollected"-->
+                    <!--/>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.startDate"
+                           for="field_startDate">Start Date</label>
+                    <div class="input-group">
+                        <input ng-focus="vm.openCalendar('startDate')" id="field_startDate" type="text"
+                               class="form-control" name="startDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                               ng-model="vm.customerCard.startDate" is-open="vm.datePickerOpenStatus.startDate"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('startDate')"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.endDate"
+                           for="field_endDate">End Date</label>
+                    <div class="input-group">
+                        <input ng-focus="vm.openCalendar('endDate')" id="field_endDate" type="text" class="form-control"
+                               name="endDate" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.customerCard.endDate"
+                               is-open="vm.datePickerOpenStatus.endDate"
+                        />
+                        <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label data-translate="simpleServiceApp.customerCard.course" for="field_course">Course</label>
+                    <select class="form-control" id="field_course" name="course" ng-model="vm.customerCard.course"
+                            ng-options="course as course.name for course in vm.courses track by course.id">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.classCount"
+                           for="field_classCount">Class Count</label>
+                    <input type="number" class="form-control" name="classCount" id="field_classCount"
+                           ng-model="vm.customerCard.classCount"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.customerCard.totalMinutes"
+                           for="field_totalMinutes">Total Minutes</label>
+                    <input type="number" class="form-control" name="totalMinutes" id="field_totalMinutes"
+                           ng-model="vm.customerCard.totalMinutes"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
