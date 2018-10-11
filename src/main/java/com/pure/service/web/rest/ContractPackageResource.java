@@ -2,25 +2,33 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.ContractPackage;
+import com.pure.service.repository.ContractPackageRepository;
+import com.pure.service.service.ContractPackageQueryService;
 import com.pure.service.service.ContractPackageService;
+import com.pure.service.service.dto.ContractPackageCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
-import com.pure.service.service.dto.ContractPackageCriteria;
-import com.pure.service.service.ContractPackageQueryService;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +46,9 @@ public class ContractPackageResource {
     private final ContractPackageService contractPackageService;
 
     private final ContractPackageQueryService contractPackageQueryService;
+
+    @Autowired
+    private ContractPackageRepository contractPackageRepository;
 
     public ContractPackageResource(ContractPackageService contractPackageService, ContractPackageQueryService contractPackageQueryService) {
         this.contractPackageService = contractPackageService;
@@ -101,6 +112,16 @@ public class ContractPackageResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contract-packages");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+    @GetMapping("/contract-packages/all-renew-packages")
+    @Timed
+    public ResponseEntity<List<ContractPackage>> getAllRenewContractPackages() {
+
+        List<ContractPackage> page = contractPackageRepository.findByType_Code("renew");
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
 
     /**
      * GET  /contract-packages/:id : get the "id" contractPackage.

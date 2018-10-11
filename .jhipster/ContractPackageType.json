@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20181011065718",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "contract_package_type",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

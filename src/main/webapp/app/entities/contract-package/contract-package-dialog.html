@@ -8,10 +8,10 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-
-        <div class="row">
-            <div class="col-md-6"></div>
-            <div class="col-md-6"></div>
+        <div class="form-group" ng-show="vm.contractPackage.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.contractPackage.id" readonly />
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="simpleServiceApp.contractPackage.name" for="field_name">Name</label>
@@ -35,6 +35,12 @@
         <div class="form-group">
             <label data-translate="simpleServiceApp.contractPackage.customerCardType" for="field_customerCardType">Customer Card Type</label>
             <select class="form-control" id="field_customerCardType" name="customerCardType" ng-model="vm.contractPackage.customerCardType" ng-options="customerCardType as customerCardType.name for customerCardType in vm.customercardtypes track by customerCardType.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.contractPackage.type" for="field_type">Type</label>
+            <select class="form-control" id="field_type" name="type" ng-model="vm.contractPackage.type" ng-options="contractPackageType as contractPackageType.name for contractPackageType in vm.contractpackagetypes track by contractPackageType.id">
                 <option value=""></option>
             </select>
         </div>

@@ -15,10 +15,10 @@
     <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
 
     <!--
-        Added the entity ContractPackage.
+        Added the entity ContractPackageType.
     -->
-    <changeSet id="20180801062216-1" author="jhipster">
-        <createTable tableName="contract_package">
+    <changeSet id="20181011065718-1" author="jhipster">
+        <createTable tableName="contract_package_type">
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -31,14 +31,6 @@
             </column>
 
             <column name="comments" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="customer_card_type_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="type_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

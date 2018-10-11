@@ -84,6 +84,9 @@ public class ContractPackageQueryService extends QueryService<ContractPackage> {
             if (criteria.getCustomerCardTypeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerCardTypeId(), ContractPackage_.customerCardType, CustomerCardType_.id));
             }
+            if (criteria.getTypeId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getTypeId(), ContractPackage_.type, ContractPackageType_.id));
+            }
         }
         return specification;
     }

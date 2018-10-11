@@ -12,6 +12,12 @@
             "otherEntityName": "customerCardType",
             "relationshipType": "many-to-one",
             "otherEntityField": "name"
+        },
+        {
+            "relationshipName": "type",
+            "otherEntityName": "contractPackageType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
         }
     ],
     "fields": [

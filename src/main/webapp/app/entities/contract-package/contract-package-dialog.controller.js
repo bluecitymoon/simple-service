@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractPackageDialogController', ContractPackageDialogController);
 
-    ContractPackageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ContractPackage', 'ContractTemplate', 'CustomerCardType'];
+    ContractPackageDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ContractPackage', 'ContractTemplate', 'CustomerCardType', 'ContractPackageType'];
 
-    function ContractPackageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ContractPackage, ContractTemplate, CustomerCardType) {
+    function ContractPackageDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ContractPackage, ContractTemplate, CustomerCardType, ContractPackageType) {
         var vm = this;
 
         vm.contractPackage = entity;
@@ -15,6 +15,7 @@
         vm.save = save;
         vm.contracttemplates = ContractTemplate.query();
         vm.customercardtypes = CustomerCardType.query();
+        vm.contractpackagetypes = ContractPackageType.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

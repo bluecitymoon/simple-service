@@ -42,6 +42,9 @@ public class ContractPackage implements Serializable {
     @ManyToOne
     private CustomerCardType customerCardType;
 
+    @ManyToOne
+    private ContractPackageType type;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -126,6 +129,19 @@ public class ContractPackage implements Serializable {
 
     public void setCustomerCardType(CustomerCardType customerCardType) {
         this.customerCardType = customerCardType;
+    }
+
+    public ContractPackageType getType() {
+        return type;
+    }
+
+    public ContractPackage type(ContractPackageType contractPackageType) {
+        this.type = contractPackageType;
+        return this;
+    }
+
+    public void setType(ContractPackageType contractPackageType) {
+        this.type = contractPackageType;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

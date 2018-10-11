@@ -14,5 +14,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="customer_card_type"/>
 
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="contract_package"
+                                 constraintName="fk_contract_package_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="contract_package_type"/>
+
     </changeSet>
 </databaseChangeLog>

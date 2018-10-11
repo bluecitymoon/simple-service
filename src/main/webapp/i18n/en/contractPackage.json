@@ -19,7 +19,8 @@
       "code": "代码",
       "comments": "备注",
       "contractTemplate": "合同模板",
-      "customerCardType": "卡类型"
+      "customerCardType": "卡类型",
+      "type": "类型"
     }
   }
 }
