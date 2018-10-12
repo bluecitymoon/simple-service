@@ -307,7 +307,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             ClassArrangement arrangement = new ClassArrangement();
             arrangement = arrangement.clazz(rule.getTargetClass())
                 .startDate(day)
-                .endDate(endDateLocalDateTime.toInstant(ZoneOffset.UTC))
+                .endDate(endDateLocalDateTime.toInstant(ZoneOffset.ofHours(8)))
                 .planedTeacher(rule.getTargetClass().getTeacher());
 
             arrangement.setConsumeClassCount(rule.getConsumeClassCount());

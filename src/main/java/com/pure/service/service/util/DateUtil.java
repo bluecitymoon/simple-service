@@ -151,7 +151,7 @@ public class DateUtil {
 
         while (nextCountDay.isBefore(endTime)) {
 
-            Instant nextCountDayInstant = nextCountDay.toInstant(ZoneOffset.UTC);
+            Instant nextCountDayInstant = nextCountDay.toInstant(ZoneOffset.ofHours(8));
             countDays.add(nextCountDayInstant);
 
             System.out.println(nextCountDayInstant.toString());
@@ -205,7 +205,7 @@ public class DateUtil {
 
         localDateTime = localDateTime.withHour(Integer.valueOf(hour)).withMinute(Integer.valueOf(minutes));
 
-        return localDateTime.toInstant(ZoneOffset.UTC);
+        return localDateTime.toInstant(ZoneOffset.ofHours(8));
     }
 
     public static boolean isSameday(Instant first, Instant second) {
