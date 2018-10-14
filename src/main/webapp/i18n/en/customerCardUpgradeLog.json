@@ -1,0 +1,29 @@
+{
+    "simpleServiceApp": {
+        "customerCardUpgradeLog" : {
+            "home": {
+                "title": "Customer Card Upgrade Logs",
+                "createLabel": "Create a new Customer Card Upgrade Log",
+                "createOrEditLabel": "Create or edit a Customer Card Upgrade Log"
+            },
+            "created": "A new Customer Card Upgrade Log is created with identifier {{ param }}",
+            "updated": "A Customer Card Upgrade Log is updated with identifier {{ param }}",
+            "deleted": "A Customer Card Upgrade Log is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Card Upgrade Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Card Upgrade Log"
+            },
+            "customerName": "Customer Name",
+            "customerId": "Customer Id",
+            "serialNumber": "Serial Number",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "originalCardType": "Original Card Type",
+            "newCardType": "New Card Type"
+        }
+    }
+}

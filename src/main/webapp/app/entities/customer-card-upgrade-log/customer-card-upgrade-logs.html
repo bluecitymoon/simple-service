@@ -1,0 +1,86 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerCardUpgradeLog.home.title">Customer Card Upgrade Logs</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.customerCardUpgradeLog.home.title">Customer Card Upgrade Logs</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="customer-card-upgrade-log.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.customerCardUpgradeLog.home.createLabel">
+                        Create new Customer Card Upgrade Log
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerName"><span data-translate="simpleServiceApp.customerCardUpgradeLog.customerName">Customer Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customerId"><span data-translate="simpleServiceApp.customerCardUpgradeLog.customerId">Customer Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.customerCardUpgradeLog.serialNumber">Serial Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerCardUpgradeLog.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerCardUpgradeLog.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerCardUpgradeLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerCardUpgradeLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="originalCardType.name"><span data-translate="simpleServiceApp.customerCardUpgradeLog.originalCardType">Original Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newCardType.name"><span data-translate="simpleServiceApp.customerCardUpgradeLog.newCardType">New Card Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerCardUpgradeLog in vm.customerCardUpgradeLogs track by customerCardUpgradeLog.id">
+                    <td><a ui-sref="customer-card-upgrade-log-detail({id:customerCardUpgradeLog.id})">{{customerCardUpgradeLog.id}}</a></td>
+                    <td>{{customerCardUpgradeLog.customerName}}</td>
+                    <td>{{customerCardUpgradeLog.customerId}}</td>
+                    <td>{{customerCardUpgradeLog.serialNumber}}</td>
+                    <td>{{customerCardUpgradeLog.createdBy}}</td>
+                    <td>{{customerCardUpgradeLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCardUpgradeLog.lastModifiedBy}}</td>
+                    <td>{{customerCardUpgradeLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        <a ui-sref="customer-card-type-detail({id:customerCardUpgradeLog.originalCardType.id})">{{customerCardUpgradeLog.originalCardType.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="customer-card-type-detail({id:customerCardUpgradeLog.newCardType.id})">{{customerCardUpgradeLog.newCardType.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="customer-card-upgrade-log-detail({id:customerCardUpgradeLog.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-card-upgrade-log.edit({id:customerCardUpgradeLog.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="customer-card-upgrade-log.delete({id:customerCardUpgradeLog.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

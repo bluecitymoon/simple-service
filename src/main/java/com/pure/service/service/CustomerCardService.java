@@ -2,6 +2,10 @@ package com.pure.service.service;
 
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.service.dto.CardNumberRequest;
+import com.pure.service.service.dto.request.UpgradeCustomerCardRequest;
+import com.pure.service.service.exception.CollectionNotPaidException;
+import com.pure.service.service.exception.ContractsExceedLimitException;
+import com.pure.service.service.exception.TemplateNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -46,4 +50,6 @@ public interface CustomerCardService {
     String generateCardNumber(CardNumberRequest cardNumberRequest);
 
     List<CustomerCard> getCardsByCustomerId(Long id);
+
+    CustomerCard upgradeCustomerCard(UpgradeCustomerCardRequest upgradeCustomerCardRequest) throws ContractsExceedLimitException, CollectionNotPaidException, TemplateNotFoundException;
 }

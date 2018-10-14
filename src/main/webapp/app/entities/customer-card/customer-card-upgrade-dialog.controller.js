@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCardDialogUpgradeController', CustomerCardDialogUpgradeController);
 
-    CustomerCardDialogUpgradeController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType', 'Course', 'SequenceNumber', 'AlertService'];
+    CustomerCardDialogUpgradeController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'CustomerCard', 'Customer', 'CustomerCardType', 'Course', 'SequenceNumber', 'AlertService', 'ContractPackage'];
 
-    function CustomerCardDialogUpgradeController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCard, Customer, CustomerCardType, Course, SequenceNumber, AlertService) {
+    function CustomerCardDialogUpgradeController ($timeout, $scope, $stateParams, $uibModalInstance, entity, CustomerCard, Customer, CustomerCardType, Course, SequenceNumber, AlertService, ContractPackage) {
         var vm = this;
 
         vm.customerCard = entity;
@@ -17,6 +17,10 @@
         vm.save = save;
         vm.customerId = $stateParams.cid;
         vm.customers = [];
+        vm.allUpgradePackages = ContractPackage.getAllRenewContractPackages({
+            page:0,
+            size: 100
+        });
 
         vm.searchPersonWithKeyword = function (keyword) {
 
@@ -38,7 +42,7 @@
 
             CustomerCard.generateCustomerCardNumber({
                 customerId: vm.customerCard.customer.id,
-                cardCode: vm.customerCard.customerCardType.code
+                cardCode: vm.customerCard.newCustomerCardType.code
             }, function (data) {
 
                 console.log(data);
@@ -49,7 +53,7 @@
             });
         }
 
-        $scope.$watch("vm.customerCard.customerCardType", function (newVal, oldVal) {
+        $scope.$watch("vm.customerCard.newCustomerCardType", function (newVal, oldVal) {
 
             if (newVal) {
                 vm.customerCard.totalMoneyAmount = newVal.totalMoneyAmount;
@@ -65,15 +69,15 @@
             }
         });
 
-        $scope.$watch("vm.customerCard.customer", function (newVal, oldVal) {
-
-            if (newVal) {
-
-                if (vm.customerCard.customerCardType) {
-                    generateCustomerCardNumber();
-                }
-            }
-        });
+        // $scope.$watch("vm.customerCard.customer", function (newVal, oldVal) {
+        //
+        //     if (newVal) {
+        //
+        //         if (vm.customerCard.customerCardType) {
+        //             generateCustomerCardNumber();
+        //         }
+        //     }
+        // });
 
         $scope.$watch("vm.customerCard.totalMoneyAmount", function (newVal, oldVal) {
 
@@ -107,7 +111,6 @@
             }
         }
 
-        loadSingleCustomer(vm.customerId);
         generateSequenceNumber();
 
         $timeout(function (){
@@ -120,15 +123,18 @@
 
         function save () {
             vm.isSaving = true;
-            if (vm.customerCard.id !== null) {
-                CustomerCard.update(vm.customerCard, onSaveSuccess, onSaveError);
-            } else {
-                CustomerCard.save(vm.customerCard, onSaveSuccess, onSaveError);
-            }
+            CustomerCard.upgradeCustomerCard(vm.customerCard, onSaveSuccess, function (error) {
+                if (error.data && error.data.detail) {
+
+                    AlertService.error(error.data.detail);
+                }
+                vm.isSaving = false;
+            })
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('simpleServiceApp:customerCardUpdate', result);
+            $scope.$emit('simpleServiceApp:customerCardUpgradeSuccess', result);
+
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }
@@ -137,17 +143,6 @@
             vm.isSaving = false;
         }
 
-        function loadSingleCustomer(cid) {
-
-            if (cid) {
-
-                Customer.get({id : cid}, function (data) {
-                    vm.customerCard.customer = data;
-                }, function (error) {
-                    console.debug(error);
-                })
-            }
-        }
         vm.datePickerOpenStatus.signDate = false;
         vm.datePickerOpenStatus.startDate = false;
         vm.datePickerOpenStatus.endDate = false;

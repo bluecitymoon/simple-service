@@ -1,23 +1,90 @@
 
-<div class="page-header">
-    <h1 class="page-title">卡列表</h1>
-</div>
-<div class="panel">
-    <div class="panel-body">
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="customer-card.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.customerCard.home.createLabel">
+<!--<div class="page-header">-->
+    <!--<h1 class="page-title">卡列表</h1>-->
+<!--</div>-->
+<jhi-alert></jhi-alert>
+<div class="panel panel-primary panel-bordered-dark">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">查询卡列表</h3>
+    </div>
+    <form class="form-horizontal">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">客户姓名</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.name" placeholder="客户姓名"
+                               class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">联系电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.contactPhoneNumber" placeholder="联系电话"
+                               class="form-control">
+                    </div>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">卡类型</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.cardType">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.customercardtypes | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 form-group">
+                    <div class="col-sm-4">
+                        <button class="btn btn-primary btn-block" type="button" ng-click="pagination.currentPageNumber = 1; vm.loadAll()"><i
+                                class="fa fa-search-minus"></i>查询
+                        </button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button class="btn btn-mint btn-block" type="button" ng-click="vm.clearConditions()"><i
+                                class="fa fa-trash"></i>清除
+                        </button>
+                    </div>
+                    <div class="col-sm-4" has-any-authority="ROLE_ADMIN,ROLE_RECEPTION,ROLE_HEADMASTER">
+                        <button class="btn btn-primary" ui-sref="customer-card.new" >
+                            <span class="glyphicon glyphicon-plus"></span>
+                            <span  data-translate="simpleServiceApp.customerCard.home.createLabel">
                         Create new Customer Card
                     </span>
-                </button>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">流水号</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.serialNumber" placeholder="流水号"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">卡号</label>
+                    <div class="col-sm-9">
+                        <input type="text" ng-model="vm.searchCondition.number" placeholder="卡号"
+                               class="form-control">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <br/>
+    </form>
+</div>
+
+<div class="panel">
+    <div class="panel-body">
+
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
@@ -91,9 +158,10 @@
             </tbody>
         </table>
     </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-    </div>
+        <div class="text-center">
+            <jhi-item-count page="pagination.currentPageNumber" total="pagination.totalItems" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <uib-pagination class="pagination-sm" total-items="pagination.totalItems" items-per-page="vm.itemsPerPage"
+                            ng-model="pagination.currentPageNumber" ng-click="vm.loadAll()"></uib-pagination>
+        </div>
 </div>
 </div>

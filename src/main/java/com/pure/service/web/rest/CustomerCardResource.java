@@ -2,15 +2,19 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCard;
+import com.pure.service.service.CustomerCardQueryService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.dto.CardNumberRequest;
+import com.pure.service.service.dto.CustomerCardCriteria;
 import com.pure.service.service.dto.CustomerCardDTO;
+import com.pure.service.service.dto.request.UpgradeCustomerCardRequest;
+import com.pure.service.service.exception.CollectionNotPaidException;
+import com.pure.service.service.exception.ContractsExceedLimitException;
+import com.pure.service.service.exception.TemplateNotFoundException;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
-import com.pure.service.service.dto.CustomerCardCriteria;
-import com.pure.service.service.CustomerCardQueryService;
-import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,11 +22,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +71,29 @@ public class CustomerCardResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new customerCard cannot already have an ID")).body(null);
         }
         CustomerCard result = customerCardService.save(customerCard);
+        return ResponseEntity.created(new URI("/api/customer-cards/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/customer-cards/upgrade")
+    @Timed
+    public ResponseEntity<CustomerCard> upgradeCustomerCard(@RequestBody UpgradeCustomerCardRequest upgradeCustomerCardRequest) throws URISyntaxException, ContractsExceedLimitException, CollectionNotPaidException, TemplateNotFoundException {
+
+        if (upgradeCustomerCardRequest.getNewCustomerCardType() == null) {
+            throw new RuntimeException("未选择升级后的卡类型");
+        }
+
+        if (upgradeCustomerCardRequest.getNewCustomerCardType().equals(upgradeCustomerCardRequest.getCustomerCardType())) {
+            throw new RuntimeException("升级后的卡类型不能与升级前一致");
+        }
+
+        if (upgradeCustomerCardRequest.getUpgradePackage() == null) {
+            throw new RuntimeException("未选择升级套餐");
+        }
+
+        CustomerCard result = customerCardService.upgradeCustomerCard(upgradeCustomerCardRequest);
+
         return ResponseEntity.created(new URI("/api/customer-cards/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

@@ -28,6 +28,7 @@
             },
             'update': { method:'PUT' },
             'getSequenceNumber': {method: 'POST', url: 'api/sequence/get'},
+            'upgradeCustomerCard': {method: 'POST', url: 'api/customer-cards/upgrade'},
             'generateCustomerCardNumber': {method: 'POST', url: 'api/customer-cards/generate-card-number'}
         });
     }

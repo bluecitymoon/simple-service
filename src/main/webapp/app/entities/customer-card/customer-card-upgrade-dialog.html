@@ -6,7 +6,7 @@
         <h4 class="modal-title" id="myCustomerCardLabel">卡升级</h4>
     </div>
     <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert></jhi-alert>
 
         <div class="row">
             <div class="col-md-4">
@@ -61,7 +61,7 @@
                         <ui-select-match>
                             {{$select.selected.name}}
                         </ui-select-match>
-                        <ui-select-choices repeat="item in (vm.customercardtypes | filter: $select.search) track by item.id">
+                        <ui-select-choices repeat="item in (vm.allUpgradePackages | filter: $select.search) track by item.id">
                             <span ng-bind="item.name"></span>
                         </ui-select-choices>
                     </ui-select>
@@ -223,7 +223,7 @@
                 data-translate="entity.action.cancel">Cancel</span>
         </button>
         <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+            <span class="glyphicon glyphicon-save"></span><span>确定升级</span>
         </button>
     </div>
 </form>

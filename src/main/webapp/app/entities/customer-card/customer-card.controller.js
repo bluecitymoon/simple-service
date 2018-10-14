@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CustomerCardController', CustomerCardController);
 
-    CustomerCardController.$inject = ['$state', 'CustomerCard', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerCardType', '$uibModal'];
+    CustomerCardController.$inject = ['$scope', '$state', 'CustomerCard', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'CustomerCardType', '$uibModal'];
 
-    function CustomerCardController($state, CustomerCard, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerCardType, $uibModal) {
+    function CustomerCardController($scope, $state, CustomerCard, ParseLinks, AlertService, paginationConstants, pagingParams, CustomerCardType, $uibModal) {
 
         var vm = this;
 
@@ -17,14 +17,48 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.customercardtypes = CustomerCardType.query({ page: 0,  size: 1000 });
-        loadAll();
+        vm.searchCondition = {};
+        var currentPageNumber = 1;
+        // var cacheCondition = Cache.getCustomerSearchCondition();
+        //
+        // if (cacheCondition) {
+        //     currentPageNumber = cacheCondition.currentPageNumber;
+        // }
+
+        $scope.pagination = {
+            currentPageNumber: currentPageNumber,
+            totalItems: 0
+        };
+        vm.loadAll = loadAll;
 
         function loadAll () {
-            CustomerCard.query({
-                page: pagingParams.page - 1,
+
+            var parameters = {
+                page: $scope.pagination.currentPageNumber - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
-            }, onSuccess, onError);
+            };
+
+            if (vm.searchCondition.name) {
+                parameters["customerName"] = vm.searchCondition.name;
+            }
+
+            if (vm.searchCondition.contactPhoneNumber) {
+                parameters["customerPhoneNumber"] = vm.searchCondition.contactPhoneNumber;
+            }
+
+            if (vm.searchCondition.cardType) {
+                parameters["customerCardTypeId.equals"] = vm.searchCondition.cardType.id;
+            }
+            if (vm.searchCondition.number) {
+                parameters["number.equals"] = vm.searchCondition.number;
+            }
+            if (vm.searchCondition.serialNumber) {
+                parameters["serialNumber.equals"] = vm.searchCondition.serialNumber;
+            }
+
+            CustomerCard.query(parameters, onSuccess, onError);
+
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
@@ -38,6 +72,7 @@
                 vm.queryCount = vm.totalItems;
                 vm.customerCards = data;
                 vm.page = pagingParams.page;
+                $scope.pagination.totalItems = headers('X-Total-Count');
             }
             function onError(error) {
                 AlertService.error(error.data.message);

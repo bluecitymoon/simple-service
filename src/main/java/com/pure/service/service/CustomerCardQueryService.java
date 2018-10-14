@@ -1,22 +1,25 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.Course_;
+import com.pure.service.domain.CustomerCard;
+import com.pure.service.domain.CustomerCardType_;
+import com.pure.service.domain.CustomerCard_;
+import com.pure.service.domain.Customer_;
+import com.pure.service.repository.CustomerCardRepository;
+import com.pure.service.service.dto.CustomerCardCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.CustomerCard;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.CustomerCardRepository;
-import com.pure.service.service.dto.CustomerCardCriteria;
+import java.util.List;
 
 
 /**
@@ -129,8 +132,24 @@ public class CustomerCardQueryService extends QueryService<CustomerCard> {
             if (criteria.getCourseId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCourseId(), CustomerCard_.course, Course_.id));
             }
+
+            if (!StringUtils.isEmpty(criteria.getCustomerName())) {
+                specification = specification.and(customerName(criteria.getCustomerName()));
+            }
+
+            if (!StringUtils.isEmpty(criteria.getCustomerPhoneNumber())) {
+                specification = specification.and(customerPhoneNumber(criteria.getCustomerPhoneNumber()));
+            }
         }
+
         return specification;
     }
+    private Specification customerName(String customerName) {
 
+        return (root, query, cb) -> cb.like(root.get(CustomerCard_.customer).get(Customer_.name), customerName);
+    }
+    private Specification customerPhoneNumber(String phoneNumber) {
+
+        return (root, query, cb) -> cb.like(root.get(CustomerCard_.customer).get(Customer_.contactPhoneNumber), phoneNumber);
+    }
 }

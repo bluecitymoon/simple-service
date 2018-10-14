@@ -1,0 +1,58 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerCardUpgradeLoghome.title">Customer Card Upgrade Logs</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.customerName">Customer Name</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.customerName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.customerId">Customer Id</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.customerId}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.serialNumber">Serial Number</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.serialNumber}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.customerCardUpgradeLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.originalCardType">Original Card Type</span></dt>
+        <dd>
+            <a ui-sref="customer-card-type-detail({id:vm.customerCardUpgradeLog.originalCardType.id})">{{vm.customerCardUpgradeLog.originalCardType.name}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardUpgradeLog.newCardType">New Card Type</span></dt>
+        <dd>
+            <a ui-sref="customer-card-type-detail({id:vm.customerCardUpgradeLog.newCardType.id})">{{vm.customerCardUpgradeLog.newCardType.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-card-upgrade-log-detail.edit({id:vm.customerCardUpgradeLog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

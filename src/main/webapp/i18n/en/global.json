@@ -69,6 +69,7 @@
                 "customerConsumerType": "Customer Consumer Type",
                 "customerConsumerLog": "Customer Consumer Log",
                 "contractPackageType": "Contract Package Type",
+                "customerCardUpgradeLog": "Customer Card Upgrade Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

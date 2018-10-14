@@ -2,21 +2,22 @@
     'use strict';
     angular
         .module('simpleServiceApp')
-        .factory('ContractPackage', ContractPackage);
+        .factory('CustomerCardUpgradeLog', CustomerCardUpgradeLog);
 
-    ContractPackage.$inject = ['$resource'];
+    CustomerCardUpgradeLog.$inject = ['$resource', 'DateUtils'];
 
-    function ContractPackage ($resource) {
-        var resourceUrl =  'api/contract-packages/:id';
+    function CustomerCardUpgradeLog ($resource, DateUtils) {
+        var resourceUrl =  'api/customer-card-upgrade-logs/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
-            'getAllRenewContractPackages': { url: 'api/contract-packages/all-renew-packages', method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
+                        data.lastModifiedDate = DateUtils.convertDateTimeFromServer(data.lastModifiedDate);
                     }
                     return data;
                 }
