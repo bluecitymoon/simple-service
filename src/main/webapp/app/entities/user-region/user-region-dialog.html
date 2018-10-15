@@ -1,0 +1,70 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUserRegionLabel" data-translate="simpleServiceApp.userRegion.home.createOrEditLabel">Create or edit a User Region</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.userRegion.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.userRegion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.userRegion.createdBy" for="field_createdBy">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                    ng-model="vm.userRegion.createdBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.userRegion.createdDate" for="field_createdDate">Created Date</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.userRegion.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.userRegion.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                    ng-model="vm.userRegion.lastModifiedBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.userRegion.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                <div class="input-group">
+                    <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.userRegion.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.userRegion.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.userRegion.user" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.userRegion.region" for="field_region">Region</label>
+            <select class="form-control" id="field_region" name="region" ng-model="vm.userRegion.region" ng-options="region as region.name for region in vm.regions track by region.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

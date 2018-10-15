@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "address",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "phone",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20181015062118",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "region",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

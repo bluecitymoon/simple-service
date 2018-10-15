@@ -70,6 +70,8 @@
                 "customerConsumerLog": "Customer Consumer Log",
                 "contractPackageType": "Contract Package Type",
                 "customerCardUpgradeLog": "Customer Card Upgrade Log",
+                "region": "Region",
+                "userRegion": "User Region",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

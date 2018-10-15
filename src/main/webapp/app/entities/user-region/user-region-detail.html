@@ -1,0 +1,46 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.userRegionhome.title">User Regions</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.userRegion.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.userRegion.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userRegion.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.userRegion.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userRegion.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.userRegion.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userRegion.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.userRegion.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userRegion.user">User</span></dt>
+        <dd>
+            {{vm.userRegion.user.login}}
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userRegion.region">Region</span></dt>
+        <dd>
+            <a ui-sref="region-detail({id:vm.userRegion.region.id})">{{vm.userRegion.region.name}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="user-region-detail.edit({id:vm.userRegion.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

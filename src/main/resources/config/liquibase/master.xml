@@ -68,6 +68,8 @@
     <include file="config/liquibase/changelog/20181007133813_added_entity_CustomerConsumerLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181011065718_added_entity_ContractPackageType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181012160301_added_entity_CustomerCardUpgradeLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181015062118_added_entity_Region.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181015063736_added_entity_UserRegion.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -153,5 +155,6 @@
     <include file="config/liquibase/changelog/20180928084252_added_entity_constraints_TimetableItem.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181007133813_added_entity_constraints_CustomerConsumerLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181012160301_added_entity_constraints_CustomerCardUpgradeLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181015063736_added_entity_constraints_UserRegion.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

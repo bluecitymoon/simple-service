@@ -1,0 +1,26 @@
+{
+    "simpleServiceApp": {
+        "userRegion" : {
+            "home": {
+                "title": "用户校区列表",
+                "createLabel": "分配",
+                "createOrEditLabel": "管理"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "用户区域详情"
+            },
+            "createdBy": "创建者",
+            "createdDate": "创建时间",
+            "lastModifiedBy": "最近修改",
+            "lastModifiedDate": "最近修改人",
+            "user": "用户",
+            "region": "校区"
+        }
+    }
+}

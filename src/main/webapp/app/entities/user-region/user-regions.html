@@ -1,0 +1,80 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.userRegion.home.title">User Regions</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.userRegion.home.title">User Regions</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="user-region.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.userRegion.home.createLabel">
+                        Create new User Region
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.userRegion.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.userRegion.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.userRegion.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.userRegion.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="user.login"><span data-translate="simpleServiceApp.userRegion.user">User</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="region.name"><span data-translate="simpleServiceApp.userRegion.region">Region</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userRegion in vm.userRegions track by userRegion.id">
+                    <td><a ui-sref="user-region-detail({id:userRegion.id})">{{userRegion.id}}</a></td>
+                    <td>{{userRegion.createdBy}}</td>
+                    <td>{{userRegion.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{userRegion.lastModifiedBy}}</td>
+                    <td>{{userRegion.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>
+                        {{userRegion.user.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="region-detail({id:userRegion.region.id})">{{userRegion.region.name}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="user-region-detail({id:userRegion.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-region.edit({id:userRegion.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-region.delete({id:userRegion.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

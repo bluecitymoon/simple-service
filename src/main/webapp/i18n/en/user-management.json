@@ -14,9 +14,9 @@
         "detail": {
             "title": "用户"
         },
-        "login": "登录",
-        "firstName": "名字",
-        "lastName": "姓氏",
+        "login": "账号",
+        "firstName": "姓名",
+        "lastName": "别称",
         "email": "邮箱",
         "activated": "已激活",
         "deactivated": "失效",

@@ -33,9 +33,17 @@
                 success: success,
                 error: error,
                 info: info,
-                warning : warning
+                warning : warning,
+                showCommonError: showCommonError
             };
 
+            function showCommonError(response) {
+
+                if (response.data && response.data.detail) {
+
+                    this.error(response.data.detail);
+                }
+            }
             function isToast() {
                 return toast;
             }
