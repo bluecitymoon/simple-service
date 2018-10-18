@@ -1,12 +1,11 @@
 package com.pure.service.service.dto;
 
+import com.pure.service.region.AbstractQueryCriteria;
 import io.github.jhipster.service.filter.Filter;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
-
-import java.io.Serializable;
 
 
 
@@ -19,7 +18,7 @@ import java.io.Serializable;
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class CustomerCriteria implements Serializable {
+public class CustomerCriteria extends AbstractQueryCriteria {
     private static final long serialVersionUID = 1L;
 
 

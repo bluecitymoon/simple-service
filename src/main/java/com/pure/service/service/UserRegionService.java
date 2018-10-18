@@ -44,4 +44,6 @@ public interface UserRegionService {
     void delete(Long id);
 
     List<User> getAllUsersInRegion(Long regionId);
+
+    Long removeUserRegion(Long userId, Long regionId);
 }

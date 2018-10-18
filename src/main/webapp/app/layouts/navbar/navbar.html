@@ -62,6 +62,8 @@
 <!--</div>-->
 <!--</div>-->
 <!--</div>-->
+<jhi-alert class="text-center text-bold"></jhi-alert>
+
 <div class="header collapse d-lg-flex p-0">
     <div class="container">
         <div class="row align-items-center">
@@ -620,6 +622,7 @@
                         </ul>
                     </li>
 
+
                     <li uib-dropdown class="nav-item pull-right">
                         <a class="nav-link" uib-dropdown-toggle href="">
                             <!--<span class="avatar" style="background-image: url(./../content/images/logo-jhipster.png)"></span>-->
@@ -662,6 +665,20 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li uib-dropdown class="nav-item pull-right">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span class="text-bold text-info" ng-switch-when="true">{{vm.selectedRegion.name}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-arrow" style="left: 0" uib-dropdown-menu>
+                            <li ui-sref-active="active" ng-repeat="region in vm.regions track by region.id">
+                                <a ng-click="vm.selectRegion(region)">
+                                    <span>{{region.name}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <!--<li uib-dropdown class="nav-item pull-right" ng-controller="JhiLanguageController as languageVm">-->
                     <!--<a class="nav-link" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">-->
                     <!--<span>-->

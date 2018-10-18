@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerQueryService;
@@ -85,6 +87,7 @@ public class CustomerResource {
      */
     @PostMapping("/customers")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws URISyntaxException {
         log.debug("REST request to save Customer : {}", customer);
         if (customer.getId() != null) {
@@ -140,6 +143,7 @@ public class CustomerResource {
      */
     @GetMapping("/customers")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Customer>> getAllCustomers(CustomerCriteria criteria, @ApiParam Pageable pageable) {
         log.debug("REST request to get Customers by criteria: {}", criteria);
 

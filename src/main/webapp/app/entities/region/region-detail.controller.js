@@ -42,6 +42,17 @@
 
         vm.removeUserFromRegion = function (user) {
 
+            var request = {
+                userId: user.id,
+                regionId: vm.region.id
+            };
+            UserRegion.removeUserFromRegion(request, function (response) {
+
+                console.log(response);
+                loadAllUsersInRegion();
+            }, function (error) {
+                AlertService.showCommonError(error);
+            });
         };
 
         var unsubscribe = $rootScope.$on('simpleServiceApp:regionUpdate', function(event, result) {

@@ -23,7 +23,8 @@
                 }
             },
             'update': { method:'PUT' },
-            'getAllUsersInRegion': {url: 'api/user-regions/users/:regionId', isArray: true}
+            'getAllUsersInRegion': {url: 'api/user-regions/users/:regionId', isArray: true},
+            'removeUserFromRegion': { method: 'DELETE', url: 'api/user-regions/user/:userId/region/:regionId'}
         });
     }
 })();

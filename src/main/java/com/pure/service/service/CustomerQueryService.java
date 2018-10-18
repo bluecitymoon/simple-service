@@ -77,6 +77,10 @@ public class CustomerQueryService extends QueryService<Customer> {
     private Specifications<Customer> createSpecification(CustomerCriteria criteria) {
         Specifications<Customer> specification = Specifications.where(null);
         if (criteria != null) {
+
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), Customer_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Customer_.id));
             }

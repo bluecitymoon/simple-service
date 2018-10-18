@@ -225,6 +225,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setAge(newOrder.getAge());
             customer.setClassLevel(newOrder.getClassLevel());
             customer.setSchool(newOrder.getSchool());
+            customer.setRegionId(newOrder.getRegionId());
 
             Customer savedCustomer = save(customer);
 

@@ -4,6 +4,8 @@ import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.FreeClassRecordQueryService;
@@ -80,6 +82,7 @@ public class FreeClassRecordResource {
      */
     @PostMapping("/free-class-records")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<FreeClassRecord> createFreeClassRecord(@RequestBody FreeClassRecord freeClassRecord) throws URISyntaxException {
         log.debug("REST request to save FreeClassRecord : {}", freeClassRecord);
         if (freeClassRecord.getId() != null) {
@@ -218,6 +221,7 @@ public class FreeClassRecordResource {
      */
     @GetMapping("/free-class-records")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<FreeClassRecord>> getAllFreeClassRecords(FreeClassRecordCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get FreeClassRecords by criteria: {}", criteria);
         User currentUser = userService.getUserWithAuthorities();

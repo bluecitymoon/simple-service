@@ -1,8 +1,14 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.hibernate.annotations.Where;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -10,7 +16,8 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "ad")
-public class Ad implements Serializable {
+@Where(clause = "")
+public class Ad extends AbstractRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

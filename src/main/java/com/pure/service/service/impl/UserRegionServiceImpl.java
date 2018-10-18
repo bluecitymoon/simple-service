@@ -117,4 +117,28 @@ public class UserRegionServiceImpl implements UserRegionService{
 
         return regions.stream().map(UserRegion::getUser).collect(Collectors.toList());
     }
+
+    @Override
+    public Long removeUserRegion(Long userId, Long regionId) {
+
+        UserRegionCriteria userRegionCriteria = new UserRegionCriteria();
+        LongFilter regionIdFilter = new LongFilter();
+        regionIdFilter.setEquals(regionId);
+
+        LongFilter userIdFilter = new LongFilter();
+        userIdFilter.setEquals(userId);
+
+        userRegionCriteria.setRegionId(regionIdFilter);
+        userRegionCriteria.setUserId(userIdFilter);
+
+        List<UserRegion> userRegions = userRegionQueryService.findByCriteria(userRegionCriteria);
+
+        if (CollectionUtils.isEmpty(userRegions)) {
+            return new Long("-1");
+        }
+
+        userRegionRepository.delete(userRegions);
+
+        return userRegions.get(0).getId();
+    }
 }

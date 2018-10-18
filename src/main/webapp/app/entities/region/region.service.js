@@ -20,7 +20,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'getCurrentUserRegions': { method: 'GET', url: 'api/regions/currentUser', isArray: true}
         });
     }
 })();

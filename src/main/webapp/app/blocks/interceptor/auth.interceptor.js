@@ -18,8 +18,14 @@
             /*jshint camelcase: false */
             config.headers = config.headers || {};
             var token = $localStorage.authenticationToken || $sessionStorage.authenticationToken;
+            var regionId = $localStorage.regionId || $sessionStorage.regionId;
             if (token && token.access_token) {
                 config.headers.Authorization = 'Bearer ' + token.access_token;
+
+                if ($localStorage.currentUserRegion) {
+                    config.headers["X-RegionId"] = $localStorage.currentUserRegion.id
+
+                }
             }
             return config;
         }

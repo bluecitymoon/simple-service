@@ -5,8 +5,21 @@ import com.pure.service.service.dto.dto.LocationStatusReportEntity;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
+import javax.persistence.Table;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -73,7 +86,7 @@ query = "select count(0) as count, l.name as location, l.id as locationId, cs.co
 
 @Entity
 @Table(name = "customer")
-public class Customer extends AbstractAuditingEntity implements Serializable {
+public class Customer extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

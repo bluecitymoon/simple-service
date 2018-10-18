@@ -72,6 +72,10 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
     private Specifications<FreeClassRecord> createSpecification(FreeClassRecordCriteria criteria) {
         Specifications<FreeClassRecord> specification = Specifications.where(null);
         if (criteria != null) {
+
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), FreeClassRecord_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), FreeClassRecord_.id));
             }

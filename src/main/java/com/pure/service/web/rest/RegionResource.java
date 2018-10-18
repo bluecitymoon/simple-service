@@ -2,15 +2,23 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Region;
+import com.pure.service.domain.User;
+import com.pure.service.domain.UserRegion;
+import com.pure.service.repository.UserRepository;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.RegionService;
+import com.pure.service.service.UserRegionQueryService;
+import com.pure.service.service.dto.UserRegionCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.RegionCriteria;
 import com.pure.service.service.RegionQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -23,6 +31,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing Region.
@@ -38,6 +47,12 @@ public class RegionResource {
     private final RegionService regionService;
 
     private final RegionQueryService regionQueryService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserRegionQueryService userRegionQueryService;
 
     public RegionResource(RegionService regionService, RegionQueryService regionQueryService) {
         this.regionService = regionService;
@@ -102,6 +117,24 @@ public class RegionResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/regions/currentUser")
+    @Timed
+    public ResponseEntity<List<Region>> getCurrentUserRegions() {
+
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        User currentUser = userRepository.findOneByLogin(currentUserLogin).get();
+
+        UserRegionCriteria userRegionCriteria = new UserRegionCriteria();
+        LongFilter userIdFilter = new LongFilter();
+        userIdFilter.setEquals(currentUser.getId());
+        userRegionCriteria.setUserId(userIdFilter);
+
+        List<UserRegion> userRegions = userRegionQueryService.findByCriteria(userRegionCriteria);
+
+        List<Region> regionList = userRegions.stream().map(UserRegion::getRegion).collect(Collectors.toList());
+
+        return new ResponseEntity<>(regionList, null, HttpStatus.OK);
+    }
     /**
      * GET  /regions/:id : get the "id" region.
      *

@@ -11,7 +11,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
@@ -22,7 +21,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "free_class_record")
-public class FreeClassRecord extends AbstractAuditingEntity implements Serializable {
+public class FreeClassRecord extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

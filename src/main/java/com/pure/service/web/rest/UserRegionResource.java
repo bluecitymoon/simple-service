@@ -137,4 +137,13 @@ public class UserRegionResource {
         userRegionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @DeleteMapping("/user-regions/user/{userId}/region/{regionId}")
+    @Timed
+    public ResponseEntity<Void> deleteUserRegion(@PathVariable Long userId, @PathVariable Long regionId) {
+
+        Long deletedUserRegionId = userRegionService.removeUserRegion(userId, regionId);
+
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, deletedUserRegionId.toString())).build();
+    }
 }
