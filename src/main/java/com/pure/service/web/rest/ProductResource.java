@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Product;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.ProductService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class ProductResource {
      */
     @PostMapping("/products")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Product> createProduct(@RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to save Product : {}", product);
         if (product.getId() != null) {
@@ -95,6 +98,7 @@ public class ProductResource {
      */
     @GetMapping("/products")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Product>> getAllProducts(ProductCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Products by criteria: {}", criteria);
         Page<Product> page = productQueryService.findByCriteria(criteria, pageable);

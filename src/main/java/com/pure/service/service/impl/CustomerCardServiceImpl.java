@@ -9,6 +9,7 @@ import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.FinanceCategory;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CustomerCardRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
@@ -204,6 +205,8 @@ public class CustomerCardServiceImpl implements CustomerCardService {
         longFilter.setEquals(id);
         customerCardCriteria.setCustomerId(longFilter);
 
+        RegionUtils.setRegionIdFilter(customerCardCriteria);
+
         return customerCardQueryService.findByCriteria(customerCardCriteria);
     }
 
@@ -215,6 +218,7 @@ public class CustomerCardServiceImpl implements CustomerCardService {
 
         newCustomerCard.setCustomerCardType(upgradeCustomerCardRequest.getNewCustomerCardType());
 
+        RegionUtils.setRegionAbstractAuditingRegionEntity(newCustomerCard);
         CustomerCard savedCustomerCard = save(newCustomerCard);
 
         PackageContractRequest contractRequest = new PackageContractRequest();
@@ -230,6 +234,8 @@ public class CustomerCardServiceImpl implements CustomerCardService {
         upgradeLog.setCustomerId(upgradeCustomerCardRequest.getCustomer().getId());
         upgradeLog.setCustomerName(upgradeCustomerCardRequest.getCustomer().getName());
         upgradeLog.setSerialNumber(newCustomerCard.getSerialNumber());
+
+        RegionUtils.setRegionAbstractRegionEntity(upgradeLog);
 
         logService.save(upgradeLog);
 
@@ -247,6 +253,7 @@ public class CustomerCardServiceImpl implements CustomerCardService {
 
         CustomerCommunicationLogType logType =logTypeRepository.findByCode("card_upgrade");
         log.setLogType(logType);
+        RegionUtils.setRegionAbstractAuditingRegionEntity(log);
 
         logRepository.save(log);
 

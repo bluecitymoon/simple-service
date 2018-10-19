@@ -3,6 +3,8 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.StudentClassService;
 import com.pure.service.service.dto.dto.CommonResponse;
 import com.pure.service.service.dto.request.SingleStudentClassRequest;
@@ -57,6 +59,7 @@ public class StudentClassResource {
      */
     @PostMapping("/student-classes")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<StudentClass> createStudentClass(@RequestBody StudentClass studentClass) throws URISyntaxException {
         log.debug("REST request to save StudentClass : {}", studentClass);
         if (studentClass.getId() != null) {
@@ -119,6 +122,7 @@ public class StudentClassResource {
      */
     @GetMapping("/student-classes")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<StudentClass>> getAllStudentClasses(StudentClassCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get StudentClasses by criteria: {}", criteria);
         Page<StudentClass> page = studentClassQueryService.findByCriteria(criteria, pageable);

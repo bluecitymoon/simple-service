@@ -70,6 +70,9 @@ public class StudentQueryService extends QueryService<Student> {
     private Specifications<Student> createSpecification(StudentCriteria criteria) {
         Specifications<Student> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), Student_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Student_.id));
             }

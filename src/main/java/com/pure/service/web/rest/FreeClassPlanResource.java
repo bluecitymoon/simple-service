@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.FreeClassPlan;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.FreeClassPlanService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class FreeClassPlanResource {
      */
     @PostMapping("/free-class-plans")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<FreeClassPlan> createFreeClassPlan(@RequestBody FreeClassPlan freeClassPlan) throws URISyntaxException {
         log.debug("REST request to save FreeClassPlan : {}", freeClassPlan);
         if (freeClassPlan.getId() != null) {
@@ -95,6 +98,7 @@ public class FreeClassPlanResource {
      */
     @GetMapping("/free-class-plans")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<FreeClassPlan>> getAllFreeClassPlans(FreeClassPlanCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get FreeClassPlans by criteria: {}", criteria);
         Page<FreeClassPlan> page = freeClassPlanQueryService.findByCriteria(criteria, pageable);

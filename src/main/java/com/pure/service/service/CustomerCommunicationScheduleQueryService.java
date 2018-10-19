@@ -76,6 +76,10 @@ public class CustomerCommunicationScheduleQueryService extends QueryService<Cust
     private Specifications<CustomerCommunicationSchedule> createSpecification(CustomerCommunicationScheduleCriteria criteria) {
         Specifications<CustomerCommunicationSchedule> specification = Specifications.where(null);
         if (criteria != null) {
+
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), CustomerCommunicationSchedule_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CustomerCommunicationSchedule_.id));
             }

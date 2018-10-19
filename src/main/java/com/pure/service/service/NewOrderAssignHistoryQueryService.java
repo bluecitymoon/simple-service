@@ -1,8 +1,12 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.FreeClassRecord_;
+import com.pure.service.domain.NewOrderAssignHistory;
+import com.pure.service.domain.NewOrderAssignHistory_;
+import com.pure.service.repository.NewOrderAssignHistoryRepository;
+import com.pure.service.service.dto.NewOrderAssignHistoryCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +15,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.NewOrderAssignHistory;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.NewOrderAssignHistoryRepository;
-import com.pure.service.service.dto.NewOrderAssignHistoryCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +68,9 @@ public class NewOrderAssignHistoryQueryService extends QueryService<NewOrderAssi
     private Specifications<NewOrderAssignHistory> createSpecification(NewOrderAssignHistoryCriteria criteria) {
         Specifications<NewOrderAssignHistory> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), NewOrderAssignHistory_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), NewOrderAssignHistory_.id));
             }

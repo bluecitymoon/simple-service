@@ -3,6 +3,8 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.CustomerTrackTaskService;
 import com.pure.service.service.UserService;
@@ -64,6 +66,7 @@ public class CustomerTrackTaskResource {
      */
     @PostMapping("/customer-track-tasks")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerTrackTask> createCustomerTrackTask(@RequestBody CustomerTrackTask customerTrackTask) throws URISyntaxException {
         log.debug("REST request to save CustomerTrackTask : {}", customerTrackTask);
         if (customerTrackTask.getId() != null) {
@@ -106,6 +109,7 @@ public class CustomerTrackTaskResource {
      */
     @GetMapping("/customer-track-tasks")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerTrackTask>> getAllCustomerTrackTasks(CustomerTrackTaskCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerTrackTasks by criteria: {}", criteria);
         Page<CustomerTrackTask> page = customerTrackTaskQueryService.findByCriteria(criteria, pageable);

@@ -1,8 +1,13 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.ClassArrangement_;
+import com.pure.service.domain.StudentLeave;
+import com.pure.service.domain.StudentLeave_;
+import com.pure.service.domain.Student_;
+import com.pure.service.repository.StudentLeaveRepository;
+import com.pure.service.service.dto.StudentLeaveCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +16,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.StudentLeave;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.StudentLeaveRepository;
-import com.pure.service.service.dto.StudentLeaveCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +69,9 @@ public class StudentLeaveQueryService extends QueryService<StudentLeave> {
     private Specifications<StudentLeave> createSpecification(StudentLeaveCriteria criteria) {
         Specifications<StudentLeave> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), StudentLeave_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), StudentLeave_.id));
             }

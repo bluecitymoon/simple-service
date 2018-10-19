@@ -4,6 +4,7 @@ import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.domain.StudentClassInOutLog;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ProductRepository;
 import com.pure.service.repository.StudentClassInOutLogRepository;
 import com.pure.service.repository.StudentClassRepository;
@@ -135,7 +136,7 @@ public class StudentClassServiceImpl implements StudentClassService{
 
             StudentClass studentClass = new StudentClass();
             studentClass = studentClass.student(student).product(clazz);
-
+            RegionUtils.setRegionAbstractAuditingRegionEntity(studentClass);
              save(studentClass);
 
             successMessageBuilder.append(student.getName() + " ");

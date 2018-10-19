@@ -72,6 +72,9 @@ public class CustomerTrackTaskQueryService extends QueryService<CustomerTrackTas
     private Specifications<CustomerTrackTask> createSpecification(CustomerTrackTaskCriteria criteria) {
         Specifications<CustomerTrackTask> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), CustomerTrackTask_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CustomerTrackTask_.id));
             }

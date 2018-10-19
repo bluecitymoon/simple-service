@@ -4,6 +4,7 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.TaskStatus;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
 import com.pure.service.repository.TaskRepository;
@@ -59,6 +60,8 @@ public class CustomerTrackTaskServiceImpl implements CustomerTrackTaskService{
             customerTrackTask.getTask() != null &&
             customerTrackTask.getTask().getId() == null) {
 
+            //omg
+            RegionUtils.setRegionAbstractAuditingRegionEntity(customerTrackTask.getTask());
             TaskStatus ongoing = taskStatusRepository.findByCode("ongoing");
             customerTrackTask.getTask().setTaskStatus(ongoing);
 

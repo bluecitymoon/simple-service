@@ -1,8 +1,12 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.MarketingNewOrderPlan;
+import com.pure.service.domain.MarketingNewOrderPlan_;
+import com.pure.service.domain.User_;
+import com.pure.service.repository.MarketingNewOrderPlanRepository;
+import com.pure.service.service.dto.MarketingNewOrderPlanCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +15,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.MarketingNewOrderPlan;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.MarketingNewOrderPlanRepository;
-import com.pure.service.service.dto.MarketingNewOrderPlanCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +68,9 @@ public class MarketingNewOrderPlanQueryService extends QueryService<MarketingNew
     private Specifications<MarketingNewOrderPlan> createSpecification(MarketingNewOrderPlanCriteria criteria) {
         Specifications<MarketingNewOrderPlan> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), MarketingNewOrderPlan_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), MarketingNewOrderPlan_.id));
             }

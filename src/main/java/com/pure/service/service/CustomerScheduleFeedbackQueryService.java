@@ -71,6 +71,9 @@ public class CustomerScheduleFeedbackQueryService extends QueryService<CustomerS
     private Specifications<CustomerScheduleFeedback> createSpecification(CustomerScheduleFeedbackCriteria criteria) {
         Specifications<CustomerScheduleFeedback> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), CustomerScheduleFeedback_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CustomerScheduleFeedback_.id));
             }

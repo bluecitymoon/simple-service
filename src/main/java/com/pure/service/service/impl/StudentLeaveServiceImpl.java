@@ -2,6 +2,7 @@ package com.pure.service.service.impl;
 
 import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.Student;
+import com.pure.service.region.RegionIdStorage;
 import com.pure.service.service.StudentLeaveQueryService;
 import com.pure.service.service.StudentLeaveService;
 import com.pure.service.domain.StudentLeave;
@@ -94,6 +95,8 @@ public class StudentLeaveServiceImpl implements StudentLeaveService{
 
         List<StudentLeave> leaves = new ArrayList<>();
 
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
+
         for (Student student : studentLeaveRequest.getStudents()) {
 
             for (ClassArrangement classArrangement : studentLeaveRequest.getArrangements()) {
@@ -115,7 +118,7 @@ public class StudentLeaveServiceImpl implements StudentLeaveService{
                     StudentLeave studentLeave = new StudentLeave();
                     studentLeave.setClassArrangement(classArrangement);
                     studentLeave.setStudent(student);
-
+                    studentLeave.setRegionId(regionId);
                     //TODO add leave limit
 
                     leaves.add(studentLeave);

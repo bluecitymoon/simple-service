@@ -7,6 +7,7 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.region.RegionIdStorage;
 import com.pure.service.repository.CollectionRepository;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.ContractStatusRepository;
@@ -156,7 +157,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException, CollectionNotPaidException, ContractsExceedLimitException {
+    public List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException, ContractsExceedLimitException {
 
         List<ContractTemplate> templates = contractTemplateRepository.findByContractPackage_Id(packageContractRequest.getPackageId());
 
@@ -180,6 +181,7 @@ public class ContractServiceImpl implements ContractService {
 
         ContractStatus generated = contractStatusRepository.findByCode(ContractStatusEnum.generated.name());
 
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
         List<Contract> contracts = new ArrayList<>();
         for (ContractTemplate template : templates) {
             Contract contract = new Contract();
@@ -194,7 +196,7 @@ public class ContractServiceImpl implements ContractService {
             contract.setContractNumber(generateContractNumber());
             contract.setTotalHours(template.getTotalHours());
             contract.setContractNature(template.getContractNature());
-
+            contract.setRegionId(regionId);
             contract.setContractStatus(generated);
 
             contracts.add(contract);
@@ -207,11 +209,11 @@ public class ContractServiceImpl implements ContractService {
     }
 
     private void saveContractLog(Customer customer, String serialNumber) {
-
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
         CustomerCommunicationLog log = new CustomerCommunicationLog();
         log.setCustomer(customer);
         log.setComments("客户生成套餐合同，流水号 " + serialNumber);
-
+        log.setRegionId(regionId);
         CustomerCommunicationLogType type = customerCommunicationLogTypeRepository.findByCode(CustomerCommunicationLogTypeEnum.contract_generated.name());
         log.setLogType(type);
 

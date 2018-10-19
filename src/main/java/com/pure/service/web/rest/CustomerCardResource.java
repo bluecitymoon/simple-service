@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCard;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CustomerCardQueryService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.dto.CardNumberRequest;
@@ -65,6 +67,7 @@ public class CustomerCardResource {
      */
     @PostMapping("/customer-cards")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerCard> createCustomerCard(@RequestBody CustomerCard customerCard) throws URISyntaxException {
         log.debug("REST request to save CustomerCard : {}", customerCard);
         if (customerCard.getId() != null) {
@@ -141,6 +144,7 @@ public class CustomerCardResource {
      */
     @GetMapping("/customer-cards")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerCard>> getAllCustomerCards(CustomerCardCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerCards by criteria: {}", criteria);
         Page<CustomerCard> page = customerCardQueryService.findByCriteria(criteria, pageable);

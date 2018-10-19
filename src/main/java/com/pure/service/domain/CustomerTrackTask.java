@@ -91,7 +91,7 @@ public class CustomerTrackTask extends AbstractRegionEntity {
     @Override
     public String toString() {
         return "CustomerTrackTask{" +
-            "id=" + getId() +
+            "id=" + getId() + "regionId = " + getRegionId() +
             "}";
     }
 }

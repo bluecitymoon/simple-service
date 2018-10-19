@@ -1,8 +1,13 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.Product_;
+import com.pure.service.domain.StudentClass;
+import com.pure.service.domain.StudentClass_;
+import com.pure.service.domain.Student_;
+import com.pure.service.repository.StudentClassRepository;
+import com.pure.service.service.dto.StudentClassCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +16,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.StudentClass;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.StudentClassRepository;
-import com.pure.service.service.dto.StudentClassCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +69,9 @@ public class StudentClassQueryService extends QueryService<StudentClass> {
     private Specifications<StudentClass> createSpecification(StudentClassCriteria criteria) {
         Specifications<StudentClass> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), StudentClass_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), StudentClass_.id));
             }

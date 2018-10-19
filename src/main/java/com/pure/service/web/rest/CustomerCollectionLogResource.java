@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCollectionLog;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CustomerCollectionLogService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class CustomerCollectionLogResource {
      */
     @PostMapping("/customer-collection-logs")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerCollectionLog> createCustomerCollectionLog(@RequestBody CustomerCollectionLog customerCollectionLog) throws URISyntaxException {
         log.debug("REST request to save CustomerCollectionLog : {}", customerCollectionLog);
         if (customerCollectionLog.getId() != null) {
@@ -95,6 +98,7 @@ public class CustomerCollectionLogResource {
      */
     @GetMapping("/customer-collection-logs")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerCollectionLog>> getAllCustomerCollectionLogs(CustomerCollectionLogCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerCollectionLogs by criteria: {}", criteria);
         Page<CustomerCollectionLog> page = customerCollectionLogQueryService.findByCriteria(criteria, pageable);

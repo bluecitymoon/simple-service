@@ -1,8 +1,13 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.Task;
+import com.pure.service.domain.TaskStatus_;
+import com.pure.service.domain.Task_;
+import com.pure.service.domain.User_;
+import com.pure.service.repository.TaskRepository;
+import com.pure.service.service.dto.TaskCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +16,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.Task;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.TaskRepository;
-import com.pure.service.service.dto.TaskCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +69,9 @@ public class TaskQueryService extends QueryService<Task> {
     private Specifications<Task> createSpecification(TaskCriteria criteria) {
         Specifications<Task> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), Task_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Task_.id));
             }

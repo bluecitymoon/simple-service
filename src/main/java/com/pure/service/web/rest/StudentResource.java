@@ -2,11 +2,15 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Student;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
+import com.pure.service.region.RegionIdStorage;
 import com.pure.service.service.StudentService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentCriteria;
 import com.pure.service.service.StudentQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -55,6 +59,7 @@ public class StudentResource {
      */
     @PostMapping("/students")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Student> createStudent(@RequestBody Student student) throws URISyntaxException {
         log.debug("REST request to save Student : {}", student);
         if (student.getId() != null) {
@@ -97,6 +102,7 @@ public class StudentResource {
      */
     @GetMapping("/students")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Student>> getAllStudents(StudentCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Students by criteria: {}", criteria);
         Page<Student> page = studentQueryService.findByCriteria(criteria, pageable);
@@ -128,6 +134,11 @@ public class StudentResource {
             studentCriteria.setName(customerNameFilter);
         }
 
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
+        LongFilter regionIdFilter = new LongFilter();
+        regionIdFilter.setEquals(regionId);
+
+        studentCriteria.setRegionId(regionIdFilter);
         List<Student> filteredStudents = studentQueryService.findByCriteria(studentCriteria);
 
         return new ResponseEntity<>(filteredStudents, null, HttpStatus.OK);

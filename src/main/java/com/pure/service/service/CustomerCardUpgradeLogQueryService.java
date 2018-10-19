@@ -1,8 +1,12 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.CustomerCardType_;
+import com.pure.service.domain.CustomerCardUpgradeLog;
+import com.pure.service.domain.CustomerCardUpgradeLog_;
+import com.pure.service.repository.CustomerCardUpgradeLogRepository;
+import com.pure.service.service.dto.CustomerCardUpgradeLogCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +15,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.CustomerCardUpgradeLog;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.CustomerCardUpgradeLogRepository;
-import com.pure.service.service.dto.CustomerCardUpgradeLogCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +68,9 @@ public class CustomerCardUpgradeLogQueryService extends QueryService<CustomerCar
     private Specifications<CustomerCardUpgradeLog> createSpecification(CustomerCardUpgradeLogCriteria criteria) {
         Specifications<CustomerCardUpgradeLog> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), CustomerCardUpgradeLog_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CustomerCardUpgradeLog_.id));
             }

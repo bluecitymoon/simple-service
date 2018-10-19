@@ -3,6 +3,9 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
+import com.pure.service.region.RegionIdStorage;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.CustomerCommunicationScheduleQueryService;
 import com.pure.service.service.CustomerCommunicationScheduleService;
@@ -69,6 +72,7 @@ public class CustomerCommunicationScheduleResource {
      */
     @PostMapping("/customer-communication-schedules")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerCommunicationSchedule> createCustomerCommunicationSchedule(@RequestBody CustomerCommunicationSchedule customerCommunicationSchedule) throws URISyntaxException {
         log.debug("REST request to save CustomerCommunicationSchedule : {}", customerCommunicationSchedule);
         if (customerCommunicationSchedule.getId() != null) {
@@ -146,6 +150,7 @@ public class CustomerCommunicationScheduleResource {
      */
     @GetMapping("/customer-communication-schedules")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerCommunicationSchedule>> getAllCustomerCommunicationSchedules(CustomerCommunicationScheduleCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerCommunicationSchedules by criteria: {}", criteria);
 
@@ -178,10 +183,16 @@ public class CustomerCommunicationScheduleResource {
         customerCommunicationScheduleCriteria.setFollowerId(longFilter);
 
         InstantFilter instantFilter = new InstantFilter();
-        instantFilter.setGreaterOrEqualThan(DateUtil.getSimpleTodayInstantBegin());
-        instantFilter.setLessOrEqualThan(DateUtil.getSimpleTodayInstantEnd());
+        instantFilter.setGreaterThan(DateUtil.getSimpleTodayInstantBegin());
+        instantFilter.setLessThan(DateUtil.getSimpleTodayInstantEnd());
 
         customerCommunicationScheduleCriteria.setSceduleDate(instantFilter);
+
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
+        LongFilter regionIdFilter = new LongFilter();
+        regionIdFilter.setEquals(regionId);
+
+        customerCommunicationScheduleCriteria.setRegionId(regionIdFilter);
 
         List<CustomerCommunicationSchedule> page = customerCommunicationScheduleQueryService.findByCriteria(customerCommunicationScheduleCriteria);
 

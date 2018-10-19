@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerCardUpgradeLog;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CustomerCardUpgradeLogService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class CustomerCardUpgradeLogResource {
      */
     @PostMapping("/customer-card-upgrade-logs")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerCardUpgradeLog> createCustomerCardUpgradeLog(@RequestBody CustomerCardUpgradeLog customerCardUpgradeLog) throws URISyntaxException {
         log.debug("REST request to save CustomerCardUpgradeLog : {}", customerCardUpgradeLog);
         if (customerCardUpgradeLog.getId() != null) {
@@ -95,6 +98,7 @@ public class CustomerCardUpgradeLogResource {
      */
     @GetMapping("/customer-card-upgrade-logs")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerCardUpgradeLog>> getAllCustomerCardUpgradeLogs(CustomerCardUpgradeLogCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerCardUpgradeLogs by criteria: {}", criteria);
         Page<CustomerCardUpgradeLog> page = customerCardUpgradeLogQueryService.findByCriteria(criteria, pageable);

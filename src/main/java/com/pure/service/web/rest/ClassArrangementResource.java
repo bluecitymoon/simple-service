@@ -3,6 +3,7 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
+import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
@@ -74,6 +75,7 @@ public class ClassArrangementResource {
      */
     @PostMapping("/class-arrangements")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<ClassArrangement> createClassArrangement(@RequestBody ClassArrangement classArrangement) throws URISyntaxException {
         log.debug("REST request to save ClassArrangement : {}", classArrangement);
         if (classArrangement.getId() != null) {

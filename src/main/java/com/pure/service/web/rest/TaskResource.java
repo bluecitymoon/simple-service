@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Task;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.TaskService;
 import com.pure.service.web.rest.util.HeaderUtil;
@@ -54,6 +56,7 @@ public class TaskResource {
      */
     @PostMapping("/tasks")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Task> createTask(@RequestBody Task task) throws URISyntaxException {
         log.debug("REST request to save Task : {}", task);
         if (task.getId() != null) {
@@ -96,6 +99,7 @@ public class TaskResource {
      */
     @GetMapping("/tasks")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Task>> getAllTasks(TaskCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Tasks by criteria: {}", criteria);
         Page<Task> page = taskQueryService.findByCriteria(criteria, pageable);
@@ -105,6 +109,7 @@ public class TaskResource {
 
     @GetMapping("/tasks/today")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Task>> getTodaysTask(TaskCriteria criteria) {
 
         log.debug("REST request to get Tasks by criteria: {}", criteria);

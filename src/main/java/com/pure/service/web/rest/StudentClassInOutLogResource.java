@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentClassInOutLog;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.StudentClassInOutLogService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class StudentClassInOutLogResource {
      */
     @PostMapping("/student-class-in-out-logs")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<StudentClassInOutLog> createStudentClassInOutLog(@RequestBody StudentClassInOutLog studentClassInOutLog) throws URISyntaxException {
         log.debug("REST request to save StudentClassInOutLog : {}", studentClassInOutLog);
         if (studentClassInOutLog.getId() != null) {
@@ -95,6 +98,7 @@ public class StudentClassInOutLogResource {
      */
     @GetMapping("/student-class-in-out-logs")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<StudentClassInOutLog>> getAllStudentClassInOutLogs(StudentClassInOutLogCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get StudentClassInOutLogs by criteria: {}", criteria);
         Page<StudentClassInOutLog> page = studentClassInOutLogQueryService.findByCriteria(criteria, pageable);

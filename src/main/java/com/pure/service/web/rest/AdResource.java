@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Ad;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.AdQueryService;
 import com.pure.service.service.AdService;
 import com.pure.service.service.dto.AdCriteria;
@@ -59,6 +61,7 @@ public class AdResource {
      */
     @PostMapping("/ads")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Ad> createAd(@RequestBody Ad ad) throws URISyntaxException {
         log.debug("REST request to save Ad : {}", ad);
         if (ad.getId() != null) {
@@ -101,6 +104,7 @@ public class AdResource {
      */
     @GetMapping("/ads")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Ad>> getAllAds(AdCriteria criteria,@ApiParam Pageable pageable) {
 
         log.debug("REST request to get Ads by criteria: {}", criteria);

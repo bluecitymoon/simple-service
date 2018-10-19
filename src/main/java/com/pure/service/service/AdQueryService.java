@@ -1,8 +1,11 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.Ad;
+import com.pure.service.domain.Ad_;
+import com.pure.service.repository.AdRepository;
+import com.pure.service.service.dto.AdCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +14,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.Ad;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.AdRepository;
-import com.pure.service.service.dto.AdCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +67,10 @@ public class AdQueryService extends QueryService<Ad> {
     private Specifications<Ad> createSpecification(AdCriteria criteria) {
         Specifications<Ad> specification = Specifications.where(null);
         if (criteria != null) {
+
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), Ad_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Ad_.id));
             }

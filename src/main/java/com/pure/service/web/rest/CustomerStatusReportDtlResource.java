@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerStatusReportDtl;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CustomerStatusReportDtlService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class CustomerStatusReportDtlResource {
      */
     @PostMapping("/customer-status-report-dtls")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerStatusReportDtl> createCustomerStatusReportDtl(@RequestBody CustomerStatusReportDtl customerStatusReportDtl) throws URISyntaxException {
         log.debug("REST request to save CustomerStatusReportDtl : {}", customerStatusReportDtl);
         if (customerStatusReportDtl.getId() != null) {
@@ -95,6 +98,7 @@ public class CustomerStatusReportDtlResource {
      */
     @GetMapping("/customer-status-report-dtls")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerStatusReportDtl>> getAllCustomerStatusReportDtls(CustomerStatusReportDtlCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerStatusReportDtls by criteria: {}", criteria);
         Page<CustomerStatusReportDtl> page = customerStatusReportDtlQueryService.findByCriteria(criteria, pageable);

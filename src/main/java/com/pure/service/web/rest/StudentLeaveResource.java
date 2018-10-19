@@ -2,6 +2,7 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentLeave;
+import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.service.StudentLeaveService;
 import com.pure.service.service.dto.dto.StudentLeaveRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
@@ -55,6 +56,7 @@ public class StudentLeaveResource {
      */
     @PostMapping("/student-leaves")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<StudentLeave> createStudentLeave(@RequestBody StudentLeave studentLeave) throws URISyntaxException {
         log.debug("REST request to save StudentLeave : {}", studentLeave);
         if (studentLeave.getId() != null) {

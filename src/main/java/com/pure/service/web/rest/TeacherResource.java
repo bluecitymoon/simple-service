@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Teacher;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.TeacherService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class TeacherResource {
      */
     @PostMapping("/teachers")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher) throws URISyntaxException {
         log.debug("REST request to save Teacher : {}", teacher);
         if (teacher.getId() != null) {
@@ -95,6 +98,7 @@ public class TeacherResource {
      */
     @GetMapping("/teachers")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Teacher>> getAllTeachers(TeacherCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Teachers by criteria: {}", criteria);
         Page<Teacher> page = teacherQueryService.findByCriteria(criteria, pageable);

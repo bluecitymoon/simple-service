@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.CustomerScheduleFeedback;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CustomerScheduleFeedbackService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class CustomerScheduleFeedbackResource {
      */
     @PostMapping("/customer-schedule-feedbacks")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<CustomerScheduleFeedback> createCustomerScheduleFeedback(@RequestBody CustomerScheduleFeedback customerScheduleFeedback) throws URISyntaxException {
         log.debug("REST request to save CustomerScheduleFeedback : {}", customerScheduleFeedback);
         if (customerScheduleFeedback.getId() != null) {
@@ -95,6 +98,7 @@ public class CustomerScheduleFeedbackResource {
      */
     @GetMapping("/customer-schedule-feedbacks")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerScheduleFeedback>> getAllCustomerScheduleFeedbacks(CustomerScheduleFeedbackCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get CustomerScheduleFeedbacks by criteria: {}", criteria);
         Page<CustomerScheduleFeedback> page = customerScheduleFeedbackQueryService.findByCriteria(criteria, pageable);

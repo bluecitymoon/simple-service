@@ -273,6 +273,7 @@ public class CustomerResource {
 
     @GetMapping("/customers/search/{keyword}")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Customer>> searchAllCustomers(CustomerCriteria criteria, @ApiParam Pageable pageable, @PathVariable("keyword") String keyword) {
         log.debug("REST request to get Customers by criteria: {} and keyword {}", criteria, keyword);
 
@@ -345,6 +346,7 @@ public class CustomerResource {
      */
     @GetMapping("/customers/withlog")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<CustomerFollowLog>> getAllCustomersWithFollowLog(CustomerCriteria criteria, @ApiParam Pageable pageable) {
         log.debug("REST request to get Customers with log by criteria: {}", criteria);
 

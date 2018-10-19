@@ -3,6 +3,8 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Contract;
 import com.pure.service.domain.ContractNature;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.repository.ContractNatureRepository;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
@@ -69,6 +71,7 @@ public class ContractResource {
      */
     @PostMapping("/contracts")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Contract> createContract(@RequestBody Contract contract) throws URISyntaxException, CollectionNotPaidException {
         log.debug("REST request to save Contract : {}", contract);
         if (contract.getId() != null) {
@@ -82,6 +85,7 @@ public class ContractResource {
 
     @PostMapping("/contracts/free")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Contract> createFreeContract(@RequestBody Contract contract) throws URISyntaxException, CollectionNotPaidException {
         log.debug("REST request to save Contract : {}", contract);
         if (contract.getId() != null) {
@@ -147,6 +151,7 @@ public class ContractResource {
      */
     @GetMapping("/contracts")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Contract>> getAllContracts(ContractCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Contracts by criteria: {}", criteria);
         Page<Contract> page = contractQueryService.findByCriteria(criteria, pageable);

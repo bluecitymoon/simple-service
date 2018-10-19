@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.NewOrderAssignHistory;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.NewOrderAssignHistoryService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class NewOrderAssignHistoryResource {
      */
     @PostMapping("/new-order-assign-histories")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<NewOrderAssignHistory> createNewOrderAssignHistory(@RequestBody NewOrderAssignHistory newOrderAssignHistory) throws URISyntaxException {
         log.debug("REST request to save NewOrderAssignHistory : {}", newOrderAssignHistory);
         if (newOrderAssignHistory.getId() != null) {
@@ -95,6 +98,7 @@ public class NewOrderAssignHistoryResource {
      */
     @GetMapping("/new-order-assign-histories")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<NewOrderAssignHistory>> getAllNewOrderAssignHistories(NewOrderAssignHistoryCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get NewOrderAssignHistories by criteria: {}", criteria);
         Page<NewOrderAssignHistory> page = newOrderAssignHistoryQueryService.findByCriteria(criteria, pageable);

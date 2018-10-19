@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.NewOrderResourceLocation;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.NewOrderResourceLocationService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class NewOrderResourceLocationResource {
      */
     @PostMapping("/new-order-resource-locations")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<NewOrderResourceLocation> createNewOrderResourceLocation(@RequestBody NewOrderResourceLocation newOrderResourceLocation) throws URISyntaxException {
         log.debug("REST request to save NewOrderResourceLocation : {}", newOrderResourceLocation);
         if (newOrderResourceLocation.getId() != null) {
@@ -95,6 +98,7 @@ public class NewOrderResourceLocationResource {
      */
     @GetMapping("/new-order-resource-locations")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<NewOrderResourceLocation>> getAllNewOrderResourceLocations(NewOrderResourceLocationCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get NewOrderResourceLocations by criteria: {}", criteria);
         Page<NewOrderResourceLocation> page = newOrderResourceLocationQueryService.findByCriteria(criteria, pageable);

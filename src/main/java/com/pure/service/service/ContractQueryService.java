@@ -75,6 +75,10 @@ public class ContractQueryService extends QueryService<Contract> {
     private Specifications<Contract> createSpecification(ContractCriteria criteria) {
         Specifications<Contract> specification = Specifications.where(null);
         if (criteria != null) {
+
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), Contract_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Contract_.id));
             }

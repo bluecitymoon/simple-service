@@ -72,6 +72,10 @@ public class CustomerCardQueryService extends QueryService<CustomerCard> {
     private Specifications<CustomerCard> createSpecification(CustomerCardCriteria criteria) {
         Specifications<CustomerCard> specification = Specifications.where(null);
         if (criteria != null) {
+
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), CustomerCard_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CustomerCard_.id));
             }

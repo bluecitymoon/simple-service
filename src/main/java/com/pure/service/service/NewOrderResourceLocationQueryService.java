@@ -1,8 +1,11 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.NewOrderResourceLocation;
+import com.pure.service.domain.NewOrderResourceLocation_;
+import com.pure.service.repository.NewOrderResourceLocationRepository;
+import com.pure.service.service.dto.NewOrderResourceLocationCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +14,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.NewOrderResourceLocation;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.NewOrderResourceLocationRepository;
-import com.pure.service.service.dto.NewOrderResourceLocationCriteria;
+import java.util.List;
 
 
 /**
@@ -69,6 +67,9 @@ public class NewOrderResourceLocationQueryService extends QueryService<NewOrderR
     private Specifications<NewOrderResourceLocation> createSpecification(NewOrderResourceLocationCriteria criteria) {
         Specifications<NewOrderResourceLocation> specification = Specifications.where(null);
         if (criteria != null) {
+            if (criteria.getRegionId() != null) {
+                specification = specification.and(buildSpecification(criteria.getRegionId(), NewOrderResourceLocation_.regionId));
+            }
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), NewOrderResourceLocation_.id));
             }

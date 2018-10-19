@@ -6,6 +6,7 @@ import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.CustomerScheduleStatus;
 import com.pure.service.domain.CustomerStatus;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
@@ -106,6 +107,7 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
 
         customerCommunicationLog.setLogType(newCreateOrderType);
         customerCommunicationLog.customer(savedSchedule.getCustomer());
+        RegionUtils.setRegionAbstractAuditingRegionEntity(customerCommunicationLog);
 
         CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
 
@@ -186,6 +188,8 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
 
         customerCommunicationLog.setLogType(newCreateOrderType);
         customerCommunicationLog.customer(schedule.getCustomer());
+
+        RegionUtils.setRegionAbstractAuditingRegionEntity(customerCommunicationLog);
 
         customerCommunicationLogRepository.save(customerCommunicationLog);
 

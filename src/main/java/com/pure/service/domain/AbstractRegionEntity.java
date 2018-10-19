@@ -7,7 +7,7 @@ import java.io.Serializable;
 @MappedSuperclass
 public class AbstractRegionEntity implements Serializable {
 
-    @Column(name = "region_id", length = 10)
+    @Column(name = "region_id", length = 10, nullable = false)
     private Long regionId;
 
     public Long getRegionId() {

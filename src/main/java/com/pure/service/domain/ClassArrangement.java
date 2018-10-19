@@ -43,6 +43,7 @@ import java.util.Objects;
             " left join class_status cs on cs.id = p.status_id \n" +
             " and ca.start_date > :1\n" +
             " and ca.end_date < :2\n" +
+            " and ca.region_id = :3" +
             " order by ca.start_date asc",
         resultSetMapping = "scheduleMapping")})
 

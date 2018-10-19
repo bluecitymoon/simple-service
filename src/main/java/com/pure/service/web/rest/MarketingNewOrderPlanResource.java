@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.MarketingNewOrderPlan;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.MarketingNewOrderPlanQueryService;
 import com.pure.service.service.MarketingNewOrderPlanService;
 import com.pure.service.service.dto.MarketingNewOrderPlanCriteria;
@@ -62,6 +64,7 @@ public class MarketingNewOrderPlanResource {
      */
     @PostMapping("/marketing-new-order-plans")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<MarketingNewOrderPlan> createMarketingNewOrderPlan(@RequestBody MarketingNewOrderPlan marketingNewOrderPlan) throws URISyntaxException {
         log.debug("REST request to save MarketingNewOrderPlan : {}", marketingNewOrderPlan);
         if (marketingNewOrderPlan.getId() != null) {
@@ -128,6 +131,7 @@ public class MarketingNewOrderPlanResource {
      */
     @GetMapping("/marketing-new-order-plans")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<MarketingNewOrderPlan>> getAllMarketingNewOrderPlans(MarketingNewOrderPlanCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get MarketingNewOrderPlans by criteria: {}", criteria);
         Page<MarketingNewOrderPlan> page = marketingNewOrderPlanQueryService.findByCriteria(criteria, pageable);

@@ -2,6 +2,7 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.MarketingQrcode;
+import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.service.MarketingQrcodeService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -56,6 +57,7 @@ public class MarketingQrcodeResource {
      */
     @PostMapping("/marketing-qrcodes")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<MarketingQrcode> createMarketingQrcode(@RequestBody MarketingQrcode marketingQrcode) throws URISyntaxException {
         log.debug("REST request to save MarketingQrcode : {}", marketingQrcode);
         if (marketingQrcode.getId() != null) {

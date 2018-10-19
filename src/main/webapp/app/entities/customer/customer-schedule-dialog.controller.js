@@ -38,7 +38,9 @@
             vm.isSaving = true;
 
             vm.customerCommunicationSchedule.customer = vm.customer;
-            vm.customerCommunicationSchedule.follower = vm.customer.newOrder.salesFollower;
+            if (vm.customer.newOrder) {
+                vm.customerCommunicationSchedule.follower = vm.customer.newOrder.salesFollower;
+            }
 
             CustomerCommunicationSchedule.save(vm.customerCommunicationSchedule, onSaveSuccess, onSaveError);
 
