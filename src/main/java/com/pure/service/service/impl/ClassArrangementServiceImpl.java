@@ -295,6 +295,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             throw new RuntimeException("起始时间错误，开始时间应该比结束时间早");
         }
 
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
         List<Instant> countDays = DateUtil.getCountWeekdayInRange(startDate, endDate, rule.getCountNumber().getValue(), rule.getEstimateStartTime());
 
         log.debug("Generating arrangements {} ", countDays);
@@ -313,6 +314,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                 .planedTeacher(rule.getTargetClass().getTeacher());
 
             arrangement.setConsumeClassCount(rule.getConsumeClassCount());
+            arrangement.setRegionId(regionId);
 
             ClassArrangementStatus initStatus = statusRepository.findByCode("notTaken");
             arrangement.setStatus(initStatus);

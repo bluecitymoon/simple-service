@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.ClassRoom;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.ClassRoomService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class ClassRoomResource {
      */
     @PostMapping("/class-rooms")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<ClassRoom> createClassRoom(@RequestBody ClassRoom classRoom) throws URISyntaxException {
         log.debug("REST request to save ClassRoom : {}", classRoom);
         if (classRoom.getId() != null) {
@@ -95,6 +98,7 @@ public class ClassRoomResource {
      */
     @GetMapping("/class-rooms")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<ClassRoom>> getAllClassRooms(ClassRoomCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get ClassRooms by criteria: {}", criteria);
         Page<ClassRoom> page = classRoomQueryService.findByCriteria(criteria, pageable);

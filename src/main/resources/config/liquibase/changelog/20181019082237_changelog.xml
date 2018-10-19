@@ -1,0 +1,84 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1539937374945-15">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="ad"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-16">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="class_arrangement"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-17">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="class_room"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-18">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="contract"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-19">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-20">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_card"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-21">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_card_upgrade_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-22">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_communication_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-23">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_consumer_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-24">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_schedule"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-25">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_schedule_feedback"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-26">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_status_report_dtl"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-27">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="customer_track_task"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-28">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="free_class_plan"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-29">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="free_class_record"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-30">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="marketing_new_order_plan"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-31">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="marketing_qrcode"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-32">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="new_order_assign_history"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-33">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="new_order_resource_location"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-34">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="product"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-35">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="student"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-36">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="student_class"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-37">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="student_class_in_out_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-38">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="student_class_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-39">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="student_leave"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-40">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="task"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1539937374945-41">
+        <dropNotNullConstraint columnDataType="bigint" columnName="region_id" tableName="teacher"/>
+    </changeSet>
+</databaseChangeLog>
