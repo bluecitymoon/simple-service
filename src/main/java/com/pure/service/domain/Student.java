@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -17,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "student")
-public class Student implements Serializable {
+public class Student extends AbstractRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

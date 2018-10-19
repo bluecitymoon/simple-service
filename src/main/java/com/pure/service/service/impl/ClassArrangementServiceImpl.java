@@ -4,6 +4,7 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.domain.ClassArrangementStatus;
 import com.pure.service.domain.ClassRoom;
+import com.pure.service.region.RegionIdStorage;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
@@ -129,8 +130,8 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     @Override
     public List<ClassSchedule> searchSchedulesInRange(CustomerStatusRequest customerStatusRequest) {
-
-        return classArrangementRepository.getAllSchedulesByRange(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
+        Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
+        return classArrangementRepository.getAllSchedulesByRange(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), regionId);
     }
 
     private static Map<Integer, String> gapWeekdayNameMap = new HashMap<>();
@@ -195,8 +196,9 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             timePeriodListMap.put(new TimePeriod(DateUtil.getInstantWithSpecialHourMinutes(starting, "18", "30"),
                 DateUtil.getInstantWithSpecialHourMinutes(starting, "20", "00")), singledDay.getEvenning());
 
+            Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
             //find all the schedules in the day.
-            List<ClassSchedule> schedules = classArrangementRepository.getAllSchedulesByRange(starting, ending);
+            List<ClassSchedule> schedules = classArrangementRepository.getAllSchedulesByRange(starting, ending, regionId);
 
             //find the schedules for the room
             for (ClassRoom classRoom : classRooms) {

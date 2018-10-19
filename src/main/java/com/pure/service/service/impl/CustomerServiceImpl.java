@@ -235,6 +235,7 @@ public class CustomerServiceImpl implements CustomerService {
 
             customerCommunicationLog.setLogType(newCreateOrderType);
             customerCommunicationLog.customer(savedCustomer);
+            customerCommunicationLog.setRegionId(customer.getRegionId());
 
             CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
 

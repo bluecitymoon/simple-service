@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -16,7 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "new_order_assign_history")
-public class NewOrderAssignHistory extends AbstractAuditingEntity implements Serializable {
+public class NewOrderAssignHistory extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

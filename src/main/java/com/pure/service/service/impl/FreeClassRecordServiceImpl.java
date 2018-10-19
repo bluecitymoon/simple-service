@@ -157,6 +157,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
                     .olderFollowerLogin(olderFollowerLogin)
                     .olderFollowerName(olderFollowerName)
                     .newOrder(freeClassRecord);
+                newOrderAssignHistory.setRegionId(freeClassRecord.getRegionId());
 
                 newOrderAssignHistoryRepository.save(newOrderAssignHistory);
             }
@@ -180,6 +181,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
 
             customerCommunicationLog.setLogType(newCreateOrderType);
             customerCommunicationLog.freeClassRecord(saved);
+            customerCommunicationLog.setRegionId(saved.getRegionId());
 
             CustomerCommunicationLog savedLog = customerCommunicationLogRepository.save(customerCommunicationLog);
 

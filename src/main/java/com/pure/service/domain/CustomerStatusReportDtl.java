@@ -1,8 +1,12 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -10,7 +14,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "customer_status_report_dtl")
-public class CustomerStatusReportDtl implements Serializable {
+public class CustomerStatusReportDtl extends AbstractRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

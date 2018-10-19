@@ -23,7 +23,7 @@ public interface ClassArrangementRepository extends JpaRepository<ClassArrangeme
     List<ClassSchedule> getAllSchedules();
 
     @Query(nativeQuery = true)
-    List<ClassSchedule> getAllSchedulesByRange(Instant start, Instant end);
+    List<ClassSchedule> getAllSchedulesByRange(Instant start, Instant end, Long regionId);
 
     List<ClassArrangement> findByStartDateAndEndDateAndClazz_Id(Instant startDate, Instant endDate, Long classId);
 }

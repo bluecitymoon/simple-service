@@ -15,7 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "customer_communication_log")
-public class CustomerCommunicationLog extends AbstractAuditingEntity {
+public class CustomerCommunicationLog extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 

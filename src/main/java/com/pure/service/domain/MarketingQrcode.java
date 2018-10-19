@@ -16,7 +16,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "marketing_qrcode")
-public class MarketingQrcode extends AbstractAuditingEntity {
+public class MarketingQrcode extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 
