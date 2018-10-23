@@ -180,12 +180,19 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public boolean customerCardPaid(String serialNumber) {
 
-        Collection collection = collectionRepository.findBySequenceNumber(serialNumber);
+        List<Collection> collections = collectionRepository.findBySequenceNumber(serialNumber);
 
-        if (collection == null) {
+        if (CollectionUtils.isEmpty(collections)) {
             return false;
         }
 
-        return collection.getStatus().getCode().equals(CollectionStatusEnum.collected.name());
+        for (Collection collection : collections) {
+
+            if (!collection.getStatus().getCode().equals(CollectionStatusEnum.collected.name())) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

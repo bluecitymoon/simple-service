@@ -5,6 +5,7 @@ import com.pure.service.domain.Contract;
 import com.pure.service.domain.CustomerConsumerLog;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClassLog;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.CustomerConsumerLogRepository;
 import com.pure.service.repository.ProductRepository;
@@ -157,6 +158,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
         //流水号
         studentClassLog.setUniqueNumber(uniqueNumber);
 
+        RegionUtils.setRegionAbstractAuditingRegionEntity(studentClassLog);
         saveLogWithUniqueNumber(studentClassLog, uniqueNumber);
     }
 
@@ -201,13 +203,13 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
         //保存耗课记录
         CustomerConsumerLog customerConsumerLog = new CustomerConsumerLog();
 
-
-
         customerConsumerLog = customerConsumerLog.consumerName(studentClassLog.getStudent().getName())
             .count(new Float(classCount))
             .unit("课时")
             .student(studentClassLog.getStudent())
             .uniqueNumber(uniqueNumber);
+
+        RegionUtils.setRegionAbstractAuditingRegionEntity(customerConsumerLog);
 
         customerConsumerLogRepository.save(customerConsumerLog);
 
