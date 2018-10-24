@@ -1,6 +1,7 @@
 package com.pure.service.domain;
 
 
+import com.pure.service.service.dto.dto.ChannelReportElement;
 import com.pure.service.service.dto.dto.LocationStatusReportEntity;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.dto.ReportEntity;
@@ -34,6 +35,7 @@ query = "select u.id as userId, u.first_name as userName, count(0) as count, cs.
         "\t     cross join jhi_user u on t.sales_follower_id  = u.id\n" +
         "\t where t.assign_date < :2 and t.assign_date > :1\n" +
         "\t and exists (select 1 from `jhi_user_authority` a where a.`user_id` = u.id and a.`authority_name` = 'ROLE_COURSE_CONSULTANT') \n" +
+        "\t and t.region_id = :3 \n" +
         "\t     group by t.status_id, u.id;",
     resultSetMapping = "reportMapping"),
     @NamedNativeQuery(name = "Customer.searchCurrentUserOverview",
@@ -42,7 +44,8 @@ query = "select count(0) as untrackedCustomerCount from customer t \n" +
         "\t where `sales_follower_id` = :1\n" +
         "\t \tand cs.`code` = 'new_created' \t\n" +
         "\t \tand t.assign_date < :2 \n" +
-        "\t \tand t.assign_date > :3",
+        "\t \tand t.assign_date > :3" +
+        "\t \tand t.region_id = :4 \n" ,
     resultSetMapping = "overviewMapping"),
 
     @NamedNativeQuery(name="Customer.searchLocationCustomerStatusReport",
@@ -51,8 +54,18 @@ query = "select count(0) as count, l.name as location, l.id as locationId, cs.co
         "\tcross join new_order_resource_location l on t.new_order_resource_location_id = l.`id`\n" +
         "\tcross join `customer_status` cs on t.`status_id` = cs.id\n" +
         "\twhere t.assign_date < :2 and t.assign_date > :1\n" +
+        "\t and t.region_id = :3 \n" +
         " group by l.`id`, cs.id ",
-    resultSetMapping = "locationStatusMapping")
+    resultSetMapping = "locationStatusMapping"),
+
+    @NamedNativeQuery(name = "Customer.searchChannelReport",
+    query = "select  cs.id as channelId, cs.name as channelName, count(0) as visitedCustomerCount from customer c \n" +
+        "\tleft join market_channel_category cs on c.channel_id = cs.id\n" +
+        "\twhere c.visit_date < :2 and c.visit_date > :1\n" +
+        "\t and c.region_id = :3 \n" +
+        "\tgroup by cs.id\n",
+
+    resultSetMapping = "channelMapping")
 
 })
 
@@ -80,6 +93,13 @@ query = "select count(0) as count, l.name as location, l.id as locationId, cs.co
                 @ColumnResult(name = "locationId", type = Long.class),
                 @ColumnResult(name = "statusCode", type = String.class),
                 @ColumnResult(name = "statusName", type = String.class)
+            })),
+    @SqlResultSetMapping(name = "channelMapping",
+        classes = @ConstructorResult(targetClass = ChannelReportElement.class,
+            columns = {
+                @ColumnResult(name = "channelId", type = Long.class),
+                @ColumnResult(name = "channelName", type = String.class),
+                @ColumnResult(name = "visitedCustomerCount", type = Integer.class)
             }))
 })
 

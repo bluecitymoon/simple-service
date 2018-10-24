@@ -2,6 +2,7 @@ package com.pure.service.service;
 
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.service.dto.dto.ChannelReportElement;
 import com.pure.service.service.dto.dto.CombinedReport;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
@@ -68,4 +69,6 @@ public interface CustomerService {
     Customer mergeCustomer(Long originalId, Long targetId, Customer customer);
 
     void backupReport();
+
+    List<ChannelReportElement> getVistedCustomerStatusReport(CustomerStatusRequest customerStatusRequest);
 }

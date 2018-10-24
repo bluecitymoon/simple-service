@@ -25,4 +25,14 @@ public class RegionUtils {
         Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
         entity.setRegionId(regionId);
     }
+
+    public static Long getRegionIdForCurrentUser() {
+
+        String regionId = RegionIdStorage.getRegionIdContext();
+        if (org.apache.commons.lang3.math.NumberUtils.isCreatable(regionId)) {
+            return Long.valueOf(regionId);
+        }
+
+        return null;
+    }
 }

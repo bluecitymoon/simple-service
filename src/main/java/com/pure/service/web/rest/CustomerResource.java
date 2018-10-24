@@ -14,6 +14,7 @@ import com.pure.service.service.UserService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.CustomerFollowLog;
+import com.pure.service.service.dto.dto.ChannelReportElement;
 import com.pure.service.service.dto.dto.CombinedReport;
 import com.pure.service.service.dto.dto.Overview;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
@@ -238,6 +239,34 @@ public class CustomerResource {
                 break;
         }
         CombinedReport report = customerService.getStatusReport(customerStatusRequest);
+
+        return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
+    @PostMapping("/customers/visited/status/report")
+    @Timed
+    public ResponseEntity<List<ChannelReportElement>> getVistedCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
+//2014-12-03T10:15:30.00Z
+        switch (customerStatusRequest.getQueryType()) {
+            case "monthly":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getYear()) || StringUtils.isEmpty(customerStatusRequest.getMonth())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+
+                preProccessStatusRequest(customerStatusRequest);
+
+                break;
+            case "dateRange":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getStartDate()) || StringUtils.isEmpty(customerStatusRequest.getEndDate())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+                break;
+            default:
+                break;
+        }
+        List<ChannelReportElement> report = customerService.getVistedCustomerStatusReport(customerStatusRequest);
 
         return new ResponseEntity<>(report, HttpStatus.OK);
     }

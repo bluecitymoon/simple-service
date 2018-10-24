@@ -14,6 +14,7 @@ import com.pure.service.domain.Student;
 import com.pure.service.domain.Task;
 import com.pure.service.domain.TaskStatus;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.CustomerCardRepository;
 import com.pure.service.repository.CustomerCollectionLogRepository;
@@ -34,6 +35,7 @@ import com.pure.service.service.FreeClassRecordService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.TaskStatusEnum;
+import com.pure.service.service.dto.dto.ChannelReportElement;
 import com.pure.service.service.dto.dto.ChartElement;
 import com.pure.service.service.dto.dto.CombinedReport;
 import com.pure.service.service.dto.dto.LocationStatusReportEntity;
@@ -309,7 +311,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CombinedReport getStatusReport(CustomerStatusRequest customerStatusRequest) {
 
         CombinedReport report = new CombinedReport();
-        List<ReportEntity> reportEntities = customerRepository.searchCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
+        List<ReportEntity> reportEntities = customerRepository.searchCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), RegionUtils.getRegionIdForCurrentUser());
 
         Map<Long, ReportElement> userBasedStatusCountMap = new HashMap<>();
         Map<String, ChartElement> codeBasedStatusCountMap = new HashMap<>();
@@ -422,7 +424,7 @@ public class CustomerServiceImpl implements CustomerService {
     public List<StatusReportElement> getLocationStatusReport(CustomerStatusRequest customerStatusRequest) {
 
         List<LocationStatusReportEntity> entities =
-            customerRepository.searchLocationCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
+            customerRepository.searchLocationCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), RegionUtils.getRegionIdForCurrentUser());
 
         Map<Long, StatusReportElement> locationBasedReportMap = new HashMap<>();
         for (LocationStatusReportEntity entity : entities) {
@@ -541,6 +543,14 @@ public class CustomerServiceImpl implements CustomerService {
         autoReassignCustomerTask.reassign();
     }
 
+    @Override
+    public List<ChannelReportElement> getVistedCustomerStatusReport(CustomerStatusRequest customerStatusRequest) {
+
+        List<ChannelReportElement> visitedTotalElements = customerRepository.searchChannelReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), RegionUtils.getRegionIdForCurrentUser());
+
+        return visitedTotalElements;
+    }
+
     private void mergeStudents(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
 
         List<Student> leftStudents = studentRepository.findByCustomer_Id(leftCustomer.getId());
@@ -641,7 +651,7 @@ public class CustomerServiceImpl implements CustomerService {
         String currentLogin = SecurityUtils.getCurrentUserLogin();
         User currentUser = userRepository.findOneByLogin(currentLogin).get();
 
-        Overview overview = customerRepository.searchCurrentUserOverview(currentUser.getId(), monthEnding, monthBeginning);
+        Overview overview = customerRepository.searchCurrentUserOverview(currentUser.getId(), monthEnding, monthBeginning, RegionUtils.getRegionIdForCurrentUser());
 
         return overview;
     }
