@@ -10,19 +10,13 @@ public class ChannelReportElement implements Serializable {
     private Integer visitedCustomerCount;
     private Integer cardCount;
     private Integer contractCount;
-    private Integer moneyCollected;
+    private Double moneyCollected;
     private Double contractMadeRate;
+    private String contractMadeRateText;
 
     public ChannelReportElement(Long channelId, String channelName, Integer visitedCustomerCount) {
         this.channelId = channelId;
         this.channelName = channelName;
-        this.visitedCustomerCount = visitedCustomerCount;
-    }
-
-    public ChannelReportElement(Long channelId, String channelName, String channelCode, Integer visitedCustomerCount) {
-        this.channelId = channelId;
-        this.channelName = channelName;
-        this.channelCode = channelCode;
         this.visitedCustomerCount = visitedCustomerCount;
     }
 
@@ -74,11 +68,11 @@ public class ChannelReportElement implements Serializable {
         this.contractCount = contractCount;
     }
 
-    public Integer getMoneyCollected() {
+    public Double getMoneyCollected() {
         return moneyCollected;
     }
 
-    public void setMoneyCollected(Integer moneyCollected) {
+    public void setMoneyCollected(Double moneyCollected) {
         this.moneyCollected = moneyCollected;
     }
 
@@ -88,5 +82,13 @@ public class ChannelReportElement implements Serializable {
 
     public void setContractMadeRate(Double contractMadeRate) {
         this.contractMadeRate = contractMadeRate;
+    }
+
+    public String getContractMadeRateText() {
+        return contractMadeRateText;
+    }
+
+    public void setContractMadeRateText(String contractMadeRateText) {
+        this.contractMadeRateText = contractMadeRateText;
     }
 }

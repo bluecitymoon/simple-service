@@ -546,8 +546,24 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<ChannelReportElement> getVistedCustomerStatusReport(CustomerStatusRequest customerStatusRequest) {
 
+        Long regionId = RegionUtils.getRegionIdForCurrentUser();
+
         List<ChannelReportElement> visitedTotalElements = customerRepository.searchChannelReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), RegionUtils.getRegionIdForCurrentUser());
 
+        for (ChannelReportElement visitedTotalElement : visitedTotalElements) {
+
+            Integer customerCardCount = customerRepository.getChannelCustomerCardCount(visitedTotalElement.getChannelId(),  regionId, customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
+            visitedTotalElement.setCardCount(customerCardCount);
+
+            Integer customerContractCount = customerRepository.getChannelCustomerContractCount(visitedTotalElement.getChannelId(), regionId, customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate());
+            visitedTotalElement.setContractCount(customerContractCount);
+
+            Double contractRate = new Double(customerContractCount) * 100 / visitedTotalElement.getVisitedCustomerCount();
+
+            BigDecimal finishRateDecimal = new BigDecimal(contractRate);
+            BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+            visitedTotalElement.setContractMadeRateText(roundedDecimal.toString() + "%");
+        }
         return visitedTotalElements;
     }
 

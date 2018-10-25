@@ -1,0 +1,52 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "month",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "year",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "channelId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "channelName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "visitedCustomerCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cardCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "contractCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "moneyCollected",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "contractMadeRate",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "regionId",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20181024090415",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "channel_report",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

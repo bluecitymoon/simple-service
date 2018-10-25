@@ -33,6 +33,14 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
     @Query(nativeQuery = true)
     List<ChannelReportElement> searchChannelReport(Instant startDate, Instant endDate, Long regionId);
 
+    @Query(nativeQuery = true, value = "select count(0) as cardCount from customer_card cc left join customer c on cc.customer_id = c.id where c.channel_id = :1 and c.region_id = :2" +
+        " and c.visit_date > :3 and c.visit_date < :4")
+    Integer getChannelCustomerCardCount(Long channelId, Long regionId, Instant startDate, Instant endDate);
+
+    @Query(nativeQuery = true, value = "select count(0) as contractCount from contract co left join customer c on co.customer_id = c.id where c.channel_id = :1 and c.region_id = :2 " +
+        " and c.visit_date > :3 and c.visit_date < :4")
+    Integer getChannelCustomerContractCount(Long channelId, Long regionId, Instant startDate, Instant endDate);
+
     Customer findByNewOrder_Id(Long newOrderId);
 
     Customer findByContactPhoneNumber(String contactPhoneNumber);

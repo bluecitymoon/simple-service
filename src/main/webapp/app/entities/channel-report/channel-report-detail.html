@@ -1,0 +1,62 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.channelReporthome.title">Channel Reports</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.channelReport.month">Month</span></dt>
+        <dd>
+            <span>{{vm.channelReport.month}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.year">Year</span></dt>
+        <dd>
+            <span>{{vm.channelReport.year}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.channelId">Channel Id</span></dt>
+        <dd>
+            <span>{{vm.channelReport.channelId}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.channelName">Channel Name</span></dt>
+        <dd>
+            <span>{{vm.channelReport.channelName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.visitedCustomerCount">Visited Customer Count</span></dt>
+        <dd>
+            <span>{{vm.channelReport.visitedCustomerCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.cardCount">Card Count</span></dt>
+        <dd>
+            <span>{{vm.channelReport.cardCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.contractCount">Contract Count</span></dt>
+        <dd>
+            <span>{{vm.channelReport.contractCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.moneyCollected">Money Collected</span></dt>
+        <dd>
+            <span>{{vm.channelReport.moneyCollected}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.contractMadeRate">Contract Made Rate</span></dt>
+        <dd>
+            <span>{{vm.channelReport.contractMadeRate}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.channelReport.regionId">Region Id</span></dt>
+        <dd>
+            <span>{{vm.channelReport.regionId}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="channel-report-detail.edit({id:vm.channelReport.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

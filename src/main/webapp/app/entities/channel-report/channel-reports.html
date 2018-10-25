@@ -1,0 +1,166 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.channelReport.home.title">Channel Reports</h1>
+</div>
+<jhi-alert></jhi-alert>
+
+<uib-tabset>
+    <uib-tab heading="查询报告-按年月">
+        <div class="panel">
+            <form class="form-horizontal">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">年份</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.searchCondition.yearObject"
+                                        ng-options="year as year.id for year in vm.years">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">月份</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" ng-model="vm.searchCondition.monthObject"
+                                        ng-options="month as month.id for month in vm.months">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 form-group">
+
+                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadReport('monthly')"><i
+                                    class="fa fa-search-minus"></i>查询
+                            </button>
+
+                        </div>
+                        <div class="col-md-2 form-group">
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </uib-tab>
+    <uib-tab heading="查询报告-按日期范围">
+        <div class="panel">
+            <form class="form-horizontal">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">开始日期</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="开始时间" class="form-control"
+                                       ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                                       ng-model="vm.searchCondition.startDate"
+                                       is-open="vm.datePickerOpenStatus.startDate">
+                            </div>
+                        </div>
+                        <div class="col-md-3 form-group">
+                            <label class="col-sm-3 control-label">结束日期</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="结束时间" class="form-control"
+                                       ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                                       ng-model="vm.searchCondition.endDate"
+                                       is-open="vm.datePickerOpenStatus.endDate">
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-3 form-group">
+
+                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadReport('dateRange')">
+                                <i
+                                        class="fa fa-search-minus"></i>查询
+                            </button>
+
+                        </div>
+                        <div class="col-md-2 form-group">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </uib-tab>
+
+</uib-tabset>
+
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.channelReport.home.title">Channel Reports</h2>-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="channel-report.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.channelReport.home.createLabel">-->
+                        <!--Create new Channel Report-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<br/>-->
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="month"><span data-translate="simpleServiceApp.channelReport.month">Month</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="year"><span data-translate="simpleServiceApp.channelReport.year">Year</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="channelId"><span data-translate="simpleServiceApp.channelReport.channelId">Channel Id</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="channelName"><span data-translate="simpleServiceApp.channelReport.channelName">Channel Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="visitedCustomerCount"><span data-translate="simpleServiceApp.channelReport.visitedCustomerCount">Visited Customer Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cardCount"><span data-translate="simpleServiceApp.channelReport.cardCount">Card Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractCount"><span data-translate="simpleServiceApp.channelReport.contractCount">Contract Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.channelReport.moneyCollected">Money Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractMadeRate"><span data-translate="simpleServiceApp.channelReport.contractMadeRate">Contract Made Rate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="regionId"><span data-translate="simpleServiceApp.channelReport.regionId">Region Id</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th></th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="channelReport in vm.channelReports track by $index">
+                    <!--<td><a ui-sref="channel-report-detail({id:channelReport.id})">{{channelReport.id}}</a></td>-->
+                    <!--<td>{{channelReport.month}}</td>-->
+                    <!--<td>{{channelReport.year}}</td>-->
+                    <!--<td>{{channelReport.channelId}}</td>-->
+                    <td>{{channelReport.channelName}}</td>
+                    <td>{{channelReport.visitedCustomerCount}}</td>
+                    <td>{{channelReport.cardCount}}</td>
+                    <td>{{channelReport.contractCount}}</td>
+                    <td>{{channelReport.moneyCollected}}</td>
+                    <td>{{channelReport.contractMadeRateText}}</td>
+                    <!--<td>{{channelReport.regionId}}</td>-->
+                    <!--<td class="text-right">-->
+                        <!--<div class="btn-group flex-btn-group-container">-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="channel-report-detail({id:channelReport.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="channel-report.edit({id:channelReport.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="channel-report.delete({id:channelReport.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--<div class="text-center">-->
+        <!--<jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>-->
+        <!--<uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>-->
+    <!--</div>-->
+</div>
+</div>

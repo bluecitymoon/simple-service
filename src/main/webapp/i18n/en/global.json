@@ -72,6 +72,7 @@
                 "customerCardUpgradeLog": "Customer Card Upgrade Log",
                 "region": "Region",
                 "userRegion": "User Region",
+                "channelReport": "Channel Report",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,30 @@
+{
+    "simpleServiceApp": {
+        "channelReport" : {
+            "home": {
+                "title": "来源性质报告",
+                "createLabel": "Create a new Channel Report",
+                "createOrEditLabel": "Create or edit a Channel Report"
+            },
+            "created": "A new Channel Report is created with identifier {{ param }}",
+            "updated": "A Channel Report is updated with identifier {{ param }}",
+            "deleted": "A Channel Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Channel Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Channel Report"
+            },
+            "month": "月份",
+            "year": "年份",
+            "channelId": "渠道Id",
+            "channelName": "来源性质",
+            "visitedCustomerCount": "到访人数",
+            "cardCount": "卡数",
+            "contractCount": "合同数",
+            "moneyCollected": "已收金额",
+            "contractMadeRate": "合同率",
+            "regionId": "Region Id"
+        }
+    }
+}

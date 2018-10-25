@@ -1,0 +1,84 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.channelReport.home.title">Channel Reports</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.channelReport.home.title">Channel Reports</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="channel-report.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.channelReport.home.createLabel">
+                        Create new Channel Report
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="month"><span data-translate="simpleServiceApp.channelReport.month">Month</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="year"><span data-translate="simpleServiceApp.channelReport.year">Year</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="channelId"><span data-translate="simpleServiceApp.channelReport.channelId">Channel Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="channelName"><span data-translate="simpleServiceApp.channelReport.channelName">Channel Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="visitedCustomerCount"><span data-translate="simpleServiceApp.channelReport.visitedCustomerCount">Visited Customer Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cardCount"><span data-translate="simpleServiceApp.channelReport.cardCount">Card Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractCount"><span data-translate="simpleServiceApp.channelReport.contractCount">Contract Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.channelReport.moneyCollected">Money Collected</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractMadeRate"><span data-translate="simpleServiceApp.channelReport.contractMadeRate">Contract Made Rate</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="regionId"><span data-translate="simpleServiceApp.channelReport.regionId">Region Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="channelReport in vm.channelReports track by channelReport.id">
+                    <td><a ui-sref="channel-report-detail({id:channelReport.id})">{{channelReport.id}}</a></td>
+                    <td>{{channelReport.month}}</td>
+                    <td>{{channelReport.year}}</td>
+                    <td>{{channelReport.channelId}}</td>
+                    <td>{{channelReport.channelName}}</td>
+                    <td>{{channelReport.visitedCustomerCount}}</td>
+                    <td>{{channelReport.cardCount}}</td>
+                    <td>{{channelReport.contractCount}}</td>
+                    <td>{{channelReport.moneyCollected}}</td>
+                    <td>{{channelReport.contractMadeRate}}</td>
+                    <td>{{channelReport.regionId}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="channel-report-detail({id:channelReport.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="channel-report.edit({id:channelReport.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="channel-report.delete({id:channelReport.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

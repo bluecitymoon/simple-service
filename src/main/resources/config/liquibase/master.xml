@@ -70,6 +70,7 @@
     <include file="config/liquibase/changelog/20181012160301_added_entity_CustomerCardUpgradeLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181015062118_added_entity_Region.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181015063736_added_entity_UserRegion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181024090415_added_entity_ChannelReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>

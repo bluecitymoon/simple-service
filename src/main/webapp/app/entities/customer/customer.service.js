@@ -40,7 +40,8 @@
             },
             'mergeCustomer': {
                 url: 'api/customers/merge', method: 'POST'
-            }
+            },
+            'getVistedCustomerStatusReport': {url: 'api/customers/visited/status/report', method: 'POST', isArray: true}
         });
     }
 })();
