@@ -1,0 +1,52 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fileName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "fullFolder",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "baseUrl",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20181026065451",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "user_guide_document",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

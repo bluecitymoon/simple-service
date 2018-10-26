@@ -1,0 +1,84 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.userGuideDocument.home.title">User Guide Documents</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.userGuideDocument.home.title">User Guide Documents</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="user-guide-document.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.userGuideDocument.home.createLabel">
+                        Create new User Guide Document
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="title"><span data-translate="simpleServiceApp.userGuideDocument.title">Title</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fileName"><span data-translate="simpleServiceApp.userGuideDocument.fileName">File Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fullUrl"><span data-translate="simpleServiceApp.userGuideDocument.fullUrl">Full Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fullFolder"><span data-translate="simpleServiceApp.userGuideDocument.fullFolder">Full Folder</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="baseUrl"><span data-translate="simpleServiceApp.userGuideDocument.baseUrl">Base Url</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.userGuideDocument.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.userGuideDocument.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.userGuideDocument.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.userGuideDocument.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.userGuideDocument.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="userGuideDocument in vm.userGuideDocuments track by userGuideDocument.id">
+                    <td><a ui-sref="user-guide-document-detail({id:userGuideDocument.id})">{{userGuideDocument.id}}</a></td>
+                    <td>{{userGuideDocument.title}}</td>
+                    <td>{{userGuideDocument.fileName}}</td>
+                    <td>{{userGuideDocument.fullUrl}}</td>
+                    <td>{{userGuideDocument.fullFolder}}</td>
+                    <td>{{userGuideDocument.baseUrl}}</td>
+                    <td>{{userGuideDocument.comments}}</td>
+                    <td>{{userGuideDocument.createdBy}}</td>
+                    <td>{{userGuideDocument.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{userGuideDocument.lastModifiedBy}}</td>
+                    <td>{{userGuideDocument.lastModifiedDate}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="user-guide-document-detail({id:userGuideDocument.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-guide-document.edit({id:userGuideDocument.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="user-guide-document.delete({id:userGuideDocument.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

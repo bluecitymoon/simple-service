@@ -1,0 +1,85 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myUserGuideDocumentLabel"
+            data-translate="simpleServiceApp.userGuideDocument.home.createOrEditLabel">Create or edit a User Guide
+            Document</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.title"
+                           for="field_title">Title</label>
+                    <input type="text" class="form-control" name="title" id="field_title"
+                           ng-model="vm.userGuideDocument.title"
+                    />
+                </div>
+            </div>
+            <div class="col-md-8">
+
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.fullUrl"
+                           for="field_fullUrl">Full Url</label>
+                    <input type="text" class="form-control" name="fullUrl" id="field_fullUrl"
+                           ng-model="vm.userGuideDocument.fullUrl"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.baseUrl"
+                           for="field_baseUrl">Base Url</label>
+                    <input type="text" class="form-control" name="baseUrl" id="field_baseUrl"
+                           ng-model="vm.userGuideDocument.baseUrl"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.fullFolder"
+                           for="field_fullFolder">Full Folder</label>
+                    <input type="text" class="form-control" name="fullFolder" id="field_fullFolder"
+                           ng-model="vm.userGuideDocument.fullFolder"
+                    />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.fileName"
+                           for="field_fileName">File Name</label>
+                    <input type="text" class="form-control" name="fileName" id="field_fileName"
+                           ng-model="vm.userGuideDocument.fileName"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.comments"
+                           for="field_comments">Comments</label>
+                    <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"
+                           ng-model="vm.userGuideDocument.comments"
+                    ></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

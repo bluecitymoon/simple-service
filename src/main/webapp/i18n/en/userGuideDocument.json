@@ -1,0 +1,30 @@
+{
+    "simpleServiceApp": {
+        "userGuideDocument" : {
+            "home": {
+                "title": "User Guide Documents",
+                "createLabel": "Create a new User Guide Document",
+                "createOrEditLabel": "Create or edit a User Guide Document"
+            },
+            "created": "A new User Guide Document is created with identifier {{ param }}",
+            "updated": "A User Guide Document is updated with identifier {{ param }}",
+            "deleted": "A User Guide Document is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete User Guide Document {{ id }}?"
+            },
+            "detail": {
+                "title": "User Guide Document"
+            },
+            "title": "Title",
+            "fileName": "File Name",
+            "fullUrl": "Full Url",
+            "fullFolder": "Full Folder",
+            "baseUrl": "Base Url",
+            "comments": "Comments",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date"
+        }
+    }
+}

@@ -1,0 +1,62 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.userGuideDocumenthome.title">User Guide Documents</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.title">Title</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.title}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.fileName">File Name</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.fileName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.fullUrl">Full Url</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.fullUrl}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.fullFolder">Full Folder</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.fullFolder}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.baseUrl">Base Url</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.baseUrl}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.userGuideDocument.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.userGuideDocument.lastModifiedDate}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="user-guide-document-detail.edit({id:vm.userGuideDocument.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>
