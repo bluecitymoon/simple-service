@@ -9,6 +9,7 @@ import com.pure.service.domain.FreeClassPlan;
 import com.pure.service.domain.FreeClassRecord;
 import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.User;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
@@ -270,6 +271,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         schedule.setComments("客户从小程序提交的预约");
         schedule.setSourceType("WeChat");
         schedule.setCreatedBy("" + customer.getId());
+        RegionUtils.setRegionAbstractAuditingRegionEntity(schedule);
 
         CustomerCommunicationSchedule savedSchedule = scheduleService.save(schedule);
 
@@ -280,6 +282,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         feedback.setGiftStatus("未领取");
         feedback.setGiftCode(giftCode);
 
+        RegionUtils.setRegionAbstractAuditingRegionEntity(feedback);
         feedbackRepository.save(feedback);
 
         return giftCode;
