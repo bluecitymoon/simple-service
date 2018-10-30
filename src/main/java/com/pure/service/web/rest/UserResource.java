@@ -2,6 +2,7 @@ package com.pure.service.web.rest;
 
 import com.pure.service.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.pure.service.domain.Authority;
 import com.pure.service.domain.User;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.security.AuthoritiesConstants;
@@ -171,6 +172,13 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public List<String> getAuthorities() {
         return userService.getAuthorities();
+    }
+
+    @GetMapping("/users/authorities/detail")
+    @Timed
+    public List<Authority> getDetailedAuthorities() {
+
+        return userService.getDetailedAuthorities();
     }
 
     /**

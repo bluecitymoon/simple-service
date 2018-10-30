@@ -63,6 +63,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    <label>可查看此文档的角色或职位</label>
+                    <ui-select multiple tagging ng-model="vm.userGuideDocument.authorities">
+                        <ui-select-match>{{$item.description}}</ui-select-match>
+                        <ui-select-choices repeat="authority in vm.authorities | filter:$select.search">
+                            {{authority.description}}
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
                     <label class="control-label" data-translate="simpleServiceApp.userGuideDocument.comments"
                            for="field_comments">Comments</label>
                     <textarea cols="6" type="text" class="form-control" name="comments" id="field_comments"

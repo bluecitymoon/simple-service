@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('simpleServiceApp')
-        .factory('UserGuideDocument', UserGuideDocument);
+        .factory('AuthorityUserGuideDocument', AuthorityUserGuideDocument);
 
-    UserGuideDocument.$inject = ['$resource', 'DateUtils'];
+    AuthorityUserGuideDocument.$inject = ['$resource', 'DateUtils'];
 
-    function UserGuideDocument ($resource, DateUtils) {
-        var resourceUrl =  'api/user-guide-documents/:id';
+    function AuthorityUserGuideDocument ($resource, DateUtils) {
+        var resourceUrl =  'api/authority-user-guide-documents/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
@@ -17,13 +17,12 @@
                     if (data) {
                         data = angular.fromJson(data);
                         data.createdDate = DateUtils.convertDateTimeFromServer(data.createdDate);
+                        data.lastModifiedDate = DateUtils.convertDateTimeFromServer(data.lastModifiedDate);
                     }
                     return data;
                 }
             },
-            'update': { method:'PUT' },
-            'saveWithAuthority': { method: 'POST', url: 'api/user-guide-documents/save-with-authority'},
-            'getAllUserGuideDocumentsWithAuthorities': { method: 'GET', url: 'api/user-guide-documents/with-authorities', isArray: true}
+            'update': { method:'PUT' }
         });
     }
 })();

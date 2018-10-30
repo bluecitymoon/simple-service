@@ -185,6 +185,7 @@ public class StudentClassServiceImpl implements StudentClassService{
         StudentClass studentClass = new StudentClass();
         studentClass.setStudent(student);
         studentClass.setProduct(clazz);
+        RegionUtils.setRegionAbstractAuditingRegionEntity(studentClass);
 
         return save(studentClass);
     }

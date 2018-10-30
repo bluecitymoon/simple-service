@@ -1,0 +1,50 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.authorityUserGuideDocumenthome.title">Authority User Guide Documents</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.authorityUserGuideDocument.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.authorityUserGuideDocument.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.authorityUserGuideDocument.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.authorityUserGuideDocument.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.authorityUserGuideDocument.comments}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.authority">Authority</span></dt>
+        <dd>
+            <a ui-sref="authority-detail({id:vm.authorityUserGuideDocument.authority.id})">{{vm.authorityUserGuideDocument.authority.description}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.authorityUserGuideDocument.userGuideDocument">User Guide Document</span></dt>
+        <dd>
+            <a ui-sref="user-guide-document-detail({id:vm.authorityUserGuideDocument.userGuideDocument.id})">{{vm.authorityUserGuideDocument.userGuideDocument.title}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="authority-user-guide-document-detail.edit({id:vm.authorityUserGuideDocument.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

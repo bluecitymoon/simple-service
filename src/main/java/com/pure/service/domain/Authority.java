@@ -2,11 +2,11 @@ package com.pure.service.domain;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 /**
@@ -18,14 +18,25 @@ import java.io.Serializable;
 public class Authority implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull
-    @Size(min = 0, max = 50)
-    @Id
-    @Column(length = 50)
+//    @Size(min = 0, max = 50)
+//    @Id
+//    @Column(length = 50)
     private String name;
 
     private String description;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

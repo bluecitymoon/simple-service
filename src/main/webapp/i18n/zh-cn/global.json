@@ -74,6 +74,7 @@
                 "userRegion": "User Region",
                 "channelReport": "Channel Report",
                 "userGuideDocument": "User Guide Document",
+                "authorityUserGuideDocument": "Authority User Guide Document",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

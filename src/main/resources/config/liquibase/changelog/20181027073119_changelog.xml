@@ -1,0 +1,82 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1540625495509-1">
+        <addColumn tableName="jhi_authority">
+            <column name="id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-2">
+        <addUniqueConstraint columnNames="name" constraintName="UK_88c2b0kkkn5l6p7880v1fek3s" tableName="jhi_authority"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-3">
+        <createIndex indexName="IX_jhi_authorityPK" tableName="jhi_authority" unique="true">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-4">
+        <addForeignKeyConstraint baseColumnNames="user_guide_document_id" baseTableName="authority_user_guide_document" constraintName="FKobpy9y831wju01mr2679grgux" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="user_guide_document"/>
+    </changeSet>
+    <!-- <changeSet author="Jerry (generated)" id="1540625495509-5">
+        <addForeignKeyConstraint baseColumnNames="authority_id" baseTableName="authority_user_guide_document" constraintName="FKrido3nqmh5w8kgphsdjuxcdkh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="jhi_authority"/>
+    </changeSet> -->
+    <changeSet author="Jerry (generated)" id="1540625495509-6">
+        <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="fk_authority_name"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-7">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="customer_consumer_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-8">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="customer_schedule_feedback"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-9">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="student_class"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-10">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="student_class_in_out_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-11">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="student_leave"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-12">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="timetable_item"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-13">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="user_guide_document"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-14">
+        <addNotNullConstraint columnDataType="varchar(50)" columnName="created_by" tableName="user_region"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-15">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="customer_consumer_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-16">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="customer_schedule_feedback"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-17">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="student_class"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-18">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="student_class_in_out_log"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-19">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="student_leave"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-20">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="timetable_item"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-21">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="user_guide_document"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1540625495509-22">
+        <addNotNullConstraint columnDataType="blob" columnName="created_date" tableName="user_region"/>
+    </changeSet>
+    <!-- <changeSet author="Jerry (generated)" id="1540625495509-23">
+        <dropNotNullConstraint columnDataType="varchar(255)" columnName="name" tableName="jhi_authority"/>
+    </changeSet> -->
+    <changeSet author="Jerry (generated)" id="1540625495509-24">
+        <dropPrimaryKey tableName="jhi_authority"/>
+        <addPrimaryKey columnNames="id" constraintName="jhi_authorityPK" tableName="jhi_authority"/>
+    </changeSet>
+</databaseChangeLog>

@@ -47,7 +47,7 @@ public class FreeClassRecordCriteria extends AbstractQueryCriteria {
 
     private String salesFollowerAssignStatus;
     private String ccAssignStatus;
-
+    private StringFilter sourceType;
     public FreeClassRecordCriteria() {
     }
 
@@ -169,6 +169,14 @@ public class FreeClassRecordCriteria extends AbstractQueryCriteria {
 
     public void setCcAssignStatus(String ccAssignStatus) {
         this.ccAssignStatus = ccAssignStatus;
+    }
+
+    public StringFilter getSourceType() {
+        return sourceType;
+    }
+
+    public void setSourceType(StringFilter sourceType) {
+        this.sourceType = sourceType;
     }
 
     @Override

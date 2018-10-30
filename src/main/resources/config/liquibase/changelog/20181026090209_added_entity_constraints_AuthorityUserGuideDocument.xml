@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity AuthorityUserGuideDocument.
+    -->
+    <changeSet id="20181026090209-2" author="jhipster">
+
+        <!--<addForeignKeyConstraint baseColumnNames="authority_id"-->
+                                 <!--baseTableName="authority_user_guide_document"-->
+                                 <!--constraintName="fk_authority_user_guide_document_authority_id"-->
+                                 <!--referencedColumnNames="id"-->
+                                 <!--referencedTableName="authority"/>-->
+
+        <addForeignKeyConstraint baseColumnNames="user_guide_document_id"
+                                 baseTableName="authority_user_guide_document"
+                                 constraintName="fk_authority_user_guide_document_user_guide_document_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_guide_document"/>
+
+    </changeSet>
+</databaseChangeLog>

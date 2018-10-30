@@ -3,11 +3,11 @@
 
     angular
         .module('simpleServiceApp')
-        .controller('UserGuideDocumentController', UserGuideDocumentController);
+        .controller('AuthorityUserGuideDocumentController', AuthorityUserGuideDocumentController);
 
-    UserGuideDocumentController.$inject = ['$uibModal', '$state', 'UserGuideDocument', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    AuthorityUserGuideDocumentController.$inject = ['$state', 'AuthorityUserGuideDocument', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function UserGuideDocumentController($uibModal, $state, UserGuideDocument, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function AuthorityUserGuideDocumentController($state, AuthorityUserGuideDocument, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -17,29 +17,10 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
-        vm.editDocument = function (userGuideDocument) {
-
-            $uibModal.open({
-                templateUrl: 'app/entities/user-guide-document/user-guide-document-dialog.html',
-                controller: 'UserGuideDocumentDialogController',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg',
-                resolve: {
-                    entity: ['UserGuideDocument', function(UserGuideDocument) {
-                        return userGuideDocument;
-                    }]
-                }
-            }).result.then(function() {
-                // $state.go('user-guide-document', null, { reload: 'user-guide-document' });
-            }, function() {
-                // $state.go('^');
-            });
-        };
         loadAll();
 
         function loadAll () {
-            UserGuideDocument.getAllUserGuideDocumentsWithAuthorities({
+            AuthorityUserGuideDocument.query({
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
                 sort: sort()
@@ -55,7 +36,7 @@
                 vm.links = ParseLinks.parse(headers('link'));
                 vm.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
-                vm.userGuideDocuments = data;
+                vm.authorityUserGuideDocuments = data;
                 vm.page = pagingParams.page;
             }
             function onError(error) {

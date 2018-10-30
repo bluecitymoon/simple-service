@@ -5,14 +5,15 @@
         .module('simpleServiceApp')
         .controller('UserGuideDocumentDialogController', UserGuideDocumentDialogController);
 
-    UserGuideDocumentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserGuideDocument'];
+    UserGuideDocumentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserGuideDocument', 'User'];
 
-    function UserGuideDocumentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UserGuideDocument) {
+    function UserGuideDocumentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, UserGuideDocument, User) {
         var vm = this;
 
         vm.userGuideDocument = entity;
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
+        vm.authorities = User.getDetailedAuthorities();
         vm.openCalendar = openCalendar;
         vm.save = save;
 
@@ -26,11 +27,11 @@
 
         function save () {
             vm.isSaving = true;
-            if (vm.userGuideDocument.id !== null) {
-                UserGuideDocument.update(vm.userGuideDocument, onSaveSuccess, onSaveError);
-            } else {
-                UserGuideDocument.save(vm.userGuideDocument, onSaveSuccess, onSaveError);
-            }
+            // if (vm.userGuideDocument.id !== null) {
+            //     UserGuideDocument.update(vm.userGuideDocument, onSaveSuccess, onSaveError);
+            // } else {
+            UserGuideDocument.saveWithAuthority(vm.userGuideDocument, onSaveSuccess, onSaveError);
+            // }
         }
 
         function onSaveSuccess (result) {

@@ -3,6 +3,7 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.UserGuideDocument;
 import com.pure.service.service.UserGuideDocumentService;
+import com.pure.service.service.dto.dto.UserGuideDocumentDto;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.UserGuideDocumentCriteria;
@@ -64,6 +65,19 @@ public class UserGuideDocumentResource {
             .body(result);
     }
 
+    @PostMapping("/user-guide-documents/save-with-authority")
+    @Timed
+    public ResponseEntity<UserGuideDocument> saveWithAuthority(@RequestBody UserGuideDocumentDto userGuideDocument) throws URISyntaxException {
+        log.debug("REST request to save UserGuideDocument : {}", userGuideDocument);
+//        if (userGuideDocument.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new userGuideDocument cannot already have an ID")).body(null);
+//        }
+        UserGuideDocument result = userGuideDocumentService.saveWithAuthorities(userGuideDocument);
+        return ResponseEntity.created(new URI("/api/user-guide-documents/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
     /**
      * PUT  /user-guide-documents : Updates an existing userGuideDocument.
      *
@@ -98,6 +112,25 @@ public class UserGuideDocumentResource {
     public ResponseEntity<List<UserGuideDocument>> getAllUserGuideDocuments(UserGuideDocumentCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get UserGuideDocuments by criteria: {}", criteria);
         Page<UserGuideDocument> page = userGuideDocumentQueryService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-guide-documents");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/user-guide-documents/mine")
+    @Timed
+    public ResponseEntity<List<UserGuideDocument>> getAllCurrentUserGuideDocuments() {
+
+        List<UserGuideDocument> page = userGuideDocumentService.getCurrentUserDocuments();
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/user-guide-documents/with-authorities")
+    @Timed
+    public ResponseEntity<List<UserGuideDocumentDto>> getAllUserGuideDocumentsWithAuthorities(UserGuideDocumentCriteria criteria, @ApiParam Pageable pageable) {
+        log.debug("REST request to get UserGuideDocuments by criteria: {}", criteria);
+        Page<UserGuideDocumentDto> page = userGuideDocumentService.searchDocumentsWithAuthorites(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/user-guide-documents");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

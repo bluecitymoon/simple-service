@@ -29,6 +29,10 @@
         vm.sales = User.getAllSales();
         vm.showUploadTextArea = false;
         vm.customerStatus = CustomerStatus.query();
+        vm.sourceTypes = [
+            {id: 1, name: "小程序", code: "WeChat"},
+            {id: 2, name: "非小程序", code: null}
+        ];
         vm.salesAssignStatusList = [
 
             {name: "已分配", code: "assigned"},
@@ -36,7 +40,8 @@
         ];
 
 
-        vm.openCalendar = openCalendar;         vm.datePickerOptions = {             showMeridian: false         };
+        vm.openCalendar = openCalendar;
+        vm.datePickerOptions = {             showMeridian: false         };
         vm.datePickerOptions = {
             showMeridian: false
         };
@@ -174,6 +179,9 @@
 
             if (vm.searchCondition.customerStatus) {
                 vm.parameters["status.equals"] = vm.searchCondition.customerStatus.name;
+            }
+            if (vm.searchCondition.sourceType) {
+                vm.parameters["sourceType.equals"] = vm.searchCondition.sourceType.code;
             }
             FreeClassRecord.query(vm.parameters, onSuccess, onError);
 

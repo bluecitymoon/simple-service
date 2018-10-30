@@ -3,6 +3,7 @@ package com.pure.service.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -72,7 +73,7 @@ public class FreeClassRecord extends AbstractAuditingRegionEntity {
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "free_class_record_class_category",
                joinColumns = @JoinColumn(name="free_class_records_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="class_categories_id", referencedColumnName="id"))

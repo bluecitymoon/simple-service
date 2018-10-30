@@ -165,6 +165,20 @@
                         </ui-select>
                     </div>
                 </div>
+
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">数据来源</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.sourceType">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.sourceTypes | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

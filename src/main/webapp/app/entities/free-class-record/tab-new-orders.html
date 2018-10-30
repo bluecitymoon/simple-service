@@ -72,6 +72,7 @@
                     <th jh-sort-by="contactPhoneNumber"><span
                             data-translate="simpleServiceApp.freeClassRecord.contactPhoneNumber">Contact Phone Number</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>预约课程</th>
                     <th>学校</th>
                     <th jh-sort-by="createdBy"><span>引入人</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -101,7 +102,13 @@
                     <!--<td><a ui-sref="free-class-record-detail({id:freeClassRecord.id})">{{freeClassRecord.id}}</a></td>-->
                     <td>{{freeClassRecord.personName}}</td>
                     <td>{{freeClassRecord.contactPhoneNumber}}</td>
+
+                    <td><span ng-repeat="classCategory in freeClassRecord.classCategories">
+                            <a ui-sref="class-category-detail({id: classCategory.id})">{{classCategory.name}}</a>{{$last ? '' : ', '}}
+                        </span>
+                    </td>
                     <td>{{freeClassRecord.school}}</td>
+
                     <td>{{freeClassRecord.referer.firstName}}</td>
                     <td>{{freeClassRecord.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <!--<td>{{freeClassRecord.lastModifiedBy}}</td>-->

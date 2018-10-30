@@ -34,6 +34,11 @@
                 url: "api/users/role/ROLE_COURSE_CONSULTANT",
                 method: 'GET',
                 isArray: true
+            },
+            'getDetailedAuthorities': {
+                url: 'api/users/authorities/detail',
+                method: 'GET',
+                isArray: true
             }
         });
 

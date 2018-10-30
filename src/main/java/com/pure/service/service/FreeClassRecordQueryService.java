@@ -119,6 +119,9 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             if (criteria.getAgentId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getAgentId(), FreeClassRecord_.referer, User_.id));
             }
+            if (criteria.getSourceType() != null) {
+                specification = specification.and(buildStringSpecification(criteria.getSourceType(), FreeClassRecord_.sourceType));
+            }
         }
         return specification;
     }

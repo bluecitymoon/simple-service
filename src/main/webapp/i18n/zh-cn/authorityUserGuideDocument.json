@@ -1,0 +1,27 @@
+{
+    "simpleServiceApp": {
+        "authorityUserGuideDocument" : {
+            "home": {
+                "title": "Authority User Guide Documents",
+                "createLabel": "Create a new Authority User Guide Document",
+                "createOrEditLabel": "Create or edit a Authority User Guide Document"
+            },
+            "created": "A new Authority User Guide Document is created with identifier {{ param }}",
+            "updated": "A Authority User Guide Document is updated with identifier {{ param }}",
+            "deleted": "A Authority User Guide Document is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Authority User Guide Document {{ id }}?"
+            },
+            "detail": {
+                "title": "Authority User Guide Document"
+            },
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date",
+            "comments": "Comments",
+            "authority": "Authority",
+            "userGuideDocument": "User Guide Document"
+        }
+    }
+}
