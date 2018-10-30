@@ -21,10 +21,14 @@ public class RegionInsertAspect {
 
         log.debug("Insert: set region id for " + joinPoint.getSignature().getName() + " class name " + joinPoint.getTarget().getClass().toGenericString());
 
+        if (RegionIdStorage.getRegionIdContext() == null) {
+            return;
+        }
         Object firstArgument = joinPoint.getArgs()[0];
         if (firstArgument instanceof AbstractAuditingRegionEntity) {
 
             log.debug("The criteria is region based, setting region id.");
+
 
             Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
             ((AbstractAuditingRegionEntity) firstArgument).setRegionId(regionId);
