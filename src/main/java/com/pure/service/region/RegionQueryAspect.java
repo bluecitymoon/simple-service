@@ -24,8 +24,13 @@ public class RegionQueryAspect {
         if (firstArgument instanceof AbstractQueryCriteria) {
 
             log.debug("The criteria is region based, setting region id.");
+            Long regionId;
 
-            Long regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
+            if (RegionIdStorage.getRegionIdContext() == null) {
+                regionId = 1L;
+            } else {
+                regionId = Long.valueOf(RegionIdStorage.getRegionIdContext());
+            }
 
             LongFilter regionIdFilter = new LongFilter();
             regionIdFilter.setEquals(regionId);
