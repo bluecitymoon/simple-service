@@ -4,6 +4,7 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
+import com.pure.service.service.dto.request.BatchReassignClassArrangement;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +56,6 @@ public interface ClassArrangementService {
     void createClassSchedule(ClassArrangementRule rule);
 
     void fixupClassArrangements();
+
+    void reassignClassArrangements(BatchReassignClassArrangement request);
 }

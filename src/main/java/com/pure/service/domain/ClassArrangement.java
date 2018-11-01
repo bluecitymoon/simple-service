@@ -97,7 +97,18 @@ public class ClassArrangement extends AbstractAuditingRegionEntity {
     @ManyToOne
     private Product clazz;
 
+//    @ManyToOne
+//    private TimeSegment timeSegment;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+//    public TimeSegment getTimeSegment() {
+//        return timeSegment;
+//    }
+//
+//    public void setTimeSegment(TimeSegment timeSegment) {
+//        this.timeSegment = timeSegment;
+//    }
+
     public Long getId() {
         return id;
     }

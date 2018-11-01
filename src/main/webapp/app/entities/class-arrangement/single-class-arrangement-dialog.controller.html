@@ -3,112 +3,30 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myContractLabel">排课</h4>
+        <!--<h4 class="modal-title" id="myContractLabel">排课管理</h4>-->
     </div>
 
     <jhi-alert></jhi-alert>
 
     <div class="modal-body">
 
-        <div class="row">
-            <div class="col-md-9">
+        <uib-tabset>
+            <uib-tab heading="排课">
 
-                <label>班级</label>
-                <div class="input-group mar-btm">
+                <div ng-include="'app/entities/class-arrangement/new-class-arrangment-dialog-tab.html'"></div>
+            </uib-tab>
+            <uib-tab heading="更换班级">
+                <div ng-include="'app/entities/class-arrangement/class-arrangment-reassign-class-tab.html'"></div>
+            </uib-tab>
+        </uib-tabset>
 
-                    <ui-select ng-model="vm.classArrangementRule.targetClass">
-                        <ui-select-match>
-                            {{$select.selected.name}}
-                        </ui-select-match>
-                        <ui-select-choices repeat="item in (vm.products | filter: $select.search) track by item.id">
-                            <span ng-bind="item.name"></span>
-                        </ui-select-choices>
-                    </ui-select>
-
-                    <span class="input-group-btn">
-                        <a class="btn btn-mint" type="button" ng-click="vm.openAddClassDialog()">
-                                        录入新班 <i class="glyphicon glyphicon-plus"></i>
-                                    </a>
-                    </span>
-                </div>
-
-            </div>
-            <div class="col-md-3">
-
-                <div class="form-group">
-                    <label class="control-label" for="consumeClassCount">耗课节数（默认耗2节课）</label>
-                    <input type="text" class="form-control" name="consumeClassCount" id="consumeClassCount"
-                           ng-model="vm.classArrangementRule.consumeClassCount"
-                    />
-                </div>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label"
-                           data-translate="simpleServiceApp.classArrangementRule.estimateStartDate"
-                           for="field_estimateStartDate">Estimate Start Date</label>
-                    <div class="input-group">
-                        <input id="field_estimateStartDate" type="text" class="form-control" name="estimateStartDate"
-                               datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.classArrangementRule.estimateStartDate"
-                               is-open="vm.datePickerOpenStatus.estimateStartDate" ng-focus="vm.openCalendar('estimateStartDate')"
-                        />
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('estimateStartDate')"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">预计结束日期</label>
-                    <div class="input-group">
-                        <input id="field_estimateEndDate" type="text" class="form-control" name="estimateEndDate"
-                               datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"  ng-model="vm.classArrangementRule.estimateEndDate"
-                               is-open="vm.datePickerOpenStatus.estimateEndDate" ng-focus="vm.openCalendar('estimateEndDate')"
-                        />
-                        <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('estimateEndDate')"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                    </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label"
-                           data-translate="simpleServiceApp.classArrangementRule.estimateStartTime"
-                           for="field_estimateStartTime">Estimate Start Time</label>
-                    <input type="text" class="form-control" name="estimateStartTime" id="field_estimateStartTime"
-                           ng-model="vm.classArrangementRule.estimateStartTime" readonly
-                    />
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label"
-                           data-translate="simpleServiceApp.classArrangementRule.estimateEndTime"
-                           for="field_estimateEndTime">Estimate Start Time</label>
-                    <input type="text" class="form-control" name="estimateEndTime" id="field_estimateEndTime"
-                           ng-model="vm.classArrangementRule.estimateEndTime" readonly
-                    />
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
-                data-translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定</span>
-        </button>
-    </div>
+    <!--<div class="modal-footer">-->
+        <!--<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">-->
+            <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span-->
+                <!--data-translate="entity.action.cancel">Cancel</span>-->
+        <!--</button>-->
+
+    <!--</div>-->
 </form>

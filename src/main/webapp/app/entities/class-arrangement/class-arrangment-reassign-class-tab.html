@@ -1,0 +1,59 @@
+<div class="pad-lft pad-rgt">
+    <div class="panel panel-bordered-mint">
+
+        <div class="panel-body">
+
+            <div class="row pad-all">
+
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+
+                    <div class="input-group mar-btm">
+
+                        <ui-select ng-model="vm.updatedClassArrangement.targetClass">
+                            <ui-select-match>
+                                {{$select.selected.name}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.products | filter: $select.search) track by item.id">
+                                <span ng-bind="item.name"></span>
+                            </ui-select-choices>
+                        </ui-select>
+
+                        <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button" ng-click="vm.reassignClassArrangements()">确定更换班级</button>
+				</span>
+                    </div>
+                </div>
+
+                <div class="col-md-1"></div>
+
+            </div>
+
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr>
+                    <th>预计上课开始时间</th>
+                    <th>预计上课结束时间</th>
+                    <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label for="email-list-all">全选</label>
+                    </th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id">
+                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td class="text-center">
+                        <input id="email-list-{{classArrangement.id}}" type="checkbox" class="magic-checkbox"
+                               ng-model="classArrangement.selected">
+                        <label for="email-list-{{classArrangement.id}}"></label>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</div>

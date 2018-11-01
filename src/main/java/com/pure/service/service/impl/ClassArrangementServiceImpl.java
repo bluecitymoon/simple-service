@@ -4,6 +4,7 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.domain.ClassArrangementStatus;
 import com.pure.service.domain.ClassRoom;
+import com.pure.service.domain.StudentClassLog;
 import com.pure.service.region.RegionIdStorage;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
@@ -11,11 +12,15 @@ import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.repository.ClassRoomRepository;
 import com.pure.service.repository.ProductRepository;
 import com.pure.service.service.ClassArrangementService;
+import com.pure.service.service.StudentClassLogQueryService;
+import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.dto.ClassroomDto;
+import com.pure.service.service.dto.request.BatchReassignClassArrangement;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +65,43 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private StudentClassLogQueryService studentClassLogQueryService;
+
     public ClassArrangementServiceImpl(ClassArrangementRepository classArrangementRepository) {
         this.classArrangementRepository = classArrangementRepository;
     }
 
+    @Override
+    public void reassignClassArrangements(BatchReassignClassArrangement request) {
+
+        List<ClassArrangement> arrangements = new ArrayList<>();
+        List<ClassArrangement> arrangementList = request.getArrangements();
+
+        for (ClassArrangement classArrangement : arrangementList) {
+
+            StudentClassLogCriteria studentClassLogCriteria = new StudentClassLogCriteria();
+
+            LongFilter arrangementId = new LongFilter();
+            arrangementId.setEquals(classArrangement.getId());
+
+            studentClassLogCriteria.setArrangementId(arrangementId);
+
+            List<StudentClassLog> logs = studentClassLogQueryService.findByCriteria(studentClassLogCriteria);
+            if (CollectionUtils.isEmpty(logs)) {
+
+                classArrangement.setClazz(request.getNewClass());
+
+                arrangements.add(classArrangement);
+            }
+
+            if (!CollectionUtils.isEmpty(arrangements)) {
+
+                classArrangementRepository.save(arrangements);
+            }
+
+        }
+    }
     /**
      * Save a classArrangement.
      *
@@ -263,6 +301,8 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             classArrangementRepository.save(classArrangement);
         }
     }
+
+
 
     private ClassSchedule findClassInRange(List<ClassSchedule> roomClasses, Instant classStart, Instant classEnd) {
 

@@ -16,6 +16,18 @@
             estimateEndTime: $scope.dialogSchedule.end,
             consumeClassCount: 2
         };
+        vm.classArrangements = [];
+        vm.updatedClassArrangement = {
+            targetClass: null
+        };
+        vm.allSelected = false;
+
+        vm.toggleAll = function () {
+            angular.forEach(vm.classArrangements, function (arrangement) {
+                arrangement.selected = vm.allSelected;
+            });
+        };
+
         vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
@@ -76,6 +88,46 @@
             });
         };
 
+        function loadAllClassArrangements() {
+
+            console.log($scope.dialogSchedule.classSchedule);
+
+            ClassArrangement.query({"clazzId.equals": $scope.dialogSchedule.classSchedule.classId, size: 1000, page: 0, "startTime": $scope.dialogSchedule.start, "endTime": $scope.dialogSchedule.end}, function (arrangements) {
+                vm.classArrangements = arrangements;
+            });
+
+        }
+        loadAllClassArrangements();
+
+        vm.reassignClassArrangements = function () {
+
+            var selectedArrangements = [];
+            angular.forEach(vm.classArrangements, function (arrangement) {
+
+                if (arrangement.selected) {
+                    selectedArrangements.push(arrangement);
+                }
+            });
+
+            if (selectedArrangements.length == 0) {
+                AlertService.error("未选中需要更换班级的排课");
+            }
+
+            if (vm.updatedClassArrangement.targetClass == null) {
+                AlertService.error("未选中目标班级");
+            }
+            var request = {
+                arrangements: selectedArrangements,
+                newClass: vm.updatedClassArrangement.targetClass
+            };
+
+            ClassArrangement.reassignClassArrangements(request, function (data) {
+                AlertService.success("更换成功!");
+                $scope.$emit('simpleServiceApp:classArrangementsGenerated');
+            }, function (error) {
+                AlertService.showCommonError(error);
+            });
+        };
         var unsubscribe = $rootScope.$on('simpleServiceApp:productUpdate', function(event, result) {
             loadClassInClassRoom();
         });

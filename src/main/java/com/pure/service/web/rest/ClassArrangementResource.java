@@ -10,6 +10,7 @@ import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.dto.ClassArrangementCriteria;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
+import com.pure.service.service.dto.request.BatchReassignClassArrangement;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
 import com.pure.service.web.rest.util.HeaderUtil;
@@ -25,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,7 @@ import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,6 +90,17 @@ public class ClassArrangementResource {
             .body(result);
     }
 
+    @PostMapping("/class-arrangements/batch-reassign")
+    @Timed
+//    @RegionBasedInsert
+    public ResponseEntity<Void> reassignClassArrangements(@RequestBody BatchReassignClassArrangement request) {
+
+        log.debug("REST request to reassign Class Arrangements : {}", request);
+        classArrangementService.reassignClassArrangements(request);
+
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/class-arrangements/generate-by-rule/{id}")
     @Timed
     public ResponseEntity<Void> createClassArrangementsByRule(@PathVariable Long id) {
@@ -131,10 +145,55 @@ public class ClassArrangementResource {
     public ResponseEntity<List<ClassArrangement>> getAllClassArrangements(ClassArrangementCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get ClassArrangements by criteria: {}", criteria);
         Page<ClassArrangement> page = classArrangementQueryService.findByCriteria(criteria, pageable);
+
+        List<ClassArrangement> filteredClassArrangements = filterClassArrangements(page.getContent(), criteria);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/class-arrangements");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(filteredClassArrangements, headers, HttpStatus.OK);
     }
 
+    private List<ClassArrangement> filterClassArrangements(List<ClassArrangement> content, ClassArrangementCriteria criteria) {
+
+        if (CollectionUtils.isEmpty(content)) {
+            return content;
+        }
+        List<ClassArrangement> result = new ArrayList<>();
+
+        String startTime = criteria.getStartTime(), endTime = criteria.getEndTime();
+        if (StringUtils.isEmpty(startTime) && StringUtils.isEmpty(endTime)) {
+            return content;
+        }
+
+        for (ClassArrangement classArrangement : content) {
+
+            if (!StringUtils.isEmpty(startTime) && !StringUtils.isEmpty(endTime)) {
+
+                if (sameTimeInstant(classArrangement.getStartDate(), startTime) && sameTimeInstant(classArrangement.getEndDate(), endTime)) {
+
+                    result.add(classArrangement);
+                }
+            } else {
+
+                result.add(classArrangement);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean sameTimeInstant(Instant targetInstant, String filterTime) {
+
+
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(targetInstant, DateUtil.defaultShanghaiZoneId);
+        int hour = localDateTime.getHour(), minute = localDateTime.getMinute();
+
+        String[] hourMinutes = filterTime.split(":");
+        int targetHour = Integer.valueOf(hourMinutes[0]), targetMinute = Integer.valueOf(hourMinutes[1]);
+
+        boolean isEquals = (hour == targetHour && minute == targetMinute);
+
+        return isEquals;
+    }
     @GetMapping("/class-arrangements/by-class-id/{id}")
     @Timed
     public ResponseEntity<List<ClassArrangement>> getAllClassArrangementsByProductId(@PathVariable Long id) {
