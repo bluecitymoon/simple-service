@@ -128,6 +128,37 @@
                 AlertService.showCommonError(error);
             });
         };
+
+        vm.deleteClassArrangements = function () {
+
+            var selectedArrangements = [];
+            angular.forEach(vm.classArrangements, function (arrangement) {
+
+                if (arrangement.selected) {
+                    selectedArrangements.push(arrangement);
+                }
+            });
+
+            if (selectedArrangements.length == 0) {
+                AlertService.error("未选中需要更换班级的排课");
+            }
+
+            var request = {
+                arrangements: selectedArrangements,
+                newClass: null
+            };
+
+            ClassArrangement.deleteClassArrangements(request, function (data) {
+                AlertService.success("删除成功!");
+                $scope.$emit('simpleServiceApp:classArrangementsGenerated');
+
+                loadAllClassArrangements();
+
+            }, function (error) {
+                AlertService.showCommonError(error);
+            });
+        };
+
         var unsubscribe = $rootScope.$on('simpleServiceApp:productUpdate', function(event, result) {
             loadClassInClassRoom();
         });

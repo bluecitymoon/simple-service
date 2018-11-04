@@ -34,7 +34,8 @@
             'update': { method:'PUT' },
             'generateClassSchedule': { url: 'api/class-arrangements/generate-by-rule/:id', method: 'GET'},
             'createClassSchedule': { url: 'api/class-arrangements/create-schedule', method: 'POST'},
-            'reassignClassArrangements': { url: 'api/class-arrangements/batch-reassign', method: 'POST'}
+            'reassignClassArrangements': { url: 'api/class-arrangements/batch-reassign', method: 'POST'},
+            'deleteClassArrangements': { url: 'api/class-arrangements/batch-delete', method: 'POST'}
         });
     }
 })();

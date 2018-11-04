@@ -101,6 +101,18 @@ public class ClassArrangementResource {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/class-arrangements/batch-delete")
+    @Timed
+//    @RegionBasedInsert
+    public ResponseEntity<Void> deleteClassArrangements(@RequestBody BatchReassignClassArrangement request) {
+
+        log.debug("REST request to reassign Class Arrangements : {}", request);
+        classArrangementService.deleteClassArrangements(request);
+
+        return ResponseEntity.ok().build();
+    }
+
+
     @GetMapping("/class-arrangements/generate-by-rule/{id}")
     @Timed
     public ResponseEntity<Void> createClassArrangementsByRule(@PathVariable Long id) {

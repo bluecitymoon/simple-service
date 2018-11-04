@@ -58,4 +58,6 @@ public interface ClassArrangementService {
     void fixupClassArrangements();
 
     void reassignClassArrangements(BatchReassignClassArrangement request);
+
+    void deleteClassArrangements(BatchReassignClassArrangement request);
 }

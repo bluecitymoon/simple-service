@@ -102,6 +102,35 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
         }
     }
+
+    @Override
+    public void deleteClassArrangements(BatchReassignClassArrangement request) {
+        List<ClassArrangement> arrangementList = request.getArrangements();
+        List<ClassArrangement> arrangements = new ArrayList<>();
+
+        for (ClassArrangement classArrangement : arrangementList) {
+
+            StudentClassLogCriteria studentClassLogCriteria = new StudentClassLogCriteria();
+
+            LongFilter arrangementId = new LongFilter();
+            arrangementId.setEquals(classArrangement.getId());
+
+            studentClassLogCriteria.setArrangementId(arrangementId);
+
+            List<StudentClassLog> logs = studentClassLogQueryService.findByCriteria(studentClassLogCriteria);
+            if (CollectionUtils.isEmpty(logs)) {
+
+                arrangements.add(classArrangement);
+            }
+
+            if (!CollectionUtils.isEmpty(arrangements)) {
+
+                classArrangementRepository.delete(arrangements);
+            }
+
+        }
+    }
+
     /**
      * Save a classArrangement.
      *
