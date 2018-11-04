@@ -238,7 +238,7 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         if (!hasUnCheckedSchedule) {
 
             CustomerCommunicationSchedule schedule = new CustomerCommunicationSchedule();
-
+            RegionUtils.setRegionAbstractAuditingRegionEntity(schedule);
             Customer customer = customerRepository.findOne(id);
             schedule.setCustomer(customer);
 
