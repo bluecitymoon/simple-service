@@ -220,11 +220,11 @@ public class CustomerCommunicationScheduleServiceImpl implements CustomerCommuni
         List<CustomerCommunicationSchedule> customerCommunicationSchedules = customerCommunicationScheduleQueryService.findByCriteria(customerCommunicationScheduleCriteria);
 
         //TODO eating shit requirement
-        for (CustomerCommunicationSchedule schedule : customerCommunicationSchedules) {
-            if (schedule.getActuallMeetDate() != null) {
-                throw new RuntimeException("该客户无需再签到");
-            }
-        }
+//        for (CustomerCommunicationSchedule schedule : customerCommunicationSchedules) {
+//            if (schedule.getActuallMeetDate() != null) {
+//                throw new RuntimeException("该客户无需再签到");
+//            }
+//        }
         for (CustomerCommunicationSchedule customerCommunicationSchedule : customerCommunicationSchedules) {
             if (customerCommunicationSchedule.getActuallMeetDate() == null) {
 
