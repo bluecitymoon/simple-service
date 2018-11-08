@@ -184,7 +184,7 @@ public class UserService {
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
-                    .map(authorityRepository::findOne)
+                    .map(authorityRepository::findByName)
                     .forEach(managedAuthorities::add);
                 log.debug("Changed Information for User: {}", user);
                 return user;
