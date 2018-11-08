@@ -12,4 +12,6 @@ import java.util.List;
 public interface AuthorityRepository extends JpaRepository<Authority, String> {
 
     List<Authority> findByNameIn(List<String> authorityNames);
+
+    Authority findByName(String name);
 }

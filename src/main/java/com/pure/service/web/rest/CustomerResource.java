@@ -185,6 +185,15 @@ public class CustomerResource {
         return customerService.getCurrentUserOverview();
     }
 
+    @GetMapping("/customers/fixupCreatedDateIssue")
+    @Timed
+    public ResponseEntity fixupCreatedDateIssue() {
+
+        customerService.fixupCreatedDateIssue();
+
+        return ResponseEntity.ok().build();
+    }
+
     private void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
 
         Integer month = customerStatusRequest.getMonth();

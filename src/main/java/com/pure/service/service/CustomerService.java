@@ -71,4 +71,6 @@ public interface CustomerService {
     void backupReport();
 
     List<ChannelReportElement> getVistedCustomerStatusReport(CustomerStatusRequest customerStatusRequest);
+
+    void fixupCreatedDateIssue();
 }

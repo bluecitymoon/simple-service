@@ -567,6 +567,11 @@ public class CustomerServiceImpl implements CustomerService {
         return visitedTotalElements;
     }
 
+    @Override
+    public void fixupCreatedDateIssue() {
+
+    }
+
     private void mergeStudents(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
 
         List<Student> leftStudents = studentRepository.findByCustomer_Id(leftCustomer.getId());
