@@ -34,12 +34,13 @@ import java.util.Objects;
             " order by ca.start_date asc",
         resultSetMapping = "scheduleMapping"),
     @NamedNativeQuery(name = "ClassArrangement.getAllSchedulesByRange",
-        query = "select  ca.id as arrangementId, p.id as classId, concat(DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i'),  ' ', p.name, ' ', t.name) as title, p.name as className, p.students_reach_max_numbers as fullTag, cs.name as statusTag, t.name as teacherName, ca.start_date as start, ca.end_date as end, cr.name as classroomName, cr.id as classroomId, c.name as courseName\n" +
+        query = "select  ca.id as arrangementId, p.id as classId, concat(DATE_FORMAT(start_date,'%H:%i'), '-', DATE_FORMAT(end_date,'%H:%i'),  ' ', p.name, ' ', t.name) as title, p.name as className, p.students_reach_max_numbers as fullTag, cs.name as statusTag, t.name as teacherName, ca.start_date as start, ca.end_date as end, cr.name as classroomName, cr.id as classroomId, ccb.name as courseName\n" +
             " from class_arrangement ca\n" +
             " cross join product p on ca.clazz_id = p.id\n" +
             " cross join teacher t on ca.planed_teacher_id = t.id\n" +
             " cross join class_room cr on p.class_room_id = cr.id\n" +
             " cross join course c on p.course_id = c.id\n" +
+            " left join class_category_base ccb on c.class_category_base_id = ccb.id\n" +
             " left join class_status cs on cs.id = p.status_id \n" +
             " where ca.start_date > :1\n" +
             " and ca.end_date < :2\n" +

@@ -40,7 +40,6 @@
                         <tr>
                             <td>09:00-10:30</td>
                             <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.morningFirstHalf">
-
                                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
 
                                         <li class="nav-item" uib-dropdown style="width: 100%">
@@ -49,6 +48,8 @@
                                                 {{mf.className || '&nbsp;&nbsp;'}}
                                                 <label ng-if="mf.statusTag" class="label label-default" style="font-size: 0.6em">{{mf.statusTag}}</label>
                                                 <label ng-if="mf.fullTag" class="label label-mint font-weight-bold" style="font-size: 0.6em">{{mf.fullTag}}</label>
+                                                <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
+
                                             </button>
 
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
@@ -91,6 +92,8 @@
                                                 {{mf.className || '&nbsp;&nbsp;'}}
                                                 <label ng-if="mf.statusTag" class="label label-default" style="font-size: 0.6em">{{mf.statusTag}}</label>
                                                 <label ng-if="mf.fullTag" class="label label-mint font-weight-bold" style="font-size: 0.6em">{{mf.fullTag}}</label>
+                                                <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
+
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
@@ -139,6 +142,8 @@
                                                 {{mf.className || '&nbsp;&nbsp;'}}
                                                 <label ng-if="mf.statusTag" class="label label-default" style="font-size: 0.6em">{{mf.statusTag}}</label>
                                                 <label ng-if="mf.fullTag" class="label label-mint font-weight-bold" style="font-size: 0.6em">{{mf.fullTag}}</label>
+                                                <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
+
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
@@ -181,6 +186,8 @@
                                                 {{mf.className || '&nbsp;&nbsp;'}}
                                                 <label ng-if="mf.statusTag" class="label label-default" style="font-size: 0.6em">{{mf.statusTag}}</label>
                                                 <label ng-if="mf.fullTag" class="label label-mint font-weight-bold" style="font-size: 0.6em">{{mf.fullTag}}</label>
+                                                <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
+
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
                                                 <li ui-sref-active="active">
@@ -212,6 +219,8 @@
                         <tr>
                             <td>16:30-18:00</td>
                             <td class="{{mf.statusColor}} text-center" ng-repeat="mf in weekday.afternoonThiredHalf">
+
+
                                 <!--<div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">-->
                                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
 
@@ -221,6 +230,9 @@
                                                 {{mf.className || '&nbsp;&nbsp;'}}
                                                 <label ng-if="mf.statusTag" class="label label-default" style="font-size: 0.6em">{{mf.statusTag}}</label>
                                                 <label ng-if="mf.fullTag" class="label label-mint font-weight-bold" style="font-size: 0.6em">{{mf.fullTag}}</label>
+
+                                                <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
+
                                             </button>
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
 
@@ -266,6 +278,8 @@
                                                 {{mf.className || '&nbsp;&nbsp;'}}
                                                 <label ng-if="mf.statusTag" class="label label-default" style="font-size: 0.6em">{{mf.statusTag}}</label>
                                                 <label ng-if="mf.fullTag" class="label label-mint font-weight-bold" style="font-size: 0.6em">{{mf.fullTag}}</label>
+                                                <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
+
                                             </button>
 
                                             <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>

@@ -19,4 +19,7 @@ public interface StudentClassRepository extends JpaRepository<StudentClass, Long
 
     List<StudentClass> findByProduct_Id(Long classId);
 
+    @Query(nativeQuery = true, value = "select count(0) as studentCount from student_class where product_id = :1")
+    Integer getStudentCountInClass(Long classId);
+
 }

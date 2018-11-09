@@ -26,6 +26,12 @@
                     />
         </div>
 
+        <div class="form-group">
+            <label data-translate="simpleServiceApp.course.classCategoryBase" for="field_classCategoryBase">Class Category Base</label>
+            <select class="form-control" id="field_classCategoryBase" name="classCategoryBase" ng-model="vm.course.classCategoryBase" ng-options="classCategoryBase as classCategoryBase.name for classCategoryBase in vm.classcategorybases track by classCategoryBase.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

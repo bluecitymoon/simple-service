@@ -11,6 +11,7 @@ import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.repository.ClassRoomRepository;
 import com.pure.service.repository.ProductRepository;
+import com.pure.service.repository.StudentClassRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.dto.StudentClassLogCriteria;
@@ -67,6 +68,9 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     @Autowired
     private StudentClassLogQueryService studentClassLogQueryService;
+
+    @Autowired
+    private StudentClassRepository studentClassRepository;
 
     public ClassArrangementServiceImpl(ClassArrangementRepository classArrangementRepository) {
         this.classArrangementRepository = classArrangementRepository;
@@ -285,6 +289,10 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                     } else {
 
                         periodSchedule.setClickable(true);
+
+                        Integer studentCount = studentClassRepository.getStudentCountInClass(periodSchedule.getClassId());
+                        periodSchedule.setStudentCount(studentCount);
+
                         classNameElements.add(periodSchedule);
 
                         if (!foundTeacher) {
@@ -293,6 +301,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
                             singledDay.getCourses().add(periodSchedule.getCourseName());
                         }
                         foundTeacher = true;
+
                     }
                 }
 

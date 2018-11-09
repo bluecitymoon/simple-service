@@ -19,6 +19,7 @@ public class ClassSchedule implements Serializable {
     private String courseName;
     private Boolean allDay = true;
     private Boolean clickable = false;
+    private Integer studentCount;
 
     public ClassSchedule() {
     }
@@ -97,6 +98,14 @@ public class ClassSchedule implements Serializable {
         this.start = start;
         this.end = end;
         this.allDay = allDay;
+    }
+
+    public Integer getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(Integer studentCount) {
+        this.studentCount = studentCount;
     }
 
     public String getFullTag() {

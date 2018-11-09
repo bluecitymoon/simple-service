@@ -1,13 +1,10 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
+
+import java.io.Serializable;
 
 
 
@@ -31,6 +28,8 @@ public class CourseCriteria implements Serializable {
     private StringFilter name;
 
     private StringFilter code;
+
+    private LongFilter classCategoryBaseId;
 
     public CourseCriteria() {
     }
@@ -59,12 +58,21 @@ public class CourseCriteria implements Serializable {
         this.code = code;
     }
 
+    public LongFilter getClassCategoryBaseId() {
+        return classCategoryBaseId;
+    }
+
+    public void setClassCategoryBaseId(LongFilter classCategoryBaseId) {
+        this.classCategoryBaseId = classCategoryBaseId;
+    }
+
     @Override
     public String toString() {
         return "CourseCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (code != null ? "code=" + code + ", " : "") +
+                (classCategoryBaseId != null ? "classCategoryBaseId=" + classCategoryBaseId + ", " : "") +
             "}";
     }
 

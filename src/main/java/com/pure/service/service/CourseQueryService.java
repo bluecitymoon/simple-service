@@ -78,6 +78,9 @@ public class CourseQueryService extends QueryService<Course> {
             if (criteria.getCode() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getCode(), Course_.code));
             }
+            if (criteria.getClassCategoryBaseId() != null) {
+                specification = specification.and(buildReferringEntitySpecification(criteria.getClassCategoryBaseId(), Course_.classCategoryBase, ClassCategoryBase_.id));
+            }
         }
         return specification;
     }

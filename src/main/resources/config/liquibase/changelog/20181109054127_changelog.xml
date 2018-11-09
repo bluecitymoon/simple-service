@@ -1,0 +1,12 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1541742106371-1">
+        <addColumn tableName="course">
+            <column name="class_category_base_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1541742106371-2">
+        <addForeignKeyConstraint baseColumnNames="class_category_base_id" baseTableName="course" constraintName="FKnuk19aix6lqp93n6q8kxbmx3a" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="class_category_base"/>
+    </changeSet>
+    
+</databaseChangeLog>

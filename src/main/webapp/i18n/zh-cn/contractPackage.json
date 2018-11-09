@@ -2,24 +2,24 @@
     "simpleServiceApp": {
         "contractPackage": {
             "home": {
-                "title": "Ì×²ÍÁĞ±í",
-                "createLabel": "ĞÂ½¨Ì×²Í",
-                "createOrEditLabel": "¹ÜÀíÌ×²Í"
+                "title": "å¥—é¤åˆ—è¡¨",
+                "createLabel": "æ–°å»ºå¥—é¤",
+                "createOrEditLabel": "ç®¡ç†å¥—é¤"
             },
-            "created": "´´½¨³É¹¦£¡",
-            "updated": "¸üĞÂ³É¹¦£¡",
-            "deleted": "É¾³ı³É¹¦£¡",
+            "created": "åˆ›å»ºæˆåŠŸï¼",
+            "updated": "æ›´æ–°æˆåŠŸï¼",
+            "deleted": "åˆ é™¤æˆåŠŸï¼",
             "delete": {
-                "question": "ÄãÈ·¶¨ÒªÉ¾³ıÕâÌõÊı¾İ?"
+                "question": "ä½ ç¡®å®šè¦åˆ é™¤è¿™æ¡æ•°æ®?"
             },
             "detail": {
-                "title": "Ì×²ÍÏêÇé"
+                "title": "å¥—é¤è¯¦æƒ…"
             },
-            "name": "Ãû³Æ",
-            "code": "´úÂë",
-            "comments": "±¸×¢",
-            "contractTemplate": "ºÏÍ¬Ä£°å",
-            "customerCardType": "¿¨ÀàĞÍ"
+            "name": "åç§°",
+            "code": "ä»£ç ",
+            "comments": "å¤‡æ³¨",
+            "contractTemplate": "åˆåŒæ¨¡æ¿",
+            "customerCardType": "å¡ç±»å‹"
         }
     }
 }

@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('CourseDetailController', CourseDetailController);
 
-    CourseDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Course'];
+    CourseDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Course', 'ClassCategoryBase'];
 
-    function CourseDetailController($scope, $rootScope, $stateParams, previousState, entity, Course) {
+    function CourseDetailController($scope, $rootScope, $stateParams, previousState, entity, Course, ClassCategoryBase) {
         var vm = this;
 
         vm.course = entity;

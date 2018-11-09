@@ -16,7 +16,8 @@
                 "title": "课程详情"
             },
             "name": "名称",
-            "code": "编码"
+            "code": "编码",
+            "classCategoryBase": "大类"
         }
     }
 }

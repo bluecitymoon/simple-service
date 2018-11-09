@@ -24,6 +24,9 @@ public class Course implements Serializable {
     @Column(name = "code")
     private String code;
 
+    @ManyToOne
+    private ClassCategoryBase classCategoryBase;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -57,6 +60,19 @@ public class Course implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public ClassCategoryBase getClassCategoryBase() {
+        return classCategoryBase;
+    }
+
+    public Course classCategoryBase(ClassCategoryBase classCategoryBase) {
+        this.classCategoryBase = classCategoryBase;
+        return this;
+    }
+
+    public void setClassCategoryBase(ClassCategoryBase classCategoryBase) {
+        this.classCategoryBase = classCategoryBase;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

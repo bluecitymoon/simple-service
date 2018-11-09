@@ -1,8 +1,10 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.coursehome.title">Courses</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
 <div class="panel">
     <div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.course.detail.title">Course</span> {{vm.course.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="simpleServiceApp.course.name">Name</span></dt>
         <dd>
@@ -11,6 +13,10 @@
         <dt><span data-translate="simpleServiceApp.course.code">Code</span></dt>
         <dd>
             <span>{{vm.course.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.course.classCategoryBase">Class Category Base</span></dt>
+        <dd>
+            <a ui-sref="class-category-base-detail({id:vm.course.classCategoryBase.id})">{{vm.course.classCategoryBase.name}}</a>
         </dd>
     </dl>
 
