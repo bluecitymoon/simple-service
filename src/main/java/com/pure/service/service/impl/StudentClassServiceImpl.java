@@ -189,4 +189,11 @@ public class StudentClassServiceImpl implements StudentClassService{
 
         return save(studentClass);
     }
+
+    @Override
+    public void removeStudentFromClass(Long studentId, Long classId) {
+        StudentClass studentClass = studentClassRepository.findByStudent_IdAndProduct_Id(studentId, classId);
+
+        delete(studentClass.getId());
+    }
 }

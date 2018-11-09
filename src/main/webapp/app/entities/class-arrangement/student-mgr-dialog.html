@@ -25,22 +25,34 @@
                                         class="glyphicon glyphicon-sort"></span></th>
                                 <th jh-sort-by="name"><span>姓名</span></th>
                                 <th><span>性别</span></th>
-                                <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox"
-                                                               ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label
-                                        for="email-list-all">全选</label>
-                                </th>
+                                <!--<th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox"-->
+                                <!--ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label-->
+                                <!--for="email-list-all">全选</label>-->
+                                <!--</th>-->
+
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="student in vm.students track by student.id"
                                 ng-class="student.selected? 'bg-info': ''">
-                                <td><a ui-sref="student-detail({id:student.id})" target="_window">{{student.id}}</a></td>
+                                <td><a ui-sref="student-detail({id:student.id})" target="_window">{{student.id}}</a>
+                                </td>
                                 <td>{{student.name}}</td>
                                 <td>{{student.gender}}</td>
-                                <td class="text-center">
-                                    <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox"
-                                           ng-model="student.selected">
-                                    <label for="email-list-{{student.id}}"></label>
+                                <!--<td class="text-center">-->
+                                <!--<input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox"-->
+                                <!--ng-model="student.selected">-->
+                                <!--<label for="email-list-{{student.id}}"></label>-->
+                                <!--</td>-->
+                                <td>
+
+                                    <button type="button"
+                                            ng-click="vm.removeSingleStudent(student)"
+                                            class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove-circle"></span>
+                                        <span>从该班级移除</span>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -53,33 +65,36 @@
         </uib-tab>
 
         <uib-tab heading="进班">
+            <div class="panel panel-bordered-mint">
 
-            <div class="row pad-all">
+                <div class="panel-body">
+                    <div class="row pad-all">
 
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
 
-                    <div class="input-group mar-btm">
+                            <div class="input-group mar-btm">
 
-                        <ui-select ng-model="vm.selectedStudent">
-                            <ui-select-match>
-                                {{$select.selected.name}}
-                            </ui-select-match>
-                            <ui-select-choices refresh="vm.searchStudentWithKeyword($select.search)"
-                                               repeat="item in (vm.preSelectedStudents | filter: $select.search) track by item.id">
-                                <span ng-bind="item.name"></span>
-                                <span class="pull-right" ng-bind="item.phone"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                                <ui-select ng-model="vm.selectedStudent">
+                                    <ui-select-match>
+                                        {{$select.selected.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices refresh="vm.searchStudentWithKeyword($select.search)"
+                                                       repeat="item in (vm.preSelectedStudents | filter: $select.search) track by item.id">
+                                        <span ng-bind="item.name"></span>
+                                        <span class="pull-right" ng-bind="item.phone"></span>
+                                    </ui-select-choices>
+                                </ui-select>
 
-                        <span class="input-group-btn">
+                                <span class="input-group-btn">
                     <button class="btn btn-primary" type="button" ng-click="vm.assignStudentIntoClass()">分配学员进班</button>
 				</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1"></div>
                     </div>
                 </div>
-
-                <div class="col-md-1"></div>
-
             </div>
         </uib-tab>
     </uib-tabset>

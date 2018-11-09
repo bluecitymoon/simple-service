@@ -25,7 +25,8 @@
             'update': { method:'PUT' },
             'batchAssignStudentIntoClass' : { url: 'api/student-classes/batch-assign', method:'POST' },
             'createSingleStudentClass': { url: 'api/student-classes/single-assign', method:'POST' },
-            'getAllStudentInClass': { url:'api/student-classes/students/:classId', method: 'GET', isArray: true}
+            'getAllStudentInClass': { url:'api/student-classes/students/:classId', method: 'GET', isArray: true},
+            'removeStudentFromClass': { url:'api//student-classes/student/:studentId/class/:classId', method: 'DELETE'}
         });
     }
 })();

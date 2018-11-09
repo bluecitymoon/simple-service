@@ -11,7 +11,7 @@
         var vm = this;
 
         vm.classSchedule = entity;
-        vm.allSelected = true;
+        vm.allSelected = false;
         vm.students = [];
         vm.preSelectedStudents = [];
 
@@ -25,6 +25,19 @@
             });
         };
 
+        vm.removeSingleStudent = function (student) {
+
+            StudentClass.removeStudentFromClass({
+                studentId: student.id,
+                classId: vm.classSchedule.classId
+            }, function (response) {
+                AlertService.success("成功移除！");
+
+                loadStudentsInClass();
+            }, function (error) {
+                AlertService.showCommonError(error);
+            })
+        };
         vm.searchStudentWithKeyword = function (keyword) {
 
             console.log(keyword);
@@ -43,9 +56,9 @@
             StudentClass.getAllStudentInClass({classId: vm.classSchedule.classId}, function (data) {
                 vm.students = data;
 
-                angular.forEach(vm.students, function (s) {
-                    s.selected = true;
-                })
+                // angular.forEach(vm.students, function (s) {
+                //     s.selected = true;
+                // })
             });
         }
 

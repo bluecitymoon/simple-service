@@ -128,7 +128,7 @@
                 controller: 'StudentMgrDialogController',
                 controllerAs: 'vm',
                 backdrop: 'static',
-                size: 'lg',
+                size: 'md',
                 resolve: {
                     entity: function () {
                         return classArrangement;

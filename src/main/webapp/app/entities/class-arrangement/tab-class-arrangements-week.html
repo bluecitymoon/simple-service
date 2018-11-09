@@ -1,7 +1,8 @@
 <style>
     .dropdown-toggle::after {
-        display:none;
+        display:none !important;
     }
+
 </style>
 <div class="panel">
     <div class="panel-body">
@@ -52,7 +53,7 @@
 
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                            <ul class="dropdown-menu " uib-dropdown-menu>
 
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.openStudentsManagementDialog(mf)">
@@ -95,7 +96,7 @@
                                                 <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
 
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                            <ul class="dropdown-menu " uib-dropdown-menu>
 
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.openStudentsManagementDialog(mf)">
@@ -145,7 +146,7 @@
                                                 <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
 
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                            <ul class="dropdown-menu " uib-dropdown-menu>
 
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.openStudentsManagementDialog(mf)">
@@ -180,7 +181,7 @@
                                 <!--<div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">-->
                                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
 
-                                        <li class="nav-item" uib-dropdown style="width: 100%">
+                                        <li class="nav-item dropup" uib-dropdown style="width: 100%">
 
                                             <button uib-dropdown-toggle class="btn btn-default btn-block border-0 dropdown-toggle">
                                                 {{mf.className || '&nbsp;&nbsp;'}}
@@ -189,7 +190,7 @@
                                                 <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
 
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                            <ul class="dropdown-menu " uib-dropdown-menu>
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.openStudentsManagementDialog(mf)">
                                                         <span>学员列表</span>
@@ -224,7 +225,7 @@
                                 <!--<div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">-->
                                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
 
-                                        <li class="nav-item" uib-dropdown style="width: 100%">
+                                        <li class="nav-item dropup" uib-dropdown style="width: 100%">
 
                                             <button uib-dropdown-toggle class="btn btn-default btn-block border-0 dropdown-toggle">
                                                 {{mf.className || '&nbsp;&nbsp;'}}
@@ -234,7 +235,7 @@
                                                 <label class="badge badge-mint float-right timeline-badge" ng-if="mf.studentCount">{{mf.studentCount}}</label>
 
                                             </button>
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                            <ul class="dropdown-menu " uib-dropdown-menu>
 
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.openStudentsManagementDialog(mf)">
@@ -272,7 +273,7 @@
                                 <!--<div class="col-lg order-lg-first" ng-switch="vm.isAuthenticated()">-->
                                     <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
 
-                                        <li class="nav-item" uib-dropdown style="width: 100%">
+                                        <li class="nav-item dropup" uib-dropdown style="width: 100%">
 
                                             <button uib-dropdown-toggle class="btn btn-default btn-block border-0 dropdown-toggle">
                                                 {{mf.className || '&nbsp;&nbsp;'}}
@@ -282,7 +283,7 @@
 
                                             </button>
 
-                                            <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+                                            <ul class="dropdown-menu " uib-dropdown-menu>
                                                 <li ui-sref-active="active">
                                                     <a ng-click="vm.openStudentsManagementDialog(mf)">
                                                         <span>学员列表</span>

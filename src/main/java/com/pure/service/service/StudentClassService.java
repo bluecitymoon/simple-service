@@ -51,4 +51,6 @@ public interface StudentClassService {
     List<Student> findStudentsInClass(Long classId);
 
     StudentClass singleAssign(SingleStudentClassRequest studentsClassRequest);
+
+    void removeStudentFromClass(Long studentId, Long classId);
 }

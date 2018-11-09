@@ -166,4 +166,12 @@ public class StudentClassResource {
         studentClassService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+    @DeleteMapping("/student-classes/student/{studentId}/class/{classId}")
+    @Timed
+    public ResponseEntity<Void> removeStudentFromClass(@PathVariable Long studentId, @PathVariable Long classId) {
+        log.debug("REST request to removeStudentFromClass : {}, {}", studentId, classId);
+        studentClassService.removeStudentFromClass(studentId, classId);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, studentId.toString())).build();
+    }
 }
