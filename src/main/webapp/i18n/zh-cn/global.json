@@ -76,6 +76,7 @@
                 "userGuideDocument": "User Guide Document",
                 "authorityUserGuideDocument": "Authority User Guide Document",
                 "classCategoryBase": "Class Category Base",
+                "classCategory": "Class Category",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

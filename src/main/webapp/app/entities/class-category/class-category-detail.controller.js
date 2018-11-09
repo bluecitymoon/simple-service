@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ClassCategoryDetailController', ClassCategoryDetailController);
 
-    ClassCategoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'ClassCategory', 'FreeClassRecord'];
+    ClassCategoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'ClassCategory', 'FreeClassRecord', 'ClassCategoryBase'];
 
-    function ClassCategoryDetailController($scope, $rootScope, $stateParams, previousState, entity, ClassCategory, FreeClassRecord) {
+    function ClassCategoryDetailController($scope, $rootScope, $stateParams, previousState, entity, ClassCategory, FreeClassRecord, ClassCategoryBase) {
         var vm = this;
 
         vm.classCategory = entity;

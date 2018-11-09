@@ -1,8 +1,10 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.classCategory.home.title">Class Categories</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
 <div class="panel">
-<div class="panel-body">
-    <h2><span data-translate="simpleServiceApp.classCategory.detail.title">Class Category</span> {{vm.classCategory.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
+    <div class="panel-body">
     <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="simpleServiceApp.classCategory.name">Name</span></dt>
         <dd>
@@ -15,6 +17,10 @@
         <dt><span data-translate="simpleServiceApp.classCategory.description">Description</span></dt>
         <dd>
             <span>{{vm.classCategory.description}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classCategory.classCategoryBase">Class Category Base</span></dt>
+        <dd>
+            <a ui-sref="class-category-base-detail({id:vm.classCategory.classCategoryBase.id})">{{vm.classCategory.classCategoryBase.name}}</a>
         </dd>
     </dl>
 

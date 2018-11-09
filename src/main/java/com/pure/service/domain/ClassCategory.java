@@ -34,6 +34,9 @@ public class ClassCategory implements Serializable {
     @JsonIgnore
     private Set<FreeClassRecord> freeClassRecords = new HashSet<>();
 
+    @ManyToOne
+    private ClassCategoryBase classCategoryBase;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -105,6 +108,19 @@ public class ClassCategory implements Serializable {
 
     public void setFreeClassRecords(Set<FreeClassRecord> freeClassRecords) {
         this.freeClassRecords = freeClassRecords;
+    }
+
+    public ClassCategoryBase getClassCategoryBase() {
+        return classCategoryBase;
+    }
+
+    public ClassCategory classCategoryBase(ClassCategoryBase classCategoryBase) {
+        this.classCategoryBase = classCategoryBase;
+        return this;
+    }
+
+    public void setClassCategoryBase(ClassCategoryBase classCategoryBase) {
+        this.classCategoryBase = classCategoryBase;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

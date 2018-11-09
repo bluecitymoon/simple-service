@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('ClassCategory Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockClassCategory, MockFreeClassRecord;
+        var MockEntity, MockPreviousState, MockClassCategory, MockFreeClassRecord, MockClassCategoryBase;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -14,6 +14,7 @@ describe('Controller Tests', function() {
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockClassCategory = jasmine.createSpy('MockClassCategory');
             MockFreeClassRecord = jasmine.createSpy('MockFreeClassRecord');
+            MockClassCategoryBase = jasmine.createSpy('MockClassCategoryBase');
             
 
             var locals = {
@@ -22,7 +23,8 @@ describe('Controller Tests', function() {
                 'entity': MockEntity,
                 'previousState': MockPreviousState,
                 'ClassCategory': MockClassCategory,
-                'FreeClassRecord': MockFreeClassRecord
+                'FreeClassRecord': MockFreeClassRecord,
+                'ClassCategoryBase': MockClassCategoryBase
             };
             createController = function() {
                 $injector.get('$controller')("ClassCategoryDetailController", locals);

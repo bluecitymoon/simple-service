@@ -18,7 +18,8 @@
             "name": "名称",
             "code": "代码",
             "description": "描述",
-            "freeClassRecord": "Free Class Record"
+            "freeClassRecord": "Free Class Record",
+            "classCategoryBase": "大类"
         }
     }
 }
