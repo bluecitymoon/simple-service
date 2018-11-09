@@ -44,7 +44,12 @@
                 } else if (vm.regions.length == 1) {
                     storeUserRegion(vm.regions[0]);
                 } else {
-                    storeUserRegion(vm.regions[1]);
+
+                    if ($localStorage.currentUserRegion != null) {
+                        vm.selectedRegion = $localStorage.currentUserRegion;
+                    } else {
+                        storeUserRegion(vm.regions[1]);
+                    }
                 }
             }, function (error) {
                 AlertService.error('加载用户所在区域出错！');

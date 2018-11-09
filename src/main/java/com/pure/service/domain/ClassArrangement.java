@@ -41,7 +41,7 @@ import java.util.Objects;
             " cross join class_room cr on p.class_room_id = cr.id\n" +
             " cross join course c on p.course_id = c.id\n" +
             " left join class_status cs on cs.id = p.status_id \n" +
-            " and ca.start_date > :1\n" +
+            " where ca.start_date > :1\n" +
             " and ca.end_date < :2\n" +
             " and ca.region_id = :3" +
             " order by ca.start_date asc",
