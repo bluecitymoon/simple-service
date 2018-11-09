@@ -75,6 +75,7 @@
                 "channelReport": "Channel Report",
                 "userGuideDocument": "User Guide Document",
                 "authorityUserGuideDocument": "Authority User Guide Document",
+                "classCategoryBase": "Class Category Base",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

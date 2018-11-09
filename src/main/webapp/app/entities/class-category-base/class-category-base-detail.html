@@ -1,0 +1,30 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.classCategoryBasehome.title">Class Category Bases</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.classCategoryBase.name">Name</span></dt>
+        <dd>
+            <span>{{vm.classCategoryBase.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.classCategoryBase.code">Code</span></dt>
+        <dd>
+            <span>{{vm.classCategoryBase.code}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="class-category-base-detail.edit({id:vm.classCategoryBase.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>
