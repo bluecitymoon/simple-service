@@ -9,15 +9,15 @@ import java.util.List;
 public class BatchSigninStudent implements Serializable {
 
     private Long classId;
-    private Long arrangementId;
+    private List<SingleArrangementRequest> arrangementIds;
     private List<Student> students = new ArrayList<>();
 
-    public Long getArrangementId() {
-        return arrangementId;
+    public List<SingleArrangementRequest> getArrangementIds() {
+        return arrangementIds;
     }
 
-    public void setArrangementId(Long arrangementId) {
-        this.arrangementId = arrangementId;
+    public void setArrangementIds(List<SingleArrangementRequest> arrangementIds) {
+        this.arrangementIds = arrangementIds;
     }
 
     public Long getClassId() {

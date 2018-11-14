@@ -1,54 +1,173 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
             ng-click="vm.clear()">&times;</button>
-    <h4 class="modal-title">学员签到</h4>
+    <!--<h4 class="modal-title">学员签到</h4>-->
 </div>
 
 <jhi-alert></jhi-alert>
 
 <div class="panel">
     <div class="panel-body">
-        <div class="table-responsive">
-            <table class="jh-table table table-striped">
-                <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span>姓名</span></th>
-                    <th><span>性别</span></th>
-                    <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label for="email-list-all">全选</label>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="student in vm.students track by student.id"
-                    ng-class="student.selected? 'bg-info': ''">
-                    <td><a ui-sref="student-detail({id:student.id})" target="_window">{{student.id}}</a></td>
-                    <td>{{student.name}}</td>
-                    <td>{{student.gender}}</td>
-                    <td class="text-center">
-                        <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox" ng-model="student.selected">
-                        <label for="email-list-{{student.id}}"></label>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+
+        <uib-tabset>
+            <uib-tab heading="签到">
+
+                <div class="pad-lft pad-rgt">
+                    <div class="panel panel-bordered-mint">
+                        <!--<div class="panel-heading">-->
+                        <!--<h4 class="panel-title">签到</h4>-->
+                        <!--</div>-->
+                        <div class="panel-body">
+
+                            <div class="table-responsive">
+                                <table class="jh-table table table-striped">
+                                    <thead>
+                                    <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                        <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                                                class="glyphicon glyphicon-sort"></span></th>
+                                        <th jh-sort-by="name"><span>姓名</span></th>
+                                        <th><span>性别</span></th>
+                                        <th class="text-center"><input id="email-list-all" type="checkbox"
+                                                                       class="magic-checkbox" ng-model="vm.allSelected"
+                                                                       ng-change="vm.toggleAll()"><label
+                                                for="email-list-all">全选</label>
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="student in vm.students track by student.id"
+                                        ng-class="student.selected? 'bg-info': ''">
+                                        <td><a ui-sref="student-detail({id:student.id})"
+                                               target="_window">{{student.id}}</a></td>
+                                        <td>{{student.name}}</td>
+                                        <td>{{student.gender}}</td>
+                                        <td class="text-center">
+                                            <input id="email-list-{{student.id}}" type="checkbox" class="magic-checkbox"
+                                                   ng-model="student.selected">
+                                            <label for="email-list-{{student.id}}"></label>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-block btn-primary" ng-click="vm.signClassInBatch('single')">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定签到</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab heading="补签">
+
+                <div class="pad-lft pad-rgt">
+                    <div class="panel panel-bordered-mint">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">选择补签学员</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="jh-table table table-striped">
+
+                                <tbody>
+                                <tr ng-repeat="student in vm.students track by student.id"
+                                    ng-class="student.selected? 'bg-info': ''">
+                                    <td>{{student.name}}</td>
+                                    <td class="text-center">
+                                        <input id="email-list-{{student.id}}-1" type="checkbox" class="magic-checkbox"
+                                               ng-model="student.selected">
+                                        <label for="email-list-{{student.id}}"></label>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pad-lft pad-rgt">
+                    <div class="panel panel-bordered-mint">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">选择补签日期</h4>
+                        </div>
+                        <div class="panel-body">
+
+                            <table class="jh-table table table-striped">
+                                <thead>
+                                <tr>
+                                    <th><input type="text" placeholder="开始时间" class="form-control"
+                                               ng-focus="vm.openCalendar('createStartDate')" datetime-picker="{{dateformat}}"
+                                               timepicker-options="vm.datePickerOptions"
+                                               ng-model="vm.searchCondition.createStartDate"
+                                               is-open="vm.datePickerOpenStatus.createStartDate">
+                                    </th>
+                                    <th>
+                                        <input type="text" placeholder="结束时间" class="form-control"
+                                               ng-focus="vm.openCalendar('createEndDate')" datetime-picker="{{dateformat}}"
+                                               timepicker-options="vm.datePickerOptions"
+                                               ng-model="vm.searchCondition.createEndDate"
+                                               is-open="vm.datePickerOpenStatus.createEndDate">
+
+                                    </th>
+                                    <th>
+
+                                        <button class="btn btn-sm btn-primary btn-block" type="button"
+                                                ng-click="vm.loadClassArrangementsInRange()"><i
+                                                class="fa fa-search-minus"></i>查询
+                                        </button>
+                                    </th>
+                                </tr>
+
+                                </thead>
+
+                                <tbody>
+                                <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id">
+                                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                    <td class="text-center">
+                                        <input id="email-list-{{classArrangement.id}}" type="checkbox" class="magic-checkbox"
+                                               ng-model="classArrangement.selected">
+                                        <label for="email-list-{{classArrangement.id}}"></label>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!--<button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">-->
+                            <!--<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>-->
+                            <!--</button>-->
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-block btn-primary" ng-click="vm.signClassInBatch('batch')">
+                                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定补签</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </uib-tab>
     </div>
+
 </div>
 
-<div class="modal-footer">
-    <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-default btn-block" data-dismiss="modal" ng-click="vm.clear()">
-                <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
-            </button>
-        </div>
-        <div class="col-md-6">
-            <button type="button"  class="btn btn-block btn-primary" ng-click="vm.signClassInBatch()">
-                <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定签到</span>
-            </button>
-        </div>
-    </div>
+<!--<div class="modal-footer">-->
+<!---->
 
-</div>
+<!--</div>-->

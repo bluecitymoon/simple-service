@@ -17,6 +17,7 @@ import com.pure.service.service.StudentClassLogService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.request.BatchSigninStudent;
+import com.pure.service.service.dto.request.SingleArrangementRequest;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -123,43 +124,47 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
         for (Student student : request.getStudents()) {
 
-            signInForSingleStudent(student, request.getArrangementId());
+            signInForSingleStudent(student, request.getArrangementIds());
         }
     }
 
-    private void signInForSingleStudent(Student student, Long arrangementId) {
+    private void signInForSingleStudent(Student student, List<SingleArrangementRequest> arrangementIds) {
 
-        LongFilter studentFilter = new LongFilter();
-        studentFilter.setEquals(student.getId());
+        for (SingleArrangementRequest arrangementId : arrangementIds) {
 
-        LongFilter arrangementIdFilter = new LongFilter();
-        arrangementIdFilter.setEquals(arrangementId);
+            LongFilter studentFilter = new LongFilter();
+            studentFilter.setEquals(student.getId());
 
-        StudentClassLogCriteria criteria = new StudentClassLogCriteria();
-        criteria.setStudentId(studentFilter);
-        criteria.setArrangementId(arrangementIdFilter);
+            LongFilter arrangementIdFilter = new LongFilter();
+            arrangementIdFilter.setEquals(arrangementId.getArrangementId());
 
-        List<StudentClassLog> logs = logQueryService.findByCriteria(criteria);
+            StudentClassLogCriteria criteria = new StudentClassLogCriteria();
+            criteria.setStudentId(studentFilter);
+            criteria.setArrangementId(arrangementIdFilter);
 
-        if (!CollectionUtils.isEmpty(logs)) {
-            return;
+            List<StudentClassLog> logs = logQueryService.findByCriteria(criteria);
+
+            if (!CollectionUtils.isEmpty(logs)) {
+                continue;
+            }
+
+            ClassArrangement classArrangement = classArrangementService.findOne(arrangementId.getArrangementId());
+
+            Long currentInstant = Instant.now().getEpochSecond();
+
+            String uniqueNumber = "" + currentInstant + RandomStringUtils.randomNumeric(6);
+
+            StudentClassLog studentClassLog = new StudentClassLog();
+            studentClassLog.setActualTakenDate(Instant.now());
+            studentClassLog.setStudent(student);
+            studentClassLog.setArrangement(classArrangement);
+            //流水号
+            studentClassLog.setUniqueNumber(uniqueNumber);
+
+            RegionUtils.setRegionAbstractAuditingRegionEntity(studentClassLog);
+            saveLogWithUniqueNumber(studentClassLog, uniqueNumber);
         }
 
-        ClassArrangement classArrangement = classArrangementService.findOne(arrangementId);
-
-        Long currentInstant = Instant.now().getEpochSecond();
-
-        String uniqueNumber = "" + currentInstant + RandomStringUtils.randomNumeric(6);
-
-        StudentClassLog studentClassLog = new StudentClassLog();
-        studentClassLog.setActualTakenDate(Instant.now());
-        studentClassLog.setStudent(student);
-        studentClassLog.setArrangement(classArrangement);
-        //流水号
-        studentClassLog.setUniqueNumber(uniqueNumber);
-
-        RegionUtils.setRegionAbstractAuditingRegionEntity(studentClassLog);
-        saveLogWithUniqueNumber(studentClassLog, uniqueNumber);
     }
 
     private void saveLogWithUniqueNumber(StudentClassLog studentClassLog, String uniqueNumber) {
