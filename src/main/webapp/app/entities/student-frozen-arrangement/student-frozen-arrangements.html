@@ -1,0 +1,86 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.studentFrozenArrangement.home.title">Student Frozen Arrangements</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.studentFrozenArrangement.home.title">Student Frozen Arrangements</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="student-frozen-arrangement.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.studentFrozenArrangement.home.createLabel">
+                        Create new Student Frozen Arrangement
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentFrozenArrangement.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentFrozenArrangement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentFrozenArrangement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentFrozenArrangement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span data-translate="simpleServiceApp.studentFrozenArrangement.active">Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentFrozenArrangement.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classArrangement.startDate"><span data-translate="simpleServiceApp.studentFrozenArrangement.classArrangement">Class Arrangement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="studentFrozen.id"><span data-translate="simpleServiceApp.studentFrozenArrangement.studentFrozen">Student Frozen</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="studentFrozenArrangement in vm.studentFrozenArrangements track by studentFrozenArrangement.id">
+                    <td><a ui-sref="student-frozen-arrangement-detail({id:studentFrozenArrangement.id})">{{studentFrozenArrangement.id}}</a></td>
+                    <td>{{studentFrozenArrangement.createdBy}}</td>
+                    <td>{{studentFrozenArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentFrozenArrangement.lastModifiedBy}}</td>
+                    <td>{{studentFrozenArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentFrozenArrangement.active}}</td>
+                    <td>
+                        <a ui-sref="student-detail({id:studentFrozenArrangement.student.id})">{{studentFrozenArrangement.student.name}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="class-arrangement-detail({id:studentFrozenArrangement.classArrangement.id})">{{studentFrozenArrangement.classArrangement.startDate}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="student-frozen-detail({id:studentFrozenArrangement.studentFrozen.id})">{{studentFrozenArrangement.studentFrozen.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="student-frozen-arrangement-detail({id:studentFrozenArrangement.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student-frozen-arrangement.edit({id:studentFrozenArrangement.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student-frozen-arrangement.delete({id:studentFrozenArrangement.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

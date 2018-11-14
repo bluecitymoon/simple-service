@@ -77,6 +77,8 @@
                 "authorityUserGuideDocument": "Authority User Guide Document",
                 "classCategoryBase": "Class Category Base",
                 "classCategory": "Class Category",
+                "studentFrozenArrangement": "Student Frozen Arrangement",
+                "studentFrozen": "Student Frozen",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

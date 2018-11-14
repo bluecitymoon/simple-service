@@ -82,6 +82,10 @@
             })
         }
 
+        vm.frozenStudent = function (student) {
+
+        };
+
         loadClassesThisWeek();
         //loadSchedulesThisMonth();
 

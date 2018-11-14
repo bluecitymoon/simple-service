@@ -20,6 +20,11 @@
         vm.students = [];
         vm.allSelected = false;
 
+        $scope.pagination = {
+            currentPageNumber: 0,
+            totalItems: 0
+        };
+
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -93,7 +98,7 @@
             }
             function onSuccess(data, headers) {
                 vm.links = ParseLinks.parse(headers('link'));
-                vm.totalItems = headers('X-Total-Count');
+                $scope.pagination.totalItems = headers('X-Total-Count');
                 vm.queryCount = vm.totalItems;
                 vm.students = data;
                 vm.page = pagingParams.page;
