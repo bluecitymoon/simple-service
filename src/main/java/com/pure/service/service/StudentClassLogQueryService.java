@@ -2,6 +2,7 @@ package com.pure.service.service;
 
 
 import com.pure.service.domain.ClassArrangement_;
+import com.pure.service.domain.Product_;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.domain.StudentClassLog_;
 import com.pure.service.domain.Student_;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -102,8 +104,15 @@ public class StudentClassLogQueryService extends QueryService<StudentClassLog> {
             if (criteria.getArrangementId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getArrangementId(), StudentClassLog_.arrangement, ClassArrangement_.id));
             }
+            if (criteria.getClassId() != null) {
+                specification = specification.and(classId(criteria.getClassId()));
+            }
         }
         return specification;
     }
 
+    private Specification classId(Long classId) {
+
+        return (root, query, cb) -> cb.equal(root.get(StudentClassLog_.arrangement).get(ClassArrangement_.clazz).get(Product_.id), classId);
+    }
 }

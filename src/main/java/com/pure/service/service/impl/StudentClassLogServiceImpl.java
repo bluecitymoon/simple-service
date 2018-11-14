@@ -149,6 +149,9 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             }
 
             ClassArrangement classArrangement = classArrangementService.findOne(arrangementId.getArrangementId());
+            classArrangement.setActualTeacher(arrangementId.getActualTeacher());
+
+            classArrangementService.save(classArrangement);
 
             Long currentInstant = Instant.now().getEpochSecond();
 

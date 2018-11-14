@@ -48,6 +48,7 @@
                     $translatePartialLoader.addPart('classArrangement');
                     $translatePartialLoader.addPart('global');
                     $translatePartialLoader.addPart('product');
+                    $translatePartialLoader.addPart('studentClassLog');
                     return $translate.refresh();
                 }]
             }

@@ -42,6 +42,8 @@ public class StudentClassLogCriteria extends AbstractQueryCriteria {
 
     private LongFilter arrangementId;
 
+    private Long classId;
+
     public StudentClassLogCriteria() {
     }
 
@@ -123,6 +125,14 @@ public class StudentClassLogCriteria extends AbstractQueryCriteria {
 
     public void setArrangementId(LongFilter arrangementId) {
         this.arrangementId = arrangementId;
+    }
+
+    public Long getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Long classId) {
+        this.classId = classId;
     }
 
     @Override

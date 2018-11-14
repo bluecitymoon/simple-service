@@ -5,14 +5,15 @@
         .module('simpleServiceApp')
         .controller('StudentSignDialogController', StudentSignDialogController);
 
-    StudentSignDialogController.$inject = ['entity', 'AlertService', 'DateUtils', 'ClassArrangement', 'StudentClass', '$uibModalInstance', 'StudentClassLog'];
+    StudentSignDialogController.$inject = ['entity', 'AlertService', 'DateUtils', 'ClassArrangement', 'StudentClass', '$uibModalInstance', 'StudentClassLog', 'Teacher'];
 
-    function StudentSignDialogController(entity, AlertService, DateUtils, ClassArrangement, StudentClass, $uibModalInstance, StudentClassLog) {
+    function StudentSignDialogController(entity, AlertService, DateUtils, ClassArrangement, StudentClass, $uibModalInstance, StudentClassLog, Teacher) {
         var vm = this;
 
         vm.classSchedule = entity;
         vm.allSelected = true;
         vm.students = [];
+        vm.allTeachers = Teacher.query({size: 1000, page: 0});
         vm.clear = clear;
         vm.openCalendar = openCalendar;
 
@@ -44,6 +45,7 @@
                 })
             });
         }
+
         function loadAllClassArrangements() {
 
             ClassArrangement.query({"clazzId.equals": vm.classSchedule.classId, size: 1000, page: 0}, function (arrangements) {
@@ -55,6 +57,22 @@
         loadAllClassArrangements();
 
         loadStudentsInClass();
+
+        loadPlannedTeacher();
+        function loadPlannedTeacher() {
+            //vm.actualTeacher
+
+            ClassArrangement.get({id: vm.classSchedule.arrangementId}, function (classArrangement) {
+                vm.actualTeacher = classArrangement.planedTeacher;
+            })
+        }
+
+        vm.studentClassLogs = [];
+        function loadAllStudentClassLogs() {
+            vm.studentClassLogs = StudentClassLog.query({size: 10000, page:0, "classId": vm.classSchedule.classId});
+        }
+
+        loadAllStudentClassLogs();
 
         vm.signClassInBatch = function (type) {
 
@@ -72,7 +90,11 @@
 
                 request = {
                     classId: vm.classSchedule.classId,
-                    arrangementIds: [{arrangementId: vm.classSchedule.arrangementId}],
+                    arrangementIds: [
+                        {
+                            arrangementId: vm.classSchedule.arrangementId,
+                            actualTeacher: vm.actualTeacher
+                        }],
                     students: selectedRecords
                 };
             } else {
@@ -81,7 +103,7 @@
                 angular.forEach(vm.classArrangements, function (arrangement) {
 
                     if (arrangement.selected) {
-                        arrangementIds.push({arrangementId: arrangement.id})
+                        arrangementIds.push({arrangementId: arrangement.id, actualTeacher: arrangement.planedTeacher})
                     }
                 });
 
@@ -101,6 +123,8 @@
                 AlertService.success("签到成功！");
                 clear();
                 console.log(data);
+
+                // loadAllStudentClassLogs();
             }, function (error) {
                 if (error.data && error.data.detail) {
 
