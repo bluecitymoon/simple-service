@@ -5,6 +5,8 @@ import com.pure.service.domain.Contract;
 import com.pure.service.domain.CustomerConsumerLog;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClassLog;
+import com.pure.service.domain.StudentFrozenArrangement;
+import com.pure.service.domain.StudentLeave;
 import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.CustomerConsumerLogRepository;
@@ -14,8 +16,12 @@ import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.StudentClassLogService;
+import com.pure.service.service.StudentFrozenArrangementQueryService;
+import com.pure.service.service.StudentLeaveQueryService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
+import com.pure.service.service.dto.StudentFrozenArrangementCriteria;
+import com.pure.service.service.dto.StudentLeaveCriteria;
 import com.pure.service.service.dto.request.BatchSigninStudent;
 import com.pure.service.service.dto.request.SingleArrangementRequest;
 import io.github.jhipster.service.filter.InstantFilter;
@@ -62,6 +68,12 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
     @Autowired
     private ContractRepository contractRepository;
+
+    @Autowired
+    private StudentLeaveQueryService studentLeaveQueryService;
+
+    @Autowired
+    private StudentFrozenArrangementQueryService studentFrozenArrangementQueryService;
 
     public StudentClassLogServiceImpl(StudentClassLogRepository studentClassLogRepository) {
         this.studentClassLogRepository = studentClassLogRepository;
@@ -138,6 +150,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             LongFilter arrangementIdFilter = new LongFilter();
             arrangementIdFilter.setEquals(arrangementId.getArrangementId());
 
+            //检查这节课是不是签到过了
             StudentClassLogCriteria criteria = new StudentClassLogCriteria();
             criteria.setStudentId(studentFilter);
             criteria.setArrangementId(arrangementIdFilter);
@@ -145,6 +158,27 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             List<StudentClassLog> logs = logQueryService.findByCriteria(criteria);
 
             if (!CollectionUtils.isEmpty(logs)) {
+                continue;
+            }
+
+            //检查是不是请假
+            StudentLeaveCriteria studentLeaveCriteria = new StudentLeaveCriteria();
+            studentLeaveCriteria.setStudentId(studentFilter);
+            studentLeaveCriteria.setClassArrangementId(arrangementIdFilter);
+
+            List<StudentLeave> studentLeaves = studentLeaveQueryService.findByCriteria(studentLeaveCriteria);
+            //请过假的不能签到
+            if (!CollectionUtils.isEmpty(studentLeaves)) {
+                continue;
+            }
+
+            StudentFrozenArrangementCriteria studentFrozenArrangementCriteria = new StudentFrozenArrangementCriteria();
+            studentFrozenArrangementCriteria.setClassArrangementId(arrangementIdFilter);
+            studentFrozenArrangementCriteria.setStudentId(studentFilter);
+
+            List<StudentFrozenArrangement> arrangements = studentFrozenArrangementQueryService.findByCriteria(studentFrozenArrangementCriteria);
+            //冻结的不能签到
+            if (!CollectionUtils.isEmpty(arrangements)) {
                 continue;
             }
 

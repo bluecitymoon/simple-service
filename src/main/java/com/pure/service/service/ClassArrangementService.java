@@ -6,6 +6,7 @@ import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.request.BatchReassignClassArrangement;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.StudentClassArrangementsRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -60,4 +61,6 @@ public interface ClassArrangementService {
     void reassignClassArrangements(BatchReassignClassArrangement request);
 
     void deleteClassArrangements(BatchReassignClassArrangement request);
+
+    List<ClassArrangement> findStudentArrangements(StudentClassArrangementsRequest request);
 }

@@ -138,6 +138,13 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
+                            <!--ng-click="vm.lockStudentClass(student)"-->
+                            <button type="submit"
+                                    ng-click="vm.lockStudentClass(student)"
+                                    class="btn btn-mint btn-sm">
+                                <span class="glyphicon glyphicon-lock"></span>
+                                <span>冻结</span>
+                            </button>
                             <button type="submit"
                                     ui-sref="student.edit({id:student.id})"
                                     class="btn btn-primary btn-sm">

@@ -1,70 +1,72 @@
 <div class="page-header">
-    <h1 class="page-title" data-translate="simpleServiceApp.studentFrozen.home.title">Student Frozens</h1>
+    <h1 class="page-title">学员冻结列表</h1>
 </div>
 <jhi-alert></jhi-alert>
 <div class="panel">
     <div class="panel-body">
 
     <!--<h2 data-translate="simpleServiceApp.studentFrozen.home.title">Student Frozens</h2>-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="student-frozen.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span  data-translate="simpleServiceApp.studentFrozen.home.createLabel">
-                        Create new Student Frozen
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="student-frozen.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.studentFrozen.home.createLabel">-->
+                        <!--Create new Student Frozen-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     <br/>
     <div class="table-responsive">
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentFrozen.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+
                     <th jh-sort-by="startDate"><span data-translate="simpleServiceApp.studentFrozen.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.studentFrozen.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentFrozen.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentFrozen.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentFrozen.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentFrozen.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentFrozen.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="studentFrozen in vm.studentFrozens track by studentFrozen.id">
                     <td><a ui-sref="student-frozen-detail({id:studentFrozen.id})">{{studentFrozen.id}}</a></td>
+                    <td>
+                        <a ui-sref="student-detail({id:studentFrozen.student.id})">{{studentFrozen.student.name}}</a>
+                    </td>
                     <td>{{studentFrozen.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{studentFrozen.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{studentFrozen.createdBy}}</td>
                     <td>{{studentFrozen.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{studentFrozen.lastModifiedBy}}</td>
                     <td>{{studentFrozen.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>
-                        <a ui-sref="student-detail({id:studentFrozen.student.id})">{{studentFrozen.student.name}}</a>
-                    </td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-frozen-detail({id:studentFrozen.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                            <!--</button>-->
                             <button type="submit"
-                                    ui-sref="student-frozen-detail({id:studentFrozen.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="student-frozen.edit({id:studentFrozen.id})"
+                                    ng-click="vm.viewFrozenArrangements(studentFrozen)"
                                     class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down">查看冻结排课</span>
                             </button>
                             <button type="submit"
                                     ui-sref="student-frozen.delete({id:studentFrozen.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                                <span>取消冻结</span>
                             </button>
                         </div>
                     </td>

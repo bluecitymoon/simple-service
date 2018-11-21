@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product', 'StudentClass'];
+    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product', 'StudentClass', '$uibModal'];
 
-    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product, StudentClass) {
+    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product, StudentClass, $uibModal) {
 
         var vm = this;
 
@@ -32,6 +32,26 @@
         vm.toggleAll = function () {
             angular.forEach(vm.students, function (student) {
                 student.selected = vm.allSelected;
+            });
+        };
+
+        vm.lockStudentClass = function (student) {
+
+            $uibModal.open({
+                templateUrl: 'app/entities/student/student-lock-dialog.html',
+                controller: 'StudentLockDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: ['Student', function(Student) {
+                        return student;
+                    }]
+                }
+            }).result.then(function() {
+                // $state.go('^', {}, { reload: false });
+            }, function() {
+                // $state.go('^');
             });
         };
 

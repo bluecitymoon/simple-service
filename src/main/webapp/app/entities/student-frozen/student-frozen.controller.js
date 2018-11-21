@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentFrozenController', StudentFrozenController);
 
-    StudentFrozenController.$inject = ['$state', 'StudentFrozen', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    StudentFrozenController.$inject = ['$uibModal', '$state', 'StudentFrozen', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function StudentFrozenController($state, StudentFrozen, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function StudentFrozenController($uibModal, $state, StudentFrozen, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -16,6 +16,25 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+
+        vm.viewFrozenArrangements = function (studentFrozen) {
+            $uibModal.open({
+                templateUrl: 'app/entities/student-frozen/student-lock-list.html',
+                controller: 'StudentLockListController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: [function() {
+                        return studentFrozen;
+                    }]
+                }
+            }).result.then(function() {
+                // $state.go('^', {}, { reload: false });
+            }, function() {
+                // $state.go('^');
+            });
+        };
 
         loadAll();
 

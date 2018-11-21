@@ -12,6 +12,7 @@ import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.request.BatchReassignClassArrangement;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.StudentClassArrangementsRequest;
 import com.pure.service.service.util.DateUtil;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -162,6 +163,15 @@ public class ClassArrangementResource {
 
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/class-arrangements");
         return new ResponseEntity<>(filteredClassArrangements, headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/class-arrangements/student-class-arrangements")
+    @Timed
+    public ResponseEntity<List<ClassArrangement>> findStudentArrangements(StudentClassArrangementsRequest request) {
+
+        List<ClassArrangement> page = classArrangementService.findStudentArrangements(request);
+
+        return new ResponseEntity<>(page, null, HttpStatus.OK);
     }
 
     private List<ClassArrangement> filterClassArrangements(List<ClassArrangement> content, ClassArrangementCriteria criteria) {

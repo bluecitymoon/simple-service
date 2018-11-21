@@ -12,6 +12,7 @@
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'loadArrangements': { url:'api/class-arrangements/by-class-id/:id', method: 'GET', isArray: true},
+            'getStudentFrozenArrangements': { url:'api/student-frozen-arrangements/arrangements/:frozenId', method: 'GET', isArray: true},
             'getClassArrangementsToday': { url:'api/class-arrangements/today', method: 'GET', isArray: true},
             'getAllClassSchedules': { url:'api/class-arrangements/all', method: 'GET', isArray: true},
             'searchSchedulesInRange': { url:'api/class-arrangements/get-by-range', method: 'POST', isArray: true},
@@ -35,7 +36,8 @@
             'generateClassSchedule': { url: 'api/class-arrangements/generate-by-rule/:id', method: 'GET'},
             'createClassSchedule': { url: 'api/class-arrangements/create-schedule', method: 'POST'},
             'reassignClassArrangements': { url: 'api/class-arrangements/batch-reassign', method: 'POST'},
-            'deleteClassArrangements': { url: 'api/class-arrangements/batch-delete', method: 'POST'}
+            'deleteClassArrangements': { url: 'api/class-arrangements/batch-delete', method: 'POST'},
+            'findStudentArrangements': { url: 'api/class-arrangements/student-class-arrangements', method: 'GET', isArray: true}
         });
     }
 })();

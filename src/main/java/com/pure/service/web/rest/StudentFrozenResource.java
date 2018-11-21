@@ -5,6 +5,7 @@ import com.pure.service.domain.StudentFrozen;
 import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.StudentFrozenService;
+import com.pure.service.service.dto.request.StudentFrozenRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentFrozenCriteria;
@@ -64,6 +65,18 @@ public class StudentFrozenResource {
         StudentFrozen result = studentFrozenService.save(studentFrozen);
         return ResponseEntity.created(new URI("/api/student-frozens/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/student-frozens/generate")
+    @Timed
+    @RegionBasedInsert
+    public ResponseEntity<StudentFrozen> generateStudentFrozen(@RequestBody StudentFrozenRequest studentFrozen) throws URISyntaxException {
+
+        StudentFrozen result = studentFrozenService.generateStudentFrozen(studentFrozen);
+
+        return ResponseEntity.created(new URI("/api/student-frozens/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 

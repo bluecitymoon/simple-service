@@ -235,7 +235,7 @@ public class CustomerCardServiceImpl implements CustomerCardService {
         upgradeLog.setCustomerName(upgradeCustomerCardRequest.getCustomer().getName());
         upgradeLog.setSerialNumber(newCustomerCard.getSerialNumber());
 
-        RegionUtils.setRegionAbstractRegionEntity(upgradeLog);
+        RegionUtils.setRegionAbstractAuditingRegionEntity(upgradeLog);
 
         logService.save(upgradeLog);
 

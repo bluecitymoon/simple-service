@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -16,7 +15,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "customer_card_upgrade_log")
-public class CustomerCardUpgradeLog extends AbstractRegionEntity {
+public class CustomerCardUpgradeLog extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,18 +31,6 @@ public class CustomerCardUpgradeLog extends AbstractRegionEntity {
 
     @Column(name = "serial_number")
     private String serialNumber;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "created_date")
-    private Instant createdDate;
-
-    @Column(name = "last_modified_by")
-    private String lastModifiedBy;
-
-    @Column(name = "last_modified_date")
-    private Instant lastModifiedDate;
 
     @ManyToOne
     private CustomerCardType originalCardType;
@@ -99,57 +86,6 @@ public class CustomerCardUpgradeLog extends AbstractRegionEntity {
         this.serialNumber = serialNumber;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public CustomerCardUpgradeLog createdBy(String createdBy) {
-        this.createdBy = createdBy;
-        return this;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Instant getCreatedDate() {
-        return createdDate;
-    }
-
-    public CustomerCardUpgradeLog createdDate(Instant createdDate) {
-        this.createdDate = createdDate;
-        return this;
-    }
-
-    public void setCreatedDate(Instant createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public CustomerCardUpgradeLog lastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-        return this;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Instant getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public CustomerCardUpgradeLog lastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-        return this;
-    }
-
-    public void setLastModifiedDate(Instant lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
 
     public CustomerCardType getOriginalCardType() {
         return originalCardType;

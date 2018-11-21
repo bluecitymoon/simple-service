@@ -1,0 +1,81 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title">
+            学员冻结
+        </h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert></jhi-alert>
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label>学员</label>
+                <input type="text" class="form-control" name="name" readonly
+                       ng-model="vm.student.name"
+                />
+            </div>
+
+            <div class="form-group col-md-4 col-lg-offset-1">
+                <label>冻结开始日期</label>
+                <input type="text" placeholder="冻结开始日期" class="form-control"
+                       ng-focus="vm.openCalendar('frozenStartDate')" datetime-picker="{{dateformat}}"
+                       timepicker-options="vm.datePickerOptions"
+                       ng-model="vm.searchCondition.frozenStartDate"
+                       is-open="vm.datePickerOpenStatus.frozenStartDate">
+            </div>
+            <div class="form-group col-md-4">
+                <label>冻结结束日期</label>
+                <input type="text" placeholder="冻结结束日期" class="form-control"
+                       ng-focus="vm.openCalendar('frozenEndDate')" datetime-picker="{{dateformat}}"
+                       timepicker-options="vm.datePickerOptions"
+                       ng-model="vm.searchCondition.frozenEndDate"
+                       is-open="vm.datePickerOpenStatus.frozenEndDate">
+            </div>
+
+        </div>
+
+        <div class="panel panel-bordered-mint">
+            <div class="panel-heading">
+                <h4 class="panel-title">以下排课将被冻结</h4>
+            </div>
+            <div class="panel-body">
+
+                    <table class="jh-table table table-striped">
+                        <thead>
+                        <tr>
+                            <th>预计上课开始时间</th>
+                            <th>预计上课结束时间</th>
+                            <th class="text-center"><input id="email-list-all" type="checkbox" class="magic-checkbox" ng-model="vm.allSelected" ng-change="vm.toggleAll()"><label for="email-list-all">全选</label>
+                            </th>
+                        </tr>
+
+                        </thead>
+
+                        <tbody>
+                        <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id" ng-class="classArrangement.selected? 'bg-info': ''">
+                            <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td class="text-center">
+                                <input id="email-list-{{classArrangement.id}}" type="checkbox" class="magic-checkbox"
+                                       ng-model="classArrangement.selected">
+                                <label for="email-list-{{classArrangement.id}}"></label>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+                data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-lock"></span>&nbsp;<span>确定冻结</span>
+        </button>
+    </div>
+</form>

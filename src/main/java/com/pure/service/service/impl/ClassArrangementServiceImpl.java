@@ -4,6 +4,7 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.domain.ClassArrangementStatus;
 import com.pure.service.domain.ClassRoom;
+import com.pure.service.domain.StudentClass;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.region.RegionIdStorage;
 import com.pure.service.repository.ClassArrangementRepository;
@@ -12,15 +13,21 @@ import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.repository.ClassRoomRepository;
 import com.pure.service.repository.ProductRepository;
 import com.pure.service.repository.StudentClassRepository;
+import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.StudentClassLogQueryService;
+import com.pure.service.service.StudentClassQueryService;
+import com.pure.service.service.dto.ClassArrangementCriteria;
+import com.pure.service.service.dto.StudentClassCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.dto.ClassArrangementWeekElement;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.dto.ClassroomDto;
 import com.pure.service.service.dto.request.BatchReassignClassArrangement;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.StudentClassArrangementsRequest;
 import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -71,6 +78,12 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
     @Autowired
     private StudentClassRepository studentClassRepository;
+
+    @Autowired
+    private StudentClassQueryService studentClassQueryService;
+
+    @Autowired
+    private ClassArrangementQueryService classArrangementQueryService;
 
     public ClassArrangementServiceImpl(ClassArrangementRepository classArrangementRepository) {
         this.classArrangementRepository = classArrangementRepository;
@@ -133,6 +146,49 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
             }
 
         }
+    }
+
+    @Override
+    public List<ClassArrangement> findStudentArrangements(StudentClassArrangementsRequest request) {
+
+        List<ClassArrangement> classArrangements = new ArrayList<>();
+
+        StudentClassCriteria studentClassCriteria = new StudentClassCriteria();
+        LongFilter studentIdFilter = new LongFilter();
+        studentIdFilter.setEquals(request.getStudentId());
+
+        studentClassCriteria.setStudentId(studentIdFilter);
+
+        List<StudentClass> studentClasses = studentClassQueryService.findByCriteria(studentClassCriteria);
+        if (CollectionUtils.isEmpty(studentClasses)) {
+            return new ArrayList<>();
+        }
+
+        for (StudentClass studentClass : studentClasses) {
+            Long classId = studentClass.getProduct().getId();
+
+            ClassArrangementCriteria classArrangementCriteria = new ClassArrangementCriteria();
+
+            LongFilter classIdFilter = new LongFilter();
+            classIdFilter.setEquals(classId);
+            classArrangementCriteria.setClazzId(classIdFilter);
+
+            InstantFilter instantFilter = new InstantFilter();
+            instantFilter.setLessOrEqualThan(request.getEndDate());
+            instantFilter.setGreaterOrEqualThan(request.getStartDate());
+
+            classArrangementCriteria.setStartDate(instantFilter);
+
+            List<ClassArrangement> classArrangementList = classArrangementQueryService.findByCriteria(classArrangementCriteria);
+
+            if (CollectionUtils.isEmpty(classArrangementList)) {
+                continue;
+            }
+
+            classArrangements.addAll(classArrangementList);
+        }
+
+        return classArrangements;
     }
 
     /**

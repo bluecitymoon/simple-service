@@ -1,6 +1,7 @@
 package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.StudentFrozenArrangement;
 import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.region.RegionBasedQuery;
@@ -104,6 +105,16 @@ public class StudentFrozenArrangementResource {
         Page<StudentFrozenArrangement> page = studentFrozenArrangementQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/student-frozen-arrangements");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @GetMapping("/student-frozen-arrangements/arrangements/{frozenId}")
+    @Timed
+    @RegionBasedQuery
+    public ResponseEntity<List<ClassArrangement>> getStudentFrozenArrangements(@PathVariable("frozenId") Long frozenId) {
+
+        List<ClassArrangement> page = studentFrozenArrangementService.getStudentFrozenArrangements(frozenId);
+
+        return new ResponseEntity<>(page, HttpStatus.OK);
     }
 
     /**

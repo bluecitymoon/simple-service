@@ -24,7 +24,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'generateStudentFrozen': {url: 'api/student-frozens/generate', method: 'POST'}
         });
     }
 })();
