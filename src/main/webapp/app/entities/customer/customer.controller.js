@@ -93,7 +93,7 @@
 
             var parameters = {
                 page: $scope.pagination.currentPageNumber - 1,
-                size: vm.itemsPerPage,
+                size: 50,
                 sort: sort()
             };
 
