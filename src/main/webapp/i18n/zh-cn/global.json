@@ -79,6 +79,7 @@
                 "classCategory": "Class Category",
                 "studentFrozenArrangement": "Student Frozen Arrangement",
                 "studentFrozen": "Student Frozen",
+                "scheduledTaskLog": "Scheduled Task Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -161,6 +161,11 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
                 newOrderAssignHistory.setRegionId(freeClassRecord.getRegionId());
 
                 newOrderAssignHistoryRepository.save(newOrderAssignHistory);
+
+                Customer associatedCustomer = customerRepository.findByNewOrder_Id(freeClassRecord.getId());
+
+                associatedCustomer.setAssignDate(Instant.now());
+
             }
 
         } else {
@@ -194,6 +199,7 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
             log.debug("Default customer saved for the new order, customer is {} ", newCustomer);
 
         }
+
 
 //        scheduleForCustomer(freeClassRecord);
 

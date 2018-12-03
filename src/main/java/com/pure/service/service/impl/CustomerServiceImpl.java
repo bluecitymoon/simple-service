@@ -10,6 +10,7 @@ import com.pure.service.domain.CustomerCommunicationSchedule;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
+import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.Task;
 import com.pure.service.domain.TaskStatus;
@@ -24,6 +25,7 @@ import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
+import com.pure.service.repository.NewOrderAssignHistoryRepository;
 import com.pure.service.repository.StudentRepository;
 import com.pure.service.repository.TaskStatusRepository;
 import com.pure.service.repository.UserRepository;
@@ -112,6 +114,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
     private AutoReassignCustomerTask autoReassignCustomerTask;
+
+    @Autowired
+    private NewOrderAssignHistoryRepository newOrderAssignHistoryRepository;
 
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
@@ -220,6 +225,19 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setName(newOrder.getPersonName());
             customer.setContactPhoneNumber(newOrder.getContactPhoneNumber());
             customer.setSalesFollower(newOrder.getSalesFollower());
+            if (customer.getSalesFollower() != null ) {
+                customer.setAssignDate(Instant.now());
+
+                NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
+
+                newOrderAssignHistory = newOrderAssignHistory.newFollowerName(customer.getSalesFollower().getFirstName())
+                    .newFollowerLogin(customer.getSalesFollower().getLogin())
+                    .newOrder(customer.getNewOrder());
+                newOrderAssignHistory.setRegionId(newOrder.getRegionId());
+
+                newOrderAssignHistoryRepository.save(newOrderAssignHistory);
+            }
+
             customer.setChannel(newOrder.getMarketChannelCategory());
             customer.setNewOrder(newOrder);
             customer.setBirthday(newOrder.getBirthday());

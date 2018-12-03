@@ -1,0 +1,75 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myScheduledTaskLogLabel" data-translate="simpleServiceApp.scheduledTaskLog.home.createOrEditLabel">Create or edit a Scheduled Task Log</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.scheduledTaskLog.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.scheduledTaskLog.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.className" for="field_className">Class Name</label>
+            <input type="text" class="form-control" name="className" id="field_className"
+                    ng-model="vm.scheduledTaskLog.className"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.scheduledTaskLog.name"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.detailInfo" for="field_detailInfo">Detail Info</label>
+                <textarea class="form-control" name="detailInfo" id="field_detailInfo"
+                    ng-model="vm.scheduledTaskLog.detailInfo" ></textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.createdBy" for="field_createdBy">Created By</label>
+            <input type="text" class="form-control" name="createdBy" id="field_createdBy"
+                    ng-model="vm.scheduledTaskLog.createdBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.createdDate" for="field_createdDate">Created Date</label>
+                <div class="input-group">
+                    <input id="field_createdDate" type="text" class="form-control" name="createdDate" datetime-picker="{{dateformat}}" ng-model="vm.scheduledTaskLog.createdDate" is-open="vm.datePickerOpenStatus.createdDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('createdDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.lastModifiedBy" for="field_lastModifiedBy">Last Modified By</label>
+            <input type="text" class="form-control" name="lastModifiedBy" id="field_lastModifiedBy"
+                    ng-model="vm.scheduledTaskLog.lastModifiedBy"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.scheduledTaskLog.lastModifiedDate" for="field_lastModifiedDate">Last Modified Date</label>
+                <div class="input-group">
+                    <input id="field_lastModifiedDate" type="text" class="form-control" name="lastModifiedDate" datetime-picker="{{dateformat}}" ng-model="vm.scheduledTaskLog.lastModifiedDate" is-open="vm.datePickerOpenStatus.lastModifiedDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('lastModifiedDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

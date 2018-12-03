@@ -76,6 +76,7 @@
     <include file="config/liquibase/changelog/20181109024040_added_entity_ClassCategoryBase.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181114131248_added_entity_StudentFrozenArrangement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181114131616_added_entity_StudentFrozen.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181123125043_added_entity_ScheduledTaskLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>

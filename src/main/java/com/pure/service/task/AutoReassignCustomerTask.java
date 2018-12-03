@@ -3,9 +3,13 @@ package com.pure.service.task;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerStatusReportDtl;
+import com.pure.service.domain.Region;
+import com.pure.service.domain.ScheduledTaskLog;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerStatusReportDtlRepository;
 import com.pure.service.repository.CustomerStatusRepository;
+import com.pure.service.repository.RegionRepository;
+import com.pure.service.repository.ScheduledTaskLogRepository;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.dto.CustomerCriteria;
@@ -15,6 +19,7 @@ import com.pure.service.service.dto.request.ReportElement;
 import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -48,6 +53,13 @@ public class AutoReassignCustomerTask {
 
     @Autowired
     private CustomerStatusRepository customerStatusRepository;
+
+    @Autowired
+    private ScheduledTaskLogRepository scheduledTaskLogRepository;
+
+    @Autowired
+    private RegionRepository regionRepository;
+
     /**
      * 每月底把上月未完成的新单重新分配到下月份继续完成
      * 并将上月的报告存档.
@@ -56,40 +68,69 @@ public class AutoReassignCustomerTask {
     @Scheduled(cron = "01 01 00 1 * ?")
     public void reassign() {
 
-        Instant now = Instant.now();
-        log.info("开始启动自动重分配任务");
+        try {
 
-        Instant lastMonthBeginning = now.minus(15, ChronoUnit.DAYS);
-        Instant startInstant = DateUtil.getFirstSecondOfMonth(LocalDateTime.ofInstant(lastMonthBeginning, ZoneId.systemDefault()));
-        Instant endInstant = DateUtil.getLastSecondOfMonth(LocalDateTime.ofInstant(lastMonthBeginning, ZoneId.systemDefault()));
+            List<Region> allRegions = regionRepository.findAll();
 
-        log.info("Getting report between {} and {}", startInstant, endInstant);
+            for (Region region : allRegions) {
 
-        CustomerStatusRequest customerStatusRequest = new CustomerStatusRequest();
-        customerStatusRequest.setStartDate(startInstant);
-        customerStatusRequest.setEndDate(endInstant);
+                Instant now = Instant.now();
+                log.info("开始启动自动重分配任务");
 
-        CombinedReport report = customerService.getStatusReport(customerStatusRequest);
+                Instant lastMonthBeginning = now.minus(15, ChronoUnit.DAYS);
+                Instant startInstant = DateUtil.getFirstSecondOfMonth(LocalDateTime.ofInstant(lastMonthBeginning, ZoneId.systemDefault()));
+                Instant endInstant = DateUtil.getLastSecondOfMonth(LocalDateTime.ofInstant(lastMonthBeginning, ZoneId.systemDefault()));
 
-        List<CustomerStatusReportDtl> reportDtls = new ArrayList<>();
+                log.info("Getting report between {} and {}", startInstant, endInstant);
 
-        List<ReportElement> reportElements = report.getData();
+                CustomerStatusRequest customerStatusRequest = new CustomerStatusRequest();
+                customerStatusRequest.setStartDate(startInstant);
+                customerStatusRequest.setEndDate(endInstant);
 
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(lastMonthBeginning, ZoneId.systemDefault());
-        for (ReportElement reportElement : reportElements) {
+                CombinedReport report = customerService.getStatusReport(customerStatusRequest);
 
-            CustomerStatusReportDtl dtl = new CustomerStatusReportDtl();
-            BeanUtils.copyProperties(reportElement, dtl);
+                List<CustomerStatusReportDtl> reportDtls = new ArrayList<>();
 
-            dtl.setYear("" + localDateTime.getYear());
-            dtl.setMonth("" + localDateTime.getMonthValue());
-            reportDtls.add(dtl);
+                List<ReportElement> reportElements = report.getData();
+
+                LocalDateTime localDateTime = LocalDateTime.ofInstant(lastMonthBeginning, ZoneId.systemDefault());
+                for (ReportElement reportElement : reportElements) {
+
+                    CustomerStatusReportDtl dtl = new CustomerStatusReportDtl();
+                    BeanUtils.copyProperties(reportElement, dtl);
+
+                    dtl.setYear("" + localDateTime.getYear());
+                    dtl.setMonth("" + localDateTime.getMonthValue());
+                    dtl.setRegionId(region.getId());
+                    reportDtls.add(dtl);
+                }
+
+                reportDtlRepository.save(reportDtls);
+
+                //reassign
+                reassignNewOrders(startInstant, endInstant, now);
+
+                ScheduledTaskLog log = new ScheduledTaskLog();
+                log.setClassName("AutoReassignCustomerTask");
+                log.setName("重分配及TMK报表备份任务");
+                log.setDetailInfo("成功：region = " + region.getId() + " \n report detail: \n" +  reportDtls.toString());
+
+                scheduledTaskLogRepository.save(log);
+            }
+
+
+
+        } catch (Exception e) {
+
+            ScheduledTaskLog log = new ScheduledTaskLog();
+            log.setClassName("AutoReassignCustomerTask");
+            log.setName("重分配及TMK报表备份任务");
+            log.setDetailInfo(ExceptionUtils.getStackTrace(e));
+
+            scheduledTaskLogRepository.save(log);
         }
 
-        reportDtlRepository.save(reportDtls);
 
-        //reassign
-        reassignNewOrders(startInstant, endInstant, now);
 
     }
 

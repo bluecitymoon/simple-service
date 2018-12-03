@@ -1,0 +1,27 @@
+{
+    "simpleServiceApp": {
+        "scheduledTaskLog" : {
+            "home": {
+                "title": "Scheduled Task Logs",
+                "createLabel": "Create a new Scheduled Task Log",
+                "createOrEditLabel": "Create or edit a Scheduled Task Log"
+            },
+            "created": "A new Scheduled Task Log is created with identifier {{ param }}",
+            "updated": "A Scheduled Task Log is updated with identifier {{ param }}",
+            "deleted": "A Scheduled Task Log is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Scheduled Task Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Scheduled Task Log"
+            },
+            "className": "Class Name",
+            "name": "Name",
+            "detailInfo": "Detail Info",
+            "createdBy": "Created By",
+            "createdDate": "Created Date",
+            "lastModifiedBy": "Last Modified By",
+            "lastModifiedDate": "Last Modified Date"
+        }
+    }
+}

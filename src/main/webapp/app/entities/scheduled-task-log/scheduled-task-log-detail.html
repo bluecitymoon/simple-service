@@ -1,0 +1,50 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.scheduledTaskLoghome.title">Scheduled Task Logs</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.className">Class Name</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.className}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.name">Name</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.detailInfo">Detail Info</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.detailInfo}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.createdBy">Created By</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.createdBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.createdDate">Created Date</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.lastModifiedBy">Last Modified By</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.lastModifiedBy}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.scheduledTaskLog.lastModifiedDate">Last Modified Date</span></dt>
+        <dd>
+            <span>{{vm.scheduledTaskLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="scheduled-task-log-detail.edit({id:vm.scheduledTaskLog.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>
