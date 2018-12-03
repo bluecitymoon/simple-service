@@ -180,6 +180,9 @@ public class Customer extends AbstractAuditingRegionEntity {
     @Column(name = "assign_date")
     private Instant assignDate;
 
+    @Column(name = "course_consultant_assign_date")
+    private Instant courseConsultantAssignDate;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -208,6 +211,14 @@ public class Customer extends AbstractAuditingRegionEntity {
 
     public void setVistedCustomerStatus(VistedCustomerStatus vistedCustomerStatus) {
         this.vistedCustomerStatus = vistedCustomerStatus;
+    }
+
+    public Instant getCourseConsultantAssignDate() {
+        return courseConsultantAssignDate;
+    }
+
+    public void setCourseConsultantAssignDate(Instant courseConsultantAssignDate) {
+        this.courseConsultantAssignDate = courseConsultantAssignDate;
     }
 
     public String getNextTrackComments() {
