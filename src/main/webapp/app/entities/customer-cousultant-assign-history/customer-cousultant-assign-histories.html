@@ -1,0 +1,52 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerCousultantAssignHistory.home.title">Customer Cousultant Assign Histories</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.customer">Customer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="olderFollowerLogin"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.olderFollowerLogin">Older Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="olderFollowerName"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.olderFollowerName">Older Follower Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newFollowerLogin"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.newFollowerLogin">New Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newFollowerName"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.newFollowerName">New Follower Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="comments"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerCousultantAssignHistory.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="customerCousultantAssignHistory in vm.customerCousultantAssignHistories track by customerCousultantAssignHistory.id">
+                    <td>{{customerCousultantAssignHistory.id}}</td>
+                    <td>
+                        <a ui-sref="customer-detail({id:customerCousultantAssignHistory.customer.id})" target="_window">{{customerCousultantAssignHistory.customer.name}}</a>
+                    </td>
+                    <td>{{customerCousultantAssignHistory.olderFollowerLogin}}</td>
+                    <td>{{customerCousultantAssignHistory.olderFollowerName}}</td>
+                    <td>{{customerCousultantAssignHistory.newFollowerLogin}}</td>
+                    <td>{{customerCousultantAssignHistory.newFollowerName}}</td>
+                    <!--<td>{{customerCousultantAssignHistory.comments}}</td>-->
+                    <td>{{customerCousultantAssignHistory.createdBy}}</td>
+                    <td>{{customerCousultantAssignHistory.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCousultantAssignHistory.lastModifiedBy}}</td>
+                    <td>{{customerCousultantAssignHistory.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

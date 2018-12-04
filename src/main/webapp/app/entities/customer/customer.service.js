@@ -31,6 +31,11 @@
                 url: 'api/customers/batchupdate',
                 isArray: true
             },
+            'batchAssignCourseConsultant' : {
+                method: 'PUT',
+                url: 'api/customers/batch-assign-course-consultant',
+                isArray: true
+            },
             'getOverview' : {
                 method: 'GET',
                 url: 'api/customers/overview'

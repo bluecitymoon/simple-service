@@ -17,6 +17,7 @@ import com.pure.service.service.dto.CustomerFollowLog;
 import com.pure.service.service.dto.dto.ChannelReportElement;
 import com.pure.service.service.dto.dto.CombinedReport;
 import com.pure.service.service.dto.dto.Overview;
+import com.pure.service.service.dto.request.BatchAssignRequest;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.dto.request.MergeCustomer;
 import com.pure.service.service.dto.request.StatusReportElement;
@@ -457,6 +458,19 @@ public class CustomerResource {
             return ResponseEntity.badRequest().build();
         }
         List<Customer> result = customerService.batchSave(customers);
+
+        return ResponseEntity.ok().body(result);
+    }
+
+    @PutMapping("/customers/batch-assign-course-consultant")
+    @Timed
+    public ResponseEntity<List<Customer>> batchAssignCustomers(@RequestBody BatchAssignRequest request) {
+//        log.debug("REST request to update customers : {}", customers);
+        if (CollectionUtils.isEmpty(request.getCustomers()) || request.getUserId() == null) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        List<Customer> result = customerService.batchAssignCustomer(request.getCustomers(), request.getUserId());
 
         return ResponseEntity.ok().body(result);
     }

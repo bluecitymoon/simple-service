@@ -1,0 +1,55 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customer",
+            "otherEntityName": "customer",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "name"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "olderFollowerLogin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "olderFollowerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "newFollowerLogin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "newFollowerName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20181203092656",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "cust_cc_assign_history",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

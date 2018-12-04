@@ -73,4 +73,6 @@ public interface CustomerService {
     List<ChannelReportElement> getVistedCustomerStatusReport(CustomerStatusRequest customerStatusRequest);
 
     void fixupCreatedDateIssue();
+
+    List<Customer> batchAssignCustomer(List<Customer> customers, Long userId);
 }

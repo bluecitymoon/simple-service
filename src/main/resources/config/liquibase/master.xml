@@ -77,6 +77,7 @@
     <include file="config/liquibase/changelog/20181114131248_added_entity_StudentFrozenArrangement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181114131616_added_entity_StudentFrozen.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181123125043_added_entity_ScheduledTaskLog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181203092656_added_entity_CustomerCousultantAssignHistory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
@@ -142,6 +143,7 @@
     <include file="config/liquibase/changelog/20181109054127_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181120085547_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181203085052_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181204024128_changelog.xml" relativeToChangelogFile="false"/>
 
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>
@@ -176,5 +178,6 @@
     <include file="config/liquibase/changelog/20181026090209_added_entity_constraints_AuthorityUserGuideDocument.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181114131248_added_entity_constraints_StudentFrozenArrangement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181114131616_added_entity_constraints_StudentFrozen.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181203092656_added_entity_constraints_CustomerCousultantAssignHistory.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

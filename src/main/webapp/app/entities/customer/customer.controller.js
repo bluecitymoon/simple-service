@@ -263,13 +263,18 @@
                 c.assignDate = new Date();
             });
 
-            Customer.batchUpdate(selectedRecords, function (response) {
+            var request = {
+                customers: selectedRecords,
+                userId: vm.selectedUser.id
+            };
+
+            Customer.batchAssignCourseConsultant(request, function (response) {
 
                 AlertService.success("操作成功！批量分配了" + response.length + "条客户数据到用户" + vm.selectedUser.firstName+ "！");
 
             }, function (error) {
 
-                AlertService.error(error);
+                AlertService.showCommonError(error);
             });
 
         };

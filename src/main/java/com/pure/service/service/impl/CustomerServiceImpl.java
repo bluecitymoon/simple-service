@@ -7,6 +7,7 @@ import com.pure.service.domain.CustomerCollectionLog;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.CustomerCommunicationSchedule;
+import com.pure.service.domain.CustomerCousultantAssignHistory;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
@@ -22,6 +23,7 @@ import com.pure.service.repository.CustomerCollectionLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
+import com.pure.service.repository.CustomerCousultantAssignHistoryRepository;
 import com.pure.service.repository.CustomerRepository;
 import com.pure.service.repository.CustomerStatusRepository;
 import com.pure.service.repository.CustomerTrackTaskRepository;
@@ -118,6 +120,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private NewOrderAssignHistoryRepository newOrderAssignHistoryRepository;
 
+    @Autowired
+    private CustomerCousultantAssignHistoryRepository assignHistoryRepository;
+
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
@@ -135,6 +140,50 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerCommunicationLogQueryService = customerCommunicationLogQueryService;
     }
 
+    @Override
+    public List<Customer> batchAssignCustomer(List<Customer> customers, Long userId) {
+
+        List<CustomerCousultantAssignHistory> assignHistories = new ArrayList<>();
+
+        List<Customer> customerList = new ArrayList<>();
+
+        for (Customer customer : customers) {
+
+            Customer oldCustomer = customerRepository.findOne(customer.getId());
+            if (oldCustomer.getCourseConsultant().getId() == customer.getCourseConsultant().getId()) {
+                continue;
+            }
+
+            customer.setCourseConsultantAssignDate(Instant.now());
+            User newAssignee = userRepository.findOne(userId);
+            customer.setCourseConsultant(newAssignee);
+
+            customerList.add(customer);
+
+            String olderFollowerLogin = oldCustomer.getCourseConsultant() == null ? "" : oldCustomer.getCourseConsultant().getLogin();
+            String olderFollowerName = oldCustomer.getCourseConsultant() == null ? "" : oldCustomer.getCourseConsultant().getFirstName();
+            String newFollowerLogin = customer.getCourseConsultant() == null ? "" : customer.getCourseConsultant().getLogin();
+            String newFollowerName = customer.getCourseConsultant() == null ? "" : customer.getCourseConsultant().getFirstName();
+
+            CustomerCousultantAssignHistory assignHistory = new CustomerCousultantAssignHistory();
+            assignHistory = assignHistory.customer(customer).olderFollowerLogin(olderFollowerLogin).olderFollowerName(olderFollowerName).newFollowerLogin(newFollowerLogin).newFollowerName(newFollowerName);
+
+            RegionUtils.setRegionAbstractAuditingRegionEntity(assignHistory);
+            assignHistories.add(assignHistory);
+
+        }
+
+        if (!CollectionUtils.isEmpty(customerList)) {
+            customerRepository.save(customerList);
+        }
+
+        if (!CollectionUtils.isEmpty(assignHistories)) {
+            assignHistoryRepository.save(assignHistories);
+
+        }
+
+        return customerList;
+    }
     /**
      * Save a customer.
      *
@@ -589,6 +638,8 @@ public class CustomerServiceImpl implements CustomerService {
     public void fixupCreatedDateIssue() {
 
     }
+
+
 
     private void mergeStudents(Customer leftCustomer, Customer rightCustomer, Customer finalCustomer) {
 
