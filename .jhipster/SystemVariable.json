@@ -9,6 +9,10 @@
         {
             "fieldName": "attrValue",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20180514031810",

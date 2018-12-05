@@ -1,6 +1,11 @@
-<div>
-    <h2 data-translate="simpleServiceApp.systemVariable.home.title">System Variables</h2>
-    <jhi-alert></jhi-alert>
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.systemVariable.home.title">System Variables</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.systemVariable.home.title">System Variables</h2>-->
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
@@ -21,6 +26,7 @@
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.systemVariable.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="attrValue"><span data-translate="simpleServiceApp.systemVariable.attrValue">Attr Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.systemVariable.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -29,6 +35,7 @@
                     <td><a ui-sref="system-variable-detail({id:systemVariable.id})">{{systemVariable.id}}</a></td>
                     <td>{{systemVariable.name}}</td>
                     <td>{{systemVariable.attrValue}}</td>
+                    <td>{{systemVariable.comments}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
@@ -59,4 +66,5 @@
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
     </div>
+</div>
 </div>

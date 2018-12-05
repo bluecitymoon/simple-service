@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.SystemVariable;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.SystemVariableService;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
@@ -53,6 +55,7 @@ public class SystemVariableResource {
      */
     @PostMapping("/system-variables")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<SystemVariable> createSystemVariable(@RequestBody SystemVariable systemVariable) throws URISyntaxException {
         log.debug("REST request to save SystemVariable : {}", systemVariable);
         if (systemVariable.getId() != null) {
@@ -95,6 +98,7 @@ public class SystemVariableResource {
      */
     @GetMapping("/system-variables")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<SystemVariable>> getAllSystemVariables(SystemVariableCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get SystemVariables by criteria: {}", criteria);
         Page<SystemVariable> page = systemVariableQueryService.findByCriteria(criteria, pageable);

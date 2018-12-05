@@ -126,6 +126,7 @@
                             return {
                                 name: null,
                                 attrValue: null,
+                                comments: null,
                                 id: null
                             };
                         }

@@ -11,7 +11,6 @@ import com.pure.service.domain.CustomerCousultantAssignHistory;
 import com.pure.service.domain.CustomerStatus;
 import com.pure.service.domain.CustomerTrackTask;
 import com.pure.service.domain.FreeClassRecord;
-import com.pure.service.domain.NewOrderAssignHistory;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.Task;
 import com.pure.service.domain.TaskStatus;
@@ -277,14 +276,8 @@ public class CustomerServiceImpl implements CustomerService {
             if (customer.getSalesFollower() != null ) {
                 customer.setAssignDate(Instant.now());
 
-                NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
+                freeClassRecordService.saveFreeClassAssignHistory(newOrder, null);
 
-                newOrderAssignHistory = newOrderAssignHistory.newFollowerName(customer.getSalesFollower().getFirstName())
-                    .newFollowerLogin(customer.getSalesFollower().getLogin())
-                    .newOrder(customer.getNewOrder());
-                newOrderAssignHistory.setRegionId(newOrder.getRegionId());
-
-                newOrderAssignHistoryRepository.save(newOrderAssignHistory);
             }
 
             customer.setChannel(newOrder.getMarketChannelCategory());

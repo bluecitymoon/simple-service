@@ -1,8 +1,12 @@
 package com.pure.service.domain;
 
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Objects;
 
 /**
@@ -10,7 +14,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "system_variable")
-public class SystemVariable implements Serializable {
+public class SystemVariable extends AbstractRegionEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -23,6 +27,9 @@ public class SystemVariable implements Serializable {
 
     @Column(name = "attr_value")
     private String attrValue;
+
+    @Column(name = "comments")
+    private String comments;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -58,6 +65,19 @@ public class SystemVariable implements Serializable {
     public void setAttrValue(String attrValue) {
         this.attrValue = attrValue;
     }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public SystemVariable comments(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -86,6 +106,7 @@ public class SystemVariable implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", attrValue='" + getAttrValue() + "'" +
+            ", comments='" + getComments() + "'" +
             "}";
     }
 }

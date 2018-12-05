@@ -57,4 +57,6 @@ public interface FreeClassRecordService {
     String createScheduleForCustomer(Instant scheduleDate, Customer customer, String sourceType);
 
     List<FreeClassPlanElement> getSchedulePlanList();
+
+    void saveFreeClassAssignHistory(FreeClassRecord newOrder, FreeClassRecord oldOrder);
 }

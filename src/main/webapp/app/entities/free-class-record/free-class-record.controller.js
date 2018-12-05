@@ -87,7 +87,7 @@
 
             }, function (error) {
 
-                AlertService.error(error);
+                AlertService.showCommonError(error);
             });
 
         };

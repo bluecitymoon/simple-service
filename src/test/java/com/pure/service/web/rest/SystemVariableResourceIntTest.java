@@ -46,6 +46,9 @@ public class SystemVariableResourceIntTest {
     private static final String DEFAULT_ATTR_VALUE = "AAAAAAAAAA";
     private static final String UPDATED_ATTR_VALUE = "BBBBBBBBBB";
 
+    private static final String DEFAULT_COMMENTS = "AAAAAAAAAA";
+    private static final String UPDATED_COMMENTS = "BBBBBBBBBB";
+
     @Autowired
     private SystemVariableRepository systemVariableRepository;
 
@@ -90,7 +93,8 @@ public class SystemVariableResourceIntTest {
     public static SystemVariable createEntity(EntityManager em) {
         SystemVariable systemVariable = new SystemVariable()
             .name(DEFAULT_NAME)
-            .attrValue(DEFAULT_ATTR_VALUE);
+            .attrValue(DEFAULT_ATTR_VALUE)
+            .comments(DEFAULT_COMMENTS);
         return systemVariable;
     }
 
@@ -116,6 +120,7 @@ public class SystemVariableResourceIntTest {
         SystemVariable testSystemVariable = systemVariableList.get(systemVariableList.size() - 1);
         assertThat(testSystemVariable.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testSystemVariable.getAttrValue()).isEqualTo(DEFAULT_ATTR_VALUE);
+        assertThat(testSystemVariable.getComments()).isEqualTo(DEFAULT_COMMENTS);
     }
 
     @Test
@@ -148,8 +153,9 @@ public class SystemVariableResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(systemVariable.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].attrValue").value(hasItem(DEFAULT_ATTR_VALUE.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].attrValue").value(hasItem(DEFAULT_ATTR_VALUE)))
+            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)));
     }
 
     @Test
@@ -163,8 +169,9 @@ public class SystemVariableResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(systemVariable.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.attrValue").value(DEFAULT_ATTR_VALUE.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
+            .andExpect(jsonPath("$.attrValue").value(DEFAULT_ATTR_VALUE))
+            .andExpect(jsonPath("$.comments").value(DEFAULT_COMMENTS));
     }
 
     @Test
@@ -245,6 +252,45 @@ public class SystemVariableResourceIntTest {
         defaultSystemVariableShouldNotBeFound("attrValue.specified=false");
     }
 
+    @Test
+    @Transactional
+    public void getAllSystemVariablesByCommentsIsEqualToSomething() throws Exception {
+        // Initialize the database
+        systemVariableRepository.saveAndFlush(systemVariable);
+
+        // Get all the systemVariableList where comments equals to DEFAULT_COMMENTS
+        defaultSystemVariableShouldBeFound("comments.equals=" + DEFAULT_COMMENTS);
+
+        // Get all the systemVariableList where comments equals to UPDATED_COMMENTS
+        defaultSystemVariableShouldNotBeFound("comments.equals=" + UPDATED_COMMENTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSystemVariablesByCommentsIsInShouldWork() throws Exception {
+        // Initialize the database
+        systemVariableRepository.saveAndFlush(systemVariable);
+
+        // Get all the systemVariableList where comments in DEFAULT_COMMENTS or UPDATED_COMMENTS
+        defaultSystemVariableShouldBeFound("comments.in=" + DEFAULT_COMMENTS + "," + UPDATED_COMMENTS);
+
+        // Get all the systemVariableList where comments equals to UPDATED_COMMENTS
+        defaultSystemVariableShouldNotBeFound("comments.in=" + UPDATED_COMMENTS);
+    }
+
+    @Test
+    @Transactional
+    public void getAllSystemVariablesByCommentsIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        systemVariableRepository.saveAndFlush(systemVariable);
+
+        // Get all the systemVariableList where comments is not null
+        defaultSystemVariableShouldBeFound("comments.specified=true");
+
+        // Get all the systemVariableList where comments is null
+        defaultSystemVariableShouldNotBeFound("comments.specified=false");
+    }
+
     /**
      * Executes the search, and checks that the default entity is returned
      */
@@ -253,8 +299,9 @@ public class SystemVariableResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(systemVariable.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].attrValue").value(hasItem(DEFAULT_ATTR_VALUE.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
+            .andExpect(jsonPath("$.[*].attrValue").value(hasItem(DEFAULT_ATTR_VALUE)))
+            .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)));
     }
 
     /**
@@ -289,7 +336,8 @@ public class SystemVariableResourceIntTest {
         SystemVariable updatedSystemVariable = systemVariableRepository.findOne(systemVariable.getId());
         updatedSystemVariable
             .name(UPDATED_NAME)
-            .attrValue(UPDATED_ATTR_VALUE);
+            .attrValue(UPDATED_ATTR_VALUE)
+            .comments(UPDATED_COMMENTS);
 
         restSystemVariableMockMvc.perform(put("/api/system-variables")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -302,6 +350,7 @@ public class SystemVariableResourceIntTest {
         SystemVariable testSystemVariable = systemVariableList.get(systemVariableList.size() - 1);
         assertThat(testSystemVariable.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testSystemVariable.getAttrValue()).isEqualTo(UPDATED_ATTR_VALUE);
+        assertThat(testSystemVariable.getComments()).isEqualTo(UPDATED_COMMENTS);
     }
 
     @Test

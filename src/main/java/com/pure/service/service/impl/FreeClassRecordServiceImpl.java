@@ -144,27 +144,17 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
             FreeClassRecord oldFreeClassRecord = freeClassRecordRepository.findOne(freeClassRecord.getId());
 
             String olderFollowerLogin = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getLogin();
-            String olderFollowerName = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getFirstName();
             String newFollowerLogin = freeClassRecord.getSalesFollower() == null ? "" : freeClassRecord.getSalesFollower().getLogin();
-            String newFollowerName = freeClassRecord.getSalesFollower() == null ? "" : freeClassRecord.getSalesFollower().getFirstName();
 
             if (!olderFollowerLogin.equals(newFollowerLogin)) {
 
-                NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
-
-                newOrderAssignHistory = newOrderAssignHistory.newFollowerName(newFollowerName)
-                    .newFollowerLogin(newFollowerLogin)
-                    .newFollowerName(newFollowerName)
-                    .olderFollowerLogin(olderFollowerLogin)
-                    .olderFollowerName(olderFollowerName)
-                    .newOrder(freeClassRecord);
-                newOrderAssignHistory.setRegionId(freeClassRecord.getRegionId());
-
-                newOrderAssignHistoryRepository.save(newOrderAssignHistory);
+                saveFreeClassAssignHistory(freeClassRecord, oldFreeClassRecord);
 
                 Customer associatedCustomer = customerRepository.findByNewOrder_Id(freeClassRecord.getId());
 
-                associatedCustomer.setAssignDate(Instant.now());
+                if (associatedCustomer != null) {
+                    associatedCustomer.setAssignDate(Instant.now());
+                }
 
             }
 
@@ -426,6 +416,37 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
         }
 
         return elements;
+    }
+
+    @Override
+    public void saveFreeClassAssignHistory(FreeClassRecord newFreeClassRecord, FreeClassRecord oldFreeClassRecord) {
+
+        String olderFollowerLogin = "";
+        String olderFollowerName = "";
+        if (oldFreeClassRecord != null) {
+            olderFollowerLogin = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getLogin();
+            olderFollowerName = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getFirstName();
+        }
+
+        String newFollowerLogin = newFreeClassRecord.getSalesFollower() == null ? "" : newFreeClassRecord.getSalesFollower().getLogin();
+        String newFollowerName = newFreeClassRecord.getSalesFollower() == null ? "" : newFreeClassRecord.getSalesFollower().getFirstName();
+
+        if (!olderFollowerLogin.equals(newFollowerLogin)) {
+
+            NewOrderAssignHistory newOrderAssignHistory = new NewOrderAssignHistory();
+
+            newOrderAssignHistory = newOrderAssignHistory.newFollowerName(newFollowerName)
+                .newFollowerLogin(newFollowerLogin)
+                .newFollowerName(newFollowerName)
+                .olderFollowerLogin(olderFollowerLogin)
+                .olderFollowerName(olderFollowerName)
+                .newOrder(newFreeClassRecord);
+            newOrderAssignHistory.setRegionId(newFreeClassRecord.getRegionId());
+
+            newOrderAssignHistoryRepository.save(newOrderAssignHistory);
+
+        }
+
     }
 
     private FreeClassPlan findPlanInDay(List<FreeClassPlan> plans, Instant scheduleDate) {

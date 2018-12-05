@@ -144,6 +144,7 @@
     <include file="config/liquibase/changelog/20181120085547_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181203085052_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181204024128_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181205020103_changelog.xml" relativeToChangelogFile="false"/>
 
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>

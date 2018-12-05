@@ -39,11 +39,20 @@
 
             function showCommonError(response) {
 
-                if (response.data && response.data.detail) {
+                if (response.data) {
 
-                    this.error(response.data.detail);
+                    if (response.data.detail) {
+                        this.error(response.data.detail);
+                    } else if (response.data.title) {
+                        this.error(response.data.title)
+                    } else {
+                        this.error("出错了");
+                    }
+                } else {
+                    this.error("出错了");
                 }
             }
+
             function isToast() {
                 return toast;
             }

@@ -2,21 +2,22 @@
     "simpleServiceApp": {
         "systemVariable" : {
             "home": {
-                "title": "System Variables",
-                "createLabel": "Create a new System Variable",
-                "createOrEditLabel": "Create or edit a System Variable"
+                "title": "系统可变量",
+                "createLabel": "录入",
+                "createOrEditLabel": "修改"
             },
-            "created": "A new System Variable is created with identifier {{ param }}",
-            "updated": "A System Variable is updated with identifier {{ param }}",
-            "deleted": "A System Variable is deleted with identifier {{ param }}",
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
             "delete": {
-                "question": "Are you sure you want to delete System Variable {{ id }}?"
+                "question": "你确定要删除这条记录？"
             },
             "detail": {
-                "title": "System Variable"
+                "title": "系统变量"
             },
-            "name": "Name",
-            "attrValue": "Attr Value"
+            "name": "名称",
+            "attrValue": "当前值",
+            "comments": "备注"
         }
     }
 }

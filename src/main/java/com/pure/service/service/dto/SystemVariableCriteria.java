@@ -1,11 +1,7 @@
 package com.pure.service.service.dto;
 
-import java.io.Serializable;
-import io.github.jhipster.service.filter.BooleanFilter;
-import io.github.jhipster.service.filter.DoubleFilter;
+import com.pure.service.region.AbstractQueryCriteria;
 import io.github.jhipster.service.filter.Filter;
-import io.github.jhipster.service.filter.FloatFilter;
-import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
@@ -22,7 +18,7 @@ import io.github.jhipster.service.filter.StringFilter;
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
-public class SystemVariableCriteria implements Serializable {
+public class SystemVariableCriteria extends AbstractQueryCriteria {
     private static final long serialVersionUID = 1L;
 
 
@@ -31,6 +27,8 @@ public class SystemVariableCriteria implements Serializable {
     private StringFilter name;
 
     private StringFilter attrValue;
+
+    private StringFilter comments;
 
     public SystemVariableCriteria() {
     }
@@ -59,12 +57,21 @@ public class SystemVariableCriteria implements Serializable {
         this.attrValue = attrValue;
     }
 
+    public StringFilter getComments() {
+        return comments;
+    }
+
+    public void setComments(StringFilter comments) {
+        this.comments = comments;
+    }
+
     @Override
     public String toString() {
         return "SystemVariableCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
                 (attrValue != null ? "attrValue=" + attrValue + ", " : "") +
+                (comments != null ? "comments=" + comments + ", " : "") +
             "}";
     }
 
