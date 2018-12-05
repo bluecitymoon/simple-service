@@ -15,10 +15,10 @@
             "detail": {
                 "title": "新单分配记录"
             },
-            "olderFollowerLogin": "老的跟单者",
-            "olderFollowerName": "老的跟单者姓名",
-            "newFollowerLogin": "新的跟单者",
-            "newFollowerName": "新的跟单者姓名",
+            "olderFollowerLogin": "原跟单人Id",
+            "olderFollowerName": "原跟单人",
+            "newFollowerLogin": "新跟单人Id",
+            "newFollowerName": "新的跟单人",
             "createdBy": "操作者",
             "createdDate": "操作时间",
             "lastModifiedBy": "最近修改人",

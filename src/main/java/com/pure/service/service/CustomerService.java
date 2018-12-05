@@ -75,4 +75,7 @@ public interface CustomerService {
     void fixupCreatedDateIssue();
 
     List<Customer> batchAssignCustomer(List<Customer> customers, Long userId);
+
+    void fixAssignDateIssue();
 }
+

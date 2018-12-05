@@ -1,34 +1,49 @@
 package com.pure.service.web.rest;
 
-import com.pure.service.config.Constants;
 import com.codahale.metrics.annotation.Timed;
+import com.pure.service.config.Constants;
 import com.pure.service.domain.Authority;
 import com.pure.service.domain.User;
+import com.pure.service.domain.UserRegion;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.security.AuthoritiesConstants;
 import com.pure.service.service.MailService;
+import com.pure.service.service.UserRegionQueryService;
 import com.pure.service.service.UserService;
 import com.pure.service.service.dto.UserDTO;
-import com.pure.service.web.rest.vm.ManagedUserVM;
+import com.pure.service.service.dto.UserRegionCriteria;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
+import com.pure.service.web.rest.vm.ManagedUserVM;
+import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing users.
@@ -67,6 +82,9 @@ public class UserResource {
     private final MailService mailService;
 
     private final UserService userService;
+
+    @Autowired
+    private UserRegionQueryService userRegionQueryService;
 
     public UserResource(UserRepository userRepository, MailService mailService,
             UserService userService) {
@@ -161,7 +179,20 @@ public class UserResource {
     public List<User> getAllUsers(@PathVariable String role) {
 
         List<User> users = userRepository.findAllUsersByAuthorityName(role);
-        return users;
+
+        Long regionId = RegionUtils.getRegionIdForCurrentUser();
+
+        UserRegionCriteria userRegionCriteria = new UserRegionCriteria();
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(regionId);
+
+        userRegionCriteria.setRegionId(longFilter);
+
+        List<User> userList = userRegionQueryService.findByCriteria(userRegionCriteria).stream().map(UserRegion::getUser).collect(Collectors.toList());
+
+         users.retainAll(userList);
+
+         return users;
     }
 
     /**

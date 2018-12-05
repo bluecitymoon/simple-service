@@ -44,4 +44,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
     Customer findByNewOrder_Id(Long newOrderId);
 
     Customer findByContactPhoneNumber(String contactPhoneNumber);
+
+    List<Customer> findByAssignDateIsNullAndSalesFollowerIsNotNull();
 }

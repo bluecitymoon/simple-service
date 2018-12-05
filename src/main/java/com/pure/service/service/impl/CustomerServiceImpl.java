@@ -35,6 +35,7 @@ import com.pure.service.service.CustomerCommunicationLogQueryService;
 import com.pure.service.service.CustomerQueryService;
 import com.pure.service.service.CustomerService;
 import com.pure.service.service.FreeClassRecordService;
+import com.pure.service.service.NewOrderAssignHistoryQueryService;
 import com.pure.service.service.dto.CustomerCommunicationLogCriteria;
 import com.pure.service.service.dto.CustomerCriteria;
 import com.pure.service.service.dto.TaskStatusEnum;
@@ -122,6 +123,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerCousultantAssignHistoryRepository assignHistoryRepository;
 
+    @Autowired
+    private NewOrderAssignHistoryQueryService newOrderAssignHistoryQueryService;
+
     private final CustomerQueryService customerQueryService;
     private final CustomerCommunicationLogTypeRepository customerCommunicationLogTypeRepository;
     private final CustomerCommunicationLogRepository customerCommunicationLogRepository;
@@ -183,6 +187,8 @@ public class CustomerServiceImpl implements CustomerService {
 
         return customerList;
     }
+
+
     /**
      * Save a customer.
      *
@@ -750,6 +756,46 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setNextScheduleDate(schedule.getSceduleDate());
 
         save(customer);
+    }
+
+    @Override
+    public void fixAssignDateIssue() {
+
+        List<Customer> customers = customerRepository.findByAssignDateIsNullAndSalesFollowerIsNotNull();
+
+        int count = 0;
+        int goodcount = 0;
+        for (Customer customer : customers) {
+
+            customer.setAssignDate(customer.getCreatedDate());
+//            Long newOrderId = customer.getNewOrder().getId();
+//
+//            NewOrderAssignHistoryCriteria historyCriteria = new NewOrderAssignHistoryCriteria();
+//
+//            LongFilter longFilter = new LongFilter();
+//            longFilter.setEquals(newOrderId);
+//
+//            historyCriteria.setNewOrderId(longFilter);
+//
+//            List<NewOrderAssignHistory> histories = newOrderAssignHistoryQueryService.findByCriteria(historyCriteria);
+//            if (CollectionUtils.isEmpty(histories)) {
+//                count ++;
+//                log.debug("没有分配记录+1");
+//                continue;
+//            }
+//
+//            NewOrderAssignHistory newOrderAssignHistory = histories.get(0);
+//
+//            System.out.println(newOrderAssignHistory.getCreatedDate().toString());
+//
+//            log.debug("Create date {} ", newOrderAssignHistory.getCreatedDate());
+//            goodcount ++;
+        }
+
+        customerRepository.save(customers);
+
+        log.debug("未找到分配历史记录数量 " + count + " 有历史记录的" + goodcount + "条");
+
     }
 
 }

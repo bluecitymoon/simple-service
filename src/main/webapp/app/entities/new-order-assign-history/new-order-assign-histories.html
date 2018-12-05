@@ -23,54 +23,55 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="olderFollowerLogin"><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerLogin">Older Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="newOrder.personName"><span data-translate="simpleServiceApp.newOrderAssignHistory.newOrder">New Order</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="olderFollowerName"><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerName">Older Follower Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="newFollowerLogin"><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerLogin">New Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="newFollowerName"><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerName">New Follower Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="olderFollowerLogin"><span data-translate="simpleServiceApp.newOrderAssignHistory.olderFollowerLogin">Older Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="newFollowerLogin"><span data-translate="simpleServiceApp.newOrderAssignHistory.newFollowerLogin">New Follower Login</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.newOrderAssignHistory.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.newOrderAssignHistory.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.newOrderAssignHistory.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="newOrder.personName"><span data-translate="simpleServiceApp.newOrderAssignHistory.newOrder">New Order</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <!--<th></th>-->
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="newOrderAssignHistory in vm.newOrderAssignHistories track by newOrderAssignHistory.id">
                     <td><a ui-sref="new-order-assign-history-detail({id:newOrderAssignHistory.id})">{{newOrderAssignHistory.id}}</a></td>
-                    <td>{{newOrderAssignHistory.olderFollowerLogin}}</td>
-                    <td>{{newOrderAssignHistory.olderFollowerName}}</td>
-                    <td>{{newOrderAssignHistory.newFollowerLogin}}</td>
-                    <td>{{newOrderAssignHistory.newFollowerName}}</td>
+                    <td>
+                        <a ui-sref="free-class-record-detail({id:newOrderAssignHistory.newOrder.id})">{{newOrderAssignHistory.newOrder.personName}}</a>
+                    </td>
+                    <td>{{newOrderAssignHistory.olderFollowerName || '无'}}</td>
+                    <td>{{newOrderAssignHistory.newFollowerName || '无'}}</td>
+                    <!--<td>{{newOrderAssignHistory.olderFollowerLogin || '无'}}</td>-->
+                    <!--<td>{{newOrderAssignHistory.newFollowerLogin || '无'}}</td>-->
                     <td>{{newOrderAssignHistory.createdBy}}</td>
                     <td>{{newOrderAssignHistory.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
                     <td>{{newOrderAssignHistory.lastModifiedBy}}</td>
                     <td>{{newOrderAssignHistory.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>
-                        <a ui-sref="free-class-record-detail({id:newOrderAssignHistory.newOrder.id})">{{newOrderAssignHistory.newOrder.personName}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="new-order-assign-history-detail({id:newOrderAssignHistory.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                            </button>
+
+                    <!--<td class="text-right">-->
+                        <!--<div class="btn-group flex-btn-group-container">-->
                             <!--<button type="submit"-->
-                                    <!--ui-sref="new-order-assign-history.edit({id:newOrderAssignHistory.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                                    <!--ui-sref="new-order-assign-history-detail({id:newOrderAssignHistory.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
                             <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="new-order-assign-history.delete({id:newOrderAssignHistory.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
-                        </div>
-                    </td>
+                            <!--&lt;!&ndash;<button type="submit"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ui-sref="new-order-assign-history.edit({id:newOrderAssignHistory.id})"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;class="btn btn-primary btn-sm">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-pencil"></span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="hidden-sm-down" data-translate="entity.action.edit"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<button type="submit"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;ui-sref="new-order-assign-history.delete({id:newOrderAssignHistory.id})"&ndash;&gt;-->
+                                    <!--&lt;!&ndash;class="btn btn-danger btn-sm">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="glyphicon glyphicon-remove-circle"></span>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="hidden-sm-down" data-translate="entity.action.delete"></span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</button>&ndash;&gt;-->
+                        <!--</div>-->
+                    <!--</td>-->
                 </tr>
             </tbody>
         </table>

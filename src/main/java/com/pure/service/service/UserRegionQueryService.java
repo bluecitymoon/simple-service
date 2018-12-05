@@ -1,8 +1,13 @@
 package com.pure.service.service;
 
 
-import java.util.List;
-
+import com.pure.service.domain.Region_;
+import com.pure.service.domain.UserRegion;
+import com.pure.service.domain.UserRegion_;
+import com.pure.service.domain.User_;
+import com.pure.service.repository.UserRegionRepository;
+import com.pure.service.service.dto.UserRegionCriteria;
+import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -11,12 +16,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jhipster.service.QueryService;
-
-import com.pure.service.domain.UserRegion;
-import com.pure.service.domain.*; // for static metamodels
-import com.pure.service.repository.UserRegionRepository;
-import com.pure.service.service.dto.UserRegionCriteria;
+import java.util.List;
 
 
 /**
@@ -59,7 +59,7 @@ public class UserRegionQueryService extends QueryService<UserRegion> {
     @Transactional(readOnly = true)
     public Page<UserRegion> findByCriteria(UserRegionCriteria criteria, Pageable page) {
         log.debug("find by criteria : {}, page: {}", criteria, page);
-        final Specifications<UserRegion> specification = createSpecification(criteria);
+        Specifications<UserRegion> specification = createSpecification(criteria);
         return userRegionRepository.findAll(specification, page);
     }
 

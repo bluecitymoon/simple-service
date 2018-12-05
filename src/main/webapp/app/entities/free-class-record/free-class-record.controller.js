@@ -108,10 +108,7 @@
         loadAllUsers();
 
         function loadAllUsers () {
-            User.query({
-                page: 0,
-                size: 1000
-            }, onSuccess, onError);
+            User.getAllSales({}, onSuccess, onError);
 
             function onSuccess(data) {
                 vm.users = data;

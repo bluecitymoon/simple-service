@@ -475,6 +475,7 @@ public class CustomerResource {
         return ResponseEntity.ok().body(result);
     }
 
+
     /**
      * GET  /customers/:id : get the "id" customer.
      *
@@ -487,6 +488,15 @@ public class CustomerResource {
         log.debug("REST request to get Customer : {}", id);
         Customer customer = customerService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(customer));
+    }
+
+    @GetMapping("/customers/fix-assign-date-issue")
+    @Timed
+    public ResponseEntity<Void> fixAssignDateIssue() {
+
+        customerService.fixAssignDateIssue();
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/customers/premerge/{oid}/{tid}")
