@@ -131,7 +131,7 @@
                             {{$select.selected.firstName}}
                         </ui-select-match>
                         <ui-select-choices refresh="vm.searchPersonWithKeyword($select.search)" refresh-delay="0"
-                                           repeat="item in (vm.users | filter: $select.search) track by item.id">
+                                           repeat="item in (vm.sales | filter: $select.search) track by item.id">
                             <span ng-bind="item.firstName"></span>
                         </ui-select-choices>
                     </ui-select>

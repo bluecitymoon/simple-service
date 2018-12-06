@@ -18,6 +18,7 @@
         vm.marketchannelcategories = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.classcategories = ClassCategory.query({ page: 0,  size: 1000 });
         vm.users = User.query({ page: 0,  size: 1000 });
+        vm.sales = User.getAllSales();
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
         vm.classLevels = [
             {id: 1, value: "成年"},
