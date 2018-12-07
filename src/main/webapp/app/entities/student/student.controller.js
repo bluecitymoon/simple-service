@@ -29,6 +29,27 @@
             vm.searchCondition = {};
         };
         vm.classes = Product.query({ page: 0,  size: 1000 });
+
+        vm.openHistoryLog = function (student) {
+
+            $uibModal.open({
+                templateUrl: 'app/entities/student/student-log-dialog.html',
+                controller: 'StudentLogDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: ['Student', function(Student) {
+                        return student;
+                    }]
+                }
+            }).result.then(function() {
+                // $state.go('^', {}, { reload: false });
+            }, function() {
+                // $state.go('^');
+            });
+        };
+
         vm.toggleAll = function () {
             angular.forEach(vm.students, function (student) {
                 student.selected = vm.allSelected;

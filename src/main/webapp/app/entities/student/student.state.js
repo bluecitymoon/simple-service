@@ -47,6 +47,7 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('student');
                     $translatePartialLoader.addPart('global');
+                    $translatePartialLoader.addPart('studentClassLog');
                     return $translate.refresh();
                 }]
             }
@@ -83,38 +84,6 @@
                 }]
             }
         })
-            // .state('student-froze', {
-            //     parent: 'student',
-            //     url: '/student/froze/{id}',
-            //     data: {
-            //         authorities: ['ROLE_USER'],
-            //         pageTitle: 'simpleServiceApp.student.detail.title'
-            //     },
-            //     views: {
-            //         'content@': {
-            //             templateUrl: 'app/entities/student/student-lock-dialog.html',
-            //             controller: 'StudentLockDialogController',
-            //             controllerAs: 'vm'
-            //         }
-            //     },
-            //     resolve: {
-            //         translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-            //             $translatePartialLoader.addPart('student');
-            //             return $translate.refresh();
-            //         }],
-            //         entity: ['$stateParams', 'Student', function($stateParams, Student) {
-            //             return Student.get({id : $stateParams.id}).$promise;
-            //         }],
-            //         previousState: ["$state", function ($state) {
-            //             var currentStateData = {
-            //                 name: $state.current.name || 'student',
-            //                 params: $state.params,
-            //                 url: $state.href($state.current.name, $state.params)
-            //             };
-            //             return currentStateData;
-            //         }]
-            //     }
-            // })
         .state('student-detail.edit', {
             parent: 'student-detail',
             url: '/detail/edit',

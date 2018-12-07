@@ -10,6 +10,7 @@ import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.StudentClassLogQueryService;
+import io.github.jhipster.service.filter.LongFilter;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -129,6 +130,23 @@ public class StudentClassLogResource {
         StudentClassLog studentClassLog = studentClassLogService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(studentClassLog));
     }
+
+    @GetMapping("/student-class-logs/student/{studentId}")
+    @Timed
+    public ResponseEntity<List<StudentClassLog>> getStudentClassLogByStudentId(@PathVariable("studentId") Long studentId) {
+
+        StudentClassLogCriteria criteria = new StudentClassLogCriteria();
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(studentId);
+
+        criteria.setStudentId(longFilter);
+
+        List<StudentClassLog> logs = studentClassLogQueryService.findByCriteria(criteria);
+
+        return new ResponseEntity<>(logs, HttpStatus.OK);
+    }
+
 
     /**
      * DELETE  /student-class-logs/:id : delete the "id" studentClassLog.

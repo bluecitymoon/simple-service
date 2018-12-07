@@ -1,0 +1,121 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+
+    </div>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="form-group col-md-2">
+                <label>学员</label>
+                <input type="text" class="form-control" name="name" readonly
+                       ng-model="vm.student.name"
+                />
+            </div>
+
+            <div class="form-group col-md-4 col-lg-offset-1">
+                <label>开始日期</label>
+                <input type="text" placeholder="开始日期" class="form-control"
+                       ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
+                       timepicker-options="vm.datePickerOptions"
+                       ng-model="vm.searchCondition.startDate"
+                       is-open="vm.datePickerOpenStatus.startDate">
+            </div>
+            <div class="form-group col-md-4">
+                <label>结束日期</label>
+                <input type="text" placeholder="结束日期" class="form-control"
+                       ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
+                       timepicker-options="vm.datePickerOptions"
+                       ng-model="vm.searchCondition.endDate"
+                       is-open="vm.datePickerOpenStatus.endDate">
+            </div>
+        </div>
+
+
+        <uib-tabset>
+            <uib-tab heading="上课记录">
+                <div class="panel panel-bordered-mint">
+                    <div class="panel-body">
+                        <table class="jh-table table table-striped">
+                            <thead>
+                            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
+                                        class="glyphicon glyphicon-sort"></span></th>
+                                <th>
+                                    <span>上课时间</span>
+                                </th>
+
+                                <th>
+                                    <span>下课时间</span>
+                                </th>
+
+                                <th>
+                                    <span>实际签到时间</span>
+                                </th>
+
+                                <th jh-sort-by="comments"><span
+                                        data-translate="simpleServiceApp.studentClassLog.comments">Comments</span> <span
+                                        class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentClassLog.createdBy">Created By</span>
+                                    <span class="glyphicon glyphicon-sort"></span></th>
+                                <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentClassLog.createdDate">Created Date</span>
+                                    <span class="glyphicon glyphicon-sort"></span></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="studentClassLog in vm.studentClassLogs track by studentClassLog.id">
+                                <td><a target="_window" ui-sref="student-class-log-detail({id:studentClassLog.id})">{{studentClassLog.id}}</a></td>
+
+                                <td>
+                                    {{studentClassLog.arrangement.startDate | date:'yyyy-MM-dd hh:mm'}}
+                                </td>
+                                <td>
+                                    {{studentClassLog.arrangement.endDate | date:'yyyy-MM-dd hh:mm'}}
+                                </td>
+                                <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                <td>{{studentClassLog.comments}}</td>
+                                <td>{{studentClassLog.createdBy}}</td>
+                                <td>{{studentClassLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                <!--<td>{{studentClassLog.point}}</td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </uib-tab>
+            <uib-tab heading="耗课记录">
+                <div class="panel panel-bordered-mint">
+                    <div class="panel-body">
+
+                    </div>
+                </div>
+
+            </uib-tab>
+            <uib-tab heading="缺席记录">
+                <div class="panel panel-bordered-mint">
+                    <div class="panel-body">
+
+                    </div>
+                </div>
+
+            </uib-tab>
+            <uib-tab heading="冻结记录">
+                <div class="panel panel-bordered-mint">
+                    <div class="panel-body">
+
+                    </div>
+                </div>
+
+            </uib-tab>
+        </uib-tabset>
+
+    </div>
+
+</form>
