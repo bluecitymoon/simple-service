@@ -1,0 +1,76 @@
+<div class="page-header">
+    <h1 class="page-title">教务主管每日确认</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.studentClassLogDailyReport.home.title">Student Class Log Daily Reports</h2>-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="student-class-log-daily-report.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="simpleServiceApp.studentClassLogDailyReport.home.createLabel">
+                        Create new Student Class Log Daily Report
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="shouldTaken"><span data-translate="simpleServiceApp.studentClassLogDailyReport.shouldTaken">Should Taken</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="leave"><span data-translate="simpleServiceApp.studentClassLogDailyReport.leave">Leave</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="absence"><span data-translate="simpleServiceApp.studentClassLogDailyReport.absence">Absence</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="added"><span data-translate="simpleServiceApp.studentClassLogDailyReport.added">Added</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actualTaken"><span data-translate="simpleServiceApp.studentClassLogDailyReport.actualTaken">Actual Taken</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="logDate"><span data-translate="simpleServiceApp.studentClassLogDailyReport.logDate">Log Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="studentClassLogDailyReport in vm.studentClassLogDailyReports track by studentClassLogDailyReport.id">
+                    <td><a ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})">{{studentClassLogDailyReport.id}}</a></td>
+                    <td>{{studentClassLogDailyReport.shouldTaken}}</td>
+                    <td>{{studentClassLogDailyReport.leave}}</td>
+                    <td>{{studentClassLogDailyReport.absence}}</td>
+                    <td>{{studentClassLogDailyReport.added}}</td>
+                    <td>{{studentClassLogDailyReport.actualTaken}}</td>
+                    <td>{{studentClassLogDailyReport.logDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student-class-log-daily-report.edit({id:studentClassLogDailyReport.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="student-class-log-daily-report.delete({id:studentClassLogDailyReport.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

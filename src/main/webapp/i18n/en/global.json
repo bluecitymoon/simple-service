@@ -83,6 +83,7 @@
                 "customerCousultantAssignHistory": "Customer Cousultant Assign History",
                 "studentAbsenceLog": "Student Absence Log",
                 "studentClassLogType": "Student Class Log Type",
+                "studentClassLogDailyReport": "Student Class Log Daily Report",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

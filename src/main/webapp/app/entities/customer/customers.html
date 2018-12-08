@@ -331,7 +331,7 @@
                     <td>{{customer.trackCount}}</td>
                     <td>{{customer.nextTrackComments}}</td>
 
-                    <td>{{customer.lastTrackDate | date :'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customer.lastTrackDate | date :'yyyy-MM-dd HH:mm'}}</td>
                     <td ng-if="vm.department == 'market'"><span ng-bind-html="customer.lastTrackComments"></span></td>
                     <!--<td>{{customer.sex}}</td>-->
                     <!--<td><i class="{{customer.status.icon}}"></i></td>-->

@@ -19,7 +19,7 @@
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
-        vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.itemsPerPage = 50;
         vm.searchCondition = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.datePickerOpenStatus = {};

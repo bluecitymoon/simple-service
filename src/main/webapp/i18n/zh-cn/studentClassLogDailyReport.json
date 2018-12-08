@@ -1,0 +1,26 @@
+{
+    "simpleServiceApp": {
+        "studentClassLogDailyReport" : {
+            "home": {
+                "title": "Student Class Log Daily Reports",
+                "createLabel": "Create a new Student Class Log Daily Report",
+                "createOrEditLabel": "Create or edit a Student Class Log Daily Report"
+            },
+            "created": "A new Student Class Log Daily Report is created with identifier {{ param }}",
+            "updated": "A Student Class Log Daily Report is updated with identifier {{ param }}",
+            "deleted": "A Student Class Log Daily Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Student Class Log Daily Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Student Class Log Daily Report"
+            },
+            "shouldTaken": "应到课",
+            "leave": "请假",
+            "absence": "缺席",
+            "added": "补课",
+            "actualTaken": "实际到课",
+            "logDate": "确认日期"
+        }
+    }
+}

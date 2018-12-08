@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "shouldTaken",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "leave",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "absence",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "added",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "actualTaken",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "logDate",
+            "fieldType": "Instant"
+        }
+    ],
+    "changelogDate": "20181208072422",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "student_class_log_daily_report",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

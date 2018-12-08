@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myStudentClassLogDailyReportLabel" data-translate="simpleServiceApp.studentClassLogDailyReport.home.createOrEditLabel">Create or edit a Student Class Log Daily Report</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.studentClassLogDailyReport.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.studentClassLogDailyReport.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.studentClassLogDailyReport.shouldTaken" for="field_shouldTaken">Should Taken</label>
+            <input type="number" class="form-control" name="shouldTaken" id="field_shouldTaken"
+                    ng-model="vm.studentClassLogDailyReport.shouldTaken"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.studentClassLogDailyReport.leave" for="field_leave">Leave</label>
+            <input type="number" class="form-control" name="leave" id="field_leave"
+                    ng-model="vm.studentClassLogDailyReport.leave"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.studentClassLogDailyReport.absence" for="field_absence">Absence</label>
+            <input type="number" class="form-control" name="absence" id="field_absence"
+                    ng-model="vm.studentClassLogDailyReport.absence"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.studentClassLogDailyReport.added" for="field_added">Added</label>
+            <input type="number" class="form-control" name="added" id="field_added"
+                    ng-model="vm.studentClassLogDailyReport.added"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.studentClassLogDailyReport.actualTaken" for="field_actualTaken">Actual Taken</label>
+            <input type="number" class="form-control" name="actualTaken" id="field_actualTaken"
+                    ng-model="vm.studentClassLogDailyReport.actualTaken"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="simpleServiceApp.studentClassLogDailyReport.logDate" for="field_logDate">Log Date</label>
+                <div class="input-group">
+                    <input id="field_logDate" type="text" class="form-control" name="logDate" datetime-picker="{{dateformat}}" ng-model="vm.studentClassLogDailyReport.logDate" is-open="vm.datePickerOpenStatus.logDate"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('logDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
