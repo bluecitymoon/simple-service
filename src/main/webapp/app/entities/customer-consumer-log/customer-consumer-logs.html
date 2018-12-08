@@ -24,6 +24,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="type.name"><span>耗课类型</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="count"><span data-translate="simpleServiceApp.customerConsumerLog.count">Count</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="unit"><span data-translate="simpleServiceApp.customerConsumerLog.unit">Unit</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="uniqueNumber"><span data-translate="simpleServiceApp.customerConsumerLog.uniqueNumber">Unique Number</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -40,6 +41,7 @@
             <tbody>
                 <tr ng-repeat="customerConsumerLog in vm.customerConsumerLogs track by customerConsumerLog.id">
                     <td><a ui-sref="customer-consumer-log-detail({id:customerConsumerLog.id})">{{customerConsumerLog.id}}</a></td>
+                    <!--<td>{{customerConsumerLog.type.name}}</td>-->
                     <td>{{customerConsumerLog.count}}</td>
                     <td>{{customerConsumerLog.unit}}</td>
                     <td>{{customerConsumerLog.uniqueNumber}}</td>
@@ -63,18 +65,7 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="customer-consumer-log.edit({id:customerConsumerLog.id})"-->
-                                    <!--class="btn btn-primary btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
-                            <!--</button>-->
-                            <!--<button type="submit"-->
-                                    <!--ui-sref="customer-consumer-log.delete({id:customerConsumerLog.id})"-->
-                                    <!--class="btn btn-danger btn-sm">-->
-                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
-                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
-                            <!--</button>-->
+
                         </div>
                     </td>
                 </tr>

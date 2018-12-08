@@ -1,0 +1,87 @@
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.studentAbsenceLog.home.title">Student Absence Logs</h1>
+</div>
+<jhi-alert></jhi-alert>
+<div class="panel">
+    <div class="panel-body">
+
+    <!--<h2 data-translate="simpleServiceApp.studentAbsenceLog.home.title">Student Absence Logs</h2>-->
+    <!--<div class="container-fluid">-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-4 no-padding-left">-->
+                <!--<button class="btn btn-primary" ui-sref="student-absence-log.new" >-->
+                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--<span  data-translate="simpleServiceApp.studentAbsenceLog.home.createLabel">-->
+                        <!--Create new Student Absence Log-->
+                    <!--</span>-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentAbsenceLog.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classArrangement.id"><span data-translate="simpleServiceApp.studentAbsenceLog.classArrangement">Class Arrangement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.studentAbsenceLog.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="regionId"><span data-translate="simpleServiceApp.studentAbsenceLog.regionId">Region Id</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentAbsenceLog.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentAbsenceLog.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentAbsenceLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentAbsenceLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classCount"><span data-translate="simpleServiceApp.studentAbsenceLog.classCount">Class Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th></th>-->
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="studentAbsenceLog in vm.studentAbsenceLogs track by studentAbsenceLog.id">
+                    <td><a ui-sref="student-absence-log-detail({id:studentAbsenceLog.id})">{{studentAbsenceLog.id}}</a></td>
+                    <td>
+                        <a target="_window" ui-sref="student-detail({id:studentAbsenceLog.student.id})">{{studentAbsenceLog.student.name}}</a>
+                    </td>
+                    <td>
+                        <a target="_window" ui-sref="class-arrangement-detail({id:studentAbsenceLog.classArrangement.id})">{{studentAbsenceLog.classArrangement.id}}</a>
+                    </td>
+                    <td>{{studentAbsenceLog.comments}}</td>
+                    <!--<td>{{studentAbsenceLog.regionId}}</td>-->
+                    <td>{{studentAbsenceLog.createdBy}}</td>
+                    <td>{{studentAbsenceLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentAbsenceLog.lastModifiedBy}}</td>
+                    <td>{{studentAbsenceLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentAbsenceLog.classCount}}</td>
+
+                    <!--<td class="text-right">-->
+                        <!--<div class="btn-group flex-btn-group-container">-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-absence-log-detail({id:studentAbsenceLog.id})"-->
+                                    <!--class="btn btn-info btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-eye-open"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.view"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-absence-log.edit({id:studentAbsenceLog.id})"-->
+                                    <!--class="btn btn-primary btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.edit"></span>-->
+                            <!--</button>-->
+                            <!--<button type="submit"-->
+                                    <!--ui-sref="student-absence-log.delete({id:studentAbsenceLog.id})"-->
+                                    <!--class="btn btn-danger btn-sm">-->
+                                <!--<span class="glyphicon glyphicon-remove-circle"></span>-->
+                                <!--<span class="hidden-sm-down" data-translate="entity.action.delete"></span>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>
+</div>

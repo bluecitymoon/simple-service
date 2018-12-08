@@ -4,24 +4,31 @@ import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.Contract;
 import com.pure.service.domain.CustomerConsumerLog;
 import com.pure.service.domain.Student;
+import com.pure.service.domain.StudentAbsenceLog;
 import com.pure.service.domain.StudentClassLog;
+import com.pure.service.domain.StudentClassLogType;
 import com.pure.service.domain.StudentFrozenArrangement;
 import com.pure.service.domain.StudentLeave;
 import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.CustomerConsumerLogRepository;
 import com.pure.service.repository.ProductRepository;
+import com.pure.service.repository.StudentAbsenceLogRepository;
 import com.pure.service.repository.StudentClassLogRepository;
+import com.pure.service.repository.StudentClassLogTypeRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.ContractQueryService;
+import com.pure.service.service.StudentAbsenceLogQueryService;
 import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.StudentClassLogService;
 import com.pure.service.service.StudentFrozenArrangementQueryService;
 import com.pure.service.service.StudentLeaveQueryService;
 import com.pure.service.service.dto.ContractCriteria;
+import com.pure.service.service.dto.StudentAbsenceLogCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.StudentFrozenArrangementCriteria;
 import com.pure.service.service.dto.StudentLeaveCriteria;
+import com.pure.service.service.dto.enumurations.StudentClassLogTypeEnum;
 import com.pure.service.service.dto.request.BatchSigninStudent;
 import com.pure.service.service.dto.request.SingleArrangementRequest;
 import io.github.jhipster.service.filter.InstantFilter;
@@ -74,6 +81,15 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
     @Autowired
     private StudentFrozenArrangementQueryService studentFrozenArrangementQueryService;
+
+    @Autowired
+    private StudentClassLogTypeRepository studentClassLogTypeRepository;
+
+    @Autowired
+    private StudentAbsenceLogQueryService studentAbsenceLogQueryService;
+
+    @Autowired
+    private StudentAbsenceLogRepository studentAbsenceLogRepository;
 
     public StudentClassLogServiceImpl(StudentClassLogRepository studentClassLogRepository) {
         this.studentClassLogRepository = studentClassLogRepository;
@@ -132,15 +148,60 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
     @Override
     public void batchSignIn(BatchSigninStudent request) {
 
-//        Product clazz = productRepository.findOne(request.getClassId());
+        List<Student> students = request.getStudents();
 
-        for (Student student : request.getStudents()) {
+        StudentClassLogType regular = studentClassLogTypeRepository.findByCode(StudentClassLogTypeEnum.RegularSign.name());
+        for (Student student : students) {
+            signInForSingleStudent(student, request.getArrangementIds(), regular);
+        }
 
-            signInForSingleStudent(student, request.getArrangementIds());
+        List<Student> addedStudents = request.getAddedStudents();
+
+        StudentClassLogType added = studentClassLogTypeRepository.findByCode(StudentClassLogTypeEnum.AddedSign.name());
+        for (Student student : addedStudents) {
+
+            signInForSingleStudent(student, request.getArrangementIds(), added);
+        }
+
+        List<Student> absentStudents = request.getAbsentStudents();
+        for (Student absentStudent : absentStudents) {
+
+            saveAbsenceLog(request, absentStudent);
         }
     }
 
-    private void signInForSingleStudent(Student student, List<SingleArrangementRequest> arrangementIds) {
+    private void saveAbsenceLog(BatchSigninStudent request, Student absentStudent) {
+        for (SingleArrangementRequest arrangementId : request.getArrangementIds()) {
+
+            StudentAbsenceLogCriteria criteria = new StudentAbsenceLogCriteria();
+
+            LongFilter studentFilter = new LongFilter();
+            studentFilter.setEquals(absentStudent.getId());
+
+            LongFilter arrangementIdFilter = new LongFilter();
+            arrangementIdFilter.setEquals(arrangementId.getArrangementId());
+
+            criteria.setStudentId(studentFilter);
+            criteria.setClassArrangementId(arrangementIdFilter);
+
+            List<StudentAbsenceLog> existedlogs = studentAbsenceLogQueryService.findByCriteria(criteria);
+            if (CollectionUtils.isEmpty(existedlogs)) {
+
+                ClassArrangement classArrangement = classArrangementService.findOne(arrangementId.getArrangementId());
+                StudentAbsenceLog log = new StudentAbsenceLog();
+                log.setClassArrangement(classArrangement);
+                log.setStudent(absentStudent);
+                log.setClassCount(classArrangement.getConsumeClassCount());
+
+                RegionUtils.setRegionAbstractAuditingRegionEntity(log);
+
+                studentAbsenceLogRepository.save(log);
+
+            }
+        }
+    }
+
+    private void signInForSingleStudent(Student student, List<SingleArrangementRequest> arrangementIds, StudentClassLogType type) {
 
         for (SingleArrangementRequest arrangementId : arrangementIds) {
 
@@ -195,6 +256,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             studentClassLog.setActualTakenDate(Instant.now());
             studentClassLog.setStudent(student);
             studentClassLog.setArrangement(classArrangement);
+            studentClassLog.setType(type);
             //流水号
             studentClassLog.setUniqueNumber(uniqueNumber);
 

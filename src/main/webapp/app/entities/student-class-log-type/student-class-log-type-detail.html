@@ -1,0 +1,34 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.studentClassLogTypehome.title">Student Class Log Types</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.studentClassLogType.name">Name</span></dt>
+        <dd>
+            <span>{{vm.studentClassLogType.name}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLogType.code">Code</span></dt>
+        <dd>
+            <span>{{vm.studentClassLogType.code}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.studentClassLogType.comments">Comments</span></dt>
+        <dd>
+            <span>{{vm.studentClassLogType.comments}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="student-class-log-type-detail.edit({id:vm.studentClassLogType.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

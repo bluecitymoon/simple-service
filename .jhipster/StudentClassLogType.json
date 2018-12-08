@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20181207125330",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "student_class_log_type",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

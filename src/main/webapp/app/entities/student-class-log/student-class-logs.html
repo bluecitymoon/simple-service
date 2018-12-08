@@ -52,6 +52,14 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentClassLog.student">Student</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type.name"><span>类型</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="arrangement.startDate"><span>上课时间</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="arrangement.endDate"><span>下课时间</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="actualTakenDate"><span
                             data-translate="simpleServiceApp.studentClassLog.actualTakenDate">Actual Taken Date</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
@@ -62,38 +70,41 @@
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentClassLog.createdDate">Created Date</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedBy"><span
-                            data-translate="simpleServiceApp.studentClassLog.lastModifiedBy">Last Modified By</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="lastModifiedDate"><span
-                            data-translate="simpleServiceApp.studentClassLog.lastModifiedDate">Last Modified Date</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="point"><span data-translate="simpleServiceApp.studentClassLog.point">Point</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentClassLog.student">Student</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="arrangement.startDate"><span
-                            data-translate="simpleServiceApp.studentClassLog.arrangement">Arrangement</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="lastModifiedBy"><span-->
+                            <!--data-translate="simpleServiceApp.studentClassLog.lastModifiedBy">Last Modified By</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span-->
+                            <!--data-translate="simpleServiceApp.studentClassLog.lastModifiedDate">Last Modified Date</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="point"><span data-translate="simpleServiceApp.studentClassLog.point">Point</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+
                     <!--<th></th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="studentClassLog in vm.studentClassLogs track by studentClassLog.id">
                     <td><a ui-sref="student-class-log-detail({id:studentClassLog.id})">{{studentClassLog.id}}</a></td>
-                    <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{studentClassLog.comments}}</td>
-                    <td>{{studentClassLog.createdBy}}</td>
-                    <td>{{studentClassLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{studentClassLog.lastModifiedBy}}</td>
-                    <td>{{studentClassLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{studentClassLog.point}}</td>
                     <td>
                         <a ui-sref="student-detail({id:studentClassLog.student.id})">{{studentClassLog.student.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="class-arrangement-detail({id:studentClassLog.arrangement.id})">{{studentClassLog.arrangement.startDate}}</a>
+                        {{studentClassLog.type.name}}
                     </td>
+                    <td>
+                        {{studentClassLog.arrangement.startDate | date:'yyyy-MM-dd HH:mm'}}
+                    </td>
+                    <td>
+                        {{studentClassLog.arrangement.endDate | date:'yyyy-MM-dd HH:mm'}}
+                    </td>
+                    <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{studentClassLog.comments}}</td>
+                    <td>{{studentClassLog.createdBy}}</td>
+                    <td>{{studentClassLog.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <!--<td>{{studentClassLog.lastModifiedBy}}</td>-->
+                    <!--<td>{{studentClassLog.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                    <!--<td>{{studentClassLog.point}}</td>-->
+
                     <!--<td class="text-right">-->
                     <!--<div class="btn-group flex-btn-group-container">-->
                     <!--<button type="submit"-->

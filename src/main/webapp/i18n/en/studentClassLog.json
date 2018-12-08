@@ -15,7 +15,7 @@
             "detail": {
                 "title": "学员上课记录详情"
             },
-            "actualTakenDate": "上课时间",
+            "actualTakenDate": "签到时间",
             "comments": "备注",
             "createdBy": "创建人",
             "createdDate": "创建时间",

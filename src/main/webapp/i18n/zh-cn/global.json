@@ -81,6 +81,8 @@
                 "studentFrozen": "Student Frozen",
                 "scheduledTaskLog": "Scheduled Task Log",
                 "customerCousultantAssignHistory": "Customer Cousultant Assign History",
+                "studentAbsenceLog": "Student Absence Log",
+                "studentClassLogType": "Student Class Log Type",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

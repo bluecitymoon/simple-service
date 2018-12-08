@@ -31,26 +31,29 @@
                                     </ui-select>
                                 </dd>
 
-                                <dt><span>上课学员</span></dt>
+                                <dt><span>常规学员</span></dt>
                                 <dd>
                                     <div class="table-responsive">
                                         <table class="jh-table table table-striped">
-                                            <!--<thead>-->
-                                            <!--<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">-->
-                                            <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span-->
-                                            <!--class="glyphicon glyphicon-sort"></span></th>-->
-                                            <!--<th jh-sort-by="name"><span>姓名</span></th>-->
-                                            <!--<th><span>性别</span></th>-->
-                                            <!--<th class="text-center"><input id="email-list-all" type="checkbox"-->
-                                            <!--class="magic-checkbox" ng-model="vm.allSelected"-->
-                                            <!--ng-change="vm.toggleAll()"><label-->
-                                            <!--for="email-list-all">全选</label>-->
-                                            <!--</th>-->
-                                            <!--</tr>-->
-                                            <!--</thead>-->
+                                            <thead>
+                                            <tr jh-sort="vm.predicate" ascending="vm.reverse"
+                                                callback="vm.transition()">
+                                                <th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+                                                    <span
+                                                            class="glyphicon glyphicon-sort"></span></th>
+                                                <th jh-sort-by="name"><span>姓名</span></th>
+                                                <th><span>性别</span></th>
+                                                <th class="text-center">
+                                                    <span>出席</span>
+                                                </th>
+                                                <th class="text-center">
+                                                    <span>缺席</span>
+                                                </th>
+                                            </tr>
+                                            </thead>
                                             <tbody>
                                             <tr ng-repeat="student in vm.students track by student.id"
-                                                ng-class="student.selected? 'bg-info': ''">
+                                                ng-class="{'bg-info': student.selected, 'bg-danger': student.absent}" >
                                                 <td><a ui-sref="student-detail({id:student.id})"
                                                        target="_window">{{student.id}}</a></td>
                                                 <td>{{student.name}}</td>
@@ -58,12 +61,37 @@
                                                 <td class="text-center">
                                                     <input id="email-list-{{student.id}}" type="checkbox"
                                                            class="magic-checkbox"
-                                                           ng-model="student.selected">
-                                                    <label for="email-list-{{student.id}}"></label>
+                                                           ng-model="student.selected" ng-change="vm.singleRowClicked(student, 'normal')">
+                                                    <label for="email-list-{{student.id}}" ></label>
+                                                </td>
+                                                <td class="text-center">
+                                                    <input id="absence-list-{{student.id}}" type="checkbox"
+                                                           class="magic-checkbox"
+                                                           ng-model="student.absent" ng-change="vm.singleRowClicked(student, 'absent')">
+                                                    <label for="absence-list-{{student.id}}"></label>
                                                 </td>
                                             </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </dd>
+                                <dt>补课学员</dt>
+                                <dd>
+
+                                    <div class="row">
+                                        <div class="col-md-12 input-group mar-btm">
+                                            <ui-select multiple ng-model="vm.addedStudents">
+                                                <ui-select-match placeholder="输入姓名或者电话号码模糊搜索">
+                                                    {{$item.name}}
+                                                </ui-select-match>
+                                                <ui-select-choices refresh="vm.searchStudentWithKeyword($select.search)"
+                                                                   repeat="item in (vm.preaddedStudents | filter: $select.search) track by item.id">
+                                                    <span ng-bind="item.name"></span>
+                                                    <span class="pull-right" ng-bind="item.phone"></span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+
                                     </div>
                                 </dd>
                             </dl>
@@ -98,21 +126,71 @@
                         </div>
                         <div class="panel-body">
 
-                            <table class="jh-table table table-striped">
+                            <dl class="dl-horizontal jh-entity-details">
+                                <dt><span>常规学员</span></dt>
+                                <dd>
+                                    <table class="jh-table table table-striped">
 
-                                <tbody>
-                                <tr ng-repeat="student in vm.students track by student.id"
-                                    ng-class="student.selected? 'bg-info': ''">
-                                    <td>{{student.name}}</td>
-                                    <td class="text-center">
-                                        <input id="email-list-{{student.id}}-1" type="checkbox" class="magic-checkbox"
-                                               ng-model="student.selected">
-                                        <label for="email-list-{{student.id}}"></label>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                        <thead>
+                                        <tr jh-sort="vm.predicate" ascending="vm.reverse"
+                                            callback="vm.transition()">
+                                            <th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+                                                <span
+                                                        class="glyphicon glyphicon-sort"></span></th>
+                                            <th jh-sort-by="name"><span>姓名</span></th>
+                                            <th><span>性别</span></th>
+                                            <th class="text-center">
+                                                <span>出席</span>
+                                            </th>
+                                            <th class="text-center">
+                                                <span>缺席</span>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="student in vm.students track by student.id"
+                                            ng-class="{'bg-info': student.selected, 'bg-danger': student.absent}" >
+                                            <td><a ui-sref="student-detail({id:student.id})"
+                                                   target="_window">{{student.id}}</a></td>
+                                            <td>{{student.name}}</td>
+                                            <td>{{student.gender}}</td>
+                                            <td class="text-center">
+                                                <input id="email-list-{{student.id}}-1" type="checkbox"
+                                                       class="magic-checkbox"
+                                                       ng-model="student.selected" ng-change="vm.singleRowClicked(student, 'normal')">
+                                                <label for="email-list-{{student.id}}" ></label>
+                                            </td>
+                                            <td class="text-center">
+                                                <input id="absence-list-{{student.id}}-1" type="checkbox"
+                                                       class="magic-checkbox"
+                                                       ng-model="student.absent" ng-change="vm.singleRowClicked(student, 'absent')">
+                                                <label for="absence-list-{{student.id}}"></label>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
 
+                                </dd>
+                                <dt><span>补课学员</span></dt>
+                                <dd>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <ui-select multiple ng-model="vm.addedBatchStudents">
+                                                <ui-select-match placeholder="输入姓名或者电话号码模糊搜索（可多选）">
+                                                    {{$item.name}}
+                                                </ui-select-match>
+                                                <ui-select-choices refresh="vm.searchStudentWithKeyword($select.search)"
+                                                                   repeat="item in (vm.preaddedStudents | filter: $select.search) track by item.id">
+                                                    <span ng-bind="item.name"></span>
+                                                    <span class="pull-right" ng-bind="item.phone"></span>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+
+                                    </div>
+
+                                </dd>
+                            </dl>
                         </div>
                     </div>
                 </div>
@@ -126,32 +204,7 @@
 
                             <table class="jh-table table table-striped">
                                 <thead>
-                                <!--<tr>-->
-                                <!--<th><input type="text" placeholder="开始时间" class="form-control"-->
-                                <!--ng-focus="vm.openCalendar('createStartDate')"-->
-                                <!--datetime-picker="{{dateformat}}"-->
-                                <!--timepicker-options="vm.datePickerOptions"-->
-                                <!--ng-model="vm.searchCondition.createStartDate"-->
-                                <!--is-open="vm.datePickerOpenStatus.createStartDate">-->
-                                <!--</th>-->
-                                <!--<th>-->
-                                <!--<input type="text" placeholder="结束时间" class="form-control"-->
-                                <!--ng-focus="vm.openCalendar('createEndDate')"-->
-                                <!--datetime-picker="{{dateformat}}"-->
-                                <!--timepicker-options="vm.datePickerOptions"-->
-                                <!--ng-model="vm.searchCondition.createEndDate"-->
-                                <!--is-open="vm.datePickerOpenStatus.createEndDate">-->
 
-                                <!--</th>-->
-                                <!--<th></th>-->
-                                <!--<th>-->
-
-                                <!--<button class="btn btn-sm btn-primary btn-block" type="button"-->
-                                <!--ng-click="vm.loadClassArrangementsInRange()"><i-->
-                                <!--class="fa fa-search-minus"></i>查询-->
-                                <!--</button>-->
-                                <!--</th>-->
-                                <!--</tr>-->
                                 <tr>
                                     <th>上课开始时间</th>
                                     <th>上课结束时间</th>

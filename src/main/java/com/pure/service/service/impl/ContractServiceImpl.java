@@ -82,17 +82,17 @@ public class ContractServiceImpl implements ContractService {
      * @return the persisted entity
      */
     @Override
-    public Contract save(Contract contract) throws CollectionNotPaidException {
+    public Contract save(Contract contract) {
         log.debug("Request to save Contract : {}", contract);
 
-        if (contract.getId() == null) {
-
-            String serialNumber = contract.getSerialNumber();
-            if (!collectionService.customerCardPaid(serialNumber)) {
-
-                throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
-            }
-        }
+//        if (contract.getId() == null) {
+//
+//            String serialNumber = contract.getSerialNumber();
+//            if (!collectionService.customerCardPaid(serialNumber)) {
+//
+//                throw new CollectionNotPaidException("无法生成合同，应收款未付或未确认到款");
+//            }
+//        }
         return contractRepository.save(contract);
     }
 

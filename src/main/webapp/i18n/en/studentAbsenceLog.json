@@ -1,0 +1,29 @@
+{
+    "simpleServiceApp": {
+        "studentAbsenceLog" : {
+            "home": {
+                "title": "学员缺席记录",
+                "createLabel": "录入缺席记录",
+                "createOrEditLabel": "管理缺席记录"
+            },
+            "created": "创建成功！",
+            "updated": "更新成功！",
+            "deleted": "删除成功！",
+            "delete": {
+                "question": "你确定要删除这条数据?"
+            },
+            "detail": {
+                "title": "学员缺席记录"
+            },
+            "comments": "备注",
+            "regionId": "Region Id",
+            "createdBy": "操作者",
+            "createdDate": "操作时间",
+            "lastModifiedBy": "最近修改人",
+            "lastModifiedDate": "最近修改时间",
+            "classCount": "应耗课课时",
+            "student": "学员",
+            "classArrangement": "排课"
+        }
+    }
+}

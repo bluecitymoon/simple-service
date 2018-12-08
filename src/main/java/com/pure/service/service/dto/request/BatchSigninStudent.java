@@ -11,6 +11,8 @@ public class BatchSigninStudent implements Serializable {
     private Long classId;
     private List<SingleArrangementRequest> arrangementIds;
     private List<Student> students = new ArrayList<>();
+    private List<Student> absentStudents = new ArrayList<>();
+    private List<Student> addedStudents = new ArrayList<>();
 
     public List<SingleArrangementRequest> getArrangementIds() {
         return arrangementIds;
@@ -34,5 +36,21 @@ public class BatchSigninStudent implements Serializable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+    public List<Student> getAddedStudents() {
+        return addedStudents;
+    }
+
+    public void setAddedStudents(List<Student> addedStudents) {
+        this.addedStudents = addedStudents;
+    }
+
+    public List<Student> getAbsentStudents() {
+        return absentStudents;
+    }
+
+    public void setAbsentStudents(List<Student> absentStudents) {
+        this.absentStudents = absentStudents;
     }
 }

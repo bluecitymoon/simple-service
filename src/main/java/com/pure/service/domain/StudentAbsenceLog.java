@@ -8,15 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import java.time.Instant;
 import java.util.Objects;
 
 /**
- * A StudentClassLog.
+ * A StudentAbsenceLog.
  */
 @Entity
-@Table(name = "student_class_log")
-public class StudentClassLog extends AbstractAuditingRegionEntity {
+@Table(name = "student_absence_log")
+public class StudentAbsenceLog extends AbstractAuditingRegionEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,26 +23,17 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "actual_taken_date")
-    private Instant actualTakenDate;
-
     @Column(name = "comments")
     private String comments;
 
-    @Column(name = "unique_number")
-    private String uniqueNumber;
-
-    @Column(name = "point")
-    private Integer point;
+    @Column(name = "class_count")
+    private Integer classCount;
 
     @ManyToOne
     private Student student;
 
     @ManyToOne
-    private ClassArrangement arrangement;
-
-    @ManyToOne
-    private StudentClassLogType type;
+    private ClassArrangement classArrangement;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -54,32 +44,11 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
         this.id = id;
     }
 
-    public String getUniqueNumber() {
-        return uniqueNumber;
-    }
-
-    public void setUniqueNumber(String uniqueNumber) {
-        this.uniqueNumber = uniqueNumber;
-    }
-
-    public Instant getActualTakenDate() {
-        return actualTakenDate;
-    }
-
-    public StudentClassLog actualTakenDate(Instant actualTakenDate) {
-        this.actualTakenDate = actualTakenDate;
-        return this;
-    }
-
-    public void setActualTakenDate(Instant actualTakenDate) {
-        this.actualTakenDate = actualTakenDate;
-    }
-
     public String getComments() {
         return comments;
     }
 
-    public StudentClassLog comments(String comments) {
+    public StudentAbsenceLog comments(String comments) {
         this.comments = comments;
         return this;
     }
@@ -89,24 +58,24 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
     }
 
 
-    public Integer getPoint() {
-        return point;
+    public Integer getClassCount() {
+        return classCount;
     }
 
-    public StudentClassLog point(Integer point) {
-        this.point = point;
+    public StudentAbsenceLog classCount(Integer classCount) {
+        this.classCount = classCount;
         return this;
     }
 
-    public void setPoint(Integer point) {
-        this.point = point;
+    public void setClassCount(Integer classCount) {
+        this.classCount = classCount;
     }
 
     public Student getStudent() {
         return student;
     }
 
-    public StudentClassLog student(Student student) {
+    public StudentAbsenceLog student(Student student) {
         this.student = student;
         return this;
     }
@@ -115,25 +84,17 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
         this.student = student;
     }
 
-    public StudentClassLogType getType() {
-        return type;
+    public ClassArrangement getClassArrangement() {
+        return classArrangement;
     }
 
-    public void setType(StudentClassLogType type) {
-        this.type = type;
-    }
-
-    public ClassArrangement getArrangement() {
-        return arrangement;
-    }
-
-    public StudentClassLog arrangement(ClassArrangement classArrangement) {
-        this.arrangement = classArrangement;
+    public StudentAbsenceLog classArrangement(ClassArrangement classArrangement) {
+        this.classArrangement = classArrangement;
         return this;
     }
 
-    public void setArrangement(ClassArrangement classArrangement) {
-        this.arrangement = classArrangement;
+    public void setClassArrangement(ClassArrangement classArrangement) {
+        this.classArrangement = classArrangement;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -145,11 +106,11 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        StudentClassLog studentClassLog = (StudentClassLog) o;
-        if (studentClassLog.getId() == null || getId() == null) {
+        StudentAbsenceLog studentAbsenceLog = (StudentAbsenceLog) o;
+        if (studentAbsenceLog.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), studentClassLog.getId());
+        return Objects.equals(getId(), studentAbsenceLog.getId());
     }
 
     @Override
@@ -159,15 +120,15 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
 
     @Override
     public String toString() {
-        return "StudentClassLog{" +
+        return "StudentAbsenceLog{" +
             "id=" + getId() +
-            ", actualTakenDate='" + getActualTakenDate() + "'" +
             ", comments='" + getComments() + "'" +
+            ", regionId='" + getRegionId() + "'" +
             ", createdBy='" + getCreatedBy() + "'" +
             ", createdDate='" + getCreatedDate() + "'" +
             ", lastModifiedBy='" + getLastModifiedBy() + "'" +
             ", lastModifiedDate='" + getLastModifiedDate() + "'" +
-            ", point='" + getPoint() + "'" +
+            ", classCount='" + getClassCount() + "'" +
             "}";
     }
 }

@@ -5,22 +5,56 @@
         .module('simpleServiceApp')
         .controller('StudentSignDialogController', StudentSignDialogController);
 
-    StudentSignDialogController.$inject = ['entity', 'AlertService', 'DateUtils', 'ClassArrangement', 'StudentClass', '$uibModalInstance', 'StudentClassLog', 'Teacher'];
+    StudentSignDialogController.$inject = ['$scope', 'entity', 'AlertService', 'DateUtils', 'ClassArrangement', 'StudentClass', '$uibModalInstance', 'StudentClassLog', 'Teacher', 'Student'];
 
-    function StudentSignDialogController(entity, AlertService, DateUtils, ClassArrangement, StudentClass, $uibModalInstance, StudentClassLog, Teacher) {
+    function StudentSignDialogController($scope, entity, AlertService, DateUtils, ClassArrangement, StudentClass, $uibModalInstance, StudentClassLog, Teacher, Student) {
         var vm = this;
 
         vm.classSchedule = entity;
         vm.allSelected = true;
         vm.students = [];
+        vm.tempStudents = [];
         vm.allTeachers = Teacher.query({size: 1000, page: 0});
         vm.clear = clear;
         vm.openCalendar = openCalendar;
+
+        vm.singleRowClicked = function (student, type) {
+
+            switch (type) {
+                case "absent":
+
+                    if (student.absent) {
+                        student.selected = false;
+                    }
+
+                    break;
+                case "normal":
+
+                    if (student.selected) {
+                        student.absent = false;
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+        };
 
         vm.toggleAll = function () {
             angular.forEach(vm.students, function (student) {
                 student.selected = vm.allSelected;
             });
+        };
+
+        vm.searchStudentWithKeyword = function (keyword) {
+
+            if (!keyword) {
+                return;
+            }
+
+            Student.searchStudentsWithKeyword({keyword: keyword}, function (data) {
+                vm.preaddedStudents = data;
+            })
         };
         vm.loadClassArrangementsInRange = function () {
 
@@ -80,10 +114,14 @@
                 return r.selected;
             });
 
-            if (!selectedRecords || selectedRecords.length == 0) {
-                AlertService.error("未选择学员！");
-                return;
-            }
+            var absentStudents = vm.students.filter(function (r) {
+                return r.absent;
+            });
+            //
+            // if (!selectedRecords || selectedRecords.length == 0) {
+            //     AlertService.error("未选择学员！");
+            //     return;
+            // }
 
             var request;
             if (type == "single") {
@@ -95,7 +133,9 @@
                             arrangementId: vm.classSchedule.arrangementId,
                             actualTeacher: vm.actualTeacher
                         }],
-                    students: selectedRecords
+                    students: selectedRecords,
+                    absentStudents: absentStudents,
+                    addedStudents: vm.addedStudents
                 };
             } else {
 
@@ -114,7 +154,9 @@
                 request = {
                     classId: vm.classSchedule.classId,
                     arrangementIds: arrangementIds,
-                    students: selectedRecords
+                    students: selectedRecords,
+                    absentStudents: absentStudents,
+                    addedStudents: vm.addedStudents
                 };
             }
 

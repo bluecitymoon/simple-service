@@ -37,6 +37,22 @@
             })
         };
 
+        function loadCourseClasses() {
+
+            if (vm.contract.course) {
+                vm.products = Product.query({"courseId.equals": vm.contract.course.id});
+
+            }
+        }
+        loadCourseClasses();
+        $scope.$watch("vm.contract.course", function (newVal, oldVal) {
+
+            if (newVal) {
+                loadCourseClasses();
+            }
+
+        });
+
         $scope.$watch("vm.contract.customer", function (newVal, oldVal) {
 
             if (newVal) {

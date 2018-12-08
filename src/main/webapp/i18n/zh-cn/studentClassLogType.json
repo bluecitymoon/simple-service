@@ -1,0 +1,23 @@
+{
+    "simpleServiceApp": {
+        "studentClassLogType" : {
+            "home": {
+                "title": "Student Class Log Types",
+                "createLabel": "Create a new Student Class Log Type",
+                "createOrEditLabel": "Create or edit a Student Class Log Type"
+            },
+            "created": "A new Student Class Log Type is created with identifier {{ param }}",
+            "updated": "A Student Class Log Type is updated with identifier {{ param }}",
+            "deleted": "A Student Class Log Type is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Student Class Log Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Student Class Log Type"
+            },
+            "name": "Name",
+            "code": "Code",
+            "comments": "Comments"
+        }
+    }
+}
