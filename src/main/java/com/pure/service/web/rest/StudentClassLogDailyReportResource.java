@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentClassLogDailyReport;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.StudentClassLogDailyReportQueryService;
 import com.pure.service.service.StudentClassLogDailyReportService;
 import com.pure.service.service.dto.StudentClassLogDailyReportCriteria;
@@ -60,6 +62,7 @@ public class StudentClassLogDailyReportResource {
      */
     @PostMapping("/student-class-log-daily-reports")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<StudentClassLogDailyReport> createStudentClassLogDailyReport(@RequestBody StudentClassLogDailyReport studentClassLogDailyReport) throws URISyntaxException {
         log.debug("REST request to save StudentClassLogDailyReport : {}", studentClassLogDailyReport);
         if (studentClassLogDailyReport.getId() != null) {
@@ -102,6 +105,7 @@ public class StudentClassLogDailyReportResource {
      */
     @GetMapping("/student-class-log-daily-reports")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<StudentClassLogDailyReport>> getAllStudentClassLogDailyReports(StudentClassLogDailyReportCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get StudentClassLogDailyReports by criteria: {}", criteria);
         Page<StudentClassLogDailyReport> page = studentClassLogDailyReportQueryService.findByCriteria(criteria, pageable);

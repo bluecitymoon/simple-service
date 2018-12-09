@@ -1,5 +1,6 @@
 <div class="page-header">
-    <h1 class="page-title">教务主管每日确认</h1>
+    <h1 class="page-title">教务主管每日确认 <label class="label label-success">{{vm.statusBasedStudent.logDate |
+        date:'yyyy-MM-dd HH:mm'}}</label></h1>
 </div>
 <jhi-alert></jhi-alert>
 
@@ -8,12 +9,12 @@
 
         <div class="panel panel-primary panel-colorful">
             <div class="pad-all text-center">
-                <span class="text-3x text-thin">53</span>
+                <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.shouldTaken}}</span>
                 <p>应到人数</p>
                 <!--<i class="fa fa-calendar fa-2x icon-lg"></i>-->
 
                 <button type="submit"
-                        ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                        ng-click="vm.showShouldTakenStudents('shouldTaken')"
                         class="btn btn-info btn-sm">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
@@ -25,12 +26,12 @@
     <div class="col-md-1">
         <div class="panel panel-warning panel-colorful">
             <div class="pad-all text-center">
-                <span class="text-3x text-thin">0</span>
+                <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.leave}}</span>
                 <p>请假</p>
                 <!--<i class="fa fa-calendar fa-2x icon-lg"></i>-->
 
                 <button type="submit"
-                        ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                        ng-click="vm.showShouldTakenStudents('leave')"
                         class="btn btn-info btn-sm">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
@@ -41,12 +42,12 @@
     <div class="col-md-1">
         <div class="panel panel-danger panel-colorful">
             <div class="pad-all text-center">
-                <span class="text-3x text-thin">0</span>
+                <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.absence}}</span>
                 <p>缺席</p>
                 <!--<i class="fa fa-calendar fa-2x icon-lg"></i>-->
 
                 <button type="submit"
-                        ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                        ng-click="vm.showShouldTakenStudents('absence')"
                         class="btn btn-info btn-sm">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
@@ -57,12 +58,12 @@
     <div class="col-md-1">
         <div class="panel panel-mint panel-colorful">
             <div class="pad-all text-center">
-                <span class="text-3x text-thin">0</span>
+                <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.added}}</span>
                 <p>补课</p>
                 <!--<i class="fa fa-calendar fa-2x icon-lg"></i>-->
 
                 <button type="submit"
-                        ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                        ng-click="vm.showShouldTakenStudents('added')"
                         class="btn btn-info btn-sm">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
@@ -71,14 +72,14 @@
         </div>
     </div>
     <div class="col-md-1">
-        <div class="panel panel-info panel-colorful">
+        <div class="panel panel-success panel-colorful">
             <div class="pad-all text-center">
-                <span class="text-3x text-thin">0</span>
+                <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.actualTaken}}</span>
                 <p>实际到课</p>
                 <!--<i class="fa fa-calendar fa-2x icon-lg"></i>-->
 
                 <button type="submit"
-                        ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                        ng-click="vm.showShouldTakenStudents('actualTaken')"
                         class="btn btn-info btn-sm">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     <span class="hidden-sm-down" data-translate="entity.action.view"></span>
@@ -86,9 +87,49 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-colorful">
+            <div class="panel-body">
+                <table class="jh-table table table-striped">
+
+                    <thead>
+                    <tr jh-sort="vm.predicate" ascending="vm.reverse"
+                        callback="vm.transition()">
+                        <th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+                            <span
+                                    class="glyphicon glyphicon-sort"></span></th>
+                        <th jh-sort-by="name"><span>姓名</span></th>
+                        <th><span>性别</span></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="student in vm.students track by student.id">
+                        <td><a ui-sref="student-detail({id:student.id})"
+                               target="_window">{{student.id}}</a></td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.gender}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
     <div class="col-md-2 col-lg-offset-1 pad-top-lg">
         <button type="submit"
-                ui-sref="student-class-log-daily-report-detail({id:studentClassLogDailyReport.id})"
+                ng-click="vm.confirmDailyReport()"
                 class="btn btn-block btn-sm btn-primary">
             <span class="glyphicon glyphicon-briefcase"></span>
             <span class="hidden-sm-down">确认备案</span>
@@ -96,34 +137,15 @@
     </div>
 </div>
 
-<div class="panel panel-bordered-purple">
-    <div class="panel-heading">
-        <h3 class="panel-title">今日确认内容</h3>
-    </div>
-    <div class="panel-body">
-
-
-    </div>
-</div>
-
+<hr>
 
 <div class="panel">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">历史记录</h3>
+    </div>
+
     <div class="panel-body">
-
-        <!--<h2 data-translate="simpleServiceApp.studentClassLogDailyReport.home.title">Student Class Log Daily Reports</h2>-->
-        <!--<div class="container-fluid">-->
-        <!--<div class="row">-->
-        <!--<div class="col-xs-4 no-padding-left">-->
-        <!--<button class="btn btn-primary" ui-sref="student-class-log-daily-report.new" >-->
-        <!--<span class="glyphicon glyphicon-plus"></span>-->
-        <!--<span  data-translate="simpleServiceApp.studentClassLogDailyReport.home.createLabel">-->
-        <!--Create new Student Class Log Daily Report-->
-        <!--</span>-->
-        <!--</button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
 
         <br/>
         <div class="table-responsive">

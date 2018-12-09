@@ -11,6 +11,7 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'getStudentClassLogDailyReportToday': { method: 'GET', url: 'api/student-class-log-daily-reports/today'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {
