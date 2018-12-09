@@ -28,8 +28,8 @@
                     <tbody>
                     <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id"
                         ng-class="classArrangement.selected? 'bg-info': ''">
-                        <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                        <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                        <td>{{classArrangement.startDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                        <td>{{classArrangement.endDate | date:'yyyy-MM-dd HH:mm'}}</td>
 
                     </tr>
                     </tbody>

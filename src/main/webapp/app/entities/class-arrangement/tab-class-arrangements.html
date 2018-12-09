@@ -119,8 +119,8 @@
                 <tbody>
                 <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id">
                     <td><a ui-sref="class-arrangement-detail({id:classArrangement.id})">{{classArrangement.id}}</a></td>
-                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>
                         <a ui-sref="teacher-detail({id:classArrangement.planedTeacher.id})">{{classArrangement.planedTeacher.name}}</a>
                     </td>
@@ -134,9 +134,9 @@
                         <a ui-sref="product-detail({id:classArrangement.clazz.id})">{{classArrangement.clazz.name}}</a>
                     </td>
                     <td>{{classArrangement.createdBy}}</td>
-                    <td>{{classArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{classArrangement.lastModifiedBy}}</td>
-                    <td>{{classArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{classArrangement.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
 
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

@@ -72,8 +72,8 @@
 
                         <tbody>
                         <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id">
-                            <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                            <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                            <td>{{classArrangement.startDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                            <td>{{classArrangement.endDate | date:'yyyy-MM-dd HH:mm'}}</td>
                             <td class="text-center">
                                 <input id="email-list-{{classArrangement.id}}" type="checkbox" class="magic-checkbox"
                                        ng-model="classArrangement.selected">

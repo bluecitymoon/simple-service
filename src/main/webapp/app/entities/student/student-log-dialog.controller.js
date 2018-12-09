@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentLogDialogController', StudentLogDialogController);
 
-    StudentLogDialogController.$inject = ['$timeout', '$scope', '$uibModalInstance', 'entity', 'Student', 'Customer', 'ClassArrangement', 'StudentClass', 'AlertService', 'StudentFrozen', 'StudentClassLog'];
+    StudentLogDialogController.$inject = ['$timeout', '$scope', '$uibModalInstance', 'entity', 'Student', 'Customer', 'ClassArrangement', 'StudentClass', 'AlertService', 'StudentFrozen', 'StudentClassLog', 'CustomerConsumerLog', 'StudentLeave', 'StudentAbsenceLog'];
 
-    function StudentLogDialogController ($timeout, $scope, $uibModalInstance, entity, Student, Customer, ClassArrangement, StudentClass, AlertService, StudentFrozen, StudentClassLog) {
+    function StudentLogDialogController ($timeout, $scope, $uibModalInstance, entity, Student, Customer, ClassArrangement, StudentClass, AlertService, StudentFrozen, StudentClassLog, CustomerConsumerLog, StudentLeave, StudentAbsenceLog) {
         var vm = this;
 
         vm.student = entity;
@@ -39,6 +39,41 @@
             });
         }
         getStudentClassLogByStudentId();
+
+        function getStudentConsumeLog() {
+
+            CustomerConsumerLog.query({"studentId.equals": vm.student.id}, function (response) {
+                vm.customerConsumerLogs = response;
+            });
+
+        }
+        function getStudentLeaves() {
+
+            StudentLeave.query({"studentId.equals": vm.student.id}, function (response) {
+                vm.studentLeaves = response;
+            });
+
+        }
+        function getStudentAbsenceLog() {
+
+            StudentAbsenceLog.query({"studentId.equals": vm.student.id}, function (response) {
+                vm.studentAbsenceLogs = response;
+            });
+
+        }
+
+        function getStudentFronzenLog() {
+
+            StudentFrozen.query({"studentId.equals": vm.student.id}, function (response) {
+                vm.studentFrozens = response;
+            });
+
+        }
+
+        getStudentConsumeLog();
+        getStudentLeaves();
+        getStudentAbsenceLog();
+        getStudentFronzenLog();
 
         function clear () {
             $uibModalInstance.dismiss('cancel');

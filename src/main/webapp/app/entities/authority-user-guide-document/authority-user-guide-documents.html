@@ -38,9 +38,9 @@
                 <tr ng-repeat="authorityUserGuideDocument in vm.authorityUserGuideDocuments track by authorityUserGuideDocument.id">
                     <td><a ui-sref="authority-user-guide-document-detail({id:authorityUserGuideDocument.id})">{{authorityUserGuideDocument.id}}</a></td>
                     <td>{{authorityUserGuideDocument.createdBy}}</td>
-                    <td>{{authorityUserGuideDocument.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{authorityUserGuideDocument.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{authorityUserGuideDocument.lastModifiedBy}}</td>
-                    <td>{{authorityUserGuideDocument.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{authorityUserGuideDocument.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{authorityUserGuideDocument.comments}}</td>
                     <td>
                         <a ui-sref="authority-detail({id:authorityUserGuideDocument.authority.id})">{{authorityUserGuideDocument.authority.description}}</a>

@@ -217,8 +217,8 @@
                                 <tbody>
                                 <tr ng-repeat="classArrangement in vm.classArrangements track by classArrangement.id"
                                     ng-class="classArrangement.selected? 'bg-info': ''">
-                                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                    <td>{{classArrangement.startDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{classArrangement.endDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                     <td>
                                         <ui-select ng-model="classArrangement.planedTeacher">
                                             <ui-select-match>
@@ -284,9 +284,9 @@
                                     <td>
                                         {{studentClassLog.arrangement.actualTeacher.name}}
                                     </td>
-                                    <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                                    <td>{{studentClassLog.arrangement.startDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                                    <td>{{studentClassLog.arrangement.endDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                    <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{studentClassLog.arrangement.startDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{studentClassLog.arrangement.endDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                     <td>{{studentClassLog.arrangement.consumeClassCount}}</td>
 
                                 </tr>

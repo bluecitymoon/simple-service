@@ -18,22 +18,22 @@
                 />
             </div>
 
-            <div class="form-group col-md-4 col-lg-offset-1">
-                <label>开始日期</label>
-                <input type="text" placeholder="开始日期" class="form-control"
-                       ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"
-                       timepicker-options="vm.datePickerOptions"
-                       ng-model="vm.searchCondition.startDate"
-                       is-open="vm.datePickerOpenStatus.startDate">
-            </div>
-            <div class="form-group col-md-4">
-                <label>结束日期</label>
-                <input type="text" placeholder="结束日期" class="form-control"
-                       ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"
-                       timepicker-options="vm.datePickerOptions"
-                       ng-model="vm.searchCondition.endDate"
-                       is-open="vm.datePickerOpenStatus.endDate">
-            </div>
+            <!--<div class="form-group col-md-4 col-lg-offset-1">-->
+                <!--<label>开始日期</label>-->
+                <!--<input type="text" placeholder="开始日期" class="form-control"-->
+                       <!--ng-focus="vm.openCalendar('startDate')" datetime-picker="{{dateformat}}"-->
+                       <!--timepicker-options="vm.datePickerOptions"-->
+                       <!--ng-model="vm.searchCondition.startDate"-->
+                       <!--is-open="vm.datePickerOpenStatus.startDate">-->
+            <!--</div>-->
+            <!--<div class="form-group col-md-4">-->
+                <!--<label>结束日期</label>-->
+                <!--<input type="text" placeholder="结束日期" class="form-control"-->
+                       <!--ng-focus="vm.openCalendar('endDate')" datetime-picker="{{dateformat}}"-->
+                       <!--timepicker-options="vm.datePickerOptions"-->
+                       <!--ng-model="vm.searchCondition.endDate"-->
+                       <!--is-open="vm.datePickerOpenStatus.endDate">-->
+            <!--</div>-->
         </div>
 
 
@@ -57,6 +57,9 @@
                                 <th>
                                     <span>实际签到时间</span>
                                 </th>
+                                <th>
+                                    签到类型
+                                </th>
 
                                 <th jh-sort-by="comments"><span
                                         data-translate="simpleServiceApp.studentClassLog.comments">Comments</span> <span
@@ -73,15 +76,16 @@
                                 <td><a target="_window" ui-sref="student-class-log-detail({id:studentClassLog.id})">{{studentClassLog.id}}</a></td>
 
                                 <td>
-                                    {{studentClassLog.arrangement.startDate | date:'yyyy-MM-dd hh:mm'}}
+                                    {{studentClassLog.arrangement.startDate | date:'yyyy-MM-dd HH:mm'}}
                                 </td>
                                 <td>
-                                    {{studentClassLog.arrangement.endDate | date:'yyyy-MM-dd hh:mm'}}
+                                    {{studentClassLog.arrangement.endDate | date:'yyyy-MM-dd HH:mm'}}
                                 </td>
-                                <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                <td>{{studentClassLog.actualTakenDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                <td>{{studentClassLog.type.name}}</td>
                                 <td>{{studentClassLog.comments}}</td>
                                 <td>{{studentClassLog.createdBy}}</td>
-                                <td>{{studentClassLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                                <td>{{studentClassLog.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                 <!--<td>{{studentClassLog.point}}</td>-->
                             </tr>
                             </tbody>
@@ -94,14 +98,145 @@
                 <div class="panel panel-bordered-mint">
                     <div class="panel-body">
 
+                        <div class="table-responsive">
+                            <table class="jh-table table table-striped">
+                                <thead>
+                                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="count"><span data-translate="simpleServiceApp.customerConsumerLog.count">Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="unit"><span data-translate="simpleServiceApp.customerConsumerLog.unit">Unit</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="uniqueNumber"><span data-translate="simpleServiceApp.customerConsumerLog.uniqueNumber">Unique Number</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="consumerName"><span>消费者姓名</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="customerConsumerType.name"><span data-translate="simpleServiceApp.customerConsumerLog.customerConsumerType">Customer Consumer Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th jh-sort-by="student.name"><span data-translate="simpleServiceApp.customerConsumerLog.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.customerConsumerLog.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.customerConsumerLog.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.customerConsumerLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.customerConsumerLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="customerConsumerLog in vm.customerConsumerLogs track by customerConsumerLog.id">
+                                    <td><a ui-sref="customer-consumer-log-detail({id:customerConsumerLog.id})">{{customerConsumerLog.id}}</a></td>
+                                    <td>{{customerConsumerLog.count}}</td>
+                                    <td>{{customerConsumerLog.unit}}</td>
+                                    <td>{{customerConsumerLog.uniqueNumber}}</td>
+                                    <td>{{customerConsumerLog.consumerName}}</td>
+                                    <td>
+                                        {{customerConsumerLog.customerConsumerType.name}}
+                                    </td>
+                                    <!--<td>-->
+                                        <!--<a ui-sref="student-detail({id:customerConsumerLog.student.id})" target="_window">{{customerConsumerLog.student.name}}</a>-->
+                                    <!--</td>-->
+                                    <td>{{customerConsumerLog.createdBy}}</td>
+                                    <td>{{customerConsumerLog.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <!--<td>{{customerConsumerLog.lastModifiedBy}}</td>-->
+                                    <!--<td>{{customerConsumerLog.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
 
             </uib-tab>
+            <uib-tab heading="请假记录">
+                <div class="panel panel-bordered-mint">
+                    <div class="panel-body">
+
+                        <div class="table-responsive">
+                            <table class="jh-table table table-striped">
+                                <thead>
+                                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentLeave.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <th jh-sort-by="classArrangement.startDate"><span>排课上课时间</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="classArrangement.endDate"><span>排课下课时间</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="balance"><span data-translate="simpleServiceApp.studentLeave.balance">Balance</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th jh-sort-by="calculateStartDate"><span data-translate="simpleServiceApp.studentLeave.calculateStartDate">Calculate Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <!--<th jh-sort-by="calculateEndDate"><span data-translate="simpleServiceApp.studentLeave.calculateEndDate">Calculate End Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentLeave.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentLeave.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentLeave.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentLeave.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <!--<th></th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="studentLeave in vm.studentLeaves track by studentLeave.id">
+                                    <td><a target="_window" ui-sref="student-leave-detail({id:studentLeave.id})">{{studentLeave.id}}</a></td>
+                                    <!--<td>-->
+                                        <!--<a ui-sref="student-detail({id:studentLeave.student.id})">{{studentLeave.student.name}}</a>-->
+                                    <!--</td>-->
+                                    <td>
+                                        <a target="_window" ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentLeave.classArrangement.startDate  | date:'yyyy-MM-dd HH:mm' }}</a>
+                                    </td>
+                                    <td>
+                                        <a target="_window" ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentLeave.classArrangement.endDate  | date:'yyyy-MM-dd HH:mm'}}</a>
+                                    </td>
+                                    <td>{{studentLeave.balance}}</td>
+                                    <!--<td>{{studentLeave.calculateStartDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                                    <!--<td>{{studentLeave.calculateEndDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                                    <td>{{studentLeave.createdBy}}</td>
+                                    <td>{{studentLeave.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <!--<td>{{studentLeave.lastModifiedBy}}</td>-->
+                                    <!--<td>{{studentLeave.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+            </uib-tab>
+
             <uib-tab heading="缺席记录">
                 <div class="panel panel-bordered-mint">
                     <div class="panel-body">
 
+                        <div class="table-responsive">
+                            <table class="jh-table table table-striped">
+                                <thead>
+                                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="classArrangement.startDate"><span>排课上课时间</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="classArrangement.endDate"><span>排课下课时间</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.studentAbsenceLog.comments">Comments</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th jh-sort-by="regionId"><span data-translate="simpleServiceApp.studentAbsenceLog.regionId">Region Id</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentAbsenceLog.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentAbsenceLog.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentAbsenceLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentAbsenceLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="classCount"><span data-translate="simpleServiceApp.studentAbsenceLog.classCount">Class Count</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <!--<th></th>-->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="studentAbsenceLog in vm.studentAbsenceLogs track by studentAbsenceLog.id">
+                                    <td><a ui-sref="student-absence-log-detail({id:studentAbsenceLog.id})">{{studentAbsenceLog.id}}</a></td>
+                                    <td>
+                                        <a target="_window" ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentAbsenceLog.classArrangement.startDate  | date:'yyyy-MM-dd HH:mm' }}</a>
+                                    </td>
+                                    <td>
+                                        <a target="_window" ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentAbsenceLog.classArrangement.endDate  | date:'yyyy-MM-dd HH:mm'}}</a>
+                                    </td>
+                                    <td>{{studentAbsenceLog.comments}}</td>
+                                    <!--<td>{{studentAbsenceLog.regionId}}</td>-->
+                                    <td>{{studentAbsenceLog.createdBy}}</td>
+                                    <td>{{studentAbsenceLog.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{studentAbsenceLog.lastModifiedBy}}</td>
+                                    <td>{{studentAbsenceLog.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{studentAbsenceLog.classCount}}</td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -109,7 +244,32 @@
             <uib-tab heading="冻结记录">
                 <div class="panel panel-bordered-mint">
                     <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="jh-table table table-striped">
+                                <thead>
+                                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
 
+                                    <th jh-sort-by="startDate"><span data-translate="simpleServiceApp.studentFrozen.startDate">Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="endDate"><span data-translate="simpleServiceApp.studentFrozen.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentFrozen.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
+                                    <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentFrozen.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="studentFrozen in vm.studentFrozens track by studentFrozen.id">
+                                    <td><a ui-sref="student-frozen-detail({id:studentFrozen.id})">{{studentFrozen.id}}</a></td>
+
+                                    <td>{{studentFrozen.startDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{studentFrozen.endDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                                    <td>{{studentFrozen.createdBy}}</td>
+                                    <td>{{studentFrozen.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 

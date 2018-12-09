@@ -54,11 +54,11 @@
                 <tr ng-repeat="task in vm.tasks track by task.id">
                     <td><a ui-sref="task-detail({id:task.id})">{{task.id}}</a></td>
                     <td style="max-width: 20em; word-wrap:break-word">{{task.description}}</td>
-                    <td>{{task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{task.estimateExecuteDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{task.createdBy}}</td>
-                    <td>{{task.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{task.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <!--<td>{{task.lastModifiedBy}}</td>-->
-                    <!--<td>{{task.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
+                    <!--<td>{{task.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
                     <td>
                         {{task.assignee.login}}
                     </td>

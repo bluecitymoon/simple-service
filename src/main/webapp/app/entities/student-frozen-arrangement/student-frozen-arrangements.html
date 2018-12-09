@@ -39,9 +39,9 @@
                 <tr ng-repeat="studentFrozenArrangement in vm.studentFrozenArrangements track by studentFrozenArrangement.id">
                     <td><a ui-sref="student-frozen-arrangement-detail({id:studentFrozenArrangement.id})">{{studentFrozenArrangement.id}}</a></td>
                     <td>{{studentFrozenArrangement.createdBy}}</td>
-                    <td>{{studentFrozenArrangement.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentFrozenArrangement.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{studentFrozenArrangement.lastModifiedBy}}</td>
-                    <td>{{studentFrozenArrangement.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentFrozenArrangement.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{studentFrozenArrangement.active}}</td>
                     <td>
                         <a ui-sref="student-detail({id:studentFrozenArrangement.student.id})">{{studentFrozenArrangement.student.name}}</a>

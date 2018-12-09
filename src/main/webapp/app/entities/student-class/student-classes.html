@@ -37,9 +37,9 @@
                 <tr ng-repeat="studentClass in vm.studentClasses track by studentClass.id">
                     <td><a ui-sref="student-class-detail({id:studentClass.id})">{{studentClass.id}}</a></td>
                     <td>{{studentClass.createdBy}}</td>
-                    <td>{{studentClass.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentClass.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{studentClass.lastModifiedBy}}</td>
-                    <td>{{studentClass.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentClass.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>
                         <a ui-sref="student-detail({id:studentClass.student.id})">{{studentClass.student.name}}</a>
                     </td>

@@ -27,7 +27,7 @@
                 <tbody>
                 <tr ng-repeat="customerTrackTask in vm.customerTrackTasks track by customerTrackTask.id">
                     <td><a ui-sref="task-detail({id:task.id})">{{customerTrackTask.task.id}}</a></td>
-                    <td>{{customerTrackTask.task.estimateExecuteDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerTrackTask.task.estimateExecuteDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td><label class="{{customerTrackTask.task.taskStatus.labelCss}}">{{customerTrackTask.task.taskStatus.name}}</label></td>
                     <td>{{customerTrackTask.task.description}}</td>
                     <td>{{customerTrackTask.task.assignee.firstName}}</td>

@@ -45,9 +45,9 @@
                     <td>{{timetableItem.courseName}}</td>
                     <td>{{timetableItem.teacherName}}</td>
                     <td>{{timetableItem.createdBy}}</td>
-                    <td>{{timetableItem.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{timetableItem.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{timetableItem.lastModifiedBy}}</td>
-                    <td>{{timetableItem.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{timetableItem.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>
                         <a ui-sref="product-detail({id:timetableItem.clazz.id})">{{timetableItem.clazz.name}}</a>
                     </td>

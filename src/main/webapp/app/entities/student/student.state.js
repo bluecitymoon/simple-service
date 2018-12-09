@@ -48,6 +48,11 @@
                     $translatePartialLoader.addPart('student');
                     $translatePartialLoader.addPart('global');
                     $translatePartialLoader.addPart('studentClassLog');
+                    $translatePartialLoader.addPart('customerConsumerLog');
+                    $translatePartialLoader.addPart('studentLeave');
+                    $translatePartialLoader.addPart('studentAbsenceLog');
+                    $translatePartialLoader.addPart('studentFrozen');
+
                     return $translate.refresh();
                 }]
             }

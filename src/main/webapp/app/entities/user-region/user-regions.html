@@ -37,9 +37,9 @@
                 <tr ng-repeat="userRegion in vm.userRegions track by userRegion.id">
                     <td><a ui-sref="user-region-detail({id:userRegion.id})">{{userRegion.id}}</a></td>
                     <td>{{userRegion.createdBy}}</td>
-                    <td>{{userRegion.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{userRegion.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{userRegion.lastModifiedBy}}</td>
-                    <td>{{userRegion.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{userRegion.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>
                         {{userRegion.user.login}}
                     </td>

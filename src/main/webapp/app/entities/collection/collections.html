@@ -115,9 +115,9 @@
                     <td>{{collection.sequenceNumber}}</td>
                     <td>{{collection.payerName}}</td>
                     <td>{{collection.createdBy}}</td>
-                    <td>{{collection.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{collection.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <!--<td>{{collection.lastModifiedBy}}</td>-->
-                    <!--<td>{{collection.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>-->
+                    <!--<td>{{collection.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
 
                     <td>
                         <a ui-sref="payment-type-detail({id:collection.paymentType.id})">{{collection.paymentType.name}}</a>

@@ -43,9 +43,9 @@
                     <td>{{customerCardUpgradeLog.customerId}}</td>
                     <td>{{customerCardUpgradeLog.serialNumber}}</td>
                     <td>{{customerCardUpgradeLog.createdBy}}</td>
-                    <td>{{customerCardUpgradeLog.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCardUpgradeLog.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{customerCardUpgradeLog.lastModifiedBy}}</td>
-                    <td>{{customerCardUpgradeLog.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{customerCardUpgradeLog.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>
                         <a ui-sref="customer-card-type-detail({id:customerCardUpgradeLog.originalCardType.id})">{{customerCardUpgradeLog.originalCardType.name}}</a>
                     </td>
