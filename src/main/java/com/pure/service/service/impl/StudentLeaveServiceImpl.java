@@ -1,6 +1,7 @@
 package com.pure.service.service.impl;
 
 import com.pure.service.domain.ClassArrangement;
+import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
 import com.pure.service.region.RegionIdStorage;
 import com.pure.service.service.StudentLeaveQueryService;
@@ -50,6 +51,9 @@ public class StudentLeaveServiceImpl implements StudentLeaveService{
     @Override
     public StudentLeave save(StudentLeave studentLeave) {
         log.debug("Request to save StudentLeave : {}", studentLeave);
+
+        Product leavedClass = studentLeave.getClassArrangement().getClazz();
+
         return studentLeaveRepository.save(studentLeave);
     }
 

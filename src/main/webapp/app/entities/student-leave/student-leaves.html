@@ -25,10 +25,11 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="student.name"><span data-translate="simpleServiceApp.studentLeave.student">Student</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="classArrangement.id"><span data-translate="simpleServiceApp.studentLeave.classArrangement">Class Arrangement</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classArrangement.startDate"><span>排课上课时间</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="classArrangement.endDate"><span>排课下课时间</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="balance"><span data-translate="simpleServiceApp.studentLeave.balance">Balance</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="calculateStartDate"><span data-translate="simpleServiceApp.studentLeave.calculateStartDate">Calculate Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="calculateEndDate"><span data-translate="simpleServiceApp.studentLeave.calculateEndDate">Calculate End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="calculateStartDate"><span data-translate="simpleServiceApp.studentLeave.calculateStartDate">Calculate Start Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="calculateEndDate"><span data-translate="simpleServiceApp.studentLeave.calculateEndDate">Calculate End Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="createdBy"><span data-translate="simpleServiceApp.studentLeave.createdBy">Created By</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentLeave.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentLeave.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -43,15 +44,18 @@
                         <a ui-sref="student-detail({id:studentLeave.student.id})">{{studentLeave.student.name}}</a>
                     </td>
                     <td>
-                        <a ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentLeave.classArrangement.id}}</a>
+                        <a target="_window" ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentLeave.classArrangement.startDate  | date:'yyyy-MM-dd HH:mm' }}</a>
+                    </td>
+                    <td>
+                        <a target="_window" ui-sref="class-arrangement-detail({id:studentLeave.classArrangement.id})">{{studentLeave.classArrangement.endDate  | date:'yyyy-MM-dd HH:mm'}}</a>
                     </td>
                     <td>{{studentLeave.balance}}</td>
-                    <td>{{studentLeave.calculateStartDate | date:'yyyy-MM-dd hh:mm'}}</td>
-                    <td>{{studentLeave.calculateEndDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <!--<td>{{studentLeave.calculateStartDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                    <!--<td>{{studentLeave.calculateEndDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
                     <td>{{studentLeave.createdBy}}</td>
-                    <td>{{studentLeave.createdDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentLeave.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
                     <td>{{studentLeave.lastModifiedBy}}</td>
-                    <td>{{studentLeave.lastModifiedDate | date:'yyyy-MM-dd hh:mm'}}</td>
+                    <td>{{studentLeave.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
 
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

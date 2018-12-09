@@ -153,7 +153,7 @@ public class CustomerServiceImpl implements CustomerService {
         for (Customer customer : customers) {
 
             Customer oldCustomer = customerRepository.findOne(customer.getId());
-            if (oldCustomer.getCourseConsultant().getId() == customer.getCourseConsultant().getId()) {
+            if (oldCustomer.getCourseConsultant() == customer.getCourseConsultant()) {
                 continue;
             }
 

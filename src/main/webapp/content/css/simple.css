@@ -9079,7 +9079,9 @@ blockquote {
 .pad-top {
     padding-top: 15px
 }
-
+.pad-top-lg {
+    padding-top: 2em;
+}
 .pad-btm {
     padding-bottom: 15px
 }

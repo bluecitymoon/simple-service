@@ -37,9 +37,21 @@ public class StudentLeave extends AbstractAuditingRegionEntity {
     private Student student;
 
     @ManyToOne
+    private Contract contract;
+
+    @ManyToOne
     private ClassArrangement classArrangement;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
     public Long getId() {
         return id;
     }
