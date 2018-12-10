@@ -74,6 +74,18 @@ public class StudentClassLogDailyReportResource {
             .body(result);
     }
 
+    @PostMapping("/student-class-log-daily-reports/save-daily-report")
+    @Timed
+    @RegionBasedInsert
+    public ResponseEntity<StudentClassLogDailyReport> saveLogDailyReport(@RequestBody StudentClassLogDailyReport studentClassLogDailyReport) throws URISyntaxException {
+
+        StudentClassLogDailyReport result = studentClassLogDailyReportService.saveLogDailyReport(studentClassLogDailyReport);
+
+        return ResponseEntity.created(new URI("/api/student-class-log-daily-reports/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
     /**
      * PUT  /student-class-log-daily-reports : Updates an existing studentClassLogDailyReport.
      *

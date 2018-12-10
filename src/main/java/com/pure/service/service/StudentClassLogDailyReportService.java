@@ -42,4 +42,6 @@ public interface StudentClassLogDailyReportService {
     void delete(Long id);
 
     StatusBasedStudent getStudentClassLogDailyReportToday();
+
+    StudentClassLogDailyReport saveLogDailyReport(StudentClassLogDailyReport studentClassLogDailyReport);
 }

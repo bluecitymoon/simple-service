@@ -9,25 +9,30 @@ import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.StudentClassLogDailyReportRepository;
 import com.pure.service.service.StudentAbsenceLogQueryService;
+import com.pure.service.service.StudentClassLogDailyReportQueryService;
 import com.pure.service.service.StudentClassLogDailyReportService;
 import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.StudentClassService;
 import com.pure.service.service.StudentLeaveQueryService;
 import com.pure.service.service.dto.StudentAbsenceLogCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
+import com.pure.service.service.dto.StudentClassLogDailyReportCriteria;
 import com.pure.service.service.dto.StudentLeaveCriteria;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.dto.StatusBasedStudent;
 import com.pure.service.service.dto.enumurations.StudentClassLogTypeEnum;
 import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -62,6 +67,9 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
 
     @Autowired
     private StudentClassLogQueryService studentClassLogQueryService;
+
+    @Autowired
+    private StudentClassLogDailyReportQueryService studentClassLogDailyReportQueryService;
 
     public StudentClassLogDailyReportServiceImpl(StudentClassLogDailyReportRepository studentClassLogDailyReportRepository) {
         this.studentClassLogDailyReportRepository = studentClassLogDailyReportRepository;
@@ -177,5 +185,33 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
 
 
         return statusBasedStudent;
+    }
+
+    @Override
+    public StudentClassLogDailyReport saveLogDailyReport(StudentClassLogDailyReport dailyReport) {
+
+        Instant logDate = dailyReport.getLogDate();
+
+        Instant logDateStart = DateUtil.getBeginningOfInstant(logDate);
+        Instant logDateEnd = DateUtil.getEndingOfInstant(logDate);
+
+        StudentClassLogDailyReportCriteria classLogDailyReportCriteria = new StudentClassLogDailyReportCriteria();
+        InstantFilter instantFilter = new InstantFilter();
+        instantFilter.setGreaterOrEqualThan(logDateStart);
+        instantFilter.setLessOrEqualThan(logDateEnd);
+
+        classLogDailyReportCriteria.setLogDate(instantFilter);
+
+        List<StudentClassLogDailyReport> existedReports = studentClassLogDailyReportQueryService.findByCriteria(classLogDailyReportCriteria);
+
+        if (CollectionUtils.isEmpty(existedReports)) {
+            return save(dailyReport);
+        }
+
+        StudentClassLogDailyReport existedReport = existedReports.get(0);
+        BeanUtils.copyProperties(dailyReport, existedReport, "id");
+
+
+        return save(existedReport);
     }
 }

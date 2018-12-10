@@ -22,7 +22,8 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'saveLogDailyReport': { method: 'POST', url: "api/student-class-log-daily-reports/save-daily-report"}
         });
     }
 })();

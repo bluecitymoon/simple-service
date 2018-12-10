@@ -81,7 +81,7 @@
         };
 
         vm.confirmDailyReport = function () {
-            StudentClassLogDailyReport.save(vm.studentClassLogDailyReport, onSaveSuccess, onSaveError);
+            StudentClassLogDailyReport.saveLogDailyReport(vm.studentClassLogDailyReport, onSaveSuccess, onSaveError);
         };
 
         function loadAll () {
