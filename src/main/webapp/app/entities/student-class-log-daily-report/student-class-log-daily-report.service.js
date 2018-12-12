@@ -11,6 +11,7 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'getMonthlyStudentClassLogDailyReport': { url: 'api/student-class-log-daily-reports/monthly', method: 'POST', isArray: true},
             'getStudentClassLogDailyReportToday': { method: 'GET', url: 'api/student-class-log-daily-reports/today'},
             'get': {
                 method: 'GET',

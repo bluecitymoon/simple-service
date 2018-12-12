@@ -46,6 +46,7 @@ public class CustomerStatusReportDtlResource {
         this.customerStatusReportDtlQueryService = customerStatusReportDtlQueryService;
     }
 
+
     /**
      * POST  /customer-status-report-dtls : Create a new customerStatusReportDtl.
      *

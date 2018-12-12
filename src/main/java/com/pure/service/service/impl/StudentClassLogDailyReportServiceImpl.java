@@ -20,7 +20,9 @@ import com.pure.service.service.dto.StudentClassLogDailyReportCriteria;
 import com.pure.service.service.dto.StudentLeaveCriteria;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.dto.StatusBasedStudent;
+import com.pure.service.service.dto.dto.StudentClassLogMonthlyReport;
 import com.pure.service.service.dto.enumurations.StudentClassLogTypeEnum;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
@@ -35,9 +37,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -213,5 +218,83 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
 
 
         return save(existedReport);
+    }
+
+    @Override
+    public List<StudentClassLogMonthlyReport> getMonthlyReport(CustomerStatusRequest customerStatusRequest) {
+
+        List<StudentClassLogMonthlyReport> result = new ArrayList<>();
+
+        Map<String, List<StudentClassLogDailyReport>> mergedReportMap = new HashMap<>();
+        StudentClassLogDailyReportCriteria reportCriteria = new StudentClassLogDailyReportCriteria();
+
+        InstantFilter instantFilter = new InstantFilter();
+        instantFilter.setGreaterThan(customerStatusRequest.getStartDate());
+        instantFilter.setLessThan(customerStatusRequest.getEndDate());
+
+        reportCriteria.setLogDate(instantFilter);
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(RegionUtils.getRegionIdForCurrentUser());
+
+        reportCriteria.setRegionId(longFilter);
+
+        List<StudentClassLogDailyReport> studentClassLogDailyReports = studentClassLogDailyReportQueryService.findByCriteria(reportCriteria);
+
+        if (CollectionUtils.isEmpty(studentClassLogDailyReports)) return result;
+
+        for (StudentClassLogDailyReport studentClassLogDailyReport : studentClassLogDailyReports) {
+
+            Instant logDate = studentClassLogDailyReport.getLogDate();
+
+            LocalDateTime localDateTime = DateUtil.instantToLocalDateTime(logDate);
+            Integer month = localDateTime.getMonthValue();
+            Integer year = localDateTime.getYear();
+
+            String monthYear = "" + year + "-" + month;
+            List<StudentClassLogDailyReport> logs = mergedReportMap.get(monthYear);
+            if (logs == null) {
+
+                logs = new ArrayList<>();
+                logs.add(studentClassLogDailyReport);
+
+                mergedReportMap.put(monthYear, logs);
+
+                continue;
+            }
+
+            logs.add(studentClassLogDailyReport);
+        }
+
+        for (Map.Entry<String, List<StudentClassLogDailyReport>> logListEntry : mergedReportMap.entrySet()) {
+
+            StudentClassLogMonthlyReport monthlyReport = new StudentClassLogMonthlyReport();
+
+            String monthYear = logListEntry.getKey();
+            List<StudentClassLogDailyReport> reports = logListEntry.getValue();
+
+            int shouldTaken = 0,leave = 0, absence = 0, added = 0, actualTaken = 0;
+            for (StudentClassLogDailyReport report : reports) {
+
+                shouldTaken += report.getShouldTaken();
+                leave += report.getLeave();
+                absence += report.getAbsence();
+                added += report.getAdded();
+                actualTaken += report.getActualTaken();
+            }
+
+            monthlyReport.setYearMonth(monthYear);
+            monthlyReport.setAbsence(absence);
+            monthlyReport.setActualTaken(actualTaken);
+            monthlyReport.setAdded(added);
+            monthlyReport.setShouldTaken(shouldTaken);
+            monthlyReport.setLeave(leave);
+            monthlyReport.setDetails(reports);
+
+            result.add(monthlyReport);
+        }
+
+
+        return result;
     }
 }

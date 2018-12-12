@@ -2,8 +2,12 @@ package com.pure.service.service;
 
 import com.pure.service.domain.StudentClassLogDailyReport;
 import com.pure.service.service.dto.dto.StatusBasedStudent;
+import com.pure.service.service.dto.dto.StudentClassLogMonthlyReport;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 /**
  * Service Interface for managing StudentClassLogDailyReport.
@@ -44,4 +48,6 @@ public interface StudentClassLogDailyReportService {
     StatusBasedStudent getStudentClassLogDailyReportToday();
 
     StudentClassLogDailyReport saveLogDailyReport(StudentClassLogDailyReport studentClassLogDailyReport);
+
+    List<StudentClassLogMonthlyReport> getMonthlyReport(CustomerStatusRequest customerStatusRequest);
 }

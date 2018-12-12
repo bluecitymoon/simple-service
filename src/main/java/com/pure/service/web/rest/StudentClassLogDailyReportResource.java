@@ -8,6 +8,8 @@ import com.pure.service.service.StudentClassLogDailyReportQueryService;
 import com.pure.service.service.StudentClassLogDailyReportService;
 import com.pure.service.service.dto.StudentClassLogDailyReportCriteria;
 import com.pure.service.service.dto.dto.StatusBasedStudent;
+import com.pure.service.service.dto.dto.StudentClassLogMonthlyReport;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,6 +55,64 @@ public class StudentClassLogDailyReportResource {
     public StudentClassLogDailyReportResource(StudentClassLogDailyReportService studentClassLogDailyReportService, StudentClassLogDailyReportQueryService studentClassLogDailyReportQueryService) {
         this.studentClassLogDailyReportService = studentClassLogDailyReportService;
         this.studentClassLogDailyReportQueryService = studentClassLogDailyReportQueryService;
+    }
+
+    private void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
+
+        Integer month = customerStatusRequest.getMonth();
+        Integer year = customerStatusRequest.getYear();
+
+        Integer nextMonth = month + 1;
+        Integer nextYear = year;
+        if (nextMonth == 13) {
+            nextMonth = 1;
+
+            nextYear = year + 1;
+        }
+
+        String monthString = "" + month;
+        String nextMonthString = "" + nextMonth;
+        if (month < 10) {
+            monthString = "0" + monthString;
+        }
+
+        if (nextMonth < 10) {
+            nextMonthString = "0" + nextMonthString;
+        }
+
+        String fullDateStart = "" + year+ "-" + monthString + "-01T00:00:01.00Z";
+        String fullDateEnd = "" + nextYear + "-" + nextMonthString + "-01T00:00:01.00Z";
+
+        customerStatusRequest.setStartDate(Instant.parse(fullDateStart));
+        customerStatusRequest.setEndDate(Instant.parse(fullDateEnd));
+    }
+
+    @PostMapping("/student-class-log-daily-reports/monthly")
+    @Timed
+    public ResponseEntity<List<StudentClassLogMonthlyReport>> getMonthlyStudentClassLogDailyReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
+
+        switch (customerStatusRequest.getQueryType()) {
+            case "monthly":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getYear()) || StringUtils.isEmpty(customerStatusRequest.getMonth())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+
+                preProccessStatusRequest(customerStatusRequest);
+
+                break;
+            case "dateRange":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getStartDate()) || StringUtils.isEmpty(customerStatusRequest.getEndDate())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+                break;
+            default:
+                break;
+        }
+        List<StudentClassLogMonthlyReport> report = studentClassLogDailyReportService.getMonthlyReport(customerStatusRequest);
+
+        return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
     /**
