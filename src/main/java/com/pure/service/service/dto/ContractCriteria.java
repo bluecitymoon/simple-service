@@ -71,8 +71,17 @@ public class ContractCriteria extends AbstractQueryCriteria {
 
     private String customerName;
     private String customerContactPhoneNumber;
+    private Long followerId;
 
     public ContractCriteria() {
+    }
+
+    public Long getFollowerId() {
+        return followerId;
+    }
+
+    public void setFollowerId(Long followerId) {
+        this.followerId = followerId;
     }
 
     public String getCustomerName() {

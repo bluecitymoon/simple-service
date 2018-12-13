@@ -9,6 +9,7 @@ import com.pure.service.domain.CustomerCard_;
 import com.pure.service.domain.Customer_;
 import com.pure.service.domain.Product_;
 import com.pure.service.domain.Student_;
+import com.pure.service.domain.User_;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.service.dto.ContractCriteria;
 import io.github.jhipster.service.QueryService;
@@ -156,6 +157,10 @@ public class ContractQueryService extends QueryService<Contract> {
                 specification = specification.and(customerContractPhoneNumber(criteria.getCustomerContactPhoneNumber()));
             }
 
+            if (criteria.getFollowerId() != null) {
+                specification = specification.and(followerId(criteria.getFollowerId()));
+            }
+
         }
         return specification;
     }
@@ -170,5 +175,9 @@ public class ContractQueryService extends QueryService<Contract> {
 
         return (root, query, cb) -> cb.like(root.get(Contract_.customer).get(Customer_.contactPhoneNumber), phoneNumber);
 
+    }
+
+    private Specification followerId(Long userId) {
+        return (root, query, cb) -> cb.equal(root.get(Contract_.customer).get(Customer_.courseConsultant).get(User_.id), userId);
     }
 }

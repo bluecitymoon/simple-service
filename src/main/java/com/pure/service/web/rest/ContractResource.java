@@ -3,11 +3,14 @@ package com.pure.service.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Contract;
 import com.pure.service.domain.ContractNature;
+import com.pure.service.domain.User;
 import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.repository.ContractNatureRepository;
+import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
+import com.pure.service.service.UserService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
@@ -56,6 +59,9 @@ public class ContractResource {
 
     @Autowired
     private ContractNatureRepository contractNatureRepository;
+
+    @Autowired
+    private UserService userService;
 
     public ContractResource(ContractService contractService, ContractQueryService contractQueryService) {
         this.contractService = contractService;
@@ -154,6 +160,14 @@ public class ContractResource {
     @RegionBasedQuery
     public ResponseEntity<List<Contract>> getAllContracts(ContractCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Contracts by criteria: {}", criteria);
+
+        if (!SecurityUtils.isCurrentUserHeadmasterOrAdmin()) {
+
+            User currentUser = userService.getUserWithAuthorities();
+
+            criteria.setFollowerId(currentUser.getId());
+        }
+
         Page<Contract> page = contractQueryService.findByCriteria(criteria, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/contracts");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
