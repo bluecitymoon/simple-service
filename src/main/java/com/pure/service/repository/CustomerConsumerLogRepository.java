@@ -13,4 +13,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface CustomerConsumerLogRepository extends JpaRepository<CustomerConsumerLog, Long>, JpaSpecificationExecutor<CustomerConsumerLog> {
 
+    CustomerConsumerLog findByUniqueNumber(String uniqueNumber);
 }

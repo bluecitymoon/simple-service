@@ -3,6 +3,7 @@ package com.pure.service.service.impl;
 import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.Contract;
 import com.pure.service.domain.CustomerConsumerLog;
+import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentAbsenceLog;
 import com.pure.service.domain.StudentClassLog;
@@ -16,6 +17,7 @@ import com.pure.service.repository.ProductRepository;
 import com.pure.service.repository.StudentAbsenceLogRepository;
 import com.pure.service.repository.StudentClassLogRepository;
 import com.pure.service.repository.StudentClassLogTypeRepository;
+import com.pure.service.repository.StudentRepository;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.StudentAbsenceLogQueryService;
@@ -44,7 +46,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 
 /**
@@ -90,6 +96,13 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
     @Autowired
     private StudentAbsenceLogRepository studentAbsenceLogRepository;
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+//
+//    @Autowired
+//    private CustomerConsumerLogRepository customerConsumerLogRepository;
 
     public StudentClassLogServiceImpl(StudentClassLogRepository studentClassLogRepository) {
         this.studentClassLogRepository = studentClassLogRepository;
@@ -169,6 +182,44 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             saveAbsenceLog(request, absentStudent);
         }
     }
+
+    @Override
+    public void fixDuplicateSignIssue() {
+
+        List<StudentClassLog> logs = studentClassLogRepository.findAll();
+        Map<StudentArrangement, List<StudentClassLog>> studentClassLogMap = new HashMap<>();
+
+        for (StudentClassLog studentClassLog : logs) {
+
+            StudentArrangement studentArrangement = new StudentArrangement();
+            studentArrangement.setArrangementId(studentClassLog.getArrangement().getId());
+            studentArrangement.setStudentId(studentClassLog.getStudent().getId());
+
+            List<StudentClassLog> studentClassLogs = studentClassLogMap.get(studentArrangement);
+            if (studentClassLogs == null) {
+                studentClassLogs = new ArrayList<>();
+
+                studentClassLogMap.put(studentArrangement, studentClassLogs);
+            }
+
+            studentClassLogs.add(studentClassLog);
+        }
+
+        for (List<StudentClassLog> studentClassLogs : studentClassLogMap.values()) {
+
+            if (studentClassLogs.size() < 2)  continue;
+
+            for (int i = 0; i < studentClassLogs.size(); i++) {
+
+                if (i == 0) continue;
+                StudentClassLog toDeletedLog = studentClassLogs.get(i);
+
+                rollbackStudentClassLog(toDeletedLog);
+            }
+        }
+    }
+
+
 
     private void saveAbsenceLog(BatchSigninStudent request, Student absentStudent) {
         for (SingleArrangementRequest arrangementId : request.getArrangementIds()) {
@@ -320,5 +371,96 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
         //保存签到记录
         studentClassLog.setUniqueNumber(uniqueNumber);
         save(studentClassLog);
+    }
+
+    @Override
+    public void rollbackStudentClassLog(StudentClassLog studentClassLog) {
+
+        String uniqueNumber = studentClassLog.getUniqueNumber();
+
+
+
+        ContractCriteria contractCriteria = new ContractCriteria();
+
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(studentClassLog.getStudent().getId());
+
+        contractCriteria.setStudentId(longFilter);
+
+        Contract contract = null;
+
+        List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
+
+        if (CollectionUtils.isEmpty(contracts)) {
+
+            return;
+        }
+
+        if (contracts.size() == 1) {
+            contract = contracts.get(0);
+        } else {
+
+            for (Contract singleContract : contracts) {
+                Product clazz = singleContract.getProduct();
+
+                if (studentClassLog.getArrangement().getClazz().equals(clazz)) {
+                    contract = singleContract;
+                }
+            }
+
+            if (contract == null) {
+                contract = contracts.get(0);
+            }
+        }
+
+//        CustomerConsumerLog customerConsumerLog = customerConsumerLogRepository.findByUniqueNumber(uniqueNumber);
+//        if (customerConsumerLog == null) {
+//        Float count = customerConsumerLog.getCount();
+
+        contract.setHoursTaken(contract.getHoursTaken() - studentClassLog.getArrangement().getConsumeClassCount());
+
+        contractRepository.save(contract);
+
+        //TODO
+//        customerConsumerLogRepository.delete(customerConsumerLog);
+
+        studentClassLogRepository.delete(studentClassLog);
+
+    }
+
+    private class StudentArrangement {
+        private Long studentId;
+        private Long arrangementId;
+
+        public Long getStudentId() {
+            return studentId;
+        }
+
+        public void setStudentId(Long studentId) {
+            this.studentId = studentId;
+        }
+
+        public Long getArrangementId() {
+            return arrangementId;
+        }
+
+        public void setArrangementId(Long arrangementId) {
+            this.arrangementId = arrangementId;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof StudentArrangement)) return false;
+            StudentArrangement that = (StudentArrangement) o;
+            return Objects.equals(getStudentId(), that.getStudentId()) &&
+                Objects.equals(getArrangementId(), that.getArrangementId());
+        }
+
+        @Override
+        public int hashCode() {
+
+            return Objects.hash(getStudentId(), getArrangementId());
+        }
     }
 }

@@ -30,6 +30,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,6 +44,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
+
+import static com.pure.service.service.util.DateUtil.preProccessStatusRequest;
 
 /**
  * REST controller for managing Contract.
@@ -206,6 +209,27 @@ public class ContractResource {
     @PostMapping("/contracts/consultant-work-report")
     @Timed
     public ResponseEntity<List<ConsultantWork>> getCourseConsultantWorkReport(@RequestBody CustomerStatusRequest request) {
+
+        switch (request.getQueryType()) {
+            case "monthly":
+
+                if (StringUtils.isEmpty(request.getYear()) || StringUtils.isEmpty(request.getMonth())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+
+                preProccessStatusRequest(request);
+
+                break;
+            case "dateRange":
+
+                if (StringUtils.isEmpty(request.getStartDate()) || StringUtils.isEmpty(request.getEndDate())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+                break;
+            default:
+                break;
+        }
+
         List<ConsultantWork> reports = contractService.getCourseConsultantWorkReport(request);
 
         return new ResponseEntity<>(reports, null, HttpStatus.OK);

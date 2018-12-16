@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.region.RegionBasedQuery;
+import com.pure.service.repository.StudentClassLogRepository;
 import com.pure.service.service.StudentClassLogService;
 import com.pure.service.service.dto.request.BatchSigninStudent;
 import com.pure.service.web.rest.util.HeaderUtil;
@@ -15,6 +16,7 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -42,6 +44,9 @@ public class StudentClassLogResource {
     private final StudentClassLogService studentClassLogService;
 
     private final StudentClassLogQueryService studentClassLogQueryService;
+
+    @Autowired
+    private StudentClassLogRepository studentClassLogRepository;
 
     public StudentClassLogResource(StudentClassLogService studentClassLogService, StudentClassLogQueryService studentClassLogQueryService) {
         this.studentClassLogService = studentClassLogService;
@@ -74,6 +79,26 @@ public class StudentClassLogResource {
     public ResponseEntity<StudentClassLog> batchSignin(@RequestBody BatchSigninStudent students) {
 
         studentClassLogService.batchSignIn(students);
+
+        return ResponseEntity.ok().build();
+    }
+
+
+    @PostMapping("/student-class-logs/fix-duplicated-sign-in-issue")
+    @Timed
+    public ResponseEntity<StudentClassLog> fixDuplicateSignIssue() {
+
+        studentClassLogService.fixDuplicateSignIssue();
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/student-class-logs/rollback/{id}")
+    @Timed
+    public ResponseEntity<StudentClassLog> rollbackStudentClassLog(@PathVariable Long id) {
+        log.debug("REST request to get StudentClassLog : {}", id);
+
+        studentClassLogService.rollbackStudentClassLog(studentClassLogRepository.findOne(id));
 
         return ResponseEntity.ok().build();
     }

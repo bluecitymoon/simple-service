@@ -8,6 +8,7 @@ import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.region.RegionIdStorage;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CollectionRepository;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.ContractStatusRepository;
@@ -29,6 +30,7 @@ import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import com.pure.service.service.util.DateUtil;
 import io.github.jhipster.service.filter.InstantFilter;
+import io.github.jhipster.service.filter.LongFilter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -255,15 +257,25 @@ public class ContractServiceImpl implements ContractService {
             ContractCriteria contractCriteria = new ContractCriteria();
 
             InstantFilter signDate = new InstantFilter();
-            signDate.setLessOrEqualThan(weekElement.getStart());
-            signDate.setGreaterOrEqualThan(weekElement.getEnd());
+            signDate.setLessOrEqualThan(weekElement.getEnd());
+            signDate.setGreaterOrEqualThan(weekElement.getStart());
 
             contractCriteria.setSignDate(signDate);
+
+            LongFilter regionId = new LongFilter();
+            regionId.setEquals(RegionUtils.getRegionIdForCurrentUser());
+
+            contractCriteria.setRegionId(regionId);
 
             List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
 
             Float totalMoneyShouldCollected = 0f;
             for (Contract contract : contracts) {
+
+                //bad data
+                if (contract.getTotalMoneyAmount() == null) {
+                    continue;
+                }
 
                 Float moneyShouldCollected = contract.getMoneyShouldCollected();
                 if (contract.getMoneyShouldCollected() == null) {
@@ -281,6 +293,7 @@ public class ContractServiceImpl implements ContractService {
             consultantWork.setWeekFromDate(weekElement.getStart());
             consultantWork.setWeekEndDate(weekElement.getEnd());
             consultantWork.setWeekName(weekElement.getWeekIndex());
+            consultantWork.setContracts(contracts);
 
             consultantWorks.add(consultantWork);
 

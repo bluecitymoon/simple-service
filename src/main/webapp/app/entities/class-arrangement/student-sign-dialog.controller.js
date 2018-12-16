@@ -110,6 +110,7 @@
 
         vm.signClassInBatch = function (type) {
 
+            vm.isSaving = true;
             var selectedRecords = vm.students.filter(function (r) {
                 return r.selected;
             });
@@ -167,11 +168,14 @@
                 console.log(data);
 
                 // loadAllStudentClassLogs();
+                vm.isSaving = false;
             }, function (error) {
                 if (error.data && error.data.detail) {
 
                     AlertService.error(error.data.detail);
                 }
+
+                vm.isSaving = false;
             })
         };
 

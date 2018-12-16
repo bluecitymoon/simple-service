@@ -1,0 +1,42 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.consultantReporthome.title">Consultant Reports</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.consultantReport.weekName">Week Name</span></dt>
+        <dd>
+            <span>{{vm.consultantReport.weekName}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.consultantReport.weekFromDate">Week From Date</span></dt>
+        <dd>
+            <span>{{vm.consultantReport.weekFromDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.consultantReport.weekEndDate">Week End Date</span></dt>
+        <dd>
+            <span>{{vm.consultantReport.weekEndDate | date:'yyyy-MM-dd hh:mm'}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.consultantReport.visitedCount">Visited Count</span></dt>
+        <dd>
+            <span>{{vm.consultantReport.visitedCount}}</span>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.consultantReport.dealedMoneyAmount">Dealed Money Amount</span></dt>
+        <dd>
+            <span>{{vm.consultantReport.dealedMoneyAmount}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="consultant-report-detail.edit({id:vm.consultantReport.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

@@ -25,7 +25,8 @@
                 }
             },
             'update': { method:'PUT' },
-            'batchSignin': {method: 'POST', url: 'api/student-class-logs/batch-sign-in'}
+            'batchSignin': {method: 'POST', url: 'api/student-class-logs/batch-sign-in'},
+            'rollbackStudentClassLog': {method: 'GET', url: 'api/student-class-logs/rollback/:id'}
         });
     }
 })();

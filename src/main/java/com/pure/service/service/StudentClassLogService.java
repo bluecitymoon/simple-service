@@ -42,4 +42,8 @@ public interface StudentClassLogService {
     void delete(Long id);
 
     void batchSignIn(BatchSigninStudent students);
+
+    void fixDuplicateSignIssue();
+
+    void rollbackStudentClassLog(StudentClassLog studentClassLog);
 }

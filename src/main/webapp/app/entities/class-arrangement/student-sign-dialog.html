@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-block btn-primary"
-                                    ng-click="vm.signClassInBatch('single')">
+                                    ng-click="vm.signClassInBatch('single')" ng-disabled="vm.isSaving">
                                 <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定签到</span>
                             </button>
                         </div>
@@ -252,7 +252,7 @@
                         </div>
                         <div class="col-md-6">
                             <button type="button" class="btn btn-block btn-primary"
-                                    ng-click="vm.signClassInBatch('batch')">
+                                    ng-click="vm.signClassInBatch('batch')" ng-disabled="vm.isSaving">
                                 <span class="glyphicon glyphicon-save"></span>&nbsp;<span>确定补签</span>
                             </button>
                         </div>

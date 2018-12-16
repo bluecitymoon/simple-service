@@ -1,6 +1,7 @@
 package com.pure.service.service.util;
 
 import com.pure.service.service.dto.dto.WeekElement;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
@@ -53,13 +54,13 @@ public class DateUtil {
     public static Instant getBeginningOfInstant(Instant instant) {
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
-        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.UTC);
+        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.ofHours(8));
     }
 
     public static Instant getEndingOfInstant(Instant instant) {
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
-        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.UTC);
+        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.ofHours(8));
     }
 
     public static Instant getLastSecondOfMonth() {
@@ -250,6 +251,36 @@ public class DateUtil {
         LocalDate secondDate = LocalDateTime.ofInstant(second, ZoneId.systemDefault()).toLocalDate();
 
         return firstDate.equals(secondDate);
+    }
+
+    public static void preProccessStatusRequest(CustomerStatusRequest customerStatusRequest) {
+
+        Integer month = customerStatusRequest.getMonth();
+        Integer year = customerStatusRequest.getYear();
+
+        Integer nextMonth = month + 1;
+        Integer nextYear = year;
+        if (nextMonth == 13) {
+            nextMonth = 1;
+
+            nextYear = year + 1;
+        }
+
+        String monthString = "" + month;
+        String nextMonthString = "" + nextMonth;
+        if (month < 10) {
+            monthString = "0" + monthString;
+        }
+
+        if (nextMonth < 10) {
+            nextMonthString = "0" + nextMonthString;
+        }
+
+        String fullDateStart = "" + year+ "-" + monthString + "-01T00:00:01.00Z";
+        String fullDateEnd = "" + nextYear + "-" + nextMonthString + "-01T00:00:01.00Z";
+
+        customerStatusRequest.setStartDate(Instant.parse(fullDateStart));
+        customerStatusRequest.setEndDate(Instant.parse(fullDateEnd));
     }
 
 //    public static void main(String[] args) {

@@ -68,6 +68,7 @@
                                     <span class="glyphicon glyphicon-sort"></span></th>
                                 <th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.studentClassLog.createdDate">Created Date</span>
                                     <span class="glyphicon glyphicon-sort"></span></th>
+                                <th></th>
 
                             </tr>
                             </thead>
@@ -86,7 +87,17 @@
                                 <td>{{studentClassLog.comments}}</td>
                                 <td>{{studentClassLog.createdBy}}</td>
                                 <td>{{studentClassLog.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>
-                                <!--<td>{{studentClassLog.point}}</td>-->
+                                <td>
+                                <td class="text-right">
+                                    <div class="btn-group flex-btn-group-container">
+
+                                        <button class="btn btn-danger btn-sm" ng-click="vm.rollbackStudentClassLog(studentClassLog)">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <span>删除上课记录</span>
+
+                                        </button>
+                                    </div>
+                                </td>
                             </tr>
                             </tbody>
                         </table>

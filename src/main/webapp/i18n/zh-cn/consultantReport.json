@@ -1,0 +1,25 @@
+{
+    "simpleServiceApp": {
+        "consultantReport" : {
+            "home": {
+                "title": "Consultant Reports",
+                "createLabel": "Create a new Consultant Report",
+                "createOrEditLabel": "Create or edit a Consultant Report"
+            },
+            "created": "A new Consultant Report is created with identifier {{ param }}",
+            "updated": "A Consultant Report is updated with identifier {{ param }}",
+            "deleted": "A Consultant Report is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Consultant Report {{ id }}?"
+            },
+            "detail": {
+                "title": "Consultant Report"
+            },
+            "weekName": "Week Name",
+            "weekFromDate": "Week From Date",
+            "weekEndDate": "Week End Date",
+            "visitedCount": "Visited Count",
+            "dealedMoneyAmount": "Dealed Money Amount"
+        }
+    }
+}

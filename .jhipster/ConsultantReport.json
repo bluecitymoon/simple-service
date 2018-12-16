@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "weekName",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "weekFromDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "weekEndDate",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "visitedCount",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "dealedMoneyAmount",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20181216072722",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "consultant_report",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

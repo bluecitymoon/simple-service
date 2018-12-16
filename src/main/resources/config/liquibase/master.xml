@@ -81,6 +81,7 @@
     <include file="config/liquibase/changelog/20181207061743_added_entity_StudentAbsenceLog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181207125330_added_entity_StudentClassLogType.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20181208072422_added_entity_StudentClassLogDailyReport.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20181216072722_added_entity_ConsultantReport.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180414115116_added_entity_constraints_FreeClassRecord.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180422140037_changelog.xml" relativeToChangelogFile="false"/>
