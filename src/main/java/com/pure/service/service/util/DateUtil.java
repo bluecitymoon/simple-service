@@ -1,5 +1,7 @@
 package com.pure.service.service.util;
 
+import com.pure.service.service.dto.dto.WeekElement;
+
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.Instant;
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,13 +53,13 @@ public class DateUtil {
     public static Instant getBeginningOfInstant(Instant instant) {
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
-        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.ofHours(8));
+        return localDateTime.with(LocalTime.MIN).toInstant(ZoneOffset.UTC);
     }
 
     public static Instant getEndingOfInstant(Instant instant) {
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.systemDefault());
-        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.ofHours(8));
+        return localDateTime.with(LocalTime.MAX).toInstant(ZoneOffset.UTC);
     }
 
     public static Instant getLastSecondOfMonth() {
@@ -177,10 +180,43 @@ public class DateUtil {
         int todayCount = calendar.get(Calendar.DAY_OF_WEEK);
         calendar.add(Calendar.DATE, calendar.getFirstDayOfWeek() - todayCount);
 
-        Date monday = calendar.getTime();
-
-        return monday;
+        return calendar.getTime();
     }
+
+    public static List<WeekElement> getWeekElementsBetween(Instant start, Instant end) {
+
+        List<WeekElement> result = new ArrayList<>();
+
+        Instant nextStartDate = DateUtil.getBeginningOfInstant(start);
+        Instant nextEndDate = DateUtil.getEndingOfInstant(start.plus(7, ChronoUnit.DAYS));
+        int weekCount = 0;
+        while ( nextEndDate.isBefore(end) ) {
+
+            weekCount ++;
+
+            WeekElement weekElement = new WeekElement();
+            weekElement.setStart(nextStartDate);
+            weekElement.setEnd(nextEndDate);
+            weekElement.setWeekIndex(weekCount);
+            nextStartDate = Instant.ofEpochSecond(nextEndDate.getEpochSecond());
+
+            nextEndDate = nextEndDate.plus(7, ChronoUnit.DAYS);
+
+            result.add(weekElement);
+        }
+
+        WeekElement weekElement = new WeekElement();
+        weekElement.setStart(nextStartDate.plus(1, ChronoUnit.SECONDS));
+        weekElement.setEnd(DateUtil.getEndingOfInstant(end));
+        weekElement.setWeekIndex(weekCount + 1);
+
+        result.add(weekElement);
+
+        System.out.println(result);
+
+        return result;
+    }
+
 
     public static Instant getCurrentMondayStartSecond() {
 
@@ -218,13 +254,10 @@ public class DateUtil {
 
 //    public static void main(String[] args) {
 //
-//        Instant instant = Instant.now();
+//        Instant start = Instant.parse("2018-11-03T10:15:30.00Z");
+//        Instant end = Instant.now();
 //
-//        LocalDateTime localDateTime = instantToLocalDateTime(instant);
-//        localDateTime = localDateTime.withMinute(16).withMinute(45);
-//
-//        System.out.println(localDateTime);
-//
+//        getWeekElementsBetween(start, end);
 //
 //    }
 }

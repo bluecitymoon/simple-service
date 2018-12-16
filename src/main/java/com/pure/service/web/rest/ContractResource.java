@@ -12,7 +12,9 @@ import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.UserService;
 import com.pure.service.service.dto.ContractCriteria;
+import com.pure.service.service.dto.dto.ConsultantWork;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
@@ -199,5 +201,13 @@ public class ContractResource {
         log.debug("REST request to delete Contract : {}", id);
         contractService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    @PostMapping("/contracts/consultant-work-report")
+    @Timed
+    public ResponseEntity<List<ConsultantWork>> getCourseConsultantWorkReport(@RequestBody CustomerStatusRequest request) {
+        List<ConsultantWork> reports = contractService.getCourseConsultantWorkReport(request);
+
+        return new ResponseEntity<>(reports, null, HttpStatus.OK);
     }
 }

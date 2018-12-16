@@ -32,7 +32,7 @@
 
         vm.loadAll = loadAll;
 
-        vm.loadAll();
+        // vm.loadAll();
 
         function loadAll() {
 

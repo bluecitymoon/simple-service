@@ -1,7 +1,9 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.Contract;
+import com.pure.service.service.dto.dto.ConsultantWork;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
@@ -56,4 +58,6 @@ public interface ContractService {
     List<Contract> generatePackagedContract(PackageContractRequest packageContractRequest) throws TemplateNotFoundException, CollectionNotPaidException, ContractsExceedLimitException;
 
     String generateContractNumber();
+
+    List<ConsultantWork> getCourseConsultantWorkReport(CustomerStatusRequest request);
 }

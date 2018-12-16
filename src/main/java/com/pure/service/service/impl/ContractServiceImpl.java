@@ -15,14 +15,20 @@ import com.pure.service.repository.ContractTemplateRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.service.CollectionService;
+import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.CustomerCardService;
+import com.pure.service.service.dto.ContractCriteria;
+import com.pure.service.service.dto.dto.ConsultantWork;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.dto.WeekElement;
 import com.pure.service.service.dto.enumurations.ContractStatusEnum;
 import com.pure.service.service.dto.enumurations.CustomerCommunicationLogTypeEnum;
-import com.pure.service.service.exception.CollectionNotPaidException;
+import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
+import com.pure.service.service.util.DateUtil;
+import io.github.jhipster.service.filter.InstantFilter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,6 +76,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private CollectionService collectionService;
+
+    @Autowired
+    private ContractQueryService contractQueryService;
 
     public ContractServiceImpl(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
@@ -199,6 +208,11 @@ public class ContractServiceImpl implements ContractService {
             contract.setRegionId(regionId);
             contract.setContractStatus(generated);
 
+            Integer promotionAmount = template.getPromotionAmount() == null? 0: template.getPromotionAmount();
+            Float moneyShouldCollected = template.getTotalMoneyAmount() - promotionAmount;
+
+            contract.setMoneyShouldCollected(moneyShouldCollected);
+
             contracts.add(contract);
 
         }
@@ -228,5 +242,51 @@ public class ContractServiceImpl implements ContractService {
         String text = "" + currentInstant + RandomStringUtils.randomNumeric(6);
 
         return text;
+    }
+
+    @Override
+    public List<ConsultantWork> getCourseConsultantWorkReport(CustomerStatusRequest request) {
+
+        List<ConsultantWork> consultantWorks = new ArrayList<>();
+
+        List<WeekElement> weekElements = DateUtil.getWeekElementsBetween(request.getStartDate(), request.getEndDate());
+        weekElements.forEach(weekElement -> {
+
+            ContractCriteria contractCriteria = new ContractCriteria();
+
+            InstantFilter signDate = new InstantFilter();
+            signDate.setLessOrEqualThan(weekElement.getStart());
+            signDate.setGreaterOrEqualThan(weekElement.getEnd());
+
+            contractCriteria.setSignDate(signDate);
+
+            List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
+
+            Float totalMoneyShouldCollected = 0f;
+            for (Contract contract : contracts) {
+
+                Float moneyShouldCollected = contract.getMoneyShouldCollected();
+                if (contract.getMoneyShouldCollected() == null) {
+
+                    Float promotionAmount = contract.getPromotionAmount() == null ? 0 : contract.getPromotionAmount();
+                    moneyShouldCollected = contract.getTotalMoneyAmount() - promotionAmount;
+                }
+
+                totalMoneyShouldCollected = totalMoneyShouldCollected + moneyShouldCollected;
+            }
+
+            ConsultantWork consultantWork = new ConsultantWork();
+            consultantWork.setContracts(contracts);
+            consultantWork.setDealedMoneyAmount(totalMoneyShouldCollected);
+            consultantWork.setWeekFromDate(weekElement.getStart());
+            consultantWork.setWeekEndDate(weekElement.getEnd());
+            consultantWork.setWeekName(weekElement.getWeekIndex());
+
+            consultantWorks.add(consultantWork);
+
+        });
+
+
+        return consultantWorks;
     }
 }
