@@ -159,6 +159,13 @@ public class StudentResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(student));
     }
 
+    @GetMapping("/students/merge-duplicate-student")
+    @Timed
+    public ResponseEntity<Student> mergeDuplicatedStudent() {
+        Student student = studentService.mergeDuplicatedStudent();
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * DELETE  /students/:id : delete the "id" student.
      *
