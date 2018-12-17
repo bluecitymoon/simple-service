@@ -15,6 +15,7 @@ import com.pure.service.repository.ContractStatusRepository;
 import com.pure.service.repository.ContractTemplateRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
+import com.pure.service.repository.CustomerCommunicationScheduleRepository;
 import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
@@ -81,6 +82,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private ContractQueryService contractQueryService;
+
+    @Autowired
+    private CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository;
 
     public ContractServiceImpl(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
@@ -251,6 +255,8 @@ public class ContractServiceImpl implements ContractService {
 
         List<ConsultantWork> consultantWorks = new ArrayList<>();
 
+        List<Contract> totalContracts = new ArrayList<>();
+
         List<WeekElement> weekElements = DateUtil.getWeekElementsBetween(request.getStartDate(), request.getEndDate());
         weekElements.forEach(weekElement -> {
 
@@ -268,6 +274,10 @@ public class ContractServiceImpl implements ContractService {
             contractCriteria.setRegionId(regionId);
 
             List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
+
+            if (!CollectionUtils.isEmpty(contracts)) {
+                totalContracts.addAll(contracts);
+            }
 
             Float totalMoneyShouldCollected = 0f;
             for (Contract contract : contracts) {
@@ -287,6 +297,8 @@ public class ContractServiceImpl implements ContractService {
                 totalMoneyShouldCollected = totalMoneyShouldCollected + moneyShouldCollected;
             }
 
+            Integer visitedCount = customerCommunicationScheduleRepository.getCustomerVisitedCountBetween(weekElement.getStart(), weekElement.getEnd(), RegionUtils.getRegionIdForCurrentUser());
+
             ConsultantWork consultantWork = new ConsultantWork();
             consultantWork.setContracts(contracts);
             consultantWork.setDealedMoneyAmount(totalMoneyShouldCollected);
@@ -294,6 +306,7 @@ public class ContractServiceImpl implements ContractService {
             consultantWork.setWeekEndDate(weekElement.getEnd());
             consultantWork.setWeekName(weekElement.getWeekIndex());
             consultantWork.setContracts(contracts);
+            consultantWork.setVisitedCount(visitedCount);
 
             consultantWorks.add(consultantWork);
 

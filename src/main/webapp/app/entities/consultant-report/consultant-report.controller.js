@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ConsultantReportController', ConsultantReportController);
 
-    ConsultantReportController.$inject = ['$state', 'ConsultantReport', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Contract'];
+    ConsultantReportController.$inject = ['$state', 'ConsultantReport', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Contract', '$uibModal'];
 
-    function ConsultantReportController($state, ConsultantReport, ParseLinks, AlertService, paginationConstants, pagingParams, Contract) {
+    function ConsultantReportController($state, ConsultantReport, ParseLinks, AlertService, paginationConstants, pagingParams, Contract, $uibModal) {
 
         var vm = this;
 
@@ -16,6 +16,11 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+
+        vm.total = {
+            visit: 0,
+            dealedAmount: 0
+        };
 
         vm.years = [];
         vm.months = [];
@@ -75,7 +80,17 @@
             Contract.getCourseConsultantWorkReport(vm.searchCondition, onSuccess, onError);
 
             function onSuccess(data, headers) {
+                vm.total =  {
+                    visit: 0,
+                    dealedAmount: 0
+                };
                 vm.consultantReports = data;
+
+                angular.forEach(vm.consultantReports, function (report) {
+
+                    vm.total.visit = vm.total.visit + report.visitedCount;
+                    vm.total.dealedAmount = vm.total.dealedAmount + report.dealedMoneyAmount;
+                })
             }
             function onError(error) {
                 AlertService.showCommonError(error);
@@ -92,6 +107,24 @@
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
+            });
+        }
+
+        vm.viewDetails = function (report) {
+
+            $uibModal.open({
+                templateUrl: 'app/entities/consultant-report/contract-dialog.html',
+                controller: 'ConsultantReportContractDetailDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    entity: function () {
+                        return report.contracts;
+                    }
+                }
+            }).result.then(function() {
+            }, function() {
             });
         }
     }

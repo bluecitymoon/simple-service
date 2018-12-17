@@ -2,7 +2,7 @@
     "simpleServiceApp": {
         "consultantReport" : {
             "home": {
-                "title": "Consultant Reports",
+                "title": "运营报告",
                 "createLabel": "Create a new Consultant Report",
                 "createOrEditLabel": "Create or edit a Consultant Report"
             },
@@ -15,11 +15,11 @@
             "detail": {
                 "title": "Consultant Report"
             },
-            "weekName": "Week Name",
-            "weekFromDate": "Week From Date",
-            "weekEndDate": "Week End Date",
-            "visitedCount": "Visited Count",
-            "dealedMoneyAmount": "Dealed Money Amount"
+            "weekName": "星期序号",
+            "weekFromDate": "开始时间",
+            "weekEndDate": "结束时间",
+            "visitedCount": "到店数",
+            "dealedMoneyAmount": "业绩"
         }
     }
 }

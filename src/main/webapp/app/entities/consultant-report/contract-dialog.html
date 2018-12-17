@@ -1,0 +1,106 @@
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <!--<h4 class="modal-title" id="myConsultantReportLabel" data-translate="simpleServiceApp.consultantReport.home.createOrEditLabel">Create or edit a Consultant Report</h4>-->
+    </div>
+    <div class="modal-body">
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+
+                    <th jh-sort-by="customer.id"><span>客户</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="student.id"><span>学员</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractNumber"><span data-translate="simpleServiceApp.contract.contractNumber">Contract Number</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>合同性质</th>
+                    <!--<th jh-sort-by="serialNumber"><span data-translate="simpleServiceApp.contract.serialNumber">Serial Number</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="signDate"><span data-translate="simpleServiceApp.contract.signDate">Sign Date</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="startDate"><span-->
+                            <!--data-translate="simpleServiceApp.contract.startDate">Start Date</span> <span-->
+                            <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="endDate"><span data-translate="simpleServiceApp.contract.endDate">End Date</span>-->
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalMoneyAmount"><span data-translate="simpleServiceApp.contract.totalMoneyAmount">Total Money Amount</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyShouldCollected"><span
+                            data-translate="simpleServiceApp.contract.moneyShouldCollected">Money Should Collected</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="moneyCollected"><span data-translate="simpleServiceApp.contract.moneyCollected">Money Collected</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="promotionAmount"><span data-translate="simpleServiceApp.contract.promotionAmount">Promotion Amount</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="totalHours"><span
+                            data-translate="simpleServiceApp.contract.totalHours">Total Hours</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="hoursTaken"><span
+                            data-translate="simpleServiceApp.contract.hoursTaken">Hours Taken</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="comments"><span data-translate="simpleServiceApp.contract.comments">Comments</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="createdBy"><span-->
+                            <!--data-translate="simpleServiceApp.contract.createdBy">Created By</span> <span-->
+                            <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="createdDate"><span data-translate="simpleServiceApp.contract.createdDate">Created Date</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.contract.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--<th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.contract.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>-->
+                    <th jh-sort-by="course.name"><span data-translate="simpleServiceApp.contract.course">Course</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="contractStatus.name"><span
+                            data-translate="simpleServiceApp.contract.contractStatus">Contract Status</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="product.name"><span
+                            data-translate="simpleServiceApp.contract.product">Product</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
+                    <!--<th jh-sort-by="customerCard.number"><span data-translate="simpleServiceApp.contract.customerCard">Customer Card</span>-->
+                        <!--<span class="glyphicon glyphicon-sort"></span></th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="contract in vm.contracts track by contract.id">
+                    <!--<td><a ui-sref="contract-detail({id:contract.id})">{{contract.id}}</a></td>-->
+                    <td><a ui-sref="customer-detail({id:contract.customer.id})">{{contract.customer.name}}</a></td>
+                    <td><a ui-sref="student-detail({id:contract.student.id})">{{contract.student.name}}</a></td>
+                    <td>{{contract.contractNumber}}</td>
+                    <td>{{contract.contractNature.name}}</td>
+                    <!--<td>{{contract.serialNumber}}</td>-->
+                    <td>{{contract.signDate | date:'yyyy-MM-dd HH:mm'}}</td>
+                    <!--<td>{{contract.startDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                    <!--<td>{{contract.endDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                    <td>{{contract.totalMoneyAmount}}</td>
+                    <td>{{contract.moneyShouldCollected}}</td>
+                    <td>{{contract.moneyCollected}}</td>
+                    <td>{{contract.promotionAmount}}</td>
+                    <td>{{contract.totalHours}}</td>
+                    <td>{{contract.hoursTaken}}</td>
+                    <!--<td>{{contract.comments}}</td>-->
+                    <!--<td>{{contract.createdBy}}</td>-->
+                    <!--<td>{{contract.createdDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                    <!--<td>{{contract.lastModifiedBy}}</td>-->
+                    <!--<td>{{contract.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>-->
+                    <td>
+                        {{contract.course.name}}
+                    </td>
+                    <td>
+                        {{contract.contractStatus.name}}
+                    </td>
+                    <td>
+                        {{contract.product.name}}
+                    </td>
+                    <!--<td>-->
+                        <!--{{contract.customerCard.number}}-->
+                    <!--</td>-->
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </form>
+

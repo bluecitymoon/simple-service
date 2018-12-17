@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('consultantReport');
+                    $translatePartialLoader.addPart('contract');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]

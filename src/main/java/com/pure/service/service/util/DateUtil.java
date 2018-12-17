@@ -189,7 +189,7 @@ public class DateUtil {
         List<WeekElement> result = new ArrayList<>();
 
         Instant nextStartDate = DateUtil.getBeginningOfInstant(start);
-        Instant nextEndDate = DateUtil.getEndingOfInstant(start.plus(7, ChronoUnit.DAYS));
+        Instant nextEndDate = DateUtil.getEndingOfInstant(start.plus(6, ChronoUnit.DAYS)).minusSeconds(1);
         int weekCount = 0;
         while ( nextEndDate.isBefore(end) ) {
 
@@ -199,16 +199,18 @@ public class DateUtil {
             weekElement.setStart(nextStartDate);
             weekElement.setEnd(nextEndDate);
             weekElement.setWeekIndex(weekCount);
-            nextStartDate = Instant.ofEpochSecond(nextEndDate.getEpochSecond());
+//            nextStartDate = nextEndDate.plusSeconds(1);
 
-            nextEndDate = nextEndDate.plus(7, ChronoUnit.DAYS);
+            nextEndDate = nextEndDate.plus(7, ChronoUnit.DAYS).minusSeconds(1);
+            nextStartDate = nextStartDate.plus(7, ChronoUnit.DAYS);
 
             result.add(weekElement);
         }
 
         WeekElement weekElement = new WeekElement();
         weekElement.setStart(nextStartDate.plus(1, ChronoUnit.SECONDS));
-        weekElement.setEnd(DateUtil.getEndingOfInstant(end));
+        weekElement.setEnd(end);
+
         weekElement.setWeekIndex(weekCount + 1);
 
         result.add(weekElement);
