@@ -4,7 +4,43 @@
 <jhi-alert></jhi-alert>
 
 <uib-tabset>
-    <uib-tab heading="今日确认 {{vm.statusBasedStudent.logDate | date:'yyyy-MM-dd HH:mm'}}">
+    <uib-tab heading="今日确认">
+
+        <div class="panel panel-bordered-mint">
+
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-md-4 ">
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">确认日期</label>
+                            <div class="col-sm-9">
+
+                                <div class="input-group mar-btm">
+                                    <input type="text" placeholder="确认时间" class="form-control input-sm"
+                                           ng-focus="vm.openCalendar('logDate')"
+                                           datetime-picker="{{dateformat}}"
+                                           timepicker-options="vm.datePickerOptions"
+                                           ng-model="vm.statusBasedStudent.logDate"
+                                           is-open="vm.datePickerOpenStatus.logDate">
+
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-mint" type="button" ng-click="vm.searchConfirmationDetail()">搜索</button>
+                                    </span>
+                                </div>
+
+
+                                <!--<input type="text" placeholder=".input-sm" class="form-control input-sm" id="demo-is-inputsmall">-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
 
         <div class="panel panel-bordered-mint">
 
@@ -137,7 +173,6 @@
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
     </uib-tab>
@@ -233,7 +268,8 @@
 
                 </uib-tabset>
 
-                <div ng-repeat="detail in vm.reports track by detail.yearMonth" class="panel panel-bordered-primary panel-primary">
+                <div ng-repeat="detail in vm.reports track by detail.yearMonth"
+                     class="panel panel-bordered-primary panel-primary">
 
                     <div class="panel-heading">
                         <h3 class="panel-title">{{detail.yearMonth}}</h3>

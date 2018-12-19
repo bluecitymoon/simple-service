@@ -130,13 +130,13 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
     }
 
     @Override
-    public StatusBasedStudent getStudentClassLogDailyReportToday() {
+    public StatusBasedStudent getStudentClassLogDailyReportToday(Instant logDate) {
 
         StatusBasedStudent statusBasedStudent = new StatusBasedStudent();
 
         Long regionId = RegionUtils.getRegionIdForCurrentUser();
-        Instant todayStart = DateUtil.getSimpleTodayInstantBegin();
-        Instant todayEnd = DateUtil.getSimpleTodayInstantEnd();
+        Instant todayStart = DateUtil.getBeginningOfInstant(logDate);
+        Instant todayEnd = DateUtil.getEndingOfInstant(logDate);
 
         List<ClassSchedule> todaySchedules = classArrangementRepository.getAllSchedulesByRange(todayStart, todayEnd, regionId);
 
@@ -186,7 +186,7 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
         statusBasedStudent.setAbsentStudents(new ArrayList<>(absentStudents));
         statusBasedStudent.setAddedStudents(new ArrayList<>(addedStudents));
         statusBasedStudent.setActualTakenStudents(new ArrayList<>(actualStudents));
-        statusBasedStudent.setLogDate(Instant.now());
+        statusBasedStudent.setLogDate(logDate);
 
 
         return statusBasedStudent;

@@ -7,6 +7,7 @@ import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
+import com.pure.service.domain.MarketChannelCategory;
 import com.pure.service.region.RegionIdStorage;
 import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CollectionRepository;
@@ -21,6 +22,8 @@ import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.dto.ContractCriteria;
+import com.pure.service.service.dto.dto.ConsultantDealRate;
+import com.pure.service.service.dto.dto.ConsultantDealRateReport;
 import com.pure.service.service.dto.dto.ConsultantWork;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.dto.dto.WeekElement;
@@ -44,7 +47,11 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -254,8 +261,10 @@ public class ContractServiceImpl implements ContractService {
     public List<ConsultantWork> getCourseConsultantWorkReport(CustomerStatusRequest request) {
 
         List<ConsultantWork> consultantWorks = new ArrayList<>();
+        Map<MarketChannelCategory, List<Contract>> channelCategorySetMap = new HashMap<>();
+        ConsultantDealRateReport consultantDealRateReport = new ConsultantDealRateReport();
 
-        List<Contract> totalContracts = new ArrayList<>();
+//        List<Contract> totalContracts = new ArrayList<>();
 
         List<WeekElement> weekElements = DateUtil.getWeekElementsBetween(request.getStartDate(), request.getEndDate());
         weekElements.forEach(weekElement -> {
@@ -275,9 +284,9 @@ public class ContractServiceImpl implements ContractService {
 
             List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
 
-            if (!CollectionUtils.isEmpty(contracts)) {
-                totalContracts.addAll(contracts);
-            }
+//            if (!CollectionUtils.isEmpty(contracts)) {
+//                totalContracts.addAll(contracts);
+//            }
 
             Float totalMoneyShouldCollected = 0f;
             for (Contract contract : contracts) {
@@ -295,6 +304,16 @@ public class ContractServiceImpl implements ContractService {
                 }
 
                 totalMoneyShouldCollected = totalMoneyShouldCollected + moneyShouldCollected;
+
+                //group count with market channel
+                List<Contract> contractList = channelCategorySetMap.get(contract.getCustomer().getChannel());
+                if (contractList == null) {
+                    contractList = new ArrayList<>();
+
+                }
+
+                contractList.add(contract);
+
             }
 
             Integer visitedCount = customerCommunicationScheduleRepository.getCustomerVisitedCountBetween(weekElement.getStart(), weekElement.getEnd(), RegionUtils.getRegionIdForCurrentUser());
@@ -313,6 +332,36 @@ public class ContractServiceImpl implements ContractService {
         });
 
 
+        for (Map.Entry<MarketChannelCategory, List<Contract>> entry : channelCategorySetMap.entrySet()) {
+
+            consultantDealRateReport.getChannelNames().add(entry.getKey().getName());
+
+            ConsultantDealRate consultantDealRate = new ConsultantDealRate();
+
+            Float total = 0f;
+            Set<Customer> customers = new HashSet<>();
+            for (Contract contract : entry.getValue()) {
+
+
+                if (contract.getTotalMoneyAmount() == null) {
+                    continue;
+                }
+
+                Float moneyShouldCollected = contract.getMoneyShouldCollected();
+                if (contract.getMoneyShouldCollected() == null) {
+
+                    Float promotionAmount = contract.getPromotionAmount() == null ? 0 : contract.getPromotionAmount();
+                    moneyShouldCollected = contract.getTotalMoneyAmount() - promotionAmount;
+                }
+
+                total = total + moneyShouldCollected;
+                customers.add(contract.getCustomer());
+            }
+
+            consultantDealRate.setTotalMoney(total);
+            consultantDealRate.setDeal(customers.size());
+
+        }
         return consultantWorks;
     }
 }

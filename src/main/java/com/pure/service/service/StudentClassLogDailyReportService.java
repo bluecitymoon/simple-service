@@ -7,6 +7,7 @@ import com.pure.service.service.dto.request.CustomerStatusRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -45,7 +46,7 @@ public interface StudentClassLogDailyReportService {
      */
     void delete(Long id);
 
-    StatusBasedStudent getStudentClassLogDailyReportToday();
+    StatusBasedStudent getStudentClassLogDailyReportToday(Instant logDate);
 
     StudentClassLogDailyReport saveLogDailyReport(StudentClassLogDailyReport studentClassLogDailyReport);
 

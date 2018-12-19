@@ -10,6 +10,7 @@ import com.pure.service.service.dto.StudentClassLogDailyReportCriteria;
 import com.pure.service.service.dto.dto.StatusBasedStudent;
 import com.pure.service.service.dto.dto.StudentClassLogMonthlyReport;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
+import com.pure.service.service.dto.request.SingleDateRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -201,11 +202,11 @@ public class StudentClassLogDailyReportResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(studentClassLogDailyReport));
     }
 
-    @GetMapping("/student-class-log-daily-reports/today")
+    @PostMapping("/student-class-log-daily-reports/by-date")
     @Timed
-    public ResponseEntity<StatusBasedStudent> getStudentClassLogDailyReportToday() {
+    public ResponseEntity<StatusBasedStudent> getStudentClassLogDailyReportToday(@RequestBody SingleDateRequest singleDateRequest) {
 
-        StatusBasedStudent studentClassLogDailyReport = studentClassLogDailyReportService.getStudentClassLogDailyReportToday();
+        StatusBasedStudent studentClassLogDailyReport = studentClassLogDailyReportService.getStudentClassLogDailyReportToday(singleDateRequest.getLogDate());
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(studentClassLogDailyReport));
     }
 

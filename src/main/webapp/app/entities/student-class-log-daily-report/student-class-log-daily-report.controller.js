@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentClassLogDailyReportController', StudentClassLogDailyReportController);
 
-    StudentClassLogDailyReportController.$inject = ['$state', 'StudentClassLogDailyReport', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    StudentClassLogDailyReportController.$inject = ['$state', 'StudentClassLogDailyReport', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'DateUtils'];
 
-    function StudentClassLogDailyReportController($state, StudentClassLogDailyReport, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function StudentClassLogDailyReportController($state, StudentClassLogDailyReport, ParseLinks, AlertService, paginationConstants, pagingParams, DateUtils) {
 
         var vm = this;
 
@@ -71,10 +71,11 @@
             id: null
         };
 
+        vm.statusBasedStudent.logDate = new Date();
 
-        function getStudentClassLogDailyReportToday() {
+        vm.searchConfirmationDetail = function () {
 
-            StudentClassLogDailyReport.getStudentClassLogDailyReportToday({}, function (response) {
+            StudentClassLogDailyReport.getStudentClassLogDailyReportToday({logDate: vm.statusBasedStudent.logDate}, function (response) {
 
                 vm.statusBasedStudent = response;
 
@@ -83,13 +84,18 @@
                 vm.studentClassLogDailyReport.absence = vm.statusBasedStudent.absentStudents.length;
                 vm.studentClassLogDailyReport.added = vm.statusBasedStudent.addedStudents.length;
                 vm.studentClassLogDailyReport.actualTaken = vm.statusBasedStudent.actualTakenStudents.length;
-                vm.studentClassLogDailyReport.logDate = vm.statusBasedStudent.logDate;
+                vm.studentClassLogDailyReport.logDate = DateUtils.convertDateTimeFromServer(vm.statusBasedStudent.logDate);
 
             });
 
-        }
+        };
+        vm.searchConfirmationDetail();
+        // function getStudentClassLogDailyReportToday() {
+        //
+        //
+        // }
 
-        getStudentClassLogDailyReportToday();
+        // getStudentClassLogDailyReportToday();
 
         vm.showShouldTakenStudents = function (type) {
 

@@ -12,7 +12,7 @@
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'getMonthlyStudentClassLogDailyReport': { url: 'api/student-class-log-daily-reports/monthly', method: 'POST', isArray: true},
-            'getStudentClassLogDailyReportToday': { method: 'GET', url: 'api/student-class-log-daily-reports/today'},
+            'getStudentClassLogDailyReportToday': { method: 'POST', url: 'api/student-class-log-daily-reports/by-date'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

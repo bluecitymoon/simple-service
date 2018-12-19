@@ -18,6 +18,7 @@ public class ConsultantWork implements Serializable {
     private Float dealedMoneyAmount;
     private List<Contract> contracts = new ArrayList<>();
 
+
     public List<Contract> getContracts() {
         return contracts;
     }
@@ -81,4 +82,6 @@ public class ConsultantWork implements Serializable {
     public void setDealedMoneyAmount(Float dealedMoneyAmount) {
         this.dealedMoneyAmount = dealedMoneyAmount;
     }
+
+
 }
