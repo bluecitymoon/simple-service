@@ -17,6 +17,7 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
 
+
         vm.total = {
             visit: 0,
             dealedAmount: 0

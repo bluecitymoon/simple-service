@@ -33,7 +33,6 @@ import com.pure.service.service.dto.StudentLeaveCriteria;
 import com.pure.service.service.dto.enumurations.StudentClassLogTypeEnum;
 import com.pure.service.service.dto.request.BatchSigninStudent;
 import com.pure.service.service.dto.request.SingleArrangementRequest;
-import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -326,17 +325,6 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
         contractCriteria.setStudentId(studentIdFilter);
 
-        Instant now = Instant.now();
-
-        InstantFilter startDateFilter = new InstantFilter();
-        startDateFilter.setLessOrEqualThan(now);
-
-        InstantFilter endDateFilter = new InstantFilter();
-        endDateFilter.setGreaterOrEqualThan(now);
-
-        contractCriteria.setStartDate(startDateFilter);
-        contractCriteria.setEndDate(endDateFilter);
-
         List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
 
         if (CollectionUtils.isEmpty(contracts)) {
@@ -344,7 +332,8 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
         }
 
         //TODO 多合同处理？
-        Contract targetContract = contracts.get(0);
+        Contract targetContract = getContract(studentClassLog.getArrangement().getClazz(), contracts);
+
         Integer classTakenCount = targetContract.getHoursTaken();
         if (classTakenCount == null) {
             classTakenCount = 0;
@@ -353,6 +342,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
         classTakenCount = classTakenCount + classCount;
         targetContract.setHoursTaken(classTakenCount);
+
         contractRepository.save(targetContract);
 
         //保存耗课记录
@@ -378,16 +368,12 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
         String uniqueNumber = studentClassLog.getUniqueNumber();
 
-
-
         ContractCriteria contractCriteria = new ContractCriteria();
 
         LongFilter longFilter = new LongFilter();
         longFilter.setEquals(studentClassLog.getStudent().getId());
 
         contractCriteria.setStudentId(longFilter);
-
-        Contract contract = null;
 
         List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
 
@@ -396,22 +382,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             return;
         }
 
-        if (contracts.size() == 1) {
-            contract = contracts.get(0);
-        } else {
-
-            for (Contract singleContract : contracts) {
-                Product clazz = singleContract.getProduct();
-
-                if (studentClassLog.getArrangement().getClazz().equals(clazz)) {
-                    contract = singleContract;
-                }
-            }
-
-            if (contract == null) {
-                contract = contracts.get(0);
-            }
-        }
+        Contract contract = getContract(studentClassLog.getArrangement().getClazz(), contracts);
 
 //        CustomerConsumerLog customerConsumerLog = customerConsumerLogRepository.findByUniqueNumber(uniqueNumber);
 //        if (customerConsumerLog == null) {
@@ -426,6 +397,29 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
 
         studentClassLogRepository.delete(studentClassLog);
 
+    }
+
+    private Contract getContract(Product product, List<Contract> contracts) {
+
+        Contract contract = null;
+
+        if (contracts.size() == 1) {
+            contract = contracts.get(0);
+        } else {
+
+            for (Contract singleContract : contracts) {
+                Product clazz = singleContract.getProduct();
+
+                if (product.equals(clazz)) {
+                    contract = singleContract;
+                }
+            }
+
+            if (contract == null) {
+                contract = contracts.get(0);
+            }
+        }
+        return contract;
     }
 
     private class StudentArrangement {

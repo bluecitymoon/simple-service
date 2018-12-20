@@ -17,7 +17,9 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.statusBasedStudent = {};
-
+        vm.logDateCondition = {
+            logDate: new Date()
+        };
         vm.students = [];
         vm.years = [];
         vm.months = [];
@@ -71,11 +73,11 @@
             id: null
         };
 
-        vm.statusBasedStudent.logDate = new Date();
+        // vm.statusBasedStudent.logDate = new Date();
 
         vm.searchConfirmationDetail = function () {
 
-            StudentClassLogDailyReport.getStudentClassLogDailyReportToday({logDate: vm.statusBasedStudent.logDate}, function (response) {
+            StudentClassLogDailyReport.getStudentClassLogDailyReportToday({logDate: vm.logDateCondition.logDate}, function (response) {
 
                 vm.statusBasedStudent = response;
 
@@ -84,7 +86,7 @@
                 vm.studentClassLogDailyReport.absence = vm.statusBasedStudent.absentStudents.length;
                 vm.studentClassLogDailyReport.added = vm.statusBasedStudent.addedStudents.length;
                 vm.studentClassLogDailyReport.actualTaken = vm.statusBasedStudent.actualTakenStudents.length;
-                vm.studentClassLogDailyReport.logDate = DateUtils.convertDateTimeFromServer(vm.statusBasedStudent.logDate);
+                vm.studentClassLogDailyReport.logDate = vm.logDateCondition.logDate;
 
             });
 
