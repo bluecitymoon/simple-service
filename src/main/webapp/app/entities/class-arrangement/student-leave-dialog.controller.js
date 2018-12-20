@@ -75,9 +75,16 @@
                 arrangements: selectedArrangements,
                 students: selectedRecords
             }, function (savedLeaves) {
-                angular.forEach(savedLeaves, function (l) {
-                    AlertService.success(l.student.name + "请假成功 \n");
-                })
+
+                if (savedLeaves && savedLeaves.length > 0) {
+                    angular.forEach(savedLeaves, function (l) {
+                        AlertService.success(l.student.name + "请假成功 \n");
+                    })
+                } else {
+
+                    AlertService.info("操作完成，选中的学员已经请假成功无须再次请假！");
+                }
+
             });
             //
             // if (!selectedRecords || selectedRecords.length == 0) {
