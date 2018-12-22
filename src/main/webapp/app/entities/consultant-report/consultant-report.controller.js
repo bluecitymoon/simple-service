@@ -88,6 +88,7 @@
                 vm.consultantReports = data.consultantWorks;
                 vm.userBasedConsultantReports = data.userBasedConsultantReports;
                 vm.consultantDealCount = data.consultantDealCount;
+                vm.courseCategoryBasedReport = data.courseCategoryBasedReport;
 
                 angular.forEach(vm.consultantReports, function (report) {
 

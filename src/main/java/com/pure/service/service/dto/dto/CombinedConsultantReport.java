@@ -9,6 +9,7 @@ public class CombinedConsultantReport implements Serializable {
     private List<ConsultantWork> consultantWorks = new ArrayList<>();
     private ConsultantDealRateReport consultantDealCount;
     private List<UserBasedConsultantReport> userBasedConsultantReports = new ArrayList<>();
+    private CourseCategoryBasedReport courseCategoryBasedReport = new CourseCategoryBasedReport();
 
     public List<UserBasedConsultantReport> getUserBasedConsultantReports() {
         return userBasedConsultantReports;
@@ -32,5 +33,13 @@ public class CombinedConsultantReport implements Serializable {
 
     public void setConsultantDealCount(ConsultantDealRateReport consultantDealCount) {
         this.consultantDealCount = consultantDealCount;
+    }
+
+    public CourseCategoryBasedReport getCourseCategoryBasedReport() {
+        return courseCategoryBasedReport;
+    }
+
+    public void setCourseCategoryBasedReport(CourseCategoryBasedReport courseCategoryBasedReport) {
+        this.courseCategoryBasedReport = courseCategoryBasedReport;
     }
 }

@@ -27,4 +27,7 @@ public interface CustomerCommunicationScheduleRepository extends JpaRepository<C
     @Query(nativeQuery = true, value = "select count(0) as customerCount from customer_schedule cs left join customer c on cs.customer_id = c.id where c.course_consultant_id =:4 and cs.actuall_meet_date > :1 and cs.actuall_meet_date < :2 and c.region_id = :3")
     Integer getCustomerVisitedCountBetween(Instant start, Instant end, Long regionId, Long userId);
 
+    @Query(nativeQuery = true, value = "select count(0) as customerCount from customer_schedule cs left join customer c on cs.customer_id = c.id where c.channel_id =:4 and cs.actuall_meet_date > :1 and cs.actuall_meet_date < :2 and c.region_id = :3")
+    Integer getCustomerVisitedCountBetweenWithMarketId(Instant start, Instant end, Long regionId, Long marketChannelId);
+
 }

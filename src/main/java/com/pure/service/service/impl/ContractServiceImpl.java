@@ -1,8 +1,10 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.ClassCategoryBase;
 import com.pure.service.domain.Contract;
 import com.pure.service.domain.ContractStatus;
 import com.pure.service.domain.ContractTemplate;
+import com.pure.service.domain.Course;
 import com.pure.service.domain.Customer;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
@@ -27,6 +29,7 @@ import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.ConsultantDealRate;
 import com.pure.service.service.dto.dto.ConsultantDealRateReport;
 import com.pure.service.service.dto.dto.ConsultantWork;
+import com.pure.service.service.dto.dto.CourseCategoryBasedReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.dto.dto.UserBasedConsultantReport;
 import com.pure.service.service.dto.dto.WeekElement;
@@ -271,6 +274,7 @@ public class ContractServiceImpl implements ContractService {
         Map<MarketChannelCategory, List<Contract>> channelCategorySetMap = new HashMap<>();
         ConsultantDealRateReport consultantDealRateReport = new ConsultantDealRateReport();
         Map<User, List<Contract>> userListMap = new HashMap<>();
+        Map<ClassCategoryBase,  List<Contract>> courseCategoryBaseListMap = new HashMap<>();
 
 //        List<Contract> totalContracts = new ArrayList<>();
 
@@ -335,6 +339,20 @@ public class ContractServiceImpl implements ContractService {
 
                 consultantContracts.add(contract);
 
+                //group contracts with course category
+                Course course = contract.getCourse();
+                ClassCategoryBase classCategoryBaseKey = new ClassCategoryBase(-1L, "未知课程", "Unknown");
+                if (course != null) {
+                    classCategoryBaseKey = course.getClassCategoryBase();
+                }
+
+                List<Contract> courseCategoryContracts = courseCategoryBaseListMap.get(classCategoryBaseKey);
+                if (courseCategoryContracts == null) {
+                    courseCategoryContracts = new ArrayList<>();
+
+                    courseCategoryBaseListMap.put(classCategoryBaseKey, courseCategoryContracts);
+                }
+                courseCategoryContracts.add(contract);
             }
 
             Integer visitedCount = customerCommunicationScheduleRepository.getCustomerVisitedCountBetween(weekElement.getStart(), weekElement.getEnd(), RegionUtils.getRegionIdForCurrentUser());
@@ -353,15 +371,41 @@ public class ContractServiceImpl implements ContractService {
         });
 
 
-        calculateChannelBasedReport(channelCategorySetMap, consultantDealRateReport);
+        calculateChannelBasedReport(channelCategorySetMap, consultantDealRateReport, request.getStartDate(), request.getEndDate());
 
         List<UserBasedConsultantReport> userBasedConsultantReports = calculateConsultantBasedReport(userListMap, request.getStartDate(), request.getEndDate());
+        CourseCategoryBasedReport report = getCourseCategoryBasedReport(courseCategoryBaseListMap);
 
         combinedConsultantReport.setConsultantWorks(consultantWorks);
         combinedConsultantReport.setUserBasedConsultantReports(userBasedConsultantReports);
         combinedConsultantReport.setConsultantDealCount(consultantDealRateReport);
+        combinedConsultantReport.setCourseCategoryBasedReport(report);
 
         return combinedConsultantReport;
+    }
+
+    private CourseCategoryBasedReport getCourseCategoryBasedReport(Map<ClassCategoryBase, List<Contract>> courseCategoryBaseListMap) {
+        CourseCategoryBasedReport report = new CourseCategoryBasedReport();
+
+        for (Map.Entry<ClassCategoryBase, List<Contract>> entry : courseCategoryBaseListMap.entrySet()) {
+
+            ClassCategoryBase key = entry.getKey();
+
+            report.getCategories().add(key.getName());
+            report.getContracts().add(entry.getValue());
+
+            Set<Customer> customers = new HashSet<>();
+            for (Contract contract : entry.getValue()) {
+
+                if (contract.getCustomer() != null) {
+                    customers.add(contract.getCustomer());
+                }
+            }
+
+            report.getCounter().add(customers.size());
+
+        }
+        return report;
     }
 
     private List<UserBasedConsultantReport> calculateConsultantBasedReport(Map<User, List<Contract>> userListMap, Instant start, Instant end) {
@@ -417,7 +461,7 @@ public class ContractServiceImpl implements ContractService {
         return reports;
     }
 
-    private void calculateChannelBasedReport(Map<MarketChannelCategory, List<Contract>> channelCategorySetMap, ConsultantDealRateReport consultantDealRateReport) {
+    private void calculateChannelBasedReport(Map<MarketChannelCategory, List<Contract>> channelCategorySetMap, ConsultantDealRateReport consultantDealRateReport, Instant start, Instant end) {
 
         for (Map.Entry<MarketChannelCategory, List<Contract>> entry : channelCategorySetMap.entrySet()) {
 
@@ -447,9 +491,20 @@ public class ContractServiceImpl implements ContractService {
                 customers.add(contract.getCustomer());
             }
 
+            Integer visitedCount = customerCommunicationScheduleRepository.getCustomerVisitedCountBetweenWithMarketId(start, end, RegionUtils.getRegionIdForCurrentUser(), entry.getKey().getId());
+
             consultantDealRate.setTotalMoney(total);
             consultantDealRate.setDeal(customers.size());
+            consultantDealRate.setVisit(visitedCount);
 
+            Integer dealCardCount = customers.size();
+
+            Float rate = 0f;
+            if (dealCardCount > 0 && visitedCount > 0) {
+                rate = MathUtil.division(dealCardCount, visitedCount, 2);
+            }
+
+            consultantDealRate.setRate(rate);
             consultantDealRateReport.getChannelCustomerCount().add(consultantDealRate);
 
         }

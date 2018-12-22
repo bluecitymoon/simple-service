@@ -151,52 +151,82 @@
     </div>
 </div>
 
-<!--<div class="panel panel-primary">-->
-    <!--<div class="panel-heading">-->
-        <!--<h1 class="panel-title">运营报告 - 渠道</h1>-->
-    <!--</div>-->
-    <!--<div class="panel-body">-->
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">运营报告 - 渠道</h1>
+    </div>
+    <div class="">
 
-        <!--<div class="table-responsive">-->
-            <!--<table class="jh-table table table-striped">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th class="bg-primary text-right" width="10%"><b>渠道</b></th>-->
-                    <!--<th class="bg-primary text-center" ng-repeat="element in vm.consultantDealCount.channelNames track by $index">{{element}}</th>-->
-                    <!--<th></th>-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr>-->
-                    <!--<td class="bg-primary text-right"><b>到访</b></td>-->
-                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.visit || 0}}</td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="bg-primary text-right"><b>成交</b></td>-->
+        <div class="table-responsive">
+            <table class="jh-table table table-striped" style="margin-bottom: 0px !important;">
+                <thead>
+                <tr>
+                    <th class="bg-primary text-right" width="10%"><b>渠道</b></th>
+                    <th class="bg-primary text-center" ng-repeat="element in vm.consultantDealCount.channelNames track by $index">{{element}}</th>
+                    <th class="bg-primary"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="bg-primary text-right"><b>到访</b></td>
+                    <td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.visit || 0}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="bg-primary text-right"><b>成交</b></td>
 
-                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.deal || 0}}</td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="bg-primary text-right"><b>成交率</b></td>-->
+                    <td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.deal || 0}}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="bg-primary text-right"><b>成交率</b></td>
 
-                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.rate || 0}}</td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="bg-primary text-right"><b>业绩</b></td>-->
+                    <td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.rate || 0}}%</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="bg-primary text-right"><b>业绩</b></td>
 
-                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.totalMoney || 0}}</td>-->
-                    <!--<td></td>-->
-                <!--</tr>-->
+                    <td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.totalMoney || 0}}</td>
+                    <td></td>
+                </tr>
 
-                <!--</tbody>-->
-            <!--</table>-->
-        <!--</div>-->
+                </tbody>
+            </table>
+        </div>
 
-    <!--</div>-->
-<!--</div>-->
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">运营报告 - 课程</h1>
+    </div>
+    <div>
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped" style="margin-bottom: 0px !important;">
+                <thead>
+                <tr>
+                    <th class="bg-primary text-right" width="10%"><b>种类</b></th>
+                    <th class="bg-primary text-center" ng-repeat="element in vm.courseCategoryBasedReport.categories track by $index">{{element}}</th>
+                    <th class="bg-primary"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="bg-primary text-right"><b>数量</b></td>
+                    <td class="text-center" ng-repeat="element in vm.courseCategoryBasedReport.counter track by $index">{{element || 0}}</td>
+                    <td></td>
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
 
 <div class="panel panel-primary">
     <div class="panel-heading">

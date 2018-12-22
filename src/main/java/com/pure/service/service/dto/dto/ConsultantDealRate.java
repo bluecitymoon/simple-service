@@ -6,7 +6,7 @@ public class ConsultantDealRate implements Serializable {
 
     private Integer visit;
     private Integer deal;
-    private Integer rate;
+    private Float rate;
     private Float totalMoney;
 
     public Integer getVisit() {
@@ -25,11 +25,11 @@ public class ConsultantDealRate implements Serializable {
         this.deal = deal;
     }
 
-    public Integer getRate() {
+    public Float getRate() {
         return rate;
     }
 
-    public void setRate(Integer rate) {
+    public void setRate(Float rate) {
         this.rate = rate;
     }
 

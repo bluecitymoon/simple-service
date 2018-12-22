@@ -24,6 +24,15 @@ public class ClassCategoryBase implements Serializable {
     @Column(name = "code")
     private String code;
 
+    public ClassCategoryBase() {
+    }
+
+    public ClassCategoryBase(Long id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
