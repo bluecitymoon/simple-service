@@ -27,6 +27,16 @@ public class MarketChannelCategory implements Serializable {
     @Column(name = "description")
     private String description;
 
+    public MarketChannelCategory() {
+    }
+
+    public MarketChannelCategory(Long id, String name, String code, String description) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.description = description;
+    }
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;

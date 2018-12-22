@@ -12,7 +12,7 @@ import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.UserService;
 import com.pure.service.service.dto.ContractCriteria;
-import com.pure.service.service.dto.dto.ConsultantWork;
+import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
@@ -208,7 +208,7 @@ public class ContractResource {
 
     @PostMapping("/contracts/consultant-work-report")
     @Timed
-    public ResponseEntity<List<ConsultantWork>> getCourseConsultantWorkReport(@RequestBody CustomerStatusRequest request) {
+    public ResponseEntity<CombinedConsultantReport> getCourseConsultantWorkReport(@RequestBody CustomerStatusRequest request) {
 
         switch (request.getQueryType()) {
             case "monthly":
@@ -230,7 +230,7 @@ public class ContractResource {
                 break;
         }
 
-        List<ConsultantWork> reports = contractService.getCourseConsultantWorkReport(request);
+        CombinedConsultantReport reports = contractService.getCourseConsultantWorkReport(request);
 
         return new ResponseEntity<>(reports, null, HttpStatus.OK);
     }

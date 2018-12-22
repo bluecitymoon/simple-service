@@ -1,7 +1,7 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.Contract;
-import com.pure.service.service.dto.dto.ConsultantWork;
+import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
@@ -59,5 +59,5 @@ public interface ContractService {
 
     String generateContractNumber();
 
-    List<ConsultantWork> getCourseConsultantWorkReport(CustomerStatusRequest request);
+    CombinedConsultantReport getCourseConsultantWorkReport(CustomerStatusRequest request);
 }

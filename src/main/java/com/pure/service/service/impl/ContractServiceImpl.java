@@ -8,6 +8,7 @@ import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.MarketChannelCategory;
+import com.pure.service.domain.User;
 import com.pure.service.region.RegionIdStorage;
 import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CollectionRepository;
@@ -22,10 +23,12 @@ import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.CustomerCardService;
 import com.pure.service.service.dto.ContractCriteria;
+import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.ConsultantDealRate;
 import com.pure.service.service.dto.dto.ConsultantDealRateReport;
 import com.pure.service.service.dto.dto.ConsultantWork;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.dto.UserBasedConsultantReport;
 import com.pure.service.service.dto.dto.WeekElement;
 import com.pure.service.service.dto.enumurations.ContractStatusEnum;
 import com.pure.service.service.dto.enumurations.CustomerCommunicationLogTypeEnum;
@@ -33,6 +36,7 @@ import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
 import com.pure.service.service.util.DateUtil;
+import com.pure.service.service.util.MathUtil;
 import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -258,11 +262,15 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public List<ConsultantWork> getCourseConsultantWorkReport(CustomerStatusRequest request) {
+    public CombinedConsultantReport getCourseConsultantWorkReport(CustomerStatusRequest request) {
+
+        CombinedConsultantReport combinedConsultantReport = new CombinedConsultantReport();
 
         List<ConsultantWork> consultantWorks = new ArrayList<>();
+
         Map<MarketChannelCategory, List<Contract>> channelCategorySetMap = new HashMap<>();
         ConsultantDealRateReport consultantDealRateReport = new ConsultantDealRateReport();
+        Map<User, List<Contract>> userListMap = new HashMap<>();
 
 //        List<Contract> totalContracts = new ArrayList<>();
 
@@ -284,10 +292,6 @@ public class ContractServiceImpl implements ContractService {
 
             List<Contract> contracts = contractQueryService.findByCriteria(contractCriteria);
 
-//            if (!CollectionUtils.isEmpty(contracts)) {
-//                totalContracts.addAll(contracts);
-//            }
-
             Float totalMoneyShouldCollected = 0f;
             for (Contract contract : contracts) {
 
@@ -306,13 +310,30 @@ public class ContractServiceImpl implements ContractService {
                 totalMoneyShouldCollected = totalMoneyShouldCollected + moneyShouldCollected;
 
                 //group count with market channel
-                List<Contract> contractList = channelCategorySetMap.get(contract.getCustomer().getChannel());
+                MarketChannelCategory marketChannelCategory = contract.getCustomer().getChannel();
+
+                if (marketChannelCategory == null) {
+                    marketChannelCategory = new MarketChannelCategory(-1L, "未知渠道", "Unknown", "");
+                }
+                List<Contract> contractList = channelCategorySetMap.get(marketChannelCategory);
                 if (contractList == null) {
                     contractList = new ArrayList<>();
+
+                    channelCategorySetMap.put(marketChannelCategory, contractList);
 
                 }
 
                 contractList.add(contract);
+
+                //group contracts with consultant
+                List<Contract> consultantContracts = userListMap.get(contract.getCustomer().getCourseConsultant());
+                if (consultantContracts == null) {
+                    consultantContracts = new ArrayList<>();
+
+                    userListMap.put(contract.getCustomer().getCourseConsultant(), consultantContracts);
+                }
+
+                consultantContracts.add(contract);
 
             }
 
@@ -332,9 +353,77 @@ public class ContractServiceImpl implements ContractService {
         });
 
 
+        calculateChannelBasedReport(channelCategorySetMap, consultantDealRateReport);
+
+        List<UserBasedConsultantReport> userBasedConsultantReports = calculateConsultantBasedReport(userListMap, request.getStartDate(), request.getEndDate());
+
+        combinedConsultantReport.setConsultantWorks(consultantWorks);
+        combinedConsultantReport.setUserBasedConsultantReports(userBasedConsultantReports);
+        combinedConsultantReport.setConsultantDealCount(consultantDealRateReport);
+
+        return combinedConsultantReport;
+    }
+
+    private List<UserBasedConsultantReport> calculateConsultantBasedReport(Map<User, List<Contract>> userListMap, Instant start, Instant end) {
+
+        List<UserBasedConsultantReport> reports = new ArrayList<>();
+
+        for (Map.Entry<User, List<Contract>> entry : userListMap.entrySet()) {
+            User consultant = entry.getKey();
+
+            UserBasedConsultantReport report = new UserBasedConsultantReport();
+
+            report.setConsultantName(consultant.getFirstName());
+
+            Float total = 0f;
+            for (Contract contract : entry.getValue()) {
+
+                report.getContracts().add(contract);
+                report.getCards().add(contract.getCustomerCard());
+
+                if (contract.getTotalMoneyAmount() == null) {
+                    continue;
+                }
+
+                Float moneyShouldCollected = contract.getMoneyShouldCollected();
+                if (contract.getMoneyShouldCollected() == null) {
+
+                    Float promotionAmount = contract.getPromotionAmount() == null ? 0 : contract.getPromotionAmount();
+                    moneyShouldCollected = contract.getTotalMoneyAmount() - promotionAmount;
+                }
+
+                total = total + moneyShouldCollected;
+            }
+
+            report.setTotalMoneyAmount(total);
+
+            Integer visitedCount = customerCommunicationScheduleRepository.getCustomerVisitedCountBetween(start, end, RegionUtils.getRegionIdForCurrentUser(), consultant.getId());
+            report.setCardCount(visitedCount);
+            Integer dealCardCount = report.getCards().size();
+            report.setCardCount(dealCardCount);
+
+            Float cardRate = 0f;
+            if (dealCardCount > 0 && visitedCount > 0) {
+                cardRate = MathUtil.division(dealCardCount, visitedCount, 2);
+            }
+
+            report.setCardRate(cardRate);
+            report.setShowCount(visitedCount);
+
+            reports.add(report);
+
+        }
+
+        return reports;
+    }
+
+    private void calculateChannelBasedReport(Map<MarketChannelCategory, List<Contract>> channelCategorySetMap, ConsultantDealRateReport consultantDealRateReport) {
+
         for (Map.Entry<MarketChannelCategory, List<Contract>> entry : channelCategorySetMap.entrySet()) {
 
-            consultantDealRateReport.getChannelNames().add(entry.getKey().getName());
+            String channelName = entry.getKey().getName();
+
+            consultantDealRateReport.getChannelNames().add(channelName);
 
             ConsultantDealRate consultantDealRate = new ConsultantDealRate();
 
@@ -361,7 +450,8 @@ public class ContractServiceImpl implements ContractService {
             consultantDealRate.setTotalMoney(total);
             consultantDealRate.setDeal(customers.size());
 
+            consultantDealRateReport.getChannelCustomerCount().add(consultantDealRate);
+
         }
-        return consultantWorks;
     }
 }

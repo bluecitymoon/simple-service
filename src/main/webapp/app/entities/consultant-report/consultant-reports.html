@@ -94,7 +94,10 @@
     </div>
 </div>
 
-<div class="panel">
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">运营周报</h1>
+    </div>
     <div class="panel-body">
 
         <!--<h2 data-translate="simpleServiceApp.consultantReport.home.title">Consultant Reports</h2>-->
@@ -126,7 +129,7 @@
                     <td>{{consultantReport.dealedMoneyAmount}}</td>
                     <td>
                         <button type="submit"
-                                ng-click="vm.viewDetails(consultantReport)"
+                                ng-click="vm.viewDetails(consultantReport.contracts)"
                                 class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-eye-open"></span>
                             <span class="hidden-sm-down">查看合同明细</span>
@@ -141,6 +144,98 @@
                     <td>{{vm.total.dealedAmount}}</td>
                     <td></td>
                 </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<!--<div class="panel panel-primary">-->
+    <!--<div class="panel-heading">-->
+        <!--<h1 class="panel-title">运营报告 - 渠道</h1>-->
+    <!--</div>-->
+    <!--<div class="panel-body">-->
+
+        <!--<div class="table-responsive">-->
+            <!--<table class="jh-table table table-striped">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th class="bg-primary text-right" width="10%"><b>渠道</b></th>-->
+                    <!--<th class="bg-primary text-center" ng-repeat="element in vm.consultantDealCount.channelNames track by $index">{{element}}</th>-->
+                    <!--<th></th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr>-->
+                    <!--<td class="bg-primary text-right"><b>到访</b></td>-->
+                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.visit || 0}}</td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="bg-primary text-right"><b>成交</b></td>-->
+
+                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.deal || 0}}</td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="bg-primary text-right"><b>成交率</b></td>-->
+
+                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.rate || 0}}</td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<td class="bg-primary text-right"><b>业绩</b></td>-->
+
+                    <!--<td class="text-center" ng-repeat="element in vm.consultantDealCount.channelCustomerCount track by $index">{{element.totalMoney || 0}}</td>-->
+                    <!--<td></td>-->
+                <!--</tr>-->
+
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+
+    <!--</div>-->
+<!--</div>-->
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">运营报告 - 课程顾问</h1>
+    </div>
+    <div class="panel-body">
+
+        <div class="table-responsive">
+            <table class="jh-table table table-striped">
+                <thead>
+                <tr>
+                    <th>课程顾问</th>
+                    <th><span data-translate="simpleServiceApp.consultantReport.visitedCount">Visited Count</span>
+                        <span class="glyphicon glyphicon-sort"></span></th>
+                    <th>卡</th>
+                    <th>卡率</th>
+                    <th>业绩</th>
+                    <th>卡单价</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="report in vm.userBasedConsultantReports track by report.consultantName">
+                    <td>{{report.consultantName}}</td>
+                    <td>{{report.showCount}}</td>
+                    <td>{{report.cardCount}}</td>
+                    <td>{{report.cardRate}}%</td>
+                    <td>{{report.totalMoneyAmount}}</td>
+                    <td>{{report.singleCardPrice}}</td>
+                    <td>
+                        <button type="submit"
+                                ng-click="vm.viewDetails(report.contracts)"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <span class="hidden-sm-down">查看合同明细</span>
+                        </button>
+                    </td>
+                </tr>
+                <!---->
                 </tbody>
             </table>
         </div>

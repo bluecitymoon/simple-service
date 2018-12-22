@@ -11,7 +11,7 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
-            'getCourseConsultantWorkReport': { method: 'POST', url: 'api/contracts/consultant-work-report', isArray: true},
+            'getCourseConsultantWorkReport': { method: 'POST', url: 'api/contracts/consultant-work-report'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

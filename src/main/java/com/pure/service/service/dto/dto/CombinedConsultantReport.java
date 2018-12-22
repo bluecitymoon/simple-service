@@ -8,8 +8,15 @@ public class CombinedConsultantReport implements Serializable {
 
     private List<ConsultantWork> consultantWorks = new ArrayList<>();
     private ConsultantDealRateReport consultantDealCount;
-//    private
+    private List<UserBasedConsultantReport> userBasedConsultantReports = new ArrayList<>();
 
+    public List<UserBasedConsultantReport> getUserBasedConsultantReports() {
+        return userBasedConsultantReports;
+    }
+
+    public void setUserBasedConsultantReports(List<UserBasedConsultantReport> userBasedConsultantReports) {
+        this.userBasedConsultantReports = userBasedConsultantReports;
+    }
 
     public List<ConsultantWork> getConsultantWorks() {
         return consultantWorks;

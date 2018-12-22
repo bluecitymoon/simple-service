@@ -85,7 +85,9 @@
                     visit: 0,
                     dealedAmount: 0
                 };
-                vm.consultantReports = data;
+                vm.consultantReports = data.consultantWorks;
+                vm.userBasedConsultantReports = data.userBasedConsultantReports;
+                vm.consultantDealCount = data.consultantDealCount;
 
                 angular.forEach(vm.consultantReports, function (report) {
 
@@ -111,7 +113,7 @@
             });
         }
 
-        vm.viewDetails = function (report) {
+        vm.viewDetails = function (contracts) {
 
             $uibModal.open({
                 templateUrl: 'app/entities/consultant-report/contract-dialog.html',
@@ -121,7 +123,7 @@
                 size: 'lg',
                 resolve: {
                     entity: function () {
-                        return report.contracts;
+                        return contracts;
                     }
                 }
             }).result.then(function() {
