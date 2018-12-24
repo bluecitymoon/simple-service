@@ -83,7 +83,7 @@ public class ContractQueryService extends QueryService<Contract> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), Contract_.id));
             }
-            if (criteria.getContractNumber() != null) {
+            if ( !StringUtils.isEmpty(criteria.getContractNumber())) {
                 specification = specification.and(buildStringSpecification(criteria.getContractNumber(), Contract_.contractNumber));
             }
             if (criteria.getSerialNumber() != null) {
@@ -153,7 +153,7 @@ public class ContractQueryService extends QueryService<Contract> {
                 specification = specification.and(customerName(criteria.getCustomerName()));
             }
 
-            if (!StringUtils.isEmpty(criteria.getContractNumber())) {
+            if (!StringUtils.isEmpty(criteria.getCustomerContactPhoneNumber())) {
                 specification = specification.and(customerContractPhoneNumber(criteria.getCustomerContactPhoneNumber()));
             }
 
@@ -161,13 +161,16 @@ public class ContractQueryService extends QueryService<Contract> {
                 specification = specification.and(followerId(criteria.getFollowerId()));
             }
 
+            if (!StringUtils.isEmpty(criteria.getStudentName())) {
+                specification = specification.and(studentName(criteria.getStudentName()));
+            }
+
         }
         return specification;
     }
 
     private Specification customerName(String customerName) {
-
-        return (root, query, cb) -> cb.like(root.get(Contract_.customer).get(Customer_.name), customerName);
+        return (root, query, cb) -> cb.like(root.get(Contract_.customer).get(Customer_.name), "%" + customerName + "%");
 
     }
 
@@ -179,5 +182,9 @@ public class ContractQueryService extends QueryService<Contract> {
 
     private Specification followerId(Long userId) {
         return (root, query, cb) -> cb.equal(root.get(Contract_.customer).get(Customer_.courseConsultant).get(User_.id), userId);
+    }
+
+    private Specification studentName(String studentName) {
+        return (root, query, cb) -> cb.like(root.get(Contract_.student).get(Student_.name), "%" + studentName + "%");
     }
 }

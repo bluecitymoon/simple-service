@@ -8,7 +8,7 @@ import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
+import java.time.Instant;
 
 
 /**
@@ -73,7 +73,35 @@ public class ContractCriteria extends AbstractQueryCriteria {
     private String customerContactPhoneNumber;
     private Long followerId;
 
+    private Instant signStartDate;
+    private Instant signEndDate;
+    private String studentName;
+
     public ContractCriteria() {
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public Instant getSignStartDate() {
+        return signStartDate;
+    }
+
+    public void setSignStartDate(Instant signStartDate) {
+        this.signStartDate = signStartDate;
+    }
+
+    public Instant getSignEndDate() {
+        return signEndDate;
+    }
+
+    public void setSignEndDate(Instant signEndDate) {
+        this.signEndDate = signEndDate;
     }
 
     public Long getFollowerId() {

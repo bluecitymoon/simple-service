@@ -34,12 +34,10 @@
                 </div>
                 <div class="col-md-3 form-group">
 
-                    <label class="col-sm-3 control-label">班级</label>
+                    <label class="col-sm-3 control-label">学员姓名</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="field_product" name="product" ng-model="vm.searchCondition.product"
-                                ng-options="product as product.name for product in vm.products track by product.id">
-                            <option value=""></option>
-                        </select>
+                        <input type="text" ng-model="vm.searchCondition.studentName" placeholder="学员姓名"
+                               class="form-control">
                     </div>
 
 
@@ -75,6 +73,55 @@
                 </div>
                 <div class="col-md-3 form-group">
 
+                    <label class="col-sm-3 control-label">班级</label>
+                    <div class="col-sm-9">
+                        <select class="form-control" id="field_product" name="product" ng-model="vm.searchCondition.product"
+                                ng-options="product as product.name for product in vm.products track by product.id">
+                            <option value=""></option>
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="col-sm-3 control-label">签约时间</label>
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="开始时间" class="form-control"
+                               ng-focus="vm.openCalendar('signStartDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                               ng-model="vm.searchCondition.signStartDate"
+                               is-open="vm.datePickerOpenStatus.signStartDate">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <div class="col-sm-9">
+                        <input type="text" placeholder="结束时间" class="form-control"
+                               ng-focus="vm.openCalendar('signEndDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                               ng-model="vm.searchCondition.signEndDate"
+                               is-open="vm.datePickerOpenStatus.signEndDate">
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+
+                    <label class="col-sm-3 control-label">课程顾问</label>
+                    <div class="col-sm-9">
+                        <ui-select ng-model="vm.searchCondition.courseConsultant">
+                            <ui-select-match>
+                                {{$select.selected.firstName}}
+                            </ui-select-match>
+                            <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
+                                <span ng-bind="item.firstName"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+
+                </div>
+                <div class="col-md-3 form-group">
+
                     <div class="col-sm-2">
 
                     </div>
@@ -91,18 +138,6 @@
                         </button>
                     </div>
 
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-3 form-group">
-                </div>
-                <div class="col-md-3 form-group">
-                </div>
-                <div class="col-md-3 form-group">
-                </div>
-                <div class="col-md-3 form-group">
                 </div>
             </div>
 

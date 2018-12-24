@@ -18,8 +18,10 @@ import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.ContractsExceedLimitException;
 import com.pure.service.service.exception.TemplateNotFoundException;
+import com.pure.service.service.util.DateUtil;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
+import io.github.jhipster.service.filter.InstantFilter;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
@@ -171,6 +173,30 @@ public class ContractResource {
             User currentUser = userService.getUserWithAuthorities();
 
             criteria.setFollowerId(currentUser.getId());
+        }
+
+        InstantFilter instantFilter = criteria.getSignDate();
+        if (criteria.getSignStartDate() != null) {
+
+            if (instantFilter == null) {
+                instantFilter = new InstantFilter();
+
+                criteria.setSignDate(instantFilter);
+
+            }
+            instantFilter.setGreaterOrEqualThan(DateUtil.getBeginningOfInstant(criteria.getSignStartDate()));
+        }
+
+
+        if (criteria.getSignEndDate() != null) {
+
+            if (instantFilter == null) {
+
+                instantFilter = new InstantFilter();
+                criteria.setSignDate(instantFilter);
+            }
+
+            instantFilter.setLessOrEqualThan(DateUtil.getEndingOfInstant(criteria.getSignEndDate()));
         }
 
         Page<Contract> page = contractQueryService.findByCriteria(criteria, pageable);

@@ -7,6 +7,7 @@ import com.pure.service.domain.ClassRoom;
 import com.pure.service.domain.StudentClass;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.region.RegionIdStorage;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
@@ -279,7 +280,7 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
     public List<ClassArrangementWeekElement> getArrangementsInCurrentWeek() {
 
         List<ClassArrangementWeekElement> elements = new ArrayList<>();
-        List<ClassRoom> classRooms = classRoomRepository.findAll();
+        List<ClassRoom> classRooms = classRoomRepository.findByRegionId(RegionUtils.getRegionIdForCurrentUser());
 
         Instant mondayStart = DateUtil.getCurrentMondayStartSecond();
         int dayGap = 0;

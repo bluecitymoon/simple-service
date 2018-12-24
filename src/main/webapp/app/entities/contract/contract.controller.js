@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractController', ContractController);
 
-    ContractController.$inject = ['$uibModal', '$scope', '$state', 'Contract', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Course', 'ContractStatus', 'Product'];
+    ContractController.$inject = ['$uibModal', '$scope', '$state', 'Contract', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Course', 'ContractStatus', 'Product', 'User'];
 
-    function ContractController($uibModal, $scope, $state, Contract, ParseLinks, AlertService, paginationConstants, pagingParams, Course, ContractStatus, Product) {
+    function ContractController($uibModal, $scope, $state, Contract, ParseLinks, AlertService, paginationConstants, pagingParams, Course, ContractStatus, Product, User) {
 
         var vm = this;
 
@@ -16,7 +16,11 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar =  function (date) {
+            vm.datePickerOpenStatus[date] = true;
+        };
+        vm.datePickerOptions = {             showMeridian: false         };
         vm.clearConditions = function () {
             vm.searchCondition = {};
         };
@@ -25,7 +29,7 @@
             currentPageNumber: 1,
             totalItems: 0
         };
-
+        vm.consultants = User.getAllCourseConsultant();
         vm.courses = Course.query({size: 100});
         vm.contractstatuses = ContractStatus.query({size: 100});
         vm.products = Product.query({size: 200});
@@ -45,17 +49,17 @@
             if (vm.searchCondition.customerName) {
                 parameters["customerName"] = vm.searchCondition.customerName;
             }
+            if (vm.searchCondition.studentName) {
+                parameters["studentName"] = vm.searchCondition.studentName;
+            }
             if (vm.searchCondition.customerContactPhoneNumber) {
                 parameters["customerContactPhoneNumber"] = vm.searchCondition.customerContactPhoneNumber;
             }
             if (vm.searchCondition.contractNumber) {
-                parameters["contractNumber.equals"] = vm.searchCondition.contractNumber;
+                parameters["contractNumber.contains"] = vm.searchCondition.contractNumber;
             }
             if (vm.searchCondition.serialNumber) {
                 parameters["serialNumber.equals"] = vm.searchCondition.serialNumber;
-            }
-            if (vm.searchCondition.customerContactPhoneNumber) {
-                parameters["customerContactPhoneNumber.equals"] = vm.searchCondition.customerContactPhoneNumber;
             }
             if (vm.searchCondition.product) {
                 parameters["productId.equals"] = vm.searchCondition.product.id;
@@ -65,6 +69,15 @@
             }
             if (vm.searchCondition.contractStatus) {
                 parameters["contractStatusId.equals"] = vm.searchCondition.contractStatus.id;
+            }
+            if (vm.searchCondition.signStartDate) {
+                parameters["signStartDate"] = vm.searchCondition.signStartDate;
+            }
+            if (vm.searchCondition.signEndDate) {
+                parameters["signEndDate"] = vm.searchCondition.signEndDate;
+            }
+            if (vm.searchCondition.courseConsultant) {
+                parameters["followerId"] = vm.searchCondition.courseConsultant.id;
             }
 
             Contract.query(parameters, onSuccess, onError);
