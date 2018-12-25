@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractController', ContractController);
 
-    ContractController.$inject = ['$uibModal', '$scope', '$state', 'Contract', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Course', 'ContractStatus', 'Product', 'User'];
+    ContractController.$inject = ['$rootScope', '$uibModal', '$scope', '$state', 'Contract', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Course', 'ContractStatus', 'Product', 'User'];
 
-    function ContractController($uibModal, $scope, $state, Contract, ParseLinks, AlertService, paginationConstants, pagingParams, Course, ContractStatus, Product, User) {
+    function ContractController($rootScope, $uibModal, $scope, $state, Contract, ParseLinks, AlertService, paginationConstants, pagingParams, Course, ContractStatus, Product, User) {
 
         var vm = this;
 
@@ -36,7 +36,12 @@
 
         vm.loadAll = loadAll;
 
-        // vm.loadAll();
+        $rootScope.$on("simpleServiceApp:createPackageContract", function (event, args) {
+            vm.contracts = args.contracts;
+            vm.queryCount = vm.contracts.length;
+            vm.page = 0;
+            AlertService.success("创建了" + vm.contracts.length + "条合同");
+        });
 
         function loadAll() {
 
@@ -115,6 +120,10 @@
                 search: vm.currentSearch
             });
         }
+
+        vm.editContract = function (contract) {
+
+        };
 
         vm.openFreeContractDialog = function () {
 

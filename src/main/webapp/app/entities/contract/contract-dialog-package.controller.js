@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ContractDialogPackageController', ContractDialogPackageController);
 
-    ContractDialogPackageController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService', 'DateUtils', 'ContractPackage'];
+    ContractDialogPackageController.$inject = ['$rootScope', '$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Contract', 'Student', 'Course', 'ContractStatus', 'Product', 'CustomerCard', 'Customer', 'AlertService', 'DateUtils', 'ContractPackage'];
 
-    function ContractDialogPackageController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService, DateUtils, ContractPackage) {
+    function ContractDialogPackageController ($rootScope, $timeout, $scope, $stateParams, $uibModalInstance, entity, Contract, Student, Course, ContractStatus, Product, CustomerCard, Customer, AlertService, DateUtils, ContractPackage) {
         var vm = this;
 
         vm.contract = entity;
@@ -30,6 +30,7 @@
                 vm.customers = response;
             })
         };
+
 
         $scope.$watch("vm.contract.customer", function (newVal, oldVal) {
 
@@ -97,7 +98,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('simpleServiceApp:contractUpdate', result);
+            $scope.$emit('simpleServiceApp:createPackageContract', {contracts: result});
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

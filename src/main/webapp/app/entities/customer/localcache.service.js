@@ -10,6 +10,7 @@
 
         this.customerCondition = null;
         this.newOrderCondition = null;
+        this.searchCondition = null;
 
         function getCustomerSearchCondition() {
             return this.customerCondition;
@@ -26,11 +27,21 @@
         function setNewOrderCondition(condition) {
             this.newOrderCondition = condition;
         }
+
+        function setSearchCondition(searchCondition) {
+            this.searchCondition = searchCondition;
+        }
+
+        function getSearchCondition() {
+            return this.searchCondition;
+        }
         return {
             getCustomerSearchCondition: getCustomerSearchCondition,
             setCustomerSearchCondition: setCustomerSearchCondition,
             getNewOrderCondition: getNewOrderCondition,
-            setNewOrderCondition: setNewOrderCondition
+            setNewOrderCondition: setNewOrderCondition,
+            setSearchCondition: setSearchCondition,
+            getSearchCondition: getSearchCondition
         }
     }
 })();

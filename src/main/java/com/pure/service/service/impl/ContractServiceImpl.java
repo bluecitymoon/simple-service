@@ -229,11 +229,14 @@ public class ContractServiceImpl implements ContractService {
             contract.setContractStatus(generated);
 
             Integer promotionAmount = template.getPromotionAmount() == null? 0: template.getPromotionAmount();
-            Float moneyShouldCollected = template.getTotalMoneyAmount() - promotionAmount;
+            Float totalMoneyAmount = template.getTotalMoneyAmount() == null? 0: template.getTotalMoneyAmount();
+            Float moneyShouldCollected = totalMoneyAmount - promotionAmount;
 
             contract.setMoneyShouldCollected(moneyShouldCollected);
 
             contracts.add(contract);
+
+            //如果这个客户只有一个学员，将这个合同分配到这个学员
 
         }
 
