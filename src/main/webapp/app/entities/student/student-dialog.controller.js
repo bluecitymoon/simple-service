@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentDialogController', StudentDialogController);
 
-    StudentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Student', 'Customer'];
+    StudentDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Student', 'Customer', 'AlertService'];
 
-    function StudentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Student, Customer) {
+    function StudentDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Student, Customer, AlertService) {
         var vm = this;
 
         vm.student = entity;
@@ -34,7 +34,7 @@
                 vm.student.gender = vm.student.customer.sex;
                 vm.student.school = vm.student.customer.school;
                 vm.student.address = vm.student.customer.address;
-                vm.student.birthday = vm.student.customer.birthday;
+                // vm.student.birthday = vm.student.customer.birthday;
                 vm.student.phone = vm.student.customer.contactPhoneNumber;
             }
         });
