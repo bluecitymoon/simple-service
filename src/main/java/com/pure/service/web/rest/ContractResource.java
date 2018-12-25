@@ -70,6 +70,9 @@ public class ContractResource {
     @Autowired
     private UserService userService;
 
+//    @Autowired
+//    private ContractNatureRepository contractNatureRepository;
+
     public ContractResource(ContractService contractService, ContractQueryService contractQueryService) {
         this.contractService = contractService;
         this.contractQueryService = contractQueryService;
@@ -90,6 +93,12 @@ public class ContractResource {
         if (contract.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new contract cannot already have an ID")).body(null);
         }
+
+        if (contract.getContractNature() == null) {
+            ContractNature standered = contractNatureRepository.findByCode("standered");
+            contract.setContractNature(standered);
+        }
+
         Contract result = contractService.save(contract);
         return ResponseEntity.created(new URI("/api/contracts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

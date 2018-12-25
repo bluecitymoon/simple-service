@@ -119,6 +119,8 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('simpleServiceApp:contractUpdate', result);
+            $scope.$emit('simpleServiceApp:createPackageContract', {contracts: [result]});
+
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

@@ -148,9 +148,9 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('contract', null, { reload: 'contract' });
+                    // $state.go('contract', null, { reload: 'contract' });
                 }, function() {
-                    $state.go('contract');
+                    // $state.go('contract');
                 });
             }]
         })
