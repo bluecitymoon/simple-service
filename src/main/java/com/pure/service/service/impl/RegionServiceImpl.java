@@ -74,4 +74,9 @@ public class RegionServiceImpl implements RegionService{
         log.debug("Request to delete Region : {}", id);
         regionRepository.delete(id);
     }
+
+    @Override
+    public void changeCustomerRegion(Long customerId, Long newRegionId) {
+
+    }
 }

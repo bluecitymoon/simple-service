@@ -299,5 +299,9 @@
         function openCalendar (date) {
             vm.datePickerOpenStatus[date] = true;
         }
+
+        vm.openTransferRegionDialog = function (customerId) {
+
+        }
     }
 })();

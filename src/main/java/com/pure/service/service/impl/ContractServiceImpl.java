@@ -10,6 +10,7 @@ import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.MarketChannelCategory;
+import com.pure.service.domain.StudentClassLog;
 import com.pure.service.domain.User;
 import com.pure.service.region.RegionIdStorage;
 import com.pure.service.region.RegionUtils;
@@ -20,6 +21,7 @@ import com.pure.service.repository.ContractTemplateRepository;
 import com.pure.service.repository.CustomerCommunicationLogRepository;
 import com.pure.service.repository.CustomerCommunicationLogTypeRepository;
 import com.pure.service.repository.CustomerCommunicationScheduleRepository;
+import com.pure.service.repository.StudentClassLogRepository;
 import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
@@ -99,6 +101,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private CustomerCommunicationScheduleRepository customerCommunicationScheduleRepository;
+
+    @Autowired
+    private StudentClassLogRepository studentClassLogRepository;
 
     public ContractServiceImpl(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
@@ -385,6 +390,14 @@ public class ContractServiceImpl implements ContractService {
         combinedConsultantReport.setCourseCategoryBasedReport(report);
 
         return combinedConsultantReport;
+    }
+
+    @Override
+    public void refreshContractBalance(Long studentId) {
+
+        List<Contract> contracts = contractRepository.findByStudent_Id(studentId);
+
+        List<StudentClassLog> studentClassLogs = studentClassLogRepository.findByStudent_Id(studentId);
     }
 
     private CourseCategoryBasedReport getCourseCategoryBasedReport(Map<ClassCategoryBase, List<Contract>> courseCategoryBaseListMap) {

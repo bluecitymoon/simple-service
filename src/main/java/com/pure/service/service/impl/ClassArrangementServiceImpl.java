@@ -13,7 +13,11 @@ import com.pure.service.repository.ClassArrangementRuleRepository;
 import com.pure.service.repository.ClassArrangementStatusRepository;
 import com.pure.service.repository.ClassRoomRepository;
 import com.pure.service.repository.ProductRepository;
+import com.pure.service.repository.StudentAbsenceLogRepository;
+import com.pure.service.repository.StudentClassLogRepository;
 import com.pure.service.repository.StudentClassRepository;
+import com.pure.service.repository.StudentFrozenArrangementRepository;
+import com.pure.service.repository.StudentLeaveRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
 import com.pure.service.service.StudentClassLogQueryService;
@@ -86,6 +90,18 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
     @Autowired
     private ClassArrangementQueryService classArrangementQueryService;
 
+    @Autowired
+    private StudentLeaveRepository studentLeaveRepository;
+
+    @Autowired
+    private StudentFrozenArrangementRepository studentFrozenArrangementRepository;
+
+    @Autowired
+    private StudentAbsenceLogRepository studentAbsenceLogRepository;
+
+    @Autowired
+    private StudentClassLogRepository studentClassLogRepository;
+
     public ClassArrangementServiceImpl(ClassArrangementRepository classArrangementRepository) {
         this.classArrangementRepository = classArrangementRepository;
     }
@@ -128,24 +144,33 @@ public class ClassArrangementServiceImpl implements ClassArrangementService {
 
         for (ClassArrangement classArrangement : arrangementList) {
 
-            StudentClassLogCriteria studentClassLogCriteria = new StudentClassLogCriteria();
-
-            LongFilter arrangementId = new LongFilter();
-            arrangementId.setEquals(classArrangement.getId());
-
-            studentClassLogCriteria.setArrangementId(arrangementId);
-
-            List<StudentClassLog> logs = studentClassLogQueryService.findByCriteria(studentClassLogCriteria);
-            if (CollectionUtils.isEmpty(logs)) {
-
-                arrangements.add(classArrangement);
+            Integer studentClassLogCount = studentClassLogRepository.getStudentClassLogCount(classArrangement.getId());
+            if (studentClassLogCount > 0) {
+                continue;
             }
 
-            if (!CollectionUtils.isEmpty(arrangements)) {
-
-                classArrangementRepository.delete(arrangements);
+            Integer studentLeaveCount = studentLeaveRepository.getStudentLeaveCountByArrangement(classArrangement.getId());
+            if (studentLeaveCount > 0) {
+                continue;
             }
 
+            Integer studentFrozenCount = studentFrozenArrangementRepository.getStudentFrozenArrangementCount(classArrangement.getId());
+
+            if (studentFrozenCount > 0) {
+                continue;
+            }
+
+            Integer studentAbsenceLogCount = studentAbsenceLogRepository.getStudentAbsenceLogCount(classArrangement.getId());
+            if (studentAbsenceLogCount > 0) {
+                continue;
+            }
+
+            arrangements.add(classArrangement);
+        }
+
+        if (!CollectionUtils.isEmpty(arrangements)) {
+
+            classArrangementRepository.delete(arrangements);
         }
     }
 

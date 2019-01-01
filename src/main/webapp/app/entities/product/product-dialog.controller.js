@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('ProductDialogController', ProductDialogController);
 
-    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassStatus'];
+    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Product', 'ClassAgeLevel', 'Teacher', 'ClassRoom', 'Course', 'ClassStatus', 'AlertService'];
 
-    function ProductDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassStatus) {
+    function ProductDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Product, ClassAgeLevel, Teacher, ClassRoom, Course, ClassStatus, AlertService) {
         var vm = this;
 
         vm.product = entity;
@@ -62,10 +62,7 @@
 
         function onSaveError (error) {
             vm.isSaving = false;
-            if (error.data && error.data.detail) {
-
-                AlertService.error(error.data.detail);
-            }
+            AlertService.showCommonError(error);
         }
 
         vm.datePickerOpenStatus.planedStartDate = false;

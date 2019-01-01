@@ -13,4 +13,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface StudentFrozenArrangementRepository extends JpaRepository<StudentFrozenArrangement, Long>, JpaSpecificationExecutor<StudentFrozenArrangement> {
 
+    @Query(nativeQuery = true, value = "select count(0) as frozenCount from student_frozen_arrangement where class_arrangement_id = :1")
+    Integer getStudentFrozenArrangementCount(Long arrangementId);
+
 }

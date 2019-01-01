@@ -90,6 +90,9 @@
                     </th>
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="customer.name"><span
+                            data-translate="simpleServiceApp.student.customer">Customer</span> <span
+                            class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="simpleServiceApp.student.name">Name</span> <span
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="phone"><span data-translate="simpleServiceApp.student.phone">Phone</span> <span
@@ -98,17 +101,8 @@
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="birthday"><span data-translate="simpleServiceApp.student.birthday">Birthday</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="address"><span data-translate="simpleServiceApp.student.address">Address</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="school"><span data-translate="simpleServiceApp.student.school">School</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="qq"><span data-translate="simpleServiceApp.student.qq">Qq</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="comments"><span data-translate="simpleServiceApp.student.comments">Comments</span>
-                        <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="customer.name"><span
-                            data-translate="simpleServiceApp.student.customer">Customer</span> <span
-                            class="glyphicon glyphicon-sort"></span></th>
+                    <th>耗课情况</th>
+
                     <th></th>
                 </tr>
                 </thead>
@@ -119,58 +113,53 @@
                         <label for="email-list-{{student.id}}"></label>
                     </td>
                     <td><a ui-sref="student-detail({id:student.id})">{{student.id}}</a></td>
-                    <td>{{student.name}}</td>
-                    <td>{{student.phone}}</td>
-                    <td>{{student.gender}}</td>
-                    <td>{{student.birthday | date:'yyyy-MM-dd HH:mm'}}</td>
-                    <td>{{student.address}}</td>
-                    <td>{{student.school}}</td>
-                    <td>{{student.qq}}</td>
-                    <td>{{student.comments}}</td>
                     <td>
                         <a ui-sref="customer-detail({id:student.customer.id})">{{student.customer.name}}</a>
                     </td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.phone}}</td>
+                    <td>{{student.gender}}</td>
+                    <td>{{student.birthday | date:'yyyy-MM-dd'}}</td>
+                    <td>
+                        <table class="panel-bordered-primary" ng-if="student.studentClassCounts && student.studentClassCounts.length > 0" style="margin-bottom: 0px;">
+                            <thead>
+                                <tr>
+                                <th>合同号</th>
+                                <th>类型</th>
+                                <th>总课时</th>
+                                <th>已上课时</th>
+                                <th>余额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="count in student.studentClassCounts track by $index">
+                                    <td>
+                                        {{count.contractNumber}}
+                                    </td>
+                                    <td>
+                                        {{count.contractType}}
+                                    </td>
+                                    <td>
+                                        {{count.total}}
+                                    </td>
+                                    <td>
+                                        {{count.taken}}
+                                    </td>
+                                    <td>
+                                        {{count.balance}}
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <!--<ul class="nav nav-tabs border-0 flex-column flex-lg-row">-->
-
-                                <!--<li class="nav-item" uib-dropdown>-->
-
-                                    <!--<button uib-dropdown-toggle class="btn btn-dark btn-block border-0 dropdown-toggle">-->
-                                        <!--<span class="glyphicon glyphicon glyphicon-time"></span>-->
-                                        <!--<span>历史记录</span>-->
-
-                                    <!--</button>-->
-
-                                    <!--<ul class="dropdown-menu" uib-dropdown-menu>-->
-
-                                        <!--<li ui-sref-active="active">-->
-                                            <!--<a ng-click="vm.openStudentsManagementDialog(mf)">-->
-                                                <!--<span>上课记录</span>-->
-                                            <!--</a>-->
-                                        <!--</li>-->
-                                        <!--<li ui-sref-active="active">-->
-                                            <!--<a ng-click="vm.createNewClassArrangements()">-->
-                                                <!--<span>请假记录</span>-->
-                                            <!--</a>-->
-                                        <!--</li>-->
-                                        <!--<li ui-sref-active="active">-->
-                                            <!--<a ng-click="vm.openClassSignDialog(mf)">-->
-                                                <!--<span>冻结记录</span>-->
-                                            <!--</a>-->
-                                        <!--</li>-->
-                                        <!--<li ui-sref-active="active">-->
-                                            <!--<a ng-click="vm.studentLeaveRequest(mf)">-->
-                                                <!--<span>缺席记录</span>-->
-                                            <!--</a>-->
-                                        <!--</li>-->
-                                    <!--</ul>-->
-                                <!--</li>-->
-                            <!--</ul>-->
                             <button class="btn btn-dark btn-sm" ng-click="vm.openHistoryLog(student)">
                                 <span class="glyphicon glyphicon glyphicon-time"></span>
                                 <span>历史记录</span>
-
                             </button>
                             <button type="submit"
                                     ui-sref="student-detail({id:student.id})"
@@ -178,7 +167,6 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <!--ng-click="vm.lockStudentClass(student)"-->
                             <button type="submit"
                                     ng-click="vm.lockStudentClass(student)"
                                     class="btn btn-mint btn-sm">

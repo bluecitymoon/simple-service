@@ -46,10 +46,10 @@
                     } else if (response.data.title) {
                         this.error(response.data.title)
                     } else {
-                        this.error("³ö´íÁË");
+                        this.error("å‡ºé”™äº†");
                     }
                 } else {
-                    this.error("³ö´íÁË");
+                    this.error("å‡ºé”™äº†");
                 }
             }
 

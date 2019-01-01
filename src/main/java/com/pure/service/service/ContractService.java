@@ -60,4 +60,6 @@ public interface ContractService {
     String generateContractNumber();
 
     CombinedConsultantReport getCourseConsultantWorkReport(CustomerStatusRequest request);
+
+    void refreshContractBalance(Long studentId);
 }

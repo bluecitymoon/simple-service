@@ -8,6 +8,7 @@ import com.pure.service.region.RegionUtils;
 import com.pure.service.service.StudentQueryService;
 import com.pure.service.service.StudentService;
 import com.pure.service.service.dto.StudentCriteria;
+import com.pure.service.service.dto.dto.StudentVo;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.service.filter.StringFilter;
@@ -108,9 +109,11 @@ public class StudentResource {
     @GetMapping("/students")
     @Timed
     @RegionBasedQuery
-    public ResponseEntity<List<Student>> getAllStudents(StudentCriteria criteria,@ApiParam Pageable pageable) {
+    public ResponseEntity<List<StudentVo>> getAllStudents(StudentCriteria criteria, @ApiParam Pageable pageable) {
         log.debug("REST request to get Students by criteria: {}", criteria);
-        Page<Student> page = studentQueryService.findByCriteria(criteria, pageable);
+
+        Page<StudentVo> page = studentQueryService.findStudentVosByCriteria(criteria, pageable);
+
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/students");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -1,15 +1,22 @@
 package com.pure.service.service;
 
 
+import com.pure.service.domain.Contract;
 import com.pure.service.domain.Customer_;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.Student_;
+import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.StudentRepository;
 import com.pure.service.service.dto.StudentCriteria;
+import com.pure.service.service.dto.dto.StudentClassCount;
+import com.pure.service.service.dto.dto.StudentVo;
 import io.github.jhipster.service.QueryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.domain.Specifications;
@@ -17,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,6 +42,9 @@ public class StudentQueryService extends QueryService<Student> {
 
 
     private final StudentRepository studentRepository;
+
+    @Autowired
+    private ContractRepository contractRepository;
 
     public StudentQueryService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
@@ -62,6 +73,56 @@ public class StudentQueryService extends QueryService<Student> {
         log.debug("find by criteria : {}, page: {}", criteria, page);
         final Specifications<Student> specification = createSpecification(criteria);
         return studentRepository.findAll(specification, page);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<StudentVo> findStudentVosByCriteria(StudentCriteria criteria, Pageable page) {
+
+        log.debug("find by criteria : {}, page: {}", criteria, page);
+
+        final Specifications<Student> specification = createSpecification(criteria);
+        Page<Student> students = studentRepository.findAll(specification, page);
+        List<StudentVo> studentVoList = new ArrayList<>();
+
+        for (Student student : students.getContent()) {
+
+            StudentVo studentVo = new StudentVo();
+
+            BeanUtils.copyProperties(student, studentVo);
+            getClassCounts(student, studentVo);
+
+            studentVoList.add(studentVo);
+        }
+
+        Page<StudentVo> studentVoPage = new PageImpl<>(studentVoList, page, students.getTotalElements());
+
+        return studentVoPage;
+    }
+
+    private void getClassCounts(Student student, StudentVo studentVo) {
+
+        List<Contract> studentContracts = contractRepository.findByStudent_Id(student.getId());
+
+        List<StudentClassCount> studentClassCounts = new ArrayList<>();
+        studentVo.setStudentClassCounts(studentClassCounts);
+
+        for (Contract contract : studentContracts) {
+
+            StudentClassCount classCount = new StudentClassCount();
+            classCount.setContractNumber(contract.getContractNumber());
+
+            String type = contract.getContractNature() == null? "未知类型": contract.getContractNature().getName();
+            classCount.setContractType(type);
+
+            Integer totalCount = contract.getTotalHours() == null? 0: contract.getTotalHours();
+            Integer takenCount = contract.getHoursTaken() == null? 0: contract.getHoursTaken();
+            classCount.setTotal(totalCount);
+            classCount.setTaken(takenCount);
+
+            classCount.setBalance(totalCount - takenCount);
+
+            studentClassCounts.add(classCount);
+        }
     }
 
     /**
