@@ -92,6 +92,10 @@
 
             console.log($scope.dialogSchedule.classSchedule);
 
+            if (!$scope.dialogSchedule.classSchedule.classId) {
+                return;
+            }
+
             ClassArrangement.query({"clazzId.equals": $scope.dialogSchedule.classSchedule.classId, size: 1000, page: 0, "startTime": $scope.dialogSchedule.start, "endTime": $scope.dialogSchedule.end}, function (arrangements) {
                 vm.classArrangements = arrangements;
             });

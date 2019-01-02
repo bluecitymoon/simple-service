@@ -4,6 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassArrangementRule;
 import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.repository.ClassArrangementRepository;
 import com.pure.service.service.ClassArrangementQueryService;
 import com.pure.service.service.ClassArrangementService;
@@ -155,6 +156,7 @@ public class ClassArrangementResource {
      */
     @GetMapping("/class-arrangements")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<ClassArrangement>> getAllClassArrangements(ClassArrangementCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get ClassArrangements by criteria: {}", criteria);
         Page<ClassArrangement> page = classArrangementQueryService.findByCriteria(criteria, pageable);

@@ -63,11 +63,11 @@ public class CustomerCard extends AbstractAuditingRegionEntity {
     @Column(name = "special_promotion_amount")
     private Float specialPromotionAmount;
 
-    @Column(name = "active")
-    private Boolean active;
-
-    @Column(name = "level")
-    private Integer level;
+//    @Column(name = "active")
+//    private Boolean active;
+//
+//    @Column(name = "level")
+//    private Integer level;
 
     @ManyToOne
     private Customer customer;
@@ -87,21 +87,21 @@ public class CustomerCard extends AbstractAuditingRegionEntity {
         this.id = id;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
-    }
+//    public Boolean getActive() {
+//        return active;
+//    }
+//
+//    public void setActive(Boolean active) {
+//        this.active = active;
+//    }
+//
+//    public Integer getLevel() {
+//        return level;
+//    }
+//
+//    public void setLevel(Integer level) {
+//        this.level = level;
+//    }
 
     public Float getMoneyShouldCollected() {
         return moneyShouldCollected;
