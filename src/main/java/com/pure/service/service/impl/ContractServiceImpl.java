@@ -226,7 +226,7 @@ public class ContractServiceImpl implements ContractService {
             contract.setTotalMoneyAmount(template.getTotalMoneyAmount());
             contract.setSerialNumber(customerCard.getSerialNumber());
             contract.setActive(false);
-            contract.setCourse(customerCard.getCourse());
+//            contract.setCourse(customerCard.getCourse());
             contract.setContractNumber(generateContractNumber());
             contract.setTotalHours(template.getTotalHours());
             contract.setContractNature(template.getContractNature());

@@ -1,0 +1,24 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "customerCard",
+            "otherEntityName": "customerCard",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "course",
+            "otherEntityName": "course",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20190103062142",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "customer_card_course",
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination"
+}

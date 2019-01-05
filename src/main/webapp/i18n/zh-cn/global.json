@@ -85,6 +85,7 @@
                 "studentClassLogType": "Student Class Log Type",
                 "studentClassLogDailyReport": "Student Class Log Daily Report",
                 "consultantReport": "Consultant Report",
+                "customerCardCourse": "Customer Card Course",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

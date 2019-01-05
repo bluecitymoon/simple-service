@@ -1,0 +1,22 @@
+{
+    "simpleServiceApp": {
+        "customerCardCourse" : {
+            "home": {
+                "title": "Customer Card Courses",
+                "createLabel": "Create a new Customer Card Course",
+                "createOrEditLabel": "Create or edit a Customer Card Course"
+            },
+            "created": "A new Customer Card Course is created with identifier {{ param }}",
+            "updated": "A Customer Card Course is updated with identifier {{ param }}",
+            "deleted": "A Customer Card Course is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Customer Card Course {{ id }}?"
+            },
+            "detail": {
+                "title": "Customer Card Course"
+            },
+            "customerCard": "Customer Card",
+            "course": "Course"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+
+<div class="page-header">
+    <h1 class="page-title" data-translate="simpleServiceApp.customerCardCoursehome.title">Customer Card Courses</h1>
+</div>
+<jhi-alert-error></jhi-alert-error>
+<div class="panel">
+    <div class="panel-body">
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="simpleServiceApp.customerCardCourse.customerCard">Customer Card</span></dt>
+        <dd>
+            <a ui-sref="customer-card-detail({id:vm.customerCardCourse.customerCard.id})">{{vm.customerCardCourse.customerCard.id}}</a>
+        </dd>
+        <dt><span data-translate="simpleServiceApp.customerCardCourse.course">Course</span></dt>
+        <dd>
+            <a ui-sref="course-detail({id:vm.customerCardCourse.course.id})">{{vm.customerCardCourse.course.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="customer-card-course-detail.edit({id:vm.customerCardCourse.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

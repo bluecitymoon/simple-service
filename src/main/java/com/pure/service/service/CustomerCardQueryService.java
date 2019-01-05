@@ -1,7 +1,6 @@
 package com.pure.service.service;
 
 
-import com.pure.service.domain.Course_;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCardType_;
 import com.pure.service.domain.CustomerCard_;
@@ -133,9 +132,9 @@ public class CustomerCardQueryService extends QueryService<CustomerCard> {
             if (criteria.getCustomerCardTypeId() != null) {
                 specification = specification.and(buildReferringEntitySpecification(criteria.getCustomerCardTypeId(), CustomerCard_.customerCardType, CustomerCardType_.id));
             }
-            if (criteria.getCourseId() != null) {
-                specification = specification.and(buildReferringEntitySpecification(criteria.getCourseId(), CustomerCard_.course, Course_.id));
-            }
+//            if (criteria.getCourseId() != null) {
+//                specification = specification.and(buildReferringEntitySpecification(criteria.getCourseId(), CustomerCard_.course, Course_.id));
+//            }
 
             if (!StringUtils.isEmpty(criteria.getCustomerName())) {
                 specification = specification.and(customerName(criteria.getCustomerName()));

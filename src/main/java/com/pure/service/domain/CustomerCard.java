@@ -7,8 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -75,8 +77,11 @@ public class CustomerCard extends AbstractAuditingRegionEntity {
     @ManyToOne
     private CustomerCardType customerCardType;
 
-    @ManyToOne
-    private Course course;
+//    @ManyToOne
+//    private Course course;
+
+    @OneToMany
+    private List<CustomerCardCourse> customerCardCourses;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -87,21 +92,13 @@ public class CustomerCard extends AbstractAuditingRegionEntity {
         this.id = id;
     }
 
-//    public Boolean getActive() {
-//        return active;
-//    }
-//
-//    public void setActive(Boolean active) {
-//        this.active = active;
-//    }
-//
-//    public Integer getLevel() {
-//        return level;
-//    }
-//
-//    public void setLevel(Integer level) {
-//        this.level = level;
-//    }
+    public List<CustomerCardCourse> getCustomerCardCourses() {
+        return customerCardCourses;
+    }
+
+    public void setCustomerCardCourses(List<CustomerCardCourse> customerCardCourses) {
+        this.customerCardCourses = customerCardCourses;
+    }
 
     public Float getMoneyShouldCollected() {
         return moneyShouldCollected;
@@ -294,19 +291,19 @@ public class CustomerCard extends AbstractAuditingRegionEntity {
     public void setCustomerCardType(CustomerCardType customerCardType) {
         this.customerCardType = customerCardType;
     }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public CustomerCard course(Course course) {
-        this.course = course;
-        return this;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+//
+//    public Course getCourse() {
+//        return course;
+//    }
+//
+//    public CustomerCard course(Course course) {
+//        this.course = course;
+//        return this;
+//    }
+//
+//    public void setCourse(Course course) {
+//        this.course = course;
+//    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override

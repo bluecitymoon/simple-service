@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Jerry (generated)" id="1546497103893-1">
+        <createTable tableName="customer_card_customer_card_courses">
+            <column name="customer_card_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_card_courses_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1546497103893-2">
+        <addUniqueConstraint columnNames="customer_card_courses_id" constraintName="UK_eyhes4l3q18n7gry5lmmqgu53" tableName="customer_card_customer_card_courses"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1546497103893-3">
+        <addForeignKeyConstraint baseColumnNames="customer_card_courses_id" baseTableName="customer_card_customer_card_courses" constraintName="FK82j1spvm8yw3bolarnqc4axx" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="customer_card_course"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1546497103893-4">
+        <addForeignKeyConstraint baseColumnNames="customer_card_id" baseTableName="customer_card_customer_card_courses" constraintName="FK8b2lchw28jwyska8vp7fch5ha" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="customer_card"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1546497103893-5">
+        <dropForeignKeyConstraint baseTableName="customer_card" constraintName="FKl75sbtk7iyr9004wdgya9k5i1"/>
+    </changeSet>
+    <changeSet author="Jerry (generated)" id="1546497103893-6">
+        <dropColumn columnName="course_id" tableName="customer_card"/>
+    </changeSet>
+    
+</databaseChangeLog>
