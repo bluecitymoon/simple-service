@@ -39,6 +39,15 @@
             })
         };
 
+        vm.rollbackStudentAbsenceLog = function (studentAbsenceLog) {
+
+            StudentAbsenceLog.delete({id: studentAbsenceLog.id}, function (response) {
+                AlertService.success("删除成功!");
+                getStudentAbsenceLog();
+            }, function (error) {
+                AlertService.showCommonError(error);
+            })
+        };
 
         function getStudentClassLogByStudentId() {
 

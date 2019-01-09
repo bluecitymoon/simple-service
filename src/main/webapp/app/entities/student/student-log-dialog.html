@@ -224,7 +224,7 @@
                                     <th jh-sort-by="lastModifiedBy"><span data-translate="simpleServiceApp.studentAbsenceLog.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th>
                                     <th jh-sort-by="lastModifiedDate"><span data-translate="simpleServiceApp.studentAbsenceLog.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                                     <th jh-sort-by="classCount"><span data-translate="simpleServiceApp.studentAbsenceLog.classCount">Class Count</span> <span class="glyphicon glyphicon-sort"></span></th>
-                                    <!--<th></th>-->
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -243,7 +243,16 @@
                                     <td>{{studentAbsenceLog.lastModifiedBy}}</td>
                                     <td>{{studentAbsenceLog.lastModifiedDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                     <td>{{studentAbsenceLog.classCount}}</td>
+                                    <td class="text-right">
+                                        <div class="btn-group flex-btn-group-container">
 
+                                            <button class="btn btn-danger btn-sm" ng-click="vm.rollbackStudentAbsenceLog(studentAbsenceLog)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                                <span>删除</span>
+
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

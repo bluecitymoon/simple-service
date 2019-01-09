@@ -1,5 +1,6 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.ClassArrangement;
 import com.pure.service.domain.ClassCategoryBase;
 import com.pure.service.domain.Contract;
 import com.pure.service.domain.ContractStatus;
@@ -398,6 +399,9 @@ public class ContractServiceImpl implements ContractService {
         List<Contract> contracts = contractRepository.findByStudent_Id(studentId);
 
         List<StudentClassLog> studentClassLogs = studentClassLogRepository.findByStudent_Id(studentId);
+        for (StudentClassLog classLog : studentClassLogs) {
+            ClassArrangement classArrangement = classLog.getArrangement();
+        }
     }
 
     private CourseCategoryBasedReport getCourseCategoryBasedReport(Map<ClassCategoryBase, List<Contract>> courseCategoryBaseListMap) {
