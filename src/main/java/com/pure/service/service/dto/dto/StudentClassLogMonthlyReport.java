@@ -15,8 +15,17 @@ public class StudentClassLogMonthlyReport implements Serializable {
     private Integer actualTaken;
     private Integer month;
     private Integer year;
+    private Integer frozen;
     //key
     private String yearMonth;
+
+    public Integer getFrozen() {
+        return frozen;
+    }
+
+    public void setFrozen(Integer frozen) {
+        this.frozen = frozen;
+    }
 
     private List<StudentClassLogDailyReport> details = new ArrayList<>();
 

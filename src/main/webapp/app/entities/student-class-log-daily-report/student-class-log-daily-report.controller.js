@@ -86,6 +86,7 @@
                 vm.studentClassLogDailyReport.absence = vm.statusBasedStudent.absentStudents.length;
                 vm.studentClassLogDailyReport.added = vm.statusBasedStudent.addedStudents.length;
                 vm.studentClassLogDailyReport.actualTaken = vm.statusBasedStudent.actualTakenStudents.length;
+                vm.studentClassLogDailyReport.frozen = vm.statusBasedStudent.frozenStudents.length;
                 vm.studentClassLogDailyReport.logDate = vm.logDateCondition.logDate;
 
             });
@@ -121,6 +122,9 @@
                 case "actualTaken":
 
                     vm.students = vm.statusBasedStudent.actualTakenStudents;
+                    break;
+                case "frozen":
+                    vm.students = vm.statusBasedStudent.frozenStudents;
                     break;
                 default:
                     break;

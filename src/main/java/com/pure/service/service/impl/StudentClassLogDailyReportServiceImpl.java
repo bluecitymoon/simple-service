@@ -4,6 +4,7 @@ import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentAbsenceLog;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.domain.StudentClassLogDailyReport;
+import com.pure.service.domain.StudentFrozenArrangement;
 import com.pure.service.domain.StudentLeave;
 import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ClassArrangementRepository;
@@ -13,10 +14,12 @@ import com.pure.service.service.StudentClassLogDailyReportQueryService;
 import com.pure.service.service.StudentClassLogDailyReportService;
 import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.StudentClassService;
+import com.pure.service.service.StudentFrozenArrangementQueryService;
 import com.pure.service.service.StudentLeaveQueryService;
 import com.pure.service.service.dto.StudentAbsenceLogCriteria;
 import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.StudentClassLogDailyReportCriteria;
+import com.pure.service.service.dto.StudentFrozenArrangementCriteria;
 import com.pure.service.service.dto.StudentLeaveCriteria;
 import com.pure.service.service.dto.dto.ClassSchedule;
 import com.pure.service.service.dto.dto.StatusBasedStudent;
@@ -39,6 +42,8 @@ import org.springframework.util.CollectionUtils;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -75,6 +80,9 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
 
     @Autowired
     private StudentClassLogDailyReportQueryService studentClassLogDailyReportQueryService;
+
+    @Autowired
+    private StudentFrozenArrangementQueryService studentFrozenArrangementQueryService;
 
     public StudentClassLogDailyReportServiceImpl(StudentClassLogDailyReportRepository studentClassLogDailyReportRepository) {
         this.studentClassLogDailyReportRepository = studentClassLogDailyReportRepository;
@@ -145,11 +153,13 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
         Set<Student> absentStudents = new HashSet<>();
         Set<Student> addedStudents = new HashSet<>();
         Set<Student> actualStudents = new HashSet<>();
+        Set<Student> frozenStudents = new HashSet<>();
 
         StudentLeaveCriteria studentLeaveCriteria = new StudentLeaveCriteria();
         StudentAbsenceLogCriteria studentAbsenceLogCriteria = new StudentAbsenceLogCriteria();
-
         StudentClassLogCriteria studentClassLogCriteria = new StudentClassLogCriteria();
+        StudentFrozenArrangementCriteria studentFrozenArrangementCriteria = new StudentFrozenArrangementCriteria();
+
         for (ClassSchedule todaySchedule : todaySchedules) {
             Long classId = todaySchedule.getClassId();
 
@@ -179,6 +189,11 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
 
             List<Student> actualStudentList = studentClassLogs.stream().map(StudentClassLog::getStudent).collect(Collectors.toList());
             actualStudents.addAll(actualStudentList);
+
+            studentFrozenArrangementCriteria.setClassArrangementId(classArrangementId);
+            List<Student> studentFrozenArrangements = studentFrozenArrangementQueryService.findByCriteria(studentFrozenArrangementCriteria).stream().map(StudentFrozenArrangement::getStudent).collect(Collectors.toList());
+
+            frozenStudents.addAll(studentFrozenArrangements);
         }
 
         statusBasedStudent.setShouldTakenStudents(new ArrayList<>(shouldTakenStudents));
@@ -186,6 +201,7 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
         statusBasedStudent.setAbsentStudents(new ArrayList<>(absentStudents));
         statusBasedStudent.setAddedStudents(new ArrayList<>(addedStudents));
         statusBasedStudent.setActualTakenStudents(new ArrayList<>(actualStudents));
+        statusBasedStudent.setFrozenStudents(new ArrayList<>(frozenStudents));
         statusBasedStudent.setLogDate(logDate);
 
 
@@ -273,7 +289,7 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
             String monthYear = logListEntry.getKey();
             List<StudentClassLogDailyReport> reports = logListEntry.getValue();
 
-            int shouldTaken = 0,leave = 0, absence = 0, added = 0, actualTaken = 0;
+            int shouldTaken = 0,leave = 0, absence = 0, added = 0, actualTaken = 0, frozen = 0;
             for (StudentClassLogDailyReport report : reports) {
 
                 shouldTaken += report.getShouldTaken();
@@ -281,7 +297,18 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
                 absence += report.getAbsence();
                 added += report.getAdded();
                 actualTaken += report.getActualTaken();
+                frozen += report.getFrozen();
             }
+
+            Comparator<StudentClassLogDailyReport> logDailyReportComparator = (StudentClassLogDailyReport o1, StudentClassLogDailyReport o2) -> {
+                if (o1.getLogDate().isBefore(o2.getLogDate())) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            };
+
+            Collections.sort(reports, logDailyReportComparator);
 
             monthlyReport.setYearMonth(monthYear);
             monthlyReport.setAbsence(absence);
@@ -290,6 +317,7 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
             monthlyReport.setShouldTaken(shouldTaken);
             monthlyReport.setLeave(leave);
             monthlyReport.setDetails(reports);
+            monthlyReport.setFrozen(frozen);
 
             result.add(monthlyReport);
         }

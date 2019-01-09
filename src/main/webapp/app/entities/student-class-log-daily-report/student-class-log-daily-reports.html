@@ -110,6 +110,22 @@
                         </div>
                     </div>
                     <div class="col-md-1">
+                        <div class="panel panel-dark panel-colorful">
+                            <div class="pad-all text-center">
+                                <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.frozen}}</span>
+                                <p>冻结</p>
+                                <!--<i class="fa fa-calendar fa-2x icon-lg"></i>-->
+
+                                <button type="submit"
+                                        ng-click="vm.showShouldTakenStudents('frozen')"
+                                        class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-eye-open"></span>
+                                    <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
                         <div class="panel panel-success panel-colorful">
                             <div class="pad-all text-center">
                                 <span class="text-3x text-thin">{{vm.studentClassLogDailyReport.actualTaken}}</span>
@@ -126,8 +142,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-1">
-                    </div>
+
 
                     <div class="col-md-6">
                         <div class="panel panel-colorful">
@@ -314,6 +329,15 @@
                                 </div>
                             </div>
                             <div class="col-md-1">
+                                <div class="panel panel-dark panel-colorful">
+                                    <div class="pad-all text-center">
+                                        <span class="text-3x text-thin">{{detail.frozen}}</span>
+                                        <p>冻结</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
                                 <div class="panel panel-success panel-colorful">
                                     <div class="pad-all text-center">
                                         <span class="text-3x text-thin">{{detail.actualTaken}}</span>
@@ -344,6 +368,9 @@
                                         <th><span
                                                 data-translate="simpleServiceApp.studentClassLogDailyReport.added">Added</span>
                                         </th>
+                                        <th>
+                                            冻结
+                                        </th>
 
                                         <th><span>确认日期</span></th>
 
@@ -356,6 +383,7 @@
                                         <td>{{studentClassLogDailyReport.leave}}</td>
                                         <td>{{studentClassLogDailyReport.absence}}</td>
                                         <td>{{studentClassLogDailyReport.added}}</td>
+                                        <td>{{studentClassLogDailyReport.frozen}}</td>
                                         <td>{{studentClassLogDailyReport.logDate | date:'yyyy-MM-dd HH:mm'}}</td>
                                     </tr>
 

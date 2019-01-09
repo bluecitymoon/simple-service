@@ -14,8 +14,17 @@ public class StatusBasedStudent implements Serializable {
     private List<Student> askedLeaveStudents = new ArrayList<>();
     private List<Student> addedStudents = new ArrayList<>();
     private List<Student> actualTakenStudents = new ArrayList<>();
+    private List<Student> frozenStudents = new ArrayList<>();
     private Instant logDate;
     private String weekName;
+
+    public List<Student> getFrozenStudents() {
+        return frozenStudents;
+    }
+
+    public void setFrozenStudents(List<Student> frozenStudents) {
+        this.frozenStudents = frozenStudents;
+    }
 
     public List<Student> getAskedLeaveStudents() {
         return askedLeaveStudents;
