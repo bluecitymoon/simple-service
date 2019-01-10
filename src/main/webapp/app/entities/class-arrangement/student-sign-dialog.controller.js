@@ -14,6 +14,7 @@
         vm.allSelected = true;
         vm.students = [];
         vm.tempStudents = [];
+        vm.addedStudents = [];
         vm.allTeachers = Teacher.query({size: 1000, page: 0});
         vm.clear = clear;
         vm.openCalendar = openCalendar;

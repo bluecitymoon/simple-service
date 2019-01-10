@@ -308,7 +308,7 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
                 }
             };
 
-            Collections.sort(reports, logDailyReportComparator);
+            Collections.sort(reports, logDailyReportComparator.reversed());
 
             monthlyReport.setYearMonth(monthYear);
             monthlyReport.setAbsence(absence);
