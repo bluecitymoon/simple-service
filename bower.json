@@ -32,7 +32,9 @@
     "angular-ui-select": "0.19.8",
     "echarts": "3.0.0",
     "angular-file-upload": "2.5.0",
-    "angular-ui-calendar": "0.8.1"
+    "angular-ui-calendar": "0.8.1",
+    "sweetalert2": "7.33.1",
+    "angular-h-sweetalert": "2.0.1"
   },
   "devDependencies": {
     "angular-mocks": "1.5.8"

@@ -1,0 +1,18 @@
+import './home.css';
+
+export default {
+    template: `
+    <header></header>
+    <comparison></comparison>
+    <install></install>
+    <importmodule></importmodule>
+    <exampletitle></exampletitle>
+    <example highlight></example>
+    <docs></docs>
+    `,
+    controller: class {
+        /* @ngInject */
+        constructor() {}
+
+    }
+};

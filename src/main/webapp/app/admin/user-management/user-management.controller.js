@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('UserManagementController', UserManagementController);
 
-    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'JhiLanguageService'];
+    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'JhiLanguageService', 'swal'];
 
-    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, JhiLanguageService) {
+    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, JhiLanguageService, swal) {
         var vm = this;
 
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
@@ -33,6 +33,39 @@
         Principal.identity().then(function(account) {
             vm.currentAccount = account;
         });
+
+        vm.openResetPasswordDialog = function (user) {
+
+            swal({
+                title: '重置密码',
+                input: 'text',
+                text: '请输入该用户的新密码（最低6位）',
+                type: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '确定重置',
+                cancelButtonText: "取消"
+            }).then(function (input) {
+
+                if (!input.value) { return; }
+
+                User.resetPasswordForUser({user: user, newPassword: input.value}, function(response) {
+
+                    swal({
+                        title: '提示',
+                        text: '密码重置成功！',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: '确定'
+                    })
+
+                }, function (error) {
+                    AlertService.showCommonError(error);
+                })
+
+            });
+        };
 
         function setActive (user, isActivated) {
             user.activated = isActivated;

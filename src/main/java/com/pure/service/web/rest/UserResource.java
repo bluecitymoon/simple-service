@@ -13,6 +13,7 @@ import com.pure.service.service.UserRegionQueryService;
 import com.pure.service.service.UserService;
 import com.pure.service.service.dto.UserDTO;
 import com.pure.service.service.dto.UserRegionCriteria;
+import com.pure.service.service.dto.request.ResetPasswordRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import com.pure.service.web.rest.vm.ManagedUserVM;
@@ -130,6 +131,18 @@ public class UserResource {
                 .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
                 .body(newUser);
         }
+    }
+
+    @PostMapping("/users/force-reset-password")
+    @Timed
+    @Secured({AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEADMASTER})
+    public ResponseEntity resetPasswordForUser(@Valid @RequestBody ResetPasswordRequest resetPasswordRequest) throws URISyntaxException {
+
+        User newUser = userService.resetPasswordForUser(resetPasswordRequest);
+
+        return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
+            .headers(HeaderUtil.createAlert( "userManagement.created", newUser.getLogin()))
+            .body(newUser);
     }
 
     /**

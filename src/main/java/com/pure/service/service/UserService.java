@@ -7,6 +7,7 @@ import com.pure.service.config.Constants;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.security.AuthoritiesConstants;
 import com.pure.service.security.SecurityUtils;
+import com.pure.service.service.dto.request.ResetPasswordRequest;
 import com.pure.service.service.util.RandomUtil;
 import com.pure.service.service.dto.UserDTO;
 
@@ -253,5 +254,15 @@ public class UserService {
     public List<Authority> getDetailedAuthorities() {
 
         return authorityRepository.findAll();
+    }
+
+    public User resetPasswordForUser(ResetPasswordRequest resetPasswordRequest) {
+
+        String encryptedPassword = passwordEncoder.encode(resetPasswordRequest.getNewPassword());
+
+        User user = userRepository.findOneWithAuthoritiesById(resetPasswordRequest.getUser().getId());
+        user.setPassword(encryptedPassword);
+
+        return userRepository.save(user);
     }
 }

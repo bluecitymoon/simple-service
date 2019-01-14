@@ -1,0 +1,31 @@
+{
+  "name": "angular-sweetalert",
+  "homepage": "https://github.com/leftstick/angular-sweetalert",
+  "description": "An angular service which expose sweetalert in angular way",
+  "main": [
+    "dist/ngSweetAlert2.js",
+    "dist/ngSweetAlert2.min.js"
+  ],
+  "keywords": [
+    "angular",
+    "sweetalert2"
+  ],
+  "authors": [
+    "Howard.Zuo"
+  ],
+  "license": "GPL-3.0",
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ],
+  "version": "2.0.1",
+  "_release": "2.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.0.1",
+    "commit": "17c36fd21fd8516910624dd96985f02b5d0bae11"
+  },
+  "_source": "https://github.com/leftstick/angular-sweetalert.git",
+  "_target": "2.0.1",
+  "_originalSource": "angular-h-sweetalert"
+}

@@ -1,0 +1,61 @@
+example {
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+}
+
+example .example {
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+}
+
+example .example .left-side {
+    width: 300px;
+    text-align: center;
+}
+
+example .example .left-side p {
+    margin: 15px 0;
+    font-size: 17px;
+    font-weight: 300;
+    color: #848d94;
+    line-height: 25px;
+}
+
+example .example pre {
+    margin-top: 55px;
+    max-width: 420px;
+}
+
+example .example.jquery pre {
+    margin-top: 95px;
+}
+
+example .example.twolines pre {
+    margin-top: 80px;
+}
+
+@media screen and (max-width: 420px) {
+    example .example pre {
+        width: calc(100vw - 15px);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    example {
+        width: 100%;
+    }
+
+    example .example {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    example .example pre,
+    example .example.jquery pre,
+    example .example.twolines pre  {
+        margin-top: 25px;
+    }
+}

@@ -39,6 +39,10 @@
                 url: 'api/users/authorities/detail',
                 method: 'GET',
                 isArray: true
+            },
+            'resetPasswordForUser': {
+                url: 'api/users/force-reset-password',
+                method: 'POST'
             }
         });
 
