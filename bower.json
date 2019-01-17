@@ -55,6 +55,11 @@
         "angular": "1.5.8"
       }
     },
+    "angular-h-sweetalert": {
+      "dependencies": {
+        "angular": "1.5.8"
+      }
+    },
     "bootstrap": {
       "main": [
         "dist/css/bootstrap.css"
