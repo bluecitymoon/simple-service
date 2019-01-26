@@ -16,4 +16,5 @@ import java.util.List;
 public interface CustomerCollectionLogRepository extends JpaRepository<CustomerCollectionLog, Long>, JpaSpecificationExecutor<CustomerCollectionLog> {
 
     List<CustomerCollectionLog> findByCustomer_Id(Long id);
+    List<CustomerCollectionLog> findBySerialNumber(String serialNumber);
 }

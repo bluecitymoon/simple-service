@@ -9,6 +9,7 @@ import com.pure.service.repository.CollectionStatusRepository;
 import com.pure.service.repository.ContractRepository;
 import com.pure.service.repository.ContractTemplateRepository;
 import com.pure.service.repository.CustomerCardRepository;
+import com.pure.service.repository.CustomerCollectionLogRepository;
 import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.CustomerCollectionLogService;
@@ -54,7 +55,8 @@ public class CollectionServiceImpl implements CollectionService {
     @Autowired
     private CustomerCollectionLogService customerCollectionLogService;
 
-
+    @Autowired
+    private CustomerCollectionLogRepository collectionLogRepository;
 
     public CollectionServiceImpl(CollectionRepository collectionRepository) {
         this.collectionRepository = collectionRepository;
@@ -132,6 +134,7 @@ public class CollectionServiceImpl implements CollectionService {
         CollectionStatus collectionStatus = collectionStatusRepository.findByCode(CollectionStatusEnum.collected.name());
         collection.setStatus(collectionStatus);
 
+        collection.setMoneyCollected(collection.getMoneyShouldCollected());
         Collection savedCollection = collectionRepository.save(collection);
 
         List<CustomerCard> cards = customerCardRepository.findBySerialNumber(collection.getSequenceNumber());
@@ -140,7 +143,7 @@ public class CollectionServiceImpl implements CollectionService {
         log = log.collection(savedCollection)
             .balance(collection.getBalance())
             .serialNumber(collection.getSequenceNumber())
-            .moneyCollected(collection.getMoneyCollected())
+            .moneyCollected(collection.getMoneyShouldCollected())
             .moneyShouldCollected(collection.getMoneyShouldCollected());
 
         if (!CollectionUtils.isEmpty(cards)) {
@@ -194,5 +197,30 @@ public class CollectionServiceImpl implements CollectionService {
         }
 
         return true;
+    }
+
+    @Override
+    public Collection fixRegionId() {
+
+        List<Collection> collections = collectionRepository.findAll();
+
+        for (Collection collection : collections) {
+
+            List<CustomerCollectionLog> logs = collectionLogRepository.findBySerialNumber(collection.getSequenceNumber());
+            if (!CollectionUtils.isEmpty(logs)) {
+                CustomerCollectionLog log = logs.get(0);
+
+                collection.setRegionId(log.getRegionId());
+            }
+
+            if (collection.getStatus().getName().equals("已付款")) {
+                collection.setMoneyCollected(collection.getMoneyShouldCollected());
+            }
+//            collection.setRegionId(collection.get);
+        }
+
+        collectionRepository.save(collections);
+
+        return null;
     }
 }

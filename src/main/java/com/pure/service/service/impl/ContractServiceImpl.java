@@ -11,6 +11,7 @@ import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCommunicationLog;
 import com.pure.service.domain.CustomerCommunicationLogType;
 import com.pure.service.domain.MarketChannelCategory;
+import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClassLog;
 import com.pure.service.domain.User;
 import com.pure.service.region.RegionIdStorage;
@@ -401,6 +402,11 @@ public class ContractServiceImpl implements ContractService {
         List<StudentClassLog> studentClassLogs = studentClassLogRepository.findByStudent_Id(studentId);
         for (StudentClassLog classLog : studentClassLogs) {
             ClassArrangement classArrangement = classLog.getArrangement();
+            Student student = classLog.getStudent();
+
+            for (Contract contract : contracts) {
+
+            }
         }
     }
 

@@ -2,6 +2,8 @@ package com.pure.service.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.pure.service.domain.Collection;
+import com.pure.service.region.RegionBasedInsert;
+import com.pure.service.region.RegionBasedQuery;
 import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractService;
 import com.pure.service.web.rest.util.HeaderUtil;
@@ -58,6 +60,7 @@ public class CollectionResource {
      */
     @PostMapping("/collections")
     @Timed
+    @RegionBasedInsert
     public ResponseEntity<Collection> createCollection(@RequestBody Collection collection) throws URISyntaxException {
         log.debug("REST request to save Collection : {}", collection);
         if (collection.getId() != null) {
@@ -67,6 +70,15 @@ public class CollectionResource {
         return ResponseEntity.created(new URI("/api/collections/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/collections/fix-region-id")
+    @Timed
+    @RegionBasedInsert
+    public ResponseEntity fixRegionId() {
+
+        collectionService.fixRegionId();
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/collections/confirm")
@@ -121,6 +133,7 @@ public class CollectionResource {
      */
     @GetMapping("/collections")
     @Timed
+    @RegionBasedQuery
     public ResponseEntity<List<Collection>> getAllCollections(CollectionCriteria criteria,@ApiParam Pageable pageable) {
         log.debug("REST request to get Collections by criteria: {}", criteria);
         Page<Collection> page = collectionQueryService.findByCriteria(criteria, pageable);

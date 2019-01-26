@@ -43,4 +43,6 @@ public interface CollectionService {
     void confirmCustomerCollection(Collection collection);
 
     boolean customerCardPaid(String serialNumber);
+
+    Collection fixRegionId();
 }

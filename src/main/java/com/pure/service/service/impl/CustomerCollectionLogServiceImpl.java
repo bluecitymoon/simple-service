@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * Service Implementation for managing CustomerCollectionLog.
@@ -73,5 +75,18 @@ public class CustomerCollectionLogServiceImpl implements CustomerCollectionLogSe
     public void delete(Long id) {
         log.debug("Request to delete CustomerCollectionLog : {}", id);
         customerCollectionLogRepository.delete(id);
+    }
+
+    @Override
+    public void fixRegionId() {
+
+        List<CustomerCollectionLog> allLogs = customerCollectionLogRepository.findAll();
+
+        for (CustomerCollectionLog customerCollectionLog : allLogs) {
+            customerCollectionLog.setRegionId(customerCollectionLog.getCustomer().getRegionId());
+            customerCollectionLog.setMoneyCollected(customerCollectionLog.getMoneyShouldCollected());
+        }
+
+        customerCollectionLogRepository.save(allLogs);
     }
 }

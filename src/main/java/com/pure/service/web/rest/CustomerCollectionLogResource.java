@@ -67,6 +67,15 @@ public class CustomerCollectionLogResource {
             .body(result);
     }
 
+    @PostMapping("/customer-collection-logs/fix-region-id")
+    @Timed
+    @RegionBasedInsert
+    public ResponseEntity fixRegionId() {
+
+        customerCollectionLogService.fixRegionId();
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * PUT  /customer-collection-logs : Updates an existing customerCollectionLog.
      *
