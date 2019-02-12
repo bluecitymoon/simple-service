@@ -1,21 +1,19 @@
 package com.pure.service.service;
 
+import com.pure.service.config.Constants;
 import com.pure.service.domain.Authority;
 import com.pure.service.domain.User;
 import com.pure.service.repository.AuthorityRepository;
-import com.pure.service.config.Constants;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.security.AuthoritiesConstants;
 import com.pure.service.security.SecurityUtils;
+import com.pure.service.service.dto.UserDTO;
 import com.pure.service.service.dto.request.ResetPasswordRequest;
 import com.pure.service.service.util.RandomUtil;
-import com.pure.service.service.dto.UserDTO;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.stereotype.Service;
@@ -24,7 +22,10 @@ import org.springframework.util.StringUtils;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -235,7 +236,7 @@ public class UserService {
      * <p>
      * This is scheduled to get fired everyday, at 01:00 (am).
      */
-    @Scheduled(cron = "0 0 1 * * ?")
+//    @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
         List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS));
         for (User user : users) {

@@ -125,6 +125,7 @@ public class CustomerCardServiceImpl implements CustomerCardService {
                 collection.setBalance(balance);
             }
             collection.setPayerName(customerCard.getCustomer().getName());
+            RegionUtils.setRegionAbstractAuditingRegionEntity(collection);
 
             collectionService.save(collection);
 
