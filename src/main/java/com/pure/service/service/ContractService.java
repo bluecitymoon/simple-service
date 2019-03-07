@@ -62,4 +62,6 @@ public interface ContractService {
     CombinedConsultantReport getCourseConsultantWorkReport(CustomerStatusRequest request);
 
     void refreshContractBalance(Long studentId);
+
+    void refreshContractBalance();
 }

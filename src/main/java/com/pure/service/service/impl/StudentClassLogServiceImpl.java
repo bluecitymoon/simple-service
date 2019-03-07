@@ -307,6 +307,7 @@ public class StudentClassLogServiceImpl implements StudentClassLogService{
             studentClassLog.setStudent(student);
             studentClassLog.setArrangement(classArrangement);
             studentClassLog.setType(type);
+            studentClassLog.setContractMarked(false);
             //流水号
             studentClassLog.setUniqueNumber(uniqueNumber);
 

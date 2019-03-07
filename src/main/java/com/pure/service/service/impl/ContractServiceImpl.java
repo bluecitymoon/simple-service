@@ -397,17 +397,45 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void refreshContractBalance(Long studentId) {
 
+        log.debug("Refreshing contract balance for student {}", studentId);
+
         List<Contract> contracts = contractRepository.findByStudent_Id(studentId);
 
+        if (CollectionUtils.isEmpty(contracts)) return;
+
         List<StudentClassLog> studentClassLogs = studentClassLogRepository.findByStudent_Id(studentId);
+        if (CollectionUtils.isEmpty(studentClassLogs)) return;
+
         for (StudentClassLog classLog : studentClassLogs) {
+
             ClassArrangement classArrangement = classLog.getArrangement();
             Student student = classLog.getStudent();
+//
+//            contracts.
+//                stream()
+//                .filter(contract -> contract.getProduct().equals(classArrangement.getClazz()))
+//                .findFirst()
 
-            for (Contract contract : contracts) {
-
-            }
         }
+    }
+
+    @Override
+    public void refreshContractBalance() {
+
+        List<Contract> contracts = contractRepository.findAll();
+
+        for (Contract contract : contracts) {
+
+            Student student = contract.getStudent();
+
+            List<StudentClassLog> studentClassLogs = studentClassLogRepository.findByStudent_Id(student.getId());
+
+            if (CollectionUtils.isEmpty(studentClassLogs)) {
+                contract.setHoursTaken(0);
+            }
+
+        }
+
     }
 
     private CourseCategoryBasedReport getCourseCategoryBasedReport(Map<ClassCategoryBase, List<Contract>> courseCategoryBaseListMap) {

@@ -223,6 +223,10 @@ public class StudentClassLogDailyReportServiceImpl implements StudentClassLogDai
 
         classLogDailyReportCriteria.setLogDate(instantFilter);
 
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(RegionUtils.getRegionIdForCurrentUser());
+
+        classLogDailyReportCriteria.setRegionId(longFilter);
         List<StudentClassLogDailyReport> existedReports = studentClassLogDailyReportQueryService.findByCriteria(classLogDailyReportCriteria);
 
         if (CollectionUtils.isEmpty(existedReports)) {

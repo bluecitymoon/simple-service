@@ -36,6 +36,9 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
     @Column(name = "point")
     private Integer point;
 
+    @Column(name = "calculated_in_contract")
+    private Boolean contractMarked;
+
     @ManyToOne
     private Student student;
 
@@ -46,6 +49,15 @@ public class StudentClassLog extends AbstractAuditingRegionEntity {
     private StudentClassLogType type;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+
+    public Boolean getContractMarked() {
+        return contractMarked;
+    }
+
+    public void setContractMarked(Boolean contractMarked) {
+        this.contractMarked = contractMarked;
+    }
+
     public Long getId() {
         return id;
     }

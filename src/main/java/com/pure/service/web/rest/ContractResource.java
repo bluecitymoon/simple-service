@@ -269,4 +269,13 @@ public class ContractResource {
 
         return new ResponseEntity<>(reports, null, HttpStatus.OK);
     }
+
+    @PostMapping("/contracts/refresh-contract-balance")
+    @Timed
+    public ResponseEntity<Void> refreshContractBalance() {
+
+        contractService.refreshContractBalance();
+
+        return ResponseEntity.ok().build();
+    }
 }

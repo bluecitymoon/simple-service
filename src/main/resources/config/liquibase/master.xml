@@ -158,6 +158,7 @@
     <include file="config/liquibase/changelog/20190120085707_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190126111553_changelog.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20190126120319_changelog.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190305055924_changelog.xml" relativeToChangelogFile="false"/>
 
     <!--<include file="config/liquibase/changelog/20180418080118_added_entity_constraints_FreeClassRegister.xml" relativeToChangelogFile="false"/>-->
     <include file="config/liquibase/changelog/20180426025350_added_entity_constraints_Customer.xml" relativeToChangelogFile="false"/>

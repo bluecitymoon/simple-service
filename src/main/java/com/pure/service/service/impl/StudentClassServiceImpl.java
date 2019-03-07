@@ -1,5 +1,6 @@
 package com.pure.service.service.impl;
 
+import com.pure.service.domain.Contract;
 import com.pure.service.domain.Product;
 import com.pure.service.domain.Student;
 import com.pure.service.domain.StudentClass;
@@ -9,8 +10,10 @@ import com.pure.service.repository.ProductRepository;
 import com.pure.service.repository.StudentClassInOutLogRepository;
 import com.pure.service.repository.StudentClassRepository;
 import com.pure.service.repository.StudentRepository;
+import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.StudentClassQueryService;
 import com.pure.service.service.StudentClassService;
+import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.StudentClassCriteria;
 import com.pure.service.service.dto.dto.CommonResponse;
 import com.pure.service.service.dto.request.SingleStudentClassRequest;
@@ -51,6 +54,9 @@ public class StudentClassServiceImpl implements StudentClassService{
 
     @Autowired
     private StudentClassQueryService studentClassQueryService;
+
+    @Autowired
+    private ContractQueryService contractQueryService;
 
     public StudentClassServiceImpl(StudentClassRepository studentClassRepository) {
         this.studentClassRepository = studentClassRepository;
@@ -186,6 +192,13 @@ public class StudentClassServiceImpl implements StudentClassService{
         studentClass.setStudent(student);
         studentClass.setProduct(clazz);
         RegionUtils.setRegionAbstractAuditingRegionEntity(studentClass);
+
+        ContractCriteria contractCriteria = new ContractCriteria();
+        LongFilter studentId = new LongFilter();
+        studentId.setEquals(student.getId());
+
+        contractCriteria.setStudentId(studentId);
+        List<Contract> studentContracts = contractQueryService.findByCriteria(contractCriteria);
 
         return save(studentClass);
     }
