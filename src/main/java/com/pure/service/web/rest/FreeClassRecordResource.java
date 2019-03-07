@@ -89,7 +89,7 @@ public class FreeClassRecordResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new freeClassRecord cannot already have an ID")).body(null);
         }
 
-        if (freeClassRecord.getContactPhoneNumber().length() != 11) {
+        if (StringUtils.isEmpty(freeClassRecord.getContactPhoneNumber())) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "badphonenumber", "手机号码错误")).body(null);
         }
 
