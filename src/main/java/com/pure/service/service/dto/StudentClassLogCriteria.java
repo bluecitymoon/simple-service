@@ -7,7 +7,7 @@ import io.github.jhipster.service.filter.IntegerFilter;
 import io.github.jhipster.service.filter.LongFilter;
 import io.github.jhipster.service.filter.StringFilter;
 
-
+import java.time.Instant;
 
 
 /**
@@ -44,7 +44,27 @@ public class StudentClassLogCriteria extends AbstractQueryCriteria {
 
     private Long classId;
 
+    private Instant arrangementStart;
+
+    private Instant arrangementEnd;
+
     public StudentClassLogCriteria() {
+    }
+
+    public Instant getArrangementStart() {
+        return arrangementStart;
+    }
+
+    public void setArrangementStart(Instant arrangementStart) {
+        this.arrangementStart = arrangementStart;
+    }
+
+    public Instant getArrangementEnd() {
+        return arrangementEnd;
+    }
+
+    public void setArrangementEnd(Instant arrangementEnd) {
+        this.arrangementEnd = arrangementEnd;
     }
 
     public LongFilter getId() {

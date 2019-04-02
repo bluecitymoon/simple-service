@@ -70,6 +70,7 @@
                 return;
             }
 
+            vm.isSaving = true;
             var request = {
                 studentId: vm.selectedStudent.id,
                 classId: vm.classSchedule.classId
@@ -80,8 +81,9 @@
                 AlertService.success("分配成功！");
                 vm.students.push(data.student);
 
+                vm.isSaving = false;
             }, function (error) {
-
+                vm.isSaving = false;
                 if (error.data && error.data.detail) {
 
                     AlertService.error(error.data.detail);

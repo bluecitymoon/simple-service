@@ -28,7 +28,9 @@ import com.pure.service.service.CollectionService;
 import com.pure.service.service.ContractQueryService;
 import com.pure.service.service.ContractService;
 import com.pure.service.service.CustomerCardService;
+import com.pure.service.service.StudentClassLogQueryService;
 import com.pure.service.service.dto.ContractCriteria;
+import com.pure.service.service.dto.StudentClassLogCriteria;
 import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.ConsultantDealRate;
 import com.pure.service.service.dto.dto.ConsultantDealRateReport;
@@ -106,6 +108,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Autowired
     private StudentClassLogRepository studentClassLogRepository;
+
+    @Autowired
+    private StudentClassLogQueryService studentClassLogQueryService;
 
     public ContractServiceImpl(ContractRepository contractRepository) {
         this.contractRepository = contractRepository;
@@ -426,17 +431,66 @@ public class ContractServiceImpl implements ContractService {
 
         for (Contract contract : contracts) {
 
+            if (contract.getTotalHours() == null || contract.getTotalHours() == 0) {
+                continue;
+            }
+
             Student student = contract.getStudent();
 
-            List<StudentClassLog> studentClassLogs = studentClassLogRepository.findByStudent_Id(student.getId());
+            if (student == null) continue;
+
+            StudentClassLogCriteria criteria = new StudentClassLogCriteria();
+
+            LongFilter studentId = new LongFilter();
+            studentId.setEquals(student.getId());
+
+            criteria.setStudentId(studentId);
+
+            criteria.setArrangementStart(contract.getStartDate());
+            criteria.setArrangementEnd(contract.getEndDate());
+
+            List<StudentClassLog> studentClassLogs = studentClassLogQueryService.findByCriteria(criteria);
 
             if (CollectionUtils.isEmpty(studentClassLogs)) {
                 contract.setHoursTaken(0);
             }
 
+            //合同的班级匹配或者合同的课程匹配
+            List<StudentClassLog> logs = studentClassLogs.stream().filter(log -> {
+
+                if (contract.getProduct() != null ) {
+
+                    return log.getArrangement().getClazz().equals(contract.getProduct());
+
+                } else {
+
+                    if (log.getArrangement().getClazz().getCourse() == null) {
+                        return false;
+                    }
+
+                    return log.getArrangement().getClazz().getCourse().equals(contract.getCourse());
+                }
+
+            }).collect(Collectors.toList());
+
+            int total = 0;
+            if (CollectionUtils.isEmpty(logs)) {
+                contract.setHoursTaken(0);
+
+            }
+
+            for (StudentClassLog studentClassLog : logs) {
+                total += studentClassLog.getArrangement().getConsumeClassCount();
+            }
+
+            contract.setHoursTaken(total);
+
+            contractRepository.save(contract);
         }
 
     }
+
+
 
     private CourseCategoryBasedReport getCourseCategoryBasedReport(Map<ClassCategoryBase, List<Contract>> courseCategoryBaseListMap) {
         CourseCategoryBasedReport report = new CourseCategoryBasedReport();

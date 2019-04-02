@@ -18,6 +18,7 @@ import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.List;
 
 
@@ -107,6 +108,9 @@ public class StudentClassLogQueryService extends QueryService<StudentClassLog> {
             if (criteria.getClassId() != null) {
                 specification = specification.and(classId(criteria.getClassId()));
             }
+            if (criteria.getArrangementStart() != null && criteria.getArrangementEnd() != null) {
+                specification = specification.and(classArrangementDateStartBetween(criteria.getArrangementStart(), criteria.getArrangementEnd()));
+            }
         }
         return specification;
     }
@@ -114,5 +118,9 @@ public class StudentClassLogQueryService extends QueryService<StudentClassLog> {
     private Specification classId(Long classId) {
 
         return (root, query, cb) -> cb.equal(root.get(StudentClassLog_.arrangement).get(ClassArrangement_.clazz).get(Product_.id), classId);
+    }
+
+    private Specification classArrangementDateStartBetween(Instant start, Instant end) {
+        return (root, query, cb) -> cb.between(root.get(StudentClassLog_.arrangement).get(ClassArrangement_.startDate), start, end);
     }
 }

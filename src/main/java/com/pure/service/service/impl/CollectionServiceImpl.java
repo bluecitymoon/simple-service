@@ -4,6 +4,7 @@ import com.pure.service.domain.Collection;
 import com.pure.service.domain.CollectionStatus;
 import com.pure.service.domain.CustomerCard;
 import com.pure.service.domain.CustomerCollectionLog;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.CollectionRepository;
 import com.pure.service.repository.CollectionStatusRepository;
 import com.pure.service.repository.ContractRepository;
@@ -150,6 +151,7 @@ public class CollectionServiceImpl implements CollectionService {
             log.setCustomer(cards.get(0).getCustomer());
         }
 
+        RegionUtils.setRegionAbstractAuditingRegionEntity(log);
         customerCollectionLogService.save(log);
 //
 //        //确实收款后生成合同
