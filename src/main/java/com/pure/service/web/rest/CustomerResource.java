@@ -309,6 +309,34 @@ public class CustomerResource {
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
+    @PostMapping("/customers/status/report/refer")
+    @Timed
+    public ResponseEntity<List<StatusReportElement>> getReferCustomerStatusReport(@RequestBody CustomerStatusRequest customerStatusRequest) {
+
+        switch (customerStatusRequest.getQueryType()) {
+            case "monthly":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getYear()) || StringUtils.isEmpty(customerStatusRequest.getMonth())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+
+                preProccessStatusRequest(customerStatusRequest);
+
+                break;
+            case "dateRange":
+
+                if (StringUtils.isEmpty(customerStatusRequest.getStartDate()) || StringUtils.isEmpty(customerStatusRequest.getEndDate())) {
+                    return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "conditionneeded", "请输入搜索条件")).body(null);
+                }
+                break;
+            default:
+                break;
+        }
+        List<StatusReportElement> report = customerService.getReferStatusReport(customerStatusRequest);
+
+        return new ResponseEntity<>(report, HttpStatus.OK);
+    }
+
 
     @GetMapping("/customers/search/{keyword}")
     @Timed

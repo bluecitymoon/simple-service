@@ -67,6 +67,9 @@ public class FreeClassRecord extends AbstractAuditingRegionEntity {
     @Column(name = "gift_code")
     private String giftCode;
 
+    @Column(name = "outer_referer")
+    private String outerReferer;
+
     @ManyToOne
     private MarketChannelCategory marketChannelCategory;
 
@@ -87,6 +90,14 @@ public class FreeClassRecord extends AbstractAuditingRegionEntity {
 
     @ManyToOne
     private NewOrderWechatUserInfo newOrderWechatUserInfo;
+
+    public String getOuterReferer() {
+        return outerReferer;
+    }
+
+    public void setOuterReferer(String outerReferer) {
+        this.outerReferer = outerReferer;
+    }
 
     public Instant getScheduleDate() {
         return scheduleDate;

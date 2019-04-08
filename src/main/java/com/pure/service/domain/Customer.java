@@ -58,6 +58,15 @@ query = "select count(0) as count, l.name as location, l.id as locationId, cs.co
         " group by l.`id`, cs.id ",
     resultSetMapping = "locationStatusMapping"),
 
+ @NamedNativeQuery(name="Customer.searchReferCustomerStatusReport",
+
+query = "select count(0) as count, t.outer_referer as location, t.outer_referer as locationId, cs.code as statusCode, cs.name statusName from customer t \n" +
+    "\tcross join `customer_status` cs on t.`status_id` = cs.id\n" +
+    " \twhere t.assign_date < :2 and t.assign_date > :1\n" +
+    "\t and t.region_id = :3  \n" +
+    " group by cs.id, t.outer_referer",
+    resultSetMapping = "locationStatusMapping"),
+
     @NamedNativeQuery(name = "Customer.searchChannelReport",
     query = "select  cs.id as channelId, cs.name as channelName, count(0) as visitedCustomerCount from customer c \n" +
         "\tleft join market_channel_category cs on c.channel_id = cs.id\n" +
@@ -90,7 +99,7 @@ query = "select count(0) as count, l.name as location, l.id as locationId, cs.co
             columns = {
                 @ColumnResult(name = "count", type = Integer.class),
                 @ColumnResult(name = "location", type = String.class),
-                @ColumnResult(name = "locationId", type = Long.class),
+//                @ColumnResult(name = "locationId", type = String.class),
                 @ColumnResult(name = "statusCode", type = String.class),
                 @ColumnResult(name = "statusName", type = String.class)
             })),
@@ -183,6 +192,9 @@ public class Customer extends AbstractAuditingRegionEntity {
     @Column(name = "course_consultant_assign_date")
     private Instant courseConsultantAssignDate;
 
+    @Column(name = "outer_referer")
+    private String outerReferer;
+
     @OneToOne
     @JoinColumn(unique = true)
     private FreeClassRecord newOrder;
@@ -204,6 +216,14 @@ public class Customer extends AbstractAuditingRegionEntity {
 
     @ManyToOne
     private NewOrderResourceLocation newOrderResourceLocation;
+
+    public String getOuterReferer() {
+        return outerReferer;
+    }
+
+    public void setOuterReferer(String outerReferer) {
+        this.outerReferer = outerReferer;
+    }
 
     public VistedCustomerStatus getVistedCustomerStatus() {
         return vistedCustomerStatus;

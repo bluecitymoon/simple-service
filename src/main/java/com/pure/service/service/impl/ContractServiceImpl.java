@@ -236,6 +236,7 @@ public class ContractServiceImpl implements ContractService {
 //            contract.setCourse(customerCard.getCourse());
             contract.setContractNumber(generateContractNumber());
             contract.setTotalHours(template.getTotalHours());
+            contract.setTotalClassCount(template.getClassCount());
             contract.setContractNature(template.getContractNature());
             contract.setRegionId(regionId);
             contract.setContractStatus(generated);
@@ -490,6 +491,18 @@ public class ContractServiceImpl implements ContractService {
 
     }
 
+    @Override
+    public void contractTotalCount() {
+
+        List<Contract> contracts = contractRepository.findAll();
+        for (Contract contract : contracts) {
+            if (contract.getCustomerCard() != null) {
+                contract.setTotalHours(contract.getCustomerCard().getCustomerCardType().getClassCount());
+            }
+        }
+
+        contractRepository.save(contracts);
+    }
 
 
     private CourseCategoryBasedReport getCourseCategoryBasedReport(Map<ClassCategoryBase, List<Contract>> courseCategoryBaseListMap) {

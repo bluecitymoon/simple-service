@@ -55,12 +55,52 @@
                 parent: 'entity',
                 url: '/customer-location-report-dtl?page&sort&search',
                 data: {
-                    authorities: ['ROLE_USER'],
-                    pageTitle: 'simpleServiceApp.customerStatusReportDtl.home.title'
+                    authorities: ['ROLE_USER']
                 },
                 views: {
                     'content@': {
                         templateUrl: 'app/entities/customer-status-report-dtl/customer-location-report-dtls.html',
+                        controller: 'CustomerStatusReportDtlController',
+                        controllerAs: 'vm'
+                    }
+                },
+                params: {
+                    page: {
+                        value: '1',
+                        squash: true
+                    },
+                    sort: {
+                        value: 'id,asc',
+                        squash: true
+                    },
+                    search: null
+                },
+                resolve: {
+                    pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
+                        return {
+                            page: PaginationUtil.parsePage($stateParams.page),
+                            sort: $stateParams.sort,
+                            predicate: PaginationUtil.parsePredicate($stateParams.sort),
+                            ascending: PaginationUtil.parseAscending($stateParams.sort),
+                            search: $stateParams.search
+                        };
+                    }],
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('customerStatusReportDtl');
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            })
+            .state('customer-refer-report-dtl', {
+                parent: 'entity',
+                url: '/customer-refer-report-dtl?page&sort&search',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                views: {
+                    'content@': {
+                        templateUrl: 'app/entities/customer-status-report-dtl/customer-refer-report-dtls.html',
                         controller: 'CustomerStatusReportDtlController',
                         controllerAs: 'vm'
                     }

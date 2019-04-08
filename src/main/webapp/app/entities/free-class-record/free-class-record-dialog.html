@@ -106,9 +106,17 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label>引入人</label>
+                    <input type="text" class="form-control" name="outerReferer" id="field_outerReferer"
+                           ng-model="vm.freeClassRecord.outerReferer"
+                    />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>内部引入人</label>
                     <ui-select ng-model="vm.freeClassRecord.referer">
                         <ui-select-match>
                             {{$select.selected.firstName}}

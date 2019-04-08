@@ -146,16 +146,23 @@ public class FreeClassRecordServiceImpl implements FreeClassRecordService {
             String olderFollowerLogin = oldFreeClassRecord.getSalesFollower() == null ? "" : oldFreeClassRecord.getSalesFollower().getLogin();
             String newFollowerLogin = freeClassRecord.getSalesFollower() == null ? "" : freeClassRecord.getSalesFollower().getLogin();
 
+            Customer associatedCustomer = customerRepository.findByNewOrder_Id(freeClassRecord.getId());
+
             if (!olderFollowerLogin.equals(newFollowerLogin)) {
 
                 saveFreeClassAssignHistory(freeClassRecord, oldFreeClassRecord);
-
-                Customer associatedCustomer = customerRepository.findByNewOrder_Id(freeClassRecord.getId());
 
                 if (associatedCustomer != null) {
                     associatedCustomer.setAssignDate(Instant.now());
                 }
 
+            }
+
+            //sync data to customer if changes is made to new order
+            if (associatedCustomer != null) {
+                associatedCustomer.setOuterReferer(freeClassRecord.getOuterReferer());
+
+                customerRepository.save(associatedCustomer);
             }
 
         } else {

@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1 class="page-title">区域报告</h1>
+    <h1 class="page-title">推广人员报告</h1>
 </div>
 <!--<jhi-alert></jhi-alert>-->
 <jhi-alert-error></jhi-alert-error>
@@ -29,7 +29,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-3 form-group">
 
-                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll('monthly')"><i
+                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadReferReport('monthly')"><i
                                     class="fa fa-search-minus"></i>查询
                             </button>
 
@@ -69,7 +69,7 @@
                         <div class="col-md-1"></div>
                         <div class="col-md-3 form-group">
 
-                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadAll('dateRange')">
+                            <button class="btn btn-primary btn-block" type="button" ng-click="vm.loadReferReport('dateRange')">
                                 <i
                                         class="fa fa-search-minus"></i>查询
                             </button>
@@ -85,85 +85,9 @@
 
 </uib-tabset>
 
-
-<!--<div class="panel-body">-->
-
-<!--<div class="row">-->
-<!--<div class="col-lg-8">-->
-<!--<p class="text-semibold text-uppercase text-main">总完成度</p>-->
-<!--<div class="row">-->
-<!--<div class="col-xs-5">-->
-<!--<div class="media">-->
-<!--<div class="media-left">-->
-<!--<span class="text-3x text-thin text-main">43.7</span>-->
-<!--</div>-->
-<!--<div class="media-body">-->
-<!--<p class="mar-no">%</p>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="col-xs-7 text-sm">-->
-<!--<p>-->
-<!--<span>最低</span>-->
-<!--<span class="pad-lft text-semibold">-->
-<!--<span class="text-lg">27%</span>-->
-<!--<span class="labellabel-success mar-lft">-->
-<!--<i class="pci-caret-down text-success"></i>-->
-<!--<smal>- 20</smal>-->
-<!--</span>-->
-<!--</span>-->
-<!--</p>-->
-<!--<p>-->
-<!--<span>最高</span>-->
-<!--<span class="pad-lft text-semibold">-->
-<!--<span class="text-lg">100%</span>-->
-<!--<span class="labellabel-danger mar-lft">-->
-<!--<i class="pci-caret-up text-danger"></i>-->
-<!--<smal>+ 57</smal>-->
-<!--</span>-->
-<!--</span>-->
-<!--</p>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<hr>-->
-
-<!--</div>-->
-
-
-<!--</div>-->
-<!--</div>-->
-
-<!--<div class="panel">-->
-    <!--<div class="panel-body">-->
-        <!--<uib-tabset>-->
-            <!--<uib-tab heading="总览">-->
-
-                <!--<div class="pad-all" style="">-->
-                    <!--<ng-echarts class="echarts" ec-config="lineConfig" ec-option="lineOption"-->
-                                <!--style="height: 455px; width: 1380px"></ng-echarts>-->
-                <!--</div>-->
-            <!--</uib-tab>-->
-            <!--<uib-tab heading="基于客户状态的TMK报告图表集">-->
-
-                <!--<div ng-repeat="chart in chartdtls track by chart.chartCode">-->
-                    <!--<div class="col-md-4">-->
-
-                        <!--<h3 class="panel-title">{{chart.chartName}}</h3>-->
-                        <!--<ng-echarts class="echarts" ec-config="lineConfig" ec-option="chart.lineOption"-->
-                                    <!--style="height: 455px; width: 300px"></ng-echarts>-->
-                    <!--</div>-->
-
-                <!--</div>-->
-            <!--</uib-tab>-->
-        <!--</uib-tabset>-->
-    <!--</div>-->
-<!--</div>-->
-
-
 <div class="panel">
 
-    <h3 class="panel-title">区域报告概览列表</h3>
+    <h3 class="panel-title">推广人员报告概览列表</h3>
 
     <div class="panel-body">
 
@@ -172,7 +96,7 @@
                 <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <!--<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> </th>-->
-                    <th><span>区域</span>
+                    <th><span>PWI/引入人员</span>
                     </th>
                     <th><span
                             data-translate="simpleServiceApp.customerStatusReportDtl.ageTooSmallCount">Age Too Small Count</span>
@@ -207,8 +131,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customerStatusReportDtl in vm.locationCustomerStatusReportDtls track by customerStatusReportDtl.locationId">
-                    <td>{{customerStatusReportDtl.location}}</td>
+                <tr ng-repeat="customerStatusReportDtl in vm.referCustomerStatusReportDtls track by $index">
+                    <td>{{customerStatusReportDtl.location || '未知人员'}}</td>
                     <td>{{customerStatusReportDtl.ageTooSmallCount}}</td>
                     <td>{{customerStatusReportDtl.errorInformation}}</td>
                     <td>{{customerStatusReportDtl.noWillingCount}}</td>

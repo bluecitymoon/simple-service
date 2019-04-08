@@ -77,5 +77,7 @@ public interface CustomerService {
     List<Customer> batchAssignCustomer(List<Customer> customers, Long userId);
 
     void fixAssignDateIssue();
+
+    List<StatusReportElement> getReferStatusReport(CustomerStatusRequest customerStatusRequest);
 }
 

@@ -278,4 +278,13 @@ public class ContractResource {
 
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/contracts/fix-contract-total-count")
+    @Timed
+    public ResponseEntity<Void> fixContractTotalCount() {
+
+        contractService.contractTotalCount();
+
+        return ResponseEntity.ok().build();
+    }
 }

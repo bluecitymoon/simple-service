@@ -279,6 +279,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setName(newOrder.getPersonName());
             customer.setContactPhoneNumber(newOrder.getContactPhoneNumber());
             customer.setSalesFollower(newOrder.getSalesFollower());
+            customer.setOuterReferer(newOrder.getOuterReferer());
             if (customer.getSalesFollower() != null ) {
                 customer.setAssignDate(Instant.now());
 
@@ -294,6 +295,7 @@ public class CustomerServiceImpl implements CustomerService {
             customer.setClassLevel(newOrder.getClassLevel());
             customer.setSchool(newOrder.getSchool());
             customer.setRegionId(newOrder.getRegionId());
+            customer.setOuterReferer(newOrder.getOuterReferer());
 
             Customer savedCustomer = save(customer);
 
@@ -485,6 +487,14 @@ public class CustomerServiceImpl implements CustomerService {
         return report;
     }
 
+    @Override
+    public List<StatusReportElement> getReferStatusReport(CustomerStatusRequest customerStatusRequest) {
+
+        List<LocationStatusReportEntity> entities =
+            customerRepository.searchReferCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), RegionUtils.getRegionIdForCurrentUser());
+
+        return generateStatusReport(entities);
+    }
 
     @Override
     public List<StatusReportElement> getLocationStatusReport(CustomerStatusRequest customerStatusRequest) {
@@ -492,17 +502,23 @@ public class CustomerServiceImpl implements CustomerService {
         List<LocationStatusReportEntity> entities =
             customerRepository.searchLocationCustomerStatusReport(customerStatusRequest.getStartDate(), customerStatusRequest.getEndDate(), RegionUtils.getRegionIdForCurrentUser());
 
-        Map<Long, StatusReportElement> locationBasedReportMap = new HashMap<>();
+        List<StatusReportElement> elements = generateStatusReport(entities);
+
+        return elements;
+    }
+
+    private List<StatusReportElement> generateStatusReport(List<LocationStatusReportEntity> entities) {
+        Map<String, StatusReportElement> locationBasedReportMap = new HashMap<>();
         for (LocationStatusReportEntity entity : entities) {
 
-            StatusReportElement reportElement = locationBasedReportMap.get(entity.getLocationId());
+            StatusReportElement reportElement = locationBasedReportMap.get(entity.getLocation());
             if (reportElement == null) {
                 reportElement = new StatusReportElement();
 
                 reportElement.setLocation(entity.getLocation());
-                reportElement.setLocationId(entity.getLocationId());
+//                reportElement.setLocationId(entity.getLocationId());
 
-                locationBasedReportMap.put(entity.getLocationId(), reportElement);
+                locationBasedReportMap.put(entity.getLocation(), reportElement);
             }
 
             switch (entity.getStatusCode()) {
@@ -797,5 +813,7 @@ public class CustomerServiceImpl implements CustomerService {
         log.debug("未找到分配历史记录数量 " + count + " 有历史记录的" + goodcount + "条");
 
     }
+
+
 
 }

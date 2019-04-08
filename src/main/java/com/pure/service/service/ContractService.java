@@ -64,4 +64,6 @@ public interface ContractService {
     void refreshContractBalance(Long studentId);
 
     void refreshContractBalance();
+
+    void contractTotalCount();
 }

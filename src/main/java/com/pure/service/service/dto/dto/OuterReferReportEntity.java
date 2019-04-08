@@ -2,18 +2,16 @@ package com.pure.service.service.dto.dto;
 
 import java.io.Serializable;
 
-public class LocationStatusReportEntity implements Serializable {
+public class OuterReferReportEntity implements Serializable {
 
     private Integer count;
-    private String location;
-//    private Long locationId;
+    private String refer;
     private String statusCode;
     private String statusName;
 
-    public LocationStatusReportEntity(Integer count, String location, String statusCode, String statusName) {
+    public OuterReferReportEntity(Integer count, String refer, String statusCode, String statusName) {
         this.count = count;
-        this.location = location;
-//        this.locationId = locationId;
+        this.refer = refer;
         this.statusCode = statusCode;
         this.statusName = statusName;
     }
@@ -26,21 +24,13 @@ public class LocationStatusReportEntity implements Serializable {
         this.count = count;
     }
 
-    public String getLocation() {
-        return location;
+    public String getRefer() {
+        return refer;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setRefer(String refer) {
+        this.refer = refer;
     }
-//
-//    public Long getLocationId() {
-//        return locationId;
-//    }
-//
-//    public void setLocationId(Long locationId) {
-//        this.locationId = locationId;
-//    }
 
     public String getStatusCode() {
         return statusCode;

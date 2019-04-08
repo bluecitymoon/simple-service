@@ -28,6 +28,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
     List<LocationStatusReportEntity> searchLocationCustomerStatusReport(Instant startDate, Instant endDate, Long regionId);
 
     @Query(nativeQuery = true)
+    List<LocationStatusReportEntity> searchReferCustomerStatusReport(Instant startDate, Instant endDate, Long regionId);
+
+    @Query(nativeQuery = true)
     Overview searchCurrentUserOverview(Long userId, Instant endDate, Instant startDate, Long regionId);
 
     @Query(nativeQuery = true)
@@ -46,4 +49,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Long>, JpaSp
     Customer findByContactPhoneNumber(String contactPhoneNumber);
 
     List<Customer> findByAssignDateIsNullAndSalesFollowerIsNotNull();
+
 }

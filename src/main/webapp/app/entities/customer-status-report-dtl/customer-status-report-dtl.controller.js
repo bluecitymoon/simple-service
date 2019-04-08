@@ -77,6 +77,26 @@
 
         }
 
+        vm.loadReferReport = function (type) {
+
+            vm.searchCondition.queryType = type;
+
+            if (vm.searchCondition.yearObject) {
+                vm.searchCondition.year = vm.searchCondition.yearObject.id;
+            }
+
+            if (vm.searchCondition.monthObject) {
+                vm.searchCondition.month = vm.searchCondition.monthObject.id;
+            }
+
+            CustomerStatusReportDtl.loadReferReport(vm.searchCondition,
+                function (data) {
+                    vm.referCustomerStatusReportDtls = data;
+                }, function (error) {
+                    AlertService.showCommonError(error);
+                });
+        };
+
         function loadAll (type) {
 
             vm.searchCondition.queryType = type;
