@@ -62,7 +62,7 @@ query = "select count(0) as count, l.name as location, l.id as locationId, cs.co
 
 query = "select count(0) as count, t.outer_referer as location, t.outer_referer as locationId, cs.code as statusCode, cs.name statusName from customer t \n" +
     "\tcross join `customer_status` cs on t.`status_id` = cs.id\n" +
-    " \twhere t.assign_date < :2 and t.assign_date > :1\n" +
+    " \twhere t.created_date < :2 and t.created_date > :1\n" +
     "\t and t.region_id = :3  \n" +
     " group by cs.id, t.outer_referer",
     resultSetMapping = "locationStatusMapping"),
