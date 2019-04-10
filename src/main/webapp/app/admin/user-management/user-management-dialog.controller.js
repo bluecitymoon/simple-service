@@ -30,7 +30,8 @@
             "ROLE_RECEPTION",
             "ROLE_PWI",
             "ROLE_FINANCE",
-            "ROLE_EDUCATION_ADMIN"];
+            "ROLE_EDUCATION_ADMIN",
+            "ROLE_MARKET_DIRECTOR"];
         vm.clear = clear;
         vm.languages = null;
         vm.save = save;

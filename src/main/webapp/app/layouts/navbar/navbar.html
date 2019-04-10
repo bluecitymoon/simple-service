@@ -265,6 +265,48 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li uib-dropdown class="nav-item" ng-switch-when="true"
+                        has-any-authority="ROLE_MARKET_DIRECTOR">
+                        <a class="nav-link" uib-dropdown-toggle href="">
+                            <span>
+                                <span class="glyphicon glyphicon-level-up"></span>
+                                <span class="hidden-sm">
+                                    市场总监
+                                </span>
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-arrow" uib-dropdown-menu>
+
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="customer-status-report-dtl">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                    <span>TMK报表</span>
+                                </a>
+                            </li>
+                            <li has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER">
+                                <a ui-sref="customer-location-report-dtl">
+                                    <span class="glyphicon glyphicon-list"></span>
+                                    <span>区域报表</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="channel-report">
+                                    <span class="glyphicon glyphicon-folder-open"></span>
+                                    <span>来源性质报表</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="customer-refer-report-dtl">
+                                    <span class="glyphicon glyphicon-tags"></span>
+                                    <span>户外人员报表</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
                     <li uib-dropdown class="nav-item" ng-switch-when="true"
                         has-any-authority="ROLE_ADMIN,ROLE_HEADMASTER,ROLE_COURSE_CONSULTANT">
                         <a class="nav-link" uib-dropdown-toggle href="">
