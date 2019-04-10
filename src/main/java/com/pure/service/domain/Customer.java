@@ -53,7 +53,7 @@ query = "select count(0) as untrackedCustomerCount from customer t \n" +
 query = "select count(0) as count, l.name as location, l.id as locationId, cs.code as statusCode, cs.name statusName from customer t \n" +
         "\tcross join new_order_resource_location l on t.new_order_resource_location_id = l.`id`\n" +
         "\tcross join `customer_status` cs on t.`status_id` = cs.id\n" +
-        "\twhere t.assign_date < :2 and t.assign_date > :1\n" +
+        "\twhere t.created_date < :2 and t.created_date > :1\n" +
         "\t and t.region_id = :3 \n" +
         " group by l.`id`, cs.id ",
     resultSetMapping = "locationStatusMapping"),
