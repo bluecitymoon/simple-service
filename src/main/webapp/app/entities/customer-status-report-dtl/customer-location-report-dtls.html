@@ -207,7 +207,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customerStatusReportDtl in vm.locationCustomerStatusReportDtls track by customerStatusReportDtl.locationId">
+                <tr ng-repeat="customerStatusReportDtl in vm.locationCustomerStatusReportDtls track by $index">
                     <td>{{customerStatusReportDtl.location}}</td>
                     <td>{{customerStatusReportDtl.ageTooSmallCount}}</td>
                     <td>{{customerStatusReportDtl.errorInformation}}</td>
