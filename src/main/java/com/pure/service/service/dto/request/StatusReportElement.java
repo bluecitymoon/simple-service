@@ -18,8 +18,26 @@ public class StatusReportElement implements Serializable {
     private Integer visitedCount = 0; //已成交数量
     private Integer newCreatedCount = 0;
     private Integer totalCount = 0;
+    private Integer phoneNoAnsweredCount = 0;
     private String valuableRate = "0";
     private String finishRate = "0";
+    private String validRate = "0";
+
+    public Integer getPhoneNoAnsweredCount() {
+        return phoneNoAnsweredCount;
+    }
+
+    public void setPhoneNoAnsweredCount(Integer phoneNoAnsweredCount) {
+        this.phoneNoAnsweredCount = phoneNoAnsweredCount;
+    }
+
+    public String getValidRate() {
+        return validRate;
+    }
+
+    public void setValidRate(String validRate) {
+        this.validRate = validRate;
+    }
 
     public String getFinishRate() {
         return finishRate;

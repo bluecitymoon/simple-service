@@ -547,7 +547,9 @@ public class CustomerServiceImpl implements CustomerService {
                 case "visited":
                     reportElement.setVisitedCount(entity.getCount());
                     break;
-
+                case "No_Answer":
+                    reportElement.setPhoneNoAnsweredCount(entity.getCount());
+                    break;
                 default:
                     break;
 
@@ -561,12 +563,21 @@ public class CustomerServiceImpl implements CustomerService {
                 + element.getNoWillingCount() + element.getScheduledCount() + element.getVisitedCount();
             element.setTotalCount(totalCount);
 
+            Integer validCount =  element.getConsideringCount() + element.getDealedCount()
+                + element.getScheduledCount() + element.getVisitedCount();
+            element.setTotalCount(totalCount);
+
             if (totalCount > 0) {
                 Double finishRate = (new Double(totalCount) - element.getNewCreatedCount()) * 100 / totalCount;
+                Double validRate = new Double(validCount) * 100 / totalCount;
 
                 BigDecimal finishRateDecimal = new BigDecimal(finishRate);
                 BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
                 element.setFinishRate(roundedDecimal.toString() + "%");
+
+                BigDecimal validRateDecimal = new BigDecimal(validRate);
+                BigDecimal roundedDecimalValid = validRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+                element.setValidRate(roundedDecimalValid.toString() + "%");
             }
         });
         return elements;
@@ -641,10 +652,15 @@ public class CustomerServiceImpl implements CustomerService {
             visitedTotalElement.setContractCount(customerContractCount);
 
             Double contractRate = new Double(customerContractCount) * 100 / visitedTotalElement.getVisitedCustomerCount();
+            Double cardRate = new Double(visitedTotalElement.getCardCount()) * 100 / visitedTotalElement.getVisitedCustomerCount();
 
             BigDecimal finishRateDecimal = new BigDecimal(contractRate);
             BigDecimal roundedDecimal = finishRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
             visitedTotalElement.setContractMadeRateText(roundedDecimal.toString() + "%");
+
+            BigDecimal cardRateDecimal = new BigDecimal(cardRate);
+            BigDecimal cardRoundedDecimal = cardRateDecimal.setScale(2, BigDecimal.ROUND_HALF_UP);
+            visitedTotalElement.setCardMadeRate(cardRoundedDecimal.toString() + "%");
         }
         return visitedTotalElements;
     }

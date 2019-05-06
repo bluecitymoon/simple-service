@@ -13,11 +13,20 @@ public class ChannelReportElement implements Serializable {
     private Double moneyCollected;
     private Double contractMadeRate;
     private String contractMadeRateText;
+    private String cardMadeRate;
 
     public ChannelReportElement(Long channelId, String channelName, Integer visitedCustomerCount) {
         this.channelId = channelId;
         this.channelName = channelName;
         this.visitedCustomerCount = visitedCustomerCount;
+    }
+
+    public String getCardMadeRate() {
+        return cardMadeRate;
+    }
+
+    public void setCardMadeRate(String cardMadeRate) {
+        this.cardMadeRate = cardMadeRate;
     }
 
     public Long getChannelId() {
