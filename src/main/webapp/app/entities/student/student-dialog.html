@@ -9,7 +9,7 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <label data-translate="simpleServiceApp.student.customer">Customer</label>
                 <ui-select ng-model="vm.student.customer">
                     <ui-select-match>
@@ -21,6 +21,14 @@
                         <span ng-bind="item.name"></span><span class="pull-right" ng-bind="item.contactPhoneNumber"></span>
                     </ui-select-choices>
                 </ui-select>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>剩余课时</label>
+                    <input type="number" class="form-control" name="currentBalance"
+                           ng-model="vm.student.currentBalance"
+                    />
+                </div>
             </div>
         </div>
         <div class="row">

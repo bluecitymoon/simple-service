@@ -101,7 +101,7 @@
                             class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="birthday"><span data-translate="simpleServiceApp.student.birthday">Birthday</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
-                    <th>耗课情况</th>
+                    <th>剩余课时</th>
 
                     <th></th>
                 </tr>
@@ -121,38 +121,39 @@
                     <td>{{student.gender}}</td>
                     <td>{{student.birthday | date:'yyyy-MM-dd'}}</td>
                     <td>
-                        <table class="panel-bordered-primary" ng-if="student.studentClassCounts && student.studentClassCounts.length > 0" style="margin-bottom: 0px;">
-                            <thead>
-                                <tr>
-                                <th>合同号</th>
-                                <th>类型</th>
-                                <th>总课时</th>
-                                <th>已上课时</th>
-                                <th>余额</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="count in student.studentClassCounts track by $index">
-                                    <td>
-                                        {{count.contractNumber}}
-                                    </td>
-                                    <td>
-                                        {{count.contractType}}
-                                    </td>
-                                    <td>
-                                        {{count.total}}
-                                    </td>
-                                    <td>
-                                        {{count.taken}}
-                                    </td>
-                                    <td>
-                                        {{count.balance}}
-                                    </td>
+                        {{student.currentBalance}}
+                        <!--<table class="panel-bordered-primary" ng-if="student.studentClassCounts && student.studentClassCounts.length > 0" style="margin-bottom: 0px;">-->
+                            <!--<thead>-->
+                                <!--<tr>-->
+                                <!--<th>合同号</th>-->
+                                <!--<th>类型</th>-->
+                                <!--<th>总课时</th>-->
+                                <!--<th>已上课时</th>-->
+                                <!--<th>余额</th>-->
+                                <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                                <!--<tr ng-repeat="count in student.studentClassCounts track by $index">-->
+                                    <!--<td>-->
+                                        <!--{{count.contractNumber}}-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{count.contractType}}-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{count.total}}-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{count.taken}}-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--{{count.balance}}-->
+                                    <!--</td>-->
 
-                                </tr>
+                                <!--</tr>-->
 
-                            </tbody>
-                        </table>
+                            <!--</tbody>-->
+                        <!--</table>-->
                     </td>
 
                     <td class="text-right">

@@ -48,6 +48,9 @@ public class Student extends AbstractRegionEntity {
     @Column(name = "comments")
     private String comments;
 
+    @Column(name = "current_balance")
+    private Integer currentBalance;
+
     @ManyToOne
     private Customer customer;
 
@@ -177,8 +180,14 @@ public class Student extends AbstractRegionEntity {
         this.customer = customer;
     }
 
+    public Integer getCurrentBalance() {
+        return currentBalance;
+    }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    public void setCurrentBalance(Integer currentBalance) {
+        this.currentBalance = currentBalance;
+    }
+// jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
     public boolean equals(Object o) {
