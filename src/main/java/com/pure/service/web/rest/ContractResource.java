@@ -14,6 +14,7 @@ import com.pure.service.service.UserService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.dto.UpdateContractBalanceRequest;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.ContractsExceedLimitException;
@@ -103,6 +104,16 @@ public class ContractResource {
         return ResponseEntity.created(new URI("/api/contracts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/contracts/update-balance")
+    @Timed
+    public ResponseEntity<Contract> updateContractBalance(@RequestBody UpdateContractBalanceRequest request) {
+        log.debug("REST request to update Contract balance: {}", request);
+
+        Contract result = contractService.updateContractBalance(request);
+
+        return ResponseEntity.ok(result);
     }
 
     @PostMapping("/contracts/free")

@@ -118,6 +118,7 @@ public class StudentQueryService extends QueryService<Student> {
             Integer takenCount = contract.getHoursTaken() == null? 0: contract.getHoursTaken();
             classCount.setTotal(totalCount);
             classCount.setTaken(takenCount);
+            classCount.setContractId(contract.getId());
 
             classCount.setBalance(totalCount - takenCount);
 

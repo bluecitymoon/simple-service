@@ -3,6 +3,7 @@ package com.pure.service.service;
 import com.pure.service.domain.Contract;
 import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.dto.UpdateContractBalanceRequest;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
 import com.pure.service.service.exception.ContractsExceedLimitException;
@@ -66,4 +67,6 @@ public interface ContractService {
     void refreshContractBalance();
 
     void contractTotalCount();
+
+    Contract updateContractBalance(UpdateContractBalanceRequest request);
 }

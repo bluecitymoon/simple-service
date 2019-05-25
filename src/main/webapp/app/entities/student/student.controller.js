@@ -5,9 +5,9 @@
         .module('simpleServiceApp')
         .controller('StudentController', StudentController);
 
-    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product', 'StudentClass', '$uibModal'];
+    StudentController.$inject = ['$state', 'Student', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$scope', 'Product', 'StudentClass', '$uibModal', 'swal', 'Contract'];
 
-    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product, StudentClass, $uibModal) {
+    function StudentController($state, Student, ParseLinks, AlertService, paginationConstants, pagingParams, $scope, Product, StudentClass, $uibModal, swal, Contract) {
 
         var vm = this;
 
@@ -104,6 +104,57 @@
             })
         };
 
+
+        vm.openEditContractDialog = function (count) {
+            swal({
+                title: '请输入剩余课时',
+                input: 'number',
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '确定',
+                cancelButtonText: "取消"
+            }).then(function (input) {
+
+                if (!input.value) { return; }
+
+                var request = {
+                    contractId: count.contractId,
+                    balance: input.value
+                };
+
+                Contract.updateContractBalance(request, function (contract) {
+
+                    swal({
+                        title: '提示',
+                        text: '更新成功！',
+                        type: 'success',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: '确定'
+                    });
+                    count.taken = contract.hoursTaken;
+                    count.balance = contract.totalHours - contract.hoursTaken;
+                }, function (error) {
+                    AlertService.showCommonError(error);
+                });
+
+                // User.resetPasswordForUser({user: user, newPassword: input.value}, function(response) {
+                //
+                //     swal({
+                //         title: '提示',
+                //         text: '密码重置成功！',
+                //         type: 'success',
+                //         confirmButtonColor: '#3085d6',
+                //         confirmButtonText: '确定'
+                //     })
+                //
+                // }, function (error) {
+                //     AlertService.showCommonError(error);
+                // })
+
+            });
+        };
 
         $scope.pagination = {
             currentPageNumber: 1,

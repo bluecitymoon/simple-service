@@ -9,6 +9,15 @@ public class StudentClassCount implements Serializable {
     private Integer total;
     private Integer taken;
     private Integer balance;
+    private Long contractId;
+
+    public Long getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(Long contractId) {
+        this.contractId = contractId;
+    }
 
     public String getContractNumber() {
         return contractNumber;

@@ -37,6 +37,7 @@ import com.pure.service.service.dto.dto.ConsultantDealRateReport;
 import com.pure.service.service.dto.dto.ConsultantWork;
 import com.pure.service.service.dto.dto.CourseCategoryBasedReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.dto.UpdateContractBalanceRequest;
 import com.pure.service.service.dto.dto.UserBasedConsultantReport;
 import com.pure.service.service.dto.dto.WeekElement;
 import com.pure.service.service.dto.enumurations.ContractStatusEnum;
@@ -502,6 +503,15 @@ public class ContractServiceImpl implements ContractService {
         }
 
         contractRepository.save(contracts);
+    }
+
+    @Override
+    public Contract updateContractBalance(UpdateContractBalanceRequest request) {
+
+        Contract contract = contractRepository.findOne(request.getContractId());
+        contract.setHoursTaken(contract.getTotalHours() - request.getBalance());
+
+        return save(contract);
     }
 
 
