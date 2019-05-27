@@ -129,7 +129,7 @@
                                 <th>总课时</th>
                                 <th>已上课时</th>
                                 <th>余额</th>
-                                <th></th>
+                                <th has-any-authority="ROLE_ADMIN"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -149,7 +149,7 @@
                                 <td>
                                     {{count.balance}}
                                 </td>
-                                <td>
+                                <td has-any-authority="ROLE_ADMIN">
                                     <button type="button"
                                             ng-click="vm.openEditContractDialog(count)"
                                             class="btn btn-purple btn-sm">
