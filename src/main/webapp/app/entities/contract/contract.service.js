@@ -28,6 +28,7 @@
             },
             'update': { method:'PUT' },
             'createFreeContract': { method:'POST', url: 'api/contracts/free' },
+            'createTypedContract': { method:'POST', url: 'api/contracts/create-type-contract' },
             'updateContractBalance': { method:'POST', url: 'api/contracts/update-balance' },
             'createPackageContract': {
                 url: 'api/contracts/package',

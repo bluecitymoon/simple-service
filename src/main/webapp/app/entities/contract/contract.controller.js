@@ -125,7 +125,7 @@
 
         };
 
-        vm.openFreeContractDialog = function () {
+        vm.openTypedContractDialog = function (type) {
 
             $uibModal.open({
                 templateUrl: 'app/entities/contract/contract-dialog.html',
@@ -153,7 +153,7 @@
                             lastModifiedBy: null,
                             lastModifiedDate: null,
                             id: null,
-                            contractType: 'free'
+                            contractType: type
                         };
                     }
                 }

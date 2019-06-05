@@ -6,6 +6,7 @@ import com.pure.service.domain.ContractNature;
 import com.pure.service.domain.User;
 import com.pure.service.region.RegionBasedInsert;
 import com.pure.service.region.RegionBasedQuery;
+import com.pure.service.region.RegionUtils;
 import com.pure.service.repository.ContractNatureRepository;
 import com.pure.service.security.SecurityUtils;
 import com.pure.service.service.ContractQueryService;
@@ -14,6 +15,7 @@ import com.pure.service.service.UserService;
 import com.pure.service.service.dto.ContractCriteria;
 import com.pure.service.service.dto.dto.CombinedConsultantReport;
 import com.pure.service.service.dto.dto.PackageContractRequest;
+import com.pure.service.service.dto.dto.TypedContractRequest;
 import com.pure.service.service.dto.dto.UpdateContractBalanceRequest;
 import com.pure.service.service.dto.request.CustomerStatusRequest;
 import com.pure.service.service.exception.CollectionNotPaidException;
@@ -129,6 +131,25 @@ public class ContractResource {
         contract.setContractNature(free);
 
         Contract result = contractService.save(contract);
+        return ResponseEntity.created(new URI("/api/contracts/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
+    @PostMapping("/contracts/create-type-contract")
+    @Timed
+    public ResponseEntity<Contract> createTypedContract(@RequestBody TypedContractRequest request) throws URISyntaxException, CollectionNotPaidException {
+
+        if (request.getContract().getId() != null) {
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new contract cannot already have an ID")).body(null);
+        }
+
+        ContractNature contractNature = contractNatureRepository.findByCode(request.getCode());
+        request.getContract().setContractNature(contractNature);
+        RegionUtils.setRegionAbstractAuditingRegionEntity(request.getContract());
+
+        Contract result = contractService.save(request.getContract());
+
         return ResponseEntity.created(new URI("/api/contracts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);

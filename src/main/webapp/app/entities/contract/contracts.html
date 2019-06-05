@@ -65,7 +65,8 @@
                 <div class="col-md-3 form-group">
                     <label class="col-sm-3 control-label">课程</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="field_course" name="course" ng-model="vm.searchCondition.course"
+                        <select class="form-control" id="field_course" name="course"
+                                ng-model="vm.searchCondition.course"
                                 ng-options="course as course.name for course in vm.courses track by course.id">
                             <option value=""></option>
                         </select>
@@ -75,7 +76,8 @@
 
                     <label class="col-sm-3 control-label">班级</label>
                     <div class="col-sm-9">
-                        <select class="form-control" id="field_product" name="product" ng-model="vm.searchCondition.product"
+                        <select class="form-control" id="field_product" name="product"
+                                ng-model="vm.searchCondition.product"
                                 ng-options="product as product.name for product in vm.products track by product.id">
                             <option value=""></option>
                         </select>
@@ -91,7 +93,8 @@
                     <label class="col-sm-3 control-label">签约时间</label>
                     <div class="col-sm-9">
                         <input type="text" placeholder="开始时间" class="form-control"
-                               ng-focus="vm.openCalendar('signStartDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                               ng-focus="vm.openCalendar('signStartDate')" datetime-picker="{{dateformat}}"
+                               timepicker-options="vm.datePickerOptions"
                                ng-model="vm.searchCondition.signStartDate"
                                is-open="vm.datePickerOpenStatus.signStartDate">
                     </div>
@@ -100,7 +103,8 @@
 
                     <div class="col-sm-9">
                         <input type="text" placeholder="结束时间" class="form-control"
-                               ng-focus="vm.openCalendar('signEndDate')" datetime-picker="{{dateformat}}" timepicker-options="vm.datePickerOptions"
+                               ng-focus="vm.openCalendar('signEndDate')" datetime-picker="{{dateformat}}"
+                               timepicker-options="vm.datePickerOptions"
                                ng-model="vm.searchCondition.signEndDate"
                                is-open="vm.datePickerOpenStatus.signEndDate">
                     </div>
@@ -113,7 +117,8 @@
                             <ui-select-match>
                                 {{$select.selected.firstName}}
                             </ui-select-match>
-                            <ui-select-choices repeat="item in (vm.consultants | filter: $select.search) track by item.id">
+                            <ui-select-choices
+                                    repeat="item in (vm.consultants | filter: $select.search) track by item.id">
                                 <span ng-bind="item.firstName"></span>
                             </ui-select-choices>
                         </ui-select>
@@ -151,7 +156,7 @@
         <!--<h2 data-translate="simpleServiceApp.contract.home.title">Contracts</h2>-->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-4 no-padding-left">
+                <div class="no-padding-left">
 
                     <button class="btn btn-primary" ui-sref="contract.new">
                         <span class="glyphicon glyphicon-paste"></span>
@@ -160,7 +165,7 @@
                     </span>
                     </button>
 
-                    <button class="btn btn-primary" ng-click="vm.openFreeContractDialog()">
+                    <button class="btn btn-primary" ng-click="vm.openTypedContractDialog('free')">
                         <span class="glyphicon glyphicon-plus"></span>
                         <span>
                         创建赠送合同
@@ -171,6 +176,19 @@
                         <span class="glyphicon glyphicon-adjust"></span>
                         <span>
                         创建套餐合同
+                    </span>
+                    </button>
+
+                    <button class="btn btn-mint" ng-click="vm.openTypedContractDialog('summer_vacation')">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span>
+                        创建暑假合同
+                    </span>
+                    </button>
+                    <button class="btn btn-purple" ng-click="vm.openTypedContractDialog('winter_vacation')">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span>
+                        创建寒假合同
                     </span>
                     </button>
 
@@ -208,11 +226,11 @@
                     <th jh-sort-by="promotionAmount"><span data-translate="simpleServiceApp.contract.promotionAmount">Promotion Amount</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <!--<th jh-sort-by="totalHours"><span-->
-                            <!--data-translate="simpleServiceApp.contract.totalHours">Total Hours</span> <span-->
-                            <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--data-translate="simpleServiceApp.contract.totalHours">Total Hours</span> <span-->
+                    <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <!--<th jh-sort-by="hoursTaken"><span-->
-                            <!--data-translate="simpleServiceApp.contract.hoursTaken">Hours Taken</span> <span-->
-                            <!--class="glyphicon glyphicon-sort"></span></th>-->
+                    <!--data-translate="simpleServiceApp.contract.hoursTaken">Hours Taken</span> <span-->
+                    <!--class="glyphicon glyphicon-sort"></span></th>-->
                     <th jh-sort-by="comments"><span data-translate="simpleServiceApp.contract.comments">Comments</span>
                         <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="createdBy"><span
@@ -296,7 +314,8 @@
             </table>
         </div>
         <div class="text-center">
-            <jhi-item-count page="pagination.currentPageNumber" total="pagination.totalItems" items-per-page="vm.itemsPerPage"></jhi-item-count>
+            <jhi-item-count page="pagination.currentPageNumber" total="pagination.totalItems"
+                            items-per-page="vm.itemsPerPage"></jhi-item-count>
             <uib-pagination class="pagination-sm" total-items="pagination.totalItems" items-per-page="vm.itemsPerPage"
                             ng-model="pagination.currentPageNumber" ng-click="vm.loadAll()"></uib-pagination>
         </div>

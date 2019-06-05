@@ -107,9 +107,13 @@
                 Contract.update(vm.contract, onSaveSuccess, onSaveError);
             } else {
 
-                if (vm.contract.contractType && vm.contract.contractType == 'free') {
+                if (vm.contract.contractType && vm.contract.contractType != 'standered') {
 
-                    Contract.createFreeContract(vm.contract, onSaveSuccess, onSaveError);
+                    var request = {
+                        contract: vm.contract,
+                        code: vm.contract.contractType
+                    };
+                    Contract.createTypedContract(request, onSaveSuccess, onSaveError);
                 } else {
                     Contract.save(vm.contract, onSaveSuccess, onSaveError);
 
