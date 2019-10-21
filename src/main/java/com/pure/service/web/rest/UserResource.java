@@ -6,6 +6,7 @@ import com.pure.service.domain.Authority;
 import com.pure.service.domain.User;
 import com.pure.service.domain.UserRegion;
 import com.pure.service.region.RegionUtils;
+import com.pure.service.repository.FreeClassRecordRepository;
 import com.pure.service.repository.UserRepository;
 import com.pure.service.security.AuthoritiesConstants;
 import com.pure.service.service.MailService;
@@ -41,6 +42,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -85,6 +87,9 @@ public class UserResource {
 
     @Autowired
     private UserRegionQueryService userRegionQueryService;
+
+    @Autowired
+    private FreeClassRecordRepository freeClassRecordRepository;
 
     public UserResource(UserRepository userRepository, MailService mailService,
             UserService userService) {
@@ -186,6 +191,7 @@ public class UserResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
     @GetMapping("/users/role/{role}")
     @Timed
     public List<User> getAllUsers(@PathVariable String role) {
@@ -207,6 +213,37 @@ public class UserResource {
          return users;
     }
 
+    @GetMapping("/users/get-all-pwis-with-outer-users")
+    @Timed
+    public List<User> getAllPwiWithOuterUser() {
+
+        List<User> users = userRepository.findAllUsersByAuthorityName("ROLE_PWI");
+
+        Long regionId = RegionUtils.getRegionIdForCurrentUser();
+
+        UserRegionCriteria userRegionCriteria = new UserRegionCriteria();
+        LongFilter longFilter = new LongFilter();
+        longFilter.setEquals(regionId);
+
+        userRegionCriteria.setRegionId(longFilter);
+
+        List<User> userList = userRegionQueryService.findByCriteria(userRegionCriteria).stream().map(UserRegion::getUser).collect(Collectors.toList());
+        List<String> outerUserList = freeClassRecordRepository.findAllOuterUsers();
+
+        List<User> outerUsers = new ArrayList<>();
+        for (String username : outerUserList) {
+            User user = new User();
+            user.setFirstName(username);
+            user.setInnerUser(false);
+
+            outerUsers.add(user);
+        }
+
+        users.retainAll(userList);
+        users.addAll(outerUsers);
+
+        return users;
+    }
     /**
      * @return a string list of the all of the roles
      */

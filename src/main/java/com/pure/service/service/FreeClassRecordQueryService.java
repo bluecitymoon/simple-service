@@ -79,6 +79,9 @@ public class FreeClassRecordQueryService extends QueryService<FreeClassRecord> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), FreeClassRecord_.id));
             }
+            if (!StringUtils.isEmpty(criteria.getOuterReferer())) {
+                specification = specification.and(buildStringSpecification(criteria.getOuterReferer(), FreeClassRecord_.outerReferer));
+            }
             if (criteria.getPersonName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getPersonName(), FreeClassRecord_.personName));
             }

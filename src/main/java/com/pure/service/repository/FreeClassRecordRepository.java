@@ -23,4 +23,7 @@ public interface FreeClassRecordRepository extends JpaRepository<FreeClassRecord
 
     FreeClassRecord findByContactPhoneNumber(String contactPhoneNumber);
 
+    @Query(value = "select distinct outer_referer from free_class_record", nativeQuery = true)
+    List<String> findAllOuterUsers();
+
 }

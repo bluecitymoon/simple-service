@@ -48,7 +48,17 @@ public class FreeClassRecordCriteria extends AbstractQueryCriteria {
     private String salesFollowerAssignStatus;
     private String ccAssignStatus;
     private StringFilter sourceType;
+
+    private StringFilter outerReferer;
     public FreeClassRecordCriteria() {
+    }
+
+    public StringFilter getOuterReferer() {
+        return outerReferer;
+    }
+
+    public void setOuterReferer(StringFilter outerReferer) {
+        this.outerReferer = outerReferer;
     }
 
     public LongFilter getLocationId() {

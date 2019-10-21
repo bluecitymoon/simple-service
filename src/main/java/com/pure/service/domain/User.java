@@ -82,6 +82,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @Transient
+    private boolean innerUser = true;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -194,6 +197,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public boolean isInnerUser() {
+        return innerUser;
+    }
+
+    public void setInnerUser(boolean innerUser) {
+        this.innerUser = innerUser;
     }
 
     @Override

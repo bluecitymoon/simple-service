@@ -25,6 +25,11 @@
                 method: 'GET',
                 isArray: true
             },
+            'getAllPwiWithOuterUser': {
+                url: "api/users/get-all-pwis-with-outer-users",
+                method: 'GET',
+                isArray: true
+            },
             'getAllSales': {
                 url: "api/users/role/ROLE_SALES",
                 method: 'GET',

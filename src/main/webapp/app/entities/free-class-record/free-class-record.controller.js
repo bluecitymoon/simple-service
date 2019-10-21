@@ -25,7 +25,7 @@
         vm.datePickerOpenStatus = {};
         vm.channels = MarketChannelCategory.query({ page: 0,  size: 1000 });
         vm.locations = NewOrderResourceLocation.query({ page: 0,  size: 1000 });
-        vm.pwis = User.getAllPwis();
+        vm.pwis = User.getAllPwiWithOuterUser();
         vm.sales = User.getAllSales();
         vm.showUploadTextArea = false;
         vm.customerStatus = CustomerStatus.query();
@@ -162,8 +162,13 @@
                 vm.parameters["salesFollowerId.equals"] = vm.searchCondition.sales.id;
             }
 
+            console.log(vm.searchCondition);
             if (vm.searchCondition.pwi) {
-                vm.parameters["agentId.equals"] = vm.searchCondition.pwi.id;
+                if (vm.searchCondition.pwi.id) {
+                    vm.parameters["agentId.equals"] = vm.searchCondition.pwi.id;
+                } else {
+                    vm.parameters["outerReferer.contains"] = vm.searchCondition.pwi.firstName;
+                }
             }
 
             if (vm.searchCondition.location) {
