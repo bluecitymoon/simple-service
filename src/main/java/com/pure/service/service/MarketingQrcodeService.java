@@ -1,6 +1,7 @@
 package com.pure.service.service;
 
 import com.pure.service.domain.MarketingQrcode;
+import com.pure.service.domain.WechatToken;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -43,4 +44,6 @@ public interface MarketingQrcodeService {
     void delete(Long id);
 
     MarketingQrcode generate(Long id) throws IOException;
+
+    WechatToken getWechatToken();
 }

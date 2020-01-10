@@ -111,18 +111,7 @@ public class MarketingQrcodeServiceImpl implements MarketingQrcodeService{
     public MarketingQrcode generate(Long id) throws IOException {
 
         //TODO dynamic configuration
-        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
-
-        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(tokenUrl)
-            .queryParam("grant_type", "client_credential")
-            .queryParam("appid", "wx705a848318546f57")
-            .queryParam("secret", "0bf25b973cafd1f277b81e8f5e812620");
-
-        String tokenPath = uriComponentsBuilder.toUriString();
-        log.debug("Requesting " + tokenPath);
-
-        WechatToken token = noopSslRestTemplate.getForObject(tokenPath, WechatToken.class);
-        log.debug("Got wechat token {} ", token);
+        WechatToken token = getWechatToken();
 
         String qrCodeUrl = "https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=" + token.getAccessToken();
 
@@ -163,5 +152,21 @@ public class MarketingQrcodeServiceImpl implements MarketingQrcodeService{
         log.debug("Saving qr code information {}", marketingQrcode);
 
         return save(marketingQrcode);
+    }
+
+    public WechatToken getWechatToken() {
+        String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token";
+
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromHttpUrl(tokenUrl)
+            .queryParam("grant_type", "client_credential")
+            .queryParam("appid", "wx705a848318546f57")
+            .queryParam("secret", "0bf25b973cafd1f277b81e8f5e812620");
+
+        String tokenPath = uriComponentsBuilder.toUriString();
+        log.debug("Requesting " + tokenPath);
+
+        WechatToken token = noopSslRestTemplate.getForObject(tokenPath, WechatToken.class);
+        log.debug("Got wechat token {} ", token);
+        return token;
     }
 }

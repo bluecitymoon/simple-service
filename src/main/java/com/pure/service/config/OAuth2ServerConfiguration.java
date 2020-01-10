@@ -166,6 +166,8 @@ public class OAuth2ServerConfiguration {
                 .antMatchers(HttpMethod.POST, "/api/new-order-wechat-user-infos/migrate").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/assets/upload").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/ads").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/wx/get-user-info/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/wx/get-decoded-phone-number").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
                 .antMatchers("/v2/api-docs/**").permitAll()

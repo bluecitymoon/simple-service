@@ -6,6 +6,8 @@ import com.pure.service.service.NewOrderWechatUserInfoQueryService;
 import com.pure.service.service.NewOrderWechatUserInfoService;
 import com.pure.service.service.OpenIdService;
 import com.pure.service.service.dto.NewOrderWechatUserInfoCriteria;
+import com.pure.service.service.dto.UserInfo;
+import com.pure.service.service.dto.dto.DecodedPhoneNumberRequest;
 import com.pure.service.web.rest.util.HeaderUtil;
 import com.pure.service.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -90,6 +92,27 @@ public class NewOrderWechatUserInfoResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+
+    @GetMapping("/wx/get-user-info/{code}")
+    @Timed
+    public ResponseEntity<UserInfo> getUserInfo(@PathVariable String code) {
+
+        UserInfo userInfo = openIdService.getTencentOpenId(code);
+
+        log.info("User info " + userInfo.toString());
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userInfo));
+    }
+
+    @PostMapping("/wx/get-decoded-phone-number")
+    @Timed
+    public ResponseEntity<String> getWechatDecodedPhoneNumber(@RequestBody DecodedPhoneNumberRequest request) {
+
+        String phoneNumber = openIdService.getWechatDecodedPhoneNumber(request);
+
+        log.info("Decoded phone number is {}", phoneNumber);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(phoneNumber));
+    }
+
 
     /**
      * PUT  /new-order-wechat-user-infos : Updates an existing newOrderWechatUserInfo.

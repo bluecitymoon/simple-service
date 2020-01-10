@@ -21,4 +21,12 @@ public class UserInfo implements Serializable {
     public void setOpenid(String openid) {
         this.openid = openid;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+            "openid='" + openid + '\'' +
+            ", session_key='" + session_key + '\'' +
+            '}';
+    }
 }
