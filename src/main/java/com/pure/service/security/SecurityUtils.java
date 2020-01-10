@@ -170,7 +170,4 @@ public final class SecurityUtils {
         return encryptedText;
     }
 
-    public static void main(String[] args) {
-
-    }
 }
