@@ -54,7 +54,7 @@
     "map-stream": "0.0.6",
     "ng-echarts": "^3.0.1",
     "proxy-middleware": "0.15.0",
-    "puppeteer": "0.10.2",
+    "puppeteer": "1.13.0",
     "run-sequence": "1.2.2",
     "xml2js": "0.4.17",
     "yargs": "5.0.0"
